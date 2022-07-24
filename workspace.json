@@ -3,6 +3,7 @@
   "version": 2,
   "projects": {
     "api-utils": "libs/api-utils",
-    "freelancers": "apps/freelancers"
+    "freelancers": "apps/freelancers",
+    "postgres-db": "libs/postgres-db"
   }
 }
