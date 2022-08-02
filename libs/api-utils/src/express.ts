@@ -2,6 +2,7 @@ import express, { Router } from 'express';
 import morgan from 'morgan';
 import { errorHandler } from './errorHandler';
 import { lambdaHandler, startLocal } from './handler';
+import {logger} from "./logger";
 
 export function createDefaultApp(router: Router) {
   return express()

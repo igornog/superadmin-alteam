@@ -1,6 +1,6 @@
-import {FreelancerEntity} from "./entities/Freelancer.entity";
-import {Freelancer} from "./freelancer";
+import {FreelancerEntity} from "./entities";
 import {DeepPartial} from "typeorm";
+import {Freelancer} from "@yjcapp/app";
 
 export function freelancerFromEntity(entity: FreelancerEntity): Freelancer {
   return {

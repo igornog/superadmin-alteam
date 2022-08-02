@@ -1,7 +1,7 @@
 import { postgresClient } from './postgresClient';
-import {FreelancerEntity} from "./entities/Freelancer.entity";
-import {Freelancer} from "./freelancer";
+import {FreelancerEntity} from "./entities";
 import {freelancerFromEntity, freelancerToEntity} from "./freelancerConverter";
+import {Freelancer} from "@yjcapp/app";
 
 async function createFreelancer(freelancer: Freelancer): Promise<number> {
   const freelancerRepository = (await postgresClient()).getRepository(FreelancerEntity);

@@ -1,22 +1,20 @@
 import { NextFunction, Request, Response } from 'express';
+import {logger} from "./logger";
 
 export class HttpError extends Error {
   statusCode?: number;
 
-  body? : any;
-
-  constructor(statusCode: number, body?: any) {
-    super(`Http error ${statusCode}`);
+  constructor(statusCode: number, message ?: string) {
+    super(`HTTP ERROR ${statusCode}: ${message ?? ""}`);
     this.statusCode = statusCode;
-    this.body = body;
   }
 }
 
 function handleError(err: HttpError, res: Response): void {
-  console.log(err.message, err.statusCode, err.body);
+  logger.info(err.message,{statusCode : err.statusCode})
   if (err.statusCode) {
     res.status(err.statusCode)
-      .json(err.body);
+      .send(err.message);
   } else {
     res.sendStatus(500);
   }
