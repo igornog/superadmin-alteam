@@ -5,17 +5,63 @@
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/postgres-db/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/postgres-db/**/*.ts"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/postgres-db"],
+      "outputs": [
+        "coverage/libs/postgres-db"
+      ],
       "options": {
         "jestConfig": "libs/postgres-db/jest.config.ts",
         "passWithNoTests": true
+      }
+    },
+    "migration:run": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "./libs/postgres-db/scripts/migrateRun.sh"
+      },
+      "dependsOn": [
+        "docker:up"
+      ]
+    },
+    "migration:generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "./libs/postgres-db/scripts/migrateGenerate.sh {args.name}"
+      }
+    },
+    "migration:revert": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "./libs/postgres-db/scripts/migrateRevert.sh"
+      }
+    },
+    "migration:show": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "./libs/postgres-db/scripts/migrateShow.sh"
+      }
+    },
+    "docker:up": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "./libs/postgres-db/scripts/dockerUp.sh"
+      }
+    },
+    "pgadmin": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "libs/postgres-db",
+        "command": "./scripts/connectToPG.sh"
       }
     }
   },

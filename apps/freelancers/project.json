@@ -5,12 +5,13 @@
   "targets": {
     "build": {
       "executor": "@nrwl/node:webpack",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/freelancers",
         "main": "apps/freelancers/src/main.ts",
-        "tsConfig": "apps/freelancers/tsconfig.app.json",
-        "assets": ["apps/freelancers/src/assets"]
+        "tsConfig": "apps/freelancers/tsconfig.app.json"
       },
       "configurations": {
         "production": {
@@ -31,6 +32,13 @@
       "options": {
         "buildTarget": "freelancers:build"
       },
+      "dependsOn": [
+        {
+          "target": "migration:run",
+          "params": "forward",
+          "projects": "dependencies"
+        }
+      ],
       "configurations": {
         "production": {
           "buildTarget": "freelancers:build:production"
@@ -39,19 +47,28 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/freelancers/**/*.ts"]
+        "lintFilePatterns": [
+          "apps/freelancers/**/*.ts"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/freelancers"],
+      "outputs": [
+        "coverage/apps/freelancers"
+      ],
       "options": {
         "jestConfig": "apps/freelancers/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
+  "implicitDependencies": [
+    "postgres-db"
+  ],
   "tags": []
 }

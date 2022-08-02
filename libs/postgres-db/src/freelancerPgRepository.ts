@@ -3,11 +3,11 @@ import {FreelancerEntity} from "./entities";
 import {freelancerFromEntity, freelancerToEntity} from "./freelancerConverter";
 import {Freelancer} from "@yjcapp/app";
 
-async function createFreelancer(freelancer: Freelancer): Promise<number> {
+async function createFreelancer(freelancer: Omit<Freelancer,"id">): Promise<Freelancer> {
   const freelancerRepository = (await postgresClient()).getRepository(FreelancerEntity);
   const entity = freelancerToEntity(freelancer);
   const result = await freelancerRepository.save(entity);
-  return result.id;
+  return freelancerFromEntity(result);
 }
 
 async function retrieveFreelancer(id: number): Promise<Freelancer | undefined> {
