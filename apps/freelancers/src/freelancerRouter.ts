@@ -6,7 +6,7 @@ import {sendPromise} from "../../../libs/api-utils/src/util";
 export const freelancerRouter = express.Router();
 freelancerRouter.use(express.json());
 freelancerRouter.get(
-  '/freelancers/:id',
+  '/prod/freelancers/:id',
   param('id')
     .isNumeric(),
   (req, res, next) => {
@@ -14,6 +14,6 @@ freelancerRouter.get(
 
   },
 );
-freelancerRouter.post('/freelancers', (req, res, next) => {
+freelancerRouter.post('/prod/freelancers', (req, res, next) => {
   sendPromise(createFreelancer(req.body), res, next)
 })

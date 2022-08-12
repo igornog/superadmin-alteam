@@ -11,13 +11,14 @@
       "options": {
         "outputPath": "dist/apps/freelancers",
         "main": "apps/freelancers/src/main.ts",
+        "outputFileName": "index.js",
         "tsConfig": "apps/freelancers/tsconfig.app.json"
       },
       "configurations": {
         "production": {
           "optimization": true,
           "extractLicenses": true,
-          "inspect": false,
+          "externalDependencies": "none",
           "fileReplacements": [
             {
               "replace": "apps/freelancers/src/environments/environment.ts",
@@ -25,6 +26,19 @@
             }
           ]
         }
+      }
+    },
+    "package": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        {
+          "params": "forward",
+          "target": "build",
+          "projects": "self"
+        }
+      ],
+      "options": {
+        "command": "zip -qj dist/apps/freelancers/package.zip dist/apps/freelancers/index.js"
       }
     },
     "serve": {
