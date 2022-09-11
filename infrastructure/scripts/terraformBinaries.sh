@@ -1,5 +1,5 @@
 #!/bin/sh
-TERRAFORM_VERSION=1.2.7
+TERRAFORM_VERSION=1.2.9
 
 if terraform -v | grep -Eq v$TERRAFORM_VERSION
 then

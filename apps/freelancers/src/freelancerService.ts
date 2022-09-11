@@ -4,8 +4,9 @@ import {logger} from "@yjcapp/api-utils";
 import {HttpError} from "../../../libs/api-utils/src/errorHandler";
 
 export function createFreelancer(freelancer : Omit<Freelancer,"id">){
-  logger.info("Creating freelancer")
-  return freelancerPgRepository.createFreelancer(freelancer)
+  logger.info("Creating freelancer", freelancer)
+  return Promise.resolve();
+  //return freelancerPgRepository.createFreelancer(freelancer)
 }
 export async function retrieve(id: number) {
   logger.info("Retrieving freelancer", {id})

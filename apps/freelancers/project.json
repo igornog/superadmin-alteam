@@ -12,13 +12,16 @@
         "outputPath": "dist/apps/freelancers",
         "main": "apps/freelancers/src/main.ts",
         "outputFileName": "index.js",
-        "tsConfig": "apps/freelancers/tsconfig.app.json"
+        "tsConfig": "apps/freelancers/tsconfig.app.json",
+        "externalDependencies": "none",
+        "optimization": true,
+        "extractLicenses": true
       },
       "configurations": {
-        "production": {
-          "optimization": true,
-          "extractLicenses": true,
-          "externalDependencies": "none",
+        "local": {
+          "externalDependencies": "all",
+          "optimization": false,
+          "extractLicenses": false,
           "fileReplacements": [
             {
               "replace": "apps/freelancers/src/environments/environment.ts",
