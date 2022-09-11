@@ -11,8 +11,8 @@ export class HttpError extends Error {
 }
 
 function handleError(err: HttpError, res: Response): void {
-  logger.info(err.message,{statusCode : err.statusCode})
-  if (err.statusCode) {
+  logger.error(err.message,{statusCode : err.statusCode})
+  if (err.statusCode !== undefined) {
     res.status(err.statusCode)
       .send(err.message);
   } else {

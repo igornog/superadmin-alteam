@@ -1,8 +1,7 @@
-import express, { Router } from 'express';
+import express, {Router} from 'express';
 import morgan from 'morgan';
-import { errorHandler } from './errorHandler';
-import { lambdaHandler, startLocal } from './handler';
-import {logger} from "./logger";
+import {errorHandler} from './errorHandler';
+import {lambdaHandler, startLocal} from './handler';
 
 export function createDefaultApp(router: Router) {
   return express()
