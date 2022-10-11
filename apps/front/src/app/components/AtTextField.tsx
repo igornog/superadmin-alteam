@@ -5,12 +5,13 @@ import {
   IconButton,
   InputAdornment,
   inputAdornmentClasses,
+  inputBaseClasses,
   OutlinedInput,
   outlinedInputClasses,
 } from '@mui/material';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { green, grey2, red, white } from '../utils/colors';
+import { blue, green, grey2, grey3, grey5, red, white } from '../utils/colors';
 import { isValidEmail } from '../utils/emails';
 import AtTypography from './AtTypography';
 import { HiOutlineEye, HiOutlineEyeOff } from 'react-icons/hi';
@@ -36,7 +37,21 @@ const StyledInput = styled(OutlinedInput)`
     background-color: white;
 
     & input {
+      &::placeholder {
+        color: ${grey3};
+      }
+
+      &:hover {
+        &::placeholder {
+          color: ${grey2};
+        }
+      }
+
       padding: 16.5px 20px;
+    }
+
+    &:hover:not(:focused) .${outlinedInputClasses.notchedOutline} {
+      border-color: ${grey2};
     }
 
     .${inputAdornmentClasses.positionEnd} {
@@ -44,9 +59,22 @@ const StyledInput = styled(OutlinedInput)`
     }
   }
 
-  &.${outlinedInputClasses.root}.${outlinedInputClasses.focused} {
+  &.${outlinedInputClasses.root},
+    &.${outlinedInputClasses.root}.${outlinedInputClasses.focused} {
     fieldset {
       border-width: 1px;
+    }
+
+    &:not(.Mui-error):not(.MuiInputBase-colorSuccess) {
+      fieldset {
+        border-color: ${grey5};
+      }
+    }
+
+    &:hover:not(.Mui-error):not(.MuiInputBase-colorSuccess) {
+      fieldset {
+        border-color: ${grey2};
+      }
     }
   }
 `;
@@ -56,10 +84,12 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (props) => {
   const [showPassword, setShowPassword] = useState(false);
   const [value, setValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);
+
   const returnValue = (value: string) => {
     if (props.type === AtTextFieldType.Email) {
       if (value.length === 0) {
         setStatus('secondary');
+        props.onValueChange?.('');
         setValue('');
         return;
       }

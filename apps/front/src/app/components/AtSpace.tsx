@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const StyledSpace = styled.div<MkStyledSpaceProps>`
+const StyledSpace = styled.div<AtSpaceProps>`
   ${({ direction, spacing }) =>
     direction === 'vertical'
       ? css`
@@ -21,11 +21,6 @@ const AtSpace: React.FunctionComponent<AtSpaceProps> = (
 export default AtSpace;
 
 interface AtSpaceProps {
-  direction: 'vertical' | 'horizontal';
-  spacing: string;
-}
-
-interface MkStyledSpaceProps {
   direction: 'vertical' | 'horizontal';
   spacing: string;
 }

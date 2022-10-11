@@ -30,7 +30,7 @@ const AtTypography: React.FunctionComponent<AtTypographyProps> = (
 
 interface AtTypographyProps {
   children: any;
-  bold?: true;
+  bold?: boolean;
   variant?: Variant;
   color?: string;
 }

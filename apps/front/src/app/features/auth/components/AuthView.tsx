@@ -35,6 +35,7 @@ const AuthView: React.FunctionComponent = () => {
         </StyledQuote>
       )}
       <Box width={isSmallScreen ? '100%' : '50%'}>
+        <canvas id="gradient-canvas" width="810" height="600"></canvas>
         <AuthForm />
       </Box>
     </Box>

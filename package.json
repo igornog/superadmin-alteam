@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "npx nx serve client",
-    "format": "prettier --write ./apps/client"
+    "start": "npx nx serve front",
+    "format": "prettier --write ./apps/front"
   },
   "private": true,
   "devDependencies": {
@@ -25,6 +25,7 @@
     "@types/node": "18.7.1",
     "@types/react": "18.0.20",
     "@types/react-dom": "18.0.6",
+    "@types/react-helmet": "^6.1.5",
     "@types/react-is": "17.0.3",
     "@types/react-router-dom": "5.3.3",
     "@types/styled-components": "5.1.26",
