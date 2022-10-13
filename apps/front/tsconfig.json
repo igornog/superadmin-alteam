@@ -9,10 +9,8 @@
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "typeRoots": ["node_modules/@types", "src/types"],
-    "types": ["chrome"],
     "allowJs": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -21,6 +19,9 @@
     "noFallthroughCasesInSwitch": true
   },
   "files": [],
-  "include": ["image.d.ts"],
+  "include": [
+    "src",
+    "src/**/*.ts",
+  ],
   "references": []
 }
