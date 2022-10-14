@@ -4,8 +4,8 @@
   "projects": {
     "api-utils": "libs/api-utils",
     "app": "libs/app",
-    "front": "apps/front",
     "freelancers": "apps/freelancers",
+    "front": "apps/front",
     "infrastructure": "infrastructure",
     "postgres-db": "libs/postgres-db"
   }

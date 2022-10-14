@@ -1,10 +1,15 @@
 import { Box } from '@mui/material';
+import { ArrowRight2 } from 'iconsax-react';
 import React, { useState } from 'react';
-import { HiChevronRight } from 'react-icons/hi';
 import styled from 'styled-components';
-import AtButton from '../../../components/AtButton';
-import AtTextField, { AtTextFieldType } from '../../../components/AtTextField';
-import AtTypography from '../../../components/AtTypography';
+import AtButton, {
+  AtButtonKind,
+  AtButtonVariant,
+} from '../../../components/AtButton/AtButton';
+import AtTextField, {
+  AtTextFieldType,
+} from '../../../components/AtTextField/AtTextField';
+import AtTypography from '../../../components/AtTypography/AtTypography';
 import { grey5 } from '../../../utils/colors';
 import { isValidEmail } from '../../../utils/emails';
 
@@ -57,9 +62,10 @@ const AuthForm: React.FunctionComponent = () => {
         <Box display={'flex'} justifyContent={'flex-end'}>
           <AtButton
             name={'Login'}
-            color={'success'}
+            kind={AtButtonKind.Success}
+            variant={AtButtonVariant.Contained}
             onClick={handleSubmit}
-            endIcon={<HiChevronRight size={16} />}
+            endIcon={<ArrowRight2 />}
             disabled={!(isValidEmail(email) && password.length > 0)}
           />
         </Box>

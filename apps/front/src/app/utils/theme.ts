@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material';
 import '../assets/styles/layout.css';
 import { blue, green, grey5, red } from './colors';
 
-export const altTeamTheme = createTheme({
+export const alTeamTheme = createTheme({
   palette: {
     primary: {
       main: blue,
@@ -57,8 +57,9 @@ export const altTeamTheme = createTheme({
     },
     button: {
       fontFamily: 'Inter',
-      fontSize: '14px',
+      fontSize: '16px',
       textTransform: 'none',
+      fontWeight: '600',
     },
     subtitle1: {
       fontSize: '18px',

@@ -21,3 +21,4 @@ export const green4 = 'rgba(63, 232, 151, 0.2)';
 export const green5 = 'rgba(63, 232, 151, 0.1)';
 
 export const red = '#E24928';
+export const red1 = '#FEF6F4';
