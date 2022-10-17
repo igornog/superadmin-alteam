@@ -50,6 +50,11 @@ export const alTeamTheme = createTheme({
       textTransform: 'none',
       lineHeight: '24.2px',
     },
+    body1: {
+      fontFamily: 'Inter',
+      fontSize: '16px',
+      textTransform: 'none',
+    },
     body2: {
       fontFamily: 'Inter',
       fontSize: '14px',
