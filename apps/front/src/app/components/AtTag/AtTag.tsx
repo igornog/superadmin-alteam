@@ -5,23 +5,22 @@ import { grey, red, white } from '../../utils/colors';
 import styled from 'styled-components';
 
 const StyledIcon = styled(TrushSquare)`
-  
   &.${chipClasses.deleteIcon}:hover {
-    color: ${red} !important
+    color: ${red} !important;
   }
-`
+`;
 
 const StyledChip = styled(Chip)`
   &.${chipClasses.filled}:hover {
-      background-color: ${grey};
-      color: ${white};
-      cursor: pointer;
+    background-color: ${grey};
+    color: ${white};
+    cursor: pointer;
 
-      &>svg {
-        color: ${white};
-      }
+    & > svg {
+      color: ${white};
+    }
   }
-`
+`;
 
 const AtTag: React.FunctionComponent<AtTagProps> = (props: AtTagProps) => {
   const handleClick = () => {
@@ -30,7 +29,7 @@ const AtTag: React.FunctionComponent<AtTagProps> = (props: AtTagProps) => {
 
   return (
     <StyledChip
-      variant='filled'
+      variant="filled"
       label="Prototyping"
       deleteIcon={<StyledIcon />}
       onDelete={handleClick}

@@ -6,9 +6,11 @@ import styled from 'styled-components';
 interface StyledTypographyProps {
   bold?: boolean;
   color?: string;
+  fontSize?: string;
 }
 
 const StyledTypography = styled(Typography)<StyledTypographyProps>`
+  font-size: ${({ fontSize }) => fontSize && fontSize};
   font-weight: ${({ bold }) => (bold ? 'bold' : null)};
   color: ${({ color }) => (color ? color : null)};
 `;
@@ -33,6 +35,7 @@ interface AtTypographyProps {
   bold?: boolean;
   variant?: Variant;
   color?: string;
+  fontSize?: string;
 }
 
 export default AtTypography;
