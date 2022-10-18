@@ -3,7 +3,7 @@ import AtGroupTag from './AtGroupTag';
 
 const Story: ComponentMeta<typeof AtGroupTag> = {
   component: AtGroupTag,
-  title: 'GroupTags',
+  title: 'Group Tag',
 };
 
 export default Story;

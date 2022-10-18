@@ -2,7 +2,7 @@ import { Chip, chipClasses } from '@mui/material';
 import React from 'react';
 import { TrushSquare } from 'iconsax-react';
 import styled from 'styled-components';
-import { white, red, grey } from '../../../utils/colors';
+import { white, red, grey } from '../../utils/colors';
 
 const StyledIcon = styled(TrushSquare)`
   transition: 0.3s;

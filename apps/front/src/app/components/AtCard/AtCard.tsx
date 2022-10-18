@@ -2,9 +2,9 @@ import { Box } from '@mui/material';
 import { ArrowRight2 } from 'iconsax-react';
 import React from 'react';
 import styled from 'styled-components';
-import { grey3, grey5, white } from '../../utils/colors';
+import { green, grey3, grey5, white } from '../../utils/colors';
 import AtLine from '../AtLine/AtLine';
-import AtGroupTag from '../AtTag/AtGroupTag/AtGroupTag';
+import AtGroupTag from '../AtGroupTag/AtGroupTag';
 import AtTypography from '../AtTypography/AtTypography';
 
 const StyledCard = styled.div`
@@ -14,6 +14,14 @@ const StyledCard = styled.div`
   padding: 20px;
   width: fit-content;
   min-width: 405px;
+  min-height: 230px;
+  transition: 0.3s;
+
+  &:hover {
+    transition: 0.3s;
+    cursor: pointer;
+    border-color: ${green};
+  }
 `;
 
 const AtCard: React.FunctionComponent = () => {
@@ -38,7 +46,7 @@ const AtCard: React.FunctionComponent = () => {
           flexDirection={'column'}
           alignItems={'flex-end'}
         >
-          <Box display={'flex'} gap={'5px'} alignItems={'center'}>
+          <Box display={'flex'} gap={'10px'} alignItems={'center'}>
             <AtTypography color={grey3}>Applied: 23.07.2022</AtTypography>
             <AtGroupTag icon={<ArrowRight2 size={10} />} />
           </Box>
@@ -56,6 +64,10 @@ const AtCard: React.FunctionComponent = () => {
       </Box>
 
       <AtLine spacing={16} />
+
+      <AtTypography color={grey3}>
+        No skills been added by Mega Devs
+      </AtTypography>
     </StyledCard>
   );
 };
