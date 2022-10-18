@@ -1,0 +1,27 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "target": "ES2019",
+    "experimentalDecorators": true,
+    "jsxImportSource": "react",
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "typeRoots": ["node_modules/@types", "src/types"],
+    "allowJs": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "files": [],
+  "include": [
+    "src",
+    "src/**/*.ts",
+  ],
+  "references": []
+}

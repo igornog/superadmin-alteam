@@ -28,5 +28,21 @@
     "appsDir": "apps",
     "libsDir": "libs"
   },
-  "defaultProject": "freelancers"
+  "defaultProject": "freelancers",
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "styled-components",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "styled-components"
+      },
+      "library": {
+        "style": "styled-components",
+        "linter": "eslint"
+      }
+    }
+  }
 }
