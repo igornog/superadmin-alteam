@@ -22,7 +22,7 @@ import {
   red1,
   white,
 } from '../../utils/colors';
-import { Eye, EyeSlash } from 'iconsax-react';
+import { ArrowDown2, Eye, EyeSlash } from 'iconsax-react';
 import AtTypography from '../AtTypography/AtTypography';
 
 export enum AtTextFieldType {
@@ -52,46 +52,56 @@ const StyledInput = styled(OutlinedInput)<{
   focused: boolean;
   disabled?: boolean;
   size?: string;
+  dropdown?: boolean;
 }>`
   &.${outlinedInputClasses.root} {
+    padding: 0 20px;
     background-color: ${({ focused, isError, isSuccess }) =>
       focused ? (isError ? red1 : isSuccess ? green5 : white) : white};
 
     & input {
       color: ${({ disabled }) => (disabled ? grey3 : black)};
+      font-size: ${({ size }) => (size === 'medium' ? '16px' : '14px')};
 
       &::placeholder {
         color: ${grey3};
       }
 
       &:hover {
+        ${({ dropdown }) =>
+          dropdown &&
+          css`
+            cursor: pointer;
+          `}
         &::placeholder {
           color: ${grey2};
         }
       }
 
-      padding: ${({ size }) => (size === 'medium' ? '18px 20px' : '10px 20px')};
+      padding: ${({ size }) => (size === 'medium' ? '18px 0' : '10px 0')};
     }
 
     &.${inputBaseClasses.adornedStart} {
-      padding-left: 0;
-
       input {
         padding-left: 10px;
       }
     }
 
     &.${inputBaseClasses.adornedEnd} {
-      padding-right: 0;
-
       input {
         padding-right: 10px;
       }
 
       & > svg {
+        ${({ dropdown }) =>
+          dropdown &&
+          css`
+            &:hover {
+              cursor: pointer;
+            }
+          `}
         width: 20px;
         color: ${({ disabled }) => (disabled ? grey3 : grey2)};
-        padding-right: 20px;
       }
     }
 
@@ -99,14 +109,15 @@ const StyledInput = styled(OutlinedInput)<{
       width: ${({ size }) => (size === 'medium' ? '20px' : '15px')};
       color: ${({ isError, isSuccess, disabled }) =>
         disabled ? grey3 : isError ? red : isSuccess ? green : grey2};
-      padding-left: 20px;
       margin-right: 0;
     }
   }
 
   &.${outlinedInputClasses.root},
-    &.${outlinedInputClasses.root}.${outlinedInputClasses.focused} {
+    &.${outlinedInputClasses.root}.${outlinedInputClasses.focused},
+    &.${outlinedInputClasses.root}.Mui-disabled {
     fieldset {
+      transition: 0.3s;
       border-width: 1px;
       border-color: ${({ isError, isSuccess }) =>
         isError ? red : isSuccess ? green : grey5};
@@ -115,10 +126,16 @@ const StyledInput = styled(OutlinedInput)<{
 
   &.${outlinedInputClasses.root}:hover:not(.Mui-disabled) {
     fieldset {
+      transition: 0.3s;
       border-color: ${({ isError, isSuccess }) =>
         isError ? red : isSuccess ? green : grey3};
     }
   }
+`;
+
+const StyledArrow = styled(ArrowDown2)<{ open?: boolean }>`
+  transition: 0.3s;
+  transform: rotate(${({ open }) => (open ? '180' : '0')}deg);
 `;
 
 const AtTextField: React.FunctionComponent<AtTextFieldProps> = (props) => {
@@ -136,11 +153,11 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (props) => {
   };
 
   return (
-    <Box position={'relative'}>
+    <Box position={'relative'} style={{ opacity: props.disabled ? 0.5 : 1 }}>
       {props.label && (
         <Box
           position={'absolute'}
-          top={'-10px'}
+          top={'-12px'}
           zIndex={1}
           paddingLeft={'20px'}
         >
@@ -158,11 +175,14 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (props) => {
       <FormControl variant="outlined" fullWidth={true}>
         <StyledInput
           fullWidth={true}
+          onClick={props.onClick}
+          dropdown={props.dropdown}
+          readOnly={props.dropdown}
           isError={props.isError}
           isSuccess={props.isSuccess}
           focused={isFocused}
           disabled={props.disabled}
-          value={value}
+          value={props.dropdown ? props.placeholder : value}
           size={props.size ?? 'medium'}
           required={props.required}
           type={
@@ -186,18 +206,22 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (props) => {
             )
           }
           endAdornment={
-            props.endIcon ||
-            (props.type === AtTextFieldType.Password && value.length > 0 && (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  edge="end"
-                >
-                  {showPassword ? <Eye /> : <EyeSlash />}
-                </IconButton>
-              </InputAdornment>
-            ))
+            props.dropdown ? (
+              <StyledArrow open={props.open} size={15} />
+            ) : (
+              props.endIcon ||
+              (props.type === AtTextFieldType.Password && value.length > 0 && (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <Eye /> : <EyeSlash />}
+                  </IconButton>
+                </InputAdornment>
+              ))
+            )
           }
         />
 
@@ -211,7 +235,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (props) => {
   );
 };
 
-interface AtTextFieldProps {
+export interface AtTextFieldProps {
   fullWidth?: boolean;
   required?: boolean;
 
@@ -222,6 +246,10 @@ interface AtTextFieldProps {
 
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
+
+  onClick?: () => void;
+  dropdown?: boolean;
+  open?: boolean;
 
   size?: 'small' | 'medium';
   onValueChange?: (value: string) => void;

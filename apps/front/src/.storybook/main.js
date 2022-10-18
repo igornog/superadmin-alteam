@@ -5,7 +5,10 @@ module.exports = {
     ...options,
   }),
   framework: '@storybook/react',
-  stories: ['../app/components/*/*.stories.@(tsx)'],
+  stories: [
+    '../app/components/*/*.stories.@(tsx)',
+    '../app/components/*/*/*.stories.@(tsx)',
+  ],
   webpackFinal: async (config, { configType }) => {
     // Make whatever fine-grained changes you need
     // Return the altered config

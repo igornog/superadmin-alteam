@@ -84,3 +84,5 @@ export const alTeamTheme = createTheme({
     },
   },
 });
+
+export const boxShadow = 'rgb(0 0 0 / 10%) 0px 15px 50px 0px';

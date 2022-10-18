@@ -1,11 +1,14 @@
 import { Chip, chipClasses } from '@mui/material';
 import React from 'react';
 import { TrushSquare } from 'iconsax-react';
-import { grey, red, white } from '../../utils/colors';
 import styled from 'styled-components';
+import { white, red, grey } from '../../../utils/colors';
 
 const StyledIcon = styled(TrushSquare)`
+  transition: 0.3s;
+
   &.${chipClasses.deleteIcon}:hover {
+    transition: 0.3s;
     color: ${red} !important;
   }
 `;

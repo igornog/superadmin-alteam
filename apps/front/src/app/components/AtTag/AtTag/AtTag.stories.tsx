@@ -12,5 +12,5 @@ const Template: ComponentStory<typeof AtTag> = (args: any) => (
   <AtTag {...args} />
 );
 
-export const Primary = Template.bind({});
-Primary.args = {};
+export const Tag = Template.bind({});
+Tag.args = {};

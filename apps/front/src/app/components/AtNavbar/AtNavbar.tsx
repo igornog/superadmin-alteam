@@ -43,20 +43,26 @@ const StyledLi = styled.li`
   position: relative;
   z-index: 1;
 
+  &:before {
+    transition: 0.3s;
+    position: absolute;
+    background-color: ${white};
+    top: -7px;
+    left: -56%;
+    content: '';
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    padding: 5px 35px;
+  }
+
   &:hover {
     cursor: pointer;
 
     &:before {
-      position: absolute;
-      top: -7px;
-      left: -56%;
-      content: '';
-      z-index: -1;
-      width: 100%;
-      height: 100%;
+      transition: 0.3s;
       background-color: ${green};
-      border-radius: 5px;
-      padding: 5px 35px;
     }
   }
 `;

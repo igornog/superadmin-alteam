@@ -18,13 +18,8 @@ export default Story;
 const Template: ComponentStory<typeof AtTextField> = (args: any) => (
   <Box width={'250px'}>
     <AtTextField
+      {...args}
       placeholder={'Search in most recent'}
-      isError={args.isError}
-      isSuccess={args.isSuccess}
-      label={args.label}
-      size={args.size}
-      required={args.required}
-      disabled={args.disabled}
       startIcon={args.startIcon ? <SearchNormal1 /> : null}
       endIcon={args.endIcon ? <CloseCircle /> : null}
     />
@@ -54,6 +49,7 @@ InputSuccess.args = {
 export const InputError = Template.bind({});
 InputError.args = {
   isError: true,
+  helperText: 'An error occured',
   label: 'Email',
   required: true,
   disabled: false,
@@ -88,6 +84,7 @@ InputSmallError.args = {
   required: true,
   disabled: false,
   isError: true,
+  helperText: 'An error occured',
   size: 'small',
   startIcon: false,
   endIcon: false,

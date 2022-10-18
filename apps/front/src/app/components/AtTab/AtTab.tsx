@@ -5,6 +5,8 @@ import AtTypography from '../AtTypography/AtTypography';
 
 const StyledTab = styled.div<{ active?: boolean }>`
   border: 1px solid ${grey5};
+  transition: 0.3s;
+
   ${({ active }) =>
     active
       ? css`
@@ -16,6 +18,7 @@ const StyledTab = styled.div<{ active?: boolean }>`
             
             &:hover {
                 cursor: pointer;
+                transition: .3s;
                 border-color: ${grey2};
             }
         `}
