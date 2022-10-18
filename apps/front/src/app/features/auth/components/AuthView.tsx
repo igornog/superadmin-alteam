@@ -2,7 +2,7 @@ import { Box, useMediaQuery, useTheme } from '@mui/material';
 import React from 'react';
 import styled from 'styled-components';
 import background from '../../../assets/images/background.png';
-import logo from '../../../assets/images/logo.svg';
+import logo from '../../../assets/images/white_logo.svg';
 import AuthForm from './AuthForm';
 import AuthQuote from './AuthQuote';
 

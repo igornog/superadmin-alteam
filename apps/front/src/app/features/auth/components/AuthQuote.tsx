@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import React from 'react';
 import styled from 'styled-components';
-import AtTypography from '../../../components/AtTypography';
+import AtTypography from '../../../components/AtTypography/AtTypography';
 import { white } from '../../../utils/colors';
 
 const StyledQuote = styled(AtTypography)`
