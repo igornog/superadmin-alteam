@@ -2,25 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 import logo from '../../assets/images/black_logo.svg';
 import { Box } from '@mui/material';
-import {
-  Personalcard,
-  Profile,
-  Briefcase,
-  Setting2,
-  Category,
-  LogoutCurve,
-} from 'iconsax-react';
+import { LogoutCurve } from 'iconsax-react';
 import AtTypography from '../AtTypography/AtTypography';
-import { green, grey2, grey3, grey5, white } from '../../utils/colors';
+import { black, green, grey2, grey3, grey5, white } from '../../utils/colors';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigation, NavigationProps } from '../../app';
 
 const StyledNav = styled.div`
-    width: 145px;
-    height: 100%;
+    height: 100vh;
     background-color ${white};
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
+    border-right: 1px solid ${grey5};
+    position:sticky;
+    top: 0;
 `;
 
 const StyledLogo = styled.img`
@@ -35,18 +32,19 @@ const StyledUl = styled.ul`
   padding: 0;
 `;
 
-const StyledLi = styled.li`
+const StyledLi = styled.li<{ isActive: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
   position: relative;
   z-index: 1;
+  color: ${({ isActive }) => (isActive ? black : grey2)};
 
   &:before {
     transition: 0.3s;
     position: absolute;
-    background-color: ${white};
+    background-color: ${({ isActive }) => (isActive ? green : white)};
     top: -7px;
     left: -56%;
     content: '';
@@ -58,7 +56,9 @@ const StyledLi = styled.li`
   }
 
   &:hover {
+    transition: 0.3s;
     cursor: pointer;
+    color: ${black};
 
     &:before {
       transition: 0.3s;
@@ -84,6 +84,9 @@ const StyledButton = styled.div`
 `;
 
 const AtNavbar: React.FunctionComponent = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   return (
     <StyledNav>
       <Box>
@@ -91,26 +94,17 @@ const AtNavbar: React.FunctionComponent = () => {
       </Box>
       <Box>
         <StyledUl>
-          <StyledLi>
-            <Profile />
-            <AtTypography variant={'body1'}>Talents</AtTypography>
-          </StyledLi>
-          <StyledLi>
-            <Personalcard />
-            <AtTypography variant={'body1'}>Clients</AtTypography>
-          </StyledLi>
-          <StyledLi>
-            <Briefcase />
-            <AtTypography variant={'body1'}>Listings</AtTypography>
-          </StyledLi>
-          <StyledLi>
-            <Setting2 />
-            <AtTypography variant={'body1'}>Settings</AtTypography>
-          </StyledLi>
-          <StyledLi>
-            <Category />
-            <AtTypography variant={'body1'}>Account</AtTypography>
-          </StyledLi>
+          {Navigation.map((item: NavigationProps, index: number) => {
+            return (
+              <StyledLi
+                isActive={location.pathname === item.link}
+                onClick={() => navigate(item.link)}
+              >
+                {item.icon}
+                <AtTypography variant={'body1'}>{item.name}</AtTypography>
+              </StyledLi>
+            );
+          })}
         </StyledUl>
       </Box>
       <Box paddingBottom={'30px'}>

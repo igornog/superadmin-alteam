@@ -8,7 +8,9 @@ import { boxShadow } from '../../utils/theme';
 import AtTextField, { AtTextFieldProps } from '../AtTextField/AtTextField';
 import AtTypography from '../AtTypography/AtTypography';
 
-const StyledContentPopover = styled(Collapse)`
+const StyledContentPopover = styled(Collapse)<{ minWidth: number }>`
+  position: absolute;
+  min-width: ${({ minWidth }) => minWidth && minWidth + 'px'};
   background-color: ${white};
   box-shadow: ${boxShadow};
   border: 1px solid ${grey5};
@@ -36,7 +38,9 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
 ) => {
   const dropdownRef = useRef<any>(null);
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-  const [selectedItem, setSelectedItem] = useState<DropdownItem>();
+  const [selectedItem, setSelectedItem] = useState<DropdownItem>(
+    props.listItems[0]
+  );
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -61,17 +65,27 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
     }
   }, [selectedItem]);
 
+  const [maxWidth, setMaxWidth] = useState(0);
+
+  useEffect(() => {
+    setMaxWidth(selectedItem.label.length);
+  }, [selectedItem]);
+
   return (
     <ClickAwayListener onClickAway={handleClose}>
-      <Box ref={dropdownRef} width={'fit-content'}>
+      <Box ref={dropdownRef} width={'fit-content'} position={'relative'}>
         <AtTextField
           {...props}
           dropdown={true}
           open={open}
+          maxWidth={maxWidth}
           onClick={open ? handleClose : handleClick}
           placeholder={selectedItem ? selectedItem.label : props.placeholder}
         />
-        <StyledContentPopover in={open}>
+        <StyledContentPopover
+          in={open}
+          minWidth={dropdownRef?.current?.offsetWidth}
+        >
           {props.listItems.map((item: DropdownItem) => (
             <StyledElement key={item.id} onClick={() => handleSelect(item)}>
               <AtTypography

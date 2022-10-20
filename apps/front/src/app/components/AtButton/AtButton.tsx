@@ -59,12 +59,12 @@ export const buttonKind = {
       outlined: grey2,
     },
     active: {
-      backgroundColor: null,
-      color: null,
+      backgroundColor: black,
+      color: white,
     },
     focus: {
-      backgroundColor: null,
-      color: null,
+      backgroundColor: black,
+      color: white,
     },
     disabled: {
       backgroundColor: grey4,
@@ -116,7 +116,7 @@ const StyledButton = styled(Button)<StyledButtonProps>`
     justify-content: center;
     align-items: center;
     min-width: 32px;
-    height: 32px;
+    height: 40px;
     font-size: 13px;
     text-transform: initial;
     box-shadow: none;
@@ -191,9 +191,23 @@ const StyledButton = styled(Button)<StyledButtonProps>`
     }
 
     :focus {
+      ${({ $variant }) =>
+        $variant === AtButtonVariant.Contained
+          ? css<{ kind: AtButtonKind }>`
+              background-color: ${({ kind }) =>
+                buttonKind[kind].focus.backgroundColor};
+              color: ${({ kind }) => buttonKind[kind].focus.color};
+            `
+          : $variant === AtButtonVariant.Outlined
+          ? css<{ kind: AtButtonKind }>`
+              background-color: transparent;
+              color: ${({ kind }) => buttonKind[kind].focus.color};
+            `
+          : css<{ kind: AtButtonKind }>`
+              background-color: transparent;
+              color: ${({ kind }) => buttonKind[kind].focus.color};
+            `}
       transition: all 0.25s ease-in-out;
-      background-color: ${({ kind }) => buttonKind[kind].focus.backgroundColor};
-      color: ${({ kind }) => buttonKind[kind].focus.color};
       box-shadow: none;
     }
 
@@ -230,6 +244,7 @@ interface AtButtonProps {
   disabled?: boolean;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
+  fontSize?: string;
 }
 
 const AtButton: React.FunctionComponent<AtButtonProps> = (
@@ -247,7 +262,9 @@ const AtButton: React.FunctionComponent<AtButtonProps> = (
       onClick={props.onClick}
     >
       {props.name && (
-        <AtTypography variant={'button'}>{props.name}</AtTypography>
+        <AtTypography variant={'button'} fontSize={props.fontSize}>
+          {props.name}
+        </AtTypography>
       )}
     </StyledButton>
   );

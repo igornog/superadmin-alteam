@@ -34,6 +34,7 @@ export const alTeamTheme = createTheme({
     },
     h3: {
       fontSize: '30px',
+      fontFamily: 'Inter-bold',
       fontWeight: '700',
       textTransform: 'none',
       lineHeight: '36.31px',
@@ -51,17 +52,14 @@ export const alTeamTheme = createTheme({
       lineHeight: '24.2px',
     },
     body1: {
-      fontFamily: 'Inter',
       fontSize: '16px',
       textTransform: 'none',
     },
     body2: {
-      fontFamily: 'Inter',
       fontSize: '14px',
       textTransform: 'none',
     },
     button: {
-      fontFamily: 'Inter',
       fontSize: '16px',
       textTransform: 'none',
       fontWeight: '600',
@@ -79,7 +77,6 @@ export const alTeamTheme = createTheme({
     },
     caption: {
       fontSize: '12px',
-      fontFamily: 'Inter',
       textTransform: 'none',
     },
   },

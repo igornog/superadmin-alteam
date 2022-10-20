@@ -9,7 +9,7 @@ import {
   OutlinedInput,
   outlinedInputClasses,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import {
   black,
@@ -53,14 +53,26 @@ const StyledInput = styled(OutlinedInput)<{
   disabled?: boolean;
   size?: string;
   dropdown?: boolean;
+  bgColor?: string;
+  maxWidth?: number;
 }>`
   &.${outlinedInputClasses.root} {
     padding: 0 20px;
-    background-color: ${({ focused, isError, isSuccess }) =>
-      focused ? (isError ? red1 : isSuccess ? green5 : white) : white};
+    ${({ bgColor }) =>
+      bgColor
+        ? css<{ bgColor?: string }>`
+            background-color: ${({ bgColor }) =>
+              bgColor === 'black' ? black : white};
+          `
+        : css<{ focused: boolean; isError?: boolean; isSuccess?: boolean }>`
+            background-color: ${({ focused, isError, isSuccess }) =>
+              focused ? (isError ? red1 : isSuccess ? green5 : white) : white};
+          `};
 
     & input {
-      color: ${({ disabled }) => (disabled ? grey3 : black)};
+      max-width: ${({ maxWidth }) => maxWidth && maxWidth + 'ch'};
+      color: ${({ disabled, bgColor }) =>
+        bgColor === 'black' ? white : disabled ? grey3 : black};
       font-size: ${({ size }) => (size === 'medium' ? '16px' : '14px')};
 
       &::placeholder {
@@ -101,7 +113,8 @@ const StyledInput = styled(OutlinedInput)<{
             }
           `}
         width: 20px;
-        color: ${({ disabled }) => (disabled ? grey3 : grey2)};
+        color: ${({ disabled, bgColor }) =>
+          bgColor === 'black' ? white : disabled ? grey3 : black};
       }
     }
 
@@ -119,12 +132,12 @@ const StyledInput = styled(OutlinedInput)<{
     fieldset {
       transition: 0.3s;
       border-width: 1px;
-      border-color: ${({ isError, isSuccess }) =>
-        isError ? red : isSuccess ? green : grey5};
+      border-color: ${({ isError, isSuccess, bgColor }) =>
+        bgColor === 'black' ? null : isError ? red : isSuccess ? green : grey5};
     }
   }
 
-  &.${outlinedInputClasses.root}:hover:not(.Mui-disabled) {
+  &.${outlinedInputClasses.root}:hover: not(.Mui-disabled) {
     fieldset {
       transition: 0.3s;
       border-color: ${({ isError, isSuccess }) =>
@@ -177,6 +190,8 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (props) => {
           fullWidth={true}
           onClick={props.onClick}
           dropdown={props.dropdown}
+          maxWidth={props.maxWidth}
+          bgColor={props.bgColor}
           readOnly={props.dropdown}
           isError={props.isError}
           isSuccess={props.isSuccess}
@@ -251,6 +266,8 @@ export interface AtTextFieldProps {
   dropdown?: boolean;
   open?: boolean;
 
+  maxWidth?: number;
+  bgColor?: 'black' | 'white';
   size?: 'small' | 'medium';
   onValueChange?: (value: string) => void;
   placeholder?: string;
