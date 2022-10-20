@@ -9,15 +9,17 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Navigation, NavigationProps } from '../../app';
 
 const StyledNav = styled.div`
-    height: 100vh;
-    background-color ${white};
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-between;
-    border-right: 1px solid ${grey5};
-    position:sticky;
-    top: 0;
+  position: fixed;
+  top: 0;
+  left:0;
+  height: 100vh;
+  width: 145px;
+  background-color ${white};
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid ${grey5};
 `;
 
 const StyledLogo = styled.img`

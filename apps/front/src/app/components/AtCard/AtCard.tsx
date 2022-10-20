@@ -12,9 +12,6 @@ const StyledCard = styled.div`
   border: 1px solid ${grey5};
   border-radius: 10px;
   padding: 20px;
-  width: fit-content;
-  min-width: 405px;
-  min-height: 230px;
   transition: 0.3s;
 
   &:hover {
@@ -59,7 +56,7 @@ const AtCard: React.FunctionComponent = () => {
       <Box display={'flex'}>
         <AtTypography color={grey3}>Applied to:&nbsp;</AtTypography>
         <AtTypography>
-          Solo60... &gt; App, Ticknovate... &gt; Dev, Chaptr... See all
+          Solo60... &gt; App, Ticknovate... &gt; Dev See all
         </AtTypography>
       </Box>
 

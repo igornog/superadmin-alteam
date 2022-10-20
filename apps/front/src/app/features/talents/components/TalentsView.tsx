@@ -12,19 +12,49 @@ const TalentsView: React.FunctionComponent = () => {
       sidePanelSize={'small'}
     >
       <Grid container={true} spacing={2.5} marginTop={2.5}>
-        <Grid item={true}>
+        <Grid item={true} xs={4}>
           <AtCard />
         </Grid>
-        <Grid item={true}>
+        <Grid item={true} xs={4}>
           <AtCard />
         </Grid>
-        <Grid item={true}>
+        <Grid item={true} xs={4}>
           <AtCard />
         </Grid>
-        <Grid item={true}>
+        <Grid item={true} xs={4}>
           <AtCard />
         </Grid>
-        <Grid item={true}>
+        <Grid item={true} xs={4}>
+          <AtCard />
+        </Grid>
+        <Grid item={true} xs={4}>
+          <AtCard />
+        </Grid>
+        <Grid item={true} xs={4}>
+          <AtCard />
+        </Grid>
+        <Grid item={true} xs={4}>
+          <AtCard />
+        </Grid>
+        <Grid item={true} xs={4}>
+          <AtCard />
+        </Grid>
+        <Grid item={true} xs={4}>
+          <AtCard />
+        </Grid>
+        <Grid item={true} xs={4}>
+          <AtCard />
+        </Grid>
+        <Grid item={true} xs={4}>
+          <AtCard />
+        </Grid>
+        <Grid item={true} xs={4}>
+          <AtCard />
+        </Grid>
+        <Grid item={true} xs={4}>
+          <AtCard />
+        </Grid>
+        <Grid item={true} xs={4}>
           <AtCard />
         </Grid>
       </Grid>
