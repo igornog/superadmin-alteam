@@ -111,6 +111,15 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                 />
               )}
 
+              {activeTab.settings.createFolder && (
+                <AtButton
+                  kind={AtButtonKind.Success}
+                  variant={AtButtonVariant.Contained}
+                  startIcon={<AddCircle />}
+                  name={'Create folder'}
+                />
+              )}
+
               {activeTab.settings.inviteTalent && (
                 <AtButton
                   kind={AtButtonKind.Success}
