@@ -26,7 +26,7 @@ const AtNavPage: React.FunctionComponent = () => {
     <StyledNavPage>
       {settings.tabs.map((page: Page, index: number) => (
         <AtTab
-          label={page.label}
+          label={page.title}
           badge={page.badge}
           key={index}
           active={page.active}

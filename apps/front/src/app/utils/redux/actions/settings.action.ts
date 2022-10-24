@@ -4,11 +4,19 @@ import {
   Filter,
   HandlesettingsProps,
   Page,
+  Settings,
 } from '../types/settings.type';
 
-export const handleSettings = createAsyncThunk(
+export const handleInitSettings = createAsyncThunk(
   'settings/initSettings',
   async (settings: HandlesettingsProps) => {
+    return settings;
+  }
+);
+
+export const handleSettingsTab = createAsyncThunk(
+  'settings/initSettingsActiveTab',
+  async (settings: Settings) => {
     return settings;
   }
 );

@@ -112,20 +112,18 @@ const TalentsViewSidePanel: React.FunctionComponent = () => {
           gap={1.5}
         >
           {settings.filters.jobTypes.map((jobType: Filter, index: number) => (
-            <Box
+            <StyledBox
               display={'flex'}
               width={'100%'}
               justifyContent={'space-between'}
               key={index}
+              active={jobType.active}
               color={jobType.active ? black : grey2}
+              onClick={() => handleClick(jobType, 'jobTypes')}
             >
               <AtTypography>{jobType.label}</AtTypography>
-              <StyledAddCircle
-                size={20}
-                onClick={() => handleClick(jobType, 'jobTypes')}
-                active={jobType.active}
-              />
-            </Box>
+              <StyledAddCircle size={20} active={jobType.active} />
+            </StyledBox>
           ))}
         </Box>
       </Box>

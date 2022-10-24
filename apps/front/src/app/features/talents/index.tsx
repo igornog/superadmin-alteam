@@ -2,32 +2,59 @@ export { default } from './components/TalentsView';
 
 export const talentsTabs = [
   {
-    label: 'All Talents',
+    title: 'All Talents',
     badge: 150,
     active: false,
+    settings: {
+      search: true,
+      downloadCSV: true,
+      displayMode: true,
+      sortBy: true,
+    },
   },
   {
-    label: 'Inbound Talents',
+    title: 'Inbound Talents',
     badge: 5,
     active: true,
+    settings: {
+      search: true,
+      downloadCSV: true,
+      inviteTalent: true,
+      displayMode: true,
+      sortBy: true,
+    },
   },
   {
-    label: 'Shortlist Talents',
+    title: 'Shortlist Talents',
     badge: 40,
     active: false,
+    settings: {
+      downloadCSV: true,
+      createFolder: true,
+    },
   },
   {
-    label: 'Accepted Talents',
+    title: 'Accepted Talents',
     badge: 20,
     active: false,
+    settings: {
+      downloadCSV: true,
+      createFolder: true,
+    },
   },
   {
-    label: 'Declined Talents',
+    title: 'Declined Talents',
     active: false,
+    settings: {
+      search: true,
+      downloadCSV: true,
+      sortBy: true,
+    },
   },
   {
-    label: 'Applicants',
+    title: 'Applicants',
     active: false,
+    settings: {},
   },
 ];
 

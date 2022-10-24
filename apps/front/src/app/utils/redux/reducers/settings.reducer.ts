@@ -3,7 +3,8 @@ import {
   handleActiveFilter,
   handleActiveTab,
   handleRefreshFilters,
-  handleSettings,
+  handleInitSettings,
+  handleSettingsTab,
   handleSwitchDisplayMode,
 } from '../actions/settings.action';
 import { DisplayMode, Filter, SettingsState } from '../types/settings.type';
@@ -15,6 +16,7 @@ const initialState: SettingsState = {
     skills: [],
     jobTypes: [],
   },
+  header: {},
   displayMode: DisplayMode.List,
   status: StatusType.Idle,
   error: null,
@@ -26,26 +28,29 @@ const { reducer } = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(handleSettings.pending, (state) => {
+      .addCase(handleInitSettings.pending, (state) => {
         state.status = StatusType.Loading;
       })
-      .addCase(handleSettings.fulfilled, (state, { payload }) => {
+      .addCase(handleInitSettings.fulfilled, (state, { payload }) => {
         state.status = StatusType.Succeeded;
         state.tabs = payload.tabs;
         state.filters.skills = payload.filters;
         state.filters.jobTypes = payload.jobTypes;
       })
-      .addCase(handleSettings.rejected, (state, action) => {
+      .addCase(handleInitSettings.rejected, (state, action) => {
         state.status = StatusType.Failed;
         state.error = action.error.message;
+      })
+
+      .addCase(handleSettingsTab.fulfilled, (state, { payload }) => {
+        state.header = payload;
       })
 
       .addCase(handleActiveTab.fulfilled, (state, { payload }) => {
         const activeIndex = state.tabs.findIndex((tab) => tab.active === true);
         const index = state.tabs.findIndex(
-          (tab) => tab.label === payload.label
+          (tab) => tab.title === payload.title
         );
-
         state.tabs[activeIndex].active = false;
         state.tabs[index].active = true;
       })
