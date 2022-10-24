@@ -1,9 +1,11 @@
 import { StyledEngineProvider, ThemeProvider } from '@mui/material';
 import React from 'react';
 import * as ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from './app/app';
+import store from './app/utils/redux/store';
 import { alTeamTheme } from './app/utils/theme';
 
 const root = ReactDOM.createRoot(
@@ -13,9 +15,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <ThemeProvider theme={alTeamTheme}>
     <StyledEngineProvider injectFirst>
-      <Router>
-        <App />
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <App />
+        </Router>
+      </Provider>
     </StyledEngineProvider>
   </ThemeProvider>
 );

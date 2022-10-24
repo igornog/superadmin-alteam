@@ -61,11 +61,6 @@ const StyledLi = styled.li<{ isActive: boolean }>`
     transition: 0.3s;
     cursor: pointer;
     color: ${black};
-
-    &:before {
-      transition: 0.3s;
-      background-color: ${green};
-    }
   }
 `;
 
@@ -101,6 +96,7 @@ const AtNavbar: React.FunctionComponent = () => {
               <StyledLi
                 isActive={location.pathname === item.link}
                 onClick={() => navigate(item.link)}
+                key={index}
               >
                 {item.icon}
                 <AtTypography variant={'body1'}>{item.name}</AtTypography>
@@ -109,7 +105,7 @@ const AtNavbar: React.FunctionComponent = () => {
           })}
         </StyledUl>
       </Box>
-      <Box paddingBottom={'30px'}>
+      <Box paddingBottom={'15px'}>
         <StyledButton>
           <LogoutCurve />
         </StyledButton>

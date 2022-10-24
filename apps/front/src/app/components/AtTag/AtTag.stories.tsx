@@ -13,4 +13,7 @@ const Template: ComponentStory<typeof AtTag> = (args: any) => (
 );
 
 export const Tag = Template.bind({});
-Tag.args = {};
+Tag.args = {
+  label: 'Prototyping',
+  delete: true,
+};

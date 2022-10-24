@@ -35,13 +35,13 @@ const StyledBadge = styled.div<{ active?: boolean }>`
   background-color: ${({ active }) => (active ? white : black)};
   color: ${({ active }) => (active ? black : white)};
   border-radius: 5px;
-  padding: 3px 5px;
+  padding: 3px 5px 1px 5px;
   font-size: 10px;
 `;
 
 const AtTab: React.FunctionComponent<AtTabProps> = (props: AtTabProps) => {
   return (
-    <StyledTab active={props.active}>
+    <StyledTab active={props.active} onClick={props.onClick}>
       <AtTypography>{props.label}</AtTypography>
       {props.badge && (
         <StyledBadge active={props.active}>
@@ -56,6 +56,7 @@ interface AtTabProps {
   label: string;
   badge?: number;
   active?: boolean;
+  onClick?: () => void;
 }
 
 export default AtTab;

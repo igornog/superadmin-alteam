@@ -1,8 +1,18 @@
 import { Box, Grid } from '@mui/material';
-import { AddCircle, Candle, Import, SearchNormal1 } from 'iconsax-react';
+import {
+  AddCircle,
+  Candle,
+  Element3,
+  Import,
+  RowVertical,
+  SearchNormal1,
+} from 'iconsax-react';
 import React from 'react';
-import styled from 'styled-components';
-import { grey2 } from '../../utils/colors';
+import styled, { css } from 'styled-components';
+import { black, grey, grey2, white } from '../../utils/colors';
+import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
+import { handleSwitchDisplayMode } from '../../utils/redux/actions/settings.action';
+import { DisplayMode } from '../../utils/redux/types/settings.type';
 import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton';
 import AtDropdown from '../AtDropdown/AtDropdown';
 import AtNavbar from '../AtNavbar/AtNavbar';
@@ -13,42 +23,67 @@ import AtTypography from '../AtTypography/AtTypography';
 const StyledContent = styled(Grid)`
   background-color: #f7f8fe;
   margin: 20px 255px 20px 165px;
+  width: 100%;
+`;
+
+const StyledIconsBox = styled.div`
+  background-color: #f0f1f8;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  width: fit-content;
+  padding: 5px;
+  border-radius: 5px;
+`;
+
+const sharedIconStyle = css<{ active: boolean }>`
+  transition: 0.3s;
+  color: ${grey};
+  position: relative;
+
+  ${({ active }) =>
+    active
+      ? css`
+          background-color: ${grey};
+          padding: 6px;
+          color: ${white};
+          border-radius: 5px;
+        `
+      : css`
+          padding: 5px;
+
+          &:hover {
+            color: ${black};
+            cursor: pointer;
+            transition: 0.3s;
+          }
+        `}
+`;
+
+const StyledElement3 = styled(Element3)`
+  ${sharedIconStyle}
+`;
+
+const StyledRowVertical = styled(RowVertical)`
+  ${sharedIconStyle}
 `;
 
 const AtLayout: React.FunctionComponent<AtLayoutProps> = (
   props: AtLayoutProps
 ) => {
+  const settings = useAppSelector((state) => state.settings);
+  const dispatch = useAppDispatch();
+
+  const handleSwitchMode = (mode: DisplayMode) => {
+    dispatch(handleSwitchDisplayMode(mode));
+  };
+
   return (
     <>
       <AtNavbar />
       <Grid container={true}>
         <StyledContent item={true}>
-          <AtNavPage
-            pages={[
-              {
-                label: 'All Talents',
-                badge: 150,
-              },
-              {
-                label: 'Inbound Talents',
-                badge: 5,
-              },
-              {
-                label: 'Shortlist Talents',
-                badge: 40,
-              },
-              {
-                label: 'Accepted Talents',
-                badge: 20,
-              },
-              {
-                label: 'Declined Talents',
-              },
-              {
-                label: 'Applicants',
-              },
-            ]}
-          />
+          <AtNavPage />
 
           <Box
             display={'flex'}
@@ -78,6 +113,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
             container={true}
             marginTop={'20px'}
             justifyContent={'space-between'}
+            alignItems={'center'}
           >
             <Grid item={true} xs={6.5}>
               <AtTextField
@@ -87,20 +123,37 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
               />
             </Grid>
 
-            <Box
-              display={'flex'}
-              gap={'5px'}
-              justifyContent={'flex-end'}
-              alignItems={'center'}
-            >
-              <AtTypography color={grey2}>
-                <Candle /> Sort by:
-              </AtTypography>
-              <AtDropdown
-                listItems={[{ id: 0, label: 'None' }]}
-                size={'small'}
-                bgColor={'black'}
-              />
+            <Box display={'flex'} gap={'30px'} alignItems={'center'}>
+              <Box display={'flex'}>
+                <StyledIconsBox>
+                  <StyledElement3
+                    size={20}
+                    active={settings.displayMode === DisplayMode.Grid}
+                    onClick={() => handleSwitchMode(DisplayMode.Grid)}
+                  />
+
+                  <StyledRowVertical
+                    size={20}
+                    active={settings.displayMode === DisplayMode.List}
+                    onClick={() => handleSwitchMode(DisplayMode.List)}
+                  />
+                </StyledIconsBox>
+              </Box>
+              <Box
+                display={'flex'}
+                gap={'5px'}
+                justifyContent={'flex-end'}
+                alignItems={'center'}
+              >
+                <AtTypography color={grey2}>
+                  <Candle /> Sort by:
+                </AtTypography>
+                <AtDropdown
+                  listItems={[{ id: 0, label: 'None' }]}
+                  size={'small'}
+                  bgColor={'black'}
+                />
+              </Box>
             </Box>
           </Grid>
           {props.children}

@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
+import { handleActiveTab } from '../../utils/redux/actions/settings.action';
+import { Page } from '../../utils/redux/types/settings.type';
 import AtTab from '../AtTab/AtTab';
 
 const StyledNavPage = styled.div`
@@ -11,24 +14,27 @@ const StyledNavPage = styled.div`
   border-radius: 10px;
 `;
 
-const AtNavPage: React.FunctionComponent<AtNavPageProps> = (
-  props: AtNavPageProps
-) => {
+const AtNavPage: React.FunctionComponent = () => {
+  const settings = useAppSelector((state) => state.settings);
+  const dispatch = useAppDispatch();
+
+  const handleClick = (page: Page) => {
+    dispatch(handleActiveTab(page));
+  };
+
   return (
     <StyledNavPage>
-      {props.pages.map((page, index) => (
-        <AtTab label={page.label} badge={page.badge} />
+      {settings.tabs.map((page: Page, index: number) => (
+        <AtTab
+          label={page.label}
+          badge={page.badge}
+          key={index}
+          active={page.active}
+          onClick={() => handleClick(page)}
+        />
       ))}
     </StyledNavPage>
   );
 };
-
-interface AtNavPageProps {
-  pages: {
-    label: string;
-    badge?: number;
-    action?: string;
-  }[];
-}
 
 export default AtNavPage;

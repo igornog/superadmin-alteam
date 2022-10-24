@@ -80,11 +80,7 @@ const StyledInput = styled(OutlinedInput)<{
       }
 
       &:hover {
-        ${({ dropdown }) =>
-          dropdown &&
-          css`
-            cursor: pointer;
-          `}
+        cursor: pointer;
         &::placeholder {
           color: ${grey2};
         }

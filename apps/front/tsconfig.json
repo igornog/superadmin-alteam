@@ -6,6 +6,7 @@
     "experimentalDecorators": true,
     "jsxImportSource": "react",
     "isolatedModules": true,
+    "composite": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "typeRoots": ["node_modules/@types", "src/types"],
