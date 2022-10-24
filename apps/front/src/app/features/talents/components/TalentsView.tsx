@@ -43,11 +43,7 @@ const TalentsView: React.FunctionComponent = () => {
   };
 
   return (
-    <AtLayout
-      title={activeTab?.title}
-      sidePanel={<TalentsViewSidePanel />}
-      sidePanelSize={'small'}
-    >
+    <AtLayout sidePanel={<TalentsViewSidePanel />} sidePanelSize={'small'}>
       <Grid container={true} spacing={2.5} marginTop={0}>
         {talents.map((talent) => (
           <Grid item={true} xs={6} key={talent.id} height={'100%'}>

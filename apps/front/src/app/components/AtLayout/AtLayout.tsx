@@ -12,6 +12,7 @@ import styled, { css } from 'styled-components';
 import { black, grey, grey2, white } from '../../utils/colors';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
 import { handleSwitchDisplayMode } from '../../utils/redux/actions/settings.action';
+import { getActiveTab } from '../../utils/redux/selectors/settings.selector';
 import { DisplayMode } from '../../utils/redux/types/settings.type';
 import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton';
 import AtDropdown from '../AtDropdown/AtDropdown';
@@ -20,9 +21,15 @@ import AtNavPage from '../AtNavPage/AtNavPage';
 import AtTextField, { AtTextFieldType } from '../AtTextField/AtTextField';
 import AtTypography from '../AtTypography/AtTypography';
 
-const StyledContent = styled(Grid)`
+const StyledContent = styled(Grid)<{ sidePanelSize?: string }>`
   background-color: #f7f8fe;
   margin: 20px 255px 20px 165px;
+  margin-right: ${({ sidePanelSize }) =>
+    sidePanelSize === 'small'
+      ? '255px'
+      : sidePanelSize === 'medium'
+      ? '540px'
+      : '20px'};
   width: 100%;
 `;
 
@@ -71,6 +78,7 @@ const StyledRowVertical = styled(RowVertical)`
 const AtLayout: React.FunctionComponent<AtLayoutProps> = (
   props: AtLayoutProps
 ) => {
+  const activeTab = useAppSelector((state) => getActiveTab(state));
   const settings = useAppSelector((state) => state.settings);
   const dispatch = useAppDispatch();
 
@@ -82,7 +90,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
     <>
       <AtNavbar />
       <Grid container={true}>
-        <StyledContent item={true}>
+        <StyledContent item={true} sidePanelSize={props.sidePanelSize}>
           <AtNavPage />
 
           <Box
@@ -90,22 +98,27 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
             justifyContent={'space-between'}
             marginTop={'30px'}
           >
-            <AtTypography variant={'h3'}>{props.title}</AtTypography>
+            <AtTypography variant={'h3'}>{activeTab.title}</AtTypography>
 
             <Box display={'flex'} gap={'10px'}>
-              <AtButton
-                kind={AtButtonKind.Default}
-                variant={AtButtonVariant.Text}
-                startIcon={<Import />}
-                fontSize={'14px'}
-                name={'Download CSV'}
-              />
-              <AtButton
-                kind={AtButtonKind.Success}
-                variant={AtButtonVariant.Contained}
-                startIcon={<AddCircle />}
-                name={'Invite Talents'}
-              />
+              {activeTab.settings.downloadCSV && (
+                <AtButton
+                  kind={AtButtonKind.Default}
+                  variant={AtButtonVariant.Text}
+                  startIcon={<Import />}
+                  fontSize={'14px'}
+                  name={'Download CSV'}
+                />
+              )}
+
+              {activeTab.settings.inviteTalent && (
+                <AtButton
+                  kind={AtButtonKind.Success}
+                  variant={AtButtonVariant.Contained}
+                  startIcon={<AddCircle />}
+                  name={'Invite Talents'}
+                />
+              )}
             </Box>
           </Box>
 
@@ -116,44 +129,50 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
             alignItems={'center'}
           >
             <Grid item={true} xs={6.5}>
-              <AtTextField
-                type={AtTextFieldType.Text}
-                placeholder={'Search in Inbound talents ...'}
-                startIcon={<SearchNormal1 />}
-              />
+              {activeTab.settings.search && (
+                <AtTextField
+                  type={AtTextFieldType.Text}
+                  placeholder={'Search in Inbound talents ...'}
+                  startIcon={<SearchNormal1 />}
+                />
+              )}
             </Grid>
 
             <Box display={'flex'} gap={'30px'} alignItems={'center'}>
-              <Box display={'flex'}>
-                <StyledIconsBox>
-                  <StyledElement3
-                    size={20}
-                    active={settings.displayMode === DisplayMode.Grid}
-                    onClick={() => handleSwitchMode(DisplayMode.Grid)}
-                  />
+              {activeTab.settings.displayMode && (
+                <Box display={'flex'}>
+                  <StyledIconsBox>
+                    <StyledElement3
+                      size={20}
+                      active={settings.displayMode === DisplayMode.Grid}
+                      onClick={() => handleSwitchMode(DisplayMode.Grid)}
+                    />
 
-                  <StyledRowVertical
-                    size={20}
-                    active={settings.displayMode === DisplayMode.List}
-                    onClick={() => handleSwitchMode(DisplayMode.List)}
+                    <StyledRowVertical
+                      size={20}
+                      active={settings.displayMode === DisplayMode.List}
+                      onClick={() => handleSwitchMode(DisplayMode.List)}
+                    />
+                  </StyledIconsBox>
+                </Box>
+              )}
+              {activeTab.settings.sortBy && (
+                <Box
+                  display={'flex'}
+                  gap={'5px'}
+                  justifyContent={'flex-end'}
+                  alignItems={'center'}
+                >
+                  <AtTypography color={grey2}>
+                    <Candle /> Sort by:
+                  </AtTypography>
+                  <AtDropdown
+                    listItems={[{ id: 0, label: 'None' }]}
+                    size={'small'}
+                    bgColor={'black'}
                   />
-                </StyledIconsBox>
-              </Box>
-              <Box
-                display={'flex'}
-                gap={'5px'}
-                justifyContent={'flex-end'}
-                alignItems={'center'}
-              >
-                <AtTypography color={grey2}>
-                  <Candle /> Sort by:
-                </AtTypography>
-                <AtDropdown
-                  listItems={[{ id: 0, label: 'None' }]}
-                  size={'small'}
-                  bgColor={'black'}
-                />
-              </Box>
+                </Box>
+              )}
             </Box>
           </Grid>
           {props.children}
