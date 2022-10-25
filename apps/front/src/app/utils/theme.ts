@@ -17,6 +17,15 @@ export const alTeamTheme = createTheme({
       main: grey5,
     },
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1920,
+    },
+  },
   typography: {
     fontFamily: 'Inter',
     h1: {

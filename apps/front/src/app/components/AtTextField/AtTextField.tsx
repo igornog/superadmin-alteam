@@ -66,7 +66,13 @@ const StyledInput = styled(OutlinedInput)<{
           `
         : css<{ focused: boolean; $isError?: boolean; $isSuccess?: boolean }>`
             background-color: ${({ focused, $isError, $isSuccess }) =>
-              focused ? ($isError ? red1 : $isSuccess ? green5 : white) : white};
+              focused
+                ? $isError
+                  ? red1
+                  : $isSuccess
+                  ? green5
+                  : white
+                : white};
           `};
 
     & input {
@@ -129,7 +135,13 @@ const StyledInput = styled(OutlinedInput)<{
       transition: 0.3s;
       border-width: 1px;
       border-color: ${({ $isError, $isSuccess, $bgColor }) =>
-        $bgColor === 'black' ? null : $isError ? red : $isSuccess ? green : grey5};
+        $bgColor === 'black'
+          ? null
+          : $isError
+          ? red
+          : $isSuccess
+          ? green
+          : grey5};
     }
   }
 
@@ -147,7 +159,9 @@ const StyledArrow = styled(ArrowDown2)<{ open?: boolean }>`
   transform: rotate(${({ open }) => (open ? '180' : '0')}deg);
 `;
 
-const AtTextField: React.FunctionComponent<AtTextFieldProps> = (props: AtTextFieldProps) => {
+const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
+  props: AtTextFieldProps
+) => {
   const [showPassword, setShowPassword] = useState(false);
   const [value, setValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);

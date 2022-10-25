@@ -79,7 +79,7 @@ const AtCard: React.FunctionComponent<AtCardProps> = (props: AtCardProps) => {
         </Box>
       ) : (
         <AtTypography color={grey3}>
-          No skills been added by Mega Devs
+          No skills been added by {talent.fullName}
         </AtTypography>
       )}
     </StyledCard>

@@ -1,6 +1,5 @@
 import { Grid } from '@mui/material';
 import React from 'react';
-import { talents } from '../..';
 import AtCard from '../../../../components/AtCard/AtCard';
 import {
   useAppDispatch,
@@ -13,6 +12,7 @@ import InboundTalentsTable from './InboundTalentsTable';
 const InboundTalentsView: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
   const settings = useAppSelector((state) => state.settings);
+  const talents = useAppSelector((state) => state.talents);
 
   const handleClickCard = (id: number) => {
     dispatch(handleSelectTalent(id));
@@ -21,8 +21,8 @@ const InboundTalentsView: React.FunctionComponent = () => {
   return (
     <Grid container={true} spacing={2.5} marginTop={0}>
       {settings.displayMode === DisplayMode.Grid ? (
-        talents.map((talent) => (
-          <Grid item={true} xs={6} key={talent.id} height={'100%'}>
+        talents.listTalents.map((talent) => (
+          <Grid item={true} xs={6} xl={4} key={talent.id} height={'100%'}>
             <AtCard
               talent={talent}
               onClick={() => handleClickCard(talent.id)}
@@ -31,7 +31,10 @@ const InboundTalentsView: React.FunctionComponent = () => {
         ))
       ) : settings.displayMode === DisplayMode.List ? (
         <Grid item={true} xs={12}>
-          <InboundTalentsTable />
+          <InboundTalentsTable
+            talents={talents.listTalents}
+            onClick={handleClickCard}
+          />
         </Grid>
       ) : null}
     </Grid>

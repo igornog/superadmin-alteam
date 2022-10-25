@@ -4,7 +4,7 @@ import { StatusType } from '../types/status.type';
 import { TalentsState } from '../types/talents.type';
 
 const initialState: TalentsState = {
-  talents: [],
+  listTalents: [],
   selectedTalent: null,
   status: StatusType.Idle,
   error: null,
@@ -21,7 +21,7 @@ const { reducer } = createSlice({
       })
       .addCase(handleTalents.fulfilled, (state, { payload }) => {
         state.status = StatusType.Succeeded;
-        state.talents = payload;
+        state.listTalents = payload;
       })
       .addCase(handleTalents.rejected, (state, action) => {
         state.status = StatusType.Failed;

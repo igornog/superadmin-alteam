@@ -1,7 +1,7 @@
 import { StatusType } from './status.type';
 
 export interface TalentsState {
-  talents: Talent[];
+  listTalents: Talent[];
   selectedTalent: number | null;
   status?: StatusType;
   error?: string | null;
