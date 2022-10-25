@@ -29,7 +29,6 @@ const { reducer } = createSlice({
       })
 
       .addCase(handleSelectTalent.fulfilled, (state, { payload }) => {
-        console.log(payload);
         state.selectedTalent = payload;
       });
   },

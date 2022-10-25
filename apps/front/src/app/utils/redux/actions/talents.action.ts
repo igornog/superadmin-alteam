@@ -10,7 +10,7 @@ export const handleTalents = createAsyncThunk(
 
 export const handleSelectTalent = createAsyncThunk(
   'talents/selectTalent',
-  async (idTalent: number) => {
+  async (idTalent: number | null) => {
     return idTalent;
   }
 );

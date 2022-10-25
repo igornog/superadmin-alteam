@@ -20,7 +20,7 @@
     "noFallthroughCasesInSwitch": true
   },
   "files": [],
-  "include": ["src", "src/**/*.ts"],
+  "include": ["src", "src/**/*.ts", "src/**/**/*.ts"],
   "references": [
     {
       "path": "./src/.storybook/tsconfig.json"

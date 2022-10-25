@@ -99,7 +99,7 @@ export const buttonKind = {
 interface StyledButtonProps {
   kind: AtButtonKind;
   $variant: AtButtonVariant;
-  btnName?: string;
+  $btnName?: string;
   startIcon?: React.ReactNode;
 }
 
@@ -115,22 +115,24 @@ const StyledButton = styled(Button)<StyledButtonProps>`
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 32px;
-    height: 40px;
+    min-width: 24px;
     font-size: 13px;
     text-transform: initial;
     box-shadow: none;
 
-    ${({ btnName, startIcon }) =>
-      !btnName && startIcon
+    ${({ $btnName, startIcon }) =>
+      !$btnName && startIcon
         ? css`
             padding: 5px;
+            height: 24px;
+            width: 24px;
 
             & .${buttonClasses.startIcon} {
               margin: 0;
             }
           `
         : css`
+            height: 40px;
             padding: 10px 20px;
           `}
 
@@ -255,7 +257,7 @@ const AtButton: React.FunctionComponent<AtButtonProps> = (
       {...props}
       kind={props.kind}
       $variant={props.variant}
-      btnName={props.name}
+      $btnName={props.name}
       startIcon={props.startIcon}
       endIcon={props.endIcon}
       disabled={props.disabled}

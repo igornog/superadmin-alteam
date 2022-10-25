@@ -50,7 +50,7 @@ const StyledBox = styled(Box)<{ active?: boolean }>`
   }
 `;
 
-const TalentsViewSidePanel: React.FunctionComponent = () => {
+const TalentsViewFilters: React.FunctionComponent = () => {
   const settings = useAppSelector((state) => state.settings);
   const dispatch = useAppDispatch();
 
@@ -61,6 +61,7 @@ const TalentsViewSidePanel: React.FunctionComponent = () => {
   const handleRefresh = () => {
     dispatch(handleRefreshFilters());
   };
+
   return (
     <StyledFilters>
       <Box display={'flex'} flexDirection={'column'}>
@@ -139,4 +140,4 @@ const TalentsViewSidePanel: React.FunctionComponent = () => {
   );
 };
 
-export default TalentsViewSidePanel;
+export default TalentsViewFilters;

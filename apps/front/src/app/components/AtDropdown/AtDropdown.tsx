@@ -8,9 +8,9 @@ import { boxShadow } from '../../utils/theme';
 import AtTextField, { AtTextFieldProps } from '../AtTextField/AtTextField';
 import AtTypography from '../AtTypography/AtTypography';
 
-const StyledContentPopover = styled(Collapse)<{ minWidth: number }>`
+const StyledContentPopover = styled(Collapse)<{ $minWidth: number }>`
   position: absolute;
-  min-width: ${({ minWidth }) => minWidth && minWidth + 'px'};
+  min-width: ${({ $minWidth }) => $minWidth && $minWidth + 'px'};
   background-color: ${white};
   box-shadow: ${boxShadow};
   border: 1px solid ${grey5};
@@ -84,7 +84,7 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
         />
         <StyledContentPopover
           in={open}
-          minWidth={dropdownRef?.current?.offsetWidth}
+          $minWidth={dropdownRef?.current?.offsetWidth}
         >
           {props.listItems.map((item: DropdownItem) => (
             <StyledElement key={item.id} onClick={() => handleSelect(item)}>
