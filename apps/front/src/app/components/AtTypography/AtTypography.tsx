@@ -26,7 +26,6 @@ const AtTypography: React.FunctionComponent<AtTypographyProps> = (
       bold={props.bold}
       variant={props.variant ?? 'body2'}
       color={props.color}
-      whiteSpace={'nowrap'}
       {...props}
     >
       {props.children}

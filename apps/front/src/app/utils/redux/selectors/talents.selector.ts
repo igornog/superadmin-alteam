@@ -3,6 +3,12 @@ import { Talent } from '../types/talents.type';
 
 export const getActiveTalent = createDraftSafeSelector(
   [(state) => state.talents],
-  ({ selectedTalent, listTalents }) =>
-    listTalents.find((talent: Talent) => talent.id === selectedTalent)
+  ({ selectedTalent, listTalents }) => {
+    return (
+      selectedTalent !== null &&
+      new Talent(
+        listTalents.find((talent: Talent) => talent.id === selectedTalent)
+      )
+    );
+  }
 );

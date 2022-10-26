@@ -19,6 +19,11 @@ export class Talent {
   applied?: string;
   group?: string;
   skills?: Skill[];
+  salary?: string;
+  experience?: string;
+  portfolio?: string;
+  email?: string;
+  phone?: string;
 
   constructor(data: any) {
     this.id = data.id;
@@ -28,5 +33,10 @@ export class Talent {
     this.applied = data.applied;
     this.group = data.group;
     this.skills = data.skills;
+    this.salary = data.salary;
+    this.experience = data.experience;
+    this.portfolio = data.portfolio;
+    this.email = data.email;
+    this.phone = data.phone;
   }
 }
