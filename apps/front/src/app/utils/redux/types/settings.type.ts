@@ -1,3 +1,4 @@
+import React from 'react';
 import { StatusType } from './status.type';
 
 export interface SettingsState {
@@ -5,7 +6,7 @@ export interface SettingsState {
   filters: { skills: Filter[]; jobTypes: Filter[] };
   header: Settings;
   displayMode: DisplayMode;
-  selectedModal: Modal | null;
+  selectedModal: ModalVariant | null;
   status?: StatusType;
   error?: string | null;
 }
@@ -37,7 +38,7 @@ export enum DisplayMode {
   Grid = 'grid',
 }
 
-export enum Modal {
+export enum ModalVariant {
   Skills = 'Skills',
   GeneralInformations = 'General Informations',
   About = 'About',
@@ -45,6 +46,25 @@ export enum Modal {
   Notes = 'Notes',
 }
 
+export enum ModalSize {
+  ExtraSmall = 'xs',
+  Small = 'sm',
+  Medium = 'md',
+  Large = 'lg',
+  ExtraLarge = 'xl',
+}
+
+export class Modal {
+  content: React.ReactNode;
+  size: ModalSize;
+  title: React.ReactNode;
+
+  constructor(data: any) {
+    this.content = data.content;
+    this.size = data.size;
+    this.title = data.title;
+  }
+}
 export interface HandlesettingsProps {
   tabs: Page[];
   filters: Filter[];

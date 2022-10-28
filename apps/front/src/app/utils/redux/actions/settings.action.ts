@@ -3,6 +3,7 @@ import {
   DisplayMode,
   Filter,
   HandlesettingsProps,
+  ModalVariant,
   Page,
   Settings,
 } from '../types/settings.type';
@@ -46,5 +47,12 @@ export const handleRefreshFilters = createAsyncThunk(
   'settings/refreshFilters',
   async () => {
     return true;
+  }
+);
+
+export const handleModal = createAsyncThunk(
+  'settings/selectedModal',
+  async (modal: ModalVariant | null) => {
+    return modal;
   }
 );

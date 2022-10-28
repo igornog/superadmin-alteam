@@ -6,8 +6,14 @@ import {
   handleInitSettings,
   handleSettingsTab,
   handleSwitchDisplayMode,
+  handleModal,
 } from '../actions/settings.action';
-import { DisplayMode, Filter, SettingsState } from '../types/settings.type';
+import {
+  DisplayMode,
+  Filter,
+  ModalSize,
+  SettingsState,
+} from '../types/settings.type';
 import { StatusType } from '../types/status.type';
 
 const initialState: SettingsState = {
@@ -75,6 +81,10 @@ const { reducer } = createSlice({
 
       .addCase(handleSwitchDisplayMode.fulfilled, (state, { payload }) => {
         state.displayMode = payload;
+      })
+
+      .addCase(handleModal.fulfilled, (state, { payload }) => {
+        state.selectedModal = payload;
       });
   },
 });

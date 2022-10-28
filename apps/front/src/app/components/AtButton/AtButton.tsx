@@ -101,6 +101,7 @@ interface StyledButtonProps {
   $variant: AtButtonVariant;
   $btnName?: string;
   startIcon?: React.ReactNode;
+  iconSize?: number;
 }
 
 const StyledButton = styled(Button)<StyledButtonProps>`
@@ -156,8 +157,8 @@ const StyledButton = styled(Button)<StyledButtonProps>`
           `}
 
     & svg {
-      width: 16px;
-      height: 16px;
+      width: ${({ iconSize }) => (iconSize ? iconSize : '16px')};
+      height: ${({ iconSize }) => (iconSize ? iconSize : '16px')};
     }
 
     :hover {
@@ -247,6 +248,7 @@ interface AtButtonProps {
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   fontSize?: string;
+  iconSize?: number;
 }
 
 const AtButton: React.FunctionComponent<AtButtonProps> = (
@@ -260,6 +262,7 @@ const AtButton: React.FunctionComponent<AtButtonProps> = (
       $btnName={props.name}
       startIcon={props.startIcon}
       endIcon={props.endIcon}
+      iconSize={props.iconSize}
       disabled={props.disabled}
       onClick={props.onClick}
     >
