@@ -1,14 +1,7 @@
-import {
-  Box,
-  Table,
-  TableContainer,
-  TableProps,
-  tableRowClasses,
-} from '@mui/material';
+import { Box, Table, TableContainer, TableProps } from '@mui/material';
 import React from 'react';
 import styled from 'styled-components';
-import { green, white } from '../../utils/colors';
-import { boxShadow } from '../../utils/theme';
+import { white } from '../../utils/colors';
 
 const StyledBackground = styled(Box)`
   background-color: ${white};
@@ -21,36 +14,10 @@ const StyledBackground = styled(Box)`
   z-index: -2;
 `;
 
-const StyledTable = styled(Table)<AtTableProps>`
-  background-color: ${white};
-  border-radius: 10px;
-
-  .${tableRowClasses.hover}:hover {
-    position: relative;
-    cursor: pointer;
-    background-color ${white};
-    z-index: 0;
-
-    &:after {
-      position: absolute;
-      content: '';
-      display: inline-block;
-      z-index: -1;
-      width: calc(100% + 24px);
-      height: 100%;
-      top: 0;
-      left: -12px;
-      border-radius: 5px;
-      border: 1px solid ${green};
-      box-shadow: ${boxShadow};
-    }
-  }
-`;
-
 const AtTable: React.FunctionComponent<TableProps & AtTableProps> = (props) => {
   return (
     <TableContainer component={StyledBackground}>
-      <StyledTable {...props} />
+      <Table {...props} />
     </TableContainer>
   );
 };

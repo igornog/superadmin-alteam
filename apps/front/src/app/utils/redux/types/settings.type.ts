@@ -5,6 +5,7 @@ export interface SettingsState {
   filters: { skills: Filter[]; jobTypes: Filter[] };
   header: Settings;
   displayMode: DisplayMode;
+  selectedModal: Modal | null;
   status?: StatusType;
   error?: string | null;
 }
@@ -34,6 +35,14 @@ export interface Filter {
 export enum DisplayMode {
   List = 'list',
   Grid = 'grid',
+}
+
+export enum Modal {
+  Skills = 'Skills',
+  GeneralInformations = 'General Informations',
+  About = 'About',
+  Attachments = 'Attachments',
+  Notes = 'Notes',
 }
 
 export interface HandlesettingsProps {

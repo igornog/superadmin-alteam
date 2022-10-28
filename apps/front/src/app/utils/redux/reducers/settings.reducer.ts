@@ -18,6 +18,7 @@ const initialState: SettingsState = {
   },
   header: {},
   displayMode: DisplayMode.List,
+  selectedModal: null,
   status: StatusType.Idle,
   error: null,
 };

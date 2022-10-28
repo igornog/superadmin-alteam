@@ -1,4 +1,3 @@
-import { Grid } from '@mui/material';
 import React, { useEffect } from 'react';
 import { talents, talentsFilters, talentsJobType, talentsTabs } from '..';
 import AtLayout from '../../../components/AtLayout/AtLayout';
@@ -11,7 +10,7 @@ import { handleTalents } from '../../../utils/redux/actions/talents.action';
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector';
 import InboundTalentsView from './InboundTalents/InboundTalentsView';
 import TalentsViewFilters from './TalentsViewFilters';
-import TalentsViewProfile from './TalentsViewProfile';
+import TalentViewProfile from './TalentViewProfile/TalentViewProfile';
 
 const TalentsView: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
@@ -41,7 +40,7 @@ const TalentsView: React.FunctionComponent = () => {
       <AtLayout sidePanel={<TalentsViewFilters />} sidePanelSize={'small'}>
         <InboundTalentsView />
       </AtLayout>
-      <TalentsViewProfile />
+      <TalentViewProfile />
     </>
   );
 };

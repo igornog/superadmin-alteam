@@ -4,7 +4,7 @@ import AtTableHead from '../../../../components/AtTable/AtTableHead';
 import { AtTableRow } from '../../../../components/AtTable/AtTableRow';
 import AtTypography from '../../../../components/AtTypography/AtTypography';
 import { grey, grey3 } from '../../../../utils/colors';
-import React from 'react';
+import React, { useState } from 'react';
 import AtTable from '../../../../components/AtTable/AtTable';
 import { Skill, Talent } from '../../../../utils/redux/types/talents.type';
 import { Box } from '@mui/material';
@@ -14,6 +14,8 @@ import AtGroupTag from '../../../../components/AtGroupTag/AtGroupTag';
 const InboundTalentsTable: React.FunctionComponent<InboundTalentsTableProps> = (
   props: InboundTalentsTableProps
 ) => {
+  const [position, setPosition] = useState<number | null>(null);
+
   return (
     <AtTable>
       <AtTableHead>
@@ -24,12 +26,13 @@ const InboundTalentsTable: React.FunctionComponent<InboundTalentsTableProps> = (
           <AtTableCell align="right">Skills</AtTableCell>
         </AtTableRow>
       </AtTableHead>
-      <AtTableBody>
+      <AtTableBody position={position}>
         {props.talents.map((talent: Talent) => (
           <AtTableRow
             key={talent.id}
             hover={true}
             onClick={() => props.onClick(talent.id)}
+            setPosition={setPosition}
           >
             <AtTableCell>
               <Box display={'flex'} flexDirection={'column'}>

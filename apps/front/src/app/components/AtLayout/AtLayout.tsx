@@ -185,6 +185,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                 )}
               </Box>
             </Grid>
+
             {props.children}
           </StyledContent>
         </Grid>
