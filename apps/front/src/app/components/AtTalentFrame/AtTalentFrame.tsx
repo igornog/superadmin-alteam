@@ -25,14 +25,17 @@ const AtTalentFrame: React.FunctionComponent<TalentFrameProps> = (
   props: TalentFrameProps
 ) => {
   return (
-    <StyledFrame display={'flex'} gap={'10px'} flexDirection={'column'}>
+    <StyledFrame
+      display={'flex'}
+      gap={props.gap ?? '10px'}
+      flexDirection={'column'}
+    >
       <Box
         display={'flex'}
         justifyContent={'space-between'}
-        onClick={props.onClick}
       >
         <AtTypography variant={'h5'}>{props.title}</AtTypography>
-        <StyledBox>{props.icon}</StyledBox>
+        <StyledBox onClick={props.onClick}>{props.icon}</StyledBox>
       </Box>
       {props.children}
     </StyledFrame>
@@ -44,6 +47,7 @@ interface TalentFrameProps {
   title?: string;
   icon?: React.ReactNode;
   onClick?: (e: React.MouseEvent) => void;
+  gap?: number;
 }
 
 export default AtTalentFrame;

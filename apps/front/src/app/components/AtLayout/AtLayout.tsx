@@ -23,14 +23,7 @@ import AtTypography from '../AtTypography/AtTypography';
 
 const StyledContent = styled(Grid)<{ $sidePanelSize?: string }>`
   background-color: #f7f8fe;
-  margin: 20px 255px 20px 165px;
-  margin-right: ${({ $sidePanelSize }) =>
-    $sidePanelSize === 'small'
-      ? '255px'
-      : $sidePanelSize === 'medium'
-      ? '540px'
-      : '20px'};
-  width: 100%;
+  margin: 20px 20px 20px 165px;
 `;
 
 const StyledIconsBox = styled.div`
@@ -91,7 +84,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
       <>
         <AtNavbar />
         <Grid container={true}>
-          <StyledContent item={true} $sidePanelSize={props.sidePanelSize}>
+          <StyledContent item={true} xs={true} $sidePanelSize={props.sidePanelSize}>
             <AtNavPage />
 
             <Box
@@ -188,9 +181,8 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
 
             {props.children}
           </StyledContent>
+          {props.sidePanel}
         </Grid>
-
-        {props.sidePanel}
       </>
     )
   );

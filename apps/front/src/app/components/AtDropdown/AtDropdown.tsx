@@ -16,6 +16,7 @@ const StyledContentPopover = styled(Collapse)<{ $minWidth: number }>`
   border: 1px solid ${grey5};
   border-radius: 5px;
   margin-top: 5px;
+  z-index: 999;
 `;
 
 const StyledElement = styled.div`
@@ -73,7 +74,11 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
 
   return (
     <ClickAwayListener onClickAway={handleClose}>
-      <Box ref={dropdownRef} width={'fit-content'} position={'relative'}>
+      <Box
+        ref={dropdownRef}
+        width={props.fullWidth ? '100%' : 'fit-content'}
+        position={'relative'}
+      >
         <AtTextField
           {...props}
           dropdown={true}

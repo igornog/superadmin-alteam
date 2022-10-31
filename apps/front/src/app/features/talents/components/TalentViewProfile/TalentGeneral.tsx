@@ -4,11 +4,20 @@ import React from 'react';
 import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame';
 import AtTypography from '../../../../components/AtTypography/AtTypography';
 import { grey, grey2 } from '../../../../utils/colors';
+import { useAppDispatch } from '../../../../utils/hooks/reduxHook';
+import { handleModal } from '../../../../utils/redux/actions/settings.action';
+import { ModalVariant } from '../../../../utils/redux/types/settings.type';
 import { Talent } from '../../../../utils/redux/types/talents.type';
 
 const TalentGeneral: React.FunctionComponent<TalentGeneralProps> = (
   props: TalentGeneralProps
 ) => {
+  const dispatch = useAppDispatch();
+
+  const handleEditInformations = () => {
+    dispatch(handleModal(ModalVariant.GeneralInformations));
+  };
+
   return (
     <AtTalentFrame
       title={'General information'}
@@ -18,6 +27,7 @@ const TalentGeneral: React.FunctionComponent<TalentGeneralProps> = (
           Edit
         </AtTypography>
       }
+      onClick={handleEditInformations}
     >
       <Grid container={true} gap={'15px'}>
         <Box display={'flex'} width={'100%'}>

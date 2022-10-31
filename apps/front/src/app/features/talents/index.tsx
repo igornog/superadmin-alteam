@@ -1,3 +1,5 @@
+import { Talent } from '../../utils/redux/types/talents.type';
+
 export { default } from './components/TalentsView';
 
 export const talentsTabs = [
@@ -110,6 +112,28 @@ export const talents = [
       { label: 'Wireframe' },
       { label: 'Prototyping' },
     ],
+    links: [
+      {
+        id: 1,
+        link: 'https://github.com/superuser',
+      },
+      {
+        id: 2,
+        link: 'https://behance.com/superuser',
+      },
+      {
+        id: 3,
+        link: 'https://monportfolio.com',
+      },
+      {
+        id: 4,
+        link: 'https://stackoverflow.com/superuser',
+      },
+      {
+        id: 5,
+        link: 'https://linkedin.com/superuser',
+      },
+    ],
   },
   {
     id: 2,
@@ -118,6 +142,7 @@ export const talents = [
     jobType: 'Part-Time',
     applied: '23.07.2022',
     skills: [],
+    links: [],
   },
   {
     id: 3,
@@ -132,6 +157,7 @@ export const talents = [
       { label: 'InDesign' },
       { label: 'Print Design' },
     ],
+    links: [],
   },
   {
     id: 4,
@@ -147,6 +173,7 @@ export const talents = [
       { label: 'Wireframe' },
       { label: 'UX Research' },
     ],
+    links: [],
   },
   {
     id: 5,
@@ -162,5 +189,134 @@ export const talents = [
       { label: 'C++' },
       { label: 'HTML/CSS' },
     ],
+    links: [],
+  },
+  {
+    id: 4,
+    fullName: 'Chaps D',
+    jobName: 'UI/UX Design',
+    jobType: 'Part-Time',
+    applied: '23.07.2022',
+    group: 'Group',
+    skills: [
+      { label: 'UI/UX Design' },
+      { label: 'Figma' },
+      { label: 'User Testing' },
+      { label: 'Wireframe' },
+      { label: 'UX Research' },
+    ],
+    links: [],
+  },
+  {
+    id: 5,
+    fullName: 'Mega Devs',
+    jobName: 'Full Stack Development',
+    jobType: 'Full Time',
+    applied: '23.07.2022',
+    group: 'Group',
+    skills: [
+      { label: 'React Native' },
+      { label: 'Java Script' },
+      { label: 'Cyber Security' },
+      { label: 'C++' },
+      { label: 'HTML/CSS' },
+    ],
+    links: [],
+  },
+  {
+    id: 4,
+    fullName: 'Chaps D',
+    jobName: 'UI/UX Design',
+    jobType: 'Part-Time',
+    applied: '23.07.2022',
+    group: 'Group',
+    skills: [
+      { label: 'UI/UX Design' },
+      { label: 'Figma' },
+      { label: 'User Testing' },
+      { label: 'Wireframe' },
+      { label: 'UX Research' },
+    ],
+    links: [],
+  },
+  {
+    id: 5,
+    fullName: 'Mega Devs',
+    jobName: 'Full Stack Development',
+    jobType: 'Full Time',
+    applied: '23.07.2022',
+    group: 'Group',
+    skills: [
+      { label: 'React Native' },
+      { label: 'Java Script' },
+      { label: 'Cyber Security' },
+      { label: 'C++' },
+      { label: 'HTML/CSS' },
+    ],
+    links: [],
+  },
+  {
+    id: 4,
+    fullName: 'Chaps D',
+    jobName: 'UI/UX Design',
+    jobType: 'Part-Time',
+    applied: '23.07.2022',
+    group: 'Group',
+    skills: [
+      { label: 'UI/UX Design' },
+      { label: 'Figma' },
+      { label: 'User Testing' },
+      { label: 'Wireframe' },
+      { label: 'UX Research' },
+    ],
+    links: [],
+  },
+  {
+    id: 5,
+    fullName: 'Mega Devs',
+    jobName: 'Full Stack Development',
+    jobType: 'Full Time',
+    applied: '23.07.2022',
+    group: 'Group',
+    skills: [
+      { label: 'React Native' },
+      { label: 'Java Script' },
+      { label: 'Cyber Security' },
+      { label: 'C++' },
+      { label: 'HTML/CSS' },
+    ],
+    links: [],
+  },
+  {
+    id: 4,
+    fullName: 'Chaps D',
+    jobName: 'UI/UX Design',
+    jobType: 'Part-Time',
+    applied: '23.07.2022',
+    group: 'Group',
+    skills: [
+      { label: 'UI/UX Design' },
+      { label: 'Figma' },
+      { label: 'User Testing' },
+      { label: 'Wireframe' },
+      { label: 'UX Research' },
+    ],
+    links: [],
+  },
+  {
+    id: 5,
+    fullName: 'Mega Devs',
+    jobName: 'Full Stack Development',
+    jobType: 'Full Time',
+    applied: '23.07.2022',
+    group: 'Group',
+    skills: [
+      { label: 'React Native' },
+      { label: 'Java Script' },
+      { label: 'Cyber Security' },
+      { label: 'C++' },
+      { label: 'HTML/CSS' },
+    ],
+    links: [],
   },
 ];

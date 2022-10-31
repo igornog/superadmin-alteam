@@ -11,7 +11,7 @@ import { alTeamTheme } from './app/utils/theme';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
- 
+
 root.render(
   <ThemeProvider theme={alTeamTheme}>
     <StyledEngineProvider injectFirst>

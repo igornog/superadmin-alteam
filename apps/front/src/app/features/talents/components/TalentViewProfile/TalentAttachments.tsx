@@ -19,6 +19,7 @@ const TalentAttachments: React.FunctionComponent<TalentAttachmentsProps> = (
           Download all
         </AtTypography>
       }
+      gap={0}
     >
       <AtLine spacing={15} />
 

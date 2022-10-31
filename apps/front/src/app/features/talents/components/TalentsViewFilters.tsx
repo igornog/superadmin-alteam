@@ -21,8 +21,8 @@ import { Filter } from '../../../utils/redux/types/settings.type';
 const StyledFilters = styled.div`
   background-color: ${white};
   border-left: 1px solid ${grey5};
-  height: 100%;
-  position: fixed;
+  height: 100vh;
+  position: sticky;
   right: 0;
   top: 0;
   width: 235px;

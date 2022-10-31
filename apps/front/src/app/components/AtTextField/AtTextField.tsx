@@ -9,7 +9,7 @@ import {
   OutlinedInput,
   outlinedInputClasses,
 } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import {
   black,
@@ -55,9 +55,17 @@ const StyledInput = styled(OutlinedInput)<{
   dropdown?: boolean;
   $bgColor?: string;
   $maxWidth?: number;
+  multiline?: boolean;
 }>`
   &.${outlinedInputClasses.root} {
-    padding: 0 20px;
+    ${({ multiline }) =>
+      !multiline &&
+      css`
+        padding: 0 20px;
+      `}
+
+    justify-content: space-between;
+
     ${({ $bgColor }) =>
       $bgColor
         ? css<{ $bgColor?: string }>`
@@ -163,7 +171,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
   props: AtTextFieldProps
 ) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(props.defaultValue || '');
   const [isFocused, setIsFocused] = useState(false);
 
   const returnValue = (value: string) => {
@@ -176,7 +184,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
   };
 
   return (
-    <Box position={'relative'} style={{ opacity: props.disabled ? 0.5 : 1 }}>
+    <Box position={'relative'} style={{ opacity: props.disabled ? 0.5 : 1, width: '100%' }}>
       {props.label && (
         <Box
           position={'absolute'}
@@ -206,6 +214,8 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
           $isError={props.isError}
           $isSuccess={props.isSuccess}
           focused={isFocused}
+          multiline={props.multiline}
+          rows={props.rows}
           disabled={props.disabled}
           value={props.dropdown ? props.placeholder : value}
           size={props.size ?? 'medium'}
@@ -263,6 +273,10 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
 export interface AtTextFieldProps {
   fullWidth?: boolean;
   required?: boolean;
+  defaultValue?: string;
+
+  multiline?: boolean;
+  rows?: number;
 
   isSuccess?: boolean;
   isError?: boolean;

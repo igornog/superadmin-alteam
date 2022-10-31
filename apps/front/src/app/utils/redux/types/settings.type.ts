@@ -43,7 +43,10 @@ export enum ModalVariant {
   GeneralInformations = 'General Informations',
   About = 'About',
   Attachments = 'Attachments',
-  Notes = 'Notes',
+  DeclineTalent = 'DeclineTalent',
+  Link = 'Link',
+  AddNote = 'AddNote',
+  EditNote = 'EditNote',
 }
 
 export enum ModalSize {

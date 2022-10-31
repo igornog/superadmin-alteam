@@ -36,7 +36,7 @@ const StyledChip = styled(Chip)<{ clickable?: boolean }>`
 `;
 
 const AtTag: React.FunctionComponent<AtTagProps> = (props: AtTagProps) => {
-  const handleClick = () => {
+  const handleDelete = () => {
     console.info('You clicked the delete icon.');
   };
 
@@ -46,7 +46,7 @@ const AtTag: React.FunctionComponent<AtTagProps> = (props: AtTagProps) => {
       clickable={props.hover}
       label={<AtTypography>{props.label}</AtTypography>}
       deleteIcon={props.delete ? <StyledIcon /> : undefined}
-      onDelete={props.delete ? handleClick : undefined}
+      onDelete={props.delete ? handleDelete : undefined}
     />
   );
 };

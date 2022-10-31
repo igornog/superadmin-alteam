@@ -11,6 +11,11 @@ export interface Skill {
   label: string;
 }
 
+export interface Link {
+  id: number;
+  link: string;
+}
+
 export class Talent {
   id: number;
   fullName: string;
@@ -24,6 +29,7 @@ export class Talent {
   portfolio?: string;
   email?: string;
   phone?: string;
+  links: Link[];
 
   constructor(data: any) {
     this.id = data.id;
@@ -38,5 +44,10 @@ export class Talent {
     this.portfolio = data.portfolio;
     this.email = data.email;
     this.phone = data.phone;
+    this.links = data.links;
+  }
+
+  isEmpty(): boolean {
+    return this.id !== undefined;
   }
 }

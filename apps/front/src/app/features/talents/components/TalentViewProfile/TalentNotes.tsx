@@ -1,14 +1,31 @@
 import { Box } from '@mui/material';
 import { AddCircle, Edit } from 'iconsax-react';
 import React from 'react';
+import styled from 'styled-components';
 import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame';
 import AtTypography from '../../../../components/AtTypography/AtTypography';
-import { grey, grey2, grey3 } from '../../../../utils/colors';
+import { black, grey, grey2, grey3 } from '../../../../utils/colors';
+import { useAppDispatch } from '../../../../utils/hooks/reduxHook';
+import { handleModal } from '../../../../utils/redux/actions/settings.action';
+import { ModalVariant } from '../../../../utils/redux/types/settings.type';
 import { Talent } from '../../../../utils/redux/types/talents.type';
+
+const StyledBox = styled(Box)`
+  color: ${grey2};
+  transition: 0.3s;
+
+  &:hover {
+    transition: 0.3s;
+    cursor: pointer;
+    color: ${black};
+  }
+`;
 
 const TalentNotes: React.FunctionComponent<TalentNotesProps> = (
   props: TalentNotesProps
 ) => {
+  const dispatch = useAppDispatch();
+
   return (
     <AtTalentFrame
       title={'Notes'}
@@ -18,15 +35,21 @@ const TalentNotes: React.FunctionComponent<TalentNotesProps> = (
           Add note
         </AtTypography>
       }
+      onClick={() => dispatch(handleModal(ModalVariant.AddNote))}
     >
       <Box display={'flex'} justifyContent={'space-between'}>
         <Box display={'flex'} gap={'20px'}>
           <AtTypography variant={'body1'}>Yoann Demont’s Note:</AtTypography>
 
-          <AtTypography color={grey2}>
-            <Edit size={16} />
-            Edit note
-          </AtTypography>
+          <StyledBox
+            margin={'auto'}
+            onClick={() => dispatch(handleModal(ModalVariant.EditNote))}
+          >
+            <AtTypography>
+              <Edit size={16} />
+              Edit note
+            </AtTypography>
+          </StyledBox>
         </Box>
 
         <AtTypography color={grey3}>23.07.2022</AtTypography>

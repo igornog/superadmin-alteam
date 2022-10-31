@@ -1,23 +1,26 @@
 import { Box, Drawer } from '@mui/material';
-import { ArrowLeft2 } from 'iconsax-react';
+import { ArrowLeft2, CloseSquare, TickSquare } from 'iconsax-react';
 import React from 'react';
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
 } from '../../../../components/AtButton/AtButton';
 import AtLine from '../../../../components/AtLine/AtLine';
-import AtSpace from '../../../../components/AtSpace/AtSpace';
 import AtTypography from '../../../../components/AtTypography/AtTypography';
-import { grey3 } from '../../../../utils/colors';
+import { black, grey3 } from '../../../../utils/colors';
+import { convertHexToRGBA } from '../../../../utils/helpers';
 import {
   useAppDispatch,
   useAppSelector,
 } from '../../../../utils/hooks/reduxHook';
+import { handleModal } from '../../../../utils/redux/actions/settings.action';
 import { handleSelectTalent } from '../../../../utils/redux/actions/talents.action';
 import { getActiveTalent } from '../../../../utils/redux/selectors/talents.selector';
+import { ModalVariant } from '../../../../utils/redux/types/settings.type';
 import TalentAbout from './TalentAbout';
 import TalentAttachments from './TalentAttachments';
 import TalentGeneral from './TalentGeneral';
+import TalentLinks from './TalentLinks';
 import TalentNotes from './TalentNotes';
 import TalentSkills from './TalentSkills';
 
@@ -29,12 +32,30 @@ const TalentViewProfile: React.FunctionComponent = () => {
     dispatch(handleSelectTalent(null));
   };
 
+  const handleDecline = () => {
+    dispatch(handleModal(ModalVariant.DeclineTalent));
+  };
+
+  const handleShortlist = () => {
+    console.log('Shortlisted');
+  };
+
   return (
     <Drawer
       anchor={'right'}
-      open={selectedTalent !== false}
+      open={selectedTalent.isEmpty()}
       onClose={handleClose}
       transitionDuration={{ enter: 600, exit: 300 }}
+      BackdropProps={{
+        style: {
+          backgroundColor: convertHexToRGBA(black, 0.5),
+        },
+      }}
+      PaperProps={{
+        style: {
+          boxShadow: 'none',
+        },
+      }}
     >
       <Box width={'50vw'}>
         {selectedTalent ? (
@@ -60,24 +81,40 @@ const TalentViewProfile: React.FunctionComponent = () => {
 
             <AtLine spacing={25} />
 
-            <Box padding={'0 20px 25px 20px'}>
+            <Box
+              display={'flex'}
+              flexDirection={'column'}
+              padding={'0 20px 25px 20px'}
+              gap={'25px'}
+            >
               <TalentSkills talent={selectedTalent} />
-
-              <AtSpace direction={'vertical'} spacing={'25'} />
 
               <TalentGeneral talent={selectedTalent} />
 
-              <AtSpace direction={'vertical'} spacing={'25'} />
-
               <TalentAbout talent={selectedTalent} />
 
-              <AtSpace direction={'vertical'} spacing={'25'} />
+              <TalentLinks talent={selectedTalent} />
 
               <TalentAttachments talent={selectedTalent} />
 
-              <AtSpace direction={'vertical'} spacing={'25'} />
-
               <TalentNotes talent={selectedTalent} />
+
+              <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
+                <AtButton
+                  onClick={handleDecline}
+                  kind={AtButtonKind.Danger}
+                  variant={AtButtonVariant.Contained}
+                  name={'Decline'}
+                  endIcon={<CloseSquare size={16} />}
+                />
+                <AtButton
+                  onClick={handleShortlist}
+                  kind={AtButtonKind.Success}
+                  variant={AtButtonVariant.Contained}
+                  name={'Shortlist'}
+                  endIcon={<TickSquare size={16} />}
+                />
+              </Box>
             </Box>
           </>
         ) : null}

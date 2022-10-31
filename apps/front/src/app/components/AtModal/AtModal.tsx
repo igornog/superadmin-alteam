@@ -1,13 +1,6 @@
-import {
-  Box,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Slide,
-} from '@mui/material';
+import { Box, Dialog, DialogContent, DialogTitle, Slide } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
-import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react';
+import { CloseCircle } from 'iconsax-react';
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
 import { modals } from '../../utils/modals/modals';
@@ -35,7 +28,7 @@ const AtModal: React.FunctionComponent = () => {
     <Dialog
       open={open}
       TransitionComponent={Transition}
-      keepMounted
+      keepMounted={true}
       onClose={handleClose}
       aria-describedby="alert-dialog-slide-description"
       fullWidth={true}
@@ -57,28 +50,9 @@ const AtModal: React.FunctionComponent = () => {
           />
         </Box>
       </DialogTitle>
-      <DialogContent
-        sx={{ paddingTop: 2.5, paddingBottom: 0, borderBottom: 0 }}
-        dividers={true}
-      >
+      <DialogContent sx={{ padding: 2.5, borderBottom: 0 }} dividers={true}>
         {modalSettings.content}
       </DialogContent>
-      <DialogActions sx={{ padding: 2.5 }}>
-        <AtButton
-          onClick={handleClose}
-          kind={AtButtonKind.Danger}
-          variant={AtButtonVariant.Text}
-          name={'Cancel'}
-          startIcon={<CloseSquare size={16} />}
-        />
-        <AtButton
-          onClick={handleClose}
-          kind={AtButtonKind.Success}
-          variant={AtButtonVariant.Contained}
-          name={'Save Changes'}
-          startIcon={<TickSquare size={16} />}
-        />
-      </DialogActions>
     </Dialog>
   );
 };

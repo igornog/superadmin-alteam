@@ -1,5 +1,11 @@
 import AtTypography from '../../components/AtTypography/AtTypography';
 import { ModalVariant, ModalSize } from '../redux/types/settings.type';
+import ModalAbout from './ModalAbout';
+import ModalAddNote from './ModalAddNote';
+import ModalDecline from './ModalDecline';
+import ModalEditNote from './ModalEditNote';
+import ModalGeneralInformations from './ModalGeneralInformations';
+import ModalLink from './ModalLink';
 import ModalSkills from './ModalSkills';
 
 export const modals = {
@@ -10,22 +16,37 @@ export const modals = {
   },
   [ModalVariant.GeneralInformations]: {
     size: ModalSize.Medium,
-    content: <ModalSkills />,
+    content: <ModalGeneralInformations />,
     title: <AtTypography variant={'h4'}>Edit General Information</AtTypography>,
   },
   [ModalVariant.About]: {
     size: ModalSize.Medium,
-    content: <ModalSkills />,
+    content: <ModalAbout />,
     title: <AtTypography variant={'h4'}>Edit About Talent</AtTypography>,
   },
   [ModalVariant.Attachments]: {
     size: ModalSize.Medium,
     content: <ModalSkills />,
-    title: 'Edit Skills',
+    title: <AtTypography variant={'h4'}>Edit Skills</AtTypography>,
   },
-  [ModalVariant.Notes]: {
+  [ModalVariant.DeclineTalent]: {
     size: ModalSize.Medium,
-    content: <ModalSkills />,
-    title: 'Edit Skills',
+    content: <ModalDecline />,
+    title: <AtTypography variant={'h4'}>Decline Talent</AtTypography>,
+  },
+  [ModalVariant.Link]: {
+    size: ModalSize.Small,
+    content: <ModalLink />,
+    title: <AtTypography variant={'h4'}>Add Links</AtTypography>,
+  },
+  [ModalVariant.AddNote]: {
+    size: ModalSize.Small,
+    content: <ModalAddNote />,
+    title: <AtTypography variant={'h4'}>Add Note</AtTypography>,
+  },
+  [ModalVariant.EditNote]: {
+    size: ModalSize.Small,
+    content: <ModalEditNote />,
+    title: <AtTypography variant={'h4'}>Edit Note</AtTypography>,
   },
 };
