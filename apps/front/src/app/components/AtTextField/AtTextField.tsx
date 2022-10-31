@@ -32,13 +32,13 @@ export enum AtTextFieldType {
 }
 
 const StyledLabel = styled.label<{
-  isError?: boolean;
-  isSuccess?: boolean;
+  $isError?: boolean;
+  $isSuccess?: boolean;
   focused: boolean;
   isDisabled?: boolean;
 }>`
-  background-color: ${({ isError, isSuccess, isDisabled }) =>
-    isDisabled ? grey2 : isError ? red : isSuccess ? green : grey2};
+  background-color: ${({ $isError, $isSuccess, isDisabled }) =>
+    isDisabled ? grey2 : $isError ? red : $isSuccess ? green : grey2};
   font-family: Inter;
   font-size: 10px;
   padding: 3px 5px;
@@ -47,20 +47,46 @@ const StyledLabel = styled.label<{
 `;
 
 const StyledInput = styled(OutlinedInput)<{
-  isError?: boolean;
-  isSuccess?: boolean;
+  $isError?: boolean;
+  $isSuccess?: boolean;
   focused: boolean;
   disabled?: boolean;
   size?: string;
   dropdown?: boolean;
+  $bgColor?: string;
+  $maxWidth?: number;
+  multiline?: boolean;
 }>`
   &.${outlinedInputClasses.root} {
-    padding: 0 20px;
-    background-color: ${({ focused, isError, isSuccess }) =>
-      focused ? (isError ? red1 : isSuccess ? green5 : white) : white};
+    ${({ multiline }) =>
+      !multiline &&
+      css`
+        padding: 0 20px;
+      `}
+
+    justify-content: space-between;
+
+    ${({ $bgColor }) =>
+      $bgColor
+        ? css<{ $bgColor?: string }>`
+            background-color: ${({ $bgColor }) =>
+              $bgColor === 'black' ? black : white};
+          `
+        : css<{ focused: boolean; $isError?: boolean; $isSuccess?: boolean }>`
+            background-color: ${({ focused, $isError, $isSuccess }) =>
+              focused
+                ? $isError
+                  ? red1
+                  : $isSuccess
+                  ? green5
+                  : white
+                : white};
+          `};
 
     & input {
-      color: ${({ disabled }) => (disabled ? grey3 : black)};
+      max-width: ${({ $maxWidth }) => $maxWidth && $maxWidth + 'ch'};
+      color: ${({ disabled, $bgColor }) =>
+        $bgColor === 'black' ? white : disabled ? grey3 : black};
       font-size: ${({ size }) => (size === 'medium' ? '16px' : '14px')};
 
       &::placeholder {
@@ -68,11 +94,7 @@ const StyledInput = styled(OutlinedInput)<{
       }
 
       &:hover {
-        ${({ dropdown }) =>
-          dropdown &&
-          css`
-            cursor: pointer;
-          `}
+        cursor: pointer;
         &::placeholder {
           color: ${grey2};
         }
@@ -101,14 +123,15 @@ const StyledInput = styled(OutlinedInput)<{
             }
           `}
         width: 20px;
-        color: ${({ disabled }) => (disabled ? grey3 : grey2)};
+        color: ${({ disabled, $bgColor }) =>
+          $bgColor === 'black' ? white : disabled ? grey3 : black};
       }
     }
 
     .${inputAdornmentClasses.positionStart} {
       width: ${({ size }) => (size === 'medium' ? '20px' : '15px')};
-      color: ${({ isError, isSuccess, disabled }) =>
-        disabled ? grey3 : isError ? red : isSuccess ? green : grey2};
+      color: ${({ $isError, $isSuccess, disabled }) =>
+        disabled ? grey3 : $isError ? red : $isSuccess ? green : grey2};
       margin-right: 0;
     }
   }
@@ -119,16 +142,22 @@ const StyledInput = styled(OutlinedInput)<{
     fieldset {
       transition: 0.3s;
       border-width: 1px;
-      border-color: ${({ isError, isSuccess }) =>
-        isError ? red : isSuccess ? green : grey5};
+      border-color: ${({ $isError, $isSuccess, $bgColor }) =>
+        $bgColor === 'black'
+          ? null
+          : $isError
+          ? red
+          : $isSuccess
+          ? green
+          : grey5};
     }
   }
 
-  &.${outlinedInputClasses.root}:hover:not(.Mui-disabled) {
+  &.${outlinedInputClasses.root}:hover: not(.Mui-disabled) {
     fieldset {
       transition: 0.3s;
-      border-color: ${({ isError, isSuccess }) =>
-        isError ? red : isSuccess ? green : grey3};
+      border-color: ${({ $isError, $isSuccess }) =>
+        $isError ? red : $isSuccess ? green : grey3};
     }
   }
 `;
@@ -138,9 +167,11 @@ const StyledArrow = styled(ArrowDown2)<{ open?: boolean }>`
   transform: rotate(${({ open }) => (open ? '180' : '0')}deg);
 `;
 
-const AtTextField: React.FunctionComponent<AtTextFieldProps> = (props) => {
+const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
+  props: AtTextFieldProps
+) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(props.defaultValue || '');
   const [isFocused, setIsFocused] = useState(false);
 
   const returnValue = (value: string) => {
@@ -153,7 +184,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (props) => {
   };
 
   return (
-    <Box position={'relative'} style={{ opacity: props.disabled ? 0.5 : 1 }}>
+    <Box position={'relative'} style={{ opacity: props.disabled ? 0.5 : 1, width: '100%' }}>
       {props.label && (
         <Box
           position={'absolute'}
@@ -163,8 +194,8 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (props) => {
         >
           <StyledLabel
             focused={isFocused}
-            isError={props.isError}
-            isSuccess={props.isSuccess}
+            $isError={props.isError}
+            $isSuccess={props.isSuccess}
             isDisabled={props.disabled}
           >
             {props.label} {props.required && '*'}
@@ -177,10 +208,14 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (props) => {
           fullWidth={true}
           onClick={props.onClick}
           dropdown={props.dropdown}
+          $maxWidth={props.maxWidth}
+          $bgColor={props.bgColor}
           readOnly={props.dropdown}
-          isError={props.isError}
-          isSuccess={props.isSuccess}
+          $isError={props.isError}
+          $isSuccess={props.isSuccess}
           focused={isFocused}
+          multiline={props.multiline}
+          rows={props.rows}
           disabled={props.disabled}
           value={props.dropdown ? props.placeholder : value}
           size={props.size ?? 'medium'}
@@ -238,6 +273,10 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (props) => {
 export interface AtTextFieldProps {
   fullWidth?: boolean;
   required?: boolean;
+  defaultValue?: string;
+
+  multiline?: boolean;
+  rows?: number;
 
   isSuccess?: boolean;
   isError?: boolean;
@@ -251,6 +290,8 @@ export interface AtTextFieldProps {
   dropdown?: boolean;
   open?: boolean;
 
+  maxWidth?: number;
+  bgColor?: 'black' | 'white';
   size?: 'small' | 'medium';
   onValueChange?: (value: string) => void;
   placeholder?: string;

@@ -13,6 +13,9 @@ const StyledTypography = styled(Typography)<StyledTypographyProps>`
   font-size: ${({ fontSize }) => fontSize && fontSize};
   font-weight: ${({ bold }) => (bold ? 'bold' : null)};
   color: ${({ color }) => (color ? color : null)};
+  display: flex;
+  align-items: center;
+  gap: 5px;
 `;
 
 const AtTypography: React.FunctionComponent<AtTypographyProps> = (
@@ -31,7 +34,7 @@ const AtTypography: React.FunctionComponent<AtTypographyProps> = (
 };
 
 interface AtTypographyProps {
-  children: any;
+  children: React.ReactNode;
   bold?: boolean;
   variant?: Variant;
   color?: string;
