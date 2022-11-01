@@ -8,12 +8,7 @@ import {
   handleSwitchDisplayMode,
   handleModal,
 } from '../actions/settings.action';
-import {
-  DisplayMode,
-  Filter,
-  ModalSize,
-  SettingsState,
-} from '../types/settings.type';
+import { DisplayMode, Filter, SettingsState } from '../types/settings.type';
 import { StatusType } from '../types/status.type';
 
 const initialState: SettingsState = {

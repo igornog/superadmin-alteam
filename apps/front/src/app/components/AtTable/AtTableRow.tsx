@@ -12,6 +12,7 @@ const StyledTableRow = styled(TableRow)`
   min-height: 35px;
   width: 100%;
   position: relative;
+  white-space: nowrap;
 
   &.${tableRowClasses.hover}:hover {
     {

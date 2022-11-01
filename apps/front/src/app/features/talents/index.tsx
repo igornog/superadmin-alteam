@@ -1,5 +1,3 @@
-import { Talent } from '../../utils/redux/types/talents.type';
-
 export { default } from './components/TalentsView';
 
 export const talentsTabs = [
@@ -111,6 +109,8 @@ export const talents = [
       { label: 'Sketch' },
       { label: 'Wireframe' },
       { label: 'Prototyping' },
+      { label: 'Prototyping' },
+      { label: 'Wireframe' },
     ],
     links: [
       {
@@ -192,7 +192,7 @@ export const talents = [
     links: [],
   },
   {
-    id: 4,
+    id: 6,
     fullName: 'Chaps D',
     jobName: 'UI/UX Design',
     jobType: 'Part-Time',
@@ -208,7 +208,7 @@ export const talents = [
     links: [],
   },
   {
-    id: 5,
+    id: 7,
     fullName: 'Mega Devs',
     jobName: 'Full Stack Development',
     jobType: 'Full Time',
@@ -224,7 +224,7 @@ export const talents = [
     links: [],
   },
   {
-    id: 4,
+    id: 8,
     fullName: 'Chaps D',
     jobName: 'UI/UX Design',
     jobType: 'Part-Time',
@@ -240,7 +240,7 @@ export const talents = [
     links: [],
   },
   {
-    id: 5,
+    id: 9,
     fullName: 'Mega Devs',
     jobName: 'Full Stack Development',
     jobType: 'Full Time',
@@ -256,7 +256,7 @@ export const talents = [
     links: [],
   },
   {
-    id: 4,
+    id: 10,
     fullName: 'Chaps D',
     jobName: 'UI/UX Design',
     jobType: 'Part-Time',
@@ -272,7 +272,7 @@ export const talents = [
     links: [],
   },
   {
-    id: 5,
+    id: 11,
     fullName: 'Mega Devs',
     jobName: 'Full Stack Development',
     jobType: 'Full Time',
@@ -288,7 +288,7 @@ export const talents = [
     links: [],
   },
   {
-    id: 4,
+    id: 12,
     fullName: 'Chaps D',
     jobName: 'UI/UX Design',
     jobType: 'Part-Time',
@@ -304,7 +304,7 @@ export const talents = [
     links: [],
   },
   {
-    id: 5,
+    id: 13,
     fullName: 'Mega Devs',
     jobName: 'Full Stack Development',
     jobType: 'Full Time',

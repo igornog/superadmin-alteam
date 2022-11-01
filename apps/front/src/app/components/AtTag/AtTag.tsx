@@ -15,9 +15,10 @@ const StyledIcon = styled(TrushSquare)`
   }
 `;
 
-const StyledChip = styled(Chip)<{ clickable?: boolean }>`
+const StyledChip = styled(Chip)<{ clickable?: boolean; variant: string }>`
   color: ${grey};
-  background-color: ${convertHexToRGBA(black, 0.05)};
+  background-color: ${({ variant }) =>
+    variant === 'filled' && convertHexToRGBA(black, 0.05)};
 
   ${(clickable) =>
     !clickable &&
@@ -42,7 +43,8 @@ const AtTag: React.FunctionComponent<AtTagProps> = (props: AtTagProps) => {
 
   return (
     <StyledChip
-      variant="filled"
+      {...props}
+      variant={props.variant ?? 'filled'}
       clickable={props.hover}
       label={<AtTypography>{props.label}</AtTypography>}
       deleteIcon={props.delete ? <StyledIcon /> : undefined}
@@ -55,6 +57,7 @@ interface AtTagProps {
   label: string;
   delete?: boolean;
   hover?: boolean;
+  variant?: 'filled' | 'outlined';
 }
 
 export default AtTag;

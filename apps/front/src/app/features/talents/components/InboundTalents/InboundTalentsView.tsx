@@ -22,7 +22,7 @@ const InboundTalentsView: React.FunctionComponent = () => {
   };
 
   return (
-    <Grid container={true} spacing={2.5} marginTop={0}>
+    <Grid container={true} spacing={2.5} marginTop={0} alignItems={'stretch'}>
       {listTalent.length === 0 ? (
         <Grid item={true} xs={12}>
           <AtTypography variant={'h3'} color={grey3}>
@@ -31,10 +31,18 @@ const InboundTalentsView: React.FunctionComponent = () => {
         </Grid>
       ) : settings.displayMode === DisplayMode.Grid ? (
         listTalent.map((talent) => (
-          <Grid item={true} xs={6} xl={4} key={talent.id} height={'100%'}>
+          <Grid
+            item={true}
+            xs={6}
+            xl={4}
+            key={talent.id}
+            display={'flex'}
+            flexDirection={'column'}
+          >
             <AtCard
               talent={talent}
               onClick={() => handleClickCard(talent.id)}
+              fullHeight={true}
             />
           </Grid>
         ))

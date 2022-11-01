@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { ArrowRight2 } from 'iconsax-react';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { green, grey, grey3, grey5, white } from '../../utils/colors';
 import AtLine from '../AtLine/AtLine';
 import AtGroupTag from '../AtGroupTag/AtGroupTag';
@@ -9,13 +9,18 @@ import AtTypography from '../AtTypography/AtTypography';
 import AtTag from '../AtTag/AtTag';
 import { Skill, Talent } from '../../utils/redux/types/talents.type';
 
-const StyledCard = styled.div`
+const StyledCard = styled.div<{ fullHeight?: boolean }>`
   background-color: ${white};
   border: 1px solid ${grey5};
   border-radius: 10px;
   padding: 20px;
   transition: 0.3s;
   min-height: 120px;
+  ${({ fullHeight }) =>
+    fullHeight &&
+    css`
+      height: 100%;
+    `}
 
   &:hover {
     transition: 0.3s;
@@ -28,7 +33,7 @@ const AtCard: React.FunctionComponent<AtCardProps> = (props: AtCardProps) => {
   const talent = new Talent(props.talent);
 
   return (
-    <StyledCard onClick={props.onClick}>
+    <StyledCard onClick={props.onClick} fullHeight={props.fullHeight}>
       <Box
         display={'flex'}
         alignItems={'center'}
@@ -88,6 +93,7 @@ const AtCard: React.FunctionComponent<AtCardProps> = (props: AtCardProps) => {
 
 interface AtCardProps {
   talent?: Talent;
+  fullHeight?: boolean;
   onClick?: (e: React.MouseEvent) => void;
 }
 
