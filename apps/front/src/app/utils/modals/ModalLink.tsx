@@ -1,7 +1,10 @@
 import { Box } from '@mui/material';
 import { AddCircle, TrushSquare } from 'iconsax-react';
 import React, { useEffect, useState } from 'react';
-import AtButton, { AtButtonKind, AtButtonVariant } from '../../components/AtButton/AtButton';
+import AtButton, {
+  AtButtonKind,
+  AtButtonVariant,
+} from '../../components/AtButton/AtButton';
 import AtTextField from '../../components/AtTextField/AtTextField';
 import AtTypography from '../../components/AtTypography/AtTypography';
 import { StyledLink } from '../../features/talents/components/TalentViewProfile/TalentLinks';
@@ -32,13 +35,23 @@ const ModalLink: React.FunctionComponent = () => {
 
       {links &&
         links.map((item: Link) => (
-          <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} gap={'25px'}>
+          <Box
+            display={'flex'}
+            alignItems={'center'}
+            justifyContent={'space-between'}
+            gap={'25px'}
+          >
             <AtTextField
               startIcon={getCorrectNetwork(item.link)}
               label={getCorrectNetwork(item.link, 'key')}
               defaultValue={item.link}
             />
-            <AtButton kind={AtButtonKind.Danger} variant={AtButtonVariant.Text} startIcon={<TrushSquare />} iconSize={20} />
+            <AtButton
+              kind={AtButtonKind.Danger}
+              variant={AtButtonVariant.Text}
+              startIcon={<TrushSquare />}
+              iconSize={20}
+            />
           </Box>
         ))}
 

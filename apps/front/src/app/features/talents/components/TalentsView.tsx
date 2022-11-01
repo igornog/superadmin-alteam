@@ -1,6 +1,8 @@
+import { FilterSquare } from 'iconsax-react';
 import React, { useEffect } from 'react';
 import { talents, talentsFilters, talentsJobType, talentsTabs } from '..';
 import AtLayout from '../../../components/AtLayout/AtLayout';
+import { grey2 } from '../../../utils/colors';
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook';
 import {
   handleInitSettings,
@@ -37,7 +39,11 @@ const TalentsView: React.FunctionComponent = () => {
 
   return (
     <>
-      <AtLayout sidePanel={<TalentsViewFilters />} sidePanelSize={'small'}>
+      <AtLayout
+        sidePanel={<TalentsViewFilters />}
+        sidePanelIcon={<FilterSquare size={20} />}
+        sidePanelSize={'small'}
+      >
         <InboundTalentsView />
       </AtLayout>
       <TalentViewProfile />

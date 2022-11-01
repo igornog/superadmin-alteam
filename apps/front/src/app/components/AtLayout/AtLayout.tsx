@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Backdrop, Box, Collapse, Grid, useMediaQuery } from '@mui/material';
 import {
   AddCircle,
   Candle,
@@ -11,6 +11,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { black, grey, grey2, white } from '../../utils/colors';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
+import { handleCollapsePanel } from '../../utils/redux/actions/app.action';
 import { handleSwitchDisplayMode } from '../../utils/redux/actions/settings.action';
 import { getActiveTab } from '../../utils/redux/selectors/settings.selector';
 import { DisplayMode } from '../../utils/redux/types/settings.type';
@@ -23,7 +24,7 @@ import AtTypography from '../AtTypography/AtTypography';
 
 const StyledContent = styled(Grid)<{ $sidePanelSize?: string }>`
   background-color: #f7f8fe;
-  margin: 20px 20px 20px 165px;
+  margin: 20px 20px 30px 165px;
 `;
 
 const StyledIconsBox = styled.div`
@@ -68,24 +69,36 @@ const StyledRowVertical = styled(RowVertical)`
   ${sharedIconStyle}
 `;
 
+const StyledSidePanel = styled(Collapse)`
+  position: fixed;
+  right: 0;
+`;
+
 const AtLayout: React.FunctionComponent<AtLayoutProps> = (
   props: AtLayoutProps
 ) => {
+  const isSmallScreen = useMediaQuery('(max-width:1079px)');
+
   const activeTab = useAppSelector((state) => getActiveTab(state));
   const settings = useAppSelector((state) => state.settings);
+  const app = useAppSelector((state) => state.app);
   const dispatch = useAppDispatch();
 
   const handleSwitchMode = (mode: DisplayMode) => {
     dispatch(handleSwitchDisplayMode(mode));
   };
 
-  return (
+  return !isSmallScreen ? (
     activeTab && (
       <>
         <AtNavbar />
         <Grid container={true}>
-          <StyledContent item={true} xs={true} $sidePanelSize={props.sidePanelSize}>
-            <AtNavPage />
+          <StyledContent
+            item={true}
+            xs={true}
+            $sidePanelSize={props.sidePanelSize}
+          >
+            <AtNavPage sidePanelIcon={props.sidePanelIcon} />
 
             <Box
               display={'flex'}
@@ -181,10 +194,39 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
 
             {props.children}
           </StyledContent>
-          {props.sidePanel}
+
+          {app.sidePanel.isFixed ? (
+            props.sidePanel
+          ) : (
+            <>
+              <Backdrop
+                open={app.sidePanel.isVisible}
+                onClick={() => dispatch(handleCollapsePanel(false))}
+                invisible={true}
+              />
+              <StyledSidePanel
+                in={app.sidePanel.isVisible}
+                orientation={'horizontal'}
+              >
+                {props.sidePanel}
+              </StyledSidePanel>
+            </>
+          )}
         </Grid>
       </>
     )
+  ) : (
+    <Box
+      display={'flex'}
+      height={'100vh'}
+      width={'100%'}
+      justifyContent={'center'}
+      alignItems={'center'}
+    >
+      <AtTypography>
+        This application is not suitable for small screens
+      </AtTypography>
+    </Box>
   );
 };
 
@@ -192,6 +234,7 @@ interface AtLayoutProps {
   children: React.ReactNode;
   title?: string;
   sidePanel?: React.ReactNode;
+  sidePanelIcon?: React.ReactNode;
   sidePanelSize?: 'small' | 'medium';
 }
 

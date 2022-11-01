@@ -1,9 +1,10 @@
+import { useMediaQuery } from '@mui/material';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { black, grey2, grey5, white } from '../../utils/colors';
 import AtTypography from '../AtTypography/AtTypography';
 
-const StyledTab = styled.div<{ active?: boolean }>`
+const StyledTab = styled.div<{ active?: boolean; $width?: string }>`
   border: 1px solid ${grey5};
   transition: 0.3s;
 
@@ -24,11 +25,12 @@ const StyledTab = styled.div<{ active?: boolean }>`
         `}
 
   border-radius: 5px;
-  width: fit-content;
+  width: ${({ $width }) => $width};
   padding: 10px 20px;
   display: flex;
   gap: 5px;
   align-items: center;
+  justify-content: center;
 `;
 
 const StyledBadge = styled.div<{ active?: boolean }>`
@@ -39,10 +41,21 @@ const StyledBadge = styled.div<{ active?: boolean }>`
   font-size: 10px;
 `;
 
+const StyledTypography = styled(AtTypography)`
+  white-space: nowrap;
+  @media (max-width: 1420px) {
+    font-size: 0.9vw;
+  }
+`;
+
 const AtTab: React.FunctionComponent<AtTabProps> = (props: AtTabProps) => {
   return (
-    <StyledTab active={props.active} onClick={props.onClick}>
-      <AtTypography>{props.label}</AtTypography>
+    <StyledTab
+      active={props.active}
+      onClick={props.onClick}
+      $width={props.width}
+    >
+      <StyledTypography>{props.label}</StyledTypography>
       {props.badge && (
         <StyledBadge active={props.active}>
           <AtTypography fontSize={'10px'}>{props.badge}</AtTypography>
@@ -57,6 +70,7 @@ interface AtTabProps {
   badge?: number;
   active?: boolean;
   onClick?: () => void;
+  width?: string;
 }
 
 export default AtTab;

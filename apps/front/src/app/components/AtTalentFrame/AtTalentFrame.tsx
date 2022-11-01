@@ -30,10 +30,7 @@ const AtTalentFrame: React.FunctionComponent<TalentFrameProps> = (
       gap={props.gap ?? '10px'}
       flexDirection={'column'}
     >
-      <Box
-        display={'flex'}
-        justifyContent={'space-between'}
-      >
+      <Box display={'flex'} justifyContent={'space-between'}>
         <AtTypography variant={'h5'}>{props.title}</AtTypography>
         <StyledBox onClick={props.onClick}>{props.icon}</StyledBox>
       </Box>

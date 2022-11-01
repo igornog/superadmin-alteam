@@ -184,7 +184,10 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
   };
 
   return (
-    <Box position={'relative'} style={{ opacity: props.disabled ? 0.5 : 1, width: '100%' }}>
+    <Box
+      position={'relative'}
+      style={{ opacity: props.disabled ? 0.5 : 1, width: '100%' }}
+    >
       {props.label && (
         <Box
           position={'absolute'}
