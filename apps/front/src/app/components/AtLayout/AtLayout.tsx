@@ -187,7 +187,10 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                           <Candle /> Sort by:
                         </AtTypography>
                         <AtDropdown
-                          listItems={[{ id: 0, label: 'None' }]}
+                          listItems={[
+                            { id: 0, label: 'None' },
+                            { id: 1, label: 'None' },
+                          ]}
                           size={'small'}
                           bgColor={'black'}
                         />

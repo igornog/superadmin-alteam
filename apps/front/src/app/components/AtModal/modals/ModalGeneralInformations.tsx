@@ -4,12 +4,12 @@ import React from 'react';
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../components/AtButton/AtButton';
-import AtDropdown from '../../components/AtDropdown/AtDropdown';
-import AtTextField from '../../components/AtTextField/AtTextField';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
-import { handleModal } from '../redux/actions/settings.action';
-import { getActiveTalent } from '../redux/selectors/talents.selector';
+} from '../../AtButton/AtButton';
+import AtDropdown from '../../AtDropdown/AtDropdown';
+import AtTextField from '../../AtTextField/AtTextField';
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook';
+import { handleModal } from '../../../utils/redux/actions/settings.action';
+import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector';
 
 const ModalGeneralInformations: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();

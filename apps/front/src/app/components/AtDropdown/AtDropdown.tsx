@@ -8,7 +8,11 @@ import { boxShadow } from '../../utils/theme';
 import AtTextField, { AtTextFieldProps } from '../AtTextField/AtTextField';
 import AtTypography from '../AtTypography/AtTypography';
 
-const StyledContentPopover = styled(Collapse)<{ $minWidth: number }>`
+export const StyledContentPopover = styled(Collapse)<{
+  $minWidth?: number;
+  left?: number;
+  top?: number;
+}>`
   position: absolute;
   min-width: ${({ $minWidth }) => $minWidth && $minWidth + 'px'};
   background-color: ${white};
@@ -17,18 +21,21 @@ const StyledContentPopover = styled(Collapse)<{ $minWidth: number }>`
   border-radius: 5px;
   margin-top: 5px;
   z-index: 999;
+  left: ${({ left }) => left && left + 'px'};
+  top: ${({ top }) => top && top + 'px'};
 `;
 
-const StyledElement = styled.div`
+export const StyledDropdownElement = styled.div<{ color: string }>`
   padding: 10px;
   transition: 0.25s;
   display: flex;
+  color: ${({ color }) => color};
 
   &:hover {
     cursor: pointer;
     transition: 0.5s;
 
-    & > p {
+    & p {
       color: ${black};
     }
   }
@@ -92,13 +99,13 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
           $minWidth={dropdownRef?.current?.offsetWidth}
         >
           {props.listItems.map((item: DropdownItem) => (
-            <StyledElement key={item.id} onClick={() => handleSelect(item)}>
-              <AtTypography
-                color={item.id === selectedItem?.id ? black : grey2}
-              >
-                {item.label}
-              </AtTypography>
-            </StyledElement>
+            <StyledDropdownElement
+              key={item.id}
+              onClick={() => handleSelect(item)}
+              color={item.id === selectedItem?.id ? black : grey2}
+            >
+              <AtTypography>{item.label}</AtTypography>
+            </StyledDropdownElement>
           ))}
         </StyledContentPopover>
       </Box>

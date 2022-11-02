@@ -28,30 +28,30 @@ export const capitalizeFirstLetter = (value: string) => {
   return capitalized;
 };
 
+export const availableNetworks: any = {
+  behance: <Be size={20} />,
+  dribble: <Dribbble size={20} />,
+  github: <img src={Github} alt={'linkedin icon'} width={20} />,
+  instagram: <Instagram size={20} />,
+  linkedin: <img src={Linkedin} alt={'linkedin icon'} width={20} />,
+  stackoverflow: (
+    <img src={Stackoverflow} alt={'stackoverflow icon'} width={20} />
+  ),
+  twitter: <img src={Twitter} alt={'stackoverflow icon'} width={20} />,
+  youtube: <Youtube size={20} />,
+};
+
 export const getCorrectNetwork = (
   url?: string,
   returnValue: 'icon' | 'key' = 'icon'
 ) => {
-  const networks: any = {
-    behance: <Be size={20} />,
-    dribble: <Dribbble size={20} />,
-    github: <img src={Github} alt={'linkedin icon'} width={20} />,
-    instagram: <Instagram size={20} />,
-    linkedin: <img src={Linkedin} alt={'linkedin icon'} width={20} />,
-    stackoverflow: (
-      <img src={Stackoverflow} alt={'stackoverflow icon'} width={20} />
-    ),
-    twitter: <img src={Twitter} alt={'stackoverflow icon'} width={20} />,
-    youtube: <Youtube size={20} />,
-  };
-
-  const item = Object.keys(networks).find((key) => url?.includes(key));
+  const item = Object.keys(availableNetworks).find((key) => url?.includes(key));
 
   return item ? (
     returnValue === 'key' ? (
-      capitalizeFirstLetter(item)
+      item
     ) : (
-      networks[item]
+      availableNetworks[item]
     )
   ) : returnValue === 'key' ? (
     'Not Defined Link'

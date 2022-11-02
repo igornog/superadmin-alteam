@@ -4,14 +4,14 @@ import React from 'react';
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../components/AtButton/AtButton';
-import AtTag from '../../components/AtTag/AtTag';
-import AtTextField from '../../components/AtTextField/AtTextField';
-import AtTypography from '../../components/AtTypography/AtTypography';
-import { grey2 } from '../colors';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
-import { handleModal } from '../redux/actions/settings.action';
-import { getActiveTalent } from '../redux/selectors/talents.selector';
+} from '../../AtButton/AtButton';
+import AtTag from '../../AtTag/AtTag';
+import AtTextField from '../../AtTextField/AtTextField';
+import AtTypography from '../../AtTypography/AtTypography';
+import { grey2 } from '../../../utils/colors';
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook';
+import { handleModal } from '../../../utils/redux/actions/settings.action';
+import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector';
 
 const ModalSkills: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
