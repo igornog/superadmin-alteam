@@ -4,12 +4,12 @@ import React from 'react';
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../components/AtButton/AtButton';
-import AtTextField from '../../components/AtTextField/AtTextField';
-import { useAppDispatch } from '../hooks/reduxHook';
-import { handleModal } from '../redux/actions/settings.action';
+} from '../../AtButton/AtButton';
+import AtTextField from '../../AtTextField/AtTextField';
+import { useAppDispatch } from '../../../utils/hooks/reduxHook';
+import { handleModal } from '../../../utils/redux/actions/settings.action';
 
-const ModalAbout: React.FunctionComponent = () => {
+const ModalDecline: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
   const handleClose = () => dispatch(handleModal(null));
 
@@ -18,9 +18,9 @@ const ModalAbout: React.FunctionComponent = () => {
       <AtTextField
         multiline={true}
         rows={12}
-        label={'About Talent'}
+        label={'Decline Talent'}
         defaultValue={
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu.'
+          'Thank you a lot for your time and effort to apply to YJCollective. We have an overwhelming amount of applicants and unfortunately, we won’t be progressing with you further. \n \nPlease check for new opportunities and don’t hesitate to apply. \n \nWe wish you all the best of luck with your search.'
         }
       />
 
@@ -30,18 +30,18 @@ const ModalAbout: React.FunctionComponent = () => {
           kind={AtButtonKind.Danger}
           variant={AtButtonVariant.Text}
           name={'Cancel'}
-          endIcon={<CloseSquare size={16} />}
+          startIcon={<CloseSquare size={16} />}
         />
         <AtButton
           onClick={handleClose}
           kind={AtButtonKind.Success}
           variant={AtButtonVariant.Contained}
-          name={'Save Changes'}
-          endIcon={<TickSquare size={16} />}
+          name={'Decline'}
+          startIcon={<TickSquare size={16} />}
         />
       </Box>
     </Box>
   );
 };
 
-export default ModalAbout;
+export default ModalDecline;

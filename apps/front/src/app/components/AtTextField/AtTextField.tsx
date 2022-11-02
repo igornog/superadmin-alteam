@@ -1,5 +1,6 @@
 import {
   Box,
+  ClickAwayListener,
   FormControl,
   FormHelperText,
   IconButton,
@@ -9,7 +10,7 @@ import {
   OutlinedInput,
   outlinedInputClasses,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import {
   black,
@@ -24,6 +25,11 @@ import {
 } from '../../utils/colors';
 import { ArrowDown2, Eye, EyeSlash } from 'iconsax-react';
 import AtTypography from '../AtTypography/AtTypography';
+import {
+  StyledContentPopover,
+  StyledDropdownElement,
+} from '../AtDropdown/AtDropdown';
+import { capitalizeFirstLetter } from '../../utils/helpers';
 
 export enum AtTextFieldType {
   Text = 'text',
@@ -36,6 +42,7 @@ const StyledLabel = styled.label<{
   $isSuccess?: boolean;
   focused: boolean;
   isDisabled?: boolean;
+  labelDropdown?: LabelDropdown[];
 }>`
   background-color: ${({ $isError, $isSuccess, isDisabled }) =>
     isDisabled ? grey2 : $isError ? red : $isSuccess ? green : grey2};
@@ -44,6 +51,19 @@ const StyledLabel = styled.label<{
   padding: 3px 5px;
   border-radius: 5px;
   color: ${white};
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 0;
+  
+  ${({ labelDropdown }) =>
+    labelDropdown &&
+    css`
+      &:hover {
+        cursor: pointer;
+      }
+    `}
+}
 `;
 
 const StyledInput = styled(OutlinedInput)<{
@@ -171,6 +191,10 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
   props: AtTextFieldProps
 ) => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const [showDropdownLabel, setShowDropdownLabel] = useState(false);
+  const dropdownLabelRef = useRef<any>(null);
+
   const [value, setValue] = useState(props.defaultValue || '');
   const [isFocused, setIsFocused] = useState(false);
 
@@ -183,27 +207,63 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
     setShowPassword(!showPassword);
   };
 
+  const handleClickLabel = () => {
+    setShowDropdownLabel(false);
+    props.onClickDropdownLabel?.();
+  };
+
   return (
     <Box
       position={'relative'}
       style={{ opacity: props.disabled ? 0.5 : 1, width: '100%' }}
     >
       {props.label && (
-        <Box
-          position={'absolute'}
-          top={'-12px'}
-          zIndex={1}
-          paddingLeft={'20px'}
-        >
-          <StyledLabel
-            focused={isFocused}
-            $isError={props.isError}
-            $isSuccess={props.isSuccess}
-            isDisabled={props.disabled}
-          >
-            {props.label} {props.required && '*'}
-          </StyledLabel>
-        </Box>
+        <ClickAwayListener onClickAway={() => setShowDropdownLabel(false)}>
+          <Box>
+            <Box
+              position={'absolute'}
+              top={'-9px'}
+              zIndex={1}
+              paddingLeft={'20px'}
+              ref={dropdownLabelRef}
+            >
+              <StyledLabel
+                focused={isFocused}
+                $isError={props.isError}
+                $isSuccess={props.isSuccess}
+                isDisabled={props.disabled}
+                labelDropdown={props.labelDropdown}
+                onClick={() => setShowDropdownLabel(!showDropdownLabel)}
+              >
+                {capitalizeFirstLetter(props.label)} {props.required && '*'}
+                {props.labelDropdown && (
+                  <StyledArrow open={showDropdownLabel} size={10} />
+                )}
+              </StyledLabel>
+            </Box>
+            {props.labelDropdown && (
+              <StyledContentPopover
+                in={showDropdownLabel}
+                $minWidth={dropdownLabelRef?.current?.offsetWidth}
+                left={20}
+                top={10}
+              >
+                {props.labelDropdown?.map((labelDropdown: LabelDropdown) => {
+                  return (
+                    <StyledDropdownElement
+                      onClick={handleClickLabel}
+                      color={
+                        labelDropdown.value === props.label ? black : grey2
+                      }
+                    >
+                      {labelDropdown.label}
+                    </StyledDropdownElement>
+                  );
+                })}
+              </StyledContentPopover>
+            )}
+          </Box>
+        </ClickAwayListener>
       )}
 
       <FormControl variant="outlined" fullWidth={true}>
@@ -299,7 +359,15 @@ export interface AtTextFieldProps {
   onValueChange?: (value: string) => void;
   placeholder?: string;
   type?: AtTextFieldType;
+
   label?: string;
+  labelDropdown?: LabelDropdown[];
+  onClickDropdownLabel?: () => void;
+}
+
+export interface LabelDropdown {
+  value: string;
+  label: string | React.ReactNode;
 }
 
 export default AtTextField;

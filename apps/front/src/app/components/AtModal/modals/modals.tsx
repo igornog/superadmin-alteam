@@ -1,5 +1,8 @@
-import AtTypography from '../../components/AtTypography/AtTypography';
-import { ModalVariant, ModalSize } from '../redux/types/settings.type';
+import AtTypography from '../../AtTypography/AtTypography';
+import {
+  ModalVariant,
+  ModalSize,
+} from '../../../utils/redux/types/settings.type';
 import ModalAbout from './ModalAbout';
 import ModalAddNote from './ModalAddNote';
 import ModalDecline from './ModalDecline';

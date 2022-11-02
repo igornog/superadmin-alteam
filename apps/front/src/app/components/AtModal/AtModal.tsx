@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { black } from '../../utils/colors';
 import { convertHexToRGBA } from '../../utils/helpers';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
-import { modals } from '../../utils/modals/modals';
+import { modals } from './modals/modals';
 import { handleModal } from '../../utils/redux/actions/settings.action';
 import { Modal } from '../../utils/redux/types/settings.type';
 import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton';
