@@ -1,6 +1,7 @@
 import { Grid } from '@mui/material';
 import React from 'react';
 import AtCard from '../../../../components/AtCard/AtCard';
+import AtRightClick from '../../../../components/AtRightClick/AtRightClick';
 import AtTypography from '../../../../components/AtTypography/AtTypography';
 import { grey3 } from '../../../../utils/colors';
 import {
