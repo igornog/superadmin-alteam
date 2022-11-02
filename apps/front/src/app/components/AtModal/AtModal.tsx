@@ -2,6 +2,8 @@ import { Box, Dialog, DialogContent, DialogTitle, Slide } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import { CloseCircle } from 'iconsax-react';
 import React, { useEffect, useState } from 'react';
+import { black } from '../../utils/colors';
+import { convertHexToRGBA } from '../../utils/helpers';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
 import { modals } from '../../utils/modals/modals';
 import { handleModal } from '../../utils/redux/actions/settings.action';
@@ -33,6 +35,16 @@ const AtModal: React.FunctionComponent = () => {
       aria-describedby="alert-dialog-slide-description"
       fullWidth={true}
       maxWidth={modalSettings.size}
+      BackdropProps={{
+        style: {
+          backgroundColor: convertHexToRGBA(black, 0.5),
+        },
+      }}
+      PaperProps={{
+        style: {
+          boxShadow: 'none',
+        },
+      }}
     >
       <DialogTitle variant="h4" sx={{ padding: 2.5 }}>
         <Box

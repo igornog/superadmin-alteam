@@ -19,6 +19,8 @@ import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton';
 import AtDropdown from '../AtDropdown/AtDropdown';
 import AtNavbar from '../AtNavbar/AtNavbar';
 import AtNavPage from '../AtNavPage/AtNavPage';
+import AtRightClick from '../AtRightClick/AtRightClick';
+import CreateTalentMenu from '../AtRightClick/ContextMenus/CreateTalentMenu';
 import AtTextField, { AtTextFieldType } from '../AtTextField/AtTextField';
 import AtTypography from '../AtTypography/AtTypography';
 
@@ -100,97 +102,101 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
           >
             <AtNavPage sidePanelIcon={props.sidePanelIcon} />
 
-            <Box
-              display={'flex'}
-              justifyContent={'space-between'}
-              marginTop={'30px'}
-            >
-              <AtTypography variant={'h3'}>{activeTab.title}</AtTypography>
+            <AtRightClick contextMenu={<CreateTalentMenu />}>
+              <Box>
+                <Box
+                  display={'flex'}
+                  justifyContent={'space-between'}
+                  marginTop={'30px'}
+                >
+                  <AtTypography variant={'h3'}>{activeTab.title}</AtTypography>
 
-              <Box display={'flex'} gap={'10px'}>
-                {activeTab.settings.downloadCSV && (
-                  <AtButton
-                    kind={AtButtonKind.Default}
-                    variant={AtButtonVariant.Text}
-                    startIcon={<Import />}
-                    fontSize={'14px'}
-                    name={'Download CSV'}
-                  />
-                )}
-
-                {activeTab.settings.createFolder && (
-                  <AtButton
-                    kind={AtButtonKind.Success}
-                    variant={AtButtonVariant.Contained}
-                    startIcon={<AddCircle />}
-                    name={'Create folder'}
-                  />
-                )}
-
-                {activeTab.settings.inviteTalent && (
-                  <AtButton
-                    kind={AtButtonKind.Success}
-                    variant={AtButtonVariant.Contained}
-                    startIcon={<AddCircle />}
-                    name={'Invite Talents'}
-                  />
-                )}
-              </Box>
-            </Box>
-
-            <Grid
-              container={true}
-              marginTop={'20px'}
-              justifyContent={'space-between'}
-              alignItems={'center'}
-            >
-              <Grid item={true} xs={6.5}>
-                {activeTab.settings.search && (
-                  <AtTextField
-                    type={AtTextFieldType.Text}
-                    placeholder={'Search in Inbound talents ...'}
-                    startIcon={<SearchNormal1 />}
-                  />
-                )}
-              </Grid>
-
-              <Box display={'flex'} gap={'30px'} alignItems={'center'}>
-                {activeTab.settings.displayMode && (
-                  <Box display={'flex'}>
-                    <StyledIconsBox>
-                      <StyledElement3
-                        size={20}
-                        active={settings.displayMode === DisplayMode.Grid}
-                        onClick={() => handleSwitchMode(DisplayMode.Grid)}
+                  <Box display={'flex'} gap={'10px'}>
+                    {activeTab.settings.downloadCSV && (
+                      <AtButton
+                        kind={AtButtonKind.Default}
+                        variant={AtButtonVariant.Text}
+                        startIcon={<Import />}
+                        fontSize={'14px'}
+                        name={'Download CSV'}
                       />
+                    )}
 
-                      <StyledRowVertical
-                        size={20}
-                        active={settings.displayMode === DisplayMode.List}
-                        onClick={() => handleSwitchMode(DisplayMode.List)}
+                    {activeTab.settings.createFolder && (
+                      <AtButton
+                        kind={AtButtonKind.Success}
+                        variant={AtButtonVariant.Contained}
+                        startIcon={<AddCircle />}
+                        name={'Create folder'}
                       />
-                    </StyledIconsBox>
+                    )}
+
+                    {activeTab.settings.inviteTalent && (
+                      <AtButton
+                        kind={AtButtonKind.Success}
+                        variant={AtButtonVariant.Contained}
+                        startIcon={<AddCircle />}
+                        name={'Create Talent'}
+                      />
+                    )}
                   </Box>
-                )}
-                {activeTab.settings.sortBy && (
-                  <Box
-                    display={'flex'}
-                    gap={'5px'}
-                    justifyContent={'flex-end'}
-                    alignItems={'center'}
-                  >
-                    <AtTypography color={grey2}>
-                      <Candle /> Sort by:
-                    </AtTypography>
-                    <AtDropdown
-                      listItems={[{ id: 0, label: 'None' }]}
-                      size={'small'}
-                      bgColor={'black'}
-                    />
+                </Box>
+
+                <Grid
+                  container={true}
+                  marginTop={'20px'}
+                  justifyContent={'space-between'}
+                  alignItems={'center'}
+                >
+                  <Grid item={true} xs={6.5}>
+                    {activeTab.settings.search && (
+                      <AtTextField
+                        type={AtTextFieldType.Text}
+                        placeholder={'Search in Inbound talents ...'}
+                        startIcon={<SearchNormal1 />}
+                      />
+                    )}
+                  </Grid>
+
+                  <Box display={'flex'} gap={'30px'} alignItems={'center'}>
+                    {activeTab.settings.displayMode && (
+                      <Box display={'flex'}>
+                        <StyledIconsBox>
+                          <StyledElement3
+                            size={20}
+                            active={settings.displayMode === DisplayMode.Grid}
+                            onClick={() => handleSwitchMode(DisplayMode.Grid)}
+                          />
+
+                          <StyledRowVertical
+                            size={20}
+                            active={settings.displayMode === DisplayMode.List}
+                            onClick={() => handleSwitchMode(DisplayMode.List)}
+                          />
+                        </StyledIconsBox>
+                      </Box>
+                    )}
+                    {activeTab.settings.sortBy && (
+                      <Box
+                        display={'flex'}
+                        gap={'5px'}
+                        justifyContent={'flex-end'}
+                        alignItems={'center'}
+                      >
+                        <AtTypography color={grey2}>
+                          <Candle /> Sort by:
+                        </AtTypography>
+                        <AtDropdown
+                          listItems={[{ id: 0, label: 'None' }]}
+                          size={'small'}
+                          bgColor={'black'}
+                        />
+                      </Box>
+                    )}
                   </Box>
-                )}
+                </Grid>
               </Box>
-            </Grid>
+            </AtRightClick>
 
             {props.children}
           </StyledContent>
