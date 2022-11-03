@@ -26,6 +26,10 @@ const TalentNotes: React.FunctionComponent<TalentNotesProps> = (
 ) => {
   const dispatch = useAppDispatch();
 
+  const handleAddNote = () => {
+    dispatch(handleModal(ModalVariant.AddNote));
+  };
+
   return (
     <AtTalentFrame
       title={'Notes'}
@@ -35,7 +39,7 @@ const TalentNotes: React.FunctionComponent<TalentNotesProps> = (
           Add note
         </AtTypography>
       }
-      onClick={() => dispatch(handleModal(ModalVariant.AddNote))}
+      onClick={handleAddNote}
     >
       <Box display={'flex'} justifyContent={'space-between'}>
         <Box display={'flex'} gap={'20px'}>

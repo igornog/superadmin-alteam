@@ -1,15 +1,18 @@
 import { Grid } from '@mui/material';
 import React from 'react';
 import AtCard from '../../../../components/AtCard/AtCard';
-import AtRightClick from '../../../../components/AtRightClick/AtRightClick';
 import AtTypography from '../../../../components/AtTypography/AtTypography';
 import { grey3 } from '../../../../utils/colors';
 import {
   useAppDispatch,
   useAppSelector,
 } from '../../../../utils/hooks/reduxHook';
+import { handleDrawer } from '../../../../utils/redux/actions/settings.action';
 import { handleSelectTalent } from '../../../../utils/redux/actions/talents.action';
-import { DisplayMode } from '../../../../utils/redux/types/settings.type';
+import {
+  DisplayMode,
+  SideDrawerVariant,
+} from '../../../../utils/redux/types/settings.type';
 import InboundTalentsTable from './InboundTalentsTable';
 
 const InboundTalentsView: React.FunctionComponent = () => {
@@ -18,8 +21,9 @@ const InboundTalentsView: React.FunctionComponent = () => {
   const talents = useAppSelector((state) => state.talents);
   const listTalent = talents.listTalents;
 
-  const handleClickCard = (id: number) => {
+  const handleClickTalent = (id: number) => {
     dispatch(handleSelectTalent(id));
+    dispatch(handleDrawer(SideDrawerVariant.Talent));
   };
 
   return (
@@ -42,14 +46,17 @@ const InboundTalentsView: React.FunctionComponent = () => {
           >
             <AtCard
               talent={talent}
-              onClick={() => handleClickCard(talent.id)}
+              onClick={() => handleClickTalent(talent.id)}
               fullHeight={true}
             />
           </Grid>
         ))
       ) : settings.displayMode === DisplayMode.List ? (
         <Grid item={true} xs={12}>
-          <InboundTalentsTable talents={listTalent} onClick={handleClickCard} />
+          <InboundTalentsTable
+            talents={listTalent}
+            onClick={handleClickTalent}
+          />
         </Grid>
       ) : null}
     </Grid>

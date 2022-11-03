@@ -14,7 +14,6 @@ import styled from 'styled-components';
 import useWindowSize from '../../../../utils/hooks/useWindowSize';
 import AtRightClick from '../../../../components/AtRightClick/AtRightClick';
 import InboundTalentMenu from '../../../../components/AtRightClick/ContextMenus/InboundTalentMenu';
-import CreateTalentMenu from '../../../../components/AtRightClick/ContextMenus/CreateTalentMenu';
 
 const StyledTag = styled(AtTag)`
   max-width: 150px;
@@ -44,7 +43,9 @@ const InboundTalentsTable: React.FunctionComponent<InboundTalentsTableProps> = (
       </AtTableHead>
       <AtTableBody position={position}>
         {props.talents.map((talent: Talent) => (
-          <AtRightClick contextMenu={<InboundTalentMenu />}>
+          <AtRightClick
+            contextMenu={<InboundTalentMenu idTalent={talent.id} />}
+          >
             <AtTableRow
               key={talent.id}
               hover={true}

@@ -7,6 +7,7 @@ export interface SettingsState {
   header: Settings;
   displayMode: DisplayMode;
   selectedModal: ModalVariant | null;
+  selectedDrawer: SideDrawerVariant | null;
   status?: StatusType;
   error?: string | null;
 }
@@ -38,6 +39,20 @@ export enum DisplayMode {
   Grid = 'grid',
 }
 
+export enum SideDrawerVariant {
+  Talent = 'Talent',
+}
+
+export class SideDrawer {
+  content: React.ReactNode;
+  size: string;
+
+  constructor(data: any) {
+    this.content = data.content;
+    this.size = data.size;
+  }
+}
+
 export enum ModalVariant {
   Skills = 'Skills',
   GeneralInformations = 'General Informations',
@@ -47,6 +62,7 @@ export enum ModalVariant {
   Link = 'Link',
   AddNote = 'AddNote',
   EditNote = 'EditNote',
+  Shortlist = 'Shortlist',
 }
 
 export enum ModalSize {
@@ -60,14 +76,13 @@ export enum ModalSize {
 export class Modal {
   content: React.ReactNode;
   size: ModalSize;
-  title: React.ReactNode;
 
   constructor(data: any) {
     this.content = data.content;
     this.size = data.size;
-    this.title = data.title;
   }
 }
+
 export interface HandlesettingsProps {
   tabs: Page[];
   filters: Filter[];

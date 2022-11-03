@@ -8,39 +8,49 @@ import AtButton, {
 import AtTextField from '../../AtTextField/AtTextField';
 import { useAppDispatch } from '../../../utils/hooks/reduxHook';
 import { handleModal } from '../../../utils/redux/actions/settings.action';
+import AtTypography from '../../AtTypography/AtTypography';
+import { AtModalContent, AtModalHeader } from '../AtModal';
 
 const ModalAbout: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
   const handleClose = () => dispatch(handleModal(null));
 
   return (
-    <Box display={'flex'} flexDirection={'column'} gap={2.5}>
-      <AtTextField
-        multiline={true}
-        rows={12}
-        label={'About Talent'}
-        defaultValue={
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu.'
-        }
+    <>
+      <AtModalHeader
+        title={<AtTypography variant={'h4'}>Edit About Talent</AtTypography>}
       />
 
-      <Box display={'flex'} justifyContent={'flex-end'}>
-        <AtButton
-          onClick={handleClose}
-          kind={AtButtonKind.Danger}
-          variant={AtButtonVariant.Text}
-          name={'Cancel'}
-          endIcon={<CloseSquare size={16} />}
-        />
-        <AtButton
-          onClick={handleClose}
-          kind={AtButtonKind.Success}
-          variant={AtButtonVariant.Contained}
-          name={'Save Changes'}
-          endIcon={<TickSquare size={16} />}
-        />
-      </Box>
-    </Box>
+      <AtModalContent>
+        <Box display={'flex'} flexDirection={'column'} gap={2.5}>
+          <AtTextField
+            multiline={true}
+            rows={12}
+            label={'About Talent'}
+            defaultValue={
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu.'
+            }
+          />
+
+          <Box display={'flex'} justifyContent={'flex-end'}>
+            <AtButton
+              onClick={handleClose}
+              kind={AtButtonKind.Danger}
+              variant={AtButtonVariant.Text}
+              name={'Cancel'}
+              endIcon={<CloseSquare size={16} />}
+            />
+            <AtButton
+              onClick={handleClose}
+              kind={AtButtonKind.Success}
+              variant={AtButtonVariant.Contained}
+              name={'Save Changes'}
+              endIcon={<TickSquare size={16} />}
+            />
+          </Box>
+        </Box>
+      </AtModalContent>
+    </>
   );
 };
 
