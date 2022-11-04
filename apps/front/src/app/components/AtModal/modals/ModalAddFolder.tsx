@@ -1,23 +1,17 @@
 import { Box } from '@mui/material';
 import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react';
 import React from 'react';
-import { useAppDispatch } from '../../../utils/hooks/reduxHook';
-import { handleModal } from '../../../utils/redux/actions/settings.action';
-import {
-  ModalSize,
-  ModalVariant,
-} from '../../../utils/redux/types/settings.type';
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
 } from '../../AtButton/AtButton';
-import AtLine from '../../AtLine/AtLine';
-import AtTextField from '../../AtTextField/AtTextField';
 import AtTypography from '../../AtTypography/AtTypography';
+import { ModalSize } from '../../../utils/redux/types/settings.type';
+import AtLine from '../../AtLine/AtLine';
 import AtModal from '../AtModal';
 
-const ModalEditNote: React.FunctionComponent<ModalEditNoteProps> = (
-  props: ModalEditNoteProps
+const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
+  props: ModalAddFolderProps
 ) => {
   return (
     <AtModal
@@ -32,7 +26,7 @@ const ModalEditNote: React.FunctionComponent<ModalEditNoteProps> = (
         padding={2.5}
         paddingBottom={0}
       >
-        <AtTypography variant={'h4'}>Edit Note</AtTypography>
+        <AtTypography variant={'h4'}>Create Folder</AtTypography>
         <AtButton
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
@@ -41,32 +35,22 @@ const ModalEditNote: React.FunctionComponent<ModalEditNoteProps> = (
           onClick={props.onClose}
         />
       </Box>
-      <AtLine spacingTop={20} spacingBottom={5} />
-
-      <Box display={'flex'} flexDirection={'column'} gap={2.5} padding={2.5}>
-        <AtTextField
-          multiline={true}
-          rows={12}
-          label={'Note'}
-          defaultValue={
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu.'
-          }
-        />
-
+      <AtLine spacing={20} />
+      <Box display={'flex'} flexDirection={'column'} gap={2.5}>
         <Box display={'flex'} justifyContent={'flex-end'}>
           <AtButton
             onClick={props.onClose}
             kind={AtButtonKind.Danger}
             variant={AtButtonVariant.Text}
             name={'Cancel'}
-            startIcon={<CloseSquare size={16} />}
+            endIcon={<CloseSquare size={16} />}
           />
           <AtButton
             onClick={props.onClose}
             kind={AtButtonKind.Success}
             variant={AtButtonVariant.Contained}
-            name={'Add note'}
-            startIcon={<TickSquare size={16} />}
+            name={'Create'}
+            endIcon={<TickSquare size={16} />}
           />
         </Box>
       </Box>
@@ -74,9 +58,9 @@ const ModalEditNote: React.FunctionComponent<ModalEditNoteProps> = (
   );
 };
 
-interface ModalEditNoteProps {
+interface ModalAddFolderProps {
   isOpen: boolean;
   onClose?: () => void;
 }
 
-export default ModalEditNote;
+export default ModalAddFolder;

@@ -20,7 +20,7 @@ const initialState: SettingsState = {
   },
   header: {},
   displayMode: DisplayMode.List,
-  selectedModal: null,
+  selectedModal: [],
   selectedDrawer: null,
   status: StatusType.Idle,
   error: null,
@@ -81,7 +81,17 @@ const { reducer } = createSlice({
       })
 
       .addCase(handleModal.fulfilled, (state, { payload }) => {
-        state.selectedModal = payload;
+        console.log(payload);
+
+        const index = state.selectedModal.findIndex(
+          (modal) => modal.name === payload.name
+        );
+
+        if (index === -1) {
+          state.selectedModal.push(payload);
+        } else {
+          state.selectedModal[index].state = payload.state;
+        }
       })
 
       .addCase(handleDrawer.fulfilled, (state, { payload }) => {

@@ -53,8 +53,8 @@ export const handleRefreshFilters = createAsyncThunk(
 
 export const handleModal = createAsyncThunk(
   'settings/selectedModal',
-  async (modal: ModalVariant | null) => {
-    return modal;
+  async (props: { name: ModalVariant; state: boolean }) => {
+    return props;
   }
 );
 

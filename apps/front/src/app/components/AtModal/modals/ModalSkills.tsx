@@ -1,5 +1,10 @@
 import { Box } from '@mui/material';
-import { CloseSquare, SearchNormal1, TickSquare } from 'iconsax-react';
+import {
+  CloseCircle,
+  CloseSquare,
+  SearchNormal1,
+  TickSquare,
+} from 'iconsax-react';
 import React from 'react';
 import AtButton, {
   AtButtonKind,
@@ -12,20 +17,44 @@ import { grey2 } from '../../../utils/colors';
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook';
 import { handleModal } from '../../../utils/redux/actions/settings.action';
 import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector';
-import { AtModalContent, AtModalHeader } from '../AtModal';
+import {
+  ModalSize,
+  ModalVariant,
+} from '../../../utils/redux/types/settings.type';
+import AtModal from '../AtModal';
+import AtLine from '../../AtLine/AtLine';
 
-const ModalSkills: React.FunctionComponent = () => {
-  const dispatch = useAppDispatch();
-  const handleClose = () => dispatch(handleModal(null));
+const ModalSkills: React.FunctionComponent<ModalSkillsProps> = (
+  props: ModalSkillsProps
+) => {
   const selectedTalent = useAppSelector((state) => getActiveTalent(state));
 
   return (
-    <>
-      <AtModalHeader
-        title={<AtTypography variant={'h4'}>Edit Skills</AtTypography>}
-      />
+    <AtModal
+      isOpen={props.isOpen}
+      size={ModalSize.Small}
+      onClose={props.onClose}
+    >
+      <Box
+        display={'flex'}
+        alignItems={'center'}
+        justifyContent={'space-between'}
+        padding={2.5}
+        paddingBottom={0}
+      >
+        <AtTypography variant={'h4'}>Edit Skills</AtTypography>
+        <AtButton
+          kind={AtButtonKind.Default}
+          variant={AtButtonVariant.Text}
+          startIcon={<CloseCircle />}
+          iconSize={24}
+          onClick={props.onClose}
+        />
+      </Box>
 
-      <AtModalContent gap={'20px'} padding={'0 20px 20px 20px'}>
+      <AtLine spacingTop={20} />
+
+      <Box display={'flex'} flexDirection={'column'} gap={2.5} padding={2.5}>
         <AtTextField
           placeholder={'Search in Skills'}
           startIcon={<SearchNormal1 />}
@@ -46,23 +75,28 @@ const ModalSkills: React.FunctionComponent = () => {
 
         <Box display={'flex'} justifyContent={'flex-end'}>
           <AtButton
-            onClick={handleClose}
+            onClick={props.onClose}
             kind={AtButtonKind.Danger}
             variant={AtButtonVariant.Text}
             name={'Cancel'}
             endIcon={<CloseSquare size={16} />}
           />
           <AtButton
-            onClick={handleClose}
+            onClick={props.onClose}
             kind={AtButtonKind.Success}
             variant={AtButtonVariant.Contained}
             name={'Save Changes'}
             endIcon={<TickSquare size={16} />}
           />
         </Box>
-      </AtModalContent>
-    </>
+      </Box>
+    </AtModal>
   );
 };
+
+interface ModalSkillsProps {
+  isOpen: boolean;
+  onClose?: () => void;
+}
 
 export default ModalSkills;

@@ -44,7 +44,12 @@ const InboundTalentsTable: React.FunctionComponent<InboundTalentsTableProps> = (
       <AtTableBody position={position}>
         {props.talents.map((talent: Talent) => (
           <AtRightClick
-            contextMenu={<InboundTalentMenu idTalent={talent.id} />}
+            contextMenu={
+              <InboundTalentMenu
+                idTalent={talent.id}
+                openShortlist={props.openShortlist}
+              />
+            }
           >
             <AtTableRow
               key={talent.id}
@@ -144,6 +149,7 @@ const InboundTalentsTable: React.FunctionComponent<InboundTalentsTableProps> = (
 interface InboundTalentsTableProps {
   talents: Talent[];
   onClick: (id: number) => void;
+  openShortlist: () => void;
 }
 
 export default InboundTalentsTable;

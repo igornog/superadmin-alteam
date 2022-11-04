@@ -6,7 +6,7 @@ export interface SettingsState {
   filters: { skills: Filter[]; jobTypes: Filter[] };
   header: Settings;
   displayMode: DisplayMode;
-  selectedModal: ModalVariant | null;
+  selectedModal: { name: ModalVariant; state: boolean }[];
   selectedDrawer: SideDrawerVariant | null;
   status?: StatusType;
   error?: string | null;
@@ -63,6 +63,7 @@ export enum ModalVariant {
   AddNote = 'AddNote',
   EditNote = 'EditNote',
   Shortlist = 'Shortlist',
+  AddFolder = 'AddFolder',
 }
 
 export enum ModalSize {

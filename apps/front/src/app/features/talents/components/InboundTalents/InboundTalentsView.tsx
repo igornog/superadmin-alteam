@@ -1,6 +1,7 @@
 import { Grid } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import AtCard from '../../../../components/AtCard/AtCard';
+import ModalShortlist from '../../../../components/AtModal/modals/ModalShortlist';
 import AtTypography from '../../../../components/AtTypography/AtTypography';
 import { grey3 } from '../../../../utils/colors';
 import {
@@ -20,6 +21,8 @@ const InboundTalentsView: React.FunctionComponent = () => {
   const settings = useAppSelector((state) => state.settings);
   const talents = useAppSelector((state) => state.talents);
   const listTalent = talents.listTalents;
+
+  const [openModal, setOpenModal] = useState(false);
 
   const handleClickTalent = (id: number) => {
     dispatch(handleSelectTalent(id));
@@ -48,6 +51,7 @@ const InboundTalentsView: React.FunctionComponent = () => {
               talent={talent}
               onClick={() => handleClickTalent(talent.id)}
               fullHeight={true}
+              openShortlist={() => setOpenModal(true)}
             />
           </Grid>
         ))
@@ -56,9 +60,12 @@ const InboundTalentsView: React.FunctionComponent = () => {
           <InboundTalentsTable
             talents={listTalent}
             onClick={handleClickTalent}
+            openShortlist={() => setOpenModal(true)}
           />
         </Grid>
       ) : null}
+
+      <ModalShortlist isOpen={openModal} onClose={() => setOpenModal(false)} />
     </Grid>
   );
 };

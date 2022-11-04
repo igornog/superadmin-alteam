@@ -195,7 +195,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
   const [showDropdownLabel, setShowDropdownLabel] = useState(false);
   const dropdownLabelRef = useRef<any>(null);
 
-  const [value, setValue] = useState(props.defaultValue || '');
+  const [value, setValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);
 
   const returnValue = (value: string) => {
@@ -280,6 +280,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
           multiline={props.multiline}
           rows={props.rows}
           disabled={props.disabled}
+          defaultValue={props.defaultValue}
           value={props.dropdown ? props.placeholder : value}
           size={props.size ?? 'medium'}
           required={props.required}
@@ -337,6 +338,7 @@ export interface AtTextFieldProps {
   fullWidth?: boolean;
   required?: boolean;
   defaultValue?: string;
+  value?: string;
 
   multiline?: boolean;
   rows?: number;
@@ -349,7 +351,7 @@ export interface AtTextFieldProps {
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
 
-  onClick?: () => void;
+  onClick?: (e?: any) => void;
   dropdown?: boolean;
   open?: boolean;
 

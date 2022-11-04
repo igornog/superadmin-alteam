@@ -1,35 +1,29 @@
 import { Box } from '@mui/material';
 import { CloseSquare, TickSquare } from 'iconsax-react';
-import React from 'react';
+import React, { useState } from 'react';
 import TalentAbout from '../../../features/talents/components/TalentViewProfile/TalentAbout';
 import TalentAttachments from '../../../features/talents/components/TalentViewProfile/TalentAttachments';
 import TalentGeneral from '../../../features/talents/components/TalentViewProfile/TalentGeneral';
 import TalentLinks from '../../../features/talents/components/TalentViewProfile/TalentLinks';
 import TalentNotes from '../../../features/talents/components/TalentViewProfile/TalentNotes';
 import TalentSkills from '../../../features/talents/components/TalentViewProfile/TalentSkills';
-import { grey3, grey5 } from '../../../utils/colors';
-import { useAppSelector, useAppDispatch } from '../../../utils/hooks/reduxHook';
-import { handleModal } from '../../../utils/redux/actions/settings.action';
+import { grey3 } from '../../../utils/colors';
+import { useAppSelector } from '../../../utils/hooks/reduxHook';
 import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector';
-import { ModalVariant } from '../../../utils/redux/types/settings.type';
 import AtButton, {
   AtButtonVariant,
   AtButtonKind,
 } from '../../AtButton/AtButton';
+import ModalDecline from '../../AtModal/modals/ModalDecline';
+import ModalShortlist from '../../AtModal/modals/ModalShortlist';
 import AtTypography from '../../AtTypography/AtTypography';
 import AtDrawerHeader from '../AtDrawerHeader';
 
 const DrawerTalent: React.FunctionComponent = () => {
   const selectedTalent = useAppSelector((state) => getActiveTalent(state));
-  const dispatch = useAppDispatch();
 
-  const handleDecline = () => {
-    dispatch(handleModal(ModalVariant.DeclineTalent));
-  };
-
-  const handleShortlist = () => {
-    dispatch(handleModal(ModalVariant.Shortlist));
-  };
+  const [openModalShortlist, setOpenModalShortlist] = useState(false);
+  const [openModalDecline, setOpenModalDecline] = useState(false);
 
   return (
     <Box>
@@ -62,14 +56,14 @@ const DrawerTalent: React.FunctionComponent = () => {
 
         <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
           <AtButton
-            onClick={handleDecline}
+            onClick={() => setOpenModalDecline(true)}
             kind={AtButtonKind.Danger}
             variant={AtButtonVariant.Contained}
             name={'Decline'}
             endIcon={<CloseSquare size={16} />}
           />
           <AtButton
-            onClick={handleShortlist}
+            onClick={() => setOpenModalShortlist(true)}
             kind={AtButtonKind.Success}
             variant={AtButtonVariant.Contained}
             name={'Shortlist'}
@@ -77,6 +71,15 @@ const DrawerTalent: React.FunctionComponent = () => {
           />
         </Box>
       </Box>
+
+      <ModalShortlist
+        isOpen={openModalShortlist}
+        onClose={() => setOpenModalShortlist(false)}
+      />
+      <ModalDecline
+        isOpen={openModalDecline}
+        onClose={() => setOpenModalDecline(false)}
+      />
     </Box>
   );
 };

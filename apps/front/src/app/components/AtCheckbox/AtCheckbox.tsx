@@ -1,4 +1,4 @@
-import React, { MutableRefObject } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { green, grey, grey4 } from '../../utils/colors';
 import check from '../../assets/images/icons/check.svg';

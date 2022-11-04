@@ -38,7 +38,14 @@ const AtCard: React.FunctionComponent<AtCardProps> = (props: AtCardProps) => {
 
   return (
     <StyledCard onClick={props.onClick} fullHeight={props.fullHeight}>
-      <AtRightClick contextMenu={<InboundTalentMenu idTalent={talent.id} />}>
+      <AtRightClick
+        contextMenu={
+          <InboundTalentMenu
+            idTalent={talent.id}
+            openShortlist={props.openShortlist}
+          />
+        }
+      >
         <Box>
           <Box
             display={'flex'}
@@ -96,6 +103,7 @@ interface AtCardProps {
   talent?: Talent;
   fullHeight?: boolean;
   onClick?: (e: React.MouseEvent) => void;
+  openShortlist: () => void;
 }
 
 export default AtCard;
