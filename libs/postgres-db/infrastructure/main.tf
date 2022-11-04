@@ -1,5 +1,5 @@
 module "security_label" {
-  source = "../../../infrastructure/module/naming"
+  source = "../../../infrastructure/modules/naming"
   stage  = var.stage
   name   = "postgres_db-security-group"
 }
@@ -43,14 +43,16 @@ resource "aws_db_instance" "postgres_db" {
   instance_class          = "db.t3.micro"
   allocated_storage       = 20
   engine                  = "postgres"
-  engine_version          = "13.4"
+  engine_version          = "14.4"
   db_name                 = "yjc_db"
   username                = "postgres"
+  allow_major_version_upgrade = true
+  auto_minor_version_upgrade = true
   password                = data.aws_ssm_parameter.db_password.value
   backup_retention_period = 30
   copy_tags_to_snapshot   = true
   vpc_security_group_ids  = [aws_security_group.security_group.id]
-  parameter_group_name    = "default.postgres13"
+  parameter_group_name    = "default.postgres14"
   publicly_accessible     = true
   skip_final_snapshot     = true
 }

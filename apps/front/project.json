@@ -6,17 +6,22 @@
   "targets": {
     "build": {
       "executor": "@nrwl/webpack:webpack",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "compiler": "babel",
-        "outputPath": "dist/apps/front",
+        "outputPath": "apps/front/dist",
         "index": "apps/front/src/index.html",
         "baseHref": "/",
         "main": "apps/front/src/main.tsx",
         "polyfills": "apps/front/src/polyfills.ts",
         "tsConfig": "apps/front/tsconfig.app.json",
-        "assets": ["apps/front/src/favicon.ico", "apps/front/src/app/assets"],
+        "assets": [
+          "apps/front/src/favicon.ico",
+          "apps/front/src/app/assets"
+        ],
         "styles": [],
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"
@@ -63,14 +68,20 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/front/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "apps/front/**/*.{ts,tsx,js,jsx}"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/front"],
+      "outputs": [
+        "{workspaceRoot}/coverage/apps/front"
+      ],
       "options": {
         "jestConfig": "apps/front/jest.config.ts",
         "passWithNoTests": true
@@ -93,7 +104,9 @@
     },
     "build-storybook": {
       "executor": "@nrwl/storybook:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "uiFramework": "@storybook/react",
         "outputPath": "dist/storybook/front",
@@ -105,6 +118,14 @@
         "ci": {
           "quiet": true
         }
+      }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build:production"],
+      "options": {
+        "cwd": "apps/front/infrastructure",
+        "command": "../../../infrastructure/scripts/terraformStageWrapper.sh apply front"
       }
     }
   },
