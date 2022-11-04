@@ -18,6 +18,7 @@
     "paths": {
       "@yjcapp/api-utils": ["libs/api-utils/src/index.ts"],
       "@yjcapp/app": ["libs/app/src/index.ts"],
+      "@yjcapp/axios-clients": ["libs/axios-clients/src/index.ts"],
       "@yjcapp/postgres-db": ["libs/postgres-db/src/index.ts"]
     }
   },
