@@ -122,7 +122,12 @@
     },
     "deploy": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build:production"],
+      "dependsOn": [
+        {
+          "params": "forward",
+          "target": "build",
+          "projects": "self"
+        }],
       "options": {
         "cwd": "apps/front/infrastructure",
         "command": "../../../infrastructure/scripts/terraformStageWrapper.sh apply front"
