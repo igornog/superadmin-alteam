@@ -29,4 +29,4 @@ jobs:
         with:
           terraform_version: 1.3.4
       - uses: nrwl/nx-set-shas@v3
-      - run: npx nx run-many --target=deploy --all --output-style stream
+      - run: npx nx deploy front --output-style stream
