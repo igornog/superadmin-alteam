@@ -29,5 +29,4 @@ jobs:
         with:
           terraform_version: 1.3.4
       - uses: nrwl/nx-set-shas@v3
-      - run: npx nx affected --target=test --parallel=3 --ci --code-coverage
       - run: npx nx run-many --target=deploy --all --output-style stream
