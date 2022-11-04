@@ -4,10 +4,8 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/node:webpack",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/freelancers",
         "main": "apps/freelancers/src/main.ts",
@@ -15,7 +13,9 @@
         "tsConfig": "apps/freelancers/tsconfig.app.json",
         "externalDependencies": "none",
         "optimization": true,
-        "extractLicenses": true
+        "extractLicenses": true,
+        "target": "node",
+        "compiler": "tsc"
       },
       "configurations": {
         "local": {
@@ -64,28 +64,20 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "apps/freelancers/**/*.ts"
-        ]
+        "lintFilePatterns": ["apps/freelancers/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/freelancers"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/apps/freelancers"],
       "options": {
         "jestConfig": "apps/freelancers/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "implicitDependencies": [
-    "postgres-db"
-  ],
+  "implicitDependencies": ["postgres-db"],
   "tags": []
 }

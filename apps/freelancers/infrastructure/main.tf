@@ -1,11 +1,11 @@
 module "freelancer_label" {
-  source = "../../../infrastructure/module/naming"
+  source = "../../../infrastructure/modules/naming"
   stage  = var.stage
   name   = "freelancer"
 }
 
 module "api" {
-  source            = "../../../infrastructure/module/api-lambda"
+  source            = "../../../infrastructure/modules/api-lambda"
   stage             = var.stage
   package_path      = "${path.module}/../../../dist/apps/freelancers/package.zip"
   retention_in_days = 30

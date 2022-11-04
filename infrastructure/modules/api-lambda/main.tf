@@ -61,7 +61,7 @@ resource "aws_apigatewayv2_api" "http_api" {
   disable_execute_api_endpoint = false
   tags                         = var.namespace_tags
   cors_configuration {
-    allow_origins  = ["https://${local.subdomain}.yjc.com","https://alteam.webflow.io"]
+    allow_origins  = ["*"]
     allow_methods  = var.allowed_methods
     max_age        = 86400
     allow_headers  = ["*"]

@@ -5,20 +5,14 @@
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "libs/postgres-db/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/postgres-db/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/postgres-db"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/libs/postgres-db"],
       "options": {
         "jestConfig": "libs/postgres-db/jest.config.ts",
         "passWithNoTests": true
@@ -29,9 +23,7 @@
       "options": {
         "command": "./libs/postgres-db/scripts/migrateRun.sh"
       },
-      "dependsOn": [
-        "docker:up"
-      ]
+      "dependsOn": ["docker:up"]
     },
     "migration:generate": {
       "executor": "nx:run-commands",
