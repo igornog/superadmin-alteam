@@ -20,6 +20,15 @@ module "cloudfront" {
   certificate_arn    = module.data.alteam_cert_arn
   zone_id            = module.data.hosted_zone_id
 }
+resource "null_resource" "deploy" {
+  triggers = {
+    always = timestamp()
+  }
+  provisioner "local-exec" {
+    command = "aws s3 sync ${path.module}/../dist s3://alt-${var.stage}-s3-website-tf/ --delete"
+  }
+}
+
 module "data" {
   source = "../../../infrastructure/modules/base_data"
 }
