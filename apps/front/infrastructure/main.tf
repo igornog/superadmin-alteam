@@ -3,7 +3,7 @@ terraform {
     bucket         = "s3-terraform-remote-state-eu-west-1-858816193321"
     dynamodb_table = "dynamodb-terraform-remote-state-eu-west-1-858816193321"
     region         = "eu-west-1"
-    key            = "prod"
+    key            = "dev/front"
   }
   required_version = ">= 1.1.9, < 2.0.0"
 }
@@ -17,7 +17,10 @@ module "cloudfront" {
   source             = "./modules/cloudfront"
   bucket_domain_name = module.website.regional_domain_name
   stage              = var.stage
-  certificate_arn    = var.certificate_arn
-  zone_id            = var.zone_id
+  certificate_arn    = module.data.alteam_cert_arn
+  zone_id            = module.data.hosted_zone_id
+}
+module "data" {
+  source = "../../../infrastructure/modules/base_data"
 }
 
