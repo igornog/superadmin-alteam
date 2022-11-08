@@ -1,12 +1,23 @@
 import { ArrowSwapHorizontal, Share, Sms, TrushSquare } from 'iconsax-react';
 import React from 'react';
+import { useAppDispatch } from '../../../utils/hooks/reduxHook';
+import { handleSelectTalent } from '../../../utils/redux/actions/talents.action';
 import AtTypography from '../../AtTypography/AtTypography';
 import { AtContextMenuItem } from '../AtRightClick';
 
-const InboundCardMenu: React.FunctionComponent = () => {
+const InboundTalentMenu: React.FunctionComponent<InboundTalentMenuProps> = (
+  props: InboundTalentMenuProps
+) => {
+  const dispatch = useAppDispatch();
+
+  const moveToShortlisted = () => {
+    dispatch(handleSelectTalent(props.idTalent));
+    props.openShortlist();
+  };
+
   return (
     <>
-      <AtContextMenuItem>
+      <AtContextMenuItem onSelect={moveToShortlisted}>
         <AtTypography>
           <ArrowSwapHorizontal size={20} />
           Move to Shortlisted
@@ -34,4 +45,9 @@ const InboundCardMenu: React.FunctionComponent = () => {
   );
 };
 
-export default InboundCardMenu;
+interface InboundTalentMenuProps {
+  idTalent: number;
+  openShortlist: () => void;
+}
+
+export default InboundTalentMenu;

@@ -194,13 +194,12 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
 
   const [showDropdownLabel, setShowDropdownLabel] = useState(false);
   const dropdownLabelRef = useRef<any>(null);
-
-  const [value, setValue] = useState(props.defaultValue || '');
+  // const [value, setValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);
 
   const returnValue = (value: string) => {
     props.onValueChange?.(value);
-    setValue(value);
+    // setValue(value);
   };
 
   const handleClickShowPassword = () => {
@@ -280,7 +279,8 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
           multiline={props.multiline}
           rows={props.rows}
           disabled={props.disabled}
-          value={props.dropdown ? props.placeholder : value}
+          defaultValue={props.defaultValue}
+          value={props.dropdown ? props.placeholder : props.value}
           size={props.size ?? 'medium'}
           required={props.required}
           type={
@@ -308,7 +308,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
               <StyledArrow open={props.open} size={15} />
             ) : (
               props.endIcon ||
-              (props.type === AtTextFieldType.Password && value.length > 0 && (
+              (props.type === AtTextFieldType.Password && props.value.length > 0 && (
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
@@ -337,6 +337,7 @@ export interface AtTextFieldProps {
   fullWidth?: boolean;
   required?: boolean;
   defaultValue?: string;
+  value: string;
 
   multiline?: boolean;
   rows?: number;
@@ -349,7 +350,7 @@ export interface AtTextFieldProps {
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
 
-  onClick?: () => void;
+  onClick?: (e?: any) => void;
   dropdown?: boolean;
   open?: boolean;
 

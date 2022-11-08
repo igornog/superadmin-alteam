@@ -9,8 +9,8 @@ import AtTypography from '../AtTypography/AtTypography';
 import AtTag from '../AtTag/AtTag';
 import { Skill, Talent } from '../../utils/redux/types/talents.type';
 import AtRightClick from '../AtRightClick/AtRightClick';
-import InboundTalentMenu from '../AtRightClick/ContextMenus/InboundTalentMenu';
 import { boxShadow } from '../../utils/theme';
+import InboundTalentMenu from '../AtRightClick/ContextMenus/InboundTalentMenu';
 
 const StyledCard = styled.div<{ fullHeight?: boolean }>`
   background-color: ${white};
@@ -38,7 +38,14 @@ const AtCard: React.FunctionComponent<AtCardProps> = (props: AtCardProps) => {
 
   return (
     <StyledCard onClick={props.onClick} fullHeight={props.fullHeight}>
-      <AtRightClick contextMenu={<InboundTalentMenu />}>
+      <AtRightClick
+        contextMenu={
+          <InboundTalentMenu
+            idTalent={talent.id}
+            openShortlist={props.openShortlist}
+          />
+        }
+      >
         <Box>
           <Box
             display={'flex'}
@@ -96,6 +103,7 @@ interface AtCardProps {
   talent?: Talent;
   fullHeight?: boolean;
   onClick?: (e: React.MouseEvent) => void;
+  openShortlist: () => void;
 }
 
 export default AtCard;

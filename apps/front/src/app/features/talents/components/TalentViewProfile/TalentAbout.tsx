@@ -1,21 +1,15 @@
 import { Edit } from 'iconsax-react';
-import React from 'react';
+import React, { useState } from 'react';
+import ModalAbout from '../../../../components/AtModal/modals/ModalAbout';
 import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame';
 import AtTypography from '../../../../components/AtTypography/AtTypography';
 import { grey } from '../../../../utils/colors';
-import { useAppDispatch } from '../../../../utils/hooks/reduxHook';
-import { handleModal } from '../../../../utils/redux/actions/settings.action';
-import { ModalVariant } from '../../../../utils/redux/types/settings.type';
 import { Talent } from '../../../../utils/redux/types/talents.type';
 
 const TalentAbout: React.FunctionComponent<TalentAboutProps> = (
   props: TalentAboutProps
 ) => {
-  const dispatch = useAppDispatch();
-
-  const handleEditAbout = () => {
-    dispatch(handleModal(ModalVariant.About));
-  };
+  const [openModal, setOpenModal] = useState(false);
 
   return (
     <AtTalentFrame
@@ -26,7 +20,7 @@ const TalentAbout: React.FunctionComponent<TalentAboutProps> = (
           Edit
         </AtTypography>
       }
-      onClick={handleEditAbout}
+      onClick={() => setOpenModal(true)}
     >
       <AtTypography color={grey}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque
@@ -35,6 +29,7 @@ const TalentAbout: React.FunctionComponent<TalentAboutProps> = (
         bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor
         diam fringilla vestibulum eu.
       </AtTypography>
+      <ModalAbout isOpen={openModal} onClose={() => setOpenModal(false)} />
     </AtTalentFrame>
   );
 };

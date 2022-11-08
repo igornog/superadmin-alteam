@@ -1,19 +1,37 @@
 import { Box } from '@mui/material';
 import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react';
-import React from 'react';
+import React, { useState } from 'react';
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
 } from '../../AtButton/AtButton';
-import AtTextField from '../../AtTextField/AtTextField';
 import AtTypography from '../../AtTypography/AtTypography';
-import AtModal from '../AtModal';
-import AtLine from '../../AtLine/AtLine';
 import { ModalSize } from '../../../utils/redux/types/settings.type';
+import AtLine from '../../AtLine/AtLine';
+import AtModal from '../AtModal';
+import AtTextField from '../../AtTextField/AtTextField';
+import { TreeInterface } from '../../../utils/redux/types/tree.type';
+import { useAppDispatch } from '../../../utils/hooks/reduxHook';
+import { handleAddFolder } from '../../../utils/redux/actions/tree.action';
 
-const ModalAbout: React.FunctionComponent<ModalAboutProps> = (
-  props: ModalAboutProps
+const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
+  props: ModalAddFolderProps
 ) => {
+  const dispatch = useAppDispatch();
+  const [folderName, setFolderName] = useState('');
+
+  const handleClose = () => {
+    props.onClose?.();
+    setFolderName('');
+  };
+
+  const addNewFolder = () => {
+    if (props.folder?.id) {
+      dispatch(handleAddFolder({ folderName, targetId: props.folder.id }));
+      handleClose();
+    }
+  };
+
   return (
     <AtModal
       isOpen={props.isOpen}
@@ -27,7 +45,12 @@ const ModalAbout: React.FunctionComponent<ModalAboutProps> = (
         padding={2.5}
         paddingBottom={0}
       >
-        <AtTypography variant={'h4'}>Edit About Talent</AtTypography>
+        <AtTypography variant={'h4'}>
+          Create Folder{' '}
+          {props.folder?.id === 'Parent'
+            ? 'at top level'
+            : `in ${props.folder?.name}`}
+        </AtTypography>
         <AtButton
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
@@ -37,32 +60,31 @@ const ModalAbout: React.FunctionComponent<ModalAboutProps> = (
         />
       </Box>
 
-      <AtLine spacingTop={20} spacingBottom={5} />
+      <AtLine spacing={20} />
 
       <Box display={'flex'} flexDirection={'column'} gap={2.5} padding={2.5}>
         <AtTextField
-          multiline={true}
-          rows={12}
-          value={''}
-          label={'About Talent'}
-          defaultValue={
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu.'
-          }
+          value={folderName}
+          placeholder={'Enter Name'}
+          label={'Folder Name'}
+          onValueChange={setFolderName}
         />
 
         <Box display={'flex'} justifyContent={'flex-end'}>
           <AtButton
-            onClick={props.onClose}
+            onClick={handleClose}
             kind={AtButtonKind.Danger}
             variant={AtButtonVariant.Text}
             name={'Cancel'}
             endIcon={<CloseSquare size={16} />}
           />
+
           <AtButton
-            onClick={props.onClose}
+            onClick={addNewFolder}
             kind={AtButtonKind.Success}
+            disabled={!folderName}
             variant={AtButtonVariant.Contained}
-            name={'Save Changes'}
+            name={'Create'}
             endIcon={<TickSquare size={16} />}
           />
         </Box>
@@ -71,9 +93,10 @@ const ModalAbout: React.FunctionComponent<ModalAboutProps> = (
   );
 };
 
-interface ModalAboutProps {
+interface ModalAddFolderProps {
+  folder?: TreeInterface | undefined;
   isOpen: boolean;
   onClose?: () => void;
 }
 
-export default ModalAbout;
+export default ModalAddFolder;

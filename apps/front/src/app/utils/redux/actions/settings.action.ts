@@ -6,6 +6,7 @@ import {
   ModalVariant,
   Page,
   Settings,
+  SideDrawerVariant,
 } from '../types/settings.type';
 
 export const handleInitSettings = createAsyncThunk(
@@ -50,9 +51,9 @@ export const handleRefreshFilters = createAsyncThunk(
   }
 );
 
-export const handleModal = createAsyncThunk(
-  'settings/selectedModal',
-  async (modal: ModalVariant | null) => {
-    return modal;
+export const handleDrawer = createAsyncThunk(
+  'settings/selectedDrawer',
+  async (drawer: SideDrawerVariant | null) => {
+    return drawer;
   }
 );
