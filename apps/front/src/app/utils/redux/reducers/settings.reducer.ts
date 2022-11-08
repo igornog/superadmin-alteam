@@ -6,7 +6,6 @@ import {
   handleInitSettings,
   handleSettingsTab,
   handleSwitchDisplayMode,
-  handleModal,
   handleDrawer,
 } from '../actions/settings.action';
 import { DisplayMode, Filter, SettingsState } from '../types/settings.type';
@@ -20,7 +19,6 @@ const initialState: SettingsState = {
   },
   header: {},
   displayMode: DisplayMode.List,
-  selectedModal: [],
   selectedDrawer: null,
   status: StatusType.Idle,
   error: null,
@@ -78,20 +76,6 @@ const { reducer } = createSlice({
 
       .addCase(handleSwitchDisplayMode.fulfilled, (state, { payload }) => {
         state.displayMode = payload;
-      })
-
-      .addCase(handleModal.fulfilled, (state, { payload }) => {
-        console.log(payload);
-
-        const index = state.selectedModal.findIndex(
-          (modal) => modal.name === payload.name
-        );
-
-        if (index === -1) {
-          state.selectedModal.push(payload);
-        } else {
-          state.selectedModal[index].state = payload.state;
-        }
       })
 
       .addCase(handleDrawer.fulfilled, (state, { payload }) => {

@@ -15,7 +15,7 @@ import AtButton, {
   AtButtonKind,
 } from '../../AtButton/AtButton';
 import ModalDecline from '../../AtModal/modals/ModalDecline';
-import ModalShortlist from '../../AtModal/modals/ModalShortlist';
+import ModalShortlist from '../../AtModal/modals/ModalShortlist/ModalShortlist';
 import AtTypography from '../../AtTypography/AtTypography';
 import AtDrawerHeader from '../AtDrawerHeader';
 

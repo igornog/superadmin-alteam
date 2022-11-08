@@ -2,7 +2,6 @@ import { Box } from '@mui/material';
 import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react';
 import React from 'react';
 import { useAppDispatch } from '../../../utils/hooks/reduxHook';
-import { handleModal } from '../../../utils/redux/actions/settings.action';
 import {
   ModalSize,
   ModalVariant,

@@ -15,7 +15,6 @@ import AtTextField from '../../AtTextField/AtTextField';
 import AtTypography from '../../AtTypography/AtTypography';
 import { grey2 } from '../../../utils/colors';
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook';
-import { handleModal } from '../../../utils/redux/actions/settings.action';
 import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector';
 import {
   ModalSize,

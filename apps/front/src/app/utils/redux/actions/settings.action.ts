@@ -51,13 +51,6 @@ export const handleRefreshFilters = createAsyncThunk(
   }
 );
 
-export const handleModal = createAsyncThunk(
-  'settings/selectedModal',
-  async (props: { name: ModalVariant; state: boolean }) => {
-    return props;
-  }
-);
-
 export const handleDrawer = createAsyncThunk(
   'settings/selectedDrawer',
   async (drawer: SideDrawerVariant | null) => {

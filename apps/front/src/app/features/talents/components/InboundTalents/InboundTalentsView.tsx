@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 import React, { useState } from 'react';
 import AtCard from '../../../../components/AtCard/AtCard';
-import ModalShortlist from '../../../../components/AtModal/modals/ModalShortlist';
+import ModalShortlist from '../../../../components/AtModal/modals/ModalShortlist/ModalShortlist';
 import AtTypography from '../../../../components/AtTypography/AtTypography';
 import { grey3 } from '../../../../utils/colors';
 import {
