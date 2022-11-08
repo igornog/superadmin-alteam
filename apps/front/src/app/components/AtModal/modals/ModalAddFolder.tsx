@@ -64,7 +64,7 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
 
       <Box display={'flex'} flexDirection={'column'} gap={2.5} padding={2.5}>
         <AtTextField
-          defaultValue={folderName}
+          value={folderName}
           placeholder={'Enter Name'}
           label={'Folder Name'}
           onValueChange={setFolderName}

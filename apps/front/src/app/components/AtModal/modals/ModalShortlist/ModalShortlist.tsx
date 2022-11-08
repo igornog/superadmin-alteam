@@ -7,7 +7,6 @@ import AtButton, {
   AtButtonVariant,
 } from '../../../AtButton/AtButton';
 import { useAppDispatch } from '../../../../utils/hooks/reduxHook';
-import AtTree from '../../../AtTree/AtTree';
 import { ModalSize } from '../../../../utils/redux/types/settings.type';
 import AtModal from '../../AtModal';
 import AtLine from '../../../AtLine/AtLine';
@@ -16,37 +15,7 @@ import ModalShortlistStep1 from './steps/ModalShortlistStep1';
 import { black, grey2 } from '../../../../utils/colors';
 import ModalShortlistStep2 from './steps/ModalShortlistStep2';
 import ModalShortlistStep3 from './steps/ModalShortlistStep3';
-import { AnimatePresence, motion } from 'framer-motion';
-import styled from 'styled-components';
 import AtTabs from '../../../AtTabs/AtTabs';
-
-const PagerContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  width: 100%;
-`;
-
-const PagerAnimtedContainer = styled(motion.div)`
-  flex-direction: row;
-  direction: ltr;
-  will-change: transform;
-  min-height: 0;
-  flex: 1;
-  display: flex;
-`;
-
-const Page = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-self: stretch;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  height: 100%;
-  overflow: hidden;
-  outline: none;
-`;
 
 const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
   props: ModalShortlistProps
@@ -151,11 +120,16 @@ const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
     console.log('move talent');
   };
 
+  const handleClose = () => {
+    props.onClose();
+    setStep(0);
+  };
+
   return (
     <AtModal
       isOpen={props.isOpen}
       size={ModalSize.Small}
-      onClose={props.onClose}
+      onClose={handleClose}
       minWidth={step === 2 ? '50vw' : '25vw'}
     >
       <Box
@@ -176,7 +150,7 @@ const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
           variant={AtButtonVariant.Text}
           startIcon={<CloseCircle />}
           iconSize={24}
-          onClick={props.onClose}
+          onClick={handleClose}
         />
       </Box>
 
@@ -203,7 +177,7 @@ const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
 
         <Box display={'flex'} justifyContent={'flex-end'}>
           <AtButton
-            onClick={step === 0 ? props.onClose : () => setStep(step - 1)}
+            onClick={step === 0 ? handleClose : () => setStep(step - 1)}
             kind={AtButtonKind.Danger}
             variant={AtButtonVariant.Text}
             name={step === 0 ? 'Cancel' : 'Previous Step'}
@@ -234,7 +208,7 @@ const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
 
 interface ModalShortlistProps {
   isOpen: boolean;
-  onClose?: () => void;
+  onClose: () => void;
 }
 
 export default ModalShortlist;

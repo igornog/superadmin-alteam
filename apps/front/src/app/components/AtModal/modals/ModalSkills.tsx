@@ -56,6 +56,7 @@ const ModalSkills: React.FunctionComponent<ModalSkillsProps> = (
       <Box display={'flex'} flexDirection={'column'} gap={2.5} padding={2.5}>
         <AtTextField
           placeholder={'Search in Skills'}
+          value={''}
           startIcon={<SearchNormal1 />}
           size={'small'}
         />

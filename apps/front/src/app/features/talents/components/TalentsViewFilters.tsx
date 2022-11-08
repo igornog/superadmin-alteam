@@ -104,6 +104,7 @@ const TalentsViewFilters: React.FunctionComponent = () => {
 
           <AtTextField
             size={'small'}
+          value={''}
             startIcon={<SearchNormal1 />}
             placeholder={'Search in Skills'}
           />

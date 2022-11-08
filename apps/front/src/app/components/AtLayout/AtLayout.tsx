@@ -151,6 +151,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                   <Grid item={true} xs={6.5}>
                     {activeTab.settings.search && (
                       <AtTextField
+                        value={''}
                         type={AtTextFieldType.Text}
                         placeholder={'Search in Inbound talents ...'}
                         startIcon={<SearchNormal1 />}
@@ -187,6 +188,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                           <Candle /> Sort by:
                         </AtTypography>
                         <AtDropdown
+                          value={''}
                           listItems={[
                             { id: 0, label: 'None' },
                             { id: 1, label: 'None' },

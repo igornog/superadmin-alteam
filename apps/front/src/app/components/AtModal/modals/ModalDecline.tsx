@@ -43,6 +43,7 @@ const ModalDecline: React.FunctionComponent<ModalDeclineProps> = (
         <AtTextField
           multiline={true}
           rows={12}
+          value={''}
           label={'Decline Talent'}
           defaultValue={
             'Thank you a lot for your time and effort to apply to YJCollective. We have an overwhelming amount of applicants and unfortunately, we won’t be progressing with you further. \n \nPlease check for new opportunities and don’t hesitate to apply. \n \nWe wish you all the best of luck with your search.'

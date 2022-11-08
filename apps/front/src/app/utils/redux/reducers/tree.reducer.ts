@@ -1,7 +1,8 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { handleAddFolder, handleLoadTree } from '../actions/tree.action';
 import { StatusType } from '../types/status.type';
 import { TreeInterface, TreeState } from '../types/tree.type';
+import { v4 as uuidv4 } from 'uuid';
 
 const initialState: TreeState = {
   data: {
@@ -54,7 +55,7 @@ const { reducer } = createSlice({
           currentNode.children = [];
         }
 
-        currentNode.children.push({ id: '888', name: payload.folderName });
+        currentNode.children.push({ id: uuidv4(), name: payload.folderName });
       });
   },
 });

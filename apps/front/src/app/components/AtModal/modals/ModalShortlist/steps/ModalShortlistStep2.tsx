@@ -15,6 +15,7 @@ const ModalShortlistStep2: React.FunctionComponent = () => {
 
       <AtTextField
         placeholder="Search in Listings"
+        value={''}
         size={'small'}
         startIcon={<SearchNormal1 />}
       />

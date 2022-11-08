@@ -6,3 +6,4 @@ declare module '*.webp';
 declare module '*.gif';
 declare module '*.bmp';
 declare module '*.txt';
+declare module 'uuid';

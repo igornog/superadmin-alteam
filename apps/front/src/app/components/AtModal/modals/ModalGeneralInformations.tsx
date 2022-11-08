@@ -47,18 +47,21 @@ const ModalGeneralInformations: React.FunctionComponent<
       <Box display={'flex'} flexDirection={'column'} gap={3.5} padding={2.5}>
         <AtTextField
           defaultValue={selectedTalent.jobName}
+          value={''}
           placeholder={selectedTalent.jobName ?? 'N/A'}
           label={'Role'}
         />
 
         <AtTextField
           defaultValue={selectedTalent.salary}
+          value={''}
           placeholder={selectedTalent.salary ?? 'N/A'}
           label={'Salary Expectations'}
         />
 
         <AtDropdown
           fullWidth={true}
+          value={''}
           listItems={[
             {
               id: 0,
@@ -74,6 +77,7 @@ const ModalGeneralInformations: React.FunctionComponent<
 
         <AtDropdown
           fullWidth={true}
+          value={''}
           listItems={[
             {
               id: 0,
@@ -89,18 +93,21 @@ const ModalGeneralInformations: React.FunctionComponent<
 
         <AtTextField
           defaultValue={selectedTalent.portfolio}
+          value={''}
           placeholder={selectedTalent.portfolio ?? 'N/A'}
           label={'Portfolio Link'}
         />
 
         <AtTextField
           defaultValue={selectedTalent.email}
+          value={''}
           placeholder={selectedTalent.email ?? 'N/A'}
           label={'Email'}
         />
 
         <AtTextField
           defaultValue={selectedTalent.phone}
+          value={''}
           placeholder={selectedTalent.phone ?? 'N/A'}
           label={'Phone Number'}
         />

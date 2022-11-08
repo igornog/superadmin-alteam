@@ -80,6 +80,7 @@ const ModalLink: React.FunctionComponent<ModalLinkProps> = (
             >
               <AtTextField
                 startIcon={getCorrectNetwork(item.link)}
+                value={''}
                 label={getCorrectNetwork(item.link, 'key')}
                 defaultValue={item.link}
                 labelDropdown={Object.keys(availableNetworks).map((network) => {
@@ -113,6 +114,7 @@ const ModalLink: React.FunctionComponent<ModalLinkProps> = (
           >
             <AtTextField
               startIcon={getCorrectNetwork(newLink)}
+              value={''}
               label={getCorrectNetwork(newLink, 'key')}
               onValueChange={setNewLink}
               labelDropdown={Object.keys(availableNetworks).map((network) => {

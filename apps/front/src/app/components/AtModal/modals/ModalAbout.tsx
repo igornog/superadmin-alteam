@@ -43,6 +43,7 @@ const ModalAbout: React.FunctionComponent<ModalAboutProps> = (
         <AtTextField
           multiline={true}
           rows={12}
+          value={''}
           label={'About Talent'}
           defaultValue={
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu.'

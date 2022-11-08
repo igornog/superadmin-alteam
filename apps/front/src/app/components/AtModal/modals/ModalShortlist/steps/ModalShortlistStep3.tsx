@@ -17,6 +17,7 @@ const ModalShortlistStep3: React.FunctionComponent = () => {
         placeholder="Thank you for applying to YJC. We are pleased to inform you that we would like to have a chat with you. Please reply to this email when will be the best time for you to have a chat? Or book in the call in my calendly:&#10;Link: calendlyyoann.com"
         rows={10}
         multiline={true}
+        value={''}
         label={'Shortlist Talent'}
       />
     </Box>
