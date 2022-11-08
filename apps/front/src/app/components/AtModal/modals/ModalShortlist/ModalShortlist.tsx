@@ -142,7 +142,10 @@ const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
         <Box display={'flex'} gap={'15px'}>
           <AtTypography variant={'h4'}>Shortlist Talent</AtTypography>
           <AtTypography color={grey2}>
-            Step <span style={{ color: black }}>{step + 1}</span>/3
+            Step{' '}
+            <Box>
+              <span style={{ color: black }}>{step + 1}</span>/3
+            </Box>
           </AtTypography>
         </Box>
         <AtButton
