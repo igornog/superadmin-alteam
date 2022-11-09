@@ -4,7 +4,7 @@
   "projects": {
     "api-utils": "libs/api-utils",
     "app": "libs/app",
-    "axios-clients": "libs/axios-clients",
+    "auth-api": "apps/auth-api",
     "freelancers": "apps/freelancers",
     "front": "apps/front",
     "infrastructure": "infrastructure",

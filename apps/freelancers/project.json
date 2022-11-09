@@ -1,4 +1,5 @@
 {
+  "name": "freelancers",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/freelancers/src",
   "projectType": "application",

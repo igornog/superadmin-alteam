@@ -20,32 +20,20 @@
   },
   "targetDefaults": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "production",
-        "^production"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     },
     "test": {
-      "inputs": [
-        "default",
-        "^production",
-        "{workspaceRoot}/jest.preset.js"
-      ]
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
     },
     "lint": {
-      "inputs": [
-        "default",
-        "{workspaceRoot}/.eslintrc.json"
-      ]
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
     },
     "build-storybook": {
-      "inputs": [
-        "default",
-        "^production"
-      ]
+      "inputs": ["default", "^production", "{workspaceRoot}/.storybook/**/*"]
+    },
+    "e2e": {
+      "inputs": ["default", "^production"]
     }
   },
   "workspaceLayout": {
@@ -76,15 +64,15 @@
       "!{projectRoot}/dist/*",
       "sharedGlobals"
     ],
-    "sharedGlobals": [
-      "{workspaceRoot}/babel.config.json"
-    ],
+    "sharedGlobals": ["{workspaceRoot}/babel.config.json"],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/tsconfig.spec.json",
       "!{projectRoot}/jest.config.[jt]s",
       "!{projectRoot}/.eslintrc.json",
+      "!{projectRoot}/.storybook/**/*",
+      "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
       "!{projectRoot}/.storybook/**/*",
       "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)"
     ]

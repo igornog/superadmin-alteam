@@ -22,9 +22,6 @@ variable "timeout" {
   type    = number
   default = 15
 }
-variable "retention_in_days" {
-  type = number
-}
 variable "memory_size" {
   type    = number
   default = 128
@@ -40,4 +37,8 @@ variable "subnet_ids" {
 variable "layers_arn" {
   type    = list(string)
   default = []
+}
+
+variable "api_mapping_key" {
+  type    = string
 }

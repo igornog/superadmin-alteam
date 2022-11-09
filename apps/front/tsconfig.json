@@ -6,12 +6,11 @@
     "experimentalDecorators": true,
     "jsxImportSource": "react",
     "isolatedModules": true,
-    "composite": true,
-    "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "typeRoots": ["node_modules/@types", "src/types"],
     "allowJs": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -20,10 +19,16 @@
     "noFallthroughCasesInSwitch": true
   },
   "files": [],
-  "include": ["src", "src/**/*.ts", "src/**/**/*.ts"],
+  "include": [],
   "references": [
     {
-      "path": "./src/.storybook/tsconfig.json"
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./.storybook/tsconfig.json"
     }
   ]
 }

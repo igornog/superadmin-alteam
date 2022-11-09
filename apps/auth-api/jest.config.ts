@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'axios-clients',
+  displayName: 'auth-api',
   preset: '../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -9,8 +9,8 @@ export default {
   },
   testEnvironment: 'node',
   transform: {
-    '^.+\\.[tj]sx?$': 'ts-jest',
+    '^.+\\.[tj]s$': 'ts-jest',
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/libs/axios-clients',
+  moduleFileExtensions: ['ts', 'js', 'html'],
+  coverageDirectory: '../../coverage/apps/auth-api',
 };

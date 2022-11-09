@@ -1,5 +1,7 @@
 locals {
-  subdomain = var.stage == "prod" ? "www" : var.stage
+  isProd = var.stage == "prod"
+  subdomain = local.isProd ? "www" : var.stage
+  apiDomain = "${var.stage}.api.alteam.io"
 }
 data aws_caller_identity "current"{}
 
@@ -51,7 +53,7 @@ resource "aws_iam_role_policy_attachment" "attach" {
 }
 resource "aws_cloudwatch_log_group" "logs" {
   name              = "/aws/lambda/${aws_lambda_function.api_lambda.function_name}"
-  retention_in_days = var.retention_in_days
+  retention_in_days = local.isProd ? 30 : 1
   tags              = var.namespace_tags
 }
 
@@ -61,7 +63,7 @@ resource "aws_apigatewayv2_api" "http_api" {
   disable_execute_api_endpoint = false
   tags                         = var.namespace_tags
   cors_configuration {
-    allow_origins  = ["*"]
+    allow_origins  = ["*"] // TODO
     allow_methods  = var.allowed_methods
     max_age        = 86400
     allow_headers  = ["*"]
@@ -91,6 +93,7 @@ resource "aws_apigatewayv2_route" "route" {
   route_key = "$default"
   target    = "integrations/${aws_apigatewayv2_integration.integration.id}"
 }
+
 resource "aws_lambda_permission" "apigw_lambda" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
@@ -99,4 +102,10 @@ resource "aws_lambda_permission" "apigw_lambda" {
 
   # More: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-control-access-using-iam-policies-to-invoke-api.html
   source_arn = "arn:aws:execute-api:eu-west-1:${data.aws_caller_identity.current.account_id}:${aws_apigatewayv2_api.http_api.id}/*"
+}
+resource "aws_apigatewayv2_api_mapping" "domain_connection" {
+  api_id          = aws_apigatewayv2_api.http_api.id
+  stage           = aws_apigatewayv2_stage.stage.name
+  domain_name     = local.apiDomain
+  api_mapping_key = var.api_mapping_key
 }

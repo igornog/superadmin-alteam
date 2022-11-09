@@ -6,9 +6,7 @@
   "targets": {
     "build": {
       "executor": "@nrwl/webpack:webpack",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
         "compiler": "babel",
@@ -18,10 +16,7 @@
         "main": "apps/front/src/main.tsx",
         "polyfills": "apps/front/src/polyfills.ts",
         "tsConfig": "apps/front/tsconfig.app.json",
-        "assets": [
-          "apps/front/src/favicon.ico",
-          "apps/front/src/app/assets"
-        ],
+        "assets": ["apps/front/src/favicon.ico", "apps/front/src/app/assets"],
         "styles": [],
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"
@@ -68,20 +63,14 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "apps/front/**/*.{ts,tsx,js,jsx}"
-        ]
+        "lintFilePatterns": ["apps/front/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/apps/front"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/apps/front"],
       "options": {
         "jestConfig": "apps/front/jest.config.ts",
         "passWithNoTests": true
@@ -104,9 +93,7 @@
     },
     "build-storybook": {
       "executor": "@nrwl/storybook:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "uiFramework": "@storybook/react",
         "outputPath": "dist/storybook/front",
@@ -127,7 +114,8 @@
           "params": "forward",
           "target": "build",
           "projects": "self"
-        }],
+        }
+      ],
       "options": {
         "cwd": "apps/front/infrastructure",
         "command": "../../../infrastructure/scripts/terraformStageWrapper.sh apply front"
