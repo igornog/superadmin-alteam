@@ -52,35 +52,12 @@ export class SideDrawer {
   }
 }
 
-export enum ModalVariant {
-  Skills = 'Skills',
-  GeneralInformations = 'General Informations',
-  About = 'About',
-  Attachments = 'Attachments',
-  DeclineTalent = 'DeclineTalent',
-  Link = 'Link',
-  AddNote = 'AddNote',
-  EditNote = 'EditNote',
-  Shortlist = 'Shortlist',
-  AddFolder = 'AddFolder',
-}
-
 export enum ModalSize {
   ExtraSmall = 'xs',
   Small = 'sm',
   Medium = 'md',
   Large = 'lg',
   ExtraLarge = 'xl',
-}
-
-export class Modal {
-  content: React.ReactNode;
-  size: ModalSize;
-
-  constructor(data: any) {
-    this.content = data.content;
-    this.size = data.size;
-  }
 }
 
 export interface HandlesettingsProps {

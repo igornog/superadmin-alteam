@@ -132,9 +132,10 @@ const StyledButton = styled(Button)<StyledButtonProps>`
               margin: 0;
             }
           `
-        : css`
+        : css<{ $variant: AtButtonVariant }>`
+            padding: ${({ $variant }) =>
+              $variant === AtButtonVariant.Text ? '10px 0' : '10px 20px'};
             height: 40px;
-            padding: 10px 20px;
           `}
 
     ${({ $variant }) =>
@@ -239,18 +240,6 @@ const StyledButton = styled(Button)<StyledButtonProps>`
   }
 `;
 
-interface AtButtonProps {
-  kind: AtButtonKind;
-  variant: AtButtonVariant;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  name?: string;
-  disabled?: boolean;
-  startIcon?: React.ReactNode;
-  endIcon?: React.ReactNode;
-  fontSize?: string;
-  iconSize?: number;
-}
-
 const AtButton: React.FunctionComponent<AtButtonProps> = (
   props: AtButtonProps
 ) => {
@@ -274,5 +263,17 @@ const AtButton: React.FunctionComponent<AtButtonProps> = (
     </StyledButton>
   );
 };
+
+interface AtButtonProps {
+  kind: AtButtonKind;
+  variant: AtButtonVariant;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  name?: string;
+  disabled?: boolean;
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
+  fontSize?: string;
+  iconSize?: number;
+}
 
 export default AtButton;

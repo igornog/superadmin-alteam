@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { handleInitPage } from '../actions/app.action';
 import { handleSelectTalent, handleTalents } from '../actions/talents.action';
 import { StatusType } from '../types/status.type';
 import { TalentsState } from '../types/talents.type';
@@ -30,6 +31,10 @@ const { reducer } = createSlice({
 
       .addCase(handleSelectTalent.fulfilled, (state, { payload }) => {
         state.selectedTalent = payload;
+      })
+
+      .addCase(handleInitPage.fulfilled, (state) => {
+        state.selectedTalent = null;
       });
   },
 });

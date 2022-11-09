@@ -1,11 +1,7 @@
 import { Box } from '@mui/material';
 import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react';
 import React from 'react';
-import { useAppDispatch } from '../../../utils/hooks/reduxHook';
-import {
-  ModalSize,
-  ModalVariant,
-} from '../../../utils/redux/types/settings.type';
+import { ModalSize } from '../../../utils/redux/types/settings.type';
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,

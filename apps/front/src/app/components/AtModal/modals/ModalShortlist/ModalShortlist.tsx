@@ -91,7 +91,7 @@ const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
           step={step}
         />
 
-        <Box display={'flex'} justifyContent={'flex-end'}>
+        <Box display={'flex'} justifyContent={'flex-end'} gap={'20px'}>
           <AtButton
             onClick={step === 0 ? handleClose : () => setStep(step - 1)}
             kind={AtButtonKind.Danger}
@@ -100,22 +100,20 @@ const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
             endIcon={<CloseSquare size={16} />}
           />
 
-          <Box display={'flex'} gap={'20px'}>
-            <AtButton
-              onClick={() => (step === 2 ? moveTalent() : setStep(step + 1))}
-              kind={AtButtonKind.Default}
-              variant={AtButtonVariant.Outlined}
-              name={step === 2 ? 'Skip Step and Move' : 'Skip Step'}
-              endIcon={<CloseSquare size={16} />}
-            />
-            <AtButton
-              onClick={() => (step === 2 ? moveTalent() : setStep(step + 1))}
-              kind={AtButtonKind.Success}
-              variant={AtButtonVariant.Contained}
-              name={step === 2 ? 'Send Message and Move' : 'Next Step'}
-              endIcon={<ArrowRight size={16} />}
-            />
-          </Box>
+          <AtButton
+            onClick={() => (step === 2 ? moveTalent() : setStep(step + 1))}
+            kind={AtButtonKind.Default}
+            variant={AtButtonVariant.Outlined}
+            name={step === 2 ? 'Skip Step and Move' : 'Skip Step'}
+            endIcon={<CloseSquare size={16} />}
+          />
+          <AtButton
+            onClick={() => (step === 2 ? moveTalent() : setStep(step + 1))}
+            kind={AtButtonKind.Success}
+            variant={AtButtonVariant.Contained}
+            name={step === 2 ? 'Send Message and Move' : 'Next Step'}
+            endIcon={<ArrowRight size={16} />}
+          />
         </Box>
       </Box>
     </AtModal>

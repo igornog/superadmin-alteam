@@ -1,13 +1,23 @@
 import { Backdrop, Box, Collapse, Grid, useMediaQuery } from '@mui/material';
-import { AddCircle, Candle, Import, SearchNormal1 } from 'iconsax-react';
-import React from 'react';
+import {
+  AddCircle,
+  ArrowLeft2,
+  Candle,
+  Import,
+  SearchNormal1,
+  Share,
+} from 'iconsax-react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { grey2 } from '../../utils/colors';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
 import { handleCollapsePanel } from '../../utils/redux/actions/app.action';
+import { handleSelectFolder } from '../../utils/redux/actions/tree.action';
 import { getActiveTab } from '../../utils/redux/selectors/settings.selector';
+import { getActiveFolder } from '../../utils/redux/selectors/tree.selector';
 import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton';
 import AtDropdown from '../AtDropdown/AtDropdown';
+import ModalAddFolder from '../AtModal/modals/ModalAddFolder';
 import AtNavbar from '../AtNavbar/AtNavbar';
 import AtNavPage from '../AtNavPage/AtNavPage';
 import AtRightClick from '../AtRightClick/AtRightClick';
@@ -29,11 +39,18 @@ const StyledSidePanel = styled(Collapse)`
 const AtLayout: React.FunctionComponent<AtLayoutProps> = (
   props: AtLayoutProps
 ) => {
-  const isSmallScreen = useMediaQuery('(max-width:1079px)');
+  const [openCreateFolder, setOpenCreateFolder] = useState(false);
 
+  const isSmallScreen = useMediaQuery('(max-width:1079px)');
   const activeTab = useAppSelector((state) => getActiveTab(state));
   const app = useAppSelector((state) => state.app);
+  const activeFolder = useAppSelector((state) => getActiveFolder(state));
+
   const dispatch = useAppDispatch();
+
+  const handlePreviousFolder = () => {
+    dispatch(handleSelectFolder(activeFolder?.idParent));
+  };
 
   return !isSmallScreen ? (
     activeTab && (
@@ -54,9 +71,21 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                   justifyContent={'space-between'}
                   marginTop={'30px'}
                 >
-                  <AtTypography variant={'h3'}>{activeTab.title}</AtTypography>
+                  <AtTypography variant={'h3'}>
+                    {!activeFolder.isParent() && (
+                      <AtButton
+                        kind={AtButtonKind.Default}
+                        variant={AtButtonVariant.Contained}
+                        startIcon={<ArrowLeft2 />}
+                        onClick={handlePreviousFolder}
+                      />
+                    )}
+                    {activeFolder.isParent()
+                      ? activeTab.title
+                      : activeFolder.name}
+                  </AtTypography>
 
-                  <Box display={'flex'} gap={'10px'}>
+                  <Box display={'flex'} gap={'30px'}>
                     {activeTab.settings.downloadCSV && (
                       <AtButton
                         kind={AtButtonKind.Default}
@@ -67,12 +96,22 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                       />
                     )}
 
+                    {!activeFolder.isParent() && (
+                      <AtButton
+                        kind={AtButtonKind.Default}
+                        variant={AtButtonVariant.Contained}
+                        startIcon={<Share />}
+                        name={'Share Folder'}
+                      />
+                    )}
+
                     {activeTab.settings.createFolder && (
                       <AtButton
                         kind={AtButtonKind.Success}
                         variant={AtButtonVariant.Contained}
                         startIcon={<AddCircle />}
-                        name={'Create folder'}
+                        onClick={() => setOpenCreateFolder(true)}
+                        name={'Create Folder'}
                       />
                     )}
 
@@ -154,6 +193,12 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
             </>
           )}
         </Grid>
+
+        <ModalAddFolder
+          folder={activeFolder}
+          isOpen={openCreateFolder}
+          onClose={() => setOpenCreateFolder(false)}
+        />
       </>
     )
   ) : (

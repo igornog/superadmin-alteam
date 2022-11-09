@@ -69,7 +69,7 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
           onValueChange={setFolderName}
         />
 
-        <Box display={'flex'} justifyContent={'flex-end'}>
+        <Box display={'flex'} justifyContent={'flex-end'} gap={'20px'}>
           <AtButton
             onClick={handleClose}
             kind={AtButtonKind.Danger}

@@ -3,7 +3,6 @@ import {
   DisplayMode,
   Filter,
   HandlesettingsProps,
-  ModalVariant,
   Page,
   Settings,
   SideDrawerVariant,

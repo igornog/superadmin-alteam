@@ -30,7 +30,7 @@ const AtFolder: React.FunctionComponent<AtFolderProps> = (
   props: AtFolderProps
 ) => {
   return (
-    <StyledFolder>
+    <StyledFolder onClick={props.onClick}>
       {props.loading ? (
         <Box
           display={'flex'}
@@ -42,10 +42,15 @@ const AtFolder: React.FunctionComponent<AtFolderProps> = (
           <Skeleton animation="wave" width={'100%'} />
         </Box>
       ) : (
-        <>
+        <Box
+          display={'flex'}
+          flexDirection={'column'}
+          alignItems={'center'}
+          gap={'20px'}
+        >
           {props.logo ?? <Folder size={40} />}
           <AtTypography variant={'h5'}>{props.name}</AtTypography>
-        </>
+        </Box>
       )}
     </StyledFolder>
   );
@@ -55,6 +60,7 @@ interface AtFolderProps {
   logo?: string;
   name?: string;
   loading?: boolean;
+  onClick?: (e: React.MouseEvent) => void;
 }
 
 export default AtFolder;

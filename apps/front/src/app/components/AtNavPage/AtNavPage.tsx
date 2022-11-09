@@ -6,6 +6,7 @@ import { black, grey2, white } from '../../utils/colors';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
 import {
   handleCollapsePanel,
+  handleInitPage,
   handleSidePanel,
 } from '../../utils/redux/actions/app.action';
 import { handleActiveTab } from '../../utils/redux/actions/settings.action';
@@ -51,6 +52,7 @@ const AtNavPage: React.FunctionComponent<AtNavPageProps> = (
   const navPageRef = useRef<any>(null);
 
   const handleClick = (page: Page) => {
+    dispatch(handleInitPage());
     dispatch(handleActiveTab(page));
   };
 

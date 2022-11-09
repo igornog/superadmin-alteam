@@ -12,7 +12,7 @@ import styled, { css } from 'styled-components';
 import { black, blue, green, grey2 } from '../../utils/colors';
 import { convertHexToRGBA } from '../../utils/helpers';
 import { useAppDispatch } from '../../utils/hooks/reduxHook';
-import { TreeInterface } from '../../utils/redux/types/tree.type';
+import { Tree, TreeInterface } from '../../utils/redux/types/tree.type';
 import AtCheckbox from '../AtCheckbox/AtCheckbox';
 import AtTypography from '../AtTypography/AtTypography';
 
@@ -125,10 +125,10 @@ const AtTreeItem: React.FunctionComponent<AtTreeItemProps> = (
   props: AtTreeItemProps
 ) => {
   const selectedSet = useMemo(() => new Set(props.selected), [props.selected]);
-  const dispatch = useAppDispatch();
+  const node = new Tree(props.nodes);
 
   const parentMap = useMemo(() => {
-    return goThroughAllNodes(props.nodes);
+    return goThroughAllNodes(node);
   }, []);
 
   function goThroughAllNodes(
@@ -175,7 +175,7 @@ const AtTreeItem: React.FunctionComponent<AtTreeItemProps> = (
   };
 
   function getOnChange(checked: boolean, nodes: TreeInterface) {
-    const { childNodesToToggle, path } = getChildById(props.nodes, nodes.id);
+    const { childNodesToToggle, path } = getChildById(node, nodes.id);
 
     let array = checked
       ? [...props.selected, ...childNodesToToggle]
@@ -191,25 +191,22 @@ const AtTreeItem: React.FunctionComponent<AtTreeItemProps> = (
   const [showAddFolder, setShowAddFolder] = useState(false);
   const checkboxRef = useRef<any>(null);
 
-  const isParent = props.nodes.id === 'Parent';
-
   const allSelectedChildren =
     parentMap &&
-    parentMap[props.nodes.id]?.every((childNodeId: string) =>
+    parentMap[node.id]?.every((childNodeId: string) =>
       selectedSet.has(childNodeId)
     );
-  const checked =
-    selectedSet.has(props.nodes.id) || allSelectedChildren || false;
+  const checked = selectedSet.has(node.id) || allSelectedChildren || false;
 
   const indeterminate =
     (parentMap &&
-      parentMap[props.nodes.id]?.some((childNodeId: string) =>
+      parentMap[node.id]?.some((childNodeId: string) =>
         selectedSet.has(childNodeId)
       )) ||
     false;
 
-  if (allSelectedChildren && !selectedSet.has(props.nodes.id)) {
-    props.setSelected([...props.selected, props.nodes.id]);
+  if (allSelectedChildren && !selectedSet.has(node.id)) {
+    props.setSelected([...props.selected, node.id]);
   }
 
   const handleClickRow = (e: React.MouseEvent, nodes: TreeInterface) => {
@@ -225,48 +222,52 @@ const AtTreeItem: React.FunctionComponent<AtTreeItemProps> = (
 
   return (
     <StyledTreeItem
-      key={props.nodes.id}
-      nodeId={props.nodes.id}
-      isParent={isParent}
+      key={node.id}
+      nodeId={node.id}
+      isParent={node.isParent()}
       label={
         <Box display={'flex'} flexDirection={'column'}>
           <Box
             display={'flex'}
             justifyContent={'space-between'}
             width={'100%'}
-            onMouseEnter={() => !isParent && setShowAddFolder(true)}
-            onMouseLeave={() => !isParent && setShowAddFolder(false)}
+            onMouseEnter={() => !node.isParent() && setShowAddFolder(true)}
+            onMouseLeave={() => !node.isParent() && setShowAddFolder(false)}
             onClick={(e: React.MouseEvent) =>
-              isParent
-                ? handleCreateFolder(e, props.nodes)
-                : handleClickRow(e, props.nodes)
+              node.isParent()
+                ? handleCreateFolder(e, node)
+                : handleClickRow(e, node)
             }
           >
             <Box display={'flex'} alignItems={'center'} gap={'15px'}>
               <AtTypography>
-                {!isParent ? <Folder size={20} /> : <FolderAdd size={20} />}{' '}
-                {props.nodes.name}
+                {!node.isParent() ? (
+                  <Folder size={20} />
+                ) : (
+                  <FolderAdd size={20} />
+                )}{' '}
+                {node.name}
               </AtTypography>
               {showAddFolder && (
                 <Tooltip
-                  title={`Create folder in ${props.nodes.name}`}
+                  title={`Create folder in ${node.name}`}
                   arrow={true}
                   placement={'right'}
                 >
                   <StyledAddFolder
                     size={16}
-                    onClick={(e) => handleCreateFolder(e, props.nodes)}
+                    onClick={(e) => handleCreateFolder(e, node)}
                   />
                 </Tooltip>
               )}
             </Box>
 
-            {!isParent && (
+            {!node.isParent() && (
               <AtCheckbox
                 checked={checked}
                 indeterminate={!checked && indeterminate}
                 onChange={(event) =>
-                  getOnChange(event.currentTarget.checked, props.nodes)
+                  getOnChange(event.currentTarget.checked, node)
                 }
                 checkboxRef={checkboxRef}
               />
@@ -275,8 +276,8 @@ const AtTreeItem: React.FunctionComponent<AtTreeItemProps> = (
         </Box>
       }
     >
-      {Array.isArray(props.nodes.children)
-        ? props.nodes.children.map((node: TreeInterface, index: number) => (
+      {Array.isArray(node.children)
+        ? node.children.map((node: TreeInterface, index: number) => (
             <AtTreeItem
               nodes={node}
               setOpenCreateFolder={props.setOpenCreateFolder}
