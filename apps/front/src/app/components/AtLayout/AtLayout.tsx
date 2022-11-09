@@ -1,20 +1,11 @@
 import { Backdrop, Box, Collapse, Grid, useMediaQuery } from '@mui/material';
-import {
-  AddCircle,
-  Candle,
-  Element3,
-  Import,
-  RowVertical,
-  SearchNormal1,
-} from 'iconsax-react';
+import { AddCircle, Candle, Import, SearchNormal1 } from 'iconsax-react';
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { black, grey, grey2, white } from '../../utils/colors';
+import styled from 'styled-components';
+import { grey2 } from '../../utils/colors';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
 import { handleCollapsePanel } from '../../utils/redux/actions/app.action';
-import { handleSwitchDisplayMode } from '../../utils/redux/actions/settings.action';
 import { getActiveTab } from '../../utils/redux/selectors/settings.selector';
-import { DisplayMode } from '../../utils/redux/types/settings.type';
 import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton';
 import AtDropdown from '../AtDropdown/AtDropdown';
 import AtNavbar from '../AtNavbar/AtNavbar';
@@ -23,52 +14,11 @@ import AtRightClick from '../AtRightClick/AtRightClick';
 import CreateTalentMenu from '../AtRightClick/ContextMenus/CreateTalentMenu';
 import AtTextField, { AtTextFieldType } from '../AtTextField/AtTextField';
 import AtTypography from '../AtTypography/AtTypography';
+import AtSwitchDisplayMode from './AtSwitchDisplayMode';
 
 const StyledContent = styled(Grid)<{ $sidePanelSize?: string }>`
   background-color: #f7f8fe;
   margin: 20px 20px 30px 165px;
-`;
-
-const StyledIconsBox = styled.div`
-  background-color: #f0f1f8;
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  width: fit-content;
-  padding: 5px;
-  border-radius: 5px;
-`;
-
-const sharedIconStyle = css<{ active: boolean }>`
-  transition: 0.3s;
-  color: ${grey};
-  position: relative;
-
-  ${({ active }) =>
-    active
-      ? css`
-          background-color: ${grey};
-          padding: 6px;
-          color: ${white};
-          border-radius: 5px;
-        `
-      : css`
-          padding: 5px;
-
-          &:hover {
-            color: ${black};
-            cursor: pointer;
-            transition: 0.3s;
-          }
-        `}
-`;
-
-const StyledElement3 = styled(Element3)`
-  ${sharedIconStyle}
-`;
-
-const StyledRowVertical = styled(RowVertical)`
-  ${sharedIconStyle}
 `;
 
 const StyledSidePanel = styled(Collapse)`
@@ -82,13 +32,8 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
   const isSmallScreen = useMediaQuery('(max-width:1079px)');
 
   const activeTab = useAppSelector((state) => getActiveTab(state));
-  const settings = useAppSelector((state) => state.settings);
   const app = useAppSelector((state) => state.app);
   const dispatch = useAppDispatch();
-
-  const handleSwitchMode = (mode: DisplayMode) => {
-    dispatch(handleSwitchDisplayMode(mode));
-  };
 
   return !isSmallScreen ? (
     activeTab && (
@@ -160,23 +105,8 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                   </Grid>
 
                   <Box display={'flex'} gap={'30px'} alignItems={'center'}>
-                    {activeTab.settings.displayMode && (
-                      <Box display={'flex'}>
-                        <StyledIconsBox>
-                          <StyledElement3
-                            size={20}
-                            active={settings.displayMode === DisplayMode.Grid}
-                            onClick={() => handleSwitchMode(DisplayMode.Grid)}
-                          />
+                    {activeTab.settings.displayMode && <AtSwitchDisplayMode />}
 
-                          <StyledRowVertical
-                            size={20}
-                            active={settings.displayMode === DisplayMode.List}
-                            onClick={() => handleSwitchMode(DisplayMode.List)}
-                          />
-                        </StyledIconsBox>
-                      </Box>
-                    )}
                     {activeTab.settings.sortBy && (
                       <Box
                         display={'flex'}

@@ -1,26 +1,26 @@
-import AtTableBody from '../../../../components/AtTable/AtTableBody';
-import AtTableCell from '../../../../components/AtTable/AtTableCell';
-import AtTableHead from '../../../../components/AtTable/AtTableHead';
-import { AtTableRow } from '../../../../components/AtTable/AtTableRow';
-import AtTypography from '../../../../components/AtTypography/AtTypography';
-import { grey, grey3 } from '../../../../utils/colors';
-import React, { useEffect, useRef, useState } from 'react';
-import AtTable from '../../../../components/AtTable/AtTable';
-import { Skill, Talent } from '../../../../utils/redux/types/talents.type';
 import { Box, Tooltip } from '@mui/material';
-import AtTag from '../../../../components/AtTag/AtTag';
-import AtGroupTag from '../../../../components/AtGroupTag/AtGroupTag';
+import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import useWindowSize from '../../../../utils/hooks/useWindowSize';
-import AtRightClick from '../../../../components/AtRightClick/AtRightClick';
-import InboundTalentMenu from '../../../../components/AtRightClick/ContextMenus/InboundTalentMenu';
+import { grey, grey3 } from '../../../utils/colors';
+import useWindowSize from '../../../utils/hooks/useWindowSize';
+import { Talent, Skill } from '../../../utils/redux/types/talents.type';
+import AtGroupTag from '../../AtGroupTag/AtGroupTag';
+import AtRightClick from '../../AtRightClick/AtRightClick';
+import InboundTalentMenu from '../../AtRightClick/ContextMenus/InboundTalentMenu';
+import AtTable from '../../AtTable/AtTable';
+import AtTableBody from '../../AtTable/AtTableBody';
+import AtTableCell from '../../AtTable/AtTableCell';
+import AtTableHead from '../../AtTable/AtTableHead';
+import { AtTableRow } from '../../AtTable/AtTableRow';
+import AtTag from '../../AtTag/AtTag';
+import AtTypography from '../../AtTypography/AtTypography';
 
 const StyledTag = styled(AtTag)`
   max-width: 150px;
 `;
 
-const InboundTalentsTable: React.FunctionComponent<InboundTalentsTableProps> = (
-  props: InboundTalentsTableProps
+const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
+  props: TalentsTableProps
 ) => {
   const [position, setPosition] = useState<number | null>(null);
   const skillsRef = useRef<any>(null);
@@ -54,7 +54,7 @@ const InboundTalentsTable: React.FunctionComponent<InboundTalentsTableProps> = (
             <AtTableRow
               key={talent.id}
               hover={true}
-              onClick={() => props.onClick(talent.id)}
+              onClick={() => props.openTalent(talent.id)}
               setPosition={setPosition}
             >
               <AtTableCell>
@@ -146,10 +146,11 @@ const InboundTalentsTable: React.FunctionComponent<InboundTalentsTableProps> = (
   );
 };
 
-interface InboundTalentsTableProps {
+interface TalentsTableProps {
   talents: Talent[];
-  onClick: (id: number) => void;
+  openTalent: (id: number) => void;
   openShortlist: () => void;
+  tableColumns?: string[];
 }
 
-export default InboundTalentsTable;
+export default TalentsTable;

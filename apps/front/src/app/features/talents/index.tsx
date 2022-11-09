@@ -1,8 +1,12 @@
+import { Tabs } from '../../utils/types';
+import InboundTalentsView from './components/InboundTalents/InboundTalentsView';
+import ShortlistLatentsView from './components/ShortlistTalents/ShortlistTatentsView';
+
 export { default } from './components/TalentsView';
 
 export const talentsTabs = [
   {
-    title: 'All Talents',
+    title: Tabs.AllTalent,
     badge: 150,
     active: false,
     settings: {
@@ -13,9 +17,9 @@ export const talentsTabs = [
     },
   },
   {
-    title: 'Inbound Talents',
+    title: Tabs.InboundTalent,
     badge: 5,
-    active: true,
+    active: false,
     settings: {
       search: true,
       downloadCSV: true,
@@ -25,16 +29,16 @@ export const talentsTabs = [
     },
   },
   {
-    title: 'Shortlist Talents',
+    title: Tabs.ShortlistTalent,
     badge: 40,
-    active: false,
+    active: true,
     settings: {
       downloadCSV: true,
       createFolder: true,
     },
   },
   {
-    title: 'Accepted Talents',
+    title: Tabs.AcceptedTalent,
     badge: 20,
     active: false,
     settings: {
@@ -43,7 +47,7 @@ export const talentsTabs = [
     },
   },
   {
-    title: 'Declined Talents',
+    title: Tabs.DelinedTalent,
     active: false,
     settings: {
       search: true,
@@ -52,11 +56,16 @@ export const talentsTabs = [
     },
   },
   {
-    title: 'Applicants',
+    title: Tabs.Applicants,
     active: false,
     settings: {},
   },
 ];
+
+export const tabsContent = {
+  [Tabs.InboundTalent]: <InboundTalentsView />,
+  [Tabs.ShortlistTalent]: <ShortlistLatentsView />,
+};
 
 export const talentsFilters = [
   {
