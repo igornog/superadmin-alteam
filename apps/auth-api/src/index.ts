@@ -6,7 +6,7 @@ const router = express.Router().use(express.json())
   .post('/auth/login', (req, res) => {
     const {email, password} = req.body
     if (email === 'admin@alteam.io' && password === 'bestappoftheworld') {
-      res.sendStatus(200);
+      res.send({user: {email, name: 'Admin'}});
     } else {
       res.sendStatus(403)
     }
