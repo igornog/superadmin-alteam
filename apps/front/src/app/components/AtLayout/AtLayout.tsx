@@ -86,13 +86,21 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                     )}
 
                     {activeTab.settings.createFolder && (
-                      <AtButton
-                        kind={AtButtonKind.Success}
-                        variant={AtButtonVariant.Contained}
-                        startIcon={<AddCircle />}
-                        onClick={() => setOpenCreateFolder(true)}
-                        name={'Create Folder'}
-                      />
+                      <>
+                        <AtButton
+                          kind={AtButtonKind.Success}
+                          variant={AtButtonVariant.Contained}
+                          startIcon={<AddCircle />}
+                          onClick={() => setOpenCreateFolder(true)}
+                          name={'Create Folder'}
+                        />
+
+                        <ModalAddFolder
+                          folder={activeFolder}
+                          isOpen={openCreateFolder}
+                          onClose={() => setOpenCreateFolder(false)}
+                        />
+                      </>
                     )}
 
                     {activeTab.settings.inviteTalent && (
@@ -173,12 +181,6 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
             </>
           )}
         </Grid>
-
-        <ModalAddFolder
-          folder={activeFolder}
-          isOpen={openCreateFolder}
-          onClose={() => setOpenCreateFolder(false)}
-        />
       </>
     )
   ) : (

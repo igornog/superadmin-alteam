@@ -90,7 +90,7 @@ const AtTopTitle: React.FunctionComponent<AtTopTitle> = (props: AtTopTitle) => {
                 onClick={() => setOpenDropdown(!openDropdown)}
               />
 
-              <Box position={'absolute'} top={"110%"} height={'100vh'}>
+              <Box position={'absolute'} top={'110%'} height={openDropdown ? '100vh' : 0}>
                 <StyledContentPopover
                   in={openDropdown}
                   orientation={'vertical'}

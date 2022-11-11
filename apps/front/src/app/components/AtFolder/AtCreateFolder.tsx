@@ -2,7 +2,7 @@ import { FolderAdd } from 'iconsax-react';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { grey5, grey3, black } from '../../utils/colors';
-import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
+import { useAppSelector } from '../../utils/hooks/reduxHook';
 import { getActiveFolder } from '../../utils/redux/selectors/tree.selector';
 import ModalAddFolder from '../AtModal/modals/ModalAddFolder';
 import AtTypography from '../AtTypography/AtTypography';
