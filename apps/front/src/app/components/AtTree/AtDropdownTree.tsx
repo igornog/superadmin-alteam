@@ -7,10 +7,11 @@ import {
 } from '../../utils/redux/selectors/tree.selector';
 import { TreeInterface } from '../../utils/redux/types/tree.type';
 import AtTypography from '../AtTypography/AtTypography';
-import { useAppSelector } from '../../utils/hooks/reduxHook';
+import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
 import { black, green, grey2, grey5 } from '../../utils/colors';
 import styled, { css } from 'styled-components';
 import { getActiveTab } from '../../utils/redux/selectors/settings.selector';
+import { handleSelectFolder } from '../../utils/redux/actions/tree.action';
 
 const StyledItem = styled(Box)<{
   level: number;
@@ -57,13 +58,14 @@ const StyledParent = styled(Box)<{ level: number; heightBefore: string }>`
   }
 `;
 
-const AtTree: React.FunctionComponent<AtTreeProps> = ({
+const AtTreeItem: React.FunctionComponent<AtTreeProps> = ({
   level = 1,
   menu: menuProp,
 }) => {
   const [menu, setMenu] = useState<TreeInterface[]>(menuProp || []);
   const [paddingLeft, setPaddingLeft] = useState<number>();
   const activeFolder = useAppSelector((state) => getActiveFolder(state));
+  const dispatch = useAppDispatch();
 
   const open = (id: string) => () => {
     setMenu((prevMenu) =>
@@ -89,20 +91,25 @@ const AtTree: React.FunctionComponent<AtTreeProps> = ({
           <StyledItem
             level={level}
             paddingLeft={paddingLeft + 'px'}
-            onClick={open(item.id)}
             display={'flex'}
             alignItems={'center'}
             justifyContent={'space-between'}
             isActive={activeFolder.id === item.id}
             paddingTop={'10px'}
           >
-            <AtTypography>{item.name}</AtTypography>
+            <Box onClick={() => dispatch(handleSelectFolder(item.id))}>
+              <AtTypography>{item.name}</AtTypography>
+            </Box>
             {item.children &&
-              (item.open ? <ArrowUp2 size={10} /> : <ArrowDown2 size={10} />)}
+              (item.open ? (
+                <ArrowUp2 size={10} onClick={open(item.id)} />
+              ) : (
+                <ArrowDown2 size={10} onClick={open(item.id)} />
+              ))}
           </StyledItem>
           {item.children && (
             <Collapse in={item.open} timeout="auto">
-              <AtTree menu={item.children} level={level + 1} />
+              <AtTreeItem menu={item.children} level={level + 1} />
             </Collapse>
           )}
         </React.Fragment>
@@ -125,7 +132,7 @@ const AtDropdownTree: React.FunctionComponent<AtTreeProps> = ({
       paddingLeft={'20px'}
     >
       <AtTypography color={grey2}>{activeTab.title}</AtTypography>
-      <AtTree menu={menuProp} level={level} />
+      <AtTreeItem menu={menuProp} level={level} />
     </StyledParent>
   );
 };

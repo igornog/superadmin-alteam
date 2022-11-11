@@ -92,6 +92,26 @@ export const handleLoadTree = createAsyncThunk('tree/loadTree', async () => {
                     idParent: '11',
                     name: 'Child - 13',
                   },
+                  {
+                    id: '231',
+                    idParent: '11',
+                    name: 'Child - 14',
+                  },
+                  {
+                    id: '123312',
+                    idParent: '11',
+                    name: 'Child - 15',
+                  },
+                  {
+                    id: '4321',
+                    idParent: '11',
+                    name: 'Child - 16',
+                  },
+                  {
+                    id: '12123',
+                    idParent: '11',
+                    name: 'Child - 17',
+                  },
                 ],
               },
             ],

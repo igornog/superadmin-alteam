@@ -17,14 +17,15 @@ export const StyledContentPopover = styled(Collapse)<{
   left?: number;
   top?: number;
 }>`
-  position: absolute;
+  position: sticky;
   min-width: 215px;
   background-color: ${white};
   box-shadow: ${boxShadow};
   border-radius: 5px;
-  margin-top: 5px;
   z-index: 999;
-  top: 100%;
+  top: 20px;
+  max-height: 650px;
+  overflow: auto;
 `;
 
 const StyledArrow = styled(ArrowDown2)<{ opened?: boolean }>`
@@ -89,9 +90,14 @@ const AtTopTitle: React.FunctionComponent<AtTopTitle> = (props: AtTopTitle) => {
                 onClick={() => setOpenDropdown(!openDropdown)}
               />
 
-              <StyledContentPopover in={openDropdown} orientation={'vertical'}>
-                <AtDropdownTree menu={tree.children} />
-              </StyledContentPopover>
+              <Box position={'absolute'} top={"110%"} height={'100vh'}>
+                <StyledContentPopover
+                  in={openDropdown}
+                  orientation={'vertical'}
+                >
+                  <AtDropdownTree menu={tree.children} />
+                </StyledContentPopover>
+              </Box>
             </>
           )}
         </Box>
