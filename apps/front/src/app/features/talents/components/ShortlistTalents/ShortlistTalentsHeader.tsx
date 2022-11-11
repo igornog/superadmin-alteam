@@ -6,8 +6,12 @@ import AtSwitchDisplayMode from '../../../../components/AtLayout/AtSwitchDisplay
 import AtTextField from '../../../../components/AtTextField/AtTextField';
 import AtTypography from '../../../../components/AtTypography/AtTypography';
 import { grey2 } from '../../../../utils/colors';
+import { useAppSelector } from '../../../../utils/hooks/reduxHook';
+import { getActiveFolder } from '../../../../utils/redux/selectors/tree.selector';
 
 const ShortlistTalentsHeader: React.FunctionComponent = () => {
+  const activeFolder = useAppSelector((state) => getActiveFolder(state));
+
   return (
     <Box
       display={'flex'}
@@ -21,7 +25,9 @@ const ShortlistTalentsHeader: React.FunctionComponent = () => {
       <Box display={'flex'} gap={'30px'} alignItems={'center'} flex={2}>
         <AtTextField
           startIcon={<SearchNormal1 />}
-          placeholder={'Search in Shortlisted talent...'}
+          placeholder={`Search in ${
+            activeFolder.isParent() ? 'Shortlisted talents' : activeFolder.name
+          }...`}
           value={''}
         />
 

@@ -16,8 +16,8 @@ const ShortlistFolderListing: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
   const folder = useAppSelector((state) => getActiveFolder(state));
   const selectedFolder = folder ?? new Tree(tree.data);
+  const nbChildren = selectedFolder?.children?.length ?? false;
 
-  console.log(selectedFolder);
   const selectFolder = (idFolder: string) => {
     dispatch(handleSelectFolder(idFolder));
   };
@@ -25,13 +25,14 @@ const ShortlistFolderListing: React.FunctionComponent = () => {
   return (
     <Grid container={true} spacing={2.5}>
       {tree.status === StatusType.Succeeded ? (
-        selectedFolder.children && selectedFolder?.children?.length > 0 ? (
+        selectedFolder.hasChildren() ? (
           selectedFolder.children?.map((item: TreeInterface) => {
             return (
-              <Grid item={true} xs={3}>
+              <Grid item={true} xs={nbChildren > 4 ? 2.4 : 3}>
                 <AtFolder
                   name={item.name}
                   onClick={() => selectFolder(item.id)}
+                  minimize={nbChildren > 4}
                 />
               </Grid>
             );

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { grey5, grey3, black } from '../../utils/colors';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
 import { getActiveFolder } from '../../utils/redux/selectors/tree.selector';
-import { TreeInterface } from '../../utils/redux/types/tree.type';
 import ModalAddFolder from '../AtModal/modals/ModalAddFolder';
 import AtTypography from '../AtTypography/AtTypography';
 
@@ -12,7 +11,7 @@ const StyledFolder = styled.div`
   width: 100%;
   height: 200px;
   border-radius: 5px;
-  border: 2px dashed ${grey5};
+  border: 1px dashed ${grey5};
   display: flex;
   flex-direction: column;
   justify-content: center;

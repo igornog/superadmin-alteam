@@ -29,6 +29,7 @@ const AtTypography: React.FunctionComponent<AtTypographyProps> = (
       color={props.color}
       display={props.display}
       whiteSpace={props.whiteSpace ?? 'none'}
+      ref={props.textRef}
       {...props}
     >
       {props.children}
@@ -44,6 +45,7 @@ interface AtTypographyProps {
   color?: string;
   fontSize?: string;
   whiteSpace?: any;
+  textRef?: any;
 }
 
 export default AtTypography;

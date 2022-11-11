@@ -1,18 +1,10 @@
 import { Backdrop, Box, Collapse, Grid, useMediaQuery } from '@mui/material';
-import {
-  AddCircle,
-  ArrowLeft2,
-  Candle,
-  Import,
-  SearchNormal1,
-  Share,
-} from 'iconsax-react';
+import { AddCircle, Candle, Import, SearchNormal1, Share } from 'iconsax-react';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { grey2 } from '../../utils/colors';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
 import { handleCollapsePanel } from '../../utils/redux/actions/app.action';
-import { handleSelectFolder } from '../../utils/redux/actions/tree.action';
 import { getActiveTab } from '../../utils/redux/selectors/settings.selector';
 import { getActiveFolder } from '../../utils/redux/selectors/tree.selector';
 import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton';
@@ -25,6 +17,7 @@ import CreateTalentMenu from '../AtRightClick/ContextMenus/CreateTalentMenu';
 import AtTextField, { AtTextFieldType } from '../AtTextField/AtTextField';
 import AtTypography from '../AtTypography/AtTypography';
 import AtSwitchDisplayMode from './AtSwitchDisplayMode';
+import AtTopTitle from './AtTopTitle';
 
 const StyledContent = styled(Grid)<{ $sidePanelSize?: string }>`
   background-color: #f7f8fe;
@@ -44,13 +37,9 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
   const isSmallScreen = useMediaQuery('(max-width:1079px)');
   const activeTab = useAppSelector((state) => getActiveTab(state));
   const app = useAppSelector((state) => state.app);
-  const activeFolder = useAppSelector((state) => getActiveFolder(state));
 
   const dispatch = useAppDispatch();
-
-  const handlePreviousFolder = () => {
-    dispatch(handleSelectFolder(activeFolder?.idParent));
-  };
+  const activeFolder = useAppSelector((state) => getActiveFolder(state));
 
   return !isSmallScreen ? (
     activeTab && (
@@ -71,19 +60,10 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                   justifyContent={'space-between'}
                   marginTop={'30px'}
                 >
-                  <AtTypography variant={'h3'}>
-                    {!activeFolder.isParent() && (
-                      <AtButton
-                        kind={AtButtonKind.Default}
-                        variant={AtButtonVariant.Contained}
-                        startIcon={<ArrowLeft2 />}
-                        onClick={handlePreviousFolder}
-                      />
-                    )}
-                    {activeFolder.isParent()
-                      ? activeTab.title
-                      : activeFolder.name}
-                  </AtTypography>
+                  <AtTopTitle
+                    activeTab={activeTab}
+                    activeFolder={activeFolder}
+                  />
 
                   <Box display={'flex'} gap={'30px'}>
                     {activeTab.settings.downloadCSV && (

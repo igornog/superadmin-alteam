@@ -31,7 +31,9 @@ const AtLine: React.FunctionComponent<AtLineProps> = (props: AtLineProps) => {
       spacingTop={props.spacingTop}
       size={props.size}
       direction={props.direction}
-    />
+    >
+      &nbsp;
+    </StyledLine>
   );
 };
 

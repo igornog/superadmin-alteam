@@ -36,12 +36,12 @@ export const buttonKind = {
       outlined: grey2,
     },
     active: {
-      backgroundColor: white,
+      backgroundColor: green,
       color: black,
     },
     focus: {
-      backgroundColor: white,
-      color: black,
+      backgroundColor: black,
+      color: white,
     },
     disabled: {
       backgroundColor: grey4,
@@ -206,6 +206,11 @@ const StyledButton = styled(Button)<StyledButtonProps>`
           ? css<{ kind: AtButtonKind }>`
               background-color: transparent;
               color: ${({ kind }) => buttonKind[kind].focus.color};
+            `
+          : $variant === AtButtonVariant.Text
+          ? css<{ kind: AtButtonKind }>`
+              background-color: transparent;
+              color: ${({ kind }) => buttonKind[kind].focus.backgroundColor};
             `
           : css<{ kind: AtButtonKind }>`
               background-color: transparent;

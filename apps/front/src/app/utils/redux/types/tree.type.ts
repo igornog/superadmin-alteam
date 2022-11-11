@@ -10,6 +10,7 @@ export interface TreeState {
 export interface TreeInterface {
   id: string;
   name: string;
+  open?: boolean;
   children?: TreeInterface[];
 }
 
@@ -28,5 +29,9 @@ export class Tree {
 
   isParent(): boolean {
     return this.id === 'Parent';
+  }
+
+  hasChildren(): boolean | undefined {
+    return this.children && this.children.length > 0;
   }
 }
