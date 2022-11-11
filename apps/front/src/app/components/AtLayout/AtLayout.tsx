@@ -10,6 +10,7 @@ import { getActiveFolder } from '../../utils/redux/selectors/tree.selector';
 import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton';
 import AtDropdown from '../AtDropdown/AtDropdown';
 import ModalAddFolder from '../AtModal/modals/ModalAddFolder';
+import ModalShareFolder from '../AtModal/modals/ModalShareFolder';
 import AtNavbar from '../AtNavbar/AtNavbar';
 import AtNavPage from '../AtNavPage/AtNavPage';
 import AtRightClick from '../AtRightClick/AtRightClick';
@@ -33,6 +34,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
   props: AtLayoutProps
 ) => {
   const [openCreateFolder, setOpenCreateFolder] = useState(false);
+  const [openShareFolder, setOpenShareFolder] = useState(false);
 
   const isSmallScreen = useMediaQuery('(max-width:1079px)');
   const activeTab = useAppSelector((state) => getActiveTab(state));
@@ -77,12 +79,21 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                     )}
 
                     {!activeFolder.isParent() && (
-                      <AtButton
-                        kind={AtButtonKind.Default}
-                        variant={AtButtonVariant.Contained}
-                        startIcon={<Share />}
-                        name={'Share Folder'}
-                      />
+                      <>
+                        <AtButton
+                          kind={AtButtonKind.Default}
+                          variant={AtButtonVariant.Contained}
+                          startIcon={<Share />}
+                          onClick={() => setOpenShareFolder(true)}
+                          name={'Share Folder'}
+                        />
+
+                        <ModalShareFolder
+                          folder={activeFolder}
+                          isOpen={openShareFolder}
+                          onClose={() => setOpenShareFolder(false)}
+                        />
+                      </>
                     )}
 
                     {activeTab.settings.createFolder && (
@@ -145,13 +156,12 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                           <Candle /> Sort by:
                         </AtTypography>
                         <AtDropdown
-                          value={''}
                           listItems={[
-                            { id: 0, label: 'None' },
-                            { id: 1, label: 'None' },
+                            { id: 0, value: 'None', label: 'None' },
+                            { id: 1, value: 'None', label: 'None' },
                           ]}
-                          size={'small'}
-                          bgColor={'black'}
+                          kind={AtButtonKind.Default}
+                          variant={AtButtonVariant.Contained}
                         />
                       </Box>
                     )}

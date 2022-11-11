@@ -36,7 +36,6 @@ const StyledArrow = styled(ArrowDown2)<{ opened?: boolean }>`
 const AtTopTitle: React.FunctionComponent<AtTopTitle> = (props: AtTopTitle) => {
   const dispatch = useAppDispatch();
   const [openDropdown, setOpenDropdown] = useState(false);
-  const tree = useAppSelector((state) => new Tree(state.tree.data));
 
   const handlePreviousFolder = () => {
     dispatch(handleSelectFolder(props.activeFolder?.idParent));
@@ -90,12 +89,16 @@ const AtTopTitle: React.FunctionComponent<AtTopTitle> = (props: AtTopTitle) => {
                 onClick={() => setOpenDropdown(!openDropdown)}
               />
 
-              <Box position={'absolute'} top={'110%'} height={openDropdown ? '100vh' : 0}>
+              <Box
+                position={'absolute'}
+                top={'110%'}
+                height={openDropdown ? '100vh' : 0}
+              >
                 <StyledContentPopover
                   in={openDropdown}
                   orientation={'vertical'}
                 >
-                  <AtDropdownTree menu={tree.children} />
+                  <AtDropdownTree />
                 </StyledContentPopover>
               </Box>
             </>

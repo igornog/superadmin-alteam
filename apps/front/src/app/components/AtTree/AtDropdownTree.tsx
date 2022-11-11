@@ -5,7 +5,7 @@ import {
   getActiveFolder,
   mapRecursive,
 } from '../../utils/redux/selectors/tree.selector';
-import { TreeInterface } from '../../utils/redux/types/tree.type';
+import { Tree, TreeInterface } from '../../utils/redux/types/tree.type';
 import AtTypography from '../AtTypography/AtTypography';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
 import { black, green, grey2, grey5 } from '../../utils/colors';
@@ -67,6 +67,10 @@ const AtTreeItem: React.FunctionComponent<AtTreeProps> = ({
   const activeFolder = useAppSelector((state) => getActiveFolder(state));
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    setMenu(menuProp);
+  }, [menuProp]);
+
   const open = (id: string) => () => {
     setMenu((prevMenu) =>
       mapRecursive(prevMenu, (item: any) => {
@@ -118,11 +122,9 @@ const AtTreeItem: React.FunctionComponent<AtTreeProps> = ({
   );
 };
 
-const AtDropdownTree: React.FunctionComponent<AtTreeProps> = ({
-  level = 1,
-  menu: menuProp,
-}: AtTreeProps) => {
+const AtDropdownTree: React.FunctionComponent = () => {
   const activeTab = useAppSelector((state) => getActiveTab(state));
+  const tree = useAppSelector((state) => new Tree(state.tree.data));
 
   return (
     <StyledParent
@@ -132,13 +134,13 @@ const AtDropdownTree: React.FunctionComponent<AtTreeProps> = ({
       paddingLeft={'20px'}
     >
       <AtTypography color={grey2}>{activeTab.title}</AtTypography>
-      <AtTreeItem menu={menuProp} level={level} />
+      <AtTreeItem menu={tree.children || []} />
     </StyledParent>
   );
 };
 
 export interface AtTreeProps {
-  menu: TreeInterface[] | undefined;
+  menu: TreeInterface[];
   level?: number;
 }
 export default AtDropdownTree;

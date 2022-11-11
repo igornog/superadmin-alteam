@@ -13,6 +13,7 @@ import AtTypography from '../../AtTypography/AtTypography';
 import { ModalSize } from '../../../utils/redux/types/settings.type';
 import AtModal from '../AtModal';
 import AtLine from '../../AtLine/AtLine';
+import AtTextFieldDropdown from '../../AtDropdown/AtTextFieldDropdown';
 
 const ModalGeneralInformations: React.FunctionComponent<
   ModalGeneralInformationsProps
@@ -59,7 +60,7 @@ const ModalGeneralInformations: React.FunctionComponent<
           label={'Salary Expectations'}
         />
 
-        <AtDropdown
+        <AtTextFieldDropdown
           fullWidth={true}
           value={''}
           listItems={[
@@ -75,7 +76,7 @@ const ModalGeneralInformations: React.FunctionComponent<
           label={'Availability'}
         />
 
-        <AtDropdown
+        <AtTextFieldDropdown
           fullWidth={true}
           value={''}
           listItems={[
@@ -112,7 +113,7 @@ const ModalGeneralInformations: React.FunctionComponent<
           label={'Phone Number'}
         />
 
-        <Box display={'flex'} justifyContent={'flex-end'}>
+        <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
           <AtButton
             onClick={props.onClose}
             kind={AtButtonKind.Danger}

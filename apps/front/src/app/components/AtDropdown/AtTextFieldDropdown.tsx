@@ -1,20 +1,17 @@
 import { Box, ClickAwayListener } from '@mui/material';
 import Collapse from '@mui/material/Collapse';
-import { ArrowDown2 } from 'iconsax-react';
 
 import React, { useEffect, useRef, useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { black, grey2, grey5, white } from '../../utils/colors';
-import { getText } from '../../utils/helpers';
 import { boxShadow } from '../../utils/theme';
-import AtButton, { AtButtonProps } from '../AtButton/AtButton';
+import AtTextField, { AtTextFieldProps } from '../AtTextField/AtTextField';
 import AtTypography from '../AtTypography/AtTypography';
 
 export const StyledContentPopover = styled(Collapse)<{
   $minWidth?: number;
   left?: number;
   top?: number;
-  align?: string;
 }>`
   position: absolute;
   min-width: ${({ $minWidth }) => $minWidth && $minWidth + 'px'};
@@ -24,38 +21,12 @@ export const StyledContentPopover = styled(Collapse)<{
   border-radius: 5px;
   margin-top: 5px;
   z-index: 999;
-  padding: 10px;
-
-  ${({ align }) =>
-    align === 'bottom-left' &&
-    css`
-      top: 20px;
-      left: 0;
-    `}
-
-  ${({ align }) =>
-    align === 'bottom-right' &&
-    css`
-      top: 20px;
-      right: 0;
-    `}
-
-  ${({ align }) =>
-    align === 'top-right' &&
-    css`
-      top: -100px;
-      right: 0;
-    `}
-
-  ${({ align }) =>
-    align === 'top-left' &&
-    css`
-      top: -100px;
-      left: 0;
-    `}
+  left: ${({ left }) => left && left + 'px'};
+  top: ${({ top }) => top && top + 'px'};
 `;
 
 export const StyledDropdownElement = styled.div<{ color: string }>`
+  padding: 10px;
   transition: 0.25s;
   display: flex;
   color: ${({ color }) => color};
@@ -64,15 +35,14 @@ export const StyledDropdownElement = styled.div<{ color: string }>`
     cursor: pointer;
     transition: 0.5s;
 
-    & p,
-    & svg {
+    & p {
       color: ${black};
     }
   }
 `;
 
-const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
-  props: AtDropdownProps
+const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
+  props: AtTextFieldDropdownProps
 ) => {
   const dropdownRef = useRef<any>(null);
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -103,38 +73,40 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
     }
   }, [selectedItem]);
 
+  const [maxWidth, setMaxWidth] = useState(0);
+
+  useEffect(() => {
+    setMaxWidth(selectedItem.label.length);
+  }, [selectedItem]);
+
   return (
     <ClickAwayListener onClickAway={handleClose}>
-      <Box ref={dropdownRef} position={'relative'}>
-        <AtButton
-          kind={props.kind}
-          variant={props.variant}
+      <Box
+        ref={dropdownRef}
+        width={props.fullWidth ? '100%' : 'fit-content'}
+        position={'relative'}
+      >
+        <AtTextField
+          {...props}
+          dropdown={true}
+          open={open}
+          maxWidth={maxWidth}
           onClick={open ? handleClose : handleClick}
-          name={selectedItem ? getText(selectedItem.label) : props.placeholder}
-          endIcon={<ArrowDown2 size={10} />}
-          fontSize={props.fontSize}
-          iconSize={10}
-          padding={props.padding}
+          placeholder={selectedItem ? selectedItem.label : props.placeholder}
         />
-
         <StyledContentPopover
           in={open}
           $minWidth={dropdownRef?.current?.offsetWidth}
-          align={props.align ?? 'bottom-left'}
         >
-          <Box display={'flex'} flexDirection={'column'} gap={'10px'}>
-            {props.listItems.map((item: DropdownItem) => (
-              <StyledDropdownElement
-                key={item.id}
-                onClick={() => handleSelect(item)}
-                color={item.id === selectedItem?.id ? black : grey2}
-              >
-                <AtTypography fontSize={props.fontSize}>
-                  {item.label}
-                </AtTypography>
-              </StyledDropdownElement>
-            ))}
-          </Box>
+          {props.listItems.map((item: DropdownItem) => (
+            <StyledDropdownElement
+              key={item.id}
+              onClick={() => handleSelect(item)}
+              color={item.id === selectedItem?.id ? black : grey2}
+            >
+              <AtTypography>{item.label}</AtTypography>
+            </StyledDropdownElement>
+          ))}
         </StyledContentPopover>
       </Box>
     </ClickAwayListener>
@@ -143,15 +115,12 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
 
 interface DropdownItem {
   id: number | string;
-  value: string;
-  label: React.ReactNode;
+  label: string;
 }
 
-interface AtDropdownProps extends AtButtonProps {
+interface AtTextFieldDropdownProps extends AtTextFieldProps {
   listItems: DropdownItem[];
-  placeholder?: string;
   handleSelect?: (item: DropdownItem) => void;
-  align?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 }
 
-export default AtDropdown;
+export default AtTextFieldDropdown;

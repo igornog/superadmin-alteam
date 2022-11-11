@@ -8,6 +8,7 @@ interface StyledTypographyProps {
   color?: string;
   fontSize?: string;
   display?: string;
+  gap?: string;
 }
 
 const StyledTypography = styled(Typography)<StyledTypographyProps>`
@@ -16,7 +17,7 @@ const StyledTypography = styled(Typography)<StyledTypographyProps>`
   color: ${({ color }) => (color ? color : null)};
   display: ${({ display }) => display ?? 'flex'};
   align-items: center;
-  gap: 5px;
+  gap: ${({ gap }) => gap ?? '5px'};
 `;
 
 const AtTypography: React.FunctionComponent<AtTypographyProps> = (
@@ -28,8 +29,8 @@ const AtTypography: React.FunctionComponent<AtTypographyProps> = (
       variant={props.variant ?? 'body2'}
       color={props.color}
       display={props.display}
+      gap={props.gap}
       whiteSpace={props.whiteSpace ?? 'none'}
-      ref={props.textRef}
       {...props}
     >
       {props.children}
@@ -45,7 +46,7 @@ interface AtTypographyProps {
   color?: string;
   fontSize?: string;
   whiteSpace?: any;
-  textRef?: any;
+  gap?: string;
 }
 
 export default AtTypography;

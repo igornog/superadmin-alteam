@@ -1,6 +1,10 @@
 import { Box } from '@mui/material';
 import { SearchNormal1, Candle } from 'iconsax-react';
 import React from 'react';
+import {
+  AtButtonKind,
+  AtButtonVariant,
+} from '../../../../components/AtButton/AtButton';
 import AtDropdown from '../../../../components/AtDropdown/AtDropdown';
 import AtSwitchDisplayMode from '../../../../components/AtLayout/AtSwitchDisplayMode';
 import AtTextField from '../../../../components/AtTextField/AtTextField';
@@ -45,15 +49,12 @@ const ShortlistTalentsHeader: React.FunctionComponent = () => {
               <Candle /> Sort by:
             </AtTypography>
             <AtDropdown
-              value={'None'}
-              width={'fit-content'}
-              fullWidth={true}
               listItems={[
-                { id: 0, label: 'None' },
-                { id: 1, label: 'None' },
+                { id: 0, value: 'None', label: 'None' },
+                { id: 1, value: 'None', label: 'None' },
               ]}
-              size={'small'}
-              bgColor={'black'}
+              kind={AtButtonKind.Default}
+              variant={AtButtonVariant.Contained}
             />
           </Box>
         </Box>

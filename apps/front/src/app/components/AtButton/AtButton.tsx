@@ -100,6 +100,7 @@ interface StyledButtonProps {
   kind: AtButtonKind;
   $variant: AtButtonVariant;
   $btnName?: string;
+  $padding?: string;
   startIcon?: React.ReactNode;
   iconSize?: number;
 }
@@ -121,6 +122,10 @@ const StyledButton = styled(Button)<StyledButtonProps>`
     text-transform: initial;
     box-shadow: none;
 
+    & .${buttonClasses.endIcon} {
+      margin-right: 0;
+    }
+
     ${({ $btnName, startIcon }) =>
       !$btnName && startIcon
         ? css`
@@ -132,10 +137,14 @@ const StyledButton = styled(Button)<StyledButtonProps>`
               margin: 0;
             }
           `
-        : css<{ $variant: AtButtonVariant }>`
-            padding: ${({ $variant }) =>
-              $variant === AtButtonVariant.Text ? '10px 0' : '10px 20px'};
-            height: 40px;
+        : css<{ $variant: AtButtonVariant; $padding?: string }>`
+            padding: ${({ $variant, $padding }) =>
+              $padding
+                ? $padding
+                : $variant === AtButtonVariant.Text
+                ? '10px 0'
+                : '10px 20px'};
+            min-height: 24px;
           `}
 
     ${({ $variant }) =>
@@ -254,6 +263,7 @@ const AtButton: React.FunctionComponent<AtButtonProps> = (
       kind={props.kind}
       $variant={props.variant}
       $btnName={props.name}
+      $padding={props.padding}
       startIcon={props.startIcon}
       endIcon={props.endIcon}
       iconSize={props.iconSize}
@@ -261,7 +271,11 @@ const AtButton: React.FunctionComponent<AtButtonProps> = (
       onClick={props.onClick}
     >
       {props.name && (
-        <AtTypography variant={'button'} fontSize={props.fontSize}>
+        <AtTypography
+          variant={'button'}
+          fontSize={props.fontSize}
+          whiteSpace={'nowrap'}
+        >
           {props.name}
         </AtTypography>
       )}
@@ -269,12 +283,13 @@ const AtButton: React.FunctionComponent<AtButtonProps> = (
   );
 };
 
-interface AtButtonProps {
+export interface AtButtonProps {
   kind: AtButtonKind;
   variant: AtButtonVariant;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   name?: string;
   disabled?: boolean;
+  padding?: string;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   fontSize?: string;
