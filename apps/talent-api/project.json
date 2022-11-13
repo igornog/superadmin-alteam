@@ -35,6 +35,7 @@
     "package": {
       "executor": "nx:run-commands",
       "dependsOn":["build"],
+      "inputs": ["production","^production"],
       "options": {
         "command": "zip -FSqj apps/talent-api/dist/package.zip apps/talent-api/dist/index.js"
       }

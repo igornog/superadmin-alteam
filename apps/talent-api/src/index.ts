@@ -1,8 +1,8 @@
 import {startLambdaServer} from '@yjcapp/api-utils';
 import {environment} from './environments/environment';
-import express from "express";
+import {talentRouter} from "./talentRouter";
 
 export const handler = startLambdaServer(
-  express.Router(),
+  talentRouter,
   !environment.production
 );
