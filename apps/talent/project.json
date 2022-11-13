@@ -1,17 +1,17 @@
 {
-  "name": "freelancers",
+  "name": "talent",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/freelancers/src",
+  "sourceRoot": "apps/talent/src",
   "projectType": "application",
   "targets": {
     "build": {
       "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/freelancers",
-        "main": "apps/freelancers/src/main.ts",
+        "outputPath": "apps/talent/dist",
+        "main": "apps/talent/src/main.ts",
         "outputFileName": "index.js",
-        "tsConfig": "apps/freelancers/tsconfig.app.json",
+        "tsConfig": "apps/talent/tsconfig.app.json",
         "externalDependencies": "none",
         "optimization": true,
         "extractLicenses": true,
@@ -25,8 +25,8 @@
           "extractLicenses": false,
           "fileReplacements": [
             {
-              "replace": "apps/freelancers/src/environments/environment.ts",
-              "with": "apps/freelancers/src/environments/environment.prod.ts"
+              "replace": "apps/talent/src/environments/environment.ts",
+              "with": "apps/talent/src/environments/environment.prod.ts"
             }
           ]
         }
@@ -42,13 +42,13 @@
         }
       ],
       "options": {
-        "command": "zip -qj dist/apps/freelancers/package.zip dist/apps/freelancers/index.js"
+        "command": "zip -qj dist/apps/talent/package.zip dist/apps/talent/index.js"
       }
     },
     "serve": {
       "executor": "@nrwl/node:node",
       "options": {
-        "buildTarget": "freelancers:build"
+        "buildTarget": "talent:build"
       },
       "dependsOn": [
         {
@@ -59,7 +59,7 @@
       ],
       "configurations": {
         "production": {
-          "buildTarget": "freelancers:build:production"
+          "buildTarget": "talent:build:production"
         }
       }
     },
@@ -67,14 +67,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/freelancers/**/*.ts"]
+        "lintFilePatterns": ["apps/talent/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/apps/freelancers"],
+      "outputs": ["{workspaceRoot}/coverage/apps/talent"],
       "options": {
-        "jestConfig": "apps/freelancers/jest.config.ts",
+        "jestConfig": "apps/talent/jest.config.ts",
         "passWithNoTests": true
       }
     }

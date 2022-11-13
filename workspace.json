@@ -5,9 +5,9 @@
     "api-utils": "libs/api-utils",
     "app": "libs/app",
     "auth-api": "apps/auth-api",
-    "freelancers": "apps/freelancers",
     "front": "apps/front",
     "infrastructure": "infrastructure",
-    "postgres-db": "libs/postgres-db"
+    "postgres-db": "libs/postgres-db",
+    "talent": "apps/talent"
   }
 }

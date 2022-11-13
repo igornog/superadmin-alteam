@@ -40,7 +40,7 @@
     "appsDir": "apps",
     "libsDir": "libs"
   },
-  "defaultProject": "freelancers",
+  "defaultProject": "talent",
   "generators": {
     "@nrwl/react": {
       "application": {
