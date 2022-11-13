@@ -1,17 +1,17 @@
 {
-  "name": "talent",
+  "name": "talent-api",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/talent/src",
+  "sourceRoot": "apps/talent-api/src",
   "projectType": "application",
   "targets": {
     "build": {
       "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "apps/talent/dist",
-        "main": "apps/talent/src/main.ts",
+        "outputPath": "apps/talent-api/dist",
+        "main": "apps/talent-api/src/main.ts",
         "outputFileName": "index.js",
-        "tsConfig": "apps/talent/tsconfig.app.json",
+        "tsConfig": "apps/talent-api/tsconfig.app.json",
         "externalDependencies": "none",
         "optimization": true,
         "extractLicenses": true,
@@ -25,8 +25,8 @@
           "extractLicenses": false,
           "fileReplacements": [
             {
-              "replace": "apps/talent/src/environments/environment.ts",
-              "with": "apps/talent/src/environments/environment.prod.ts"
+              "replace": "apps/talent-api/src/environments/environment.ts",
+              "with": "apps/talent-api/src/environments/environment.prod.ts"
             }
           ]
         }
@@ -42,13 +42,13 @@
         }
       ],
       "options": {
-        "command": "zip -qj dist/apps/talent/package.zip dist/apps/talent/index.js"
+        "command": "zip -qj dist/apps/talent-api/package.zip dist/apps/talent-api/index.js"
       }
     },
     "serve": {
       "executor": "@nrwl/node:node",
       "options": {
-        "buildTarget": "talent:build"
+        "buildTarget": "talent-api:build"
       },
       "dependsOn": [
         {
@@ -59,7 +59,7 @@
       ],
       "configurations": {
         "production": {
-          "buildTarget": "talent:build:production"
+          "buildTarget": "talent-api:build:production"
         }
       }
     },
@@ -67,14 +67,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/talent/**/*.ts"]
+        "lintFilePatterns": ["apps/talent-api/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/apps/talent"],
+      "outputs": ["{workspaceRoot}/coverage/apps/talent-api"],
       "options": {
-        "jestConfig": "apps/talent/jest.config.ts",
+        "jestConfig": "apps/talent-api/jest.config.ts",
         "passWithNoTests": true
       }
     }
