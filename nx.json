@@ -65,6 +65,15 @@
       "sharedGlobals"
     ],
     "sharedGlobals": ["{workspaceRoot}/babel.config.json"],
+    "stage": [
+      {
+        "runtime": "scripts/currentStage.sh"
+      }
+    ],
+    "infrastructure": [
+      "{projectRoot}/infrastructure/*",
+      "{workspaceRoot}/infrastructure/scripts/*"
+    ],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
