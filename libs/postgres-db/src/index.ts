@@ -1,1 +1,2 @@
-export * from './freelancerPgRepository';
+export * from './groupTalentPgRepository';
+export * from './soloTalentPgRepository';

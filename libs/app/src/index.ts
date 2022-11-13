@@ -1,2 +1,2 @@
-export * from './talent/groupTalent';
+export * from './talent';
 export * from './services';

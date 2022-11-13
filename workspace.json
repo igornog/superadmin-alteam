@@ -8,6 +8,7 @@
     "front": "apps/front",
     "infrastructure": "infrastructure",
     "postgres-db": "libs/postgres-db",
+    "talent": "libs/talent",
     "talent-api": "apps/talent-api"
   }
 }

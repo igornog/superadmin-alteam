@@ -1,1 +1,2 @@
-export {FreelancerEntity} from "./Freelancer.entity";
+export {GroupTalentEntity} from "./GroupTalent.entity";
+export {SoloTalentEntity} from "./SoloTalent.entity";

@@ -18,7 +18,8 @@
     "paths": {
       "@yjcapp/api-utils": ["libs/api-utils/src/index.ts"],
       "@yjcapp/app": ["libs/app/src/index.ts"],
-      "@yjcapp/postgres-db": ["libs/postgres-db/src/index.ts"]
+      "@yjcapp/postgres-db": ["libs/postgres-db/src/index.ts"],
+      "@yjcapp/talent": ["libs/talent/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
