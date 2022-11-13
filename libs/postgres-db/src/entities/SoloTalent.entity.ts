@@ -21,6 +21,6 @@ export class SoloTalentEntity extends BaseEntity {
   @Column({type: 'varchar', array: true, name: 'assets'})
   assets: string[];
 
-  @Column({type: 'varchar', array: true, name: 'assets'})
+  @Column({type: 'varchar', array: true, name: 'skills'})
   skills: string[];
 }

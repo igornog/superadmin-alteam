@@ -1,6 +1,6 @@
 import {DeepPartial} from "typeorm";
 import {GroupTalent} from "@yjcapp/app";
-import {GroupTalentEntity} from "./entities/GroupTalent.entity";
+import {GroupTalentEntity} from "./entities";
 
 export function groupTalentFromEntity(entity: GroupTalentEntity): GroupTalent {
   return {
