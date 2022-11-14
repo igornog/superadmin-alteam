@@ -2,7 +2,9 @@ import { Box, Tooltip } from '@mui/material';
 import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { grey, grey3 } from '../../../utils/colors';
+import { useAppSelector } from '../../../utils/hooks/reduxHook';
 import useWindowSize from '../../../utils/hooks/useWindowSize';
+import { getActiveTab } from '../../../utils/redux/selectors/settings.selector';
 import { Talent, Skill } from '../../../utils/redux/types/talents.type';
 import AtGroupTag from '../../AtGroupTag/AtGroupTag';
 import AtRightClick from '../../AtRightClick/AtRightClick';
@@ -26,6 +28,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
   const skillsRef = useRef<any>(null);
   const [maxItemPerLine, setMaxItemPerLine] = useState(0);
   const windowSize = useWindowSize();
+  const activeTab = useAppSelector((state) => getActiveTab(state));
 
   useEffect(() => {
     setMaxItemPerLine(Math.floor(skillsRef.current?.clientWidth / 150));
@@ -44,12 +47,10 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
       <AtTableBody position={position}>
         {props.talents.map((talent: Talent) => (
           <AtRightClick
-            contextMenu={
-              <InboundTalentMenu
-                idTalent={talent.id}
-                openShortlist={props.openShortlist}
-              />
-            }
+            contextMenu={activeTab.content.rightClick({
+              idTalent: talent.id,
+              openShortlist: props.openShortlist,
+            })}
           >
             <AtTableRow
               key={talent.id}

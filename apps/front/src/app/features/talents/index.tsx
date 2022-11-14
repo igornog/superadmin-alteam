@@ -1,3 +1,5 @@
+import InboundTalentMenu from '../../components/AtRightClick/ContextMenus/InboundTalentMenu';
+import ShortlistTalentMenu from '../../components/AtRightClick/ContextMenus/ShortlistTalentMenu';
 import { Tabs } from '../../utils/types';
 import InboundTalentsView from './components/InboundTalents/InboundTalentsView';
 import ShortlistLatentsView from './components/ShortlistTalents/ShortlistTatentsView';
@@ -63,8 +65,14 @@ export const talentsTabs = [
 ];
 
 export const tabsContent = {
-  [Tabs.InboundTalent]: <InboundTalentsView />,
-  [Tabs.ShortlistTalent]: <ShortlistLatentsView />,
+  [Tabs.InboundTalent]: {
+    node: <InboundTalentsView />,
+    rightClick: (props: any) => <InboundTalentMenu {...props} />,
+  },
+  [Tabs.ShortlistTalent]: {
+    node: <ShortlistLatentsView />,
+    rightClick: (props: any) => <ShortlistTalentMenu {...props} />,
+  },
 };
 
 export const talentsFilters = [

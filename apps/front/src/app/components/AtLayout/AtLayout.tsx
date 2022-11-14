@@ -44,7 +44,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
   const activeFolder = useAppSelector((state) => getActiveFolder(state));
 
   return !isSmallScreen ? (
-    activeTab && (
+    activeTab.config && (
       <>
         <AtNavbar />
         <Grid container={true}>
@@ -63,12 +63,12 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                   marginTop={'30px'}
                 >
                   <AtTopTitle
-                    activeTab={activeTab}
+                    activeTab={activeTab.config}
                     activeFolder={activeFolder}
                   />
 
                   <Box display={'flex'} gap={'30px'}>
-                    {activeTab.settings.downloadCSV && (
+                    {activeTab.config.settings.downloadCSV && (
                       <AtButton
                         kind={AtButtonKind.Default}
                         variant={AtButtonVariant.Text}
@@ -96,7 +96,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                       </>
                     )}
 
-                    {activeTab.settings.createFolder && (
+                    {activeTab.config.settings.createFolder && (
                       <>
                         <AtButton
                           kind={AtButtonKind.Success}
@@ -114,7 +114,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                       </>
                     )}
 
-                    {activeTab.settings.inviteTalent && (
+                    {activeTab.config.settings.inviteTalent && (
                       <AtButton
                         kind={AtButtonKind.Success}
                         variant={AtButtonVariant.Contained}
@@ -132,7 +132,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                   alignItems={'center'}
                 >
                   <Grid item={true} xs={6.5}>
-                    {activeTab.settings.search && (
+                    {activeTab.config.settings.search && (
                       <AtTextField
                         value={''}
                         type={AtTextFieldType.Text}
@@ -143,9 +143,11 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                   </Grid>
 
                   <Box display={'flex'} gap={'30px'} alignItems={'center'}>
-                    {activeTab.settings.displayMode && <AtSwitchDisplayMode />}
+                    {activeTab.config.settings.displayMode && (
+                      <AtSwitchDisplayMode />
+                    )}
 
-                    {activeTab.settings.sortBy && (
+                    {activeTab.config.settings.sortBy && (
                       <Box
                         display={'flex'}
                         gap={'5px'}

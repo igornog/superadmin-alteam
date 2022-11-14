@@ -1,4 +1,4 @@
-import { Share, Sms, TrushSquare } from 'iconsax-react';
+import { Edit, Share, Sms, TrushSquare } from 'iconsax-react';
 import React from 'react';
 import { useAppDispatch } from '../../../utils/hooks/reduxHook';
 import { handleSelectTalent } from '../../../utils/redux/actions/talents.action';
@@ -6,8 +6,8 @@ import AtTypography from '../../AtTypography/AtTypography';
 import { AtContextMenuItem } from '../AtRightClick';
 import Arrow2 from '../../../assets/images/icons/arrow2.svg';
 
-const InboundTalentMenu: React.FunctionComponent<InboundTalentMenuProps> = (
-  props: InboundTalentMenuProps
+const ShortlistTalentMenu: React.FunctionComponent<ShortlistTalentMenuProps> = (
+  props: ShortlistTalentMenuProps
 ) => {
   const dispatch = useAppDispatch();
 
@@ -15,13 +15,19 @@ const InboundTalentMenu: React.FunctionComponent<InboundTalentMenuProps> = (
     dispatch(handleSelectTalent(props.idTalent));
     props.openShortlist();
   };
-  console.log(props);
+
   return (
     <>
       <AtContextMenuItem onSelect={moveToShortlisted}>
         <AtTypography>
           <img src={Arrow2} alt={'Arrow'} width={20} />
-          Move to Shortlisted
+          Move to Accepted
+        </AtTypography>
+      </AtContextMenuItem>
+      <AtContextMenuItem>
+        <AtTypography>
+          <Edit size={20} />
+          Edit Talent Folders
         </AtTypography>
       </AtContextMenuItem>
       <AtContextMenuItem>
@@ -46,9 +52,9 @@ const InboundTalentMenu: React.FunctionComponent<InboundTalentMenuProps> = (
   );
 };
 
-interface InboundTalentMenuProps {
+interface ShortlistTalentMenuProps {
   idTalent: number;
   openShortlist: () => void;
 }
 
-export default InboundTalentMenu;
+export default ShortlistTalentMenu;

@@ -42,6 +42,10 @@ const StyledMenuItem = styled(Item)<{ variant?: string }>`
     outline: 0;
     cursor: pointer;
     color: ${black};
+
+    img {
+      filter: brightness(0.5);
+    }
   }
 `;
 

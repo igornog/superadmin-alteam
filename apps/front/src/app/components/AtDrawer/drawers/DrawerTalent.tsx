@@ -48,7 +48,7 @@ const DrawerTalent: React.FunctionComponent = () => {
         padding={'0 20px 25px 20px'}
         gap={'25px'}
       >
-        {activeTab.title === Tabs.ShortlistTalent && (
+        {activeTab.config.title === Tabs.ShortlistTalent && (
           <TalentListings talent={selectedTalent} />
         )}
 
@@ -74,14 +74,16 @@ const DrawerTalent: React.FunctionComponent = () => {
           />
           <AtButton
             onClick={() =>
-              activeTab.title === Tabs.ShortlistTalent
+              activeTab.config.title === Tabs.ShortlistTalent
                 ? setOpenModalAccepted(true)
                 : setOpenModalShortlist(true)
             }
             kind={AtButtonKind.Success}
             variant={AtButtonVariant.Contained}
             name={
-              activeTab.title === Tabs.ShortlistTalent ? 'Accept' : 'Shortlist'
+              activeTab.config.title === Tabs.ShortlistTalent
+                ? 'Accept'
+                : 'Shortlist'
             }
             endIcon={<TickSquare size={16} />}
           />
