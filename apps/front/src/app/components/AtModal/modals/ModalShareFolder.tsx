@@ -55,9 +55,10 @@ const ModalShareFolder: React.FunctionComponent<ModalShareFolderProps> = (
           onValueChange={setEmail}
           endIcon={
             <AtDropdown
+              flexibleHeight={true}
               fontSize={'10px'}
               listItems={[
-                { id: 0, value: 'Public View', label: 'Public View' },
+                { id: 0, value: 'Public View2', label: 'Public View' },
                 { id: 1, value: 'Private View', label: 'Private View' },
               ]}
               padding={'5px 7px'}

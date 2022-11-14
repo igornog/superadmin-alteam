@@ -1,24 +1,23 @@
 import { Box } from '@mui/material';
+import { CloseCircle, CloseSquare, ArrowRight2 } from 'iconsax-react';
 import React, { useEffect, useState } from 'react';
-import AtTypography from '../../../AtTypography/AtTypography';
-import { ArrowRight2, CloseCircle, CloseSquare } from 'iconsax-react';
+import { grey2, black } from '../../../../utils/colors';
+import { useAppDispatch } from '../../../../utils/hooks/reduxHook';
+import { handleLoadTree } from '../../../../utils/redux/actions/tree.action';
+import { ModalSize } from '../../../../utils/redux/types/settings.type';
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
 } from '../../../AtButton/AtButton';
-import { useAppDispatch } from '../../../../utils/hooks/reduxHook';
-import { ModalSize } from '../../../../utils/redux/types/settings.type';
-import AtModal from '../../AtModal';
 import AtLine from '../../../AtLine/AtLine';
-import { handleLoadTree } from '../../../../utils/redux/actions/tree.action';
-import ModalShortlistStep1 from './steps/ModalShortlistStep1';
-import { black, grey2 } from '../../../../utils/colors';
-import ModalShortlistStep2 from './steps/ModalShortlistStep2';
-import ModalShortlistStep3 from './steps/ModalShortlistStep3';
 import AtTabs from '../../../AtTabs/AtTabs';
+import AtTypography from '../../../AtTypography/AtTypography';
+import AtModal from '../../AtModal';
+import ModalAcceptedStep1 from './steps/ModalAcceptedStep1';
+import ModalAcceptedStep2 from './steps/ModalAcceptedStep2';
 
-const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
-  props: ModalShortlistProps
+const ModalAccepted: React.FunctionComponent<ModalAcceptedProps> = (
+  props: ModalAcceptedProps
 ) => {
   const dispatch = useAppDispatch();
   const [step, setStep] = useState(0);
@@ -53,11 +52,11 @@ const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
         paddingBottom={0}
       >
         <Box display={'flex'} gap={'15px'}>
-          <AtTypography variant={'h4'}>Shortlist Talent</AtTypography>
+          <AtTypography variant={'h4'}>Move to Accepted</AtTypography>
           <AtTypography color={grey2}>
             Step{' '}
             <Box>
-              <span style={{ color: black }}>{step + 1}</span>/3
+              <span style={{ color: black }}>{step + 1}</span>/2
             </Box>
           </AtTypography>
         </Box>
@@ -77,15 +76,11 @@ const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
           tabs={[
             {
               id: 0,
-              content: <ModalShortlistStep1 />,
+              content: <ModalAcceptedStep1 />,
             },
             {
               id: 1,
-              content: <ModalShortlistStep2 />,
-            },
-            {
-              id: 2,
-              content: <ModalShortlistStep3 />,
+              content: <ModalAcceptedStep2 />,
             },
           ]}
           step={step}
@@ -96,22 +91,22 @@ const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
             onClick={step === 0 ? handleClose : () => setStep(step - 1)}
             kind={AtButtonKind.Danger}
             variant={AtButtonVariant.Text}
-            name={step === 0 ? 'Cancel' : 'Previous Step'}
+            name={'Cancel'}
             endIcon={<CloseSquare size={16} />}
           />
 
           <AtButton
-            onClick={() => (step === 2 ? moveTalent() : setStep(step + 1))}
+            onClick={() => (step === 1 ? moveTalent() : setStep(step + 1))}
             kind={AtButtonKind.Default}
             variant={AtButtonVariant.Outlined}
-            name={step === 2 ? 'Skip Step and Move' : 'Skip Step'}
+            name={'Skip Step'}
             endIcon={<CloseSquare size={16} />}
           />
           <AtButton
-            onClick={() => (step === 2 ? moveTalent() : setStep(step + 1))}
+            onClick={() => (step === 1 ? moveTalent() : setStep(step + 1))}
             kind={AtButtonKind.Success}
             variant={AtButtonVariant.Contained}
-            name={step === 2 ? 'Send Message and Move' : 'Next Step'}
+            name={step === 1 ? 'Move' : 'Next Step'}
             endIcon={<ArrowRight2 size={16} />}
           />
         </Box>
@@ -120,9 +115,9 @@ const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
   );
 };
 
-interface ModalShortlistProps {
+interface ModalAcceptedProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default ModalShortlist;
+export default ModalAccepted;

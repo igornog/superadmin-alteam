@@ -22,21 +22,20 @@ export const StyledContentPopover = styled(Collapse)<{
   box-shadow: ${boxShadow};
   border: 1px solid ${grey5};
   border-radius: 5px;
-  margin-top: 5px;
-  z-index: 999;
+  z-index: 1300;
   padding: 10px;
 
   ${({ align }) =>
     align === 'bottom-left' &&
     css`
-      top: 20px;
+      top: 35px;
       left: 0;
     `}
 
   ${({ align }) =>
     align === 'bottom-right' &&
     css`
-      top: 20px;
+      top: 35px;
       right: 0;
     `}
 
@@ -115,6 +114,7 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
           fontSize={props.fontSize}
           iconSize={10}
           padding={props.padding}
+          flexibleHeight={props.flexibleHeight}
         />
 
         <StyledContentPopover

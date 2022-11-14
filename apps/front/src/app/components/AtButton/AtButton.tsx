@@ -103,6 +103,7 @@ interface StyledButtonProps {
   $padding?: string;
   startIcon?: React.ReactNode;
   iconSize?: number;
+  flexibleHeight?: boolean;
 }
 
 const StyledButton = styled(Button)<StyledButtonProps>`
@@ -137,14 +138,26 @@ const StyledButton = styled(Button)<StyledButtonProps>`
               margin: 0;
             }
           `
-        : css<{ $variant: AtButtonVariant; $padding?: string }>`
+        : css<{
+            $variant: AtButtonVariant;
+            $padding?: string;
+            flexibleHeight?: boolean;
+          }>`
             padding: ${({ $variant, $padding }) =>
               $padding
                 ? $padding
                 : $variant === AtButtonVariant.Text
                 ? '10px 0'
                 : '10px 20px'};
-            min-height: 24px;
+
+            ${({ flexibleHeight }) =>
+              flexibleHeight
+                ? css`
+                    min-height: 24px;
+                  `
+                : css`
+                    height: 40px;
+                  `}
           `}
 
     ${({ $variant }) =>
@@ -294,6 +307,7 @@ export interface AtButtonProps {
   endIcon?: React.ReactNode;
   fontSize?: string;
   iconSize?: number;
+  flexibleHeight?: boolean;
 }
 
 export default AtButton;
