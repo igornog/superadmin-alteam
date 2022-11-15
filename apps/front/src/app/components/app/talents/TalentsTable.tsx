@@ -19,6 +19,9 @@ import AtTypography from '../../AtTypography/AtTypography';
 
 const StyledTag = styled(AtTag)`
   max-width: 150px;
+`;
+
+const StyledTagClients = styled(AtTag)`
   border-radius: 5px;
 `;
 
@@ -117,8 +120,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
                     arrow={true}
                   >
                     <span>
-                      <StyledTag
-                        hover={true}
+                      <StyledTagClients
                         variant={'outlined'}
                         label={`5 clients`}
                       />
