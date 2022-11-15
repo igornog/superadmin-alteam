@@ -136,7 +136,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                       <AtTextField
                         value={''}
                         type={AtTextFieldType.Text}
-                        placeholder={'Search in Inbound talents ...'}
+                        placeholder={'Search in most recent...'}
                         startIcon={<SearchNormal1 />}
                       />
                     )}

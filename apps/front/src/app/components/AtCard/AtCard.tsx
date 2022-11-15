@@ -10,7 +10,6 @@ import AtTag from '../AtTag/AtTag';
 import { Skill, Talent } from '../../utils/redux/types/talents.type';
 import AtRightClick from '../AtRightClick/AtRightClick';
 import { boxShadow } from '../../utils/theme';
-import InboundTalentMenu from '../AtRightClick/ContextMenus/InboundTalentMenu';
 import { useAppSelector } from '../../utils/hooks/reduxHook';
 import { getActiveTab } from '../../utils/redux/selectors/settings.selector';
 
@@ -46,7 +45,6 @@ const AtCard: React.FunctionComponent<AtCardProps> = (props: AtCardProps) => {
           idTalent: talent.id,
           openShortlist: props.openShortlist,
           openAccepted: props.openAccepted,
-          group: talent.group,
         })}
       >
         <Box>
