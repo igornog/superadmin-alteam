@@ -29,7 +29,6 @@ export const talentsTabs = [
       inviteTalent: true,
       displayMode: true,
       sortBy: true,
-      tabs: [Column.Talent, Column.Applied, Column.Availability, Column.Skills],
     },
   },
   {
@@ -39,13 +38,6 @@ export const talentsTabs = [
     settings: {
       downloadCSV: true,
       createFolder: true,
-      tabs: [
-        Column.Talent,
-        Column.Applied,
-        Column.Availability,
-        Column.AssignedTo,
-        Column.Skills,
-      ],
     },
   },
   {

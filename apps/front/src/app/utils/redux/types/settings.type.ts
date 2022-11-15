@@ -68,9 +68,9 @@ export interface HandlesettingsProps {
 }
 
 export enum Column {
-  Talent = "Talent",
-  Applied = "Applied",
-  Availability = "Availability",
-  Skills = "Skills",
-  AssignedTo = "AssignedTo",
+  Talent = 'Talent',
+  Applied = 'Applied',
+  Availability = 'Availability',
+  Skills = 'Skills',
+  AssignedTo = 'AssignedTo',
 }

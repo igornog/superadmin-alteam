@@ -6,6 +6,7 @@ import { handleSelectTalent } from '../../../utils/redux/actions/talents.action'
 import {
   SideDrawerVariant,
   DisplayMode,
+  Column,
 } from '../../../utils/redux/types/settings.type';
 import ModalAccepted from '../../AtModal/modals/ModalAccepted/ModalAccepted';
 import ModalShortlist from '../../AtModal/modals/ModalShortlist/ModalShortlist';
@@ -63,7 +64,7 @@ const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
 };
 
 interface TalentsSwitchModeProps {
-  tableColumns?: [];
+  tableColumns: Column[];
 }
 
 export default TalentsSwitchMode;

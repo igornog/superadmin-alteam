@@ -39,10 +39,6 @@ export const buttonKind = {
       backgroundColor: green,
       color: black,
     },
-    focus: {
-      backgroundColor: black,
-      color: white,
-    },
     disabled: {
       backgroundColor: grey4,
       color: grey3,
@@ -62,10 +58,6 @@ export const buttonKind = {
       backgroundColor: black,
       color: white,
     },
-    focus: {
-      backgroundColor: black,
-      color: white,
-    },
     disabled: {
       backgroundColor: grey4,
       color: grey3,
@@ -82,10 +74,6 @@ export const buttonKind = {
       outlined: grey2,
     },
     active: {
-      backgroundColor: null,
-      color: null,
-    },
-    focus: {
       backgroundColor: null,
       color: null,
     },
@@ -216,32 +204,6 @@ const StyledButton = styled(Button)<StyledButtonProps>`
       color: ${({ kind }) => buttonKind[kind].active.color};
     }
 
-    :focus {
-      ${({ $variant }) =>
-        $variant === AtButtonVariant.Contained
-          ? css<{ kind: AtButtonKind }>`
-              background-color: ${({ kind }) =>
-                buttonKind[kind].focus.backgroundColor};
-              color: ${({ kind }) => buttonKind[kind].focus.color};
-            `
-          : $variant === AtButtonVariant.Outlined
-          ? css<{ kind: AtButtonKind }>`
-              background-color: transparent;
-              color: ${({ kind }) => buttonKind[kind].focus.color};
-            `
-          : $variant === AtButtonVariant.Text
-          ? css<{ kind: AtButtonKind }>`
-              background-color: transparent;
-              color: ${({ kind }) => buttonKind[kind].focus.backgroundColor};
-            `
-          : css<{ kind: AtButtonKind }>`
-              background-color: transparent;
-              color: ${({ kind }) => buttonKind[kind].focus.color};
-            `}
-      transition: all 0.25s ease-in-out;
-      box-shadow: none;
-    }
-
     &.Mui-disabled {
       transition: all 0.25s ease-in-out;
       cursor: not-allowed;
@@ -281,6 +243,7 @@ const AtButton: React.FunctionComponent<AtButtonProps> = (
       endIcon={props.endIcon}
       iconSize={props.iconSize}
       disabled={props.disabled}
+      disableRipple={true}
       onClick={props.onClick}
     >
       {props.name && (

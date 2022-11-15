@@ -5,6 +5,7 @@ import AtLine from '../../../../components/AtLine/AtLine';
 import AtSpace from '../../../../components/AtSpace/AtSpace';
 import { useAppDispatch } from '../../../../utils/hooks/reduxHook';
 import { handleLoadTree } from '../../../../utils/redux/actions/tree.action';
+import { Column } from '../../../../utils/redux/types/settings.type';
 import ShortlistFolderListing from './ShortlistFolderListing';
 import ShortlistTalentsHeader from './ShortlistTalentsHeader';
 
@@ -26,7 +27,15 @@ const ShortlistLatentsView: React.FunctionComponent = () => {
 
         <AtSpace direction={'vertical'} spacing={'20'} />
 
-        <TalentsSwitchMode tableColumns={[]} />
+        <TalentsSwitchMode
+          tableColumns={[
+            Column.Talent,
+            Column.Applied,
+            Column.Availability,
+            Column.AssignedTo,
+            Column.Skills,
+          ]}
+        />
       </Grid>
     </Grid>
   );

@@ -15,7 +15,7 @@ const InboundTalentMenu: React.FunctionComponent<InboundTalentMenuProps> = (
     dispatch(handleSelectTalent(props.idTalent));
     props.openShortlist();
   };
-  console.log(props);
+
   return (
     <>
       <AtContextMenuItem onSelect={moveToShortlisted}>

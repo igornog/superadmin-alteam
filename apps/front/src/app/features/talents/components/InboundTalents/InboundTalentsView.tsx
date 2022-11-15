@@ -4,6 +4,7 @@ import TalentsSwitchMode from '../../../../components/app/talents/TalentsSwitchM
 import AtTypography from '../../../../components/AtTypography/AtTypography';
 import { grey3 } from '../../../../utils/colors';
 import { useAppSelector } from '../../../../utils/hooks/reduxHook';
+import { Column } from '../../../../utils/redux/types/settings.type';
 
 const InboundTalentsView: React.FunctionComponent = () => {
   const talents = useAppSelector((state) => state.talents);
@@ -19,7 +20,14 @@ const InboundTalentsView: React.FunctionComponent = () => {
         </Grid>
       ) : (
         <Grid item={true} xs={12}>
-          <TalentsSwitchMode tableColumns={[]} />
+          <TalentsSwitchMode
+            tableColumns={[
+              Column.Talent,
+              Column.Applied,
+              Column.Availability,
+              Column.Skills,
+            ]}
+          />
         </Grid>
       )}
     </Grid>
