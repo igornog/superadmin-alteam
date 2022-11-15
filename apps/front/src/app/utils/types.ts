@@ -3,6 +3,6 @@ export enum Tabs {
   ShortlistTalent = 'Shortlist Talents',
   AllTalent = 'All Talents',
   AcceptedTalent = 'Accepted Talents',
-  DelinedTalent = 'Declined Talents',
+  DeclinedTalent = 'Declined Talents',
   Applicants = 'Applicants',
 }

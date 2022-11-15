@@ -1,13 +1,15 @@
+import DeclinedTalentMenu from '../../components/AtRightClick/ContextMenus/DeclinedTalentMenu';
 import InboundTalentMenu from '../../components/AtRightClick/ContextMenus/InboundTalentMenu';
 import ShortlistTalentMenu from '../../components/AtRightClick/ContextMenus/ShortlistTalentMenu';
-import { Column } from '../../utils/redux/types/settings.type';
+import { Page } from '../../utils/redux/types/settings.type';
 import { Tabs } from '../../utils/types';
+import DeclinedTalentsView from './components/DeclinedTalents/DeclinedTalentsView';
 import InboundTalentsView from './components/InboundTalents/InboundTalentsView';
 import ShortlistLatentsView from './components/ShortlistTalents/ShortlistTatentsView';
 
 export { default } from './components/TalentsView';
 
-export const talentsTabs = [
+export const talentsTabs: Page[] = [
   {
     title: Tabs.AllTalent,
     badge: 150,
@@ -50,12 +52,13 @@ export const talentsTabs = [
     },
   },
   {
-    title: Tabs.DelinedTalent,
+    title: Tabs.DeclinedTalent,
     active: false,
     settings: {
       search: true,
       downloadCSV: true,
       sortBy: true,
+      displayMode: true,
     },
   },
   {
@@ -73,6 +76,10 @@ export const tabsContent = {
   [Tabs.ShortlistTalent]: {
     node: <ShortlistLatentsView />,
     rightClick: (props: any) => <ShortlistTalentMenu {...props} />,
+  },
+  [Tabs.DeclinedTalent]: {
+    node: <DeclinedTalentsView />,
+    rightClick: (props: any) => <DeclinedTalentMenu {...props} />,
   },
 };
 
