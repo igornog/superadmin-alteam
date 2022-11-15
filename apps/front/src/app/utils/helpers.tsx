@@ -59,3 +59,19 @@ export const getCorrectNetwork = (
     <Global size={20} />
   );
 };
+
+export const getText = (elem: any): string => {
+  if (!elem) {
+    return '';
+  }
+  if (typeof elem === 'string') {
+    return elem;
+  }
+
+  const children = elem.props && elem.props.children;
+  if (children instanceof Array) {
+    return children.map(getText).join('');
+  }
+
+  return getText(children);
+};

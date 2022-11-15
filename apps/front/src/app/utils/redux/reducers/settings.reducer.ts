@@ -36,6 +36,7 @@ const { reducer } = createSlice({
       .addCase(handleInitSettings.fulfilled, (state, { payload }) => {
         state.status = StatusType.Succeeded;
         state.tabs = payload.tabs;
+
         state.filters.skills = payload.filters;
         state.filters.jobTypes = payload.jobTypes;
       })

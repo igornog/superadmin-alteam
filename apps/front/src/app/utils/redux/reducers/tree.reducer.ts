@@ -1,8 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { handleAddFolder, handleLoadTree } from '../actions/tree.action';
+import {
+  handleAddFolder,
+  handleLoadTree,
+  handleSelectFolder,
+} from '../actions/tree.action';
 import { StatusType } from '../types/status.type';
-import { TreeInterface, TreeState } from '../types/tree.type';
+import { TreeState } from '../types/tree.type';
 import { v4 as uuidv4 } from 'uuid';
+import { searchFolder } from '../selectors/tree.selector';
+import { handleInitPage } from '../actions/app.action';
 
 const initialState: TreeState = {
   data: {
@@ -10,6 +16,7 @@ const initialState: TreeState = {
     name: '',
     children: [],
   },
+  selectedFolder: undefined,
   status: StatusType.Idle,
   error: null,
 };
@@ -33,29 +40,30 @@ const { reducer } = createSlice({
       })
 
       .addCase(handleAddFolder.fulfilled, (state, { payload }) => {
-        const search: any = (tree: TreeInterface, targetId: string) => {
-          if (tree.id === targetId) {
-            return tree;
-          }
-
-          if (tree.children) {
-            for (const child of tree.children) {
-              const found = search(child, targetId);
-
-              if (found) {
-                return found;
-              }
-            }
-          }
-        };
-
-        const currentNode = search(state.data, payload.targetId);
+        const currentNode = searchFolder(state.data, payload.targetId);
 
         if (!Object.prototype.hasOwnProperty.call(currentNode, 'children')) {
           currentNode.children = [];
         }
 
-        currentNode.children.push({ id: uuidv4(), name: payload.folderName });
+        currentNode.children.push({
+          id: uuidv4(),
+          idParent: payload.targetId,
+          name: payload.folderName,
+        });
+      })
+
+      .addCase(handleSelectFolder.pending, (state) => {
+        state.status = StatusType.Loading;
+      })
+
+      .addCase(handleSelectFolder.fulfilled, (state, { payload }) => {
+        state.status = StatusType.Succeeded;
+        state.selectedFolder = payload;
+      })
+
+      .addCase(handleInitPage.fulfilled, (state) => {
+        state.selectedFolder = undefined;
       });
   },
 });

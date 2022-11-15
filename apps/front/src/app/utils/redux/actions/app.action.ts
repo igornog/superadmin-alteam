@@ -13,3 +13,7 @@ export const handleCollapsePanel = createAsyncThunk(
     return status;
   }
 );
+
+export const handleInitPage = createAsyncThunk('app/initPage', async () => {
+  return;
+});

@@ -26,6 +26,7 @@ export interface Settings {
   displayMode?: boolean;
   sortBy?: boolean;
   createFolder?: boolean;
+  tabsTalentColumn?: any;
 }
 
 export interface Filter {
@@ -52,19 +53,6 @@ export class SideDrawer {
   }
 }
 
-export enum ModalVariant {
-  Skills = 'Skills',
-  GeneralInformations = 'General Informations',
-  About = 'About',
-  Attachments = 'Attachments',
-  DeclineTalent = 'DeclineTalent',
-  Link = 'Link',
-  AddNote = 'AddNote',
-  EditNote = 'EditNote',
-  Shortlist = 'Shortlist',
-  AddFolder = 'AddFolder',
-}
-
 export enum ModalSize {
   ExtraSmall = 'xs',
   Small = 'sm',
@@ -73,18 +61,16 @@ export enum ModalSize {
   ExtraLarge = 'xl',
 }
 
-export class Modal {
-  content: React.ReactNode;
-  size: ModalSize;
-
-  constructor(data: any) {
-    this.content = data.content;
-    this.size = data.size;
-  }
-}
-
 export interface HandlesettingsProps {
   tabs: Page[];
   filters: Filter[];
   jobTypes: Filter[];
+}
+
+export enum Column {
+  Talent = 'Talent',
+  Applied = 'Applied',
+  Availability = 'Availability',
+  Skills = 'Skills',
+  AssignedTo = 'AssignedTo',
 }

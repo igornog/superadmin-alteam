@@ -14,12 +14,9 @@ import AtTag from '../../AtTag/AtTag';
 import AtTextField from '../../AtTextField/AtTextField';
 import AtTypography from '../../AtTypography/AtTypography';
 import { grey2 } from '../../../utils/colors';
-import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook';
+import { useAppSelector } from '../../../utils/hooks/reduxHook';
 import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector';
-import {
-  ModalSize,
-  ModalVariant,
-} from '../../../utils/redux/types/settings.type';
+import { ModalSize } from '../../../utils/redux/types/settings.type';
 import AtModal from '../AtModal';
 import AtLine from '../../AtLine/AtLine';
 
@@ -73,7 +70,7 @@ const ModalSkills: React.FunctionComponent<ModalSkillsProps> = (
           )}
         </Box>
 
-        <Box display={'flex'} justifyContent={'flex-end'}>
+        <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
           <AtButton
             onClick={props.onClose}
             kind={AtButtonKind.Danger}

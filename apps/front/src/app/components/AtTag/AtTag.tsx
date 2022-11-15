@@ -19,6 +19,7 @@ const StyledChip = styled(Chip)<{ clickable?: boolean; variant: string }>`
   color: ${grey};
   background-color: ${({ variant }) =>
     variant === 'filled' && convertHexToRGBA(black, 0.05)};
+  justify-content: space-between;
 
   ${(clickable) =>
     !clickable &&
@@ -37,10 +38,6 @@ const StyledChip = styled(Chip)<{ clickable?: boolean; variant: string }>`
 `;
 
 const AtTag: React.FunctionComponent<AtTagProps> = (props: AtTagProps) => {
-  const handleDelete = () => {
-    console.info('You clicked the delete icon.');
-  };
-
   return (
     <StyledChip
       {...props}
@@ -48,7 +45,7 @@ const AtTag: React.FunctionComponent<AtTagProps> = (props: AtTagProps) => {
       clickable={props.hover}
       label={<AtTypography>{props.label}</AtTypography>}
       deleteIcon={props.delete ? <StyledIcon /> : undefined}
-      onDelete={props.delete ? handleDelete : undefined}
+      onDelete={props.delete ? () => props.onDelete : undefined}
     />
   );
 };
@@ -58,6 +55,7 @@ interface AtTagProps {
   delete?: boolean;
   hover?: boolean;
   variant?: 'filled' | 'outlined';
+  onDelete?: () => void;
 }
 
 export default AtTag;

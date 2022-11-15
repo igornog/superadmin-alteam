@@ -11,6 +11,8 @@ import { Skill, Talent } from '../../utils/redux/types/talents.type';
 import AtRightClick from '../AtRightClick/AtRightClick';
 import { boxShadow } from '../../utils/theme';
 import InboundTalentMenu from '../AtRightClick/ContextMenus/InboundTalentMenu';
+import { useAppSelector } from '../../utils/hooks/reduxHook';
+import { getActiveTab } from '../../utils/redux/selectors/settings.selector';
 
 const StyledCard = styled.div<{ fullHeight?: boolean }>`
   background-color: ${white};
@@ -35,16 +37,17 @@ const StyledCard = styled.div<{ fullHeight?: boolean }>`
 
 const AtCard: React.FunctionComponent<AtCardProps> = (props: AtCardProps) => {
   const talent = new Talent(props.talent);
+  const activeTab = useAppSelector((state) => getActiveTab(state));
 
   return (
     <StyledCard onClick={props.onClick} fullHeight={props.fullHeight}>
       <AtRightClick
-        contextMenu={
-          <InboundTalentMenu
-            idTalent={talent.id}
-            openShortlist={props.openShortlist}
-          />
-        }
+        contextMenu={activeTab.content.rightClick({
+          idTalent: talent.id,
+          openShortlist: props.openShortlist,
+          openAccepted: props.openAccepted,
+          group: talent.group,
+        })}
       >
         <Box>
           <Box
@@ -104,6 +107,7 @@ interface AtCardProps {
   fullHeight?: boolean;
   onClick?: (e: React.MouseEvent) => void;
   openShortlist: () => void;
+  openAccepted: () => void;
 }
 
 export default AtCard;

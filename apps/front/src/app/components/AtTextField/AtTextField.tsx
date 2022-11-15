@@ -76,6 +76,7 @@ const StyledInput = styled(OutlinedInput)<{
   $bgColor?: string;
   $maxWidth?: number;
   multiline?: boolean;
+  width?: string;
 }>`
   &.${outlinedInputClasses.root} {
     ${({ multiline }) =>
@@ -83,8 +84,6 @@ const StyledInput = styled(OutlinedInput)<{
       css`
         padding: 0 20px;
       `}
-
-    justify-content: space-between;
 
     ${({ $bgColor }) =>
       $bgColor
@@ -104,6 +103,7 @@ const StyledInput = styled(OutlinedInput)<{
           `};
 
     & input {
+      width: ${({ width }) => width ?? '100%'};
       max-width: ${({ $maxWidth }) => $maxWidth && $maxWidth + 'ch'};
       color: ${({ disabled, $bgColor }) =>
         $bgColor === 'black' ? white : disabled ? grey3 : black};
@@ -268,6 +268,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
       <FormControl variant="outlined" fullWidth={true}>
         <StyledInput
           fullWidth={true}
+          width={props.width}
           onClick={props.onClick}
           dropdown={props.dropdown}
           $maxWidth={props.maxWidth}
@@ -308,17 +309,18 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
               <StyledArrow open={props.open} size={15} />
             ) : (
               props.endIcon ||
-              (props.type === AtTextFieldType.Password && props.value.length > 0 && (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <Eye /> : <EyeSlash />}
-                  </IconButton>
-                </InputAdornment>
-              ))
+              (props.type === AtTextFieldType.Password &&
+                props.value.length > 0 && (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <Eye /> : <EyeSlash />}
+                    </IconButton>
+                  </InputAdornment>
+                ))
             )
           }
         />
@@ -335,6 +337,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
 
 export interface AtTextFieldProps {
   fullWidth?: boolean;
+  width?: string;
   required?: boolean;
   defaultValue?: string;
   value: string;

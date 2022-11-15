@@ -46,10 +46,9 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
         paddingBottom={0}
       >
         <AtTypography variant={'h4'}>
-          Create Folder{' '}
           {props.folder?.id === 'Parent'
-            ? 'at top level'
-            : `in ${props.folder?.name}`}
+            ? 'Create Parent Folder'
+            : `Create Folder in ${props.folder?.name}`}
         </AtTypography>
         <AtButton
           kind={AtButtonKind.Default}
@@ -70,7 +69,7 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
           onValueChange={setFolderName}
         />
 
-        <Box display={'flex'} justifyContent={'flex-end'}>
+        <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
           <AtButton
             onClick={handleClose}
             kind={AtButtonKind.Danger}

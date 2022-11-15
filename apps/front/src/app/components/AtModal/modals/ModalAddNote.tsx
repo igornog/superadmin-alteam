@@ -49,7 +49,7 @@ const ModalAddNote: React.FunctionComponent<ModalAddNoteProps> = (
           }
         />
 
-        <Box display={'flex'} justifyContent={'flex-end'}>
+        <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
           <AtButton
             onClick={props.onClose}
             kind={AtButtonKind.Danger}

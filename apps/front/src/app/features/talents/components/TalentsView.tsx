@@ -9,7 +9,6 @@ import {
 } from '../../../utils/redux/actions/settings.action';
 import { handleTalents } from '../../../utils/redux/actions/talents.action';
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector';
-import InboundTalentsView from './InboundTalents/InboundTalentsView';
 import TalentsViewFilters from './TalentsViewFilters';
 
 const TalentsView: React.FunctionComponent = () => {
@@ -31,7 +30,7 @@ const TalentsView: React.FunctionComponent = () => {
 
   useEffect(() => {
     if (activeTab) {
-      dispatch(handleSettingsTab(activeTab));
+      dispatch(handleSettingsTab(activeTab.config));
     }
   }, [activeTab, dispatch, settings.tabs]);
 
@@ -41,7 +40,7 @@ const TalentsView: React.FunctionComponent = () => {
       sidePanelIcon={<FilterSquare size={20} />}
       sidePanelSize={'small'}
     >
-      <InboundTalentsView />
+      {activeTab.content?.node}
     </AtLayout>
   );
 };

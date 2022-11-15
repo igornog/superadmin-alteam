@@ -7,6 +7,8 @@ import AtTypography from '../AtTypography/AtTypography';
 import { black, green, grey2, grey3, grey5, white } from '../../utils/colors';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Navigation, NavigationProps } from '../../app';
+import { handleInitPage } from '../../utils/redux/actions/app.action';
+import { useAppDispatch } from '../../utils/hooks/reduxHook';
 
 const StyledNav = styled.div`
   position: fixed;
@@ -83,6 +85,12 @@ const StyledButton = styled.div`
 const AtNavbar: React.FunctionComponent = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const handleNavigate = (link: string) => {
+    dispatch(handleInitPage());
+    navigate(link);
+  };
 
   return (
     <StyledNav>
@@ -95,7 +103,7 @@ const AtNavbar: React.FunctionComponent = () => {
             return (
               <StyledLi
                 isActive={location.pathname === item.link}
-                onClick={() => navigate(item.link)}
+                onClick={() => handleNavigate(item.link)}
                 key={index}
               >
                 {item.icon}

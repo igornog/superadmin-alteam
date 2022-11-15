@@ -15,7 +15,6 @@ const AtModal: React.FunctionComponent<AtModalProps> = (
       keepMounted={true}
       onClose={props.onClose}
       fullWidth={true}
-      // maxWidth={props.size ?? ModalSize.Medium}
       BackdropProps={{
         style: {
           backgroundColor: convertHexToRGBA(black, 0.5),
@@ -24,6 +23,7 @@ const AtModal: React.FunctionComponent<AtModalProps> = (
       PaperProps={{
         style: {
           padding: 0,
+          overflow: 'visible',
           boxShadow: 'none',
           minWidth: props.minWidth,
         },
