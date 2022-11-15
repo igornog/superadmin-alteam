@@ -7,6 +7,7 @@ import {
   SideDrawerVariant,
   DisplayMode,
 } from '../../../utils/redux/types/settings.type';
+import ModalAccepted from '../../AtModal/modals/ModalAccepted/ModalAccepted';
 import ModalShortlist from '../../AtModal/modals/ModalShortlist/ModalShortlist';
 import TalentsCards from './TalentsCards';
 import TalentsTable from './TalentsTable';
@@ -19,7 +20,8 @@ const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
   const talents = useAppSelector((state) => state.talents);
   const listTalent = talents.listTalents;
 
-  const [openModal, setOpenModal] = useState(false);
+  const [openShortlistModal, setOpenShortlistModal] = useState(false);
+  const [openAcceptedModal, setOpenAcceptedModal] = useState(false);
 
   const handleClickTalent = (id: number) => {
     dispatch(handleSelectTalent(id));
@@ -32,7 +34,8 @@ const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
         <TalentsCards
           talents={listTalent}
           openTalent={handleClickTalent}
-          openShortlist={() => setOpenModal(true)}
+          openShortlist={() => setOpenShortlistModal(true)}
+          openAccepted={() => setOpenAcceptedModal(true)}
         />
       ) : (
         <Grid item={true} xs={12}>
@@ -40,11 +43,21 @@ const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
             talents={listTalent}
             openTalent={handleClickTalent}
             tableColumns={props.tableColumns}
-            openShortlist={() => setOpenModal(true)}
+            openShortlist={() => setOpenShortlistModal(true)}
+            openAccepted={() => setOpenAcceptedModal(true)}
           />
         </Grid>
       )}
-      <ModalShortlist isOpen={openModal} onClose={() => setOpenModal(false)} />
+
+      <ModalAccepted
+        isOpen={openAcceptedModal}
+        onClose={() => setOpenAcceptedModal(false)}
+      />
+
+      <ModalShortlist
+        isOpen={openShortlistModal}
+        onClose={() => setOpenShortlistModal(false)}
+      />
     </Grid>
   );
 };

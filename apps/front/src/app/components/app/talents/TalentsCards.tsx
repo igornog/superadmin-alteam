@@ -22,6 +22,7 @@ const TalentsCards: React.FunctionComponent<TalentsCardProps> = (
             onClick={() => props.openTalent(talent.id)}
             fullHeight={true}
             openShortlist={props.openShortlist}
+            openAccepted={props.openAccepted}
           />
         </Grid>
       ))}
@@ -33,6 +34,7 @@ interface TalentsCardProps {
   talents: Talent[];
   openTalent: (id: number) => void;
   openShortlist: () => void;
+  openAccepted: () => void;
 }
 
 export default TalentsCards;

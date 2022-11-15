@@ -13,7 +13,7 @@ const ShortlistTalentMenu: React.FunctionComponent<ShortlistTalentMenuProps> = (
 
   const moveToShortlisted = () => {
     dispatch(handleSelectTalent(props.idTalent));
-    props.openShortlist();
+    props.openAccepted();
   };
 
   return (
@@ -54,7 +54,7 @@ const ShortlistTalentMenu: React.FunctionComponent<ShortlistTalentMenuProps> = (
 
 interface ShortlistTalentMenuProps {
   idTalent: number;
-  openShortlist: () => void;
+  openAccepted: () => void;
 }
 
 export default ShortlistTalentMenu;

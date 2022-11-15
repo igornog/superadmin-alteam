@@ -1,5 +1,6 @@
 import InboundTalentMenu from '../../components/AtRightClick/ContextMenus/InboundTalentMenu';
 import ShortlistTalentMenu from '../../components/AtRightClick/ContextMenus/ShortlistTalentMenu';
+import { Column } from '../../utils/redux/types/settings.type';
 import { Tabs } from '../../utils/types';
 import InboundTalentsView from './components/InboundTalents/InboundTalentsView';
 import ShortlistLatentsView from './components/ShortlistTalents/ShortlistTatentsView';
@@ -28,6 +29,7 @@ export const talentsTabs = [
       inviteTalent: true,
       displayMode: true,
       sortBy: true,
+      tabs: [Column.Talent, Column.Applied, Column.Availability, Column.Skills],
     },
   },
   {
@@ -37,6 +39,13 @@ export const talentsTabs = [
     settings: {
       downloadCSV: true,
       createFolder: true,
+      tabs: [
+        Column.Talent,
+        Column.Applied,
+        Column.Availability,
+        Column.AssignedTo,
+        Column.Skills,
+      ],
     },
   },
   {

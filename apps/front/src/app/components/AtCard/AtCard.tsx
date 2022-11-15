@@ -45,6 +45,7 @@ const AtCard: React.FunctionComponent<AtCardProps> = (props: AtCardProps) => {
         contextMenu={activeTab.content.rightClick({
           idTalent: talent.id,
           openShortlist: props.openShortlist,
+          openAccepted: props.openAccepted,
           group: talent.group,
         })}
       >
@@ -106,6 +107,7 @@ interface AtCardProps {
   fullHeight?: boolean;
   onClick?: (e: React.MouseEvent) => void;
   openShortlist: () => void;
+  openAccepted: () => void;
 }
 
 export default AtCard;

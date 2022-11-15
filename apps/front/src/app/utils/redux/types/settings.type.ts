@@ -26,6 +26,7 @@ export interface Settings {
   displayMode?: boolean;
   sortBy?: boolean;
   createFolder?: boolean;
+  tabsTalentColumn?: any;
 }
 
 export interface Filter {
@@ -64,4 +65,12 @@ export interface HandlesettingsProps {
   tabs: Page[];
   filters: Filter[];
   jobTypes: Filter[];
+}
+
+export enum Column {
+  Talent = "Talent",
+  Applied = "Applied",
+  Availability = "Availability",
+  Skills = "Skills",
+  AssignedTo = "AssignedTo",
 }

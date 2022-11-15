@@ -8,7 +8,6 @@ import { getActiveTab } from '../../../utils/redux/selectors/settings.selector';
 import { Talent, Skill } from '../../../utils/redux/types/talents.type';
 import AtGroupTag from '../../AtGroupTag/AtGroupTag';
 import AtRightClick from '../../AtRightClick/AtRightClick';
-import InboundTalentMenu from '../../AtRightClick/ContextMenus/InboundTalentMenu';
 import AtTable from '../../AtTable/AtTable';
 import AtTableBody from '../../AtTable/AtTableBody';
 import AtTableCell from '../../AtTable/AtTableCell';
@@ -25,8 +24,8 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
   props: TalentsTableProps
 ) => {
   const [position, setPosition] = useState<number | null>(null);
-  const skillsRef = useRef<any>(null);
   const [maxItemPerLine, setMaxItemPerLine] = useState(0);
+  const skillsRef = useRef<any>(null);
   const windowSize = useWindowSize();
   const activeTab = useAppSelector((state) => getActiveTab(state));
 
@@ -50,6 +49,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
             contextMenu={activeTab.content.rightClick({
               idTalent: talent.id,
               openShortlist: props.openShortlist,
+              openAccepted: props.openAccepted,
             })}
           >
             <AtTableRow
@@ -151,6 +151,7 @@ interface TalentsTableProps {
   talents: Talent[];
   openTalent: (id: number) => void;
   openShortlist: () => void;
+  openAccepted: () => void;
   tableColumns?: string[];
 }
 
