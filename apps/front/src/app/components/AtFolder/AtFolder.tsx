@@ -4,12 +4,14 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { black, grey3, grey5, white } from '../../utils/colors';
 import { Tree, TreeInterface } from '../../utils/redux/types/tree.type';
-import ModalAddFolder from '../AtModal/modals/ModalAddFolder';
-import ModalRenameFolder from '../AtModal/modals/ModalRenameFolder';
-import ModalShareFolder from '../AtModal/modals/ModalShareFolder';
 import AtRightClick from '../AtRightClick/AtRightClick';
 import FolderMenu from '../AtRightClick/ContextMenus/FolderMenu';
 import AtTypography from '../AtTypography/AtTypography';
+import ModalAddFolder from '../AtModal/modals/ModalAddFolder';
+import ModalAssignFolderToClient from '../AtModal/modals/ModalAssignFolderToClient';
+import ModalRemoveFolder from '../AtModal/modals/ModalRemoveFolder';
+import ModalRenameFolder from '../AtModal/modals/ModalRenameFolder';
+import ModalShareFolder from '../AtModal/modals/ModalShareFolder';
 
 const StyledFolder = styled.div<{ minimize?: boolean }>`
   width: 100%;
@@ -38,6 +40,9 @@ const AtFolder: React.FunctionComponent<AtFolderProps> = (
   const [openModalAddFolder, setOpenModalAddFolder] = useState(false);
   const [openModalRenameFolder, setOpenModalRenameFolder] = useState(false);
   const [openModalShareFolder, setOpenModalShareFolder] = useState(false);
+  const [openModalRemoveFolder, setOpenModalRemoveFolder] = useState(false);
+  const [openAssignFolderToClient, setOpenAssignFolderToClient] =
+    useState(false);
 
   const [folder, setFolder] = useState(new Tree({}));
 
@@ -55,6 +60,8 @@ const AtFolder: React.FunctionComponent<AtFolderProps> = (
             openCreateFolder={() => setOpenModalAddFolder(true)}
             openRenameFolder={() => setOpenModalRenameFolder(true)}
             openShareFolder={() => setOpenModalShareFolder(true)}
+            openRemoveFolder={() => setOpenModalRemoveFolder(true)}
+            openAssignFolderToClient={() => setOpenAssignFolderToClient(true)}
           />
         }
       >
@@ -98,9 +105,21 @@ const AtFolder: React.FunctionComponent<AtFolderProps> = (
         folder={folder}
       />
 
+      <ModalAssignFolderToClient
+        isOpen={openAssignFolderToClient}
+        onClose={() => setOpenAssignFolderToClient(false)}
+        folder={folder}
+      />
+
       <ModalAddFolder
         isOpen={openModalAddFolder}
         onClose={() => setOpenModalAddFolder(false)}
+        folder={folder}
+      />
+
+      <ModalRemoveFolder
+        isOpen={openModalRemoveFolder}
+        onClose={() => setOpenModalRemoveFolder(false)}
         folder={folder}
       />
     </>

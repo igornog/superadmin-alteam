@@ -21,7 +21,7 @@ const FolderMenu: React.FunctionComponent<FolderMenuProps> = (
         </AtTypography>
       </AtContextMenuItem>
 
-      <AtContextMenuItem>
+      <AtContextMenuItem onSelect={props.openAssignFolderToClient}>
         <AtTypography>
           <TickCircle size={20} />
           Assign to Client
@@ -42,7 +42,7 @@ const FolderMenu: React.FunctionComponent<FolderMenuProps> = (
         </AtTypography>
       </AtContextMenuItem>
 
-      <AtContextMenuItem variant="danger">
+      <AtContextMenuItem variant="danger" onSelect={props.openRemoveFolder}>
         <AtTypography>
           <TrushSquare size={20} />
           Delete Folder
@@ -56,6 +56,8 @@ interface FolderMenuProps {
   openCreateFolder: () => void;
   openRenameFolder: () => void;
   openShareFolder: () => void;
+  openRemoveFolder: () => void;
+  openAssignFolderToClient: () => void;
 }
 
 export default FolderMenu;
