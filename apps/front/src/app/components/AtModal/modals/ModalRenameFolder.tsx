@@ -14,23 +14,24 @@ import { Tree, TreeInterface } from '../../../utils/redux/types/tree.type';
 import { useAppDispatch } from '../../../utils/hooks/reduxHook';
 import { handleAddFolder } from '../../../utils/redux/actions/tree.action';
 
-const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
-  props: ModalAddFolderProps
+const ModalRenameFolder: React.FunctionComponent<ModalRenameFolderProps> = (
+  props: ModalRenameFolderProps
 ) => {
   const dispatch = useAppDispatch();
-  const [folderName, setFolderName] = useState('');
 
   const [folder, setFolder] = useState(new Tree({}));
+  const [folderName, setFolderName] = useState('');
 
   useEffect(() => {
     if (props.folder) {
       setFolder(new Tree(props.folder));
+      setFolderName(props.folder.name);
     }
   }, [props.folder]);
 
   const handleClose = () => {
     props.onClose?.();
-    setFolderName('');
+    setFolderName(folder.name);
   };
 
   const addNewFolder = () => {
@@ -49,11 +50,7 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
         padding={2.5}
         paddingBottom={0}
       >
-        <AtTypography variant={'h4'}>
-          {folder.isParent()
-            ? 'Create Parent Folder'
-            : `Create Folder in ${folder.name}`}
-        </AtTypography>
+        <AtTypography variant={'h4'}>Rename Folder</AtTypography>
         <AtButton
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
@@ -87,7 +84,7 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
             kind={AtButtonKind.Success}
             disabled={!folderName}
             variant={AtButtonVariant.Contained}
-            name={'Create'}
+            name={'Save'}
             endIcon={<TickSquare size={16} />}
           />
         </Box>
@@ -96,10 +93,10 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
   );
 };
 
-interface ModalAddFolderProps {
+interface ModalRenameFolderProps {
   folder?: TreeInterface | undefined;
   isOpen: boolean;
   onClose?: () => void;
 }
 
-export default ModalAddFolder;
+export default ModalRenameFolder;

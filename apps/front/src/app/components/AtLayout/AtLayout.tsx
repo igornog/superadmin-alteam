@@ -142,7 +142,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                     )}
                   </Grid>
 
-                  <Box display={'flex'} gap={'30px'} alignItems={'center'}>
+                  <Box display={'flex'} gap={'30px'}>
                     {activeTab.config.settings.displayMode && (
                       <AtSwitchDisplayMode />
                     )}
@@ -158,10 +158,12 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                           <Candle /> Sort by:
                         </AtTypography>
                         <AtDropdown
+                          placeholder={'None'}
                           listItems={[
                             { id: 0, value: 'None', label: 'None' },
                             { id: 1, value: 'None', label: 'None' },
                           ]}
+                          align={'bottom-right'}
                           kind={AtButtonKind.Default}
                           variant={AtButtonVariant.Contained}
                         />

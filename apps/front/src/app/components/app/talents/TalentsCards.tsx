@@ -23,6 +23,7 @@ const TalentsCards: React.FunctionComponent<TalentsCardProps> = (
             fullHeight={true}
             openShortlist={props.openShortlist}
             openAccepted={props.openAccepted}
+            openEmailToTalent={props.openEmailToTalent}
           />
         </Grid>
       ))}
@@ -35,6 +36,7 @@ interface TalentsCardProps {
   openTalent: (id: number) => void;
   openShortlist: () => void;
   openAccepted: () => void;
+  openEmailToTalent: () => void;
 }
 
 export default TalentsCards;

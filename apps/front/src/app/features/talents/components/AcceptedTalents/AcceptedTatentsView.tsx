@@ -6,10 +6,10 @@ import AtSpace from '../../../../components/AtSpace/AtSpace';
 import { useAppDispatch } from '../../../../utils/hooks/reduxHook';
 import { handleLoadTree } from '../../../../utils/redux/actions/tree.action';
 import { Column } from '../../../../utils/redux/types/settings.type';
-import ShortlistFolderListing from './ShortlistFolderListing';
-import ShortlistTalentsHeader from './ShortlistTalentsHeader';
+import AcceptedFolderListing from './AcceptedFolderListing';
+import AcceptedTalentsHeader from './AcceptedTalentsHeader';
 
-const ShortlistTalentsView: React.FunctionComponent = () => {
+const AcceptedTatentsView: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -19,11 +19,11 @@ const ShortlistTalentsView: React.FunctionComponent = () => {
   return (
     <Grid container={true}>
       <Grid item={true} xs={12}>
-        <ShortlistFolderListing />
+        <AcceptedFolderListing />
 
         <AtLine spacing={30} />
 
-        <ShortlistTalentsHeader />
+        <AcceptedTalentsHeader />
 
         <AtSpace direction={'vertical'} spacing={'20'} />
 
@@ -41,4 +41,4 @@ const ShortlistTalentsView: React.FunctionComponent = () => {
   );
 };
 
-export default ShortlistTalentsView;
+export default AcceptedTatentsView;

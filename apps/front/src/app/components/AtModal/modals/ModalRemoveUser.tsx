@@ -7,7 +7,6 @@ import AtButton, {
   AtButtonVariant,
 } from '../../AtButton/AtButton';
 import AtLine from '../../AtLine/AtLine';
-import AtTextField from '../../AtTextField/AtTextField';
 import AtTypography from '../../AtTypography/AtTypography';
 import AtModal from '../AtModal';
 

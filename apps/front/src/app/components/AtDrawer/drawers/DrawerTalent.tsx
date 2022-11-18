@@ -48,9 +48,10 @@ const DrawerTalent: React.FunctionComponent = () => {
         padding={'0 20px 25px 20px'}
         gap={'25px'}
       >
-        {activeTab.config.title === Tabs.ShortlistTalent && (
-          <TalentListings talent={selectedTalent} />
-        )}
+        {activeTab.config.title === Tabs.ShortlistTalent ||
+          (activeTab.config.title === Tabs.AcceptedTalent && (
+            <TalentListings talent={selectedTalent} />
+          ))}
 
         <TalentSkills talent={selectedTalent} />
 

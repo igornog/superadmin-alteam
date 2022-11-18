@@ -1,8 +1,14 @@
 import { Box, CircularProgress, Skeleton } from '@mui/material';
 import { Folder } from 'iconsax-react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { black, grey3, grey5, white } from '../../utils/colors';
+import { Tree, TreeInterface } from '../../utils/redux/types/tree.type';
+import ModalAddFolder from '../AtModal/modals/ModalAddFolder';
+import ModalRenameFolder from '../AtModal/modals/ModalRenameFolder';
+import ModalShareFolder from '../AtModal/modals/ModalShareFolder';
+import AtRightClick from '../AtRightClick/AtRightClick';
+import FolderMenu from '../AtRightClick/ContextMenus/FolderMenu';
 import AtTypography from '../AtTypography/AtTypography';
 
 const StyledFolder = styled.div<{ minimize?: boolean }>`
@@ -29,39 +35,80 @@ const StyledFolder = styled.div<{ minimize?: boolean }>`
 const AtFolder: React.FunctionComponent<AtFolderProps> = (
   props: AtFolderProps
 ) => {
+  const [openModalAddFolder, setOpenModalAddFolder] = useState(false);
+  const [openModalRenameFolder, setOpenModalRenameFolder] = useState(false);
+  const [openModalShareFolder, setOpenModalShareFolder] = useState(false);
+
+  const [folder, setFolder] = useState(new Tree({}));
+
+  useEffect(() => {
+    if (props.folder) {
+      setFolder(new Tree(props.folder));
+    }
+  }, [props.folder]);
+
   return (
-    <StyledFolder onClick={props.onClick} minimize={props.minimize}>
-      {props.loading ? (
-        <Box
-          display={'flex'}
-          flexDirection={props.minimize ? 'row' : 'column'}
-          alignItems={'center'}
-          gap={props.minimize ? '5px' : '20px'}
-        >
-          <CircularProgress color={'secondary'} />
-          <Skeleton animation="wave" width={'100%'} />
-        </Box>
-      ) : (
-        <Box
-          display={'flex'}
-          flexDirection={props.minimize ? 'row' : 'column'}
-          alignItems={'center'}
-          gap={props.minimize ? '5px' : '20px'}
-          paddingLeft={props.minimize ? '20px' : '0'}
-        >
-          {props.logo ?? <Folder size={props.minimize ? 20 : 40} />}
-          <AtTypography variant={props.minimize ? 'body1' : 'h5'}>
-            {props.name}
-          </AtTypography>
-        </Box>
-      )}
-    </StyledFolder>
+    <>
+      <AtRightClick
+        contextMenu={
+          <FolderMenu
+            openCreateFolder={() => setOpenModalAddFolder(true)}
+            openRenameFolder={() => setOpenModalRenameFolder(true)}
+            openShareFolder={() => setOpenModalShareFolder(true)}
+          />
+        }
+      >
+        <StyledFolder onClick={props.onClick} minimize={props.minimize}>
+          {props.loading ? (
+            <Box
+              display={'flex'}
+              flexDirection={props.minimize ? 'row' : 'column'}
+              alignItems={'center'}
+              gap={props.minimize ? '5px' : '20px'}
+            >
+              <CircularProgress color={'secondary'} />
+              <Skeleton animation="wave" width={'100%'} />
+            </Box>
+          ) : (
+            <Box
+              display={'flex'}
+              flexDirection={props.minimize ? 'row' : 'column'}
+              alignItems={'center'}
+              gap={props.minimize ? '5px' : '20px'}
+              paddingLeft={props.minimize ? '20px' : '0'}
+            >
+              <Folder size={props.minimize ? 20 : 40} />
+              <AtTypography variant={props.minimize ? 'body1' : 'h5'}>
+                {folder.name}
+              </AtTypography>
+            </Box>
+          )}
+        </StyledFolder>
+      </AtRightClick>
+
+      <ModalRenameFolder
+        isOpen={openModalRenameFolder}
+        onClose={() => setOpenModalRenameFolder(false)}
+        folder={folder}
+      />
+
+      <ModalShareFolder
+        isOpen={openModalShareFolder}
+        onClose={() => setOpenModalShareFolder(false)}
+        folder={folder}
+      />
+
+      <ModalAddFolder
+        isOpen={openModalAddFolder}
+        onClose={() => setOpenModalAddFolder(false)}
+        folder={folder}
+      />
+    </>
   );
 };
 
 interface AtFolderProps {
-  logo?: string;
-  name?: string;
+  folder?: TreeInterface;
   loading?: boolean;
   minimize?: boolean;
   onClick?: (e: React.MouseEvent) => void;

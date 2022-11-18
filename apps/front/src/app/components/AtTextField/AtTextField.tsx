@@ -194,12 +194,10 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
 
   const [showDropdownLabel, setShowDropdownLabel] = useState(false);
   const dropdownLabelRef = useRef<any>(null);
-  // const [value, setValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);
 
   const returnValue = (value: string) => {
     props.onValueChange?.(value);
-    // setValue(value);
   };
 
   const handleClickShowPassword = () => {
