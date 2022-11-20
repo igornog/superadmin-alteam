@@ -6,7 +6,8 @@ class RemoteAuthService implements AuthService {
     const response = await axios.post('/auth/login', {
       data: { email, password },
     });
-    return response.data;
+    const { token, user } = response.data; // TODO store token in local storage
+    return user;
   }
 }
 

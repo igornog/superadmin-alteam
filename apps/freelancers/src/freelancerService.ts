@@ -1,6 +1,5 @@
 import {freelancerPgRepository} from "@yjcapp/postgres-db";
-import {logger} from "@yjcapp/api-utils";
-import {HttpError} from "../../../libs/api-utils/src/errorHandler";
+import {HttpError, logger} from "@yjcapp/api-utils";
 import {transformGroupWebFlowRequest, transformSoloWebFlowRequest} from "./webFlowRequest";
 
 export function createFreelancer(freelancer: any) {
