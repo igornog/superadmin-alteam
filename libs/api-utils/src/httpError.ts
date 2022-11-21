@@ -6,6 +6,6 @@ export class HttpError extends Error {
     this.statusCode = statusCode;
   }
   static unauthorized(message ?: string) {
-    return new HttpError(403, message);
+    return new HttpError(401, message);
   }
 }
