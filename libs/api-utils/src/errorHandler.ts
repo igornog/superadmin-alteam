@@ -1,14 +1,6 @@
-import { NextFunction, Request, Response } from 'express';
+import {NextFunction, Request, Response} from 'express';
 import {logger} from "./logger";
-
-export class HttpError extends Error {
-  statusCode?: number;
-
-  constructor(statusCode: number, message ?: string) {
-    super(`HTTP ERROR ${statusCode}: ${message ?? ""}`);
-    this.statusCode = statusCode;
-  }
-}
+import {HttpError} from "./httpError";
 
 function handleError(err: HttpError, res: Response): void {
   logger.error(err.message,{statusCode : err.statusCode})
