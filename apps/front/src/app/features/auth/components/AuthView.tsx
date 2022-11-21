@@ -1,5 +1,5 @@
 import { Box, useMediaQuery, useTheme } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import background from '../../../assets/images/background.png';
 import logo from '../../../assets/images/white_logo.svg';
@@ -13,6 +13,14 @@ const StyledQuote = styled(Box)`
 
 const AuthView: React.FunctionComponent = () => {
   const isSmallScreen = useMediaQuery(useTheme().breakpoints.down('sm'));
+
+  useEffect(() => {
+    const userToken = localStorage.getItem('alt_user_token');
+    console.log(userToken);
+    if (userToken) {
+      window.location.href = '/talents';
+    }
+  }, []);
 
   return (
     <Box

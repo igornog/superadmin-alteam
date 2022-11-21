@@ -4,10 +4,21 @@ import axios from '../axios';
 class RemoteAuthService implements AuthService {
   async login(email: string, password: string) {
     const response = await axios.post('/auth/login', {
-      data: { email, password },
+      email,
+      password,
     });
-    const { token, user } = response.data; // TODO store token in local storage
-    return user;
+
+    if (response.data.token) {
+      const { token } = response.data;
+      localStorage.setItem('alt_user_token', JSON.stringify(token));
+      window.location.href = '/talents';
+    }
+
+    return response.data;
+  }
+
+  logout() {
+    localStorage.removeItem('alt_user_token');
   }
 }
 
