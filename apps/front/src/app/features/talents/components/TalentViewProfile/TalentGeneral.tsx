@@ -1,22 +1,16 @@
 import { Box, Grid } from '@mui/material';
 import { Edit } from 'iconsax-react';
-import React from 'react';
+import React, { useState } from 'react';
+import ModalGeneralInformations from '../../../../components/AtModal/modals/ModalGeneralInformations';
 import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame';
 import AtTypography from '../../../../components/AtTypography/AtTypography';
 import { grey, grey2 } from '../../../../utils/colors';
-import { useAppDispatch } from '../../../../utils/hooks/reduxHook';
-import { handleModal } from '../../../../utils/redux/actions/settings.action';
-import { ModalVariant } from '../../../../utils/redux/types/settings.type';
 import { Talent } from '../../../../utils/redux/types/talents.type';
 
 const TalentGeneral: React.FunctionComponent<TalentGeneralProps> = (
   props: TalentGeneralProps
 ) => {
-  const dispatch = useAppDispatch();
-
-  const handleEditInformations = () => {
-    dispatch(handleModal(ModalVariant.GeneralInformations));
-  };
+  const [openModal, setOpenModal] = useState(false);
 
   return (
     <AtTalentFrame
@@ -27,7 +21,7 @@ const TalentGeneral: React.FunctionComponent<TalentGeneralProps> = (
           Edit
         </AtTypography>
       }
-      onClick={handleEditInformations}
+      onClick={() => setOpenModal(true)}
     >
       <Grid container={true} gap={'15px'}>
         <Box display={'flex'} width={'100%'}>
@@ -105,6 +99,11 @@ const TalentGeneral: React.FunctionComponent<TalentGeneralProps> = (
           </Grid>
         </Box>
       </Grid>
+
+      <ModalGeneralInformations
+        isOpen={openModal}
+        onClose={() => setOpenModal(false)}
+      />
     </AtTalentFrame>
   );
 };

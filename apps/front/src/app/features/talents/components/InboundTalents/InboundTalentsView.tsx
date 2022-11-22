@@ -1,26 +1,14 @@
 import { Grid } from '@mui/material';
 import React from 'react';
-import AtCard from '../../../../components/AtCard/AtCard';
-import AtRightClick from '../../../../components/AtRightClick/AtRightClick';
+import TalentsSwitchMode from '../../../../components/app/talents/TalentsSwitchMode';
 import AtTypography from '../../../../components/AtTypography/AtTypography';
 import { grey3 } from '../../../../utils/colors';
-import {
-  useAppDispatch,
-  useAppSelector,
-} from '../../../../utils/hooks/reduxHook';
-import { handleSelectTalent } from '../../../../utils/redux/actions/talents.action';
-import { DisplayMode } from '../../../../utils/redux/types/settings.type';
-import InboundTalentsTable from './InboundTalentsTable';
+import { useAppSelector } from '../../../../utils/hooks/reduxHook';
+import { Column } from '../../../../utils/redux/types/settings.type';
 
 const InboundTalentsView: React.FunctionComponent = () => {
-  const dispatch = useAppDispatch();
-  const settings = useAppSelector((state) => state.settings);
   const talents = useAppSelector((state) => state.talents);
   const listTalent = talents.listTalents;
-
-  const handleClickCard = (id: number) => {
-    dispatch(handleSelectTalent(id));
-  };
 
   return (
     <Grid container={true} spacing={2.5} marginTop={0} alignItems={'stretch'}>
@@ -30,28 +18,18 @@ const InboundTalentsView: React.FunctionComponent = () => {
             No Recent Candidates
           </AtTypography>
         </Grid>
-      ) : settings.displayMode === DisplayMode.Grid ? (
-        listTalent.map((talent) => (
-          <Grid
-            item={true}
-            xs={6}
-            xl={4}
-            key={talent.id}
-            display={'flex'}
-            flexDirection={'column'}
-          >
-            <AtCard
-              talent={talent}
-              onClick={() => handleClickCard(talent.id)}
-              fullHeight={true}
-            />
-          </Grid>
-        ))
-      ) : settings.displayMode === DisplayMode.List ? (
+      ) : (
         <Grid item={true} xs={12}>
-          <InboundTalentsTable talents={listTalent} onClick={handleClickCard} />
+          <TalentsSwitchMode
+            tableColumns={[
+              Column.Talent,
+              Column.Applied,
+              Column.Availability,
+              Column.Skills,
+            ]}
+          />
         </Grid>
-      ) : null}
+      )}
     </Grid>
   );
 };

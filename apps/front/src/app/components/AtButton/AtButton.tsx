@@ -36,11 +36,7 @@ export const buttonKind = {
       outlined: grey2,
     },
     active: {
-      backgroundColor: white,
-      color: black,
-    },
-    focus: {
-      backgroundColor: white,
+      backgroundColor: green,
       color: black,
     },
     disabled: {
@@ -59,10 +55,6 @@ export const buttonKind = {
       outlined: grey2,
     },
     active: {
-      backgroundColor: black,
-      color: white,
-    },
-    focus: {
       backgroundColor: black,
       color: white,
     },
@@ -85,10 +77,6 @@ export const buttonKind = {
       backgroundColor: null,
       color: null,
     },
-    focus: {
-      backgroundColor: null,
-      color: null,
-    },
     disabled: {
       backgroundColor: grey4,
       color: grey3,
@@ -100,8 +88,10 @@ interface StyledButtonProps {
   kind: AtButtonKind;
   $variant: AtButtonVariant;
   $btnName?: string;
+  $padding?: string;
   startIcon?: React.ReactNode;
   iconSize?: number;
+  flexibleHeight?: boolean;
 }
 
 const StyledButton = styled(Button)<StyledButtonProps>`
@@ -121,6 +111,10 @@ const StyledButton = styled(Button)<StyledButtonProps>`
     text-transform: initial;
     box-shadow: none;
 
+    & .${buttonClasses.endIcon} {
+      margin-right: 0;
+    }
+
     ${({ $btnName, startIcon }) =>
       !$btnName && startIcon
         ? css`
@@ -132,9 +126,26 @@ const StyledButton = styled(Button)<StyledButtonProps>`
               margin: 0;
             }
           `
-        : css`
-            height: 40px;
-            padding: 10px 20px;
+        : css<{
+            $variant: AtButtonVariant;
+            $padding?: string;
+            flexibleHeight?: boolean;
+          }>`
+            padding: ${({ $variant, $padding }) =>
+              $padding
+                ? $padding
+                : $variant === AtButtonVariant.Text
+                ? '10px 0'
+                : '10px 20px'};
+
+            ${({ flexibleHeight }) =>
+              flexibleHeight
+                ? css`
+                    min-height: 24px;
+                  `
+                : css`
+                    height: 40px;
+                  `}
           `}
 
     ${({ $variant }) =>
@@ -193,27 +204,6 @@ const StyledButton = styled(Button)<StyledButtonProps>`
       color: ${({ kind }) => buttonKind[kind].active.color};
     }
 
-    :focus {
-      ${({ $variant }) =>
-        $variant === AtButtonVariant.Contained
-          ? css<{ kind: AtButtonKind }>`
-              background-color: ${({ kind }) =>
-                buttonKind[kind].focus.backgroundColor};
-              color: ${({ kind }) => buttonKind[kind].focus.color};
-            `
-          : $variant === AtButtonVariant.Outlined
-          ? css<{ kind: AtButtonKind }>`
-              background-color: transparent;
-              color: ${({ kind }) => buttonKind[kind].focus.color};
-            `
-          : css<{ kind: AtButtonKind }>`
-              background-color: transparent;
-              color: ${({ kind }) => buttonKind[kind].focus.color};
-            `}
-      transition: all 0.25s ease-in-out;
-      box-shadow: none;
-    }
-
     &.Mui-disabled {
       transition: all 0.25s ease-in-out;
       cursor: not-allowed;
@@ -239,18 +229,6 @@ const StyledButton = styled(Button)<StyledButtonProps>`
   }
 `;
 
-interface AtButtonProps {
-  kind: AtButtonKind;
-  variant: AtButtonVariant;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  name?: string;
-  disabled?: boolean;
-  startIcon?: React.ReactNode;
-  endIcon?: React.ReactNode;
-  fontSize?: string;
-  iconSize?: number;
-}
-
 const AtButton: React.FunctionComponent<AtButtonProps> = (
   props: AtButtonProps
 ) => {
@@ -260,19 +238,39 @@ const AtButton: React.FunctionComponent<AtButtonProps> = (
       kind={props.kind}
       $variant={props.variant}
       $btnName={props.name}
+      $padding={props.padding}
       startIcon={props.startIcon}
       endIcon={props.endIcon}
       iconSize={props.iconSize}
       disabled={props.disabled}
+      disableRipple={true}
       onClick={props.onClick}
     >
       {props.name && (
-        <AtTypography variant={'button'} fontSize={props.fontSize}>
+        <AtTypography
+          variant={'button'}
+          fontSize={props.fontSize}
+          whiteSpace={'nowrap'}
+        >
           {props.name}
         </AtTypography>
       )}
     </StyledButton>
   );
 };
+
+export interface AtButtonProps {
+  kind: AtButtonKind;
+  variant: AtButtonVariant;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  name?: string;
+  disabled?: boolean;
+  padding?: string;
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
+  fontSize?: string;
+  iconSize?: number;
+  flexibleHeight?: boolean;
+}
 
 export default AtButton;

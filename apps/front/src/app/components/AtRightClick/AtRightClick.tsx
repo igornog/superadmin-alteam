@@ -3,6 +3,7 @@ import {
   Content,
   ContextMenuTrigger,
   Item,
+  MenuItemProps,
   Root,
 } from '@radix-ui/react-context-menu';
 import React from 'react';
@@ -41,6 +42,10 @@ const StyledMenuItem = styled(Item)<{ variant?: string }>`
     outline: 0;
     cursor: pointer;
     color: ${black};
+
+    img {
+      filter: brightness(0.5);
+    }
   }
 `;
 
@@ -48,11 +53,13 @@ export const AtContextMenuItem: React.FunctionComponent<
   AtContextMenuItemProps
 > = (props: AtContextMenuItemProps) => {
   return (
-    <StyledMenuItem variant={props.variant}>{props.children}</StyledMenuItem>
+    <StyledMenuItem variant={props.variant} {...props}>
+      {props.children}
+    </StyledMenuItem>
   );
 };
 
-interface AtContextMenuItemProps {
+interface AtContextMenuItemProps extends MenuItemProps {
   variant?: 'default' | 'danger';
   children: React.ReactNode;
 }

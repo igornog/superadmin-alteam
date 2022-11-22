@@ -76,6 +76,7 @@ const StyledInput = styled(OutlinedInput)<{
   $bgColor?: string;
   $maxWidth?: number;
   multiline?: boolean;
+  width?: string;
 }>`
   &.${outlinedInputClasses.root} {
     ${({ multiline }) =>
@@ -83,8 +84,6 @@ const StyledInput = styled(OutlinedInput)<{
       css`
         padding: 0 20px;
       `}
-
-    justify-content: space-between;
 
     ${({ $bgColor }) =>
       $bgColor
@@ -104,6 +103,7 @@ const StyledInput = styled(OutlinedInput)<{
           `};
 
     & input {
+      width: ${({ width }) => width ?? '100%'};
       max-width: ${({ $maxWidth }) => $maxWidth && $maxWidth + 'ch'};
       color: ${({ disabled, $bgColor }) =>
         $bgColor === 'black' ? white : disabled ? grey3 : black};
@@ -194,13 +194,10 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
 
   const [showDropdownLabel, setShowDropdownLabel] = useState(false);
   const dropdownLabelRef = useRef<any>(null);
-
-  const [value, setValue] = useState(props.defaultValue || '');
   const [isFocused, setIsFocused] = useState(false);
 
   const returnValue = (value: string) => {
     props.onValueChange?.(value);
-    setValue(value);
   };
 
   const handleClickShowPassword = () => {
@@ -269,6 +266,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
       <FormControl variant="outlined" fullWidth={true}>
         <StyledInput
           fullWidth={true}
+          width={props.width}
           onClick={props.onClick}
           dropdown={props.dropdown}
           $maxWidth={props.maxWidth}
@@ -280,7 +278,8 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
           multiline={props.multiline}
           rows={props.rows}
           disabled={props.disabled}
-          value={props.dropdown ? props.placeholder : value}
+          defaultValue={props.defaultValue}
+          value={props.dropdown ? props.placeholder : props.value}
           size={props.size ?? 'medium'}
           required={props.required}
           type={
@@ -308,17 +307,18 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
               <StyledArrow open={props.open} size={15} />
             ) : (
               props.endIcon ||
-              (props.type === AtTextFieldType.Password && value.length > 0 && (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <Eye /> : <EyeSlash />}
-                  </IconButton>
-                </InputAdornment>
-              ))
+              (props.type === AtTextFieldType.Password &&
+                props.value.length > 0 && (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <Eye /> : <EyeSlash />}
+                    </IconButton>
+                  </InputAdornment>
+                ))
             )
           }
         />
@@ -335,8 +335,10 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
 
 export interface AtTextFieldProps {
   fullWidth?: boolean;
+  width?: string;
   required?: boolean;
   defaultValue?: string;
+  value: string;
 
   multiline?: boolean;
   rows?: number;
@@ -349,7 +351,7 @@ export interface AtTextFieldProps {
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
 
-  onClick?: () => void;
+  onClick?: (e?: any) => void;
   dropdown?: boolean;
   open?: boolean;
 

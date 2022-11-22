@@ -6,7 +6,7 @@ import {
   handleInitSettings,
   handleSettingsTab,
   handleSwitchDisplayMode,
-  handleModal,
+  handleDrawer,
 } from '../actions/settings.action';
 import { DisplayMode, Filter, SettingsState } from '../types/settings.type';
 import { StatusType } from '../types/status.type';
@@ -19,7 +19,7 @@ const initialState: SettingsState = {
   },
   header: {},
   displayMode: DisplayMode.List,
-  selectedModal: null,
+  selectedDrawer: null,
   status: StatusType.Idle,
   error: null,
 };
@@ -36,6 +36,7 @@ const { reducer } = createSlice({
       .addCase(handleInitSettings.fulfilled, (state, { payload }) => {
         state.status = StatusType.Succeeded;
         state.tabs = payload.tabs;
+
         state.filters.skills = payload.filters;
         state.filters.jobTypes = payload.jobTypes;
       })
@@ -78,8 +79,8 @@ const { reducer } = createSlice({
         state.displayMode = payload;
       })
 
-      .addCase(handleModal.fulfilled, (state, { payload }) => {
-        state.selectedModal = payload;
+      .addCase(handleDrawer.fulfilled, (state, { payload }) => {
+        state.selectedDrawer = payload;
       });
   },
 });

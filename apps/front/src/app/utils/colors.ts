@@ -4,6 +4,7 @@ export const grey2 = '#6F737D';
 export const grey3 = '#9FA1A9';
 export const grey4 = '#CFD0D4';
 export const grey5 = '#E7E8E9';
+export const grey6 = '#F1F8FE';
 export const white = '#FFFFFF';
 
 export const blue = '#686DF1';
