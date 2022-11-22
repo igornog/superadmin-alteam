@@ -10,7 +10,7 @@
       "defaultConfiguration": "production",
       "options": {
         "compiler": "babel",
-        "outputPath": "dist/apps/front",
+        "outputPath": "apps/front/dist",
         "index": "apps/front/src/index.html",
         "baseHref": "/",
         "main": "apps/front/src/main.tsx",
@@ -70,7 +70,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/front"],
+      "outputs": ["{workspaceRoot}/coverage/apps/front"],
       "options": {
         "jestConfig": "apps/front/jest.config.ts",
         "passWithNoTests": true
@@ -105,6 +105,20 @@
         "ci": {
           "quiet": true
         }
+      }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        {
+          "params": "forward",
+          "target": "build",
+          "projects": "self"
+        }
+      ],
+      "options": {
+        "cwd": "apps/front/infrastructure",
+        "command": "../../../infrastructure/scripts/terraformStageWrapper.sh apply front"
       }
     }
   },

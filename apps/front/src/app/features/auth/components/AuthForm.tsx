@@ -12,6 +12,7 @@ import AtTextField, {
 import AtTypography from '../../../components/AtTypography/AtTypography';
 import { grey5 } from '../../../utils/colors';
 import { isValidEmail } from '../../../utils/emails';
+import { authService } from '../../../utils/services';
 
 const StyledBackground = styled.div`
   padding: 0 50px;
@@ -28,7 +29,7 @@ const AuthForm: React.FunctionComponent = () => {
   const [password, setPassword] = useState('');
 
   const handleSubmit = () => {
-    console.log(email, password);
+    authService.login(email, password);
   };
 
   return (

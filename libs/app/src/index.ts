@@ -1,1 +1,2 @@
-export * from './freelancer';
+export * from './talent';
+export * from './services';

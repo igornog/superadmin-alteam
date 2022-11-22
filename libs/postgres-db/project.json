@@ -1,24 +1,19 @@
 {
+  "name": "postgres-db",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/postgres-db/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "libs/postgres-db/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/postgres-db/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/postgres-db"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/libs/postgres-db"],
       "options": {
         "jestConfig": "libs/postgres-db/jest.config.ts",
         "passWithNoTests": true
@@ -29,15 +24,25 @@
       "options": {
         "command": "./libs/postgres-db/scripts/migrateRun.sh"
       },
-      "dependsOn": [
-        "docker:up"
-      ]
+      "dependsOn": ["docker:up"]
     },
     "migration:generate": {
       "executor": "nx:run-commands",
       "options": {
         "command": "./libs/postgres-db/scripts/migrateGenerate.sh {args.name}"
       }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "libs/postgres-db/infrastructure",
+        "command": "../../../infrastructure/scripts/terraformCommonWrapper.sh apply postgres-db"
+      },
+      "inputs": [
+        "{projectRoot}/src/migration/*",
+        "infrastructure",
+        "stage"
+      ]
     },
     "migration:revert": {
       "executor": "nx:run-commands",

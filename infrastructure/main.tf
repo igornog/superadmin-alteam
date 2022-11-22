@@ -11,19 +11,12 @@ provider "aws" {
   region = var.region
 }
 module "base_data" {
-  source = "./base/data"
-}
-module "freelancers" {
-  source      = "../apps/freelancers/infrastructure"
-  stage       = var.stage
-  db_name     = module.postgres_db.db_name
-  db_username = module.postgres_db.db_username
-  db_address  = module.postgres_db.db_address
-  db_password = module.postgres_db.db_password
+  source = "./modules/base_data"
 }
 
-module "postgres_db" {
-  source = "../libs/postgres-db/infrastructure"
-  stage  = var.stage
-  vpc_id = module.base_data.vpc_id
+module "domain_name" {
+  source          = "./modules/api_domain"
+  stage           = var.stage
+  certificate_arn = module.base_data.alteam_api_cert_arn
+  hosted_zone_id  = module.base_data.hosted_zone_id
 }

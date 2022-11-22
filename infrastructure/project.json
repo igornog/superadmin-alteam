@@ -1,23 +1,16 @@
 {
+  "name": "infrastructure",
   "$schema": "../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "infrastructure",
   "projectType": "application",
   "targets": {
     "deploy": {
       "executor": "nx:run-commands",
-      "dependsOn": [
-        {
-          "target": "package",
-          "projects": "dependencies"
-        }
-      ],
       "options": {
-        "command": "infrastructure/scripts/terraformStageWrapper.sh apply"
+        "cwd": "infrastructure",
+        "command": "./scripts/terraformStageWrapper.sh apply common"
       }
     }
   },
-  "tags": [],
-  "implicitDependencies": [
-    "freelancers"
-  ]
+  "tags": []
 }

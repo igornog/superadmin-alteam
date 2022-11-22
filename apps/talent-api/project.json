@@ -1,0 +1,89 @@
+{
+  "name": "talent-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/talent-api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputFileName": "index.js",
+        "outputPath": "apps/talent-api/dist",
+        "main": "apps/talent-api/src/index.ts",
+        "tsConfig": "apps/talent-api/tsconfig.app.json"
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "externalDependencies": "none",
+          "fileReplacements": [
+            {
+              "replace": "apps/talent-api/src/environments/environment.ts",
+              "with": "apps/talent-api/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "package": {
+      "executor": "nx:run-commands",
+      "dependsOn":["build"],
+      "inputs": ["production","^production"],
+      "options": {
+        "command": "zip -FSqj apps/talent-api/dist/package.zip apps/talent-api/dist/index.js"
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "talent-api:build"
+      },
+      "dependsOn": [
+        {
+          "target": "migration:run",
+          "params": "forward",
+          "projects": "dependencies"
+        }
+      ],
+      "configurations": {
+        "production": {
+          "buildTarget": "talent-api:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/talent-api/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/talent-api"],
+      "options": {
+        "jestConfig": "apps/talent-api/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "package"
+      ],
+      "options": {
+        "cwd": "apps/talent-api/infrastructure",
+        "command": "../../../infrastructure/scripts/terraformStageWrapper.sh apply talent-api"
+      }
+    }
+  },
+  "implicitDependencies": ["postgres-db"],
+  "tags": []
+}
