@@ -6,8 +6,8 @@ import AtTypography from '../../AtTypography/AtTypography';
 import { AtContextMenuItem } from '../AtRightClick';
 import Arrow2 from '../../../assets/images/icons/arrow2.svg';
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector';
-import { RightClick } from '../../../utils/types';
-import { Talent } from '../../../utils/redux/types/talents.type';
+import { RightClick, Tabs } from '../../../utils/types';
+import { Talent, TalentStatus } from '../../../utils/redux/types/talents.type';
 import { grey2 } from '../../../utils/colors';
 
 const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
@@ -19,6 +19,13 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
 
   const isCurrentTabAllowed = (rightclickFunc: RightClick) => {
     return activeTab.content.talentRightClick.includes(rightclickFunc);
+  };
+
+  const isTabAndStatusAllowed = (status: TalentStatus[]) => {
+    return (
+      activeTab.config.title === Tabs.AllTalent &&
+      status.includes(props.talent.status)
+    );
   };
 
   const moveToAccepted = () => {
@@ -51,59 +58,80 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
     </AtContextMenuItem>
   ) : (
     <>
-      {isCurrentTabAllowed(RightClick.MoveToAccepted) && (
+      {isCurrentTabAllowed(RightClick.MoveToAccepted) ||
+      isTabAndStatusAllowed([TalentStatus.Shortlisted]) ? (
         <AtContextMenuItem onSelect={moveToAccepted}>
           <AtTypography>
             <img src={Arrow2} alt={'Arrow'} width={20} />
             Move to Accepted
           </AtTypography>
         </AtContextMenuItem>
-      )}
+      ) : null}
 
-      {isCurrentTabAllowed(RightClick.MoveToShortlisted) && (
+      {isCurrentTabAllowed(RightClick.MoveToShortlisted) ||
+      isTabAndStatusAllowed([TalentStatus.Inbound, TalentStatus.Accepted]) ? (
         <AtContextMenuItem onSelect={moveToShortlist}>
           <AtTypography>
             <img src={Arrow2} alt={'Arrow'} width={20} />
             Move to Shortlisted
           </AtTypography>
         </AtContextMenuItem>
-      )}
+      ) : null}
 
-      {isCurrentTabAllowed(RightClick.EditTalentFolders) && (
+      {isCurrentTabAllowed(RightClick.EditTalentFolders) ||
+      isTabAndStatusAllowed([
+        TalentStatus.Shortlisted,
+        TalentStatus.Accepted,
+      ]) ? (
         <AtContextMenuItem>
           <AtTypography>
             <Edit size={20} />
             Edit Talent Folders
           </AtTypography>
         </AtContextMenuItem>
-      )}
+      ) : null}
 
-      {isCurrentTabAllowed(RightClick.SendEmailToTalent) && (
+      {isCurrentTabAllowed(RightClick.SendEmailToTalent) ||
+      isTabAndStatusAllowed([
+        TalentStatus.Shortlisted,
+        TalentStatus.Inbound,
+        TalentStatus.Accepted,
+      ]) ? (
         <AtContextMenuItem onSelect={sendEmailToTalent}>
           <AtTypography>
             <Sms size={20} />
             Send Email to Talent
           </AtTypography>
         </AtContextMenuItem>
-      )}
+      ) : null}
 
-      {isCurrentTabAllowed(RightClick.ShareTalent) && (
+      {isCurrentTabAllowed(RightClick.ShareTalent) ||
+      isTabAndStatusAllowed([
+        TalentStatus.Shortlisted,
+        TalentStatus.Inbound,
+        TalentStatus.Accepted,
+      ]) ? (
         <AtContextMenuItem onSelect={(e: Event) => copyLinkToClipboard(e)}>
           <AtTypography>
             <Share size={20} />
             Copy Public Link
           </AtTypography>
         </AtContextMenuItem>
-      )}
+      ) : null}
 
-      {isCurrentTabAllowed(RightClick.MoveToDesclined) && (
+      {isCurrentTabAllowed(RightClick.MoveToDesclined) ||
+      isTabAndStatusAllowed([
+        TalentStatus.Shortlisted,
+        TalentStatus.Inbound,
+        TalentStatus.Accepted,
+      ]) ? (
         <AtContextMenuItem variant="danger">
           <AtTypography>
             <TrushSquare size={20} />
             Move to Declined
           </AtTypography>
         </AtContextMenuItem>
-      )}
+      ) : null}
     </>
   );
 };
