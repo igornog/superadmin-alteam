@@ -53,6 +53,8 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
             <AtTableCell>Assigned to</AtTableCell>
           )}
 
+          {haveToDisplay(Column.Status) && <AtTableCell>Status</AtTableCell>}
+
           {haveToDisplay(Column.Skills) && (
             <AtTableCell align="right">Skills</AtTableCell>
           )}
@@ -104,6 +106,14 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
               {haveToDisplay(Column.Availability) && (
                 <AtTableCell>
                   <AtTypography>{talent.jobType}</AtTypography>
+                </AtTableCell>
+              )}
+              {haveToDisplay(Column.Status) && (
+                <AtTableCell>
+                  <StyledTagClients
+                    variant={'outlined'}
+                    label={talent.status}
+                  />
                 </AtTableCell>
               )}
               {haveToDisplay(Column.AssignedTo) && (

@@ -72,5 +72,6 @@ export enum Column {
   Applied = 'Applied',
   Availability = 'Availability',
   Skills = 'Skills',
+  Status = 'Status',
   AssignedTo = 'AssignedTo',
 }

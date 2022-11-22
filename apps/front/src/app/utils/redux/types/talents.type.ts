@@ -16,6 +16,13 @@ export interface Link {
   link: string;
 }
 
+export enum TalentStatus {
+  Inbound = 'Inbound',
+  Shortlisted = 'Shortlisted',
+  Accepted = 'Accepted',
+  Declined = 'Declined',
+}
+
 export class Talent {
   id: number;
   fullName: string;
@@ -29,6 +36,7 @@ export class Talent {
   portfolio?: string;
   email?: string;
   phone?: string;
+  status: TalentStatus;
   links: Link[];
 
   constructor(data: any) {
@@ -44,10 +52,27 @@ export class Talent {
     this.portfolio = data.portfolio;
     this.email = data.email;
     this.phone = data.phone;
+    this.status = data.status;
     this.links = data.links;
   }
 
   isEmpty(): boolean {
     return this.id !== undefined;
+  }
+
+  isInbound(): boolean {
+    return this.status === TalentStatus.Inbound;
+  }
+
+  isShortlisted(): boolean {
+    return this.status === TalentStatus.Shortlisted;
+  }
+
+  isAccepted(): boolean {
+    return this.status === TalentStatus.Accepted;
+  }
+
+  isDeclined(): boolean {
+    return this.status === TalentStatus.Declined;
   }
 }
