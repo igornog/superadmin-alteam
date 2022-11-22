@@ -2,13 +2,12 @@ import { Box, Tooltip } from '@mui/material';
 import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { grey, grey3 } from '../../../utils/colors';
-import { useAppSelector } from '../../../utils/hooks/reduxHook';
 import useWindowSize from '../../../utils/hooks/useWindowSize';
-import { getActiveTab } from '../../../utils/redux/selectors/settings.selector';
 import { Column } from '../../../utils/redux/types/settings.type';
 import { Talent, Skill } from '../../../utils/redux/types/talents.type';
 import AtGroupTag from '../../AtGroupTag/AtGroupTag';
 import AtRightClick from '../../AtRightClick/AtRightClick';
+import TalentMenu from '../../AtRightClick/ContextMenus/TalentMenu';
 import AtTable from '../../AtTable/AtTable';
 import AtTableBody from '../../AtTable/AtTableBody';
 import AtTableCell from '../../AtTable/AtTableCell';
@@ -32,7 +31,6 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
   const [maxItemPerLine, setMaxItemPerLine] = useState(0);
   const skillsRef = useRef<any>(null);
   const windowSize = useWindowSize();
-  const activeTab = useAppSelector((state) => getActiveTab(state));
 
   useEffect(() => {
     setMaxItemPerLine(Math.floor(skillsRef.current?.clientWidth / 150));
@@ -63,11 +61,14 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
       <AtTableBody position={position}>
         {props.talents.map((talent: Talent) => (
           <AtRightClick
-            contextMenu={activeTab.content.rightClick({
-              idTalent: talent.id,
-              openShortlist: props.openShortlist,
-              openAccepted: props.openAccepted,
-            })}
+            contextMenu={
+              <TalentMenu
+                talent={talent}
+                openShortlist={props.openShortlist}
+                openAccepted={props.openAccepted}
+                openEmailToTalent={props.openEmailToTalent}
+              />
+            }
           >
             <AtTableRow
               key={talent.id}
@@ -200,6 +201,7 @@ interface TalentsTableProps {
   openTalent: (id: number) => void;
   openShortlist: () => void;
   openAccepted: () => void;
+  openEmailToTalent: () => void;
   tableColumns?: Column[];
 }
 

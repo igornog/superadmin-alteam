@@ -1,5 +1,10 @@
 import { Box } from '@mui/material';
-import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react';
+import {
+  CloseCircle,
+  CloseSquare,
+  TickSquare,
+  TrushSquare,
+} from 'iconsax-react';
 import React, { useEffect, useState } from 'react';
 import AtButton, {
   AtButtonKind,
@@ -9,17 +14,22 @@ import AtTypography from '../../AtTypography/AtTypography';
 import { ModalSize } from '../../../utils/redux/types/settings.type';
 import AtLine from '../../AtLine/AtLine';
 import AtModal from '../AtModal';
-import AtTextField from '../../AtTextField/AtTextField';
 import { Tree, TreeInterface } from '../../../utils/redux/types/tree.type';
-import { useAppDispatch } from '../../../utils/hooks/reduxHook';
-import { handleAddFolder } from '../../../utils/redux/actions/tree.action';
+import { grey2, grey3, grey5 } from '../../../utils/colors';
+import styled from 'styled-components';
+import AtDropdown from '../../AtDropdown/AtDropdown';
+import AtSpace from '../../AtSpace/AtSpace';
 
-const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
-  props: ModalAddFolderProps
-) => {
-  const dispatch = useAppDispatch();
-  const [folderName, setFolderName] = useState('');
+const StyledDropdown = styled(AtDropdown)`
+  justify-content: space-between;
+  width: 100%;
+  border-color: ${grey5};
+  color: ${grey3};
+`;
 
+const ModalAssignFolderToClient: React.FunctionComponent<
+  ModalAssignFolderToClientProps
+> = (props: ModalAssignFolderToClientProps) => {
   const [folder, setFolder] = useState(new Tree({}));
 
   useEffect(() => {
@@ -30,14 +40,10 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
 
   const handleClose = () => {
     props.onClose?.();
-    setFolderName('');
   };
 
-  const addNewFolder = () => {
-    if (folder.id) {
-      dispatch(handleAddFolder({ folderName, targetId: folder.id }));
-      handleClose();
-    }
+  const removeFolder = () => {
+    console.log('Remove Folder');
   };
 
   return (
@@ -49,11 +55,7 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
         padding={2.5}
         paddingBottom={0}
       >
-        <AtTypography variant={'h4'}>
-          {folder.isParent()
-            ? 'Create Parent Folder'
-            : `Create Folder in ${folder.name}`}
-        </AtTypography>
+        <AtTypography variant={'h4'}>Assign Folder to Client</AtTypography>
         <AtButton
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
@@ -63,14 +65,27 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
         />
       </Box>
 
-      <AtLine spacing={20} />
+      <AtLine spacingTop={20} />
 
-      <Box display={'flex'} flexDirection={'column'} gap={2.5} padding={2.5}>
-        <AtTextField
-          value={folderName}
-          placeholder={'Enter Name'}
-          label={'Folder Name'}
-          onValueChange={setFolderName}
+      <Box display={'flex'} flexDirection={'column'} gap={'30px'} padding={2.5}>
+        <AtTypography color={grey2}>
+          Please select client that you want to assign this folder to. We won’t
+          make any changes to the folders inside this folder but the name of
+          this folder will be changed to the clients name and taken the image if
+          any.
+        </AtTypography>
+
+        <StyledDropdown
+          listItems={[
+            { id: 0, value: 'None', label: 'None' },
+            { id: 1, value: 'None', label: 'None' },
+          ]}
+          label={'Select Client'}
+          padding={'25px 20px'}
+          placeholder={'Select Client'}
+          align={'bottom-right'}
+          kind={AtButtonKind.Default}
+          variant={AtButtonVariant.Outlined}
         />
 
         <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
@@ -83,11 +98,10 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
           />
 
           <AtButton
-            onClick={addNewFolder}
+            onClick={removeFolder}
             kind={AtButtonKind.Success}
-            disabled={!folderName}
             variant={AtButtonVariant.Contained}
-            name={'Create'}
+            name={'Assign'}
             endIcon={<TickSquare size={16} />}
           />
         </Box>
@@ -96,10 +110,10 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
   );
 };
 
-interface ModalAddFolderProps {
+interface ModalAssignFolderToClientProps {
   folder?: TreeInterface | undefined;
   isOpen: boolean;
   onClose?: () => void;
 }
 
-export default ModalAddFolder;
+export default ModalAssignFolderToClient;

@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react';
+import { CloseCircle, CloseSquare, TrushSquare } from 'iconsax-react';
 import React, { useEffect, useState } from 'react';
 import AtButton, {
   AtButtonKind,
@@ -9,17 +9,12 @@ import AtTypography from '../../AtTypography/AtTypography';
 import { ModalSize } from '../../../utils/redux/types/settings.type';
 import AtLine from '../../AtLine/AtLine';
 import AtModal from '../AtModal';
-import AtTextField from '../../AtTextField/AtTextField';
 import { Tree, TreeInterface } from '../../../utils/redux/types/tree.type';
-import { useAppDispatch } from '../../../utils/hooks/reduxHook';
-import { handleAddFolder } from '../../../utils/redux/actions/tree.action';
+import { grey2 } from '../../../utils/colors';
 
-const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
-  props: ModalAddFolderProps
+const ModalRemoveFolder: React.FunctionComponent<ModalRemoveFolderProps> = (
+  props: ModalRemoveFolderProps
 ) => {
-  const dispatch = useAppDispatch();
-  const [folderName, setFolderName] = useState('');
-
   const [folder, setFolder] = useState(new Tree({}));
 
   useEffect(() => {
@@ -30,14 +25,10 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
 
   const handleClose = () => {
     props.onClose?.();
-    setFolderName('');
   };
 
-  const addNewFolder = () => {
-    if (folder.id) {
-      dispatch(handleAddFolder({ folderName, targetId: folder.id }));
-      handleClose();
-    }
+  const removeFolder = () => {
+    console.log('Remove Folder');
   };
 
   return (
@@ -49,11 +40,7 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
         padding={2.5}
         paddingBottom={0}
       >
-        <AtTypography variant={'h4'}>
-          {folder.isParent()
-            ? 'Create Parent Folder'
-            : `Create Folder in ${folder.name}`}
-        </AtTypography>
+        <AtTypography variant={'h4'}>Delete Folder</AtTypography>
         <AtButton
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
@@ -63,15 +50,14 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
         />
       </Box>
 
-      <AtLine spacing={20} />
+      <AtLine spacingTop={20} />
 
       <Box display={'flex'} flexDirection={'column'} gap={2.5} padding={2.5}>
-        <AtTextField
-          value={folderName}
-          placeholder={'Enter Name'}
-          label={'Folder Name'}
-          onValueChange={setFolderName}
-        />
+        <AtTypography color={grey2}>
+          Are you sure you want to delete folder? Please be avare that the
+          folder will be deleted permanently, and talent will be moved out to
+          all accepted talent with a “No Folder” badge.
+        </AtTypography>
 
         <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
           <AtButton
@@ -83,12 +69,11 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
           />
 
           <AtButton
-            onClick={addNewFolder}
+            onClick={removeFolder}
             kind={AtButtonKind.Success}
-            disabled={!folderName}
             variant={AtButtonVariant.Contained}
-            name={'Create'}
-            endIcon={<TickSquare size={16} />}
+            name={'Delete'}
+            endIcon={<TrushSquare size={16} />}
           />
         </Box>
       </Box>
@@ -96,10 +81,10 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
   );
 };
 
-interface ModalAddFolderProps {
+interface ModalRemoveFolderProps {
   folder?: TreeInterface | undefined;
   isOpen: boolean;
   onClose?: () => void;
 }
 
-export default ModalAddFolder;
+export default ModalRemoveFolder;

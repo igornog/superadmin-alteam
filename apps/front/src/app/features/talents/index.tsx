@@ -1,13 +1,52 @@
-import DeclinedTalentMenu from '../../components/AtRightClick/ContextMenus/DeclinedTalentMenu';
-import InboundTalentMenu from '../../components/AtRightClick/ContextMenus/InboundTalentMenu';
-import ShortlistTalentMenu from '../../components/AtRightClick/ContextMenus/ShortlistTalentMenu';
 import { Page } from '../../utils/redux/types/settings.type';
-import { Tabs } from '../../utils/types';
+import { RightClick, Tabs } from '../../utils/types';
+import AcceptedTatentsView from './components/AcceptedTalents/AcceptedTatentsView';
 import DeclinedTalentsView from './components/DeclinedTalents/DeclinedTalentsView';
 import InboundTalentsView from './components/InboundTalents/InboundTalentsView';
 import ShortlistLatentsView from './components/ShortlistTalents/ShortlistTatentsView';
 
 export { default } from './components/TalentsView';
+
+export const tabsContent = {
+  [Tabs.InboundTalent]: {
+    node: <InboundTalentsView />,
+    talentRightClick: [
+      RightClick.MoveToShortlisted,
+      RightClick.SendEmailToTalent,
+      RightClick.ShareTalent,
+      RightClick.MoveToDesclined,
+    ],
+  },
+  [Tabs.ShortlistTalent]: {
+    node: <ShortlistLatentsView />,
+    talentRightClick: [
+      RightClick.MoveToAccepted,
+      RightClick.EditTalentFolders,
+      RightClick.SendEmailToTalent,
+      RightClick.ShareTalent,
+      RightClick.MoveToDesclined,
+    ],
+  },
+  [Tabs.DeclinedTalent]: {
+    node: <DeclinedTalentsView />,
+    talentRightClick: [
+      RightClick.MoveToAccepted,
+      RightClick.MoveToShortlisted,
+      RightClick.SendEmailToTalent,
+      RightClick.ShareTalent,
+    ],
+  },
+  [Tabs.AcceptedTalent]: {
+    node: <AcceptedTatentsView />,
+    talentRightClick: [
+      RightClick.MoveToShortlisted,
+      RightClick.EditTalentFolders,
+      RightClick.SendEmailToTalent,
+      RightClick.ShareTalent,
+      RightClick.MoveToDesclined,
+    ],
+  },
+};
 
 export const talentsTabs: Page[] = [
   {
@@ -67,21 +106,6 @@ export const talentsTabs: Page[] = [
     settings: {},
   },
 ];
-
-export const tabsContent = {
-  [Tabs.InboundTalent]: {
-    node: <InboundTalentsView />,
-    rightClick: (props: any) => <InboundTalentMenu {...props} />,
-  },
-  [Tabs.ShortlistTalent]: {
-    node: <ShortlistLatentsView />,
-    rightClick: (props: any) => <ShortlistTalentMenu {...props} />,
-  },
-  [Tabs.DeclinedTalent]: {
-    node: <DeclinedTalentsView />,
-    rightClick: (props: any) => <DeclinedTalentMenu {...props} />,
-  },
-};
 
 export const talentsFilters = [
   {

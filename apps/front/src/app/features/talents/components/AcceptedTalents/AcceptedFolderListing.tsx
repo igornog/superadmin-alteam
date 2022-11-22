@@ -11,7 +11,7 @@ import { getActiveFolder } from '../../../../utils/redux/selectors/tree.selector
 import { StatusType } from '../../../../utils/redux/types/status.type';
 import { Tree, TreeInterface } from '../../../../utils/redux/types/tree.type';
 
-const ShortlistFolderListing: React.FunctionComponent = () => {
+const AcceptedFolderListing: React.FunctionComponent = () => {
   const tree = useAppSelector((state) => state.tree);
   const dispatch = useAppDispatch();
   const folder = useAppSelector((state) => getActiveFolder(state));
@@ -51,4 +51,4 @@ const ShortlistFolderListing: React.FunctionComponent = () => {
   );
 };
 
-export default ShortlistFolderListing;
+export default AcceptedFolderListing;

@@ -7,7 +7,7 @@ import {
 } from 'iconsax-react';
 import React from 'react';
 import styled from 'styled-components';
-import { grey, grey2 } from '../../../utils/colors';
+import { grey2 } from '../../../utils/colors';
 import { ModalSize } from '../../../utils/redux/types/settings.type';
 import AtButton, {
   AtButtonKind,
@@ -75,6 +75,7 @@ const ModalListings: React.FunctionComponent<ModalListingsProps> = (
             ></StyledTag>
             <AtDropdown
               align={'bottom-right'}
+              placeholder={'Shortlisted'}
               fontSize={'10px'}
               listItems={[
                 {

@@ -41,7 +41,7 @@ const ModalShareFolder: React.FunctionComponent<ModalShareFolderProps> = (
           variant={AtButtonVariant.Text}
           startIcon={<CloseCircle />}
           iconSize={24}
-          onClick={props.onClose}
+          onClick={handleClose}
         />
       </Box>
 
@@ -57,6 +57,7 @@ const ModalShareFolder: React.FunctionComponent<ModalShareFolderProps> = (
             <AtDropdown
               flexibleHeight={true}
               fontSize={'10px'}
+              placeholder={'Public View'}
               listItems={[
                 { id: 0, value: 'Public View2', label: 'Public View' },
                 { id: 1, value: 'Private View', label: 'Private View' },
@@ -80,6 +81,7 @@ const ModalShareFolder: React.FunctionComponent<ModalShareFolderProps> = (
             <AtDropdown
               align={'bottom-right'}
               fontSize={'10px'}
+              placeholder={'Public View'}
               listItems={[
                 {
                   id: 0,

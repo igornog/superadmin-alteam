@@ -6,3 +6,12 @@ export enum Tabs {
   DeclinedTalent = 'Declined Talents',
   Applicants = 'Applicants',
 }
+
+export enum RightClick {
+  MoveToAccepted = 'Move to Accepted',
+  MoveToShortlisted = 'Move to Shortlisted',
+  EditTalentFolders = 'Edit Talent Folders',
+  SendEmailToTalent = 'Send Email to Talent',
+  ShareTalent = 'Share Talent',
+  MoveToDesclined = 'Move to Declined',
+}

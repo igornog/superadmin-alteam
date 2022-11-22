@@ -13,7 +13,7 @@ import { grey2 } from '../../../../utils/colors';
 import { useAppSelector } from '../../../../utils/hooks/reduxHook';
 import { getActiveFolder } from '../../../../utils/redux/selectors/tree.selector';
 
-const ShortlistTalentsHeader: React.FunctionComponent = () => {
+const AcceptedTalentsHeader: React.FunctionComponent = () => {
   const activeFolder = useAppSelector((state) => getActiveFolder(state));
 
   return (
@@ -23,14 +23,14 @@ const ShortlistTalentsHeader: React.FunctionComponent = () => {
       alignItems={'center'}
     >
       <Box display={'flex'} flex={1}>
-        <AtTypography variant={'h4'}>All Shortlisted Talent</AtTypography>
+        <AtTypography variant={'h4'}>All Accepted Talent</AtTypography>
       </Box>
 
       <Box display={'flex'} gap={'30px'} alignItems={'center'} flex={2}>
         <AtTextField
           startIcon={<SearchNormal1 />}
           placeholder={`Search in ${
-            activeFolder.isParent() ? 'Shortlisted talents' : activeFolder.name
+            activeFolder.isParent() ? 'Accepted talents' : activeFolder.name
           }...`}
           value={''}
         />
@@ -65,4 +65,4 @@ const ShortlistTalentsHeader: React.FunctionComponent = () => {
   );
 };
 
-export default ShortlistTalentsHeader;
+export default AcceptedTalentsHeader;

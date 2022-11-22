@@ -10,8 +10,7 @@ import AtTag from '../AtTag/AtTag';
 import { Skill, Talent } from '../../utils/redux/types/talents.type';
 import AtRightClick from '../AtRightClick/AtRightClick';
 import { boxShadow } from '../../utils/theme';
-import { useAppSelector } from '../../utils/hooks/reduxHook';
-import { getActiveTab } from '../../utils/redux/selectors/settings.selector';
+import TalentMenu from '../AtRightClick/ContextMenus/TalentMenu';
 
 const StyledCard = styled.div<{ fullHeight?: boolean }>`
   background-color: ${white};
@@ -36,16 +35,18 @@ const StyledCard = styled.div<{ fullHeight?: boolean }>`
 
 const AtCard: React.FunctionComponent<AtCardProps> = (props: AtCardProps) => {
   const talent = new Talent(props.talent);
-  const activeTab = useAppSelector((state) => getActiveTab(state));
 
   return (
     <StyledCard onClick={props.onClick} fullHeight={props.fullHeight}>
       <AtRightClick
-        contextMenu={activeTab.content.rightClick({
-          idTalent: talent.id,
-          openShortlist: props.openShortlist,
-          openAccepted: props.openAccepted,
-        })}
+        contextMenu={
+          <TalentMenu
+            talent={talent}
+            openShortlist={props.openShortlist}
+            openAccepted={props.openAccepted}
+            openEmailToTalent={props.openEmailToTalent}
+          />
+        }
       >
         <Box>
           <Box
@@ -106,6 +107,7 @@ interface AtCardProps {
   onClick?: (e: React.MouseEvent) => void;
   openShortlist: () => void;
   openAccepted: () => void;
+  openEmailToTalent: () => void;
 }
 
 export default AtCard;

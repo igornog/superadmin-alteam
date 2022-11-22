@@ -24,6 +24,8 @@ export const StyledContentPopover = styled(Collapse)<{
   border-radius: 5px;
   z-index: 1300;
   padding: 10px;
+  margin-top: 10px;
+  box-sizing: border-box;
 
   ${({ align }) =>
     align === 'bottom-left' &&
@@ -70,14 +72,29 @@ export const StyledDropdownElement = styled.div<{ color: string }>`
   }
 `;
 
+const StyledLabel = styled.div`
+  position: absolute;
+  top: -9px;
+  left: 20px;
+  z-index: 1;
+
+  background-color: ${grey2};
+  font-family: Inter;
+  font-size: 10px;
+  padding: 3px 5px;
+  border-radius: 5px;
+  color: ${white};
+  display: flex;
+  align-items: center;
+`;
+
 const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
   props: AtDropdownProps
 ) => {
   const dropdownRef = useRef<any>(null);
+
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-  const [selectedItem, setSelectedItem] = useState<DropdownItem>(
-    props.listItems[0]
-  );
+  const [selectedItem, setSelectedItem] = useState<DropdownItem>();
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -105,7 +122,9 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
   return (
     <ClickAwayListener onClickAway={handleClose}>
       <Box ref={dropdownRef} position={'relative'}>
+        {props.label && <StyledLabel>{props.label}</StyledLabel>}
         <AtButton
+          {...props}
           kind={props.kind}
           variant={props.variant}
           onClick={open ? handleClose : handleClick}
@@ -150,6 +169,7 @@ interface DropdownItem {
 interface AtDropdownProps extends AtButtonProps {
   listItems: DropdownItem[];
   placeholder?: string;
+  label?: string;
   handleSelect?: (item: DropdownItem) => void;
   align?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 }
