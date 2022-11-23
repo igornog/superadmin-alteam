@@ -3,7 +3,7 @@ import Collapse from '@mui/material/Collapse';
 
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { black, grey2, grey5, white } from '../../utils/colors';
+import { black, grey2, grey4, grey5, white } from '../../utils/colors';
 import { boxShadow } from '../../utils/theme';
 import AtTextField, { AtTextFieldProps } from '../AtTextField/AtTextField';
 import AtTypography from '../AtTypography/AtTypography';
@@ -41,14 +41,19 @@ export const StyledDropdownElement = styled.div<{ color: string }>`
   }
 `;
 
+const StyledTextField = styled(AtTextField)`
+  justify-content: space-between;
+  & input {
+    color: ${grey4} !important;
+  }
+`;
+
 const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
   props: AtTextFieldDropdownProps
 ) => {
   const dropdownRef = useRef<any>(null);
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-  const [selectedItem, setSelectedItem] = useState<DropdownItem>(
-    props.listItems[0]
-  );
+  const [selectedItem, setSelectedItem] = useState<DropdownItem>();
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -73,12 +78,6 @@ const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
     }
   }, [selectedItem]);
 
-  const [maxWidth, setMaxWidth] = useState(0);
-
-  useEffect(() => {
-    setMaxWidth(selectedItem.label.length);
-  }, [selectedItem]);
-
   return (
     <ClickAwayListener onClickAway={handleClose}>
       <Box
@@ -86,11 +85,10 @@ const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
         width={props.fullWidth ? '100%' : 'fit-content'}
         position={'relative'}
       >
-        <AtTextField
+        <StyledTextField
           {...props}
           dropdown={true}
           open={open}
-          maxWidth={maxWidth}
           onClick={open ? handleClose : handleClick}
           placeholder={selectedItem ? selectedItem.label : props.placeholder}
         />
@@ -113,7 +111,7 @@ const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
   );
 };
 
-interface DropdownItem {
+export interface DropdownItem {
   id: number | string;
   label: string;
 }

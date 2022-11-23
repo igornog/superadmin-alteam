@@ -63,6 +63,7 @@ const ModalGeneralInformations: React.FunctionComponent<
         <AtTextFieldDropdown
           fullWidth={true}
           value={''}
+          placeholder={'Select Availability'}
           listItems={[
             {
               id: 0,
@@ -78,6 +79,7 @@ const ModalGeneralInformations: React.FunctionComponent<
 
         <AtTextFieldDropdown
           fullWidth={true}
+          placeholder={'Select Work Experience'}
           value={''}
           listItems={[
             {

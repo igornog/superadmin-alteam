@@ -1,4 +1,3 @@
-import { useMediaQuery } from '@mui/material';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { black, grey2, grey5, white } from '../../utils/colors';
