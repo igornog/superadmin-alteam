@@ -1,18 +1,18 @@
-import { Box } from '@mui/material';
-import { ArrowRight2 } from 'iconsax-react';
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import { Box } from '@mui/material'
+import { ArrowRight2 } from 'iconsax-react'
+import React, { useState } from 'react'
+import styled from 'styled-components'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../../components/AtButton/AtButton';
+} from '../../../components/AtButton/AtButton'
 import AtTextField, {
   AtTextFieldType,
-} from '../../../components/AtTextField/AtTextField';
-import AtTypography from '../../../components/AtTypography/AtTypography';
-import { grey5 } from '../../../utils/colors';
-import { isValidEmail } from '../../../utils/emails';
-import { authService } from '../../../utils/services';
+} from '../../../components/AtTextField/AtTextField'
+import AtTypography from '../../../components/AtTypography/AtTypography'
+import { grey5 } from '../../../utils/colors'
+import { isValidEmail } from '../../../utils/emails'
+import { authService } from '../../../utils/services'
 
 const StyledBackground = styled.div`
   padding: 0 50px;
@@ -22,25 +22,25 @@ const StyledBackground = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
-`;
+`
 
 const AuthForm: React.FunctionComponent = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleSubmit = () => {
-    authService.login(email, password);
-  };
+    authService.login(email, password)
+  }
 
   return (
     <StyledBackground>
-  <Box
-    paddingX={'20px'}
-    display={'flex'}
-    flexDirection={'column'}
-    gap={'30px'}
-    width={'100%'}
-  >
+      <Box
+        paddingX={'20px'}
+        display={'flex'}
+        flexDirection={'column'}
+        gap={'30px'}
+        width={'100%'}
+      >
         <AtTypography variant={'h2'}>Login</AtTypography>
 
         <AtTextField
@@ -74,7 +74,7 @@ const AuthForm: React.FunctionComponent = () => {
         </Box>
       </Box>
     </StyledBackground>
-  );
-};
+  )
+}
 
-export default AuthForm;
+export default AuthForm
