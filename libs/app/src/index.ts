@@ -1,2 +1,2 @@
-export * from './talent';
-export * from './services';
+export * from './talent'
+export * from './services'

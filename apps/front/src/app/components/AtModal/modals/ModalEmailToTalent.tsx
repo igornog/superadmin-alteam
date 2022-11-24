@@ -1,43 +1,43 @@
-import { Box } from '@mui/material';
-import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react';
-import React, { useState } from 'react';
+import { Box } from '@mui/material'
+import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react'
+import React, { useState } from 'react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../AtButton/AtButton';
-import AtTypography from '../../AtTypography/AtTypography';
-import { ModalSize } from '../../../utils/redux/types/settings.type';
-import AtLine from '../../AtLine/AtLine';
-import AtModal from '../AtModal';
-import AtTextField from '../../AtTextField/AtTextField';
-import { grey2, grey3, grey5 } from '../../../utils/colors';
-import { useAppSelector } from '../../../utils/hooks/reduxHook';
-import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector';
-import AtDropdown from '../../AtDropdown/AtDropdown';
-import styled from 'styled-components';
+} from '../../AtButton/AtButton'
+import AtTypography from '../../AtTypography/AtTypography'
+import { ModalSize } from '../../../utils/redux/types/settings.type'
+import AtLine from '../../AtLine/AtLine'
+import AtModal from '../AtModal'
+import AtTextField from '../../AtTextField/AtTextField'
+import { grey2, grey3, grey5 } from '../../../utils/colors'
+import { useAppSelector } from '../../../utils/hooks/reduxHook'
+import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector'
+import AtDropdown from '../../AtDropdown/AtDropdown'
+import styled from 'styled-components'
 
 const StyledDropdown = styled(AtDropdown)`
   justify-content: space-between;
   width: 100%;
   border-color: ${grey5};
   color: ${grey3};
-`;
+`
 
 const ModalEmailToTalent: React.FunctionComponent<ModalEmailToTalentProps> = (
-  props: ModalEmailToTalentProps
+  props: ModalEmailToTalentProps,
 ) => {
-  const selectedTalent = useAppSelector((state) => getActiveTalent(state));
+  const selectedTalent = useAppSelector((state) => getActiveTalent(state))
 
-  const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
-  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('')
+  const [message, setMessage] = useState('')
+  const [email, setEmail] = useState('')
 
   const handleClose = () => {
-    props.onClose?.();
-    setSubject('');
-    setMessage('');
-    setEmail('');
-  };
+    props.onClose?.()
+    setSubject('')
+    setMessage('')
+    setEmail('')
+  }
 
   return (
     <AtModal isOpen={props.isOpen} size={ModalSize.Small} onClose={handleClose}>
@@ -114,12 +114,12 @@ const ModalEmailToTalent: React.FunctionComponent<ModalEmailToTalentProps> = (
         </Box>
       </Box>
     </AtModal>
-  );
-};
-
-interface ModalEmailToTalentProps {
-  isOpen: boolean;
-  onClose?: () => void;
+  )
 }
 
-export default ModalEmailToTalent;
+interface ModalEmailToTalentProps {
+  isOpen: boolean
+  onClose?: () => void
+}
+
+export default ModalEmailToTalent

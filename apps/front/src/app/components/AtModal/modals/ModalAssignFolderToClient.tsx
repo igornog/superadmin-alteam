@@ -1,50 +1,50 @@
-import { Box } from '@mui/material';
+import { Box } from '@mui/material'
 import {
   CloseCircle,
   CloseSquare,
   TickSquare,
   TrushSquare,
-} from 'iconsax-react';
-import React, { useEffect, useState } from 'react';
+} from 'iconsax-react'
+import React, { useEffect, useState } from 'react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../AtButton/AtButton';
-import AtTypography from '../../AtTypography/AtTypography';
-import { ModalSize } from '../../../utils/redux/types/settings.type';
-import AtLine from '../../AtLine/AtLine';
-import AtModal from '../AtModal';
-import { Tree, TreeInterface } from '../../../utils/redux/types/tree.type';
-import { grey2, grey3, grey5 } from '../../../utils/colors';
-import styled from 'styled-components';
-import AtDropdown from '../../AtDropdown/AtDropdown';
-import AtSpace from '../../AtSpace/AtSpace';
+} from '../../AtButton/AtButton'
+import AtTypography from '../../AtTypography/AtTypography'
+import { ModalSize } from '../../../utils/redux/types/settings.type'
+import AtLine from '../../AtLine/AtLine'
+import AtModal from '../AtModal'
+import { Tree, TreeInterface } from '../../../utils/redux/types/tree.type'
+import { grey2, grey3, grey5 } from '../../../utils/colors'
+import styled from 'styled-components'
+import AtDropdown from '../../AtDropdown/AtDropdown'
+import AtSpace from '../../AtSpace/AtSpace'
 
 const StyledDropdown = styled(AtDropdown)`
   justify-content: space-between;
   width: 100%;
   border-color: ${grey5};
   color: ${grey3};
-`;
+`
 
 const ModalAssignFolderToClient: React.FunctionComponent<
   ModalAssignFolderToClientProps
 > = (props: ModalAssignFolderToClientProps) => {
-  const [folder, setFolder] = useState(new Tree({}));
+  const [folder, setFolder] = useState(new Tree({}))
 
   useEffect(() => {
     if (props.folder) {
-      setFolder(new Tree(props.folder));
+      setFolder(new Tree(props.folder))
     }
-  }, [props.folder]);
+  }, [props.folder])
 
   const handleClose = () => {
-    props.onClose?.();
-  };
+    props.onClose?.()
+  }
 
   const removeFolder = () => {
-    console.log('Remove Folder');
-  };
+    console.log('Remove Folder')
+  }
 
   return (
     <AtModal isOpen={props.isOpen} size={ModalSize.Small} onClose={handleClose}>
@@ -107,13 +107,13 @@ const ModalAssignFolderToClient: React.FunctionComponent<
         </Box>
       </Box>
     </AtModal>
-  );
-};
-
-interface ModalAssignFolderToClientProps {
-  folder?: TreeInterface | undefined;
-  isOpen: boolean;
-  onClose?: () => void;
+  )
 }
 
-export default ModalAssignFolderToClient;
+interface ModalAssignFolderToClientProps {
+  folder?: TreeInterface | undefined
+  isOpen: boolean
+  onClose?: () => void
+}
+
+export default ModalAssignFolderToClient

@@ -1,8 +1,8 @@
-import { Box } from '@mui/material';
-import React from 'react';
-import { grey2 } from '../../../../../utils/colors';
-import AtTree from '../../../../AtTree/AtTree';
-import AtTypography from '../../../../AtTypography/AtTypography';
+import { Box } from '@mui/material'
+import React from 'react'
+import { grey2 } from '../../../../../utils/colors'
+import AtTree from '../../../../AtTree/AtTree'
+import AtTypography from '../../../../AtTypography/AtTypography'
 
 const ModalShortlistStep1: React.FunctionComponent = () => {
   return (
@@ -14,7 +14,7 @@ const ModalShortlistStep1: React.FunctionComponent = () => {
 
       <AtTree />
     </Box>
-  );
-};
+  )
+}
 
-export default ModalShortlistStep1;
+export default ModalShortlistStep1

@@ -1,16 +1,16 @@
-import { Typography } from '@mui/material';
-import { Variant } from '@mui/material/styles/createTypography';
-import React from 'react';
-import styled from 'styled-components';
+import { Typography } from '@mui/material'
+import { Variant } from '@mui/material/styles/createTypography'
+import React from 'react'
+import styled from 'styled-components'
 
 interface StyledTypographyProps {
-  bold?: boolean;
-  color?: string;
-  fontSize?: string;
-  display?: string;
-  gap?: string;
-  flex?: number;
-  justifyContent?: string;
+  bold?: boolean
+  color?: string
+  fontSize?: string
+  display?: string
+  gap?: string
+  flex?: number
+  justifyContent?: string
 }
 
 const StyledTypography = styled(Typography)<StyledTypographyProps>`
@@ -22,10 +22,10 @@ const StyledTypography = styled(Typography)<StyledTypographyProps>`
   gap: ${({ gap }) => gap ?? '5px'};
   flex: ${({ display }) => display};
   justify-content: ${({ justifyContent }) => justifyContent};
-`;
+`
 
 const AtTypography: React.FunctionComponent<AtTypographyProps> = (
-  props: AtTypographyProps
+  props: AtTypographyProps,
 ) => {
   return (
     <StyledTypography
@@ -41,20 +41,20 @@ const AtTypography: React.FunctionComponent<AtTypographyProps> = (
     >
       {props.children}
     </StyledTypography>
-  );
-};
-
-interface AtTypographyProps {
-  children: React.ReactNode;
-  display?: string;
-  bold?: boolean;
-  variant?: Variant;
-  color?: string;
-  fontSize?: string;
-  whiteSpace?: any;
-  gap?: string;
-  flex?: number;
-  justifyContent?: string;
+  )
 }
 
-export default AtTypography;
+interface AtTypographyProps {
+  children: React.ReactNode
+  display?: string
+  bold?: boolean
+  variant?: Variant
+  color?: string
+  fontSize?: string
+  whiteSpace?: any
+  gap?: string
+  flex?: number
+  justifyContent?: string
+}
+
+export default AtTypography

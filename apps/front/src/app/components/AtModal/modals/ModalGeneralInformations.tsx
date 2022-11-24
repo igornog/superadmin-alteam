@@ -1,24 +1,24 @@
-import { Box } from '@mui/material';
-import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react';
-import React from 'react';
+import { Box } from '@mui/material'
+import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react'
+import React from 'react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../AtButton/AtButton';
-import AtDropdown from '../../AtDropdown/AtDropdown';
-import AtTextField from '../../AtTextField/AtTextField';
-import { useAppSelector } from '../../../utils/hooks/reduxHook';
-import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector';
-import AtTypography from '../../AtTypography/AtTypography';
-import { ModalSize } from '../../../utils/redux/types/settings.type';
-import AtModal from '../AtModal';
-import AtLine from '../../AtLine/AtLine';
-import AtTextFieldDropdown from '../../AtDropdown/AtTextFieldDropdown';
+} from '../../AtButton/AtButton'
+import AtDropdown from '../../AtDropdown/AtDropdown'
+import AtTextField from '../../AtTextField/AtTextField'
+import { useAppSelector } from '../../../utils/hooks/reduxHook'
+import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector'
+import AtTypography from '../../AtTypography/AtTypography'
+import { ModalSize } from '../../../utils/redux/types/settings.type'
+import AtModal from '../AtModal'
+import AtLine from '../../AtLine/AtLine'
+import AtTextFieldDropdown from '../../AtDropdown/AtTextFieldDropdown'
 
 const ModalGeneralInformations: React.FunctionComponent<
   ModalGeneralInformationsProps
 > = (props: ModalGeneralInformationsProps) => {
-  const selectedTalent = useAppSelector((state) => getActiveTalent(state));
+  const selectedTalent = useAppSelector((state) => getActiveTalent(state))
 
   return (
     <AtModal
@@ -131,12 +131,12 @@ const ModalGeneralInformations: React.FunctionComponent<
         </Box>
       </Box>
     </AtModal>
-  );
-};
-
-interface ModalGeneralInformationsProps {
-  isOpen: boolean;
-  onClose?: () => void;
+  )
 }
 
-export default ModalGeneralInformations;
+interface ModalGeneralInformationsProps {
+  isOpen: boolean
+  onClose?: () => void
+}
+
+export default ModalGeneralInformations

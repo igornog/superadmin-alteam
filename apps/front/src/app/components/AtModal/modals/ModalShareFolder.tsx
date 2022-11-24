@@ -1,30 +1,30 @@
-import { Box } from '@mui/material';
-import { CloseCircle, Profile, TrushSquare } from 'iconsax-react';
-import React, { useState } from 'react';
+import { Box } from '@mui/material'
+import { CloseCircle, Profile, TrushSquare } from 'iconsax-react'
+import React, { useState } from 'react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../AtButton/AtButton';
-import AtTypography from '../../AtTypography/AtTypography';
-import { ModalSize } from '../../../utils/redux/types/settings.type';
-import AtLine from '../../AtLine/AtLine';
-import AtModal from '../AtModal';
-import AtTextField from '../../AtTextField/AtTextField';
-import { TreeInterface } from '../../../utils/redux/types/tree.type';
-import { grey3, red } from '../../../utils/colors';
-import AtDropdown from '../../AtDropdown/AtDropdown';
-import ModalRemoveUser from './ModalRemoveUser';
+} from '../../AtButton/AtButton'
+import AtTypography from '../../AtTypography/AtTypography'
+import { ModalSize } from '../../../utils/redux/types/settings.type'
+import AtLine from '../../AtLine/AtLine'
+import AtModal from '../AtModal'
+import AtTextField from '../../AtTextField/AtTextField'
+import { TreeInterface } from '../../../utils/redux/types/tree.type'
+import { grey3, red } from '../../../utils/colors'
+import AtDropdown from '../../AtDropdown/AtDropdown'
+import ModalRemoveUser from './ModalRemoveUser'
 
 const ModalShareFolder: React.FunctionComponent<ModalShareFolderProps> = (
-  props: ModalShareFolderProps
+  props: ModalShareFolderProps,
 ) => {
-  const [email, setEmail] = useState('');
-  const [openRemoveUserModal, setOpenRemoveUserModal] = useState(false);
+  const [email, setEmail] = useState('')
+  const [openRemoveUserModal, setOpenRemoveUserModal] = useState(false)
 
   const handleClose = () => {
-    props.onClose?.();
-    setEmail('');
-  };
+    props.onClose?.()
+    setEmail('')
+  }
 
   return (
     <AtModal isOpen={props.isOpen} size={ModalSize.Small} onClose={handleClose}>
@@ -131,13 +131,13 @@ const ModalShareFolder: React.FunctionComponent<ModalShareFolderProps> = (
         onClose={() => setOpenRemoveUserModal(false)}
       />
     </AtModal>
-  );
-};
-
-interface ModalShareFolderProps {
-  folder?: TreeInterface | undefined;
-  isOpen: boolean;
-  onClose?: () => void;
+  )
 }
 
-export default ModalShareFolder;
+interface ModalShareFolderProps {
+  folder?: TreeInterface | undefined
+  isOpen: boolean
+  onClose?: () => void
+}
+
+export default ModalShareFolder

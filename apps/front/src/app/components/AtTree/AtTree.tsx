@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { TreeView } from '@mui/lab';
-import { ArrowDown2, ArrowRight2 } from 'iconsax-react';
-import styled from 'styled-components';
-import ModalAddFolder from '../AtModal/modals/ModalAddFolder';
-import { TreeInterface } from '../../utils/redux/types/tree.type';
-import { useAppSelector } from '../../utils/hooks/reduxHook';
-import AtTreeItem from './AtTreeItem';
+import React, { useState } from 'react'
+import { TreeView } from '@mui/lab'
+import { ArrowDown2, ArrowRight2 } from 'iconsax-react'
+import styled from 'styled-components'
+import ModalAddFolder from '../AtModal/modals/ModalAddFolder'
+import { TreeInterface } from '../../utils/redux/types/tree.type'
+import { useAppSelector } from '../../utils/hooks/reduxHook'
+import AtTreeItem from './AtTreeItem'
 
 const StyledTreeView = styled(TreeView)`
   background-color: #f7f8fe;
@@ -15,13 +15,13 @@ const StyledTreeView = styled(TreeView)`
   height: 40vh;
   overflow-y: scroll;
   overflow-x: hidden;
-`;
+`
 
 const AtTree: React.FunctionComponent = () => {
-  const [openCreateFolder, setOpenCreateFolder] = useState(false);
-  const [selectedFolder, setSelectedFolder] = useState<TreeInterface>();
-  const tree = useAppSelector((state) => state.tree);
-  const [selected, setSelected] = useState<string[]>([]);
+  const [openCreateFolder, setOpenCreateFolder] = useState(false)
+  const [selectedFolder, setSelectedFolder] = useState<TreeInterface>()
+  const tree = useAppSelector((state) => state.tree)
+  const [selected, setSelected] = useState<string[]>([])
 
   return (
     <StyledTreeView
@@ -43,7 +43,7 @@ const AtTree: React.FunctionComponent = () => {
         onClose={() => setOpenCreateFolder(false)}
       />
     </StyledTreeView>
-  );
-};
+  )
+}
 
-export default AtTree;
+export default AtTree

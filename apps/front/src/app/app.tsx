@@ -1,14 +1,14 @@
-import React from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
-import Auth from './features/auth';
-import Talents from './features/talents';
+import React from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import Auth from './features/auth'
+import Talents from './features/talents'
 import {
   Personalcard,
   Profile,
   Briefcase,
   Setting2,
   Category,
-} from 'iconsax-react';
+} from 'iconsax-react'
 
 export const Navigation: NavigationProps[] = [
   {
@@ -41,27 +41,27 @@ export const Navigation: NavigationProps[] = [
     icon: <Category />,
     name: 'Account',
   },
-];
+]
 
 export interface NavigationProps {
-  link: string;
-  element: React.ReactNode;
-  icon?: React.ReactNode;
-  name?: string;
+  link: string
+  element: React.ReactNode
+  icon?: React.ReactNode
+  name?: string
 }
 
 export const App: React.FunctionComponent = () => {
-  const location = useLocation();
+  const location = useLocation()
 
   return (
     <Routes location={location} key={location.pathname}>
       <Route path="/" element={<Auth />} />
 
       {Navigation.map((item: NavigationProps, index: number) => {
-        return <Route path={item.link} element={item.element} key={index} />;
+        return <Route path={item.link} element={item.element} key={index} />
       })}
     </Routes>
-  );
-};
+  )
+}
 
-export default App;
+export default App

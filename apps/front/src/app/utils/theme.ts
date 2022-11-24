@@ -1,6 +1,6 @@
-import { createTheme } from '@mui/material';
-import '../assets/styles/layout.css';
-import { blue, green, grey5, red } from './colors';
+import { createTheme } from '@mui/material'
+import '../assets/styles/layout.css'
+import { blue, green, grey5, red } from './colors'
 
 export const alTeamTheme = createTheme({
   palette: {
@@ -89,6 +89,6 @@ export const alTeamTheme = createTheme({
       textTransform: 'none',
     },
   },
-});
+})
 
-export const boxShadow = 'rgb(0 0 0 / 10%) 0px 15px 50px 0px';
+export const boxShadow = 'rgb(0 0 0 / 10%) 0px 15px 50px 0px'

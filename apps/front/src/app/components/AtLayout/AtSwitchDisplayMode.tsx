@@ -1,11 +1,11 @@
-import { Box } from '@mui/material';
-import { Element3, RowVertical } from 'iconsax-react';
-import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
-import { white, grey } from '../../utils/colors';
-import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
-import { handleSwitchDisplayMode } from '../../utils/redux/actions/settings.action';
-import { DisplayMode } from '../../utils/redux/types/settings.type';
+import { Box } from '@mui/material'
+import { Element3, RowVertical } from 'iconsax-react'
+import React, { useState } from 'react'
+import styled, { css } from 'styled-components'
+import { white, grey } from '../../utils/colors'
+import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook'
+import { handleSwitchDisplayMode } from '../../utils/redux/actions/settings.action'
+import { DisplayMode } from '../../utils/redux/types/settings.type'
 
 const sharedIconStyle = css<{ active: boolean }>`
   transition: 0.3s;
@@ -15,15 +15,15 @@ const sharedIconStyle = css<{ active: boolean }>`
   &:hover {
     cursor: pointer;
   }
-`;
+`
 
 const StyledElement3 = styled(Element3)`
   ${sharedIconStyle}
-`;
+`
 
 const StyledRowVertical = styled(RowVertical)`
   ${sharedIconStyle}
-`;
+`
 
 const StyledIconsBox = styled.div`
   background-color: #f0f1f8;
@@ -34,7 +34,7 @@ const StyledIconsBox = styled.div`
   width: fit-content;
   padding: 5px 10px;
   border-radius: 5px;
-`;
+`
 
 const StyledActive = styled.div<{ transition?: number | null }>`
   position: absolute;
@@ -50,22 +50,22 @@ const StyledActive = styled.div<{ transition?: number | null }>`
   padding: 6px;
   color: ${white};
   border-radius: 5px;
-`;
+`
 
 const AtSwitchDisplayMode: React.FunctionComponent = () => {
-  const settings = useAppSelector((state) => state.settings);
-  const dispatch = useAppDispatch();
-  const isList = settings.displayMode === DisplayMode.List;
-  const isGrid = settings.displayMode === DisplayMode.Grid;
+  const settings = useAppSelector((state) => state.settings)
+  const dispatch = useAppDispatch()
+  const isList = settings.displayMode === DisplayMode.List
+  const isGrid = settings.displayMode === DisplayMode.Grid
 
-  const [transition, setTransition] = useState(isList ? 4 : 39);
+  const [transition, setTransition] = useState(isList ? 4 : 39)
 
   const handleSwitchMode = (mode: DisplayMode, transition: number) => {
     if (mode !== settings.displayMode) {
-      dispatch(handleSwitchDisplayMode(mode));
-      setTransition(transition);
+      dispatch(handleSwitchDisplayMode(mode))
+      setTransition(transition)
     }
-  };
+  }
 
   return (
     <Box display={'flex'}>
@@ -85,7 +85,7 @@ const AtSwitchDisplayMode: React.FunctionComponent = () => {
         />
       </StyledIconsBox>
     </Box>
-  );
-};
+  )
+}
 
-export default AtSwitchDisplayMode;
+export default AtSwitchDisplayMode

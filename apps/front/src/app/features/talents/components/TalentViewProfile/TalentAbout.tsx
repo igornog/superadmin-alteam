@@ -1,15 +1,15 @@
-import { Edit } from 'iconsax-react';
-import React, { useState } from 'react';
-import ModalAbout from '../../../../components/AtModal/modals/ModalAbout';
-import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame';
-import AtTypography from '../../../../components/AtTypography/AtTypography';
-import { grey } from '../../../../utils/colors';
-import { Talent } from '../../../../utils/redux/types/talents.type';
+import { Edit } from 'iconsax-react'
+import React, { useState } from 'react'
+import ModalAbout from '../../../../components/AtModal/modals/ModalAbout'
+import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame'
+import AtTypography from '../../../../components/AtTypography/AtTypography'
+import { grey } from '../../../../utils/colors'
+import { Talent } from '../../../../utils/redux/types/talents.type'
 
 const TalentAbout: React.FunctionComponent<TalentAboutProps> = (
-  props: TalentAboutProps
+  props: TalentAboutProps,
 ) => {
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false)
 
   return (
     <AtTalentFrame
@@ -31,11 +31,11 @@ const TalentAbout: React.FunctionComponent<TalentAboutProps> = (
       </AtTypography>
       <ModalAbout isOpen={openModal} onClose={() => setOpenModal(false)} />
     </AtTalentFrame>
-  );
-};
-
-interface TalentAboutProps {
-  talent: Talent;
+  )
 }
 
-export default TalentAbout;
+interface TalentAboutProps {
+  talent: Talent
+}
+
+export default TalentAbout

@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { Collapse, Box } from '@mui/material';
-import { ArrowDown2, ArrowUp2 } from 'iconsax-react';
+import React, { useEffect, useState } from 'react'
+import { Collapse, Box } from '@mui/material'
+import { ArrowDown2, ArrowUp2 } from 'iconsax-react'
 import {
   getActiveFolder,
   mapRecursive,
-} from '../../utils/redux/selectors/tree.selector';
-import { Tree, TreeInterface } from '../../utils/redux/types/tree.type';
-import AtTypography from '../AtTypography/AtTypography';
-import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
-import { black, green, grey2, grey5 } from '../../utils/colors';
-import styled, { css } from 'styled-components';
-import { getActiveTab } from '../../utils/redux/selectors/settings.selector';
-import { handleSelectFolder } from '../../utils/redux/actions/tree.action';
+} from '../../utils/redux/selectors/tree.selector'
+import { Tree, TreeInterface } from '../../utils/redux/types/tree.type'
+import AtTypography from '../AtTypography/AtTypography'
+import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook'
+import { black, green, grey2, grey5 } from '../../utils/colors'
+import styled, { css } from 'styled-components'
+import { getActiveTab } from '../../utils/redux/selectors/settings.selector'
+import { handleSelectFolder } from '../../utils/redux/actions/tree.action'
 
 const StyledItem = styled(Box)<{
-  level: number;
-  isActive?: boolean;
+  level: number
+  isActive?: boolean
 }>`
   transition: 0.3s;
   color: ${({ isActive }) => (isActive ? black : grey2)};
@@ -41,7 +41,7 @@ const StyledItem = styled(Box)<{
         border: 1px solid ${green};
       }
     `}
-`;
+`
 
 const StyledParent = styled(Box)<{ level: number; heightBefore: string }>`
   position: relative;
@@ -56,37 +56,37 @@ const StyledParent = styled(Box)<{ level: number; heightBefore: string }>`
     border: 1px solid ${grey5};
     height: calc(100% - ${({ heightBefore }) => heightBefore});
   }
-`;
+`
 
 const AtTreeItem: React.FunctionComponent<AtTreeProps> = ({
   level = 1,
   menu: menuProp,
 }) => {
-  const [menu, setMenu] = useState<TreeInterface[]>(menuProp || []);
-  const [paddingLeft, setPaddingLeft] = useState<number>();
-  const activeFolder = useAppSelector((state) => getActiveFolder(state));
-  const dispatch = useAppDispatch();
+  const [menu, setMenu] = useState<TreeInterface[]>(menuProp || [])
+  const [paddingLeft, setPaddingLeft] = useState<number>()
+  const activeFolder = useAppSelector((state) => getActiveFolder(state))
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
-    setMenu(menuProp);
-  }, [menuProp]);
+    setMenu(menuProp)
+  }, [menuProp])
 
   const open = (id: string) => () => {
     setMenu((prevMenu) =>
       mapRecursive(prevMenu, (item: any) => {
         if (item.id === id) {
-          return { ...item, open: !item.open };
+          return { ...item, open: !item.open }
         }
-        return item;
-      })
-    );
-  };
+        return item
+      }),
+    )
+  }
 
   useEffect(() => {
     if (level) {
-      setPaddingLeft(level * 10);
+      setPaddingLeft(level * 10)
     }
-  }, [level]);
+  }, [level])
 
   return (
     <StyledParent level={level} heightBefore={'10px'}>
@@ -119,12 +119,12 @@ const AtTreeItem: React.FunctionComponent<AtTreeProps> = ({
         </React.Fragment>
       ))}
     </StyledParent>
-  );
-};
+  )
+}
 
 const AtDropdownTree: React.FunctionComponent = () => {
-  const activeTab = useAppSelector((state) => getActiveTab(state));
-  const tree = useAppSelector((state) => new Tree(state.tree.data));
+  const activeTab = useAppSelector((state) => getActiveTab(state))
+  const tree = useAppSelector((state) => new Tree(state.tree.data))
 
   return (
     <StyledParent
@@ -136,11 +136,11 @@ const AtDropdownTree: React.FunctionComponent = () => {
       <AtTypography color={grey2}>{activeTab.config.title}</AtTypography>
       <AtTreeItem menu={tree.children || []} />
     </StyledParent>
-  );
-};
+  )
+}
 
 export interface AtTreeProps {
-  menu: TreeInterface[];
-  level?: number;
+  menu: TreeInterface[]
+  level?: number
 }
-export default AtDropdownTree;
+export default AtDropdownTree

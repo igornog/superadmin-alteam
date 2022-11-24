@@ -38,11 +38,7 @@
         "cwd": "libs/postgres-db/infrastructure",
         "command": "../../../infrastructure/scripts/terraformCommonWrapper.sh apply postgres-db"
       },
-      "inputs": [
-        "{projectRoot}/src/migration/*",
-        "infrastructure",
-        "stage"
-      ]
+      "inputs": ["{projectRoot}/src/migration/*", "infrastructure", "stage"]
     },
     "migration:revert": {
       "executor": "nx:run-commands",

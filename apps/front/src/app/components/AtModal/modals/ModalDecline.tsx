@@ -1,18 +1,18 @@
-import { Box } from '@mui/material';
-import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react';
-import React from 'react';
+import { Box } from '@mui/material'
+import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react'
+import React from 'react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../AtButton/AtButton';
-import AtTextField from '../../AtTextField/AtTextField';
-import AtTypography from '../../AtTypography/AtTypography';
-import { ModalSize } from '../../../utils/redux/types/settings.type';
-import AtLine from '../../AtLine/AtLine';
-import AtModal from '../AtModal';
+} from '../../AtButton/AtButton'
+import AtTextField from '../../AtTextField/AtTextField'
+import AtTypography from '../../AtTypography/AtTypography'
+import { ModalSize } from '../../../utils/redux/types/settings.type'
+import AtLine from '../../AtLine/AtLine'
+import AtModal from '../AtModal'
 
 const ModalDecline: React.FunctionComponent<ModalDeclineProps> = (
-  props: ModalDeclineProps
+  props: ModalDeclineProps,
 ) => {
   return (
     <AtModal
@@ -68,12 +68,12 @@ const ModalDecline: React.FunctionComponent<ModalDeclineProps> = (
         </Box>
       </Box>
     </AtModal>
-  );
-};
-
-interface ModalDeclineProps {
-  isOpen: boolean;
-  onClose?: () => void;
+  )
 }
 
-export default ModalDecline;
+interface ModalDeclineProps {
+  isOpen: boolean
+  onClose?: () => void
+}
+
+export default ModalDecline

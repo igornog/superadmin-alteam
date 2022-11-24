@@ -1,6 +1,6 @@
-import { TableCell, TableCellProps } from '@mui/material';
-import React from 'react';
-import styled from 'styled-components';
+import { TableCell, TableCellProps } from '@mui/material'
+import React from 'react'
+import styled from 'styled-components'
 
 const StyledTableCell = styled(TableCell)`
   padding: 16px 20px;
@@ -13,10 +13,10 @@ const StyledTableCell = styled(TableCell)`
   &:last-child {
     padding-right: 0;
   }
-`;
+`
 
 const AtTableCell: React.FunctionComponent<TableCellProps> = (props) => {
-  return <StyledTableCell {...props} />;
-};
+  return <StyledTableCell {...props} />
+}
 
-export default AtTableCell;
+export default AtTableCell

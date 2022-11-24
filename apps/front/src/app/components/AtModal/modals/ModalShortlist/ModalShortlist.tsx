@@ -1,42 +1,42 @@
-import { Box } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import AtTypography from '../../../AtTypography/AtTypography';
-import { ArrowRight2, CloseCircle, CloseSquare } from 'iconsax-react';
+import { Box } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import AtTypography from '../../../AtTypography/AtTypography'
+import { ArrowRight2, CloseCircle, CloseSquare } from 'iconsax-react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../../AtButton/AtButton';
-import { useAppDispatch } from '../../../../utils/hooks/reduxHook';
-import { ModalSize } from '../../../../utils/redux/types/settings.type';
-import AtModal from '../../AtModal';
-import AtLine from '../../../AtLine/AtLine';
-import { handleLoadTree } from '../../../../utils/redux/actions/tree.action';
-import ModalShortlistStep1 from './steps/ModalShortlistStep1';
-import { black, grey2 } from '../../../../utils/colors';
-import ModalShortlistStep2 from './steps/ModalShortlistStep2';
-import ModalShortlistStep3 from './steps/ModalShortlistStep3';
-import AtTabs from '../../../AtTabs/AtTabs';
+} from '../../../AtButton/AtButton'
+import { useAppDispatch } from '../../../../utils/hooks/reduxHook'
+import { ModalSize } from '../../../../utils/redux/types/settings.type'
+import AtModal from '../../AtModal'
+import AtLine from '../../../AtLine/AtLine'
+import { handleLoadTree } from '../../../../utils/redux/actions/tree.action'
+import ModalShortlistStep1 from './steps/ModalShortlistStep1'
+import { black, grey2 } from '../../../../utils/colors'
+import ModalShortlistStep2 from './steps/ModalShortlistStep2'
+import ModalShortlistStep3 from './steps/ModalShortlistStep3'
+import AtTabs from '../../../AtTabs/AtTabs'
 
 const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
-  props: ModalShortlistProps
+  props: ModalShortlistProps,
 ) => {
-  const dispatch = useAppDispatch();
-  const [step, setStep] = useState(0);
+  const dispatch = useAppDispatch()
+  const [step, setStep] = useState(0)
 
   useEffect(() => {
     if (props.isOpen) {
-      dispatch(handleLoadTree());
+      dispatch(handleLoadTree())
     }
-  }, [dispatch, props.isOpen]);
+  }, [dispatch, props.isOpen])
 
   const moveTalent = () => {
-    console.log('move talent');
-  };
+    console.log('move talent')
+  }
 
   const handleClose = () => {
-    props.onClose();
-    setStep(0);
-  };
+    props.onClose()
+    setStep(0)
+  }
 
   return (
     <AtModal
@@ -117,12 +117,12 @@ const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
         </Box>
       </Box>
     </AtModal>
-  );
-};
-
-interface ModalShortlistProps {
-  isOpen: boolean;
-  onClose: () => void;
+  )
 }
 
-export default ModalShortlist;
+interface ModalShortlistProps {
+  isOpen: boolean
+  onClose: () => void
+}
+
+export default ModalShortlist

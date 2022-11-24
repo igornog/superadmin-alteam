@@ -7,18 +7,8 @@
     "storybook": "npx nx run front:storybook",
     "build-storybook": "npx nx run front:build-storybook",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,json,md}'",
-    "check": "prettier --check .",
+    "check": "prettier --check './**/*.{js,jsx,ts,tsx,json,md}'",
     "chromatic": "npx chromatic --force-rebuild"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,json,css,scss,md,ts,html,graphql}": [
-      "npm run format --uncommited"
-    ]
   },
   "private": true,
   "devDependencies": {

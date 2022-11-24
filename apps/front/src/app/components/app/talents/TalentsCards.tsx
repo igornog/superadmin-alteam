@@ -1,10 +1,10 @@
-import { Grid } from '@mui/material';
-import React from 'react';
-import { Talent } from '../../../utils/redux/types/talents.type';
-import AtCard from '../../AtCard/AtCard';
+import { Grid } from '@mui/material'
+import React from 'react'
+import { Talent } from '../../../utils/redux/types/talents.type'
+import AtCard from '../../AtCard/AtCard'
 
 const TalentsCards: React.FunctionComponent<TalentsCardProps> = (
-  props: TalentsCardProps
+  props: TalentsCardProps,
 ) => {
   return (
     <>
@@ -28,15 +28,15 @@ const TalentsCards: React.FunctionComponent<TalentsCardProps> = (
         </Grid>
       ))}
     </>
-  );
-};
-
-interface TalentsCardProps {
-  talents: Talent[];
-  openTalent: (id: number) => void;
-  openShortlist: () => void;
-  openAccepted: () => void;
-  openEmailToTalent: () => void;
+  )
 }
 
-export default TalentsCards;
+interface TalentsCardProps {
+  talents: Talent[]
+  openTalent: (id: number) => void
+  openShortlist: () => void
+  openAccepted: () => void
+  openEmailToTalent: () => void
+}
+
+export default TalentsCards

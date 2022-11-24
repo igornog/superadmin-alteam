@@ -1,18 +1,18 @@
-import { Box } from '@mui/material';
-import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react';
-import React from 'react';
+import { Box } from '@mui/material'
+import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react'
+import React from 'react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../AtButton/AtButton';
-import AtTextField from '../../AtTextField/AtTextField';
-import AtTypography from '../../AtTypography/AtTypography';
-import AtModal from '../AtModal';
-import AtLine from '../../AtLine/AtLine';
-import { ModalSize } from '../../../utils/redux/types/settings.type';
+} from '../../AtButton/AtButton'
+import AtTextField from '../../AtTextField/AtTextField'
+import AtTypography from '../../AtTypography/AtTypography'
+import AtModal from '../AtModal'
+import AtLine from '../../AtLine/AtLine'
+import { ModalSize } from '../../../utils/redux/types/settings.type'
 
 const ModalAbout: React.FunctionComponent<ModalAboutProps> = (
-  props: ModalAboutProps
+  props: ModalAboutProps,
 ) => {
   return (
     <AtModal
@@ -68,12 +68,12 @@ const ModalAbout: React.FunctionComponent<ModalAboutProps> = (
         </Box>
       </Box>
     </AtModal>
-  );
-};
-
-interface ModalAboutProps {
-  isOpen: boolean;
-  onClose?: () => void;
+  )
 }
 
-export default ModalAbout;
+interface ModalAboutProps {
+  isOpen: boolean
+  onClose?: () => void
+}
+
+export default ModalAbout

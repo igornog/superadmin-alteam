@@ -1,2 +1,2 @@
-export {GroupTalentEntity} from "./GroupTalent.entity";
-export {SoloTalentEntity} from "./SoloTalent.entity";
+export { GroupTalentEntity } from './GroupTalent.entity'
+export { SoloTalentEntity } from './SoloTalent.entity'

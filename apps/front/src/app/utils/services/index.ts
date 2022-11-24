@@ -1,3 +1,3 @@
-import RemoteAuthService from './authService/remoteAuthService';
+import RemoteAuthService from './authService/remoteAuthService'
 
-export const authService = new RemoteAuthService();
+export const authService = new RemoteAuthService()
