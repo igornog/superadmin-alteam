@@ -1,12 +1,11 @@
 import { Box } from '@mui/material';
 import { CloseSquare, ArrowRight2, TickSquare } from 'iconsax-react';
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
 } from '../../../../AtButton/AtButton';
 import AtTabs from '../../../../AtTabs/AtTabs';
-import AtTag from '../../../../AtTag/AtTag';
 import ModalCreateTalentStep1 from './steps/ModalCreateTalentStep1';
 import ModalCreateTalentStep2 from './steps/ModalCreateTalentStep2';
 import ModalCreateTalentStep3 from './steps/ModalCreateTalentStep3';
@@ -38,11 +37,6 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
         ]}
         step={props.step}
       />
-
-      <Box display={'flex'} flexDirection={'column'} gap={'10px'}>
-        <AtTag label={'filenamemightbethislong.pdf'} delete={true} />
-        <AtTag label={'filenamemightbethislong.pdf'} delete={true} />
-      </Box>
 
       <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
         <AtButton

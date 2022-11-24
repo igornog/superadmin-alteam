@@ -1,13 +1,7 @@
-import { Box, FormControlLabel } from '@mui/material';
-import {
-  ArrowLeft2,
-  CloseCircle,
-  CloseSquare,
-  TickSquare,
-} from 'iconsax-react';
+import { Box } from '@mui/material';
+import { ArrowLeft2, CloseCircle } from 'iconsax-react';
 import React, { useState } from 'react';
 import { black, grey2 } from '../../../../utils/colors';
-import { useAppDispatch } from '../../../../utils/hooks/reduxHook';
 import { ModalSize } from '../../../../utils/redux/types/settings.type';
 import AtButton, {
   AtButtonKind,
@@ -25,8 +19,6 @@ const ModalAddTalent: React.FunctionComponent<ModalAddTalentProps> = (
 ) => {
   const [isInviting, setIsInviting] = useState(false);
   const [step, setStep] = useState(0);
-
-  const dispatch = useAppDispatch();
 
   const handleClose = () => {
     props.onClose?.();
