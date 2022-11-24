@@ -76,7 +76,6 @@ const StyledInput = styled(OutlinedInput)<{
   $bgColor?: string
   $maxWidth?: number
   multiline?: boolean
-  width?: string
 }>`
   &.${outlinedInputClasses.root} {
     ${({ multiline }) =>
@@ -84,7 +83,7 @@ const StyledInput = styled(OutlinedInput)<{
       css`
         padding: 0 20px;
       `}
-
+    justify-content: space-between;
     ${({ $bgColor }) =>
       $bgColor
         ? css<{ $bgColor?: string }>`
@@ -101,39 +100,31 @@ const StyledInput = styled(OutlinedInput)<{
                   : white
                 : white};
           `};
-
     & input {
-      width: ${({ width }) => width ?? '100%'};
       max-width: ${({ $maxWidth }) => $maxWidth && $maxWidth + 'ch'};
       color: ${({ disabled, $bgColor }) =>
         $bgColor === 'black' ? white : disabled ? grey3 : black};
       font-size: ${({ size }) => (size === 'medium' ? '16px' : '14px')};
-
       &::placeholder {
         color: ${grey3};
       }
-
       &:hover {
         cursor: pointer;
         &::placeholder {
           color: ${grey2};
         }
       }
-
       padding: ${({ size }) => (size === 'medium' ? '18px 0' : '10px 0')};
     }
-
     &.${inputBaseClasses.adornedStart} {
       input {
         padding-left: 10px;
       }
     }
-
     &.${inputBaseClasses.adornedEnd} {
       input {
         padding-right: 10px;
       }
-
       & > svg {
         ${({ dropdown }) =>
           dropdown &&
@@ -147,7 +138,6 @@ const StyledInput = styled(OutlinedInput)<{
           $bgColor === 'black' ? white : disabled ? grey3 : black};
       }
     }
-
     .${inputAdornmentClasses.positionStart} {
       width: ${({ size }) => (size === 'medium' ? '20px' : '15px')};
       color: ${({ $isError, $isSuccess, disabled }) =>
@@ -155,14 +145,10 @@ const StyledInput = styled(OutlinedInput)<{
       margin-right: 0;
     }
   }
-
   &.${outlinedInputClasses.root},
     &.${outlinedInputClasses.root}.${outlinedInputClasses.focused},
     &.${outlinedInputClasses.root}.Mui-disabled {
     fieldset {
-      legend {
-        display: none;
-      }
       transition: 0.3s;
       border-width: 1px;
       border-color: ${({ $isError, $isSuccess, $bgColor }) =>
@@ -175,12 +161,8 @@ const StyledInput = styled(OutlinedInput)<{
           : grey5};
     }
   }
-
   &.${outlinedInputClasses.root}:hover: not(.Mui-disabled) {
     fieldset {
-      legend {
-        display: none;
-      }
       transition: 0.3s;
       border-color: ${({ $isError, $isSuccess }) =>
         $isError ? red : $isSuccess ? green : grey3};
@@ -200,10 +182,13 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
 
   const [showDropdownLabel, setShowDropdownLabel] = useState(false)
   const dropdownLabelRef = useRef<any>(null)
+
+  const [value, setValue] = useState(props.defaultValue || '')
   const [isFocused, setIsFocused] = useState(false)
 
   const returnValue = (value: string) => {
     props.onValueChange?.(value)
+    setValue(value)
   }
 
   const handleClickShowPassword = () => {
@@ -225,7 +210,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
           <Box>
             <Box
               position={'absolute'}
-              top={'-14px'}
+              top={'-9px'}
               zIndex={1}
               paddingLeft={'20px'}
               ref={dropdownLabelRef}
@@ -271,9 +256,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
 
       <FormControl variant="outlined" fullWidth={true}>
         <StyledInput
-          {...props}
           fullWidth={true}
-          width={props.width}
           onClick={props.onClick}
           dropdown={props.dropdown}
           $maxWidth={props.maxWidth}
@@ -285,8 +268,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
           multiline={props.multiline}
           rows={props.rows}
           disabled={props.disabled}
-          defaultValue={props.defaultValue}
-          value={props.dropdown ? props.placeholder : props.value}
+          value={props.dropdown ? props.placeholder : value}
           size={props.size ?? 'medium'}
           required={props.required}
           type={
@@ -314,18 +296,17 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
               <StyledArrow open={props.open} size={15} />
             ) : (
               props.endIcon ||
-              (props.type === AtTextFieldType.Password &&
-                props.value.length > 0 && (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <Eye /> : <EyeSlash />}
-                    </IconButton>
-                  </InputAdornment>
-                ))
+              (props.type === AtTextFieldType.Password && value.length > 0 && (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <Eye /> : <EyeSlash />}
+                  </IconButton>
+                </InputAdornment>
+              ))
             )
           }
         />
@@ -342,7 +323,6 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
 
 export interface AtTextFieldProps {
   fullWidth?: boolean
-  width?: string
   required?: boolean
   defaultValue?: string
   value: string
@@ -358,7 +338,7 @@ export interface AtTextFieldProps {
   startIcon?: React.ReactNode
   endIcon?: React.ReactNode
 
-  onClick?: (e?: any) => void
+  onClick?: () => void
   dropdown?: boolean
   open?: boolean
 
