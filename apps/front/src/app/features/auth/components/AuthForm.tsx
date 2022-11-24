@@ -34,13 +34,13 @@ const AuthForm: React.FunctionComponent = () => {
 
   return (
     <StyledBackground>
-      <Box
-        paddingX={'20px'}
-        display={'flex'}
-        flexDirection={'column'}
-        gap={'30px'}
-        width={'100%'}
-      >
+  <Box
+    paddingX={'20px'}
+    display={'flex'}
+    flexDirection={'column'}
+    gap={'30px'}
+    width={'100%'}
+  >
         <AtTypography variant={'h2'}>Login</AtTypography>
 
         <AtTextField
