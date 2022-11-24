@@ -17,7 +17,7 @@
   },
   "lint-staged": {
     "*.{js,json,css,scss,md,ts,html,graphql}": [
-      "npm run check"
+      "npm run format"
     ]
   },
   "private": true,
