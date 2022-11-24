@@ -1,8 +1,8 @@
-import { Box } from '@mui/material';
-import React from 'react';
-import { grey2 } from '../../../../../utils/colors';
-import AtTree from '../../../../AtTree/AtTree';
-import AtTypography from '../../../../AtTypography/AtTypography';
+import { Box } from '@mui/material'
+import React from 'react'
+import { grey2 } from '../../../../../utils/colors'
+import AtTree from '../../../../AtTree/AtTree'
+import AtTypography from '../../../../AtTypography/AtTypography'
 
 const ModalAcceptedStep1: React.FunctionComponent = () => {
   return (
@@ -14,7 +14,7 @@ const ModalAcceptedStep1: React.FunctionComponent = () => {
 
       <AtTree />
     </Box>
-  );
-};
+  )
+}
 
-export default ModalAcceptedStep1;
+export default ModalAcceptedStep1

@@ -3,10 +3,10 @@ import {
   TableRow,
   tableRowClasses,
   TableRowProps,
-} from '@mui/material';
-import React from 'react';
-import styled from 'styled-components';
-import AtTableCell from './AtTableCell';
+} from '@mui/material'
+import React from 'react'
+import styled from 'styled-components'
+import AtTableCell from './AtTableCell'
 
 const StyledTableRow = styled(TableRow)`
   min-height: 35px;
@@ -20,21 +20,21 @@ const StyledTableRow = styled(TableRow)`
     cursor: pointer;
     z-index: 0;
   }
-`;
+`
 
 export const AtTableRow: React.FunctionComponent<AtTableRowProps> = (
-  props: AtTableRowProps
+  props: AtTableRowProps,
 ) => {
   return (
     <StyledTableRow
       {...props}
       onMouseEnter={(e) => {
-        props.setPosition && props.setPosition(e.currentTarget.offsetTop);
+        props.setPosition && props.setPosition(e.currentTarget.offsetTop)
       }}
       onMouseLeave={() => props.setPosition && props.setPosition(null)}
     />
-  );
-};
+  )
+}
 
 export const AtTableLoadingRow: React.FunctionComponent<
   AtTableLoadingRowProps
@@ -45,13 +45,13 @@ export const AtTableLoadingRow: React.FunctionComponent<
         <Skeleton style={{ width: '100%' }} />
       </AtTableCell>
     </StyledTableRow>
-  );
-};
+  )
+}
 
 interface AtTableRowProps extends TableRowProps {
-  setPosition?: React.Dispatch<React.SetStateAction<number | null>>;
+  setPosition?: React.Dispatch<React.SetStateAction<number | null>>
 }
 
 interface AtTableLoadingRowProps {
-  numberColumns: number;
+  numberColumns: number
 }

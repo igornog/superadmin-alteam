@@ -1,49 +1,49 @@
-import { Backdrop, Box, Collapse, Grid, useMediaQuery } from '@mui/material';
-import { AddCircle, Candle, Import, SearchNormal1, Share } from 'iconsax-react';
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { grey2 } from '../../utils/colors';
-import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
-import { handleCollapsePanel } from '../../utils/redux/actions/app.action';
-import { getActiveTab } from '../../utils/redux/selectors/settings.selector';
-import { getActiveFolder } from '../../utils/redux/selectors/tree.selector';
-import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton';
-import AtDropdown from '../AtDropdown/AtDropdown';
-import ModalAddFolder from '../AtModal/modals/ModalAddFolder';
-import ModalAddTalent from '../AtModal/modals/ModalCreateTalent/ModalAddTalent';
-import ModalShareFolder from '../AtModal/modals/ModalShareFolder';
-import AtNavbar from '../AtNavbar/AtNavbar';
-import AtNavPage from '../AtNavPage/AtNavPage';
-import AtRightClick from '../AtRightClick/AtRightClick';
-import CreateTalentMenu from '../AtRightClick/ContextMenus/CreateTalentMenu';
-import AtTextField, { AtTextFieldType } from '../AtTextField/AtTextField';
-import AtTypography from '../AtTypography/AtTypography';
-import AtSwitchDisplayMode from './AtSwitchDisplayMode';
-import AtTopTitle from './AtTopTitle';
+import { Backdrop, Box, Collapse, Grid, useMediaQuery } from '@mui/material'
+import { AddCircle, Candle, Import, SearchNormal1, Share } from 'iconsax-react'
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import { grey2 } from '../../utils/colors'
+import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook'
+import { handleCollapsePanel } from '../../utils/redux/actions/app.action'
+import { getActiveTab } from '../../utils/redux/selectors/settings.selector'
+import { getActiveFolder } from '../../utils/redux/selectors/tree.selector'
+import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton'
+import AtDropdown from '../AtDropdown/AtDropdown'
+import ModalAddFolder from '../AtModal/modals/ModalAddFolder'
+import ModalAddTalent from '../AtModal/modals/ModalCreateTalent/ModalAddTalent'
+import ModalShareFolder from '../AtModal/modals/ModalShareFolder'
+import AtNavbar from '../AtNavbar/AtNavbar'
+import AtNavPage from '../AtNavPage/AtNavPage'
+import AtRightClick from '../AtRightClick/AtRightClick'
+import CreateTalentMenu from '../AtRightClick/ContextMenus/CreateTalentMenu'
+import AtTextField, { AtTextFieldType } from '../AtTextField/AtTextField'
+import AtTypography from '../AtTypography/AtTypography'
+import AtSwitchDisplayMode from './AtSwitchDisplayMode'
+import AtTopTitle from './AtTopTitle'
 
 const StyledContent = styled(Grid)<{ $sidePanelSize?: string }>`
   background-color: #f7f8fe;
   margin: 20px 20px 30px 165px;
-`;
+`
 
 const StyledSidePanel = styled(Collapse)`
   position: fixed;
   right: 0;
-`;
+`
 
 const AtLayout: React.FunctionComponent<AtLayoutProps> = (
-  props: AtLayoutProps
+  props: AtLayoutProps,
 ) => {
-  const [openCreateFolder, setOpenCreateFolder] = useState(false);
-  const [openShareFolder, setOpenShareFolder] = useState(false);
-  const [openCreateTalent, setOpenCreateTalent] = useState(false);
+  const [openCreateFolder, setOpenCreateFolder] = useState(false)
+  const [openShareFolder, setOpenShareFolder] = useState(false)
+  const [openCreateTalent, setOpenCreateTalent] = useState(false)
 
-  const isSmallScreen = useMediaQuery('(max-width:1079px)');
-  const activeTab = useAppSelector((state) => getActiveTab(state));
-  const app = useAppSelector((state) => state.app);
+  const isSmallScreen = useMediaQuery('(max-width:1079px)')
+  const activeTab = useAppSelector((state) => getActiveTab(state))
+  const app = useAppSelector((state) => state.app)
 
-  const dispatch = useAppDispatch();
-  const activeFolder = useAppSelector((state) => getActiveFolder(state));
+  const dispatch = useAppDispatch()
+  const activeFolder = useAppSelector((state) => getActiveFolder(state))
 
   return !isSmallScreen ? (
     activeTab.config && (
@@ -219,15 +219,15 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
         This application is not suitable for small screens
       </AtTypography>
     </Box>
-  );
-};
-
-interface AtLayoutProps {
-  children: React.ReactNode;
-  title?: string;
-  sidePanel?: React.ReactNode;
-  sidePanelIcon?: React.ReactNode;
-  sidePanelSize?: 'small' | 'medium';
+  )
 }
 
-export default AtLayout;
+interface AtLayoutProps {
+  children: React.ReactNode
+  title?: string
+  sidePanel?: React.ReactNode
+  sidePanelIcon?: React.ReactNode
+  sidePanelSize?: 'small' | 'medium'
+}
+
+export default AtLayout

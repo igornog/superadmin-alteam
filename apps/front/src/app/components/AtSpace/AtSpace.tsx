@@ -1,5 +1,5 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React from 'react'
+import styled, { css } from 'styled-components'
 
 const StyledSpace = styled.div<AtSpaceProps>`
   ${({ direction, spacing }) =>
@@ -10,17 +10,17 @@ const StyledSpace = styled.div<AtSpaceProps>`
       : css`
           width: ${spacing}px;
         `}
-`;
+`
 
 const AtSpace: React.FunctionComponent<AtSpaceProps> = (
-  props: AtSpaceProps
+  props: AtSpaceProps,
 ) => {
-  return <StyledSpace {...props} />;
-};
+  return <StyledSpace {...props} />
+}
 
-export default AtSpace;
+export default AtSpace
 
 interface AtSpaceProps {
-  direction: 'vertical' | 'horizontal';
-  spacing: string;
+  direction: 'vertical' | 'horizontal'
+  spacing: string
 }

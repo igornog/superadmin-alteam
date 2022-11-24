@@ -1,15 +1,15 @@
-import { Box } from '@mui/material';
-import { AddCircle, Edit } from 'iconsax-react';
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import AtCopyTo from '../../../../components/AtCopyTo/AtCopyTo';
-import AtLine from '../../../../components/AtLine/AtLine';
-import ModalLink from '../../../../components/AtModal/modals/ModalLink';
-import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame';
-import AtTypography from '../../../../components/AtTypography/AtTypography';
-import { black, grey4 } from '../../../../utils/colors';
-import { getCorrectNetwork } from '../../../../utils/helpers';
-import { Link, Talent } from '../../../../utils/redux/types/talents.type';
+import { Box } from '@mui/material'
+import { AddCircle, Edit } from 'iconsax-react'
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import AtCopyTo from '../../../../components/AtCopyTo/AtCopyTo'
+import AtLine from '../../../../components/AtLine/AtLine'
+import ModalLink from '../../../../components/AtModal/modals/ModalLink'
+import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame'
+import AtTypography from '../../../../components/AtTypography/AtTypography'
+import { black, grey4 } from '../../../../utils/colors'
+import { getCorrectNetwork } from '../../../../utils/helpers'
+import { Link, Talent } from '../../../../utils/redux/types/talents.type'
 
 export const StyledLink = styled(Box)<{ padding?: string }>`
   border: 1px solid ${grey4};
@@ -24,12 +24,12 @@ export const StyledLink = styled(Box)<{ padding?: string }>`
     cursor: pointer;
     transition: 0.3s;
   }
-`;
+`
 
 const TalentLinks: React.FunctionComponent<TalentLinksProps> = (
-  props: TalentLinksProps
+  props: TalentLinksProps,
 ) => {
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false)
 
   return (
     <>
@@ -71,11 +71,11 @@ const TalentLinks: React.FunctionComponent<TalentLinksProps> = (
       )}
       <ModalLink isOpen={openModal} onClose={() => setOpenModal(false)} />
     </>
-  );
-};
-
-interface TalentLinksProps {
-  talent: Talent;
+  )
 }
 
-export default TalentLinks;
+interface TalentLinksProps {
+  talent: Talent
+}
+
+export default TalentLinks

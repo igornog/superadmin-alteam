@@ -1,16 +1,16 @@
-import { Box, Grid } from '@mui/material';
-import { Edit } from 'iconsax-react';
-import React, { useState } from 'react';
-import ModalGeneralInformations from '../../../../components/AtModal/modals/ModalGeneralInformations';
-import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame';
-import AtTypography from '../../../../components/AtTypography/AtTypography';
-import { grey, grey2 } from '../../../../utils/colors';
-import { Talent } from '../../../../utils/redux/types/talents.type';
+import { Box, Grid } from '@mui/material'
+import { Edit } from 'iconsax-react'
+import React, { useState } from 'react'
+import ModalGeneralInformations from '../../../../components/AtModal/modals/ModalGeneralInformations'
+import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame'
+import AtTypography from '../../../../components/AtTypography/AtTypography'
+import { grey, grey2 } from '../../../../utils/colors'
+import { Talent } from '../../../../utils/redux/types/talents.type'
 
 const TalentGeneral: React.FunctionComponent<TalentGeneralProps> = (
-  props: TalentGeneralProps
+  props: TalentGeneralProps,
 ) => {
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false)
 
   return (
     <AtTalentFrame
@@ -105,11 +105,11 @@ const TalentGeneral: React.FunctionComponent<TalentGeneralProps> = (
         onClose={() => setOpenModal(false)}
       />
     </AtTalentFrame>
-  );
-};
-
-interface TalentGeneralProps {
-  talent: Talent;
+  )
 }
 
-export default TalentGeneral;
+interface TalentGeneralProps {
+  talent: Talent
+}
+
+export default TalentGeneral

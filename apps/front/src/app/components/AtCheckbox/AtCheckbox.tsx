@@ -1,8 +1,8 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import { green, grey, grey4 } from '../../utils/colors';
-import check from '../../assets/images/icons/check.svg';
-import minus from '../../assets/images/icons/minus.svg';
+import React from 'react'
+import styled, { css } from 'styled-components'
+import { green, grey, grey4 } from '../../utils/colors'
+import check from '../../assets/images/icons/check.svg'
+import minus from '../../assets/images/icons/minus.svg'
 
 const sharedCheck = css<{ indeterminate?: boolean }>`
   position: relative;
@@ -20,7 +20,7 @@ const sharedCheck = css<{ indeterminate?: boolean }>`
     width: 100%;
     height: 100%;
   }
-`;
+`
 
 const StyledCheckbox = styled.input<{ indeterminate?: boolean }>`
   -moz-appearance: none;
@@ -48,10 +48,10 @@ const StyledCheckbox = styled.input<{ indeterminate?: boolean }>`
     cursor: pointer;
     border-color: ${grey};
   }
-`;
+`
 
 const AtCheckbox: React.FunctionComponent<AtCheckboxProps> = (
-  props: AtCheckboxProps
+  props: AtCheckboxProps,
 ) => {
   return (
     <StyledCheckbox
@@ -61,14 +61,14 @@ const AtCheckbox: React.FunctionComponent<AtCheckboxProps> = (
       indeterminate={props.indeterminate}
       onChange={props.onChange}
     />
-  );
-};
-
-interface AtCheckboxProps {
-  checked?: boolean;
-  indeterminate?: boolean;
-  onChange?: (e: any) => void;
-  checkboxRef?: any;
+  )
 }
 
-export default AtCheckbox;
+interface AtCheckboxProps {
+  checked?: boolean
+  indeterminate?: boolean
+  onChange?: (e: any) => void
+  checkboxRef?: any
+}
+
+export default AtCheckbox

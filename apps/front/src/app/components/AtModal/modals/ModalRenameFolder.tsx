@@ -1,45 +1,45 @@
-import { Box } from '@mui/material';
-import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react';
-import React, { useEffect, useState } from 'react';
+import { Box } from '@mui/material'
+import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react'
+import React, { useEffect, useState } from 'react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../AtButton/AtButton';
-import AtTypography from '../../AtTypography/AtTypography';
-import { ModalSize } from '../../../utils/redux/types/settings.type';
-import AtLine from '../../AtLine/AtLine';
-import AtModal from '../AtModal';
-import AtTextField from '../../AtTextField/AtTextField';
-import { Tree, TreeInterface } from '../../../utils/redux/types/tree.type';
-import { useAppDispatch } from '../../../utils/hooks/reduxHook';
-import { handleAddFolder } from '../../../utils/redux/actions/tree.action';
+} from '../../AtButton/AtButton'
+import AtTypography from '../../AtTypography/AtTypography'
+import { ModalSize } from '../../../utils/redux/types/settings.type'
+import AtLine from '../../AtLine/AtLine'
+import AtModal from '../AtModal'
+import AtTextField from '../../AtTextField/AtTextField'
+import { Tree, TreeInterface } from '../../../utils/redux/types/tree.type'
+import { useAppDispatch } from '../../../utils/hooks/reduxHook'
+import { handleAddFolder } from '../../../utils/redux/actions/tree.action'
 
 const ModalRenameFolder: React.FunctionComponent<ModalRenameFolderProps> = (
-  props: ModalRenameFolderProps
+  props: ModalRenameFolderProps,
 ) => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
-  const [folder, setFolder] = useState(new Tree({}));
-  const [folderName, setFolderName] = useState('');
+  const [folder, setFolder] = useState(new Tree({}))
+  const [folderName, setFolderName] = useState('')
 
   useEffect(() => {
     if (props.folder) {
-      setFolder(new Tree(props.folder));
-      setFolderName(props.folder.name);
+      setFolder(new Tree(props.folder))
+      setFolderName(props.folder.name)
     }
-  }, [props.folder]);
+  }, [props.folder])
 
   const handleClose = () => {
-    props.onClose?.();
-    setFolderName(folder.name);
-  };
+    props.onClose?.()
+    setFolderName(folder.name)
+  }
 
   const addNewFolder = () => {
     if (folder.id) {
-      dispatch(handleAddFolder({ folderName, targetId: folder.id }));
-      handleClose();
+      dispatch(handleAddFolder({ folderName, targetId: folder.id }))
+      handleClose()
     }
-  };
+  }
 
   return (
     <AtModal isOpen={props.isOpen} size={ModalSize.Small} onClose={handleClose}>
@@ -90,13 +90,13 @@ const ModalRenameFolder: React.FunctionComponent<ModalRenameFolderProps> = (
         </Box>
       </Box>
     </AtModal>
-  );
-};
-
-interface ModalRenameFolderProps {
-  folder?: TreeInterface | undefined;
-  isOpen: boolean;
-  onClose?: () => void;
+  )
 }
 
-export default ModalRenameFolder;
+interface ModalRenameFolderProps {
+  folder?: TreeInterface | undefined
+  isOpen: boolean
+  onClose?: () => void
+}
+
+export default ModalRenameFolder

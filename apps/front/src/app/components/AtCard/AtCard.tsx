@@ -1,16 +1,16 @@
-import { Box } from '@mui/material';
-import { ArrowRight2 } from 'iconsax-react';
-import React from 'react';
-import styled, { css } from 'styled-components';
-import { green, grey, grey3, grey5, white } from '../../utils/colors';
-import AtLine from '../AtLine/AtLine';
-import AtGroupTag from '../AtGroupTag/AtGroupTag';
-import AtTypography from '../AtTypography/AtTypography';
-import AtTag from '../AtTag/AtTag';
-import { Skill, Talent } from '../../utils/redux/types/talents.type';
-import AtRightClick from '../AtRightClick/AtRightClick';
-import { boxShadow } from '../../utils/theme';
-import TalentMenu from '../AtRightClick/ContextMenus/TalentMenu';
+import { Box } from '@mui/material'
+import { ArrowRight2 } from 'iconsax-react'
+import React from 'react'
+import styled, { css } from 'styled-components'
+import { green, grey, grey3, grey5, white } from '../../utils/colors'
+import AtLine from '../AtLine/AtLine'
+import AtGroupTag from '../AtGroupTag/AtGroupTag'
+import AtTypography from '../AtTypography/AtTypography'
+import AtTag from '../AtTag/AtTag'
+import { Skill, Talent } from '../../utils/redux/types/talents.type'
+import AtRightClick from '../AtRightClick/AtRightClick'
+import { boxShadow } from '../../utils/theme'
+import TalentMenu from '../AtRightClick/ContextMenus/TalentMenu'
 
 const StyledCard = styled.div<{ fullHeight?: boolean }>`
   background-color: ${white};
@@ -31,10 +31,10 @@ const StyledCard = styled.div<{ fullHeight?: boolean }>`
     cursor: pointer;
     border-color: ${green};
   }
-`;
+`
 
 const AtCard: React.FunctionComponent<AtCardProps> = (props: AtCardProps) => {
-  const talent = new Talent(props.talent);
+  const talent = new Talent(props.talent)
 
   return (
     <StyledCard onClick={props.onClick} fullHeight={props.fullHeight}>
@@ -98,16 +98,16 @@ const AtCard: React.FunctionComponent<AtCardProps> = (props: AtCardProps) => {
         </Box>
       </AtRightClick>
     </StyledCard>
-  );
-};
-
-interface AtCardProps {
-  talent?: Talent;
-  fullHeight?: boolean;
-  onClick?: (e: React.MouseEvent) => void;
-  openShortlist: () => void;
-  openAccepted: () => void;
-  openEmailToTalent: () => void;
+  )
 }
 
-export default AtCard;
+interface AtCardProps {
+  talent?: Talent
+  fullHeight?: boolean
+  onClick?: (e: React.MouseEvent) => void
+  openShortlist: () => void
+  openAccepted: () => void
+  openEmailToTalent: () => void
+}
+
+export default AtCard

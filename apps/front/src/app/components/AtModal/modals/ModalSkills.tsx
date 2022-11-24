@@ -1,29 +1,29 @@
-import { Box } from '@mui/material';
+import { Box } from '@mui/material'
 import {
   CloseCircle,
   CloseSquare,
   SearchNormal1,
   TickSquare,
-} from 'iconsax-react';
-import React from 'react';
+} from 'iconsax-react'
+import React from 'react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../AtButton/AtButton';
-import AtTag from '../../AtTag/AtTag';
-import AtTextField from '../../AtTextField/AtTextField';
-import AtTypography from '../../AtTypography/AtTypography';
-import { grey2 } from '../../../utils/colors';
-import { useAppSelector } from '../../../utils/hooks/reduxHook';
-import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector';
-import { ModalSize } from '../../../utils/redux/types/settings.type';
-import AtModal from '../AtModal';
-import AtLine from '../../AtLine/AtLine';
+} from '../../AtButton/AtButton'
+import AtTag from '../../AtTag/AtTag'
+import AtTextField from '../../AtTextField/AtTextField'
+import AtTypography from '../../AtTypography/AtTypography'
+import { grey2 } from '../../../utils/colors'
+import { useAppSelector } from '../../../utils/hooks/reduxHook'
+import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector'
+import { ModalSize } from '../../../utils/redux/types/settings.type'
+import AtModal from '../AtModal'
+import AtLine from '../../AtLine/AtLine'
 
 const ModalSkills: React.FunctionComponent<ModalSkillsProps> = (
-  props: ModalSkillsProps
+  props: ModalSkillsProps,
 ) => {
-  const selectedTalent = useAppSelector((state) => getActiveTalent(state));
+  const selectedTalent = useAppSelector((state) => getActiveTalent(state))
 
   return (
     <AtModal
@@ -60,7 +60,7 @@ const ModalSkills: React.FunctionComponent<ModalSkillsProps> = (
         <Box display={'flex'} flexWrap={'wrap'} gap={'10px'}>
           {selectedTalent.skills && selectedTalent.skills.length > 0 ? (
             selectedTalent?.skills?.map((skill, index) => {
-              return <AtTag label={skill.label} delete={true} key={index} />;
+              return <AtTag label={skill.label} delete={true} key={index} />
             })
           ) : (
             <AtTypography color={grey2}>
@@ -88,12 +88,12 @@ const ModalSkills: React.FunctionComponent<ModalSkillsProps> = (
         </Box>
       </Box>
     </AtModal>
-  );
-};
-
-interface ModalSkillsProps {
-  isOpen: boolean;
-  onClose?: () => void;
+  )
 }
 
-export default ModalSkills;
+interface ModalSkillsProps {
+  isOpen: boolean
+  onClose?: () => void
+}
+
+export default ModalSkills

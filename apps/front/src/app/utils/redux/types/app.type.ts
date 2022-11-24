@@ -1,10 +1,10 @@
-import { StatusType } from './status.type';
+import { StatusType } from './status.type'
 
 export interface AppState {
   sidePanel: {
-    isFixed: boolean;
-    isVisible: boolean;
-  };
-  status?: StatusType;
-  error?: string | null;
+    isFixed: boolean
+    isVisible: boolean
+  }
+  status?: StatusType
+  error?: string | null
 }

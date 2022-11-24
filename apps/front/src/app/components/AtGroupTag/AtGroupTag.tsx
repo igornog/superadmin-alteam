@@ -1,7 +1,7 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import { black, green, white } from '../../utils/colors';
-import AtTypography from '../AtTypography/AtTypography';
+import React from 'react'
+import styled, { css } from 'styled-components'
+import { black, green, white } from '../../utils/colors'
+import AtTypography from '../AtTypography/AtTypography'
 
 const StyledGroupTag = styled.div<{ icon?: React.ReactNode }>`
   background-color: ${black};
@@ -26,21 +26,21 @@ const StyledGroupTag = styled.div<{ icon?: React.ReactNode }>`
         background-color ${green};
         color: ${black};
     `}
-`;
+`
 
 const AtGroupTag: React.FunctionComponent<AtGroupTagProps> = (
-  props: AtGroupTagProps
+  props: AtGroupTagProps,
 ) => {
   return (
     <StyledGroupTag icon={props.icon}>
       {props.label ? <AtTypography>{props.label}</AtTypography> : props.icon}
     </StyledGroupTag>
-  );
-};
-
-interface AtGroupTagProps {
-  label?: string;
-  icon?: React.ReactNode;
+  )
 }
 
-export default AtGroupTag;
+interface AtGroupTagProps {
+  label?: string
+  icon?: React.ReactNode
+}
+
+export default AtGroupTag

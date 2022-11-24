@@ -1,27 +1,26 @@
-import { Box } from '@mui/material';
-import { AddCircle, Edit } from 'iconsax-react';
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import ModalAddNote from '../../../../components/AtModal/modals/ModalAddNote';
-import ModalEditNote from '../../../../components/AtModal/modals/ModalEditNote';
-import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame';
-import AtTypography from '../../../../components/AtTypography/AtTypography';
-import { black, grey, grey2, grey3 } from '../../../../utils/colors';
+import { Box } from '@mui/material'
+import { AddCircle, Edit } from 'iconsax-react'
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import ModalAddNote from '../../../../components/AtModal/modals/ModalAddNote'
+import ModalEditNote from '../../../../components/AtModal/modals/ModalEditNote'
+import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame'
+import AtTypography from '../../../../components/AtTypography/AtTypography'
+import { black, grey, grey2, grey3 } from '../../../../utils/colors'
 
 const StyledBox = styled(Box)`
   color: ${grey2};
   transition: 0.3s;
-
   &:hover {
     transition: 0.3s;
     cursor: pointer;
     color: ${black};
   }
-`;
+`
 
 const TalentNotes: React.FunctionComponent = () => {
-  const [openModalAddNote, setOpenModalAddNote] = useState(false);
-  const [openModalEditNote, setOpenModalEditNote] = useState(false);
+  const [openModalAddNote, setOpenModalAddNote] = useState(false)
+  const [openModalEditNote, setOpenModalEditNote] = useState(false)
 
   return (
     <AtTalentFrame
@@ -67,7 +66,7 @@ const TalentNotes: React.FunctionComponent = () => {
         onClose={() => setOpenModalEditNote(false)}
       />
     </AtTalentFrame>
-  );
-};
+  )
+}
 
-export default TalentNotes;
+export default TalentNotes

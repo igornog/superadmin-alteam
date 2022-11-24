@@ -1,8 +1,8 @@
-import { FormControlLabel, Switch } from '@mui/material';
-import React from 'react';
-import styled from 'styled-components';
-import { blue, green } from '../../utils/colors';
-import { convertHexToRGBA } from '../../utils/helpers';
+import { FormControlLabel, Switch } from '@mui/material'
+import React from 'react'
+import styled from 'styled-components'
+import { blue, green } from '../../utils/colors'
+import { convertHexToRGBA } from '../../utils/helpers'
 
 const IOSSwitch = styled(Switch).attrs(() => ({
   classes: {
@@ -55,10 +55,10 @@ const IOSSwitch = styled(Switch).attrs(() => ({
     opacity: 1;
     background-color: ${convertHexToRGBA(blue, 0.1)};
   }
-`;
+`
 
 const AtSwitch: React.FunctionComponent<AtSwitchProps> = (
-  props: AtSwitchProps
+  props: AtSwitchProps,
 ) => {
   return (
     <FormControlLabel
@@ -75,14 +75,14 @@ const AtSwitch: React.FunctionComponent<AtSwitchProps> = (
       label={props.label}
       labelPlacement={props.placement ?? 'start'}
     />
-  );
-};
-
-interface AtSwitchProps {
-  label: string | React.ReactNode;
-  onChange: () => void;
-  placement?: 'end' | 'start' | 'top' | 'bottom';
-  defaultChecked?: boolean;
+  )
 }
 
-export default AtSwitch;
+interface AtSwitchProps {
+  label: string | React.ReactNode
+  onChange: () => void
+  placement?: 'end' | 'start' | 'top' | 'bottom'
+  defaultChecked?: boolean
+}
+
+export default AtSwitch

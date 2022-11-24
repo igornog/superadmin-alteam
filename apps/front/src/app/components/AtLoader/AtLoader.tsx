@@ -1,5 +1,5 @@
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import React from 'react'
+import styled, { keyframes } from 'styled-components'
 
 const spin = keyframes`
     0% {
@@ -8,7 +8,7 @@ const spin = keyframes`
     100% {
         transform: rotate(360deg);
     }
-`;
+`
 
 const StyledLoader = styled.div`
   border: 10px solid #f3f3f3;
@@ -17,10 +17,10 @@ const StyledLoader = styled.div`
   width: 80px;
   height: 80px;
   animation: ${spin} 1s linear infinite;
-`;
+`
 
 const AtLoader: React.FunctionComponent = () => {
-  return <StyledLoader />;
-};
+  return <StyledLoader />
+}
 
-export default AtLoader;
+export default AtLoader

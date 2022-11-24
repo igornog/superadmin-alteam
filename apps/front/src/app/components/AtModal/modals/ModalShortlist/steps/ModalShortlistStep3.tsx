@@ -1,8 +1,8 @@
-import { Box } from '@mui/material';
-import React from 'react';
-import { grey2 } from '../../../../../utils/colors';
-import AtTextField from '../../../../AtTextField/AtTextField';
-import AtTypography from '../../../../AtTypography/AtTypography';
+import { Box } from '@mui/material'
+import React from 'react'
+import { grey2 } from '../../../../../utils/colors'
+import AtTextField from '../../../../AtTextField/AtTextField'
+import AtTypography from '../../../../AtTypography/AtTypography'
 
 const ModalShortlistStep3: React.FunctionComponent = () => {
   return (
@@ -21,7 +21,7 @@ const ModalShortlistStep3: React.FunctionComponent = () => {
         label={'Shortlist Talent'}
       />
     </Box>
-  );
-};
+  )
+}
 
-export default ModalShortlistStep3;
+export default ModalShortlistStep3

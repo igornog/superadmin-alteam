@@ -1,7 +1,7 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import { Button, buttonClasses } from '@mui/material';
-import AtTypography from '../AtTypography/AtTypography';
+import React from 'react'
+import styled, { css } from 'styled-components'
+import { Button, buttonClasses } from '@mui/material'
+import AtTypography from '../AtTypography/AtTypography'
 import {
   white,
   black,
@@ -10,7 +10,7 @@ import {
   grey3,
   green,
   red,
-} from '../../utils/colors';
+} from '../../utils/colors'
 
 export enum AtButtonKind {
   Default = 'default',
@@ -82,16 +82,16 @@ export const buttonKind = {
       color: grey3,
     },
   },
-};
+}
 
 interface StyledButtonProps {
-  kind: AtButtonKind;
-  $variant: AtButtonVariant;
-  $btnName?: string;
-  $padding?: string;
-  startIcon?: React.ReactNode;
-  iconSize?: number;
-  flexibleHeight?: boolean;
+  kind: AtButtonKind
+  $variant: AtButtonVariant
+  $btnName?: string
+  $padding?: string
+  startIcon?: React.ReactNode
+  iconSize?: number
+  flexibleHeight?: boolean
 }
 
 const StyledButton = styled(Button)<StyledButtonProps>`
@@ -127,9 +127,9 @@ const StyledButton = styled(Button)<StyledButtonProps>`
             }
           `
         : css<{
-            $variant: AtButtonVariant;
-            $padding?: string;
-            flexibleHeight?: boolean;
+            $variant: AtButtonVariant
+            $padding?: string
+            flexibleHeight?: boolean
           }>`
             padding: ${({ $variant, $padding }) =>
               $padding
@@ -227,10 +227,10 @@ const StyledButton = styled(Button)<StyledButtonProps>`
             `}
     }
   }
-`;
+`
 
 const AtButton: React.FunctionComponent<AtButtonProps> = (
-  props: AtButtonProps
+  props: AtButtonProps,
 ) => {
   return (
     <StyledButton
@@ -256,21 +256,21 @@ const AtButton: React.FunctionComponent<AtButtonProps> = (
         </AtTypography>
       )}
     </StyledButton>
-  );
-};
-
-export interface AtButtonProps {
-  kind: AtButtonKind;
-  variant: AtButtonVariant;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  name?: string;
-  disabled?: boolean;
-  padding?: string;
-  startIcon?: React.ReactNode;
-  endIcon?: React.ReactNode;
-  fontSize?: string;
-  iconSize?: number;
-  flexibleHeight?: boolean;
+  )
 }
 
-export default AtButton;
+export interface AtButtonProps {
+  kind: AtButtonKind
+  variant: AtButtonVariant
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
+  name?: string
+  disabled?: boolean
+  padding?: string
+  startIcon?: React.ReactNode
+  endIcon?: React.ReactNode
+  fontSize?: string
+  iconSize?: number
+  flexibleHeight?: boolean
+}
+
+export default AtButton

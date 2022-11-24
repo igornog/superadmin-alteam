@@ -1,17 +1,17 @@
-import { Box } from '@mui/material';
-import { SearchNormal1 } from 'iconsax-react';
-import React from 'react';
-import styled from 'styled-components';
-import { grey2 } from '../../../../../utils/colors';
-import { AtButtonKind, AtButtonVariant } from '../../../../AtButton/AtButton';
-import AtDropdown from '../../../../AtDropdown/AtDropdown';
-import AtTag from '../../../../AtTag/AtTag';
-import AtTextField from '../../../../AtTextField/AtTextField';
-import AtTypography from '../../../../AtTypography/AtTypography';
+import { Box } from '@mui/material'
+import { SearchNormal1 } from 'iconsax-react'
+import React from 'react'
+import styled from 'styled-components'
+import { grey2 } from '../../../../../utils/colors'
+import { AtButtonKind, AtButtonVariant } from '../../../../AtButton/AtButton'
+import AtDropdown from '../../../../AtDropdown/AtDropdown'
+import AtTag from '../../../../AtTag/AtTag'
+import AtTextField from '../../../../AtTextField/AtTextField'
+import AtTypography from '../../../../AtTypography/AtTypography'
 
 const StyledTag = styled(AtTag)`
   flex: 5;
-`;
+`
 
 const ModalAcceptedStep2: React.FunctionComponent = () => {
   return (
@@ -62,7 +62,7 @@ const ModalAcceptedStep2: React.FunctionComponent = () => {
         </Box>
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default ModalAcceptedStep2;
+export default ModalAcceptedStep2

@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import { grey2 } from '../../utils/colors';
-import AtTypography from '../AtTypography/AtTypography';
-import download from '../../assets/images/icons/download-arrow.svg';
-import { Box } from '@mui/material';
+import React from 'react'
+import styled from 'styled-components'
+import { grey2 } from '../../utils/colors'
+import AtTypography from '../AtTypography/AtTypography'
+import download from '../../assets/images/icons/download-arrow.svg'
+import { Box } from '@mui/material'
 
 const StyledDropbox = styled.div`
   min-height: 245px;
@@ -18,7 +18,7 @@ const StyledDropbox = styled.div`
   &:hover {
     cursor: pointer;
   }
-`;
+`
 
 const AtDropBox: React.FunctionComponent = () => {
   return (
@@ -34,7 +34,7 @@ const AtDropBox: React.FunctionComponent = () => {
         </AtTypography>
       </Box>
     </StyledDropbox>
-  );
-};
+  )
+}
 
-export default AtDropBox;
+export default AtDropBox
