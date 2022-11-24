@@ -6,15 +6,8 @@
     "start": "npx nx serve front",
     "storybook": "npx nx run front:storybook",
     "build-storybook": "npx nx run front:build-storybook",
-    "format": "prettier --write .",
-    "lint": "prettier --check .",
-    "chromatic": "npx chromatic --force-rebuild",
-    "pretest": "npm run lint"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run pretest"
-    }
+    "format": "prettier --write ./apps/front",
+    "chromatic": "npx chromatic --force-rebuild"
   },
   "private": true,
   "devDependencies": {
@@ -95,7 +88,6 @@
     "express": "4.18.1",
     "express-validator": "^6.14.2",
     "framer-motion": "^6.2.10",
-    "husky": "^8.0.2",
     "iconsax-react": "^0.0.8",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
