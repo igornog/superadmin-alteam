@@ -7,6 +7,7 @@ import ModalEditNote from '../../../../components/AtModal/modals/ModalEditNote';
 import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame';
 import AtTypography from '../../../../components/AtTypography/AtTypography';
 import { black, grey, grey2, grey3 } from '../../../../utils/colors';
+import { Talent } from '../../../../utils/redux/types/talents.type';
 
 const StyledBox = styled(Box)`
   color: ${grey2};
@@ -62,10 +63,10 @@ const TalentNotes: React.FunctionComponent = () => {
         onClose={() => setOpenModalAddNote(false)}
       />
 
-      {/* <ModalEditNote
+      <ModalEditNote
         isOpen={openModalEditNote}
         onClose={() => setOpenModalEditNote(false)}
-      /> */}
+      />
     </AtTalentFrame>
   );
 };

@@ -6,9 +6,10 @@
     "start": "npx nx serve front",
     "storybook": "npx nx run front:storybook",
     "build-storybook": "npx nx run front:build-storybook",
-    "format": "prettier --write ./apps/front",
+    "format": "prettier --write .",
+    "lint": "prettier --check .",
     "chromatic": "npx chromatic --force-rebuild",
-    "pretest": "./node_modules/.bin/eslint --ignore-path .gitignore . --fix"
+    "pretest": "npm run lint"
   },
   "husky": {
     "hooks": {
