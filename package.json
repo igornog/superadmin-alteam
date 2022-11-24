@@ -17,7 +17,7 @@
   },
   "lint-staged": {
     "*.{js,json,css,scss,md,ts,html,graphql}": [
-      "npm run format"
+      "npm run format --uncommited"
     ]
   },
   "private": true,
