@@ -6,8 +6,18 @@
     "start": "npx nx serve front",
     "storybook": "npx nx run front:storybook",
     "build-storybook": "npx nx run front:build-storybook",
-    "format": "prettier --write ./apps/front",
+    "format": "prettier --write .",
     "chromatic": "npx chromatic --force-rebuild"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,scss,md,ts,html,graphql}": [
+      "npm run format --uncommitted"
+    ]
   },
   "private": true,
   "devDependencies": {
@@ -56,8 +66,10 @@
     "eslint-plugin-jsx-a11y": "6.6.1",
     "eslint-plugin-react": "7.31.8",
     "eslint-plugin-react-hooks": "4.6.0",
+    "husky": "^8.0.2",
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
+    "lint-staged": "^13.0.3",
     "nx": "15.2.0",
     "prettier": "^2.7.1",
     "react-test-renderer": "18.2.0",
