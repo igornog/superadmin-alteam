@@ -11,7 +11,6 @@ import React, {
 import styled, { css } from 'styled-components'
 import { black, blue, green, grey2 } from '../../utils/colors'
 import { convertHexToRGBA } from '../../utils/helpers'
-import { useAppDispatch } from '../../utils/hooks/reduxHook'
 import { Tree, TreeInterface } from '../../utils/redux/types/tree.type'
 import AtCheckbox from '../AtCheckbox/AtCheckbox'
 import AtTypography from '../AtTypography/AtTypography'
@@ -127,9 +126,7 @@ const AtTreeItem: React.FunctionComponent<AtTreeItemProps> = (
   const selectedSet = useMemo(() => new Set(props.selected), [props.selected])
   const node = new Tree(props.nodes)
 
-  const parentMap = useMemo(() => {
-    return goThroughAllNodes(node)
-  }, [])
+  const parentMap = goThroughAllNodes(node)
 
   function goThroughAllNodes(
     nodes: TreeInterface,

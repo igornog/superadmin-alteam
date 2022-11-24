@@ -5,11 +5,8 @@ import ModalListings from '../../../../components/AtModal/modals/ModalListings'
 import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
 import { grey, grey2 } from '../../../../utils/colors'
-import { Talent } from '../../../../utils/redux/types/talents.type'
 
-const TalentListings: React.FunctionComponent<TalentListingsProps> = (
-  props: TalentListingsProps,
-) => {
+const TalentListings: React.FunctionComponent = () => {
   const [openModal, setOpenModal] = useState(false)
 
   return (
@@ -49,10 +46,6 @@ const TalentListings: React.FunctionComponent<TalentListingsProps> = (
       <ModalListings isOpen={openModal} onClose={() => setOpenModal(false)} />
     </AtTalentFrame>
   )
-}
-
-interface TalentListingsProps {
-  talent: Talent
 }
 
 export default TalentListings

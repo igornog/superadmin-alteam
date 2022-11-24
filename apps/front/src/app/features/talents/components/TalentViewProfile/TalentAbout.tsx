@@ -4,11 +4,8 @@ import ModalAbout from '../../../../components/AtModal/modals/ModalAbout'
 import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
 import { grey } from '../../../../utils/colors'
-import { Talent } from '../../../../utils/redux/types/talents.type'
 
-const TalentAbout: React.FunctionComponent<TalentAboutProps> = (
-  props: TalentAboutProps,
-) => {
+const TalentAbout: React.FunctionComponent = () => {
   const [openModal, setOpenModal] = useState(false)
 
   return (
@@ -32,10 +29,6 @@ const TalentAbout: React.FunctionComponent<TalentAboutProps> = (
       <ModalAbout isOpen={openModal} onClose={() => setOpenModal(false)} />
     </AtTalentFrame>
   )
-}
-
-interface TalentAboutProps {
-  talent: Talent
 }
 
 export default TalentAbout

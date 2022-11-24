@@ -5,7 +5,6 @@ import AtButton, {
   AtButtonKind,
   AtButtonVariant,
 } from '../../AtButton/AtButton'
-import AtDropdown from '../../AtDropdown/AtDropdown'
 import AtTextField from '../../AtTextField/AtTextField'
 import { useAppSelector } from '../../../utils/hooks/reduxHook'
 import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector'

@@ -6,9 +6,10 @@
     "start": "npx nx serve front",
     "storybook": "npx nx run front:storybook",
     "build-storybook": "npx nx run front:build-storybook",
+    "chromatic": "npx chromatic --force-rebuild",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,json,md}'",
     "check": "prettier --check './**/*.{js,jsx,ts,tsx,json,md}'",
-    "chromatic": "npx chromatic --force-rebuild"
+    "fix-lint-errors": "eslint --fix ."
   },
   "private": true,
   "devDependencies": {
@@ -57,6 +58,7 @@
     "eslint-plugin-jsx-a11y": "6.6.1",
     "eslint-plugin-react": "7.31.8",
     "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^8.0.2",
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",

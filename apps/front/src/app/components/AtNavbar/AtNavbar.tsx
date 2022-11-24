@@ -3,12 +3,12 @@ import styled from 'styled-components'
 import logo from '../../assets/images/black_logo.svg'
 import { Box } from '@mui/material'
 import { LogoutCurve } from 'iconsax-react'
-import AtTypography from '../AtTypography/AtTypography'
 import { black, green, grey2, grey3, grey5, white } from '../../utils/colors'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Navigation, NavigationProps } from '../../app'
 import { handleInitPage } from '../../utils/redux/actions/app.action'
 import { useAppDispatch } from '../../utils/hooks/reduxHook'
+import AtTypography from '../AtTypography/AtTypography'
 
 const StyledNav = styled.div`
   position: fixed;

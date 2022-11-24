@@ -1,11 +1,6 @@
 import { Box } from '@mui/material'
-import {
-  CloseCircle,
-  CloseSquare,
-  TickSquare,
-  TrushSquare,
-} from 'iconsax-react'
-import React, { useEffect, useState } from 'react'
+import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react'
+import React from 'react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
@@ -14,11 +9,10 @@ import AtTypography from '../../AtTypography/AtTypography'
 import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtLine from '../../AtLine/AtLine'
 import AtModal from '../AtModal'
-import { Tree, TreeInterface } from '../../../utils/redux/types/tree.type'
+import { TreeInterface } from '../../../utils/redux/types/tree.type'
 import { grey2, grey3, grey5 } from '../../../utils/colors'
 import styled from 'styled-components'
 import AtDropdown from '../../AtDropdown/AtDropdown'
-import AtSpace from '../../AtSpace/AtSpace'
 
 const StyledDropdown = styled(AtDropdown)`
   justify-content: space-between;
@@ -30,13 +24,13 @@ const StyledDropdown = styled(AtDropdown)`
 const ModalAssignFolderToClient: React.FunctionComponent<
   ModalAssignFolderToClientProps
 > = (props: ModalAssignFolderToClientProps) => {
-  const [folder, setFolder] = useState(new Tree({}))
+  // const [folder, setFolder] = useState(new Tree({}))
 
-  useEffect(() => {
-    if (props.folder) {
-      setFolder(new Tree(props.folder))
-    }
-  }, [props.folder])
+  // useEffect(() => {
+  //   if (props.folder) {
+  //     setFolder(new Tree(props.folder))
+  //   }
+  // }, [props.folder])
 
   const handleClose = () => {
     props.onClose?.()

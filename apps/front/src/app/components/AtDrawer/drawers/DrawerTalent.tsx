@@ -50,20 +50,20 @@ const DrawerTalent: React.FunctionComponent = () => {
       >
         {activeTab.config.title === Tabs.ShortlistTalent ||
           (activeTab.config.title === Tabs.AcceptedTalent && (
-            <TalentListings talent={selectedTalent} />
+            <TalentListings />
           ))}
 
         <TalentSkills talent={selectedTalent} />
 
         <TalentGeneral talent={selectedTalent} />
 
-        <TalentAbout talent={selectedTalent} />
+        <TalentAbout />
 
         <TalentLinks talent={selectedTalent} />
 
-        <TalentAttachments talent={selectedTalent} />
+        <TalentAttachments />
 
-        <TalentNotes talent={selectedTalent} />
+        <TalentNotes />
 
         <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
           <AtButton

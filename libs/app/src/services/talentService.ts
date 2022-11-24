@@ -1,4 +1,4 @@
-import { GroupTalent, SoloTalent } from '@yjcapp/app'
+import { GroupTalent, SoloTalent } from '../talent'
 
 export interface TalentService {
   createGroupTalent(talent: Omit<GroupTalent, 'id'>): Promise<GroupTalent>

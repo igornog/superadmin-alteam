@@ -5,11 +5,8 @@ import AtLine from '../../../../components/AtLine/AtLine'
 import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
 import { grey } from '../../../../utils/colors'
-import { Talent } from '../../../../utils/redux/types/talents.type'
 
-const TalentAttachments: React.FunctionComponent<TalentAttachmentsProps> = (
-  props: TalentAttachmentsProps,
-) => {
+const TalentAttachments: React.FunctionComponent = () => {
   return (
     <AtTalentFrame
       title={'Attachments'}
@@ -55,10 +52,6 @@ const TalentAttachments: React.FunctionComponent<TalentAttachmentsProps> = (
       </Box>
     </AtTalentFrame>
   )
-}
-
-interface TalentAttachmentsProps {
-  talent: Talent
 }
 
 export default TalentAttachments

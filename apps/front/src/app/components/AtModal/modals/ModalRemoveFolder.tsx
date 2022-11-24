@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { CloseCircle, CloseSquare, TrushSquare } from 'iconsax-react'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
@@ -9,19 +9,19 @@ import AtTypography from '../../AtTypography/AtTypography'
 import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtLine from '../../AtLine/AtLine'
 import AtModal from '../AtModal'
-import { Tree, TreeInterface } from '../../../utils/redux/types/tree.type'
+import { TreeInterface } from '../../../utils/redux/types/tree.type'
 import { grey2 } from '../../../utils/colors'
 
 const ModalRemoveFolder: React.FunctionComponent<ModalRemoveFolderProps> = (
   props: ModalRemoveFolderProps,
 ) => {
-  const [folder, setFolder] = useState(new Tree({}))
+  // const [folder, setFolder] = useState(new Tree({}))
 
-  useEffect(() => {
-    if (props.folder) {
-      setFolder(new Tree(props.folder))
-    }
-  }, [props.folder])
+  // useEffect(() => {
+  //   if (props.folder) {
+  //     setFolder(new Tree(props.folder))
+  //   }
+  // }, [props.folder])
 
   const handleClose = () => {
     props.onClose?.()

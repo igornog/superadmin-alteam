@@ -39,6 +39,10 @@ const ModalEmailToTalent: React.FunctionComponent<ModalEmailToTalentProps> = (
     setEmail('')
   }
 
+  const handleSendEmail = () => {
+    console.log('Send email to ' + email)
+  }
+
   return (
     <AtModal isOpen={props.isOpen} size={ModalSize.Small} onClose={handleClose}>
       <Box
@@ -105,7 +109,7 @@ const ModalEmailToTalent: React.FunctionComponent<ModalEmailToTalentProps> = (
             endIcon={<CloseSquare size={16} />}
           />
           <AtButton
-            onClick={props.onClose}
+            onClick={handleSendEmail}
             kind={AtButtonKind.Success}
             variant={AtButtonVariant.Contained}
             name={'Send Email'}

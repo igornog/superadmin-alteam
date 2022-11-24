@@ -9,7 +9,7 @@ module.exports = {
     '../app/components/*/*.stories.@(tsx)',
     '../app/components/*/*/*.stories.@(tsx)',
   ],
-  webpackFinal: async (config, { configType }) => {
+  webpackFinal: async (config) => {
     // Make whatever fine-grained changes you need
     // Return the altered config
     return config
