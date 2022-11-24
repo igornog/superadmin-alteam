@@ -10,6 +10,7 @@ import { getActiveFolder } from '../../utils/redux/selectors/tree.selector'
 import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton'
 import AtDropdown from '../AtDropdown/AtDropdown'
 import ModalAddFolder from '../AtModal/modals/ModalAddFolder'
+import ModalAddTalent from '../AtModal/modals/ModalCreateTalent/ModalAddTalent'
 import ModalShareFolder from '../AtModal/modals/ModalShareFolder'
 import AtNavbar from '../AtNavbar/AtNavbar'
 import AtNavPage from '../AtNavPage/AtNavPage'
@@ -35,6 +36,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
 ) => {
   const [openCreateFolder, setOpenCreateFolder] = useState(false)
   const [openShareFolder, setOpenShareFolder] = useState(false)
+  const [openCreateTalent, setOpenCreateTalent] = useState(false)
 
   const isSmallScreen = useMediaQuery('(max-width:1079px)')
   const activeTab = useAppSelector((state) => getActiveTab(state))
@@ -115,12 +117,20 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                     )}
 
                     {activeTab.config.settings.inviteTalent && (
-                      <AtButton
-                        kind={AtButtonKind.Success}
-                        variant={AtButtonVariant.Contained}
-                        startIcon={<AddCircle />}
-                        name={'Create Talent'}
-                      />
+                      <>
+                        <AtButton
+                          kind={AtButtonKind.Success}
+                          variant={AtButtonVariant.Contained}
+                          startIcon={<AddCircle />}
+                          name={'Create Talent'}
+                          onClick={() => setOpenCreateTalent(true)}
+                        />
+
+                        <ModalAddTalent
+                          isOpen={openCreateTalent}
+                          onClose={() => setOpenCreateTalent(false)}
+                        />
+                      </>
                     )}
                   </Box>
                 </Box>

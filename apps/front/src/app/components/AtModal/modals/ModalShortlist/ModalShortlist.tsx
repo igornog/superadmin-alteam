@@ -1,7 +1,13 @@
 import { Box } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import AtTypography from '../../../AtTypography/AtTypography'
-import { ArrowRight2, CloseCircle, CloseSquare } from 'iconsax-react'
+import {
+  ArrowLeft2,
+  ArrowRight2,
+  CloseCircle,
+  CloseSquare,
+  TickSquare,
+} from 'iconsax-react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
@@ -52,7 +58,15 @@ const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
         padding={2.5}
         paddingBottom={0}
       >
-        <Box display={'flex'} gap={'15px'}>
+        <Box display={'flex'} gap={'15px'} alignItems={'center'}>
+          {step > 0 && (
+            <AtButton
+              kind={AtButtonKind.Default}
+              variant={AtButtonVariant.Contained}
+              startIcon={<ArrowLeft2 />}
+              onClick={() => setStep(step - 1)}
+            />
+          )}
           <AtTypography variant={'h4'}>Shortlist Talent</AtTypography>
           <AtTypography color={grey2}>
             Step{' '}
@@ -93,10 +107,10 @@ const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
 
         <Box display={'flex'} justifyContent={'flex-end'} gap={'20px'}>
           <AtButton
-            onClick={step === 0 ? handleClose : () => setStep(step - 1)}
+            onClick={handleClose}
             kind={AtButtonKind.Danger}
             variant={AtButtonVariant.Text}
-            name={step === 0 ? 'Cancel' : 'Previous Step'}
+            name={'Cancel'}
             endIcon={<CloseSquare size={16} />}
           />
 
@@ -112,7 +126,9 @@ const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
             kind={AtButtonKind.Success}
             variant={AtButtonVariant.Contained}
             name={step === 2 ? 'Send Message and Move' : 'Next Step'}
-            endIcon={<ArrowRight2 size={16} />}
+            endIcon={
+              step === 2 ? <TickSquare size={16} /> : <ArrowRight2 size={16} />
+            }
           />
         </Box>
       </Box>

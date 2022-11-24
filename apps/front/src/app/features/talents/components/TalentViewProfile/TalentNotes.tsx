@@ -11,7 +11,6 @@ import { black, grey, grey2, grey3 } from '../../../../utils/colors'
 const StyledBox = styled(Box)`
   color: ${grey2};
   transition: 0.3s;
-
   &:hover {
     transition: 0.3s;
     cursor: pointer;

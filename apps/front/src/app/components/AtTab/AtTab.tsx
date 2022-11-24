@@ -6,7 +6,6 @@ import AtTypography from '../AtTypography/AtTypography'
 const StyledTab = styled.div<{ active?: boolean; $width?: string }>`
   border: 1px solid ${grey5};
   transition: 0.3s;
-
   ${({ active }) =>
     active
       ? css`
@@ -22,7 +21,6 @@ const StyledTab = styled.div<{ active?: boolean; $width?: string }>`
                 border-color: ${grey2};
             }
         `}
-
   border-radius: 5px;
   width: ${({ $width }) => $width};
   padding: 10px 20px;

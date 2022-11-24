@@ -53,7 +53,7 @@ const AtTopTitle: React.FunctionComponent<AtTopTitle> = (props: AtTopTitle) => {
         position={'relative'}
         gap={'5px'}
       >
-        {!props.activeFolder.isParent() && (
+        {props.activeFolder.id && !props.activeFolder.isParent() && (
           <Box
             display={'flex'}
             gap={'15px'}
@@ -76,11 +76,11 @@ const AtTopTitle: React.FunctionComponent<AtTopTitle> = (props: AtTopTitle) => {
           gap={'5px'}
         >
           <AtTypography variant={'h3'}>
-            {props.activeFolder.isParent()
+            {props.activeFolder.isParent() || !props.activeFolder.id
               ? props.activeTab.title
               : props.activeFolder.name}
           </AtTypography>
-          {!props.activeFolder.isParent() && (
+          {props.activeFolder.id && !props.activeFolder.isParent() && (
             <>
               <AtButton
                 startIcon={<StyledArrow size={10} opened={openDropdown} />}

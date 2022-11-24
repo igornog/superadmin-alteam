@@ -69,7 +69,7 @@ export const talentsTabs: Page[] = [
   {
     title: Tabs.InboundTalent,
     badge: 5,
-    active: false,
+    active: true,
     settings: {
       search: true,
       downloadCSV: true,
@@ -81,7 +81,7 @@ export const talentsTabs: Page[] = [
   {
     title: Tabs.ShortlistTalent,
     badge: 40,
-    active: true,
+    active: false,
     settings: {
       downloadCSV: true,
       createFolder: true,

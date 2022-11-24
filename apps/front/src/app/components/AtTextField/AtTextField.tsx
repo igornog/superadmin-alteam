@@ -160,6 +160,9 @@ const StyledInput = styled(OutlinedInput)<{
     &.${outlinedInputClasses.root}.${outlinedInputClasses.focused},
     &.${outlinedInputClasses.root}.Mui-disabled {
     fieldset {
+      legend {
+        display: none;
+      }
       transition: 0.3s;
       border-width: 1px;
       border-color: ${({ $isError, $isSuccess, $bgColor }) =>
@@ -175,6 +178,9 @@ const StyledInput = styled(OutlinedInput)<{
 
   &.${outlinedInputClasses.root}:hover: not(.Mui-disabled) {
     fieldset {
+      legend {
+        display: none;
+      }
       transition: 0.3s;
       border-color: ${({ $isError, $isSuccess }) =>
         $isError ? red : $isSuccess ? green : grey3};
@@ -219,7 +225,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
           <Box>
             <Box
               position={'absolute'}
-              top={'-9px'}
+              top={'-14px'}
               zIndex={1}
               paddingLeft={'20px'}
               ref={dropdownLabelRef}
@@ -265,6 +271,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
 
       <FormControl variant="outlined" fullWidth={true}>
         <StyledInput
+          {...props}
           fullWidth={true}
           width={props.width}
           onClick={props.onClick}
