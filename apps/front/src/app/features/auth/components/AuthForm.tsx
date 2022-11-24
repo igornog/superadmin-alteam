@@ -45,7 +45,7 @@ const AuthForm: React.FunctionComponent = () => {
 
         <AtTextField
           label={'Email'}
-          value={''}
+          value={email}
           required={true}
           placeholder={'Enter email'}
           type={AtTextFieldType.Email}
@@ -55,7 +55,7 @@ const AuthForm: React.FunctionComponent = () => {
 
         <AtTextField
           label={'Password'}
-          value={''}
+          value={password}
           placeholder={'Enter password'}
           required={true}
           type={AtTextFieldType.Password}
