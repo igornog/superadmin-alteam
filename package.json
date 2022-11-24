@@ -6,7 +6,8 @@
     "start": "npx nx serve front",
     "storybook": "npx nx run front:storybook",
     "build-storybook": "npx nx run front:build-storybook",
-    "format": "prettier --write .",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,json,md}'",
+    "check": "prettier --check .",
     "chromatic": "npx chromatic --force-rebuild"
   },
   "husky": {
@@ -16,7 +17,7 @@
   },
   "lint-staged": {
     "*.{js,json,css,scss,md,ts,html,graphql}": [
-      "npm run format --uncommitted"
+      "npm run check"
     ]
   },
   "private": true,
