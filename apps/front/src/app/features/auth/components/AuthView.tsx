@@ -16,7 +16,7 @@ const AuthView: React.FunctionComponent = () => {
 
   useEffect(() => {
     const userToken = localStorage.getItem('alt_user_token');
-    console.log(userToken);
+
     if (userToken) {
       window.location.href = '/talents';
     }

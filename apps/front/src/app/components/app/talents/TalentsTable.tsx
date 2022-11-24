@@ -1,10 +1,10 @@
 import { Box, Tooltip } from '@mui/material';
-import { useState, useRef, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { grey, grey3 } from '../../../utils/colors';
 import useWindowSize from '../../../utils/hooks/useWindowSize';
 import { Column } from '../../../utils/redux/types/settings.type';
-import { Talent, Skill } from '../../../utils/redux/types/talents.type';
+import { Skill, Talent } from '../../../utils/redux/types/talents.type';
 import AtGroupTag from '../../AtGroupTag/AtGroupTag';
 import AtRightClick from '../../AtRightClick/AtRightClick';
 import TalentMenu from '../../AtRightClick/ContextMenus/TalentMenu';

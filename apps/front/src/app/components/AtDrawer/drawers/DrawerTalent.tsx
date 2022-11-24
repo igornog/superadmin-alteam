@@ -63,7 +63,7 @@ const DrawerTalent: React.FunctionComponent = () => {
 
         <TalentAttachments talent={selectedTalent} />
 
-        <TalentNotes talent={selectedTalent} />
+        <TalentNotes />
 
         <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
           <AtButton
