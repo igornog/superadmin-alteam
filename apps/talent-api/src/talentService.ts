@@ -8,7 +8,7 @@ export const talentService: TalentService = {
   retrieveGroupTalent(id: string): Promise<GroupTalent | undefined> {
     return groupTalentPgRepository.retrieveGroupTalent(id);
   },
-  createSoloTalent(talent: Omit<SoloTalent, "id">): Promise<SoloTalent> {
+  createSoloTalent(talent: Omit<SoloTalent, "id" | "appliedDate">): Promise<SoloTalent> {
     return soloTalentPgRepository.createSoloTalent(talent);
   },
   retrieveSoloTalent(id: string): Promise<SoloTalent | undefined> {

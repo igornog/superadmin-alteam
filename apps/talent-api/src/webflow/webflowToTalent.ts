@@ -60,7 +60,7 @@ function groupFormToGroupTalent(form: GroupTalentForm): Omit<GroupTalent, "id"> 
   };
 }
 
-function soloTalentFormToSoloTalent(form: SoloTalentForm): Omit<SoloTalent, "id"> {
+function soloTalentFormToSoloTalent(form: SoloTalentForm): Omit<SoloTalent, "id" | "appliedDate"> {
   const {data} = form;
   const {firstName, lastName, experience, availability, portfolioLink, role, file, about} = data;
   return {
@@ -68,7 +68,8 @@ function soloTalentFormToSoloTalent(form: SoloTalentForm): Omit<SoloTalent, "id"
     lastName,
     experience: experienceMap[experience],
     availability: availabilityMap[availability],
-    portfolioLink,
+    links: [portfolioLink],
+    listing: [],
     about,
     role,
     assets: [file],

@@ -3,7 +3,7 @@ import {SoloTalent} from "@yjcapp/app";
 import {SoloTalentEntity} from "./entities";
 import {soloTalentFromEntity, soloTalentToEntity} from "./soloTalentConverter";
 
-async function createSoloTalent(soloTalent: Omit<SoloTalent, "id">): Promise<SoloTalent> {
+async function createSoloTalent(soloTalent: Omit<SoloTalent, "id" | "appliedDate">): Promise<SoloTalent> {
   const soloTalentRepository = (await postgresClient()).getRepository(SoloTalentEntity);
   const entity = soloTalentToEntity(soloTalent);
   const result = await soloTalentRepository.save(entity);
