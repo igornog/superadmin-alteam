@@ -1,10 +1,10 @@
-import { Chip, chipClasses } from '@mui/material';
-import React from 'react';
-import { TrushSquare } from 'iconsax-react';
-import styled, { css } from 'styled-components';
-import { white, red, grey, black } from '../../utils/colors';
-import AtTypography from '../AtTypography/AtTypography';
-import { convertHexToRGBA } from '../../utils/helpers';
+import { Chip, chipClasses } from '@mui/material'
+import React from 'react'
+import { TrushSquare } from 'iconsax-react'
+import styled, { css } from 'styled-components'
+import { white, red, grey, black } from '../../utils/colors'
+import AtTypography from '../AtTypography/AtTypography'
+import { convertHexToRGBA } from '../../utils/helpers'
 
 const StyledIcon = styled(TrushSquare)`
   transition: 0.3s;
@@ -13,12 +13,13 @@ const StyledIcon = styled(TrushSquare)`
     transition: 0.3s;
     color: ${red} !important;
   }
-`;
+`
 
 const StyledChip = styled(Chip)<{ clickable?: boolean; variant: string }>`
   color: ${grey};
   background-color: ${({ variant }) =>
     variant === 'filled' && convertHexToRGBA(black, 0.05)};
+  justify-content: space-between;
 
   ${(clickable) =>
     !clickable &&
@@ -34,13 +35,9 @@ const StyledChip = styled(Chip)<{ clickable?: boolean; variant: string }>`
         }
       }
     `}
-`;
+`
 
 const AtTag: React.FunctionComponent<AtTagProps> = (props: AtTagProps) => {
-  const handleDelete = () => {
-    console.info('You clicked the delete icon.');
-  };
-
   return (
     <StyledChip
       {...props}
@@ -48,16 +45,17 @@ const AtTag: React.FunctionComponent<AtTagProps> = (props: AtTagProps) => {
       clickable={props.hover}
       label={<AtTypography>{props.label}</AtTypography>}
       deleteIcon={props.delete ? <StyledIcon /> : undefined}
-      onDelete={props.delete ? handleDelete : undefined}
+      onDelete={props.delete ? () => props.onDelete : undefined}
     />
-  );
-};
-
-interface AtTagProps {
-  label: string;
-  delete?: boolean;
-  hover?: boolean;
-  variant?: 'filled' | 'outlined';
+  )
 }
 
-export default AtTag;
+interface AtTagProps {
+  label: string
+  delete?: boolean
+  hover?: boolean
+  variant?: 'filled' | 'outlined'
+  onDelete?: () => void
+}
+
+export default AtTag

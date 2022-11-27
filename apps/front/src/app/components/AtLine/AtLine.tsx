@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { grey5 } from '../../utils/colors';
+import styled, { css } from 'styled-components'
+import { grey5 } from '../../utils/colors'
 
 const StyledLine = styled.div<AtLineProps>`
   ${({ direction }) =>
@@ -19,7 +19,7 @@ const StyledLine = styled.div<AtLineProps>`
   margin-top: ${({ spacingTop }) => (spacingTop ? `${spacingTop}px` : '')};
   margin-bottom: ${({ spacingBottom }) =>
     spacingBottom ? `${spacingBottom}px` : ''};
-`;
+`
 
 const AtLine: React.FunctionComponent<AtLineProps> = (props: AtLineProps) => {
   return (
@@ -31,18 +31,20 @@ const AtLine: React.FunctionComponent<AtLineProps> = (props: AtLineProps) => {
       spacingTop={props.spacingTop}
       size={props.size}
       direction={props.direction}
-    />
-  );
-};
-
-interface AtLineProps {
-  color?: string;
-  opacity?: number;
-  spacing?: number;
-  spacingBottom?: number;
-  spacingTop?: number;
-  size?: number;
-  direction?: 'vertical' | 'horizontal';
+    >
+      &nbsp;
+    </StyledLine>
+  )
 }
 
-export default AtLine;
+interface AtLineProps {
+  color?: string
+  opacity?: number
+  spacing?: number
+  spacingBottom?: number
+  spacingTop?: number
+  size?: number
+  direction?: 'vertical' | 'horizontal'
+}
+
+export default AtLine

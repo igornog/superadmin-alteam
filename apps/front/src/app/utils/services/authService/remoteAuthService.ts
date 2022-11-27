@@ -1,15 +1,25 @@
-import {AuthService} from "@yjcapp/app";
-import axios from "axios";
-const API_URL = 'https://dev.api.alteam.io';
-export function createRemoteAuthService(): AuthService {
-  return {
-    login: async (email, password) => {
-      return await axios.post(`${API_URL}/auth/login`, {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        data :{email, password}
-      });
+import { AuthService } from '@yjcapp/app'
+import axios from '../axios'
+
+class RemoteAuthService implements AuthService {
+  async login(email: string, password: string) {
+    const response = await axios.post('/auth/login', {
+      email,
+      password,
+    })
+
+    if (response.data.token) {
+      const { token } = response.data
+      localStorage.setItem('alt_user_token', JSON.stringify(token))
+      window.location.href = '/talents'
     }
+
+    return response.data
+  }
+
+  logout() {
+    localStorage.removeItem('alt_user_token')
   }
 }
+
+export default RemoteAuthService

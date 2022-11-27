@@ -1,12 +1,12 @@
-import { TableBody, TableBodyProps } from '@mui/material';
-import React from 'react';
-import styled, { css } from 'styled-components';
-import { green } from '../../utils/colors';
-import { boxShadow } from '../../utils/theme';
+import { TableBody, TableBodyProps } from '@mui/material'
+import React from 'react'
+import styled, { css } from 'styled-components'
+import { green } from '../../utils/colors'
+import { boxShadow } from '../../utils/theme'
 
 const StyledTableBody = styled(TableBody)`
   position: relative;
-`;
+`
 
 const StyledHover = styled.div<{ positionTop: number | null }>`
   ${({ positionTop }) =>
@@ -25,21 +25,21 @@ const StyledHover = styled.div<{ positionTop: number | null }>`
       border: 1px solid ${green};
       box-shadow: ${boxShadow};
     `}
-`;
+`
 
 const AtTableBody: React.FunctionComponent<AtTableBodyProps> = (
-  props: AtTableBodyProps
+  props: AtTableBodyProps,
 ) => {
   return (
     <StyledTableBody {...props}>
       <StyledHover positionTop={props.position} />
       {props.children}
     </StyledTableBody>
-  );
-};
-
-interface AtTableBodyProps extends TableBodyProps {
-  position: number | null;
+  )
 }
 
-export default AtTableBody;
+interface AtTableBodyProps extends TableBodyProps {
+  position: number | null
+}
+
+export default AtTableBody

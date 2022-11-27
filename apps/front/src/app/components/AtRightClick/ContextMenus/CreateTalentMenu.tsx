@@ -1,7 +1,7 @@
-import { AddCircle } from 'iconsax-react';
-import React from 'react';
-import AtTypography from '../../AtTypography/AtTypography';
-import { AtContextMenuItem } from '../AtRightClick';
+import { AddCircle } from 'iconsax-react'
+import React from 'react'
+import AtTypography from '../../AtTypography/AtTypography'
+import { AtContextMenuItem } from '../AtRightClick'
 
 const CreateTalentMenu: React.FunctionComponent = () => {
   return (
@@ -11,7 +11,7 @@ const CreateTalentMenu: React.FunctionComponent = () => {
         Create Talent
       </AtTypography>
     </AtContextMenuItem>
-  );
-};
+  )
+}
 
-export default CreateTalentMenu;
+export default CreateTalentMenu

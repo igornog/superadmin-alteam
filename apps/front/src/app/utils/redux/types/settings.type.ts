@@ -1,36 +1,37 @@
-import React from 'react';
-import { StatusType } from './status.type';
+import React from 'react'
+import { StatusType } from './status.type'
 
 export interface SettingsState {
-  tabs: Page[];
-  filters: { skills: Filter[]; jobTypes: Filter[] };
-  header: Settings;
-  displayMode: DisplayMode;
-  selectedModal: ModalVariant | null;
-  status?: StatusType;
-  error?: string | null;
+  tabs: Page[]
+  filters: { skills: Filter[]; jobTypes: Filter[] }
+  header: Settings
+  displayMode: DisplayMode
+  selectedDrawer: SideDrawerVariant | null
+  status?: StatusType
+  error?: string | null
 }
 
 export interface Page {
-  title: string;
-  badge?: number;
-  action?: string;
-  active?: boolean;
-  settings: Settings;
+  title: string
+  badge?: number
+  action?: string
+  active?: boolean
+  settings: Settings
 }
 
 export interface Settings {
-  search?: boolean;
-  downloadCSV?: boolean;
-  inviteTalent?: boolean;
-  displayMode?: boolean;
-  sortBy?: boolean;
-  createFolder?: boolean;
+  search?: boolean
+  downloadCSV?: boolean
+  inviteTalent?: boolean
+  displayMode?: boolean
+  sortBy?: boolean
+  createFolder?: boolean
+  tabsTalentColumn?: any
 }
 
 export interface Filter {
-  label?: string;
-  active?: boolean;
+  label?: string
+  active?: boolean
 }
 
 export enum DisplayMode {
@@ -38,15 +39,18 @@ export enum DisplayMode {
   Grid = 'grid',
 }
 
-export enum ModalVariant {
-  Skills = 'Skills',
-  GeneralInformations = 'General Informations',
-  About = 'About',
-  Attachments = 'Attachments',
-  DeclineTalent = 'DeclineTalent',
-  Link = 'Link',
-  AddNote = 'AddNote',
-  EditNote = 'EditNote',
+export enum SideDrawerVariant {
+  Talent = 'Talent',
+}
+
+export class SideDrawer {
+  content: React.ReactNode
+  size: string
+
+  constructor(data: any) {
+    this.content = data.content
+    this.size = data.size
+  }
 }
 
 export enum ModalSize {
@@ -57,19 +61,17 @@ export enum ModalSize {
   ExtraLarge = 'xl',
 }
 
-export class Modal {
-  content: React.ReactNode;
-  size: ModalSize;
-  title: React.ReactNode;
-
-  constructor(data: any) {
-    this.content = data.content;
-    this.size = data.size;
-    this.title = data.title;
-  }
-}
 export interface HandlesettingsProps {
-  tabs: Page[];
-  filters: Filter[];
-  jobTypes: Filter[];
+  tabs: Page[]
+  filters: Filter[]
+  jobTypes: Filter[]
+}
+
+export enum Column {
+  Talent = 'Talent',
+  Applied = 'Applied',
+  Availability = 'Availability',
+  Skills = 'Skills',
+  Status = 'Status',
+  AssignedTo = 'AssignedTo',
 }

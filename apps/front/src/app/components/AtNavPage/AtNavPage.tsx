@@ -1,16 +1,17 @@
-import { Box, useMediaQuery } from '@mui/material';
-import { ArrowLeft2 } from 'iconsax-react';
-import React, { useEffect, useRef } from 'react';
-import styled from 'styled-components';
-import { black, grey2, white } from '../../utils/colors';
-import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
+import { Box, useMediaQuery } from '@mui/material'
+import { ArrowLeft2 } from 'iconsax-react'
+import React, { useEffect, useRef } from 'react'
+import styled from 'styled-components'
+import { black, grey2, white } from '../../utils/colors'
+import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook'
 import {
   handleCollapsePanel,
+  handleInitPage,
   handleSidePanel,
-} from '../../utils/redux/actions/app.action';
-import { handleActiveTab } from '../../utils/redux/actions/settings.action';
-import { Page } from '../../utils/redux/types/settings.type';
-import AtTab from '../AtTab/AtTab';
+} from '../../utils/redux/actions/app.action'
+import { handleActiveTab } from '../../utils/redux/actions/settings.action'
+import { Page } from '../../utils/redux/types/settings.type'
+import AtTab from '../AtTab/AtTab'
 
 const StyledNavPage = styled.div<{ isWideScreen: boolean }>`
   background-color: #0f152708;
@@ -19,7 +20,7 @@ const StyledNavPage = styled.div<{ isWideScreen: boolean }>`
   width: ${({ isWideScreen }) => (isWideScreen ? 'fit-content' : '100%')};
   padding: 5px;
   border-radius: 10px;
-`;
+`
 
 const StyledSidePanelIcon = styled.div`
   background-color: ${white};
@@ -37,26 +38,27 @@ const StyledSidePanelIcon = styled.div`
     color: ${white};
     transition: 0.3s;
   }
-`;
+`
 
 const AtNavPage: React.FunctionComponent<AtNavPageProps> = (
-  props: AtNavPageProps
+  props: AtNavPageProps,
 ) => {
-  const settings = useAppSelector((state) => state.settings);
-  const app = useAppSelector((state) => state.app);
-  const isSmallScreen = useMediaQuery('(max-width:1338px)');
-  const isWideScreen = useMediaQuery('(min-width:1920px)');
+  const settings = useAppSelector((state) => state.settings)
+  const app = useAppSelector((state) => state.app)
+  const isSmallScreen = useMediaQuery('(max-width:1338px)')
+  const isWideScreen = useMediaQuery('(min-width:1920px)')
 
-  const dispatch = useAppDispatch();
-  const navPageRef = useRef<any>(null);
+  const dispatch = useAppDispatch()
+  const navPageRef = useRef<any>(null)
 
   const handleClick = (page: Page) => {
-    dispatch(handleActiveTab(page));
-  };
+    dispatch(handleInitPage())
+    dispatch(handleActiveTab(page))
+  }
 
   useEffect(() => {
-    dispatch(handleSidePanel(!isSmallScreen));
-  }, [dispatch, isSmallScreen]);
+    dispatch(handleSidePanel(!isSmallScreen))
+  }, [dispatch, isSmallScreen])
 
   return (
     <Box
@@ -91,11 +93,11 @@ const AtNavPage: React.FunctionComponent<AtNavPageProps> = (
         </StyledSidePanelIcon>
       )}
     </Box>
-  );
-};
-
-interface AtNavPageProps {
-  sidePanelIcon?: React.ReactNode;
+  )
 }
 
-export default AtNavPage;
+interface AtNavPageProps {
+  sidePanelIcon?: React.ReactNode
+}
+
+export default AtNavPage

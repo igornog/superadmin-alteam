@@ -1,8 +1,62 @@
-export { default } from './components/TalentsView';
+import { Page } from '../../utils/redux/types/settings.type'
+import { TalentStatus } from '../../utils/redux/types/talents.type'
+import { RightClick, Tabs } from '../../utils/types'
+import AcceptedTatentsView from './components/AcceptedTalents/AcceptedTatentsView'
+import AllTalentsView from './components/AllTalents/AllTalentsView'
+import DeclinedTalentsView from './components/DeclinedTalents/DeclinedTalentsView'
+import InboundTalentsView from './components/InboundTalents/InboundTalentsView'
+import ShortlistLatentsView from './components/ShortlistTalents/ShortlistTatentsView'
 
-export const talentsTabs = [
+export { default } from './components/TalentsView'
+
+export const tabsContent = {
+  [Tabs.AllTalent]: {
+    node: <AllTalentsView />,
+    talentRightClick: [],
+  },
+  [Tabs.InboundTalent]: {
+    node: <InboundTalentsView />,
+    talentRightClick: [
+      RightClick.MoveToShortlisted,
+      RightClick.SendEmailToTalent,
+      RightClick.ShareTalent,
+      RightClick.MoveToDesclined,
+    ],
+  },
+  [Tabs.ShortlistTalent]: {
+    node: <ShortlistLatentsView />,
+    talentRightClick: [
+      RightClick.MoveToAccepted,
+      RightClick.EditTalentFolders,
+      RightClick.SendEmailToTalent,
+      RightClick.ShareTalent,
+      RightClick.MoveToDesclined,
+    ],
+  },
+  [Tabs.AcceptedTalent]: {
+    node: <AcceptedTatentsView />,
+    talentRightClick: [
+      RightClick.MoveToShortlisted,
+      RightClick.EditTalentFolders,
+      RightClick.SendEmailToTalent,
+      RightClick.ShareTalent,
+      RightClick.MoveToDesclined,
+    ],
+  },
+  [Tabs.DeclinedTalent]: {
+    node: <DeclinedTalentsView />,
+    talentRightClick: [
+      RightClick.MoveToAccepted,
+      RightClick.MoveToShortlisted,
+      RightClick.SendEmailToTalent,
+      RightClick.ShareTalent,
+    ],
+  },
+}
+
+export const talentsTabs: Page[] = [
   {
-    title: 'All Talents',
+    title: Tabs.AllTalent,
     badge: 150,
     active: false,
     settings: {
@@ -13,7 +67,7 @@ export const talentsTabs = [
     },
   },
   {
-    title: 'Inbound Talents',
+    title: Tabs.InboundTalent,
     badge: 5,
     active: true,
     settings: {
@@ -25,7 +79,7 @@ export const talentsTabs = [
     },
   },
   {
-    title: 'Shortlist Talents',
+    title: Tabs.ShortlistTalent,
     badge: 40,
     active: false,
     settings: {
@@ -34,7 +88,7 @@ export const talentsTabs = [
     },
   },
   {
-    title: 'Accepted Talents',
+    title: Tabs.AcceptedTalent,
     badge: 20,
     active: false,
     settings: {
@@ -43,20 +97,21 @@ export const talentsTabs = [
     },
   },
   {
-    title: 'Declined Talents',
+    title: Tabs.DeclinedTalent,
     active: false,
     settings: {
       search: true,
       downloadCSV: true,
       sortBy: true,
+      displayMode: true,
     },
   },
   {
-    title: 'Applicants',
+    title: Tabs.Applicants,
     active: false,
     settings: {},
   },
-];
+]
 
 export const talentsFilters = [
   {
@@ -79,7 +134,7 @@ export const talentsFilters = [
     label: 'Wireframing',
     active: false,
   },
-];
+]
 
 export const talentsJobType = [
   {
@@ -94,7 +149,7 @@ export const talentsJobType = [
     label: 'Evenings & Weekends',
     active: false,
   },
-];
+]
 
 export const talents = [
   {
@@ -103,6 +158,7 @@ export const talents = [
     jobName: 'UI/UX Designer',
     jobType: 'Full Time',
     applied: '23.07.2022',
+    status: TalentStatus.Shortlisted,
     skills: [
       { label: 'UI/UX Design' },
       { label: 'Figma' },
@@ -140,6 +196,7 @@ export const talents = [
     fullName: 'Tom Black',
     jobName: 'React Native Developer',
     jobType: 'Part-Time',
+    status: TalentStatus.Inbound,
     applied: '23.07.2022',
     skills: [],
     links: [],
@@ -148,6 +205,7 @@ export const talents = [
     id: 3,
     fullName: 'Abu Junjun',
     jobName: 'Graphic Designer',
+    status: TalentStatus.Accepted,
     jobType: 'Evenings & Weekends',
     applied: '23.07.2022',
     skills: [
@@ -163,6 +221,7 @@ export const talents = [
     id: 4,
     fullName: 'Chaps D',
     jobName: 'UI/UX Design',
+    status: TalentStatus.Declined,
     jobType: 'Part-Time',
     applied: '23.07.2022',
     group: 'Group',
@@ -179,6 +238,7 @@ export const talents = [
     id: 5,
     fullName: 'Mega Devs',
     jobName: 'Full Stack Development',
+    status: TalentStatus.Shortlisted,
     jobType: 'Full Time',
     applied: '23.07.2022',
     group: 'Group',
@@ -194,6 +254,7 @@ export const talents = [
   {
     id: 6,
     fullName: 'Chaps D',
+    status: TalentStatus.Shortlisted,
     jobName: 'UI/UX Design',
     jobType: 'Part-Time',
     applied: '23.07.2022',
@@ -210,6 +271,7 @@ export const talents = [
   {
     id: 7,
     fullName: 'Mega Devs',
+    status: TalentStatus.Shortlisted,
     jobName: 'Full Stack Development',
     jobType: 'Full Time',
     applied: '23.07.2022',
@@ -226,6 +288,7 @@ export const talents = [
   {
     id: 8,
     fullName: 'Chaps D',
+    status: TalentStatus.Shortlisted,
     jobName: 'UI/UX Design',
     jobType: 'Part-Time',
     applied: '23.07.2022',
@@ -242,6 +305,7 @@ export const talents = [
   {
     id: 9,
     fullName: 'Mega Devs',
+    status: TalentStatus.Shortlisted,
     jobName: 'Full Stack Development',
     jobType: 'Full Time',
     applied: '23.07.2022',
@@ -258,6 +322,7 @@ export const talents = [
   {
     id: 10,
     fullName: 'Chaps D',
+    status: TalentStatus.Shortlisted,
     jobName: 'UI/UX Design',
     jobType: 'Part-Time',
     applied: '23.07.2022',
@@ -274,6 +339,7 @@ export const talents = [
   {
     id: 11,
     fullName: 'Mega Devs',
+    status: TalentStatus.Shortlisted,
     jobName: 'Full Stack Development',
     jobType: 'Full Time',
     applied: '23.07.2022',
@@ -290,6 +356,7 @@ export const talents = [
   {
     id: 12,
     fullName: 'Chaps D',
+    status: TalentStatus.Shortlisted,
     jobName: 'UI/UX Design',
     jobType: 'Part-Time',
     applied: '23.07.2022',
@@ -306,6 +373,7 @@ export const talents = [
   {
     id: 13,
     fullName: 'Mega Devs',
+    status: TalentStatus.Shortlisted,
     jobName: 'Full Stack Development',
     jobType: 'Full Time',
     applied: '23.07.2022',
@@ -319,4 +387,4 @@ export const talents = [
     ],
     links: [],
   },
-];
+]

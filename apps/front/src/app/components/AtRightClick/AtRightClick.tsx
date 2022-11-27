@@ -1,14 +1,15 @@
-import { Box } from '@mui/material';
+import { Box } from '@mui/material'
 import {
   Content,
   ContextMenuTrigger,
   Item,
+  MenuItemProps,
   Root,
-} from '@radix-ui/react-context-menu';
-import React from 'react';
-import styled from 'styled-components';
-import { black, blue5, grey2, grey5, red, white } from '../../utils/colors';
-import { boxShadow } from '../../utils/theme';
+} from '@radix-ui/react-context-menu'
+import React from 'react'
+import styled from 'styled-components'
+import { black, blue5, grey2, grey5, red, white } from '../../utils/colors'
+import { boxShadow } from '../../utils/theme'
 
 const StyledMenuContent = styled(Content)`
   min-width: 210px;
@@ -18,11 +19,11 @@ const StyledMenuContent = styled(Content)`
   border: 1px solid ${grey5};
   border-radius: 5px;
   box-shadow: ${boxShadow};
-`;
+`
 
 const AtContextMenuContent: React.FunctionComponent<any> = (props: any) => {
-  return <StyledMenuContent {...props} />;
-};
+  return <StyledMenuContent {...props} />
+}
 
 const StyledMenuItem = styled(Item)<{ variant?: string }>`
   line-height: 1;
@@ -41,24 +42,30 @@ const StyledMenuItem = styled(Item)<{ variant?: string }>`
     outline: 0;
     cursor: pointer;
     color: ${black};
+
+    img {
+      filter: brightness(0.5);
+    }
   }
-`;
+`
 
 export const AtContextMenuItem: React.FunctionComponent<
   AtContextMenuItemProps
 > = (props: AtContextMenuItemProps) => {
   return (
-    <StyledMenuItem variant={props.variant}>{props.children}</StyledMenuItem>
-  );
-};
+    <StyledMenuItem variant={props.variant} {...props}>
+      {props.children}
+    </StyledMenuItem>
+  )
+}
 
-interface AtContextMenuItemProps {
-  variant?: 'default' | 'danger';
-  children: React.ReactNode;
+interface AtContextMenuItemProps extends MenuItemProps {
+  variant?: 'default' | 'danger'
+  children: React.ReactNode
 }
 
 const AtRightClick: React.FunctionComponent<AtRightClickProps> = (
-  props: AtRightClickProps
+  props: AtRightClickProps,
 ) => {
   return (
     <Root modal={false}>
@@ -69,12 +76,12 @@ const AtRightClick: React.FunctionComponent<AtRightClickProps> = (
         </Box>
       </AtContextMenuContent>
     </Root>
-  );
-};
-
-interface AtRightClickProps {
-  children: React.ReactNode;
-  contextMenu: React.ReactNode;
+  )
 }
 
-export default AtRightClick;
+interface AtRightClickProps {
+  children: React.ReactNode
+  contextMenu: React.ReactNode
+}
+
+export default AtRightClick

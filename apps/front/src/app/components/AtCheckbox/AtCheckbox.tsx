@@ -1,9 +1,28 @@
-import React from 'react';
-import styled from 'styled-components';
-import { green, grey, grey4 } from '../../utils/colors';
-import check from '../../assets/images/icons/check.svg';
+import React from 'react'
+import styled, { css } from 'styled-components'
+import { green, grey, grey4 } from '../../utils/colors'
+import check from '../../assets/images/icons/check.svg'
+import minus from '../../assets/images/icons/minus.svg'
 
-const StyledCheckbox = styled.input`
+const sharedCheck = css<{ indeterminate?: boolean }>`
+  position: relative;
+  background: ${green};
+  border-color: ${green};
+
+  &:before {
+    content: url(${({ indeterminate }) => (indeterminate ? minus : check)});
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${grey4};
+    font-size: 13px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+`
+
+const StyledCheckbox = styled.input<{ indeterminate?: boolean }>`
   -moz-appearance: none;
   -webkit-appearance: none;
   -o-appearance: none;
@@ -14,39 +33,42 @@ const StyledCheckbox = styled.input`
   height: 16px;
   content: none;
 
-  &:checked {
-    background: ${green};
-    position: relative;
-    border-color: ${green};
-
-    &:before {
-      font-family: FontAwesome;
-      content: url(${check});
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: ${grey4};
-      font-size: 13px;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-    }
-  }
+  ${({ indeterminate }) =>
+    indeterminate
+      ? css<{ indeterminate?: boolean }>`
+          ${sharedCheck}
+        `
+      : css`
+          &:checked {
+            ${sharedCheck}
+          }
+        `}
 
   &:hover {
     cursor: pointer;
     border-color: ${grey};
   }
-`;
+`
 
 const AtCheckbox: React.FunctionComponent<AtCheckboxProps> = (
-  props: AtCheckboxProps
+  props: AtCheckboxProps,
 ) => {
-  return <StyledCheckbox type={'checkbox'} checked={props.checked} />;
-};
-
-interface AtCheckboxProps {
-  checked?: boolean;
+  return (
+    <StyledCheckbox
+      type={'checkbox'}
+      ref={props.checkboxRef}
+      checked={props.checked}
+      indeterminate={props.indeterminate}
+      onChange={props.onChange}
+    />
+  )
 }
 
-export default AtCheckbox;
+interface AtCheckboxProps {
+  checked?: boolean
+  indeterminate?: boolean
+  onChange?: (e: any) => void
+  checkboxRef?: any
+}
+
+export default AtCheckbox

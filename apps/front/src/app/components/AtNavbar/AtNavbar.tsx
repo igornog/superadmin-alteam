@@ -1,12 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
-import logo from '../../assets/images/black_logo.svg';
-import { Box } from '@mui/material';
-import { LogoutCurve } from 'iconsax-react';
-import AtTypography from '../AtTypography/AtTypography';
-import { black, green, grey2, grey3, grey5, white } from '../../utils/colors';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Navigation, NavigationProps } from '../../app';
+import React from 'react'
+import styled from 'styled-components'
+import logo from '../../assets/images/black_logo.svg'
+import { Box } from '@mui/material'
+import { LogoutCurve } from 'iconsax-react'
+import { black, green, grey2, grey3, grey5, white } from '../../utils/colors'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { Navigation, NavigationProps } from '../../app'
+import { handleInitPage } from '../../utils/redux/actions/app.action'
+import { useAppDispatch } from '../../utils/hooks/reduxHook'
+import AtTypography from '../AtTypography/AtTypography'
 
 const StyledNav = styled.div`
   position: fixed;
@@ -20,11 +22,11 @@ const StyledNav = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border-right: 1px solid ${grey5};
-`;
+`
 
 const StyledLogo = styled.img`
   padding-top: 30px;
-`;
+`
 
 const StyledUl = styled.ul`
   list-style-type: none;
@@ -32,7 +34,7 @@ const StyledUl = styled.ul`
   flex-direction: column;
   gap: 50px;
   padding: 0;
-`;
+`
 
 const StyledLi = styled.li<{ isActive: boolean }>`
   display: flex;
@@ -62,7 +64,7 @@ const StyledLi = styled.li<{ isActive: boolean }>`
     cursor: pointer;
     color: ${black};
   }
-`;
+`
 
 const StyledButton = styled.div`
   border: 1px solid ${grey5};
@@ -78,11 +80,17 @@ const StyledButton = styled.div`
     display: flex;
     color: ${grey3};
   }
-`;
+`
 
 const AtNavbar: React.FunctionComponent = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const location = useLocation()
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+
+  const handleNavigate = (link: string) => {
+    dispatch(handleInitPage())
+    navigate(link)
+  }
 
   return (
     <StyledNav>
@@ -95,13 +103,13 @@ const AtNavbar: React.FunctionComponent = () => {
             return (
               <StyledLi
                 isActive={location.pathname === item.link}
-                onClick={() => navigate(item.link)}
+                onClick={() => handleNavigate(item.link)}
                 key={index}
               >
                 {item.icon}
                 <AtTypography variant={'body1'}>{item.name}</AtTypography>
               </StyledLi>
-            );
+            )
           })}
         </StyledUl>
       </Box>
@@ -111,7 +119,7 @@ const AtNavbar: React.FunctionComponent = () => {
         </StyledButton>
       </Box>
     </StyledNav>
-  );
-};
+  )
+}
 
-export default AtNavbar;
+export default AtNavbar

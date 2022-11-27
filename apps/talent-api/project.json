@@ -6,9 +6,7 @@
   "targets": {
     "build": {
       "executor": "@nrwl/webpack:webpack",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "target": "node",
         "compiler": "tsc",
@@ -34,8 +32,8 @@
     },
     "package": {
       "executor": "nx:run-commands",
-      "dependsOn":["build"],
-      "inputs": ["production","^production"],
+      "dependsOn": ["build"],
+      "inputs": ["production", "^production"],
       "options": {
         "command": "zip -FSqj apps/talent-api/dist/package.zip apps/talent-api/dist/index.js"
       }
@@ -75,9 +73,7 @@
     },
     "deploy": {
       "executor": "nx:run-commands",
-      "dependsOn": [
-        "package"
-      ],
+      "dependsOn": ["package"],
       "options": {
         "cwd": "apps/talent-api/infrastructure",
         "command": "../../../infrastructure/scripts/terraformStageWrapper.sh apply talent-api"

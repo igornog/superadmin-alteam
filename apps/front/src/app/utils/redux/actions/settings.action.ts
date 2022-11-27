@@ -1,58 +1,58 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit'
 import {
   DisplayMode,
   Filter,
   HandlesettingsProps,
-  ModalVariant,
   Page,
   Settings,
-} from '../types/settings.type';
+  SideDrawerVariant,
+} from '../types/settings.type'
 
 export const handleInitSettings = createAsyncThunk(
   'settings/initSettings',
   async (settings: HandlesettingsProps) => {
-    return settings;
-  }
-);
+    return settings
+  },
+)
 
 export const handleSettingsTab = createAsyncThunk(
   'settings/initSettingsActiveTab',
   async (settings: Settings) => {
-    return settings;
-  }
-);
+    return settings
+  },
+)
 
 export const handleSwitchDisplayMode = createAsyncThunk(
   'settings/switchDisplayMode',
   async (mode: DisplayMode) => {
-    return mode;
-  }
-);
+    return mode
+  },
+)
 
 export const handleActiveTab = createAsyncThunk(
   'settings/activeTab',
   async (tab: Page) => {
-    return tab;
-  }
-);
+    return tab
+  },
+)
 
 export const handleActiveFilter = createAsyncThunk(
   'settings/activeFilter',
   async (props: { filter: Filter; section: 'skills' | 'jobTypes' }) => {
-    return props;
-  }
-);
+    return props
+  },
+)
 
 export const handleRefreshFilters = createAsyncThunk(
   'settings/refreshFilters',
   async () => {
-    return true;
-  }
-);
+    return true
+  },
+)
 
-export const handleModal = createAsyncThunk(
-  'settings/selectedModal',
-  async (modal: ModalVariant | null) => {
-    return modal;
-  }
-);
+export const handleDrawer = createAsyncThunk(
+  'settings/selectedDrawer',
+  async (drawer: SideDrawerVariant | null) => {
+    return drawer
+  },
+)

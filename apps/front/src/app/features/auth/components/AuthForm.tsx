@@ -1,17 +1,18 @@
-import { Box } from '@mui/material';
-import { ArrowRight2 } from 'iconsax-react';
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import { Box } from '@mui/material'
+import { ArrowRight2 } from 'iconsax-react'
+import React, { useState } from 'react'
+import styled from 'styled-components'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../../components/AtButton/AtButton';
+} from '../../../components/AtButton/AtButton'
 import AtTextField, {
   AtTextFieldType,
-} from '../../../components/AtTextField/AtTextField';
-import AtTypography from '../../../components/AtTypography/AtTypography';
-import { grey5 } from '../../../utils/colors';
-import { isValidEmail } from '../../../utils/emails';
+} from '../../../components/AtTextField/AtTextField'
+import AtTypography from '../../../components/AtTypography/AtTypography'
+import { grey5 } from '../../../utils/colors'
+import { isValidEmail } from '../../../utils/emails'
+import { authService } from '../../../utils/services'
 
 const StyledBackground = styled.div`
   padding: 0 50px;
@@ -21,15 +22,15 @@ const StyledBackground = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
-`;
+`
 
 const AuthForm: React.FunctionComponent = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleSubmit = () => {
-    console.log(email, password);
-  };
+    authService.login(email, password)
+  }
 
   return (
     <StyledBackground>
@@ -44,6 +45,7 @@ const AuthForm: React.FunctionComponent = () => {
 
         <AtTextField
           label={'Email'}
+          value={email}
           required={true}
           placeholder={'Enter email'}
           type={AtTextFieldType.Email}
@@ -53,6 +55,7 @@ const AuthForm: React.FunctionComponent = () => {
 
         <AtTextField
           label={'Password'}
+          value={password}
           placeholder={'Enter password'}
           required={true}
           type={AtTextFieldType.Password}
@@ -71,7 +74,7 @@ const AuthForm: React.FunctionComponent = () => {
         </Box>
       </Box>
     </StyledBackground>
-  );
-};
+  )
+}
 
-export default AuthForm;
+export default AuthForm
