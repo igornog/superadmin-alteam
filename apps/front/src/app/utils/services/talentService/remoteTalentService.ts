@@ -21,4 +21,7 @@ export default class RemoteTalentService implements TalentService {
   searchSoloTalent(talentSearch: TalentSearch): Promise<SoloTalent[]> {
     return atAxios.get('/talent/solo/search', {params: talentSearch})
   }
+  updateSoloTalent(talent: SoloTalent): Promise<SoloTalent> {
+    return atAxios.put(`/talent/solo`, talent)
+  }
 }

@@ -10,4 +10,6 @@ export interface TalentService {
   retrieveSoloTalent(id: string): Promise<SoloTalent | undefined>
 
   searchSoloTalent(talentSearch: TalentSearch): Promise<SoloTalent[]>
+
+  updateSoloTalent(talent: SoloTalent): Promise<SoloTalent>
 }

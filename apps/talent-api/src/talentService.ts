@@ -29,4 +29,7 @@ export const talentService: TalentService = {
   searchSoloTalent(talentSearch: TalentSearch): Promise<SoloTalent[]> {
     return soloTalentPgRepository.findSoloTalentBySearch(talentSearch)
   },
+  updateSoloTalent(talent: SoloTalent): Promise<SoloTalent> {
+    return soloTalentPgRepository.updateSoloTalent(talent)
+  }
 }

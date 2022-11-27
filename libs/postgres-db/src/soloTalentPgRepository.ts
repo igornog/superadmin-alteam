@@ -35,9 +35,19 @@ async function findSoloTalentBySearch(
     .getMany()
   return result.map(soloTalentFromEntity)
 }
-
+async function updateSoloTalent(
+  talent: SoloTalent,
+): Promise<SoloTalent> {
+  const soloTalentRepository = (await postgresClient()).getRepository(
+    SoloTalentEntity,
+  )
+  const entity = soloTalentToEntity(talent)
+  const result = await soloTalentRepository.save(entity)
+  return soloTalentFromEntity(result)
+}
 export const soloTalentPgRepository = {
   createSoloTalent,
   retrieveSoloTalent,
   findSoloTalentBySearch,
+  updateSoloTalent,
 }
