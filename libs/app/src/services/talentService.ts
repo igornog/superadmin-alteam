@@ -9,5 +9,5 @@ export interface TalentService {
 
   retrieveSoloTalent(id: string): Promise<SoloTalent | undefined>;
 
-  searchTalent(talentSearch: TalentSearch): Promise<SoloTalent[]>;
+  searchSoloTalent(talentSearch: TalentSearch): Promise<SoloTalent[]>;
 }

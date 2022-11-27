@@ -23,9 +23,12 @@ talentRouter.post('/talent/webflow/webhook', (req, res, next) => {
 talentRouter.get('/talent/group/:id', (req, res, next) => {
   sendPromise(talentService.retrieveGroupTalent(req.params.id), res, next);
 });
+talentRouter.post('/talent/solo', (req, res, next) => {
+  sendPromise(talentService.createSoloTalent(req.body), res, next);
+});
 talentRouter.get('/talent/solo/:id', (req, res, next) => {
   sendPromise(talentService.retrieveSoloTalent(req.params.id), res, next);
 });
-talentRouter.post('/talent/search', (req, res, next) => {
-  sendPromise(talentService.searchTalent(req.query as unknown as TalentSearch), res, next);
+talentRouter.get('/talent/solo/search', (req, res, next) => {
+  sendPromise(talentService.searchSoloTalent(req.query as unknown as TalentSearch), res, next);
 });

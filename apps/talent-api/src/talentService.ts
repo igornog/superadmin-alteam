@@ -14,7 +14,7 @@ export const talentService: TalentService = {
   retrieveSoloTalent(id: string): Promise<SoloTalent | undefined> {
     return soloTalentPgRepository.retrieveSoloTalent(id);
   },
-  searchTalent(talentSearch: TalentSearch): Promise<SoloTalent[]> {
+  searchSoloTalent(talentSearch: TalentSearch): Promise<SoloTalent[]> {
     return soloTalentPgRepository.findSoloTalentBySearch(talentSearch);
   }
 }
