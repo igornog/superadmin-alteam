@@ -1,3 +1,3 @@
-import RemoteTalentService from "./remoteTalentService";
+import RemoteTalentService from './remoteTalentService'
 
-export const talentService = new RemoteTalentService();
+export const talentService = new RemoteTalentService()

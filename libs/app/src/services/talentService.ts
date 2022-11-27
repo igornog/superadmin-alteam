@@ -1,13 +1,13 @@
-import {GroupTalent, SoloTalent, TalentSearch} from "@yjcapp/app";
+import { GroupTalent, SoloTalent, TalentSearch } from '@yjcapp/app'
 
 export interface TalentService {
-  createGroupTalent(talent: Omit<GroupTalent, "id">): Promise<GroupTalent>;
+  createGroupTalent(talent: Omit<GroupTalent, 'id'>): Promise<GroupTalent>
 
-  retrieveGroupTalent(id: string): Promise<GroupTalent | undefined>;
+  retrieveGroupTalent(id: string): Promise<GroupTalent | undefined>
 
-  createSoloTalent(talent: Omit<SoloTalent, "id">): Promise<SoloTalent>;
+  createSoloTalent(talent: Omit<SoloTalent, 'id'>): Promise<SoloTalent>
 
-  retrieveSoloTalent(id: string): Promise<SoloTalent | undefined>;
+  retrieveSoloTalent(id: string): Promise<SoloTalent | undefined>
 
-  searchSoloTalent(talentSearch: TalentSearch): Promise<SoloTalent[]>;
+  searchSoloTalent(talentSearch: TalentSearch): Promise<SoloTalent[]>
 }

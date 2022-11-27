@@ -1,42 +1,42 @@
 export interface GroupTalent {
-  id: string;
-  email: string;
-  phone: string;
-  speciality: string;
-  size: string;
-  website: string;
-  about: string;
-  assets: string[];
+  id: string
+  email: string
+  phone: string
+  speciality: string
+  size: string
+  website: string
+  about: string
+  assets: string[]
 }
 
 export interface SoloTalent {
-  id: string;
-  firstName: string;
-  lastName: string;
-  experience: string;
-  availability: string;
-  links: string[];
-  role: string;
-  about: string;
-  assets: string[];
-  skills: string[];
-  appliedDate : Date;
-  phoneNumber?: string;
-  salaryExpectation?: string;
-  workExperience?: string;
-  listing : Listing[];
+  id: string
+  firstName: string
+  lastName: string
+  experience: string
+  availability: string
+  links: string[]
+  role: string
+  about: string
+  assets: string[]
+  skills: string[]
+  appliedDate: Date
+  phoneNumber?: string
+  salaryExpectation?: string
+  workExperience?: string
+  listing: Listing[]
 }
 export interface Listing {
-  companyName: string;
-  duration: string;
-  jobType: string;
-  status: "shortlisted" | "rejected" | "hired";
+  companyName: string
+  duration: string
+  jobType: string
+  status: 'shortlisted' | 'rejected' | 'hired'
 }
 export interface TalentSearch {
-  skills: string[];
-  experience: string;
-  availability: string;
-  role: string;
+  skills: string[]
+  experience: string
+  availability: string
+  role: string
 }
 
-export type Talent = GroupTalent | SoloTalent;
+export type Talent = GroupTalent | SoloTalent
