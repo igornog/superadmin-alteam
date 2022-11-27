@@ -32,6 +32,11 @@ export interface Listing {
   jobType: string;
   status: "shortlisted" | "rejected" | "hired";
 }
-
+export interface TalentSearch {
+  skills: string[];
+  experience: string;
+  availability: string;
+  role: string;
+}
 
 export type Talent = GroupTalent | SoloTalent;

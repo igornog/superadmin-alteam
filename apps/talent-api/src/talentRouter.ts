@@ -3,7 +3,7 @@ import {webflowWebhookToTalent} from "./webflow/webflowToTalent";
 import {isGroupTalent} from "@yjcapp/talent";
 import {talentService} from "./talentService";
 import {logger, sendPromise} from "@yjcapp/api-utils";
-import {Talent} from "@yjcapp/app";
+import {Talent, TalentSearch} from "@yjcapp/app";
 
 export const talentRouter = express.Router();
 talentRouter.use(express.json());
@@ -25,4 +25,7 @@ talentRouter.get('/talent/group/:id', (req, res, next) => {
 });
 talentRouter.get('/talent/solo/:id', (req, res, next) => {
   sendPromise(talentService.retrieveSoloTalent(req.params.id), res, next);
+});
+talentRouter.post('/talent/search', (req, res, next) => {
+  sendPromise(talentService.searchTalent(req.query as unknown as TalentSearch), res, next);
 });

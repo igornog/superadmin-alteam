@@ -1,5 +1,5 @@
 import {postgresClient} from './postgresClient';
-import {SoloTalent} from "@yjcapp/app";
+import {SoloTalent, TalentSearch} from "@yjcapp/app";
 import {SoloTalentEntity} from "./entities";
 import {soloTalentFromEntity, soloTalentToEntity} from "./soloTalentConverter";
 
@@ -16,7 +16,15 @@ async function retrieveSoloTalent(id: string): Promise<SoloTalent | undefined> {
   return result ? soloTalentFromEntity(result) : undefined;
 }
 
+async function findSoloTalentBySearch(talentSearch: TalentSearch): Promise<SoloTalent[]> {
+  const soloTalentRepository = (await postgresClient()).getRepository(SoloTalentEntity);
+
+  const result = await soloTalentRepository.createQueryBuilder().take(20).getMany();
+  return result.map(soloTalentFromEntity);
+}
+
 export const soloTalentPgRepository = {
   createSoloTalent,
   retrieveSoloTalent,
+  findSoloTalentBySearch
 }

@@ -1,4 +1,4 @@
-import {GroupTalent, SoloTalent, TalentService} from "@yjcapp/app";
+import {GroupTalent, SoloTalent, TalentSearch, TalentService} from "@yjcapp/app";
 import {groupTalentPgRepository, soloTalentPgRepository} from "@yjcapp/postgres-db";
 
 export const talentService: TalentService = {
@@ -13,5 +13,8 @@ export const talentService: TalentService = {
   },
   retrieveSoloTalent(id: string): Promise<SoloTalent | undefined> {
     return soloTalentPgRepository.retrieveSoloTalent(id);
+  },
+  searchTalent(talentSearch: TalentSearch): Promise<SoloTalent[]> {
+    return soloTalentPgRepository.findSoloTalentBySearch(talentSearch);
   }
 }
