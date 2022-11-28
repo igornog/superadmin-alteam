@@ -1,11 +1,11 @@
-import { FolderAdd } from 'iconsax-react';
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { grey5, grey3, black } from '../../utils/colors';
-import { useAppSelector } from '../../utils/hooks/reduxHook';
-import { getActiveFolder } from '../../utils/redux/selectors/tree.selector';
-import ModalAddFolder from '../AtModal/modals/ModalAddFolder';
-import AtTypography from '../AtTypography/AtTypography';
+import { FolderAdd } from 'iconsax-react'
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import { grey5, grey3, black } from '../../utils/colors'
+import { useAppSelector } from '../../utils/hooks/reduxHook'
+import { getActiveFolder } from '../../utils/redux/selectors/tree.selector'
+import ModalAddFolder from '../AtModal/modals/ModalAddFolder'
+import AtTypography from '../AtTypography/AtTypography'
 
 const StyledFolder = styled.div`
   width: 100%;
@@ -25,11 +25,11 @@ const StyledFolder = styled.div`
     cursor: pointer;
     color: ${black};
   }
-`;
+`
 
 const AtCreateFolder: React.FunctionComponent = () => {
-  const [openCreateFolder, setOpenCreateFolder] = useState(false);
-  const activeFolder = useAppSelector((state) => getActiveFolder(state));
+  const [openCreateFolder, setOpenCreateFolder] = useState(false)
+  const activeFolder = useAppSelector((state) => getActiveFolder(state))
 
   return (
     <>
@@ -44,7 +44,7 @@ const AtCreateFolder: React.FunctionComponent = () => {
         onClose={() => setOpenCreateFolder(false)}
       />
     </>
-  );
-};
+  )
+}
 
-export default AtCreateFolder;
+export default AtCreateFolder

@@ -1,26 +1,26 @@
-import { Box, useMediaQuery, useTheme } from '@mui/material';
-import React, { useEffect } from 'react';
-import styled from 'styled-components';
-import background from '../../../assets/images/background.png';
-import logo from '../../../assets/images/white_logo.svg';
-import AuthForm from './AuthForm';
-import AuthQuote from './AuthQuote';
+import { Box, useMediaQuery, useTheme } from '@mui/material'
+import React, { useEffect } from 'react'
+import styled from 'styled-components'
+import background from '../../../assets/images/background.png'
+import logo from '../../../assets/images/white_logo.svg'
+import AuthForm from './AuthForm'
+import AuthQuote from './AuthQuote'
 
 const StyledQuote = styled(Box)`
   background: no-repeat url(${background});
   background-size: cover;
-`;
+`
 
 const AuthView: React.FunctionComponent = () => {
-  const isSmallScreen = useMediaQuery(useTheme().breakpoints.down('sm'));
+  const isSmallScreen = useMediaQuery(useTheme().breakpoints.down('sm'))
 
   useEffect(() => {
-    const userToken = localStorage.getItem('alt_user_token');
+    const userToken = localStorage.getItem('alt_user_token')
 
     if (userToken) {
-      window.location.href = '/talents';
+      window.location.href = '/talents'
     }
-  }, []);
+  }, [])
 
   return (
     <Box
@@ -46,7 +46,7 @@ const AuthView: React.FunctionComponent = () => {
         <AuthForm />
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default AuthView;
+export default AuthView

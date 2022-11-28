@@ -1,17 +1,17 @@
-import { Box, CircularProgress, Skeleton } from '@mui/material';
-import { Folder } from 'iconsax-react';
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { black, grey3, grey5, white } from '../../utils/colors';
-import { Tree, TreeInterface } from '../../utils/redux/types/tree.type';
-import AtRightClick from '../AtRightClick/AtRightClick';
-import FolderMenu from '../AtRightClick/ContextMenus/FolderMenu';
-import AtTypography from '../AtTypography/AtTypography';
-import ModalAddFolder from '../AtModal/modals/ModalAddFolder';
-import ModalAssignFolderToClient from '../AtModal/modals/ModalAssignFolderToClient';
-import ModalRemoveFolder from '../AtModal/modals/ModalRemoveFolder';
-import ModalRenameFolder from '../AtModal/modals/ModalRenameFolder';
-import ModalShareFolder from '../AtModal/modals/ModalShareFolder';
+import { Box, CircularProgress, Skeleton } from '@mui/material'
+import { Folder } from 'iconsax-react'
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import { black, grey3, grey5, white } from '../../utils/colors'
+import { Tree, TreeInterface } from '../../utils/redux/types/tree.type'
+import AtRightClick from '../AtRightClick/AtRightClick'
+import FolderMenu from '../AtRightClick/ContextMenus/FolderMenu'
+import AtTypography from '../AtTypography/AtTypography'
+import ModalAddFolder from '../AtModal/modals/ModalAddFolder'
+import ModalAssignFolderToClient from '../AtModal/modals/ModalAssignFolderToClient'
+import ModalRemoveFolder from '../AtModal/modals/ModalRemoveFolder'
+import ModalRenameFolder from '../AtModal/modals/ModalRenameFolder'
+import ModalShareFolder from '../AtModal/modals/ModalShareFolder'
 
 const StyledFolder = styled.div<{ minimize?: boolean }>`
   width: 100%;
@@ -32,25 +32,25 @@ const StyledFolder = styled.div<{ minimize?: boolean }>`
     cursor: pointer;
     color: ${black};
   }
-`;
+`
 
 const AtFolder: React.FunctionComponent<AtFolderProps> = (
-  props: AtFolderProps
+  props: AtFolderProps,
 ) => {
-  const [openModalAddFolder, setOpenModalAddFolder] = useState(false);
-  const [openModalRenameFolder, setOpenModalRenameFolder] = useState(false);
-  const [openModalShareFolder, setOpenModalShareFolder] = useState(false);
-  const [openModalRemoveFolder, setOpenModalRemoveFolder] = useState(false);
+  const [openModalAddFolder, setOpenModalAddFolder] = useState(false)
+  const [openModalRenameFolder, setOpenModalRenameFolder] = useState(false)
+  const [openModalShareFolder, setOpenModalShareFolder] = useState(false)
+  const [openModalRemoveFolder, setOpenModalRemoveFolder] = useState(false)
   const [openAssignFolderToClient, setOpenAssignFolderToClient] =
-    useState(false);
+    useState(false)
 
-  const [folder, setFolder] = useState(new Tree({}));
+  const [folder, setFolder] = useState(new Tree({}))
 
   useEffect(() => {
     if (props.folder) {
-      setFolder(new Tree(props.folder));
+      setFolder(new Tree(props.folder))
     }
-  }, [props.folder]);
+  }, [props.folder])
 
   return (
     <>
@@ -123,14 +123,14 @@ const AtFolder: React.FunctionComponent<AtFolderProps> = (
         folder={folder}
       />
     </>
-  );
-};
-
-interface AtFolderProps {
-  folder?: TreeInterface;
-  loading?: boolean;
-  minimize?: boolean;
-  onClick?: (e: React.MouseEvent) => void;
+  )
 }
 
-export default AtFolder;
+interface AtFolderProps {
+  folder?: TreeInterface
+  loading?: boolean
+  minimize?: boolean
+  onClick?: (e: React.MouseEvent) => void
+}
+
+export default AtFolder

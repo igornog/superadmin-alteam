@@ -1,14 +1,14 @@
-import { Grid } from '@mui/material';
-import React from 'react';
-import TalentsSwitchMode from '../../../../components/app/talents/TalentsSwitchMode';
-import AtTypography from '../../../../components/AtTypography/AtTypography';
-import { grey3 } from '../../../../utils/colors';
-import { useAppSelector } from '../../../../utils/hooks/reduxHook';
-import { Column } from '../../../../utils/redux/types/settings.type';
+import { Grid } from '@mui/material'
+import React from 'react'
+import TalentsSwitchMode from '../../../../components/app/talents/TalentsSwitchMode'
+import AtTypography from '../../../../components/AtTypography/AtTypography'
+import { grey3 } from '../../../../utils/colors'
+import { useAppSelector } from '../../../../utils/hooks/reduxHook'
+import { Column } from '../../../../utils/redux/types/settings.type'
 
 const DeclinedTalentsView: React.FunctionComponent = () => {
-  const talents = useAppSelector((state) => state.talents);
-  const listTalent = talents.listTalents;
+  const talents = useAppSelector((state) => state.talents)
+  const listTalent = talents.listTalents
 
   return (
     <Grid container={true} spacing={2.5} marginTop={0} alignItems={'stretch'}>
@@ -31,7 +31,7 @@ const DeclinedTalentsView: React.FunctionComponent = () => {
         </Grid>
       )}
     </Grid>
-  );
-};
+  )
+}
 
-export default DeclinedTalentsView;
+export default DeclinedTalentsView

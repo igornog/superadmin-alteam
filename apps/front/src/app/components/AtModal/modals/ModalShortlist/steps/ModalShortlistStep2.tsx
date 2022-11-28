@@ -1,9 +1,9 @@
-import { Box } from '@mui/material';
-import { SearchNormal1 } from 'iconsax-react';
-import React from 'react';
-import { grey2 } from '../../../../../utils/colors';
-import AtTextField from '../../../../AtTextField/AtTextField';
-import AtTypography from '../../../../AtTypography/AtTypography';
+import { Box } from '@mui/material'
+import { SearchNormal1 } from 'iconsax-react'
+import React from 'react'
+import { grey2 } from '../../../../../utils/colors'
+import AtTextField from '../../../../AtTextField/AtTextField'
+import AtTypography from '../../../../AtTypography/AtTypography'
 
 const ModalShortlistStep2: React.FunctionComponent = () => {
   return (
@@ -22,7 +22,7 @@ const ModalShortlistStep2: React.FunctionComponent = () => {
 
       <AtTypography color={grey2}>No listings assigned yet.</AtTypography>
     </Box>
-  );
-};
+  )
+}
 
-export default ModalShortlistStep2;
+export default ModalShortlistStep2

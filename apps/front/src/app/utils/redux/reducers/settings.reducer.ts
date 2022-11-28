@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
 import {
   handleActiveFilter,
   handleActiveTab,
@@ -7,9 +7,9 @@ import {
   handleSettingsTab,
   handleSwitchDisplayMode,
   handleDrawer,
-} from '../actions/settings.action';
-import { DisplayMode, Filter, SettingsState } from '../types/settings.type';
-import { StatusType } from '../types/status.type';
+} from '../actions/settings.action'
+import { DisplayMode, Filter, SettingsState } from '../types/settings.type'
+import { StatusType } from '../types/status.type'
 
 const initialState: SettingsState = {
   tabs: [],
@@ -22,7 +22,7 @@ const initialState: SettingsState = {
   selectedDrawer: null,
   status: StatusType.Idle,
   error: null,
-};
+}
 
 const { reducer } = createSlice({
   name: 'settings',
@@ -31,11 +31,11 @@ const { reducer } = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(handleInitSettings.pending, (state) => {
-        state.status = StatusType.Loading;
+        state.status = StatusType.Loading
       })
       .addCase(handleInitSettings.fulfilled, (state, { payload }) => {
-        state.status = StatusType.Succeeded;
-        state.tabs = payload.tabs;
+        state.status = StatusType.Succeeded
+        state.tabs = payload.tabs
 
         if (payload.filters) {
           state.filters.skills = payload.filters;
@@ -45,48 +45,46 @@ const { reducer } = createSlice({
         }
       })
       .addCase(handleInitSettings.rejected, (state, action) => {
-        state.status = StatusType.Failed;
-        state.error = action.error.message;
+        state.status = StatusType.Failed
+        state.error = action.error.message
       })
 
       .addCase(handleSettingsTab.fulfilled, (state, { payload }) => {
-        state.header = payload;
+        state.header = payload
       })
 
       .addCase(handleActiveTab.fulfilled, (state, { payload }) => {
-        const activeIndex = state.tabs.findIndex((tab) => tab.active === true);
-        const index = state.tabs.findIndex(
-          (tab) => tab.title === payload.title
-        );
-        state.tabs[activeIndex].active = false;
-        state.tabs[index].active = true;
+        const activeIndex = state.tabs.findIndex((tab) => tab.active === true)
+        const index = state.tabs.findIndex((tab) => tab.title === payload.title)
+        state.tabs[activeIndex].active = false
+        state.tabs[index].active = true
       })
 
       .addCase(handleActiveFilter.fulfilled, (state, { payload }) => {
         const index = state.filters[payload.section].findIndex(
-          (filter) => filter.label === payload.filter.label
-        );
-        state.filters[payload.section][index].active = !payload.filter.active;
+          (filter) => filter.label === payload.filter.label,
+        )
+        state.filters[payload.section][index].active = !payload.filter.active
       })
 
       .addCase(handleRefreshFilters.fulfilled, (state: SettingsState) => {
         Object.keys(state.filters).forEach((item: string) => {
           state.filters[item as keyof typeof state.filters].forEach(
             (filter: Filter) => {
-              filter.active = false;
-            }
-          );
-        });
+              filter.active = false
+            },
+          )
+        })
       })
 
       .addCase(handleSwitchDisplayMode.fulfilled, (state, { payload }) => {
-        state.displayMode = payload;
+        state.displayMode = payload
       })
 
       .addCase(handleDrawer.fulfilled, (state, { payload }) => {
-        state.selectedDrawer = payload;
-      });
+        state.selectedDrawer = payload
+      })
   },
-});
+})
 
-export default reducer;
+export default reducer

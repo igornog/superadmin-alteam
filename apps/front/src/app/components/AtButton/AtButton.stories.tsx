@@ -1,6 +1,7 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { TickSquare } from 'iconsax-react';
-import AtButton, { AtButtonKind, AtButtonVariant } from './AtButton';
+import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { TickSquare } from 'iconsax-react'
+import React from 'react'
+import AtButton, { AtButtonKind, AtButtonVariant } from './AtButton'
 
 const Story: ComponentMeta<typeof AtButton> = {
   component: AtButton,
@@ -18,9 +19,9 @@ const Story: ComponentMeta<typeof AtButton> = {
       control: { disable: true },
     },
   },
-};
+}
 
-export default Story;
+export default Story
 
 // Template BUTTON
 const Template: ComponentStory<typeof AtButton> = (args: any) => {
@@ -32,11 +33,11 @@ const Template: ComponentStory<typeof AtButton> = (args: any) => {
       startIcon={args.startIcon ? <TickSquare /> : null}
       endIcon={args.endIcon ? <TickSquare /> : null}
     />
-  );
-};
+  )
+}
 
 // CONTAINED BUTTON
-export const ContainedButton = Template.bind({});
+export const ContainedButton = Template.bind({})
 
 ContainedButton.args = {
   name: 'Lorem ipsum',
@@ -45,10 +46,10 @@ ContainedButton.args = {
   disabled: false,
   startIcon: false,
   endIcon: false,
-};
+}
 
 // OUTLINE BUTTON
-export const OutlinedButton = Template.bind({});
+export const OutlinedButton = Template.bind({})
 
 OutlinedButton.args = {
   name: 'Lorem ipsum',
@@ -57,10 +58,10 @@ OutlinedButton.args = {
   disabled: false,
   startIcon: false,
   endIcon: false,
-};
+}
 
 // TEXT BUTTON
-export const TextButton = Template.bind({});
+export const TextButton = Template.bind({})
 
 TextButton.args = {
   name: 'Lorem ipsum',
@@ -69,7 +70,7 @@ TextButton.args = {
   disabled: false,
   startIcon: false,
   endIcon: false,
-};
+}
 
 // ICON BUTTON
 const Icon: ComponentStory<typeof AtButton> = (args: any) => {
@@ -80,12 +81,12 @@ const Icon: ComponentStory<typeof AtButton> = (args: any) => {
       kind={args.kind}
       startIcon={<TickSquare />}
     />
-  );
-};
+  )
+}
 
-export const IconButton = Icon.bind({});
+export const IconButton = Icon.bind({})
 
 IconButton.args = {
   kind: AtButtonKind.Default,
   disabled: false,
-};
+}

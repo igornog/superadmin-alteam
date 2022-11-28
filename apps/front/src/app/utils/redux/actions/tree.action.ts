@@ -1,4 +1,4 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit'
 
 export const handleLoadTree = createAsyncThunk('tree/loadTree', async () => {
   const tree = {
@@ -124,21 +124,21 @@ export const handleLoadTree = createAsyncThunk('tree/loadTree', async () => {
         ],
       },
     ],
-  };
+  }
 
-  return tree;
-});
+  return tree
+})
 
 export const handleAddFolder = createAsyncThunk(
   'tree/addFolder',
   async (props: { folderName: string; targetId: string }) => {
-    return props;
-  }
-);
+    return props
+  },
+)
 
 export const handleSelectFolder = createAsyncThunk(
   'tree/selectFolder',
   async (idFolder: string | undefined) => {
-    return idFolder;
-  }
-);
+    return idFolder
+  },
+)

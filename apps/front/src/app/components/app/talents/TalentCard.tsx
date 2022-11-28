@@ -1,7 +1,7 @@
-import { Grid } from '@mui/material';
-import React from 'react';
-import { Talent } from '../../../utils/redux/types/talents.type';
-import AtCard from '../../AtCard/AtCard';
+import { Grid } from '@mui/material'
+import React from 'react'
+import { Talent } from '../../../utils/redux/types/talents.type'
+import AtCard from '../../AtCard/AtCard'
 
 const TalentCard: React.FunctionComponent<TalentCardProps> = (
   props: TalentCardProps

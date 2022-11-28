@@ -1,13 +1,13 @@
-import { Page } from '../../utils/redux/types/settings.type';
-import { TalentStatus } from '../../utils/redux/types/talents.type';
-import { RightClick, Tabs } from '../../utils/types';
-import AcceptedTatentsView from './components/AcceptedTalents/AcceptedTatentsView';
-import AllTalentsView from './components/AllTalents/AllTalentsView';
-import DeclinedTalentsView from './components/DeclinedTalents/DeclinedTalentsView';
-import InboundTalentsView from './components/InboundTalents/InboundTalentsView';
-import ShortlistLatentsView from './components/ShortlistTalents/ShortlistTatentsView';
+import { Page } from '../../utils/redux/types/settings.type'
+import { TalentStatus } from '../../utils/redux/types/talents.type'
+import { RightClick, Tabs } from '../../utils/types'
+import AcceptedTatentsView from './components/AcceptedTalents/AcceptedTatentsView'
+import AllTalentsView from './components/AllTalents/AllTalentsView'
+import DeclinedTalentsView from './components/DeclinedTalents/DeclinedTalentsView'
+import InboundTalentsView from './components/InboundTalents/InboundTalentsView'
+import ShortlistLatentsView from './components/ShortlistTalents/ShortlistTatentsView'
 
-export { default } from './components/TalentsView';
+export { default } from './components/TalentsView'
 
 export const tabsContent = {
   [Tabs.AllTalent]: {
@@ -52,7 +52,7 @@ export const tabsContent = {
       RightClick.ShareTalent,
     ],
   },
-};
+}
 
 export const talentsTabs: Page[] = [
   {
@@ -113,7 +113,7 @@ export const talentsTabs: Page[] = [
     active: false,
     settings: {},
   },
-];
+]
 
 export const talentsFilters = [
   {
@@ -136,7 +136,7 @@ export const talentsFilters = [
     label: 'Wireframing',
     active: false,
   },
-];
+]
 
 export const talentsJobType = [
   {
@@ -151,7 +151,7 @@ export const talentsJobType = [
     label: 'Evenings & Weekends',
     active: false,
   },
-];
+]
 
 export const talents = [
   {
@@ -389,4 +389,4 @@ export const talents = [
     ],
     links: [],
   },
-];
+]

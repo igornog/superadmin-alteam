@@ -1,19 +1,19 @@
-import { Box } from '@mui/material';
-import React, { useState } from 'react';
-import { grey2 } from '../../../../../../utils/colors';
+import { Box } from '@mui/material'
+import React, { useState } from 'react'
+import { grey2 } from '../../../../../../utils/colors'
 import AtTextFieldDropdown, {
   DropdownItem,
-} from '../../../../../AtDropdown/AtTextFieldDropdown';
-import AtTextField from '../../../../../AtTextField/AtTextField';
-import AtTypography from '../../../../../AtTypography/AtTypography';
+} from '../../../../../AtDropdown/AtTextFieldDropdown'
+import AtTextField from '../../../../../AtTextField/AtTextField'
+import AtTypography from '../../../../../AtTypography/AtTypography'
 
 const ModalCreateTalentStep1: React.FunctionComponent = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [role, setRole] = useState('');
-  const [experience, setExperience] = useState<DropdownItem>();
-  const [availability, setAvailability] = useState<DropdownItem>();
-  const [portfolio, setPortfolio] = useState('');
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [role, setRole] = useState('')
+  const [experience, setExperience] = useState<DropdownItem>()
+  const [availability, setAvailability] = useState<DropdownItem>()
+  const [portfolio, setPortfolio] = useState('')
 
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'30px'}>
@@ -92,7 +92,7 @@ const ModalCreateTalentStep1: React.FunctionComponent = () => {
         onValueChange={setPortfolio}
       />
     </Box>
-  );
-};
+  )
+}
 
-export default ModalCreateTalentStep1;
+export default ModalCreateTalentStep1

@@ -1,18 +1,18 @@
-import { Box } from '@mui/material';
-import { ArrowLeft2 } from 'iconsax-react';
-import { useAppDispatch } from '../../utils/hooks/reduxHook';
-import { handleDrawer } from '../../utils/redux/actions/settings.action';
-import AtButton, { AtButtonVariant, AtButtonKind } from '../AtButton/AtButton';
-import AtLine from '../AtLine/AtLine';
+import { Box } from '@mui/material'
+import { ArrowLeft2 } from 'iconsax-react'
+import { useAppDispatch } from '../../utils/hooks/reduxHook'
+import { handleDrawer } from '../../utils/redux/actions/settings.action'
+import AtButton, { AtButtonVariant, AtButtonKind } from '../AtButton/AtButton'
+import AtLine from '../AtLine/AtLine'
 
 const AtDrawerHeader: React.FunctionComponent<AtDrawerHeaderProps> = (
-  props: AtDrawerHeaderProps
+  props: AtDrawerHeaderProps,
 ) => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const handleClose = () => {
-    dispatch(handleDrawer(null));
-  };
+    dispatch(handleDrawer(null))
+  }
 
   return (
     <>
@@ -36,13 +36,13 @@ const AtDrawerHeader: React.FunctionComponent<AtDrawerHeaderProps> = (
       </Box>
       <AtLine spacing={25} />
     </>
-  );
-};
-
-interface AtDrawerHeaderProps {
-  title?: React.ReactNode;
-  sideTitle?: React.ReactNode;
-  invisibleClose?: boolean;
+  )
 }
 
-export default AtDrawerHeader;
+interface AtDrawerHeaderProps {
+  title?: React.ReactNode
+  sideTitle?: React.ReactNode
+  invisibleClose?: boolean
+}
+
+export default AtDrawerHeader

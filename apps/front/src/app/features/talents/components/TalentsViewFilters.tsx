@@ -1,29 +1,29 @@
-import { Box, Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material'
 import {
   AddCircle,
   ArrowRight2,
   FilterSquare,
   Refresh,
   SearchNormal1,
-} from 'iconsax-react';
-import React from 'react';
-import styled from 'styled-components';
+} from 'iconsax-react'
+import React from 'react'
+import styled from 'styled-components'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../../components/AtButton/AtButton';
-import AtLine from '../../../components/AtLine/AtLine';
-import AtSpace from '../../../components/AtSpace/AtSpace';
-import AtTextField from '../../../components/AtTextField/AtTextField';
-import AtTypography from '../../../components/AtTypography/AtTypography';
-import { black, green, grey2, grey5, white } from '../../../utils/colors';
-import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook';
-import { handleCollapsePanel } from '../../../utils/redux/actions/app.action';
+} from '../../../components/AtButton/AtButton'
+import AtLine from '../../../components/AtLine/AtLine'
+import AtSpace from '../../../components/AtSpace/AtSpace'
+import AtTextField from '../../../components/AtTextField/AtTextField'
+import AtTypography from '../../../components/AtTypography/AtTypography'
+import { black, green, grey2, grey5, white } from '../../../utils/colors'
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
+import { handleCollapsePanel } from '../../../utils/redux/actions/app.action'
 import {
   handleActiveFilter,
   handleRefreshFilters,
-} from '../../../utils/redux/actions/settings.action';
-import { Filter } from '../../../utils/redux/types/settings.type';
+} from '../../../utils/redux/actions/settings.action'
+import { Filter } from '../../../utils/redux/types/settings.type'
 
 const StyledFilters = styled.div<{ isFixed: boolean }>`
   background-color: ${white};
@@ -38,12 +38,12 @@ const StyledFilters = styled.div<{ isFixed: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-`;
+`
 
 const StyledAddCircle = styled(AddCircle)<{ active?: boolean }>`
   transition: transform 0.3s;
   transform: rotate(${({ active }) => (active ? '225' : '0')}deg);
-`;
+`
 
 const StyledBox = styled(Box)<{ active?: boolean }>`
   transition: 0.3s;
@@ -55,27 +55,27 @@ const StyledBox = styled(Box)<{ active?: boolean }>`
     color: ${({ active }) => (active ? green : black)};
     cursor: pointer;
   }
-`;
+`
 
 const StyledButton = styled(AtButton)`
   padding-left: 0;
   justify-content: flex-start;
   width: 0;
   min-width: 16px;
-`;
+`
 
 const TalentsViewFilters: React.FunctionComponent = () => {
-  const settings = useAppSelector((state) => state.settings);
-  const dispatch = useAppDispatch();
-  const app = useAppSelector((state) => state.app);
+  const settings = useAppSelector((state) => state.settings)
+  const dispatch = useAppDispatch()
+  const app = useAppSelector((state) => state.app)
 
   const handleClick = (filter: Filter, section: 'skills' | 'jobTypes') => {
-    dispatch(handleActiveFilter({ filter, section }));
-  };
+    dispatch(handleActiveFilter({ filter, section }))
+  }
 
   const handleRefresh = () => {
-    dispatch(handleRefreshFilters());
-  };
+    dispatch(handleRefreshFilters())
+  }
 
   return (
     <Grid item={true} style={{ width: '235px' }}>
@@ -166,7 +166,7 @@ const TalentsViewFilters: React.FunctionComponent = () => {
         />
       </StyledFilters>
     </Grid>
-  );
-};
+  )
+}
 
-export default TalentsViewFilters;
+export default TalentsViewFilters

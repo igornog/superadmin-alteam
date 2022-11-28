@@ -1,42 +1,42 @@
-import { Box } from '@mui/material';
-import { AddCircle, CloseCircle, TrushSquare } from 'iconsax-react';
-import React, { useEffect, useState } from 'react';
+import { Box } from '@mui/material'
+import { AddCircle, CloseCircle, TrushSquare } from 'iconsax-react'
+import React, { useEffect, useState } from 'react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../AtButton/AtButton';
-import AtTextField from '../../AtTextField/AtTextField';
-import AtTypography from '../../AtTypography/AtTypography';
-import { StyledLink } from '../../../features/talents/components/TalentViewProfile/TalentLinks';
-import { grey2 } from '../../../utils/colors';
+} from '../../AtButton/AtButton'
+import AtTextField from '../../AtTextField/AtTextField'
+import AtTypography from '../../AtTypography/AtTypography'
+import { StyledLink } from '../../../features/talents/components/TalentViewProfile/TalentLinks'
+import { grey2 } from '../../../utils/colors'
 import {
   getCorrectNetwork,
   availableNetworks,
   capitalizeFirstLetter,
-} from '../../../utils/helpers';
-import { useAppSelector } from '../../../utils/hooks/reduxHook';
-import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector';
-import { Link } from '../../../utils/redux/types/talents.type';
-import { ModalSize } from '../../../utils/redux/types/settings.type';
-import AtLine from '../../AtLine/AtLine';
-import AtModal from '../AtModal';
+} from '../../../utils/helpers'
+import { useAppSelector } from '../../../utils/hooks/reduxHook'
+import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector'
+import { Link } from '../../../utils/redux/types/talents.type'
+import { ModalSize } from '../../../utils/redux/types/settings.type'
+import AtLine from '../../AtLine/AtLine'
+import AtModal from '../AtModal'
 
 const ModalLink: React.FunctionComponent<ModalLinkProps> = (
-  props: ModalLinkProps
+  props: ModalLinkProps,
 ) => {
-  const selectedTalent = useAppSelector((state) => getActiveTalent(state));
-  const [links, setLinks] = useState<Link[]>([]);
+  const selectedTalent = useAppSelector((state) => getActiveTalent(state))
+  const [links, setLinks] = useState<Link[]>([])
 
-  const [displayLink, setDisplayLink] = useState(false);
-  const [newLink, setNewLink] = useState('');
+  const [displayLink, setDisplayLink] = useState(false)
+  const [newLink, setNewLink] = useState('')
 
   useEffect(() => {
-    setLinks(selectedTalent.links);
-  }, [selectedTalent]);
+    setLinks(selectedTalent.links)
+  }, [selectedTalent])
 
   const handleUpdateLabel = () => {
-    console.log('update label');
-  };
+    console.log('update label')
+  }
 
   return (
     <AtModal
@@ -92,7 +92,7 @@ const ModalLink: React.FunctionComponent<ModalLinkProps> = (
                         {capitalizeFirstLetter(network)}
                       </AtTypography>
                     ),
-                  };
+                  }
                 })}
                 onClickDropdownLabel={handleUpdateLabel}
               />
@@ -126,7 +126,7 @@ const ModalLink: React.FunctionComponent<ModalLinkProps> = (
                       {capitalizeFirstLetter(network)}
                     </AtTypography>
                   ),
-                };
+                }
               })}
             />
             <AtButton
@@ -146,12 +146,12 @@ const ModalLink: React.FunctionComponent<ModalLinkProps> = (
         </StyledLink>
       </Box>
     </AtModal>
-  );
-};
-
-interface ModalLinkProps {
-  isOpen: boolean;
-  onClose?: () => void;
+  )
 }
 
-export default ModalLink;
+interface ModalLinkProps {
+  isOpen: boolean
+  onClose?: () => void
+}
+
+export default ModalLink

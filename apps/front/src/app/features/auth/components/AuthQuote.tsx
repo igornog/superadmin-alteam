@@ -1,14 +1,14 @@
-import { Box } from '@mui/material';
-import React from 'react';
-import styled from 'styled-components';
-import AtTypography from '../../../components/AtTypography/AtTypography';
-import { white } from '../../../utils/colors';
+import { Box } from '@mui/material'
+import React from 'react'
+import styled from 'styled-components'
+import AtTypography from '../../../components/AtTypography/AtTypography'
+import { white } from '../../../utils/colors'
 
 const StyledQuote = styled(AtTypography)`
   background: -webkit-linear-gradient(45deg, #5fffff, ${white});
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-`;
+`
 
 const AuthQuote: React.FunctionComponent = () => {
   return (
@@ -27,7 +27,7 @@ const AuthQuote: React.FunctionComponent = () => {
         Yoann Demont, Owner at .alteam
       </AtTypography>
     </Box>
-  );
-};
+  )
+}
 
-export default AuthQuote;
+export default AuthQuote

@@ -1,21 +1,21 @@
-import { Box } from '@mui/material';
-import { ArrowRight2, CloseSquare } from 'iconsax-react';
-import React, { useState } from 'react';
-import { grey2 } from '../../../../../utils/colors';
-import { isValidEmail } from '../../../../../utils/emails';
+import { Box } from '@mui/material'
+import { ArrowRight2, CloseSquare } from 'iconsax-react'
+import React, { useState } from 'react'
+import { grey2 } from '../../../../../utils/colors'
+import { isValidEmail } from '../../../../../utils/emails'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../../../AtButton/AtButton';
-import AtTextField from '../../../../AtTextField/AtTextField';
-import AtTypography from '../../../../AtTypography/AtTypography';
+} from '../../../../AtButton/AtButton'
+import AtTextField from '../../../../AtTextField/AtTextField'
+import AtTypography from '../../../../AtTypography/AtTypography'
 
 const InviteTalent: React.FunctionComponent<InviteTalentProps> = (
-  props: InviteTalentProps
+  props: InviteTalentProps,
 ) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
 
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'30px'}>
@@ -74,11 +74,11 @@ const InviteTalent: React.FunctionComponent<InviteTalentProps> = (
         />
       </Box>
     </Box>
-  );
-};
-
-interface InviteTalentProps {
-  handleClose: () => void;
+  )
 }
 
-export default InviteTalent;
+interface InviteTalentProps {
+  handleClose: () => void
+}
+
+export default InviteTalent

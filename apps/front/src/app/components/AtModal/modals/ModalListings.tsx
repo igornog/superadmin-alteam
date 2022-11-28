@@ -1,31 +1,31 @@
-import { Box } from '@mui/material';
+import { Box } from '@mui/material'
 import {
   CloseCircle,
   SearchNormal1,
   CloseSquare,
   TickSquare,
-} from 'iconsax-react';
-import React from 'react';
-import styled from 'styled-components';
-import { grey2 } from '../../../utils/colors';
-import { ModalSize } from '../../../utils/redux/types/settings.type';
+} from 'iconsax-react'
+import React from 'react'
+import styled from 'styled-components'
+import { grey2 } from '../../../utils/colors'
+import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../AtButton/AtButton';
-import AtDropdown from '../../AtDropdown/AtDropdown';
-import AtLine from '../../AtLine/AtLine';
-import AtTag from '../../AtTag/AtTag';
-import AtTextField from '../../AtTextField/AtTextField';
-import AtTypography from '../../AtTypography/AtTypography';
-import AtModal from '../AtModal';
+} from '../../AtButton/AtButton'
+import AtDropdown from '../../AtDropdown/AtDropdown'
+import AtLine from '../../AtLine/AtLine'
+import AtTag from '../../AtTag/AtTag'
+import AtTextField from '../../AtTextField/AtTextField'
+import AtTypography from '../../AtTypography/AtTypography'
+import AtModal from '../AtModal'
 
 const StyledTag = styled(AtTag)`
   flex: 5;
-`;
+`
 
 const ModalListings: React.FunctionComponent<ModalListingsProps> = (
-  props: ModalListingsProps
+  props: ModalListingsProps,
 ) => {
   return (
     <AtModal
@@ -120,12 +120,12 @@ const ModalListings: React.FunctionComponent<ModalListingsProps> = (
         </Box>
       </Box>
     </AtModal>
-  );
-};
-
-interface ModalListingsProps {
-  isOpen: boolean;
-  onClose?: () => void;
+  )
 }
 
-export default ModalListings;
+interface ModalListingsProps {
+  isOpen: boolean
+  onClose?: () => void
+}
+
+export default ModalListings

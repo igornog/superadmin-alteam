@@ -1,10 +1,10 @@
-import { Chip, chipClasses } from '@mui/material';
-import React from 'react';
-import { TrushSquare } from 'iconsax-react';
-import styled, { css } from 'styled-components';
-import { white, red, grey, black } from '../../utils/colors';
-import AtTypography from '../AtTypography/AtTypography';
-import { convertHexToRGBA } from '../../utils/helpers';
+import { Chip, chipClasses } from '@mui/material'
+import React from 'react'
+import { TrushSquare } from 'iconsax-react'
+import styled, { css } from 'styled-components'
+import { white, red, grey, black } from '../../utils/colors'
+import AtTypography from '../AtTypography/AtTypography'
+import { convertHexToRGBA } from '../../utils/helpers'
 
 const StyledIcon = styled(TrushSquare)`
   transition: 0.3s;
@@ -13,7 +13,7 @@ const StyledIcon = styled(TrushSquare)`
     transition: 0.3s;
     color: ${red} !important;
   }
-`;
+`
 
 const StyledChip = styled(Chip)<{ clickable?: boolean; variant: string }>`
   color: ${grey};
@@ -35,7 +35,7 @@ const StyledChip = styled(Chip)<{ clickable?: boolean; variant: string }>`
         }
       }
     `}
-`;
+`
 
 const AtTag: React.FunctionComponent<AtTagProps> = (props: AtTagProps) => {
   return (
@@ -47,15 +47,15 @@ const AtTag: React.FunctionComponent<AtTagProps> = (props: AtTagProps) => {
       deleteIcon={props.delete ? <StyledIcon /> : undefined}
       onDelete={props.delete ? () => props.onDelete : undefined}
     />
-  );
-};
-
-interface AtTagProps {
-  label: string;
-  delete?: boolean;
-  hover?: boolean;
-  variant?: 'filled' | 'outlined';
-  onDelete?: () => void;
+  )
 }
 
-export default AtTag;
+interface AtTagProps {
+  label: string
+  delete?: boolean
+  hover?: boolean
+  variant?: 'filled' | 'outlined'
+  onDelete?: () => void
+}
+
+export default AtTag

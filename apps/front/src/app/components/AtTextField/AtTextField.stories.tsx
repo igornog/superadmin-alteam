@@ -1,7 +1,7 @@
-import { Box } from '@mui/material';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { CloseCircle, SearchNormal1 } from 'iconsax-react';
-import AtTextField from './AtTextField';
+import { Box } from '@mui/material'
+import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { CloseCircle, SearchNormal1 } from 'iconsax-react'
+import AtTextField from './AtTextField'
 
 const Story: ComponentMeta<typeof AtTextField> = {
   component: AtTextField,
@@ -11,9 +11,9 @@ const Story: ComponentMeta<typeof AtTextField> = {
       control: { disable: true },
     },
   },
-};
+}
 
-export default Story;
+export default Story
 
 const Template: ComponentStory<typeof AtTextField> = (args: any) => (
   <Box width={'250px'}>
@@ -24,9 +24,9 @@ const Template: ComponentStory<typeof AtTextField> = (args: any) => (
       endIcon={args.endIcon ? <CloseCircle /> : null}
     />
   </Box>
-);
+)
 
-export const InputMedium = Template.bind({});
+export const InputMedium = Template.bind({})
 InputMedium.args = {
   label: 'Email',
   required: true,
@@ -34,9 +34,9 @@ InputMedium.args = {
   size: 'medium',
   startIcon: false,
   endIcon: false,
-};
+}
 
-export const InputSuccess = Template.bind({});
+export const InputSuccess = Template.bind({})
 InputSuccess.args = {
   isSuccess: true,
   label: 'Email',
@@ -44,9 +44,9 @@ InputSuccess.args = {
   disabled: false,
   startIcon: false,
   endIcon: false,
-};
+}
 
-export const InputError = Template.bind({});
+export const InputError = Template.bind({})
 InputError.args = {
   isError: true,
   helperText: 'An error occured',
@@ -55,9 +55,9 @@ InputError.args = {
   disabled: false,
   startIcon: false,
   endIcon: false,
-};
+}
 
-export const InputSmall = Template.bind({});
+export const InputSmall = Template.bind({})
 InputSmall.args = {
   label: 'Email',
   required: true,
@@ -65,9 +65,9 @@ InputSmall.args = {
   size: 'small',
   startIcon: false,
   endIcon: false,
-};
+}
 
-export const InputSmallSuccess = Template.bind({});
+export const InputSmallSuccess = Template.bind({})
 InputSmallSuccess.args = {
   isSuccess: true,
   label: 'Email',
@@ -76,9 +76,9 @@ InputSmallSuccess.args = {
   size: 'small',
   startIcon: false,
   endIcon: false,
-};
+}
 
-export const InputSmallError = Template.bind({});
+export const InputSmallError = Template.bind({})
 InputSmallError.args = {
   label: 'Email',
   required: true,
@@ -88,4 +88,4 @@ InputSmallError.args = {
   size: 'small',
   startIcon: false,
   endIcon: false,
-};
+}

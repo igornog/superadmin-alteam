@@ -1,18 +1,18 @@
-import { Box } from '@mui/material';
-import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react';
-import React from 'react';
-import { ModalSize } from '../../../utils/redux/types/settings.type';
+import { Box } from '@mui/material'
+import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react'
+import React from 'react'
+import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../AtButton/AtButton';
-import AtLine from '../../AtLine/AtLine';
-import AtTextField from '../../AtTextField/AtTextField';
-import AtTypography from '../../AtTypography/AtTypography';
-import AtModal from '../AtModal';
+} from '../../AtButton/AtButton'
+import AtLine from '../../AtLine/AtLine'
+import AtTextField from '../../AtTextField/AtTextField'
+import AtTypography from '../../AtTypography/AtTypography'
+import AtModal from '../AtModal'
 
 const ModalAddNote: React.FunctionComponent<ModalAddNoteProps> = (
-  props: ModalAddNoteProps
+  props: ModalAddNoteProps,
 ) => {
   return (
     <AtModal
@@ -67,12 +67,12 @@ const ModalAddNote: React.FunctionComponent<ModalAddNoteProps> = (
         </Box>
       </Box>
     </AtModal>
-  );
-};
-
-interface ModalAddNoteProps {
-  isOpen: boolean;
-  onClose?: () => void;
+  )
 }
 
-export default ModalAddNote;
+interface ModalAddNoteProps {
+  isOpen: boolean
+  onClose?: () => void
+}
+
+export default ModalAddNote

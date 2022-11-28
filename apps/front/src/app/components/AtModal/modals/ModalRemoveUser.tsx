@@ -1,17 +1,17 @@
-import { Box } from '@mui/material';
-import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react';
-import React from 'react';
-import { ModalSize } from '../../../utils/redux/types/settings.type';
+import { Box } from '@mui/material'
+import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react'
+import React from 'react'
+import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../AtButton/AtButton';
-import AtLine from '../../AtLine/AtLine';
-import AtTypography from '../../AtTypography/AtTypography';
-import AtModal from '../AtModal';
+} from '../../AtButton/AtButton'
+import AtLine from '../../AtLine/AtLine'
+import AtTypography from '../../AtTypography/AtTypography'
+import AtModal from '../AtModal'
 
 const ModalRemoveUser: React.FunctionComponent<ModalRemoveUserProps> = (
-  props: ModalRemoveUserProps
+  props: ModalRemoveUserProps,
 ) => {
   return (
     <AtModal
@@ -61,12 +61,12 @@ const ModalRemoveUser: React.FunctionComponent<ModalRemoveUserProps> = (
         </Box>
       </Box>
     </AtModal>
-  );
-};
-
-interface ModalRemoveUserProps {
-  isOpen: boolean;
-  onClose?: () => void;
+  )
 }
 
-export default ModalRemoveUser;
+interface ModalRemoveUserProps {
+  isOpen: boolean
+  onClose?: () => void
+}
+
+export default ModalRemoveUser

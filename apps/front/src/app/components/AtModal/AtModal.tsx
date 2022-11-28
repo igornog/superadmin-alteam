@@ -1,12 +1,12 @@
-import { Dialog, Slide } from '@mui/material';
-import { TransitionProps } from '@mui/material/transitions';
-import React from 'react';
-import { black } from '../../utils/colors';
-import { convertHexToRGBA } from '../../utils/helpers';
-import { ModalSize } from '../../utils/redux/types/settings.type';
+import { Dialog, Slide } from '@mui/material'
+import { TransitionProps } from '@mui/material/transitions'
+import React from 'react'
+import { black } from '../../utils/colors'
+import { convertHexToRGBA } from '../../utils/helpers'
+import { ModalSize } from '../../utils/redux/types/settings.type'
 
 const AtModal: React.FunctionComponent<AtModalProps> = (
-  props: AtModalProps
+  props: AtModalProps,
 ) => {
   return (
     <Dialog
@@ -31,24 +31,24 @@ const AtModal: React.FunctionComponent<AtModalProps> = (
     >
       {props.children}
     </Dialog>
-  );
-};
+  )
+}
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
-    children: React.ReactElement;
+    children: React.ReactElement
   },
-  ref: React.Ref<unknown>
+  ref: React.Ref<unknown>,
 ) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+  return <Slide direction="up" ref={ref} {...props} />
+})
 
 interface AtModalProps {
-  children: React.ReactNode;
-  isOpen: boolean;
-  onClose?: () => void;
-  size?: ModalSize;
-  minWidth?: string;
+  children: React.ReactNode
+  isOpen: boolean
+  onClose?: () => void
+  size?: ModalSize
+  minWidth?: string
 }
 
-export default AtModal;
+export default AtModal

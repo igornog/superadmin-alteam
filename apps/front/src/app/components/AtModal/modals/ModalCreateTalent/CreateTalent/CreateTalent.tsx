@@ -1,22 +1,22 @@
-import { Box } from '@mui/material';
-import { CloseSquare, ArrowRight2, TickSquare } from 'iconsax-react';
-import React, { Dispatch, SetStateAction } from 'react';
+import { Box } from '@mui/material'
+import { CloseSquare, ArrowRight2, TickSquare } from 'iconsax-react'
+import React, { Dispatch, SetStateAction } from 'react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../../../AtButton/AtButton';
-import AtTabs from '../../../../AtTabs/AtTabs';
-import ModalCreateTalentStep1 from './steps/ModalCreateTalentStep1';
-import ModalCreateTalentStep2 from './steps/ModalCreateTalentStep2';
-import ModalCreateTalentStep3 from './steps/ModalCreateTalentStep3';
+} from '../../../../AtButton/AtButton'
+import AtTabs from '../../../../AtTabs/AtTabs'
+import ModalCreateTalentStep1 from './steps/ModalCreateTalentStep1'
+import ModalCreateTalentStep2 from './steps/ModalCreateTalentStep2'
+import ModalCreateTalentStep3 from './steps/ModalCreateTalentStep3'
 
 const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
-  props: CreateTalentProps
+  props: CreateTalentProps,
 ) => {
   const handleClose = () => {
-    props.handleClose();
-    props.setStep(0);
-  };
+    props.handleClose()
+    props.setStep(0)
+  }
 
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'30px'}>
@@ -68,13 +68,13 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
         />
       </Box>
     </Box>
-  );
-};
-
-interface CreateTalentProps {
-  handleClose: () => void;
-  step: number;
-  setStep: Dispatch<SetStateAction<number>>;
+  )
 }
 
-export default CreateTalent;
+interface CreateTalentProps {
+  handleClose: () => void
+  step: number
+  setStep: Dispatch<SetStateAction<number>>
+}
+
+export default CreateTalent

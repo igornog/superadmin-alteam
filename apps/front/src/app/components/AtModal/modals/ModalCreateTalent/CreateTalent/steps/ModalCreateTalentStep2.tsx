@@ -1,9 +1,9 @@
-import { Box } from '@mui/material';
-import { SearchNormal1 } from 'iconsax-react';
-import React from 'react';
-import { grey2 } from '../../../../../../utils/colors';
-import AtTextField from '../../../../../AtTextField/AtTextField';
-import AtTypography from '../../../../../AtTypography/AtTypography';
+import { Box } from '@mui/material'
+import { SearchNormal1 } from 'iconsax-react'
+import React from 'react'
+import { grey2 } from '../../../../../../utils/colors'
+import AtTextField from '../../../../../AtTextField/AtTextField'
+import AtTypography from '../../../../../AtTypography/AtTypography'
 
 const ModalCreateTalentStep2: React.FunctionComponent = () => {
   return (
@@ -35,7 +35,7 @@ const ModalCreateTalentStep2: React.FunctionComponent = () => {
         placeholder={'Enter About Talent'}
       />
     </Box>
-  );
-};
+  )
+}
 
-export default ModalCreateTalentStep2;
+export default ModalCreateTalentStep2

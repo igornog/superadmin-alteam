@@ -1,44 +1,44 @@
-import { Box, Tooltip } from '@mui/material';
-import { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
-import { grey, grey3 } from '../../../utils/colors';
-import useWindowSize from '../../../utils/hooks/useWindowSize';
-import { Column } from '../../../utils/redux/types/settings.type';
-import { Skill, Talent } from '../../../utils/redux/types/talents.type';
-import AtGroupTag from '../../AtGroupTag/AtGroupTag';
-import AtRightClick from '../../AtRightClick/AtRightClick';
-import TalentMenu from '../../AtRightClick/ContextMenus/TalentMenu';
-import AtTable from '../../AtTable/AtTable';
-import AtTableBody from '../../AtTable/AtTableBody';
-import AtTableCell from '../../AtTable/AtTableCell';
-import AtTableHead from '../../AtTable/AtTableHead';
-import { AtTableRow } from '../../AtTable/AtTableRow';
-import AtTag from '../../AtTag/AtTag';
-import AtTypography from '../../AtTypography/AtTypography';
+import { Box, Tooltip } from '@mui/material'
+import { useEffect, useRef, useState } from 'react'
+import styled from 'styled-components'
+import { grey, grey3 } from '../../../utils/colors'
+import useWindowSize from '../../../utils/hooks/useWindowSize'
+import { Column } from '../../../utils/redux/types/settings.type'
+import { Skill, Talent } from '../../../utils/redux/types/talents.type'
+import AtGroupTag from '../../AtGroupTag/AtGroupTag'
+import AtRightClick from '../../AtRightClick/AtRightClick'
+import TalentMenu from '../../AtRightClick/ContextMenus/TalentMenu'
+import AtTable from '../../AtTable/AtTable'
+import AtTableBody from '../../AtTable/AtTableBody'
+import AtTableCell from '../../AtTable/AtTableCell'
+import AtTableHead from '../../AtTable/AtTableHead'
+import { AtTableRow } from '../../AtTable/AtTableRow'
+import AtTag from '../../AtTag/AtTag'
+import AtTypography from '../../AtTypography/AtTypography'
 
 const StyledTag = styled(AtTag)`
   max-width: 150px;
-`;
+`
 
 const StyledTagClients = styled(AtTag)`
   border-radius: 5px;
-`;
+`
 
 const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
-  props: TalentsTableProps
+  props: TalentsTableProps,
 ) => {
-  const [position, setPosition] = useState<number | null>(null);
-  const [maxItemPerLine, setMaxItemPerLine] = useState(0);
-  const skillsRef = useRef<any>(null);
-  const windowSize = useWindowSize();
+  const [position, setPosition] = useState<number | null>(null)
+  const [maxItemPerLine, setMaxItemPerLine] = useState(0)
+  const skillsRef = useRef<any>(null)
+  const windowSize = useWindowSize()
 
   useEffect(() => {
-    setMaxItemPerLine(Math.floor(skillsRef.current?.clientWidth / 150));
-  }, [windowSize]);
+    setMaxItemPerLine(Math.floor(skillsRef.current?.clientWidth / 150))
+  }, [windowSize])
 
   const haveToDisplay = (column: Column) => {
-    return props.tableColumns?.includes(column);
-  };
+    return props.tableColumns?.includes(column)
+  }
 
   return (
     <AtTable>
@@ -203,16 +203,16 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
         ))}
       </AtTableBody>
     </AtTable>
-  );
-};
-
-interface TalentsTableProps {
-  talents: Talent[];
-  openTalent: (id: number) => void;
-  openShortlist: () => void;
-  openAccepted: () => void;
-  openEmailToTalent: () => void;
-  tableColumns?: Column[];
+  )
 }
 
-export default TalentsTable;
+interface TalentsTableProps {
+  talents: Talent[]
+  openTalent: (id: number) => void
+  openShortlist: () => void
+  openAccepted: () => void
+  openEmailToTalent: () => void
+  tableColumns?: Column[]
+}
+
+export default TalentsTable

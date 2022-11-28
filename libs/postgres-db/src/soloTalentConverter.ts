@@ -1,6 +1,6 @@
-import {DeepPartial} from "typeorm";
-import {SoloTalent} from "@yjcapp/app";
-import {SoloTalentEntity} from "./entities";
+import { DeepPartial } from 'typeorm'
+import { SoloTalent } from '@yjcapp/app'
+import { SoloTalentEntity } from './entities'
 
 export function soloTalentFromEntity(entity: SoloTalentEntity): SoloTalent {
   return {
@@ -17,7 +17,9 @@ export function soloTalentFromEntity(entity: SoloTalentEntity): SoloTalent {
   }
 }
 
-export function soloTalentToEntity(soloTalent: DeepPartial<SoloTalent>): DeepPartial<SoloTalentEntity> {
+export function soloTalentToEntity(
+  soloTalent: DeepPartial<SoloTalent>,
+): DeepPartial<SoloTalentEntity> {
   return {
     id: soloTalent.id ? parseInt(soloTalent.id) : undefined,
     firstName: soloTalent.firstName,
@@ -29,5 +31,5 @@ export function soloTalentToEntity(soloTalent: DeepPartial<SoloTalent>): DeepPar
     about: soloTalent.about,
     assets: soloTalent.assets,
     skills: soloTalent.skills,
-  };
+  }
 }

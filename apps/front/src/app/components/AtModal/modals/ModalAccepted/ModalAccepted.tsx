@@ -1,41 +1,41 @@
-import { Box } from '@mui/material';
-import { CloseCircle, CloseSquare, ArrowRight2 } from 'iconsax-react';
-import React, { useEffect, useState } from 'react';
-import { grey2, black } from '../../../../utils/colors';
-import { useAppDispatch } from '../../../../utils/hooks/reduxHook';
-import { handleLoadTree } from '../../../../utils/redux/actions/tree.action';
-import { ModalSize } from '../../../../utils/redux/types/settings.type';
+import { Box } from '@mui/material'
+import { CloseCircle, CloseSquare, ArrowRight2 } from 'iconsax-react'
+import React, { useEffect, useState } from 'react'
+import { grey2, black } from '../../../../utils/colors'
+import { useAppDispatch } from '../../../../utils/hooks/reduxHook'
+import { handleLoadTree } from '../../../../utils/redux/actions/tree.action'
+import { ModalSize } from '../../../../utils/redux/types/settings.type'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../../AtButton/AtButton';
-import AtLine from '../../../AtLine/AtLine';
-import AtTabs from '../../../AtTabs/AtTabs';
-import AtTypography from '../../../AtTypography/AtTypography';
-import AtModal from '../../AtModal';
-import ModalAcceptedStep1 from './steps/ModalAcceptedStep1';
-import ModalAcceptedStep2 from './steps/ModalAcceptedStep2';
+} from '../../../AtButton/AtButton'
+import AtLine from '../../../AtLine/AtLine'
+import AtTabs from '../../../AtTabs/AtTabs'
+import AtTypography from '../../../AtTypography/AtTypography'
+import AtModal from '../../AtModal'
+import ModalAcceptedStep1 from './steps/ModalAcceptedStep1'
+import ModalAcceptedStep2 from './steps/ModalAcceptedStep2'
 
 const ModalAccepted: React.FunctionComponent<ModalAcceptedProps> = (
-  props: ModalAcceptedProps
+  props: ModalAcceptedProps,
 ) => {
-  const dispatch = useAppDispatch();
-  const [step, setStep] = useState(0);
+  const dispatch = useAppDispatch()
+  const [step, setStep] = useState(0)
 
   useEffect(() => {
     if (props.isOpen) {
-      dispatch(handleLoadTree());
+      dispatch(handleLoadTree())
     }
-  }, [dispatch, props.isOpen]);
+  }, [dispatch, props.isOpen])
 
   const moveTalent = () => {
-    console.log('move talent');
-  };
+    console.log('move talent')
+  }
 
   const handleClose = () => {
-    props.onClose();
-    setStep(0);
-  };
+    props.onClose()
+    setStep(0)
+  }
 
   return (
     <AtModal
@@ -112,12 +112,12 @@ const ModalAccepted: React.FunctionComponent<ModalAcceptedProps> = (
         </Box>
       </Box>
     </AtModal>
-  );
-};
-
-interface ModalAcceptedProps {
-  isOpen: boolean;
-  onClose: () => void;
+  )
 }
 
-export default ModalAccepted;
+interface ModalAcceptedProps {
+  isOpen: boolean
+  onClose: () => void
+}
+
+export default ModalAccepted

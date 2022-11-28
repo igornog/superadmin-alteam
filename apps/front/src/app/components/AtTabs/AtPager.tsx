@@ -1,6 +1,6 @@
-import React, { Children, useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import styled from 'styled-components';
+import React, { Children, useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
+import styled from 'styled-components'
 
 const PagerContainer = styled.div<{ isPreviousStep: boolean }>`
   display: flex;
@@ -8,7 +8,7 @@ const PagerContainer = styled.div<{ isPreviousStep: boolean }>`
   overflow: ${({ isPreviousStep }) => (isPreviousStep ? 'hidden' : 'visible')};
   width: 100%;
   z-index: 1300;
-`;
+`
 
 const PagerAnimtedContainer = styled(motion.div)`
   flex-direction: row;
@@ -17,7 +17,7 @@ const PagerAnimtedContainer = styled(motion.div)`
   min-height: 0;
   flex: 1;
   display: flex;
-`;
+`
 
 const Page = styled.div<{ tabIndex: number; active: boolean }>`
   display: flex;
@@ -31,19 +31,19 @@ const Page = styled.div<{ tabIndex: number; active: boolean }>`
   outline: none;
   max-height: ${({ tabIndex }) => (tabIndex === -1 ? 0 : '100vh')};
   transition: max-height 0.3s ease;
-`;
+`
 
 const AtPager: React.FunctionComponent<AtPagerProps> = (
-  props: AtPagerProps
+  props: AtPagerProps,
 ) => {
-  const [initialValue, setInitialValue] = useState(props.value);
+  const [initialValue, setInitialValue] = useState(props.value)
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setInitialValue(props.value);
-    }, 500);
-    return () => clearTimeout(timer);
-  }, [props.value]);
+      setInitialValue(props.value)
+    }, 500)
+    return () => clearTimeout(timer)
+  }, [props.value])
 
   return (
     <PagerContainer isPreviousStep={initialValue !== props.value}>
@@ -68,12 +68,12 @@ const AtPager: React.FunctionComponent<AtPagerProps> = (
         ))}
       </PagerAnimtedContainer>
     </PagerContainer>
-  );
-};
-
-interface AtPagerProps {
-  children: React.ReactNode;
-  value: number;
+  )
 }
 
-export default AtPager;
+interface AtPagerProps {
+  children: React.ReactNode
+  value: number
+}
+
+export default AtPager

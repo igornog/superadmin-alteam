@@ -1,29 +1,29 @@
-import { Box } from '@mui/material';
-import { ArrowLeft2, CloseCircle } from 'iconsax-react';
-import React, { useState } from 'react';
-import { black, grey2 } from '../../../../utils/colors';
-import { ModalSize } from '../../../../utils/redux/types/settings.type';
+import { Box } from '@mui/material'
+import { ArrowLeft2, CloseCircle } from 'iconsax-react'
+import React, { useState } from 'react'
+import { black, grey2 } from '../../../../utils/colors'
+import { ModalSize } from '../../../../utils/redux/types/settings.type'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../../AtButton/AtButton';
-import AtLine from '../../../AtLine/AtLine';
-import AtSwitch from '../../../AtSwitch/AtSwitch';
-import AtTypography from '../../../AtTypography/AtTypography';
-import AtModal from '../../AtModal';
-import CreateTalent from './CreateTalent/CreateTalent';
-import InviteTalent from './InviteTalent/InviteTalent';
+} from '../../../AtButton/AtButton'
+import AtLine from '../../../AtLine/AtLine'
+import AtSwitch from '../../../AtSwitch/AtSwitch'
+import AtTypography from '../../../AtTypography/AtTypography'
+import AtModal from '../../AtModal'
+import CreateTalent from './CreateTalent/CreateTalent'
+import InviteTalent from './InviteTalent/InviteTalent'
 
 const ModalAddTalent: React.FunctionComponent<ModalAddTalentProps> = (
-  props: ModalAddTalentProps
+  props: ModalAddTalentProps,
 ) => {
-  const [isInviting, setIsInviting] = useState(false);
-  const [step, setStep] = useState(0);
+  const [isInviting, setIsInviting] = useState(false)
+  const [step, setStep] = useState(0)
 
   const handleClose = () => {
-    props.onClose?.();
-    setIsInviting(false);
-  };
+    props.onClose?.()
+    setIsInviting(false)
+  }
 
   return (
     <AtModal isOpen={props.isOpen} size={ModalSize.Small} onClose={handleClose}>
@@ -90,12 +90,12 @@ const ModalAddTalent: React.FunctionComponent<ModalAddTalentProps> = (
         )}
       </Box>
     </AtModal>
-  );
-};
-
-interface ModalAddTalentProps {
-  isOpen: boolean;
-  onClose?: () => void;
+  )
 }
 
-export default ModalAddTalent;
+interface ModalAddTalentProps {
+  isOpen: boolean
+  onClose?: () => void
+}
+
+export default ModalAddTalent

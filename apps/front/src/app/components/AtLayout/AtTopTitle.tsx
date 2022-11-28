@@ -1,21 +1,21 @@
-import { Box, ClickAwayListener, Collapse, styled } from '@mui/material';
-import { ArrowLeft2, ArrowDown2 } from 'iconsax-react';
-import React, { useState } from 'react';
-import { white } from '../../utils/colors';
-import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
-import { handleSelectFolder } from '../../utils/redux/actions/tree.action';
-import { Page } from '../../utils/redux/types/settings.type';
-import { Tree } from '../../utils/redux/types/tree.type';
-import { boxShadow } from '../../utils/theme';
-import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton';
-import AtLine from '../AtLine/AtLine';
-import AtDropdownTree from '../AtTree/AtDropdownTree';
-import AtTypography from '../AtTypography/AtTypography';
+import { Box, ClickAwayListener, Collapse, styled } from '@mui/material'
+import { ArrowLeft2, ArrowDown2 } from 'iconsax-react'
+import React, { useState } from 'react'
+import { white } from '../../utils/colors'
+import { useAppDispatch } from '../../utils/hooks/reduxHook'
+import { handleSelectFolder } from '../../utils/redux/actions/tree.action'
+import { Page } from '../../utils/redux/types/settings.type'
+import { Tree } from '../../utils/redux/types/tree.type'
+import { boxShadow } from '../../utils/theme'
+import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton'
+import AtLine from '../AtLine/AtLine'
+import AtDropdownTree from '../AtTree/AtDropdownTree'
+import AtTypography from '../AtTypography/AtTypography'
 
 export const StyledContentPopover = styled(Collapse)<{
-  $minWidth?: number;
-  left?: number;
-  top?: number;
+  $minWidth?: number
+  left?: number
+  top?: number
 }>`
   position: sticky;
   min-width: 215px;
@@ -26,24 +26,24 @@ export const StyledContentPopover = styled(Collapse)<{
   top: 20px;
   max-height: 650px;
   overflow: auto;
-`;
+`
 
 const StyledArrow = styled(ArrowDown2)<{ opened?: boolean }>`
   transition: transform 0.3s;
   transform: rotate(${({ opened }) => (opened ? '180' : '0')}deg);
-`;
+`
 
 const AtTopTitle: React.FunctionComponent<AtTopTitle> = (props: AtTopTitle) => {
-  const dispatch = useAppDispatch();
-  const [openDropdown, setOpenDropdown] = useState(false);
+  const dispatch = useAppDispatch()
+  const [openDropdown, setOpenDropdown] = useState(false)
 
   const handlePreviousFolder = () => {
-    dispatch(handleSelectFolder(props.activeFolder?.idParent));
-  };
+    dispatch(handleSelectFolder(props.activeFolder?.idParent))
+  }
 
   const handleClose = () => {
-    setOpenDropdown(false);
-  };
+    setOpenDropdown(false)
+  }
 
   return (
     <ClickAwayListener onClickAway={handleClose}>
@@ -106,12 +106,12 @@ const AtTopTitle: React.FunctionComponent<AtTopTitle> = (props: AtTopTitle) => {
         </Box>
       </Box>
     </ClickAwayListener>
-  );
-};
-
-interface AtTopTitle {
-  activeTab: Page;
-  activeFolder: Tree;
+  )
 }
 
-export default AtTopTitle;
+interface AtTopTitle {
+  activeTab: Page
+  activeFolder: Tree
+}
+
+export default AtTopTitle

@@ -1,20 +1,20 @@
-import { Box } from '@mui/material';
-import { SearchNormal1, Candle } from 'iconsax-react';
-import React from 'react';
+import { Box } from '@mui/material'
+import { SearchNormal1, Candle } from 'iconsax-react'
+import React from 'react'
 import {
   AtButtonKind,
   AtButtonVariant,
-} from '../../../../components/AtButton/AtButton';
-import AtDropdown from '../../../../components/AtDropdown/AtDropdown';
-import AtSwitchDisplayMode from '../../../../components/AtLayout/AtSwitchDisplayMode';
-import AtTextField from '../../../../components/AtTextField/AtTextField';
-import AtTypography from '../../../../components/AtTypography/AtTypography';
-import { grey2 } from '../../../../utils/colors';
-import { useAppSelector } from '../../../../utils/hooks/reduxHook';
-import { getActiveFolder } from '../../../../utils/redux/selectors/tree.selector';
+} from '../../../../components/AtButton/AtButton'
+import AtDropdown from '../../../../components/AtDropdown/AtDropdown'
+import AtSwitchDisplayMode from '../../../../components/AtLayout/AtSwitchDisplayMode'
+import AtTextField from '../../../../components/AtTextField/AtTextField'
+import AtTypography from '../../../../components/AtTypography/AtTypography'
+import { grey2 } from '../../../../utils/colors'
+import { useAppSelector } from '../../../../utils/hooks/reduxHook'
+import { getActiveFolder } from '../../../../utils/redux/selectors/tree.selector'
 
 const AcceptedTalentsHeader: React.FunctionComponent = () => {
-  const activeFolder = useAppSelector((state) => getActiveFolder(state));
+  const activeFolder = useAppSelector((state) => getActiveFolder(state))
 
   return (
     <Box
@@ -62,7 +62,7 @@ const AcceptedTalentsHeader: React.FunctionComponent = () => {
         </Box>
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default AcceptedTalentsHeader;
+export default AcceptedTalentsHeader

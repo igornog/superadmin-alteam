@@ -1,53 +1,53 @@
-import { Edit, Share, Sms, TickCircle, TrushSquare } from 'iconsax-react';
-import React, { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook';
-import { handleSelectTalent } from '../../../utils/redux/actions/talents.action';
-import AtTypography from '../../AtTypography/AtTypography';
-import { AtContextMenuItem } from '../AtRightClick';
-import Arrow2 from '../../../assets/images/icons/arrow2.svg';
-import { getActiveTab } from '../../../utils/redux/selectors/settings.selector';
-import { RightClick, Tabs } from '../../../utils/types';
-import { Talent, TalentStatus } from '../../../utils/redux/types/talents.type';
-import { grey2 } from '../../../utils/colors';
+import { Edit, Share, Sms, TickCircle, TrushSquare } from 'iconsax-react'
+import React, { useState } from 'react'
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
+import { handleSelectTalent } from '../../../utils/redux/actions/talents.action'
+import AtTypography from '../../AtTypography/AtTypography'
+import { AtContextMenuItem } from '../AtRightClick'
+import Arrow2 from '../../../assets/images/icons/arrow2.svg'
+import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
+import { RightClick, Tabs } from '../../../utils/types'
+import { Talent, TalentStatus } from '../../../utils/redux/types/talents.type'
+import { grey2 } from '../../../utils/colors'
 
 const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
-  props: TalentMenuProps
+  props: TalentMenuProps,
 ) => {
-  const dispatch = useAppDispatch();
-  const activeTab = useAppSelector((state) => getActiveTab(state));
-  const [linkCopied, setLinkCopied] = useState(false);
+  const dispatch = useAppDispatch()
+  const activeTab = useAppSelector((state) => getActiveTab(state))
+  const [linkCopied, setLinkCopied] = useState(false)
 
   const isCurrentTabAllowed = (rightclickFunc: RightClick) => {
-    return activeTab.content.talentRightClick.includes(rightclickFunc);
-  };
+    return activeTab.content.talentRightClick.includes(rightclickFunc)
+  }
 
   const isTabAndStatusAllowed = (status: TalentStatus[]) => {
     return (
       activeTab.config.title === Tabs.AllTalent &&
       status.includes(props.talent.status)
-    );
-  };
+    )
+  }
 
   const moveToAccepted = () => {
-    dispatch(handleSelectTalent(props.talent.id));
-    props.openAccepted();
-  };
+    dispatch(handleSelectTalent(props.talent.id))
+    props.openAccepted()
+  }
 
   const moveToShortlist = () => {
-    dispatch(handleSelectTalent(props.talent.id));
-    props.openShortlist();
-  };
+    dispatch(handleSelectTalent(props.talent.id))
+    props.openShortlist()
+  }
 
   const sendEmailToTalent = () => {
-    dispatch(handleSelectTalent(props.talent.id));
-    props.openEmailToTalent();
-  };
+    dispatch(handleSelectTalent(props.talent.id))
+    props.openEmailToTalent()
+  }
 
   const copyLinkToClipboard = (e: Event) => {
-    e.preventDefault();
-    navigator.clipboard.writeText(props.talent.fullName);
-    setLinkCopied(true);
-  };
+    e.preventDefault()
+    navigator.clipboard.writeText(props.talent.fullName)
+    setLinkCopied(true)
+  }
 
   return linkCopied ? (
     <AtContextMenuItem>
@@ -142,14 +142,14 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
         </AtContextMenuItem>
       ) : null}
     </>
-  );
-};
-
-interface TalentMenuProps {
-  talent: Talent;
-  openAccepted: () => void;
-  openShortlist: () => void;
-  openEmailToTalent: () => void;
+  )
 }
 
-export default TalentMenu;
+interface TalentMenuProps {
+  talent: Talent
+  openAccepted: () => void
+  openShortlist: () => void
+  openEmailToTalent: () => void
+}
+
+export default TalentMenu

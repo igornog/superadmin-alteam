@@ -1,1 +1,1 @@
-export { default } from './components/AuthView';
+export { default } from './components/AuthView'

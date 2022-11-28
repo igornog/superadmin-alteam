@@ -4,13 +4,13 @@ import {
   Share,
   TickCircle,
   TrushSquare,
-} from 'iconsax-react';
-import React from 'react';
-import AtTypography from '../../AtTypography/AtTypography';
-import { AtContextMenuItem } from '../AtRightClick';
+} from 'iconsax-react'
+import React from 'react'
+import AtTypography from '../../AtTypography/AtTypography'
+import { AtContextMenuItem } from '../AtRightClick'
 
 const FolderMenu: React.FunctionComponent<FolderMenuProps> = (
-  props: FolderMenuProps
+  props: FolderMenuProps,
 ) => {
   return (
     <>
@@ -49,15 +49,15 @@ const FolderMenu: React.FunctionComponent<FolderMenuProps> = (
         </AtTypography>
       </AtContextMenuItem>
     </>
-  );
-};
-
-interface FolderMenuProps {
-  openCreateFolder: () => void;
-  openRenameFolder: () => void;
-  openShareFolder: () => void;
-  openRemoveFolder: () => void;
-  openAssignFolderToClient: () => void;
+  )
 }
 
-export default FolderMenu;
+interface FolderMenuProps {
+  openCreateFolder: () => void
+  openRenameFolder: () => void
+  openShareFolder: () => void
+  openRemoveFolder: () => void
+  openAssignFolderToClient: () => void
+}
+
+export default FolderMenu

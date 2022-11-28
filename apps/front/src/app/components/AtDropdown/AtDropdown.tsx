@@ -1,20 +1,20 @@
-import { Box, ClickAwayListener } from '@mui/material';
-import Collapse from '@mui/material/Collapse';
-import { ArrowDown2 } from 'iconsax-react';
+import { Box, ClickAwayListener } from '@mui/material'
+import Collapse from '@mui/material/Collapse'
+import { ArrowDown2 } from 'iconsax-react'
 
-import React, { useEffect, useRef, useState } from 'react';
-import styled, { css } from 'styled-components';
-import { black, grey2, grey5, white } from '../../utils/colors';
-import { getText } from '../../utils/helpers';
-import { boxShadow } from '../../utils/theme';
-import AtButton, { AtButtonProps } from '../AtButton/AtButton';
-import AtTypography from '../AtTypography/AtTypography';
+import React, { useEffect, useRef, useState } from 'react'
+import styled, { css } from 'styled-components'
+import { black, grey2, grey5, white } from '../../utils/colors'
+import { getText } from '../../utils/helpers'
+import { boxShadow } from '../../utils/theme'
+import AtButton, { AtButtonProps } from '../AtButton/AtButton'
+import AtTypography from '../AtTypography/AtTypography'
 
 export const StyledContentPopover = styled(Collapse)<{
-  $minWidth?: number;
-  left?: number;
-  top?: number;
-  align?: string;
+  $minWidth?: number
+  left?: number
+  top?: number
+  align?: string
 }>`
   position: absolute;
   min-width: ${({ $minWidth }) => $minWidth && $minWidth + 'px'};
@@ -54,7 +54,7 @@ export const StyledContentPopover = styled(Collapse)<{
       top: -100px;
       left: 0;
     `}
-`;
+`
 
 export const StyledDropdownElement = styled.div<{ color: string }>`
   transition: 0.25s;
@@ -70,7 +70,7 @@ export const StyledDropdownElement = styled.div<{ color: string }>`
       color: ${black};
     }
   }
-`;
+`
 
 const StyledLabel = styled.div`
   position: absolute;
@@ -86,38 +86,38 @@ const StyledLabel = styled.div`
   color: ${white};
   display: flex;
   align-items: center;
-`;
+`
 
 const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
-  props: AtDropdownProps
+  props: AtDropdownProps,
 ) => {
-  const dropdownRef = useRef<any>(null);
+  const dropdownRef = useRef<any>(null)
 
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-  const [selectedItem, setSelectedItem] = useState<DropdownItem>();
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
+  const [selectedItem, setSelectedItem] = useState<DropdownItem>()
 
   const handleClose = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
   const handleClick = () => {
     if (!props.disabled) {
-      setAnchorEl(dropdownRef.current);
+      setAnchorEl(dropdownRef.current)
     }
-  };
+  }
 
   const handleSelect = (item: DropdownItem) => {
-    setSelectedItem(item);
-    props.handleSelect?.(item);
-  };
+    setSelectedItem(item)
+    props.handleSelect?.(item)
+  }
 
-  const open = Boolean(anchorEl);
+  const open = Boolean(anchorEl)
 
   useEffect(() => {
     if (selectedItem) {
-      handleClose();
+      handleClose()
     }
-  }, [selectedItem]);
+  }, [selectedItem])
 
   return (
     <ClickAwayListener onClickAway={handleClose}>
@@ -157,21 +157,21 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
         </StyledContentPopover>
       </Box>
     </ClickAwayListener>
-  );
-};
+  )
+}
 
 interface DropdownItem {
-  id: number | string;
-  value: string;
-  label: React.ReactNode;
+  id: number | string
+  value: string
+  label: React.ReactNode
 }
 
 interface AtDropdownProps extends AtButtonProps {
-  listItems: DropdownItem[];
-  placeholder?: string;
-  label?: string;
-  handleSelect?: (item: DropdownItem) => void;
-  align?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+  listItems: DropdownItem[]
+  placeholder?: string
+  label?: string
+  handleSelect?: (item: DropdownItem) => void
+  align?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
 }
 
-export default AtDropdown;
+export default AtDropdown
