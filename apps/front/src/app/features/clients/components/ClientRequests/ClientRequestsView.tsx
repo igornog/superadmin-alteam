@@ -1,13 +1,13 @@
-import { Grid } from '@mui/material';
-import React from 'react';
-import { Column } from 'typeorm';
-import ClientsSwitchMode from '../../../../components/app/clients/ClientsSwitchMode';
-import AtTypography from '../../../../components/AtTypography/AtTypography';
-import { grey3 } from '../../../../utils/colors';
-import { useAppSelector } from '../../../../utils/hooks/reduxHook';
+import { Grid } from '@mui/material'
+import React from 'react'
+import { Column } from 'typeorm'
+import ClientsSwitchMode from '../../../../components/app/clients/ClientsSwitchMode'
+import AtTypography from '../../../../components/AtTypography/AtTypography'
+import { grey3 } from '../../../../utils/colors'
+import { useAppSelector } from '../../../../utils/hooks/reduxHook'
 
 const ClientRequestsView: React.FunctionComponent = () => {
-  const clients = useAppSelector((state) => state.clients);
+  const clients = useAppSelector((state) => state.clients)
 
   return (
     <Grid container={true} spacing={2.5} marginTop={0} alignItems={'stretch'}>
@@ -31,7 +31,7 @@ const ClientRequestsView: React.FunctionComponent = () => {
         </Grid>
       )}
     </Grid>
-  );
-};
+  )
+}
 
-export default ClientRequestsView;
+export default ClientRequestsView

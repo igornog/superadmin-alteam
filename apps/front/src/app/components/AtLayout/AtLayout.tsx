@@ -1,4 +1,4 @@
-import { Backdrop, Box, Collapse, Grid, useMediaQuery } from '@mui/material';
+import { Backdrop, Box, Collapse, Grid, useMediaQuery } from '@mui/material'
 import {
   AddCircle,
   Candle,
@@ -6,27 +6,27 @@ import {
   SearchNormal1,
   Share,
   TickCircle,
-} from 'iconsax-react';
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { grey2 } from '../../utils/colors';
-import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook';
-import { handleCollapsePanel } from '../../utils/redux/actions/app.action';
-import { getActiveTab } from '../../utils/redux/selectors/settings.selector';
-import { getActiveFolder } from '../../utils/redux/selectors/tree.selector';
-import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton';
-import AtDropdown from '../AtDropdown/AtDropdown';
-import ModalAddFolder from '../AtModal/modals/ModalAddFolder';
-import ModalAddTalent from '../AtModal/modals/ModalCreateTalent/ModalAddTalent';
-import ModalShareFolder from '../AtModal/modals/ModalShareFolder';
-import AtNavbar from '../AtNavbar/AtNavbar';
-import AtNavPage from '../AtNavPage/AtNavPage';
-import AtRightClick from '../AtRightClick/AtRightClick';
-import CreateTalentMenu from '../AtRightClick/ContextMenus/CreateTalentMenu';
-import AtTextField, { AtTextFieldType } from '../AtTextField/AtTextField';
-import AtTypography from '../AtTypography/AtTypography';
-import AtSwitchDisplayMode from './AtSwitchDisplayMode';
-import AtTopTitle from './AtTopTitle';
+} from 'iconsax-react'
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import { grey2 } from '../../utils/colors'
+import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook'
+import { handleCollapsePanel } from '../../utils/redux/actions/app.action'
+import { getActiveTab } from '../../utils/redux/selectors/settings.selector'
+import { getActiveFolder } from '../../utils/redux/selectors/tree.selector'
+import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton'
+import AtDropdown from '../AtDropdown/AtDropdown'
+import ModalAddFolder from '../AtModal/modals/ModalAddFolder'
+import ModalAddTalent from '../AtModal/modals/ModalCreateTalent/ModalAddTalent'
+import ModalShareFolder from '../AtModal/modals/ModalShareFolder'
+import AtNavbar from '../AtNavbar/AtNavbar'
+import AtNavPage from '../AtNavPage/AtNavPage'
+import AtRightClick from '../AtRightClick/AtRightClick'
+import CreateTalentMenu from '../AtRightClick/ContextMenus/CreateTalentMenu'
+import AtTextField, { AtTextFieldType } from '../AtTextField/AtTextField'
+import AtTypography from '../AtTypography/AtTypography'
+import AtSwitchDisplayMode from './AtSwitchDisplayMode'
+import AtTopTitle from './AtTopTitle'
 
 const StyledContent = styled(Grid)<{ $sidePanelSize?: string }>`
   background-color: #f7f8fe;

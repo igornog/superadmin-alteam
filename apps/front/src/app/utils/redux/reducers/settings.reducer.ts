@@ -38,10 +38,10 @@ const { reducer } = createSlice({
         state.tabs = payload.tabs
 
         if (payload.filters) {
-          state.filters.skills = payload.filters;
+          state.filters.skills = payload.filters
         }
         if (payload.jobTypes) {
-          state.filters.jobTypes = payload.jobTypes;
+          state.filters.jobTypes = payload.jobTypes
         }
       })
       .addCase(handleInitSettings.rejected, (state, action) => {

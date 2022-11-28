@@ -7,12 +7,12 @@ import {
   SideDrawerVariant,
   DisplayMode,
   Column,
-} from '../../../utils/redux/types/settings.type';
-import ModalAccepted from '../../AtModal/modals/ModalAccepted/ModalAccepted';
-import ModalEmailToTalent from '../../AtModal/modals/ModalEmailToTalent';
-import ModalShortlist from '../../AtModal/modals/ModalShortlist/ModalShortlist';
-import TalentCard from './TalentCard';
-import TalentsTable from './TalentsTable';
+} from '../../../utils/redux/types/settings.type'
+import ModalAccepted from '../../AtModal/modals/ModalAccepted/ModalAccepted'
+import ModalEmailToTalent from '../../AtModal/modals/ModalEmailToTalent'
+import ModalShortlist from '../../AtModal/modals/ModalShortlist/ModalShortlist'
+import TalentCard from './TalentCard'
+import TalentsTable from './TalentsTable'
 
 const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
   props: TalentsSwitchModeProps,

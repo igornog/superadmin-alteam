@@ -4,7 +4,7 @@ import { Talent } from '../../../utils/redux/types/talents.type'
 import AtCard from '../../AtCard/AtCard'
 
 const TalentCard: React.FunctionComponent<TalentCardProps> = (
-  props: TalentCardProps
+  props: TalentCardProps,
 ) => {
   return (
     <>
@@ -28,15 +28,15 @@ const TalentCard: React.FunctionComponent<TalentCardProps> = (
         </Grid>
       ))}
     </>
-  );
-};
-
-interface TalentCardProps {
-  talents: Talent[];
-  openTalent: (id: number) => void;
-  openShortlist: () => void;
-  openAccepted: () => void;
-  openEmailToTalent: () => void;
+  )
 }
 
-export default TalentCard;
+interface TalentCardProps {
+  talents: Talent[]
+  openTalent: (id: number) => void
+  openShortlist: () => void
+  openAccepted: () => void
+  openEmailToTalent: () => void
+}
+
+export default TalentCard

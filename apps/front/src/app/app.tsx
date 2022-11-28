@@ -8,8 +8,8 @@ import {
   Briefcase,
   Setting2,
   Category,
-} from 'iconsax-react';
-import Clients from './features/clients';
+} from 'iconsax-react'
+import Clients from './features/clients'
 
 export const Navigation: NavigationProps[] = [
   {

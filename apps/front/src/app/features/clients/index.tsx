@@ -1,8 +1,8 @@
-import { Page } from '../../utils/redux/types/settings.type';
-import { RightClick, Tabs } from '../../utils/types';
-import ClientRequestsView from './components/ClientRequests/ClientRequestsView';
+import { Page } from '../../utils/redux/types/settings.type'
+import { RightClick, Tabs } from '../../utils/types'
+import ClientRequestsView from './components/ClientRequests/ClientRequestsView'
 
-export { default } from './components/ClientsView';
+export { default } from './components/ClientsView'
 
 export const tabsContent = {
   [Tabs.ClientRequests]: {
@@ -38,7 +38,7 @@ export const tabsContent = {
       RightClick.MoveToDesclined,
     ],
   },
-};
+}
 
 export const talentsTabs: Page[] = [
   {
@@ -86,7 +86,7 @@ export const talentsTabs: Page[] = [
       sortBy: true,
     },
   },
-];
+]
 
 export const clients = [
   {
@@ -119,4 +119,4 @@ export const clients = [
     phoneNumber: '+44 1234 123456',
     website: 'chaptr.com',
   },
-];
+]

@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 const ClientCard: React.FunctionComponent = () => {
-  return <div></div>;
-};
+  return <div></div>
+}
 
-export default ClientCard;
+export default ClientCard

@@ -20,16 +20,16 @@ export interface Page {
 }
 
 export interface Settings {
-  search?: boolean;
-  downloadCSV?: boolean;
-  inviteTalent?: boolean;
-  displayMode?: boolean;
-  sortBy?: boolean;
-  shareFolder?: boolean;
-  verifyClient?: boolean;
-  createClient?: boolean;
-  createFolder?: boolean;
-  tabsTalentColumn?: any;
+  search?: boolean
+  downloadCSV?: boolean
+  inviteTalent?: boolean
+  displayMode?: boolean
+  sortBy?: boolean
+  shareFolder?: boolean
+  verifyClient?: boolean
+  createClient?: boolean
+  createFolder?: boolean
+  tabsTalentColumn?: any
 }
 
 export interface Filter {
@@ -65,9 +65,9 @@ export enum ModalSize {
 }
 
 export interface HandlesettingsProps {
-  tabs: Page[];
-  filters?: Filter[];
-  jobTypes?: Filter[];
+  tabs: Page[]
+  filters?: Filter[]
+  jobTypes?: Filter[]
 }
 
 export enum Column {
