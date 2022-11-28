@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material'
-import React, { useState } from 'react'
+import React from 'react'
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
 import { handleDrawer } from '../../../utils/redux/actions/settings.action'
 import { handleSelectTalent } from '../../../utils/redux/actions/talents.action'
@@ -8,9 +8,6 @@ import {
   DisplayMode,
   Column,
 } from '../../../utils/redux/types/settings.type'
-import ModalAccepted from '../../AtModal/modals/ModalAccepted/ModalAccepted'
-import ModalEmailToTalent from '../../AtModal/modals/ModalEmailToTalent'
-import ModalShortlist from '../../AtModal/modals/ModalShortlist/ModalShortlist'
 import ClientCard from './ClientCard'
 import ClientsTable from './ClientsTable'
 
@@ -19,14 +16,10 @@ const ClientsSwitchMode: React.FunctionComponent<ClientsSwitchModeProps> = (
 ) => {
   const dispatch = useAppDispatch()
   const settings = useAppSelector((state) => state.settings)
-  const talents = useAppSelector((state) => state.talents)
-  const listTalent = talents.listTalents
+  const clients = useAppSelector((state) => state.clients)
+  const listClients = clients.listClients
 
-  const [openShortlistModal, setOpenShortlistModal] = useState(false)
-  const [openAcceptedModal, setOpenAcceptedModal] = useState(false)
-  const [openEmailToTalent, setOpenEmailToTalent] = useState(false)
-
-  const handleClickTalent = (id: number) => {
+  const handleClickClient = (id: number) => {
     dispatch(handleSelectTalent(id))
     dispatch(handleDrawer(SideDrawerVariant.Talent))
   }
@@ -34,40 +27,16 @@ const ClientsSwitchMode: React.FunctionComponent<ClientsSwitchModeProps> = (
   return (
     <Grid container={true} spacing={2.5} alignItems={'stretch'}>
       {settings.displayMode === DisplayMode.Grid ? (
-        <ClientCard
-          talents={listTalent}
-          openTalent={handleClickTalent}
-          openShortlist={() => setOpenShortlistModal(true)}
-          openAccepted={() => setOpenAcceptedModal(true)}
-          openEmailToTalent={() => setOpenEmailToTalent(true)}
-        />
+        <ClientCard clients={listClients} openClient={handleClickClient} />
       ) : (
         <Grid item={true} xs={12}>
           <ClientsTable
-            talents={listTalent}
-            openTalent={handleClickTalent}
+            clients={listClients}
+            openClient={handleClickClient}
             tableColumns={props.tableColumns}
-            openShortlist={() => setOpenShortlistModal(true)}
-            openAccepted={() => setOpenAcceptedModal(true)}
-            openEmailToTalent={() => setOpenEmailToTalent(true)}
           />
         </Grid>
       )}
-
-      <ModalAccepted
-        isOpen={openAcceptedModal}
-        onClose={() => setOpenAcceptedModal(false)}
-      />
-
-      <ModalShortlist
-        isOpen={openShortlistModal}
-        onClose={() => setOpenShortlistModal(false)}
-      />
-
-      <ModalEmailToTalent
-        isOpen={openEmailToTalent}
-        onClose={() => setOpenEmailToTalent(false)}
-      />
     </Grid>
   )
 }

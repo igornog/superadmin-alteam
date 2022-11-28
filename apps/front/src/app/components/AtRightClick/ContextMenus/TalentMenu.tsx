@@ -18,7 +18,7 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
   const [linkCopied, setLinkCopied] = useState(false)
 
   const isCurrentTabAllowed = (rightclickFunc: RightClick) => {
-    return activeTab.content.talentRightClick.includes(rightclickFunc)
+    return activeTab.content.rightClick.includes(rightclickFunc)
   }
 
   const isTabAndStatusAllowed = (status: TalentStatus[]) => {

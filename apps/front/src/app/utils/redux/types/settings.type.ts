@@ -77,4 +77,12 @@ export enum Column {
   Skills = 'Skills',
   Status = 'Status',
   AssignedTo = 'AssignedTo',
+
+  Client = 'Client',
+  Received = 'Received',
+  Listings = 'Listings',
+  Assignees = 'Assignees',
+  Email = 'Email',
+  Phone = 'Phone',
+  CompanyUrl = 'CompanyUrl',
 }

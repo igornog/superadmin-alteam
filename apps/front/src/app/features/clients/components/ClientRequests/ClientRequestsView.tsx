@@ -1,35 +1,30 @@
 import { Grid } from '@mui/material'
 import React from 'react'
-import { Column } from 'typeorm'
 import ClientsSwitchMode from '../../../../components/app/clients/ClientsSwitchMode'
-import AtTypography from '../../../../components/AtTypography/AtTypography'
-import { grey3 } from '../../../../utils/colors'
+import AtNoResult from '../../../../components/AtLayout/AtNoResult'
 import { useAppSelector } from '../../../../utils/hooks/reduxHook'
+import { Column } from '../../../../utils/redux/types/settings.type'
 
 const ClientRequestsView: React.FunctionComponent = () => {
   const clients = useAppSelector((state) => state.clients)
 
-  return (
+  return clients.listClients.length === 0 ? (
+    <AtNoResult sentence={'No Client Requests'} />
+  ) : (
     <Grid container={true} spacing={2.5} marginTop={0} alignItems={'stretch'}>
-      {clients.listClients.length === 0 ? (
-        <Grid item={true} xs={12}>
-          <AtTypography variant={'h3'} color={grey3}>
-            No Recent Candidates
-          </AtTypography>
-        </Grid>
-      ) : (
-        <Grid item={true} xs={12}>
-          <ClientsSwitchMode
-            tableColumns={[
-              Column.Talent,
-              Column.Applied,
-              Column.Availability,
-              Column.Status,
-              Column.Skills,
-            ]}
-          />
-        </Grid>
-      )}
+      <Grid item={true} xs={12}>
+        <ClientsSwitchMode
+          tableColumns={[
+            Column.Client,
+            Column.Received,
+            Column.Listings,
+            Column.Assignees,
+            Column.Email,
+            Column.Phone,
+            Column.CompanyUrl,
+          ]}
+        />
+      </Grid>
     </Grid>
   )
 }

@@ -9,18 +9,26 @@ export interface ClientsState {
 
 export class Client {
   id: number
-  fullName: string
-  jobName: string
-  jobType: string
-  applied?: string
-  group?: string
+  name: string
+  logo: string
+  received: string
+  industry: string
+  listings: number
+  assignee: number
+  email: string
+  phoneNumber: string
+  companyUrl: string
 
   constructor(data: any) {
     this.id = data.id
-    this.fullName = data.fullName
-    this.jobName = data.jobName
-    this.jobType = data.jobType
-    this.applied = data.applied
-    this.group = data.group
+    this.name = data.name
+    this.logo = data.logo
+    this.received = data.received
+    this.industry = data.industry
+    this.listings = data.listings
+    this.assignee = data.assignee
+    this.email = data.email
+    this.phoneNumber = data.phoneNumber
+    this.companyUrl = data.companyUrl
   }
 }

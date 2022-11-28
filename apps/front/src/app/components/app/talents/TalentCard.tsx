@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material'
 import React from 'react'
 import { Talent } from '../../../utils/redux/types/talents.type'
-import AtCard from '../../AtCard/AtCard'
+import AtTalentCard from '../../AtCard/AtTalentCard'
 
 const TalentCard: React.FunctionComponent<TalentCardProps> = (
   props: TalentCardProps,
@@ -17,7 +17,7 @@ const TalentCard: React.FunctionComponent<TalentCardProps> = (
           display={'flex'}
           flexDirection={'column'}
         >
-          <AtCard
+          <AtTalentCard
             talent={talent}
             onClick={() => props.openTalent(talent.id)}
             fullHeight={true}

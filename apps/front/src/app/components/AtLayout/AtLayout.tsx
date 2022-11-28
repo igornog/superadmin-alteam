@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook'
 import { handleCollapsePanel } from '../../utils/redux/actions/app.action'
 import { getActiveTab } from '../../utils/redux/selectors/settings.selector'
 import { getActiveFolder } from '../../utils/redux/selectors/tree.selector'
+import { RightClick } from '../../utils/types'
 import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton'
 import AtDropdown from '../AtDropdown/AtDropdown'
 import ModalAddFolder from '../AtModal/modals/ModalAddFolder'
@@ -29,6 +30,7 @@ import AtSwitchDisplayMode from './AtSwitchDisplayMode'
 import AtTopTitle from './AtTopTitle'
 
 const StyledContent = styled(Grid)<{ $sidePanelSize?: string }>`
+  overflow: hidden;
   background-color: #f7f8fe;
   margin: 20px 20px 30px 165px;
 `
@@ -46,7 +48,9 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
   const [openCreateTalent, setOpenCreateTalent] = useState(false)
 
   const isSmallScreen = useMediaQuery('(max-width:1079px)')
-  const activeTab = useAppSelector((state) => getActiveTab(state))
+  const activeTab = useAppSelector((state) =>
+    getActiveTab(state, props.tabsContent),
+  )
   const app = useAppSelector((state) => state.app)
 
   const dispatch = useAppDispatch()
@@ -56,7 +60,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
     activeTab.config && (
       <>
         <AtNavbar />
-        <Grid container={true}>
+        <Grid container={true} height={'100vh'}>
           <StyledContent
             item={true}
             xs={true}
@@ -225,7 +229,6 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                 </Grid>
               </Box>
             </AtRightClick>
-
             {props.children}
           </StyledContent>
 
@@ -266,6 +269,12 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
 
 interface AtLayoutProps {
   children: React.ReactNode
+  tabsContent: {
+    [Tabs: string]: {
+      node: React.ReactNode
+      rightClick: RightClick[]
+    }
+  }
   title?: string
   sidePanel?: React.ReactNode
   sidePanelIcon?: React.ReactNode

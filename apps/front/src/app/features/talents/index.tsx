@@ -9,14 +9,14 @@ import ShortlistLatentsView from './components/ShortlistTalents/ShortlistTatents
 
 export { default } from './components/TalentsView'
 
-export const tabsContent = {
+export const tabsTalentsContent = {
   [Tabs.AllTalent]: {
     node: <AllTalentsView />,
-    talentRightClick: [],
+    rightClick: [],
   },
   [Tabs.InboundTalent]: {
     node: <InboundTalentsView />,
-    talentRightClick: [
+    rightClick: [
       RightClick.MoveToShortlisted,
       RightClick.SendEmailToTalent,
       RightClick.ShareTalent,
@@ -25,7 +25,7 @@ export const tabsContent = {
   },
   [Tabs.ShortlistTalent]: {
     node: <ShortlistLatentsView />,
-    talentRightClick: [
+    rightClick: [
       RightClick.MoveToAccepted,
       RightClick.EditTalentFolders,
       RightClick.SendEmailToTalent,
@@ -35,7 +35,7 @@ export const tabsContent = {
   },
   [Tabs.AcceptedTalent]: {
     node: <AcceptedTatentsView />,
-    talentRightClick: [
+    rightClick: [
       RightClick.MoveToShortlisted,
       RightClick.EditTalentFolders,
       RightClick.SendEmailToTalent,
@@ -45,7 +45,7 @@ export const tabsContent = {
   },
   [Tabs.DeclinedTalent]: {
     node: <DeclinedTalentsView />,
-    talentRightClick: [
+    rightClick: [
       RightClick.MoveToAccepted,
       RightClick.MoveToShortlisted,
       RightClick.SendEmailToTalent,

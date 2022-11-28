@@ -1,17 +1,18 @@
 import { Page } from '../../utils/redux/types/settings.type'
 import { RightClick, Tabs } from '../../utils/types'
 import ClientRequestsView from './components/ClientRequests/ClientRequestsView'
+import LinkedinLogo from '../../assets/images/icons/Linkedin.svg'
 
 export { default } from './components/ClientsView'
 
-export const tabsContent = {
+export const tabsClientsContent = {
   [Tabs.ClientRequests]: {
     node: <ClientRequestsView />,
-    talentRightClick: [],
+    rightClick: [],
   },
   [Tabs.ActiveClients]: {
     node: <ClientRequestsView />,
-    talentRightClick: [
+    rightClick: [
       RightClick.MoveToShortlisted,
       RightClick.SendEmailToTalent,
       RightClick.ShareTalent,
@@ -20,7 +21,7 @@ export const tabsContent = {
   },
   [Tabs.InactiveClients]: {
     node: <ClientRequestsView />,
-    talentRightClick: [
+    rightClick: [
       RightClick.MoveToAccepted,
       RightClick.EditTalentFolders,
       RightClick.SendEmailToTalent,
@@ -30,7 +31,7 @@ export const tabsContent = {
   },
   [Tabs.DeclinedRequests]: {
     node: <ClientRequestsView />,
-    talentRightClick: [
+    rightClick: [
       RightClick.MoveToShortlisted,
       RightClick.EditTalentFolders,
       RightClick.SendEmailToTalent,
@@ -92,31 +93,73 @@ export const clients = [
   {
     id: 1,
     name: 'Chaptr',
+    logo: <img src={LinkedinLogo} alt={'Linkedin Logo'} width={28} />,
     received: '23.07.2022',
-    sector: 'Web 3.0',
+    industry: 'Web 3.0',
     listings: 1,
+    assignee: null,
     email: 'and@chaptr.com',
     phoneNumber: '+44 1234 123456',
-    website: 'chaptr.com',
+    companyUrl: 'chaptr.com',
   },
   {
     id: 2,
     name: 'Aviva',
+    logo: null,
     received: '23.07.2022',
-    sector: 'Web 3.0',
+    industry: 'Web 3.0',
     listings: 2,
+    assignee: null,
     email: 'and@chaptr.com',
     phoneNumber: '+44 1234 123456',
-    website: 'chaptr.com',
+    companyUrl: 'chaptr.com',
   },
   {
     id: 3,
     name: 'Heat',
+    logo: <img src={LinkedinLogo} alt={'Linkedin Logo'} width={28} />,
     received: '23.07.2022',
-    sector: 'Web 3.0',
+    industry: 'Web 3.0',
     listings: 3,
+    assignee: null,
     email: 'and@chaptr.com',
     phoneNumber: '+44 1234 123456',
-    website: 'chaptr.com',
+    companyUrl: 'chaptr.com',
+  },
+  {
+    id: 4,
+    name: 'Heat',
+    logo: null,
+    received: '23.07.2022',
+    industry: 'Web 3.0',
+    listings: 3,
+    assignee: null,
+    email: 'and@chaptr.com',
+    phoneNumber: '+44 1234 123456',
+    companyUrl: 'chaptr.com',
+  },
+  {
+    id: 5,
+    name: 'Heat',
+    logo: <img src={LinkedinLogo} alt={'Linkedin Logo'} width={28} />,
+    received: '23.07.2022',
+    industry: 'Web 3.0',
+    listings: 3,
+    assignee: null,
+    email: 'and@chaptr.com',
+    phoneNumber: '+44 1234 123456',
+    companyUrl: 'chaptr.com',
+  },
+  {
+    id: 6,
+    name: 'Heat',
+    logo: <img src={LinkedinLogo} alt={'Linkedin Logo'} width={28} />,
+    received: '23.07.2022',
+    industry: 'Web 3.0',
+    listings: 3,
+    assignee: null,
+    email: 'and@chaptr.com',
+    phoneNumber: '+44 1234 123456',
+    companyUrl: 'chaptr.com',
   },
 ]

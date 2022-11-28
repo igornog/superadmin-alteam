@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { clients, talentsTabs } from '..'
+import { clients, tabsClientsContent, talentsTabs } from '..'
 import AtLayout from '../../../components/AtLayout/AtLayout'
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
 import { handleClients } from '../../../utils/redux/actions/clients.action'
@@ -12,7 +12,9 @@ import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
 const ClientsView: React.FunctionComponent = () => {
   const dispatch = useAppDispatch()
   const settings = useAppSelector((state) => state.settings)
-  const activeTab = useAppSelector((state) => getActiveTab(state))
+  const activeTab = useAppSelector((state) =>
+    getActiveTab(state, tabsClientsContent),
+  )
 
   useEffect(() => {
     dispatch(
@@ -30,7 +32,11 @@ const ClientsView: React.FunctionComponent = () => {
     }
   }, [activeTab, dispatch, settings.tabs])
 
-  return <AtLayout>{activeTab.content?.node}</AtLayout>
+  return (
+    <AtLayout tabsContent={tabsClientsContent}>
+      {activeTab.content?.node}
+    </AtLayout>
+  )
 }
 
 export default ClientsView
