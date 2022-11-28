@@ -25,6 +25,9 @@ export interface Settings {
   inviteTalent?: boolean;
   displayMode?: boolean;
   sortBy?: boolean;
+  shareFolder?: boolean;
+  verifyClient?: boolean;
+  createClient?: boolean;
   createFolder?: boolean;
   tabsTalentColumn?: any;
 }
@@ -63,8 +66,8 @@ export enum ModalSize {
 
 export interface HandlesettingsProps {
   tabs: Page[];
-  filters: Filter[];
-  jobTypes: Filter[];
+  filters?: Filter[];
+  jobTypes?: Filter[];
 }
 
 export enum Column {

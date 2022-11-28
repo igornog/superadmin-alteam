@@ -85,6 +85,7 @@ export const talentsTabs: Page[] = [
     settings: {
       downloadCSV: true,
       createFolder: true,
+      shareFolder: true,
     },
   },
   {
@@ -94,6 +95,7 @@ export const talentsTabs: Page[] = [
     settings: {
       downloadCSV: true,
       createFolder: true,
+      shareFolder: true,
     },
   },
   {

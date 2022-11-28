@@ -3,8 +3,8 @@ import React from 'react';
 import { Talent } from '../../../utils/redux/types/talents.type';
 import AtCard from '../../AtCard/AtCard';
 
-const TalentsCards: React.FunctionComponent<TalentsCardProps> = (
-  props: TalentsCardProps
+const TalentCard: React.FunctionComponent<TalentCardProps> = (
+  props: TalentCardProps
 ) => {
   return (
     <>
@@ -31,7 +31,7 @@ const TalentsCards: React.FunctionComponent<TalentsCardProps> = (
   );
 };
 
-interface TalentsCardProps {
+interface TalentCardProps {
   talents: Talent[];
   openTalent: (id: number) => void;
   openShortlist: () => void;
@@ -39,4 +39,4 @@ interface TalentsCardProps {
   openEmailToTalent: () => void;
 }
 
-export default TalentsCards;
+export default TalentCard;

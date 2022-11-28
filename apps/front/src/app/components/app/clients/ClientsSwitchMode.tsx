@@ -11,11 +11,11 @@ import {
 import ModalAccepted from '../../AtModal/modals/ModalAccepted/ModalAccepted';
 import ModalEmailToTalent from '../../AtModal/modals/ModalEmailToTalent';
 import ModalShortlist from '../../AtModal/modals/ModalShortlist/ModalShortlist';
-import TalentCard from './TalentCard';
-import TalentsTable from './TalentsTable';
+import ClientCard from './ClientCard';
+import ClientsTable from './ClientsTable';
 
-const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
-  props: TalentsSwitchModeProps
+const ClientsSwitchMode: React.FunctionComponent<ClientsSwitchModeProps> = (
+  props: ClientsSwitchModeProps
 ) => {
   const dispatch = useAppDispatch();
   const settings = useAppSelector((state) => state.settings);
@@ -34,7 +34,7 @@ const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
   return (
     <Grid container={true} spacing={2.5} alignItems={'stretch'}>
       {settings.displayMode === DisplayMode.Grid ? (
-        <TalentCard
+        <ClientCard
           talents={listTalent}
           openTalent={handleClickTalent}
           openShortlist={() => setOpenShortlistModal(true)}
@@ -43,7 +43,7 @@ const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
         />
       ) : (
         <Grid item={true} xs={12}>
-          <TalentsTable
+          <ClientsTable
             talents={listTalent}
             openTalent={handleClickTalent}
             tableColumns={props.tableColumns}
@@ -72,8 +72,8 @@ const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
   );
 };
 
-interface TalentsSwitchModeProps {
+interface ClientsSwitchModeProps {
   tableColumns: Column[];
 }
 
-export default TalentsSwitchMode;
+export default ClientsSwitchMode;

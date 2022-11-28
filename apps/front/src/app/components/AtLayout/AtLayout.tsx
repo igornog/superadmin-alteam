@@ -1,5 +1,12 @@
 import { Backdrop, Box, Collapse, Grid, useMediaQuery } from '@mui/material';
-import { AddCircle, Candle, Import, SearchNormal1, Share } from 'iconsax-react';
+import {
+  AddCircle,
+  Candle,
+  Import,
+  SearchNormal1,
+  Share,
+  TickCircle,
+} from 'iconsax-react';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { grey2 } from '../../utils/colors';
@@ -80,21 +87,56 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                       />
                     )}
 
-                    {!activeFolder.isParent() && (
+                    {activeTab.config.settings.shareFolder &&
+                      !activeFolder.isParent() && (
+                        <>
+                          <AtButton
+                            kind={AtButtonKind.Default}
+                            variant={AtButtonVariant.Contained}
+                            startIcon={<Share />}
+                            onClick={() => setOpenShareFolder(true)}
+                            name={'Share Folder'}
+                          />
+
+                          <ModalShareFolder
+                            folder={activeFolder}
+                            isOpen={openShareFolder}
+                            onClose={() => setOpenShareFolder(false)}
+                          />
+                        </>
+                      )}
+
+                    {activeTab.config.settings.verifyClient && (
                       <>
                         <AtButton
                           kind={AtButtonKind.Default}
-                          variant={AtButtonVariant.Contained}
-                          startIcon={<Share />}
-                          onClick={() => setOpenShareFolder(true)}
-                          name={'Share Folder'}
+                          variant={AtButtonVariant.Outlined}
+                          startIcon={<TickCircle />}
+                          name={'Verifiy Client (1)'}
+                          // onClick={() => setOpenCreateTalent(true)}
                         />
 
-                        <ModalShareFolder
-                          folder={activeFolder}
-                          isOpen={openShareFolder}
-                          onClose={() => setOpenShareFolder(false)}
+                        {/* <ModalAddTalent
+                          isOpen={openCreateTalent}
+                          onClose={() => setOpenCreateTalent(false)}
+                        /> */}
+                      </>
+                    )}
+
+                    {activeTab.config.settings.createClient && (
+                      <>
+                        <AtButton
+                          kind={AtButtonKind.Success}
+                          variant={AtButtonVariant.Contained}
+                          startIcon={<AddCircle />}
+                          name={'Create Client'}
+                          // onClick={() => setOpenCreateTalent(true)}
                         />
+
+                        {/* <ModalAddTalent
+                          isOpen={openCreateTalent}
+                          onClose={() => setOpenCreateTalent(false)}
+                        /> */}
                       </>
                     )}
 
