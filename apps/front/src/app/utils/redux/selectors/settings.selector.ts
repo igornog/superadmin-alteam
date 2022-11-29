@@ -8,7 +8,7 @@ export const getActiveTab: any = createDraftSafeSelector(
 
     return {
       config: findTab,
-      content: tabsContent[findTab?.title as keyof typeof tabsContent],
+      content: tabsContent?.[findTab?.title as keyof typeof tabsContent],
     }
   },
 )
