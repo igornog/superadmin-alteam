@@ -26,17 +26,21 @@ export interface SoloTalent {
   workExperience?: string
   listing: Listing[]
 }
+
 export interface Listing {
   companyName: string
   duration: string
   jobType: string
   status: 'shortlisted' | 'rejected' | 'hired'
 }
+
 export interface TalentSearch {
-  skills: string[]
-  experience: string
-  availability: string
-  role: string
-}
+  skills?: string[]
+  experience?: string
+  availability?: string
+  role?: string
+  status?: "shortlisted" | "rejected" | "accepted" | "inbound" | "applicable"
+  page?: number
+} // TODO: add more fields
 
 export type Talent = GroupTalent | SoloTalent
