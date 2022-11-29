@@ -1,3 +1,4 @@
+//eslint-disable @typescript-eslint/no-unused-vars
 import { postgresClient } from './postgresClient'
 import { SoloTalent, TalentSearch } from '@yjcapp/app'
 import { SoloTalentEntity } from './entities'
