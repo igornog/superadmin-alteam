@@ -2,13 +2,13 @@ import { Box } from '@mui/material'
 import { Import, DocumentText1 } from 'iconsax-react'
 import React from 'react'
 import AtLine from '../../../../components/AtLine/AtLine'
-import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame'
+import AtFrame from '../../../../components/AtFrame/AtFrame'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
 import { grey } from '../../../../utils/colors'
 
 const TalentAttachments: React.FunctionComponent = () => {
   return (
-    <AtTalentFrame
+    <AtFrame
       title={'Attachments'}
       icon={
         <AtTypography>
@@ -50,7 +50,7 @@ const TalentAttachments: React.FunctionComponent = () => {
 
         <Import />
       </Box>
-    </AtTalentFrame>
+    </AtFrame>
   )
 }
 

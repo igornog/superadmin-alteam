@@ -12,7 +12,7 @@ import AtRightClick from '../AtRightClick/AtRightClick'
 import { boxShadow } from '../../utils/theme'
 import TalentMenu from '../AtRightClick/ContextMenus/TalentMenu'
 
-const StyledCard = styled.div<{ fullHeight?: boolean }>`
+export const StyledCard = styled.div<{ fullHeight?: boolean }>`
   background-color: ${white};
   border: 1px solid ${grey5};
   border-radius: 10px;

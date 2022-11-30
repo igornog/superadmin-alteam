@@ -9,6 +9,7 @@ import {
   Setting2,
   Category,
 } from 'iconsax-react'
+import Clients from './features/clients'
 
 export const Navigation: NavigationProps[] = [
   {
@@ -19,7 +20,7 @@ export const Navigation: NavigationProps[] = [
   },
   {
     link: '/clients',
-    element: <Talents />,
+    element: <Clients />,
     icon: <Personalcard />,
     name: 'Clients',
   },

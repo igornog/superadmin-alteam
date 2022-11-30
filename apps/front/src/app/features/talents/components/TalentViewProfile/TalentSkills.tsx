@@ -3,7 +3,7 @@ import { Edit } from 'iconsax-react'
 import React, { useState } from 'react'
 import ModalSkills from '../../../../components/AtModal/modals/ModalSkills'
 import AtTag from '../../../../components/AtTag/AtTag'
-import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame'
+import AtFrame from '../../../../components/AtFrame/AtFrame'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
 import { grey } from '../../../../utils/colors'
 import { Skill, Talent } from '../../../../utils/redux/types/talents.type'
@@ -14,7 +14,7 @@ const TalentSkills: React.FunctionComponent<TalentSkillsProps> = (
   const [openModal, setOpenModal] = useState(false)
 
   return (
-    <AtTalentFrame
+    <AtFrame
       title={'Skills'}
       icon={
         <AtTypography>
@@ -37,7 +37,7 @@ const TalentSkills: React.FunctionComponent<TalentSkillsProps> = (
         )}
       </Box>
       <ModalSkills isOpen={openModal} onClose={() => setOpenModal(false)} />
-    </AtTalentFrame>
+    </AtFrame>
   )
 }
 

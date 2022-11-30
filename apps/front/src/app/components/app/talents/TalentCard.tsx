@@ -1,10 +1,10 @@
 import { Grid } from '@mui/material'
 import React from 'react'
 import { Talent } from '../../../utils/redux/types/talents.type'
-import AtCard from '../../AtCard/AtCard'
+import AtTalentCard from '../../AtCard/AtTalentCard'
 
-const TalentsCards: React.FunctionComponent<TalentsCardProps> = (
-  props: TalentsCardProps,
+const TalentCard: React.FunctionComponent<TalentCardProps> = (
+  props: TalentCardProps,
 ) => {
   return (
     <>
@@ -17,7 +17,7 @@ const TalentsCards: React.FunctionComponent<TalentsCardProps> = (
           display={'flex'}
           flexDirection={'column'}
         >
-          <AtCard
+          <AtTalentCard
             talent={talent}
             onClick={() => props.openTalent(talent.id)}
             fullHeight={true}
@@ -31,7 +31,7 @@ const TalentsCards: React.FunctionComponent<TalentsCardProps> = (
   )
 }
 
-interface TalentsCardProps {
+interface TalentCardProps {
   talents: Talent[]
   openTalent: (id: number) => void
   openShortlist: () => void
@@ -39,4 +39,4 @@ interface TalentsCardProps {
   openEmailToTalent: () => void
 }
 
-export default TalentsCards
+export default TalentCard

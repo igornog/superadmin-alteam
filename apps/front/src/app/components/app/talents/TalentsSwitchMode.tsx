@@ -11,7 +11,7 @@ import {
 import ModalAccepted from '../../AtModal/modals/ModalAccepted/ModalAccepted'
 import ModalEmailToTalent from '../../AtModal/modals/ModalEmailToTalent'
 import ModalShortlist from '../../AtModal/modals/ModalShortlist/ModalShortlist'
-import TalentsCards from './TalentsCards'
+import TalentCard from './TalentCard'
 import TalentsTable from './TalentsTable'
 
 const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
@@ -34,7 +34,7 @@ const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
   return (
     <Grid container={true} spacing={2.5} alignItems={'stretch'}>
       {settings.displayMode === DisplayMode.Grid ? (
-        <TalentsCards
+        <TalentCard
           talents={listTalent}
           openTalent={handleClickTalent}
           openShortlist={() => setOpenShortlistModal(true)}

@@ -37,8 +37,12 @@ const { reducer } = createSlice({
         state.status = StatusType.Succeeded
         state.tabs = payload.tabs
 
-        state.filters.skills = payload.filters
-        state.filters.jobTypes = payload.jobTypes
+        if (payload.filters) {
+          state.filters.skills = payload.filters
+        }
+        if (payload.jobTypes) {
+          state.filters.jobTypes = payload.jobTypes
+        }
       })
       .addCase(handleInitSettings.rejected, (state, action) => {
         state.status = StatusType.Failed
