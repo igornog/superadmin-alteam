@@ -93,7 +93,7 @@ export const clients = [
   {
     id: 1,
     name: 'Chaptr',
-    logo: <img src={LinkedinLogo} alt={'Linkedin Logo'} width={28} />,
+    logo: LinkedinLogo,
     received: '23.07.2022',
     industry: 'Web 3.0',
     listings: 1,
@@ -117,7 +117,7 @@ export const clients = [
   {
     id: 3,
     name: 'Heat',
-    logo: <img src={LinkedinLogo} alt={'Linkedin Logo'} width={28} />,
+    logo: LinkedinLogo,
     received: '23.07.2022',
     industry: 'Web 3.0',
     listings: 3,
@@ -141,7 +141,7 @@ export const clients = [
   {
     id: 5,
     name: 'Heat',
-    logo: <img src={LinkedinLogo} alt={'Linkedin Logo'} width={28} />,
+    logo: LinkedinLogo,
     received: '23.07.2022',
     industry: 'Web 3.0',
     listings: 3,
@@ -153,7 +153,7 @@ export const clients = [
   {
     id: 6,
     name: 'Heat',
-    logo: <img src={LinkedinLogo} alt={'Linkedin Logo'} width={28} />,
+    logo: LinkedinLogo,
     received: '23.07.2022',
     industry: 'Web 3.0',
     listings: 3,

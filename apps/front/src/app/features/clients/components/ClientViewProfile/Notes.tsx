@@ -18,7 +18,7 @@ const StyledBox = styled(Box)`
   }
 `
 
-const TalentNotes: React.FunctionComponent = () => {
+const Notes: React.FunctionComponent = () => {
   const [openModalAddNote, setOpenModalAddNote] = useState(false)
   const [openModalEditNote, setOpenModalEditNote] = useState(false)
 
@@ -69,4 +69,4 @@ const TalentNotes: React.FunctionComponent = () => {
   )
 }
 
-export default TalentNotes
+export default Notes

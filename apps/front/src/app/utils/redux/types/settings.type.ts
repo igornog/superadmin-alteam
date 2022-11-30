@@ -44,6 +44,7 @@ export enum DisplayMode {
 
 export enum SideDrawerVariant {
   Talent = 'Talent',
+  Client = 'Client',
 }
 
 export class SideDrawer {

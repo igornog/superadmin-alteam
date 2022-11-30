@@ -6,3 +6,10 @@ export const handleClients = createAsyncThunk(
     return clients
   },
 )
+
+export const handleSelectClient = createAsyncThunk(
+  'talents/selectClient',
+  async (idClient: number | null) => {
+    return idClient
+  },
+)

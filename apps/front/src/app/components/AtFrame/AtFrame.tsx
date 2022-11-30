@@ -21,7 +21,7 @@ const StyledBox = styled(Box)`
   }
 `
 
-const AtTalentFrame: React.FunctionComponent<TalentFrameProps> = (
+const AtFrame: React.FunctionComponent<TalentFrameProps> = (
   props: TalentFrameProps,
 ) => {
   return (
@@ -47,4 +47,4 @@ interface TalentFrameProps {
   gap?: number
 }
 
-export default AtTalentFrame
+export default AtFrame

@@ -1,8 +1,8 @@
 import { Grid } from '@mui/material'
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
+import { handleSelectClient } from '../../../utils/redux/actions/clients.action'
 import { handleDrawer } from '../../../utils/redux/actions/settings.action'
-import { handleSelectTalent } from '../../../utils/redux/actions/talents.action'
 import {
   SideDrawerVariant,
   DisplayMode,
@@ -20,8 +20,8 @@ const ClientsSwitchMode: React.FunctionComponent<ClientsSwitchModeProps> = (
   const listClients = clients.listClients
 
   const handleClickClient = (id: number) => {
-    dispatch(handleSelectTalent(id))
-    dispatch(handleDrawer(SideDrawerVariant.Talent))
+    dispatch(handleSelectClient(id))
+    dispatch(handleDrawer(SideDrawerVariant.Client))
   }
 
   return (
