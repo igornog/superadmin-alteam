@@ -1,9 +1,5 @@
 import {
   BaseEntity,
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm'
 import { Listing } from '@yjcapp/app'
 
