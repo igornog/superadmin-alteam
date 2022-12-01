@@ -37,6 +37,7 @@ const AtDrawer: React.FunctionComponent = () => {
         style: {
           width: drawerSettings.size,
           boxShadow: 'none',
+          backgroundColor: drawerSettings.backgroundColor,
         },
       }}
     >

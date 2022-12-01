@@ -45,15 +45,18 @@ export enum DisplayMode {
 export enum SideDrawerVariant {
   Talent = 'Talent',
   Client = 'Client',
+  CreateClient = 'CreateClient',
 }
 
 export class SideDrawer {
   content: React.ReactNode
   size: string
+  backgroundColor: string
 
   constructor(data: any) {
     this.content = data.content
     this.size = data.size
+    this.backgroundColor = data.backgroundColor
   }
 }
 
