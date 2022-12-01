@@ -12,8 +12,10 @@ import styled from 'styled-components'
 import { grey2 } from '../../utils/colors'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook'
 import { handleCollapsePanel } from '../../utils/redux/actions/app.action'
+import { handleDrawer } from '../../utils/redux/actions/settings.action'
 import { getActiveTab } from '../../utils/redux/selectors/settings.selector'
 import { getActiveFolder } from '../../utils/redux/selectors/tree.selector'
+import { SideDrawerVariant } from '../../utils/redux/types/settings.type'
 import { RightClick } from '../../utils/types'
 import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton'
 import AtDropdown from '../AtDropdown/AtDropdown'
@@ -134,7 +136,11 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                           variant={AtButtonVariant.Contained}
                           startIcon={<AddCircle />}
                           name={'Create Client'}
-                          // onClick={() => setOpenCreateTalent(true)}
+                          onClick={() =>
+                            dispatch(
+                              handleDrawer(SideDrawerVariant.CreateClient),
+                            )
+                          }
                         />
 
                         {/* <ModalAddTalent
