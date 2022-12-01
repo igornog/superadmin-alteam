@@ -1,4 +1,4 @@
-import { BaseEntity } from 'typeorm'
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity({ name: 'group_talent' })
 export class GroupTalentEntity extends BaseEntity {
