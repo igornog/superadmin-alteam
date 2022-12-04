@@ -24,14 +24,18 @@ export interface SoloTalent {
   phoneNumber?: string
   salaryExpectation?: string
   workExperience?: string
-  listing: Listing[]
+  listing?: Listing[]
+  status: ListingStatus
+
 }
+
+export type ListingStatus = "shortlisted" | "rejected" | "accepted" | "inbound" | "applicable"
 
 export interface Listing {
   companyName: string
   duration: string
   jobType: string
-  status: 'shortlisted' | 'rejected' | 'hired'
+  status: ListingStatus
 }
 
 export interface TalentSearch {
@@ -39,8 +43,8 @@ export interface TalentSearch {
   experience?: string
   availability?: string
   role?: string
-  status?: "shortlisted" | "rejected" | "accepted" | "inbound" | "applicable"
+  status?: ListingStatus
   page?: number
-} // TODO: add more fields
+}
 
 export type Talent = GroupTalent | SoloTalent

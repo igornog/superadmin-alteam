@@ -1,7 +1,7 @@
 import {
   BaseEntity, Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn,
 } from 'typeorm'
-import { Listing } from '@yjcapp/app'
+import {Listing, ListingStatus} from '@yjcapp/app'
 
 @Entity({ name: 'solo_talent' })
 export class SoloTalentEntity extends BaseEntity {
@@ -35,8 +35,8 @@ export class SoloTalentEntity extends BaseEntity {
   @Column({ type: 'varchar', array: true, name: 'skills' })
   skills: string[]
 
-  @Column({ type: 'json', name: 'listing' })
-  listings: Listing[]
+  @Column({ type: 'json', name: 'listing', nullable: true })
+  listings?: Listing[]
 
   @Column({ type: 'varchar', nullable: true, name: 'phone_number' })
   phoneNumber?: string
@@ -49,4 +49,7 @@ export class SoloTalentEntity extends BaseEntity {
 
   @UpdateDateColumn({ type: 'timestamptz', name: 'applied_date' })
   appliedDate: Date
+
+  @Column({ type: 'varchar', name: 'status' })
+  status: ListingStatus
 }

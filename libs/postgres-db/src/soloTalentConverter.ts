@@ -13,6 +13,7 @@ export function soloTalentFromEntity(entity: SoloTalentEntity): SoloTalent {
     role: entity.role,
     about: entity.about,
     listing: entity.listings,
+    status: entity.status,
     salaryExpectation: entity.salaryExpectation,
     appliedDate: entity.appliedDate,
     phoneNumber: entity.phoneNumber,
