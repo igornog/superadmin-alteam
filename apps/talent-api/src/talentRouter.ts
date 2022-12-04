@@ -36,7 +36,7 @@ talentRouter.get('/talent/solo/:id', (req, res, next) => {
 })
 talentRouter.get('/talent/solo/search', (req, res, next) => {
   sendPromise(
-    talentService.searchSoloTalent(req.query as unknown as TalentSearch),
+    talentService.searchSoloTalent(req.query ?? {}),
     res,
     next,
   )

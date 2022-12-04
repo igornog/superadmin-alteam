@@ -1,4 +1,4 @@
-output "context" {
+output "env_variables" {
   value = {
     DB_ADDRESS : local.domain
     DB_NAME : local.db_name
