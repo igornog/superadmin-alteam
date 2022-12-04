@@ -14,7 +14,7 @@ module "talent_label" {
 }
 
 module "database_context" {
-  source = "../../../infrastructure/modules/db_context"
+  source = "../../../infrastructure/modules/db_env"
   stage  = var.stage
 }
 
