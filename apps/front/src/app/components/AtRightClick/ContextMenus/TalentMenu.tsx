@@ -18,29 +18,34 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
   const [linkCopied, setLinkCopied] = useState(false)
 
   const isCurrentTabAllowed = (rightclickFunc: RightClick) => {
-    return activeTab.content.rightClick.includes(rightclickFunc)
+    return activeTab.talentRightClick.includes(rightclickFunc)
   }
 
   const isTabAndStatusAllowed = (status: TalentStatus[]) => {
     return (
-      activeTab.config.title === Tabs.AllTalent &&
-      status.includes(props.talent.status)
+      activeTab.title === Tabs.AllTalent && status.includes(props.talent.status)
     )
   }
 
   const moveToAccepted = () => {
-    dispatch(handleSelectTalent(props.talent.id))
-    props.openAccepted()
+    if (props.openAccepted) {
+      dispatch(handleSelectTalent(props.talent.id))
+      props.openAccepted()
+    }
   }
 
   const moveToShortlist = () => {
-    dispatch(handleSelectTalent(props.talent.id))
-    props.openShortlist()
+    if (props.openShortlist) {
+      dispatch(handleSelectTalent(props.talent.id))
+      props.openShortlist()
+    }
   }
 
   const sendEmailToTalent = () => {
-    dispatch(handleSelectTalent(props.talent.id))
-    props.openEmailToTalent()
+    if (props.openEmailToTalent) {
+      dispatch(handleSelectTalent(props.talent.id))
+      props.openEmailToTalent()
+    }
   }
 
   const copyLinkToClipboard = (e: Event) => {
@@ -147,9 +152,9 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
 
 interface TalentMenuProps {
   talent: Talent
-  openAccepted: () => void
-  openShortlist: () => void
-  openEmailToTalent: () => void
+  openAccepted?: () => void
+  openShortlist?: () => void
+  openEmailToTalent?: () => void
 }
 
 export default TalentMenu

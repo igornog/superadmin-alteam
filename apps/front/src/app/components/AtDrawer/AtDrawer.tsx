@@ -1,33 +1,18 @@
 import { Drawer } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { black } from '../../utils/colors'
 import { convertHexToRGBA } from '../../utils/helpers'
-import { useAppSelector, useAppDispatch } from '../../utils/hooks/reduxHook'
-import { handleDrawer } from '../../utils/redux/actions/settings.action'
-import { SideDrawer } from '../../utils/redux/types/settings.type'
-import { drawers } from './sideDrawer'
 
-const AtDrawer: React.FunctionComponent = () => {
-  const [drawerSettings, setDrawerSettings] = useState(new SideDrawer({}))
-
-  const settings = useAppSelector((state) => state.settings)
-  const dispatch = useAppDispatch()
-  const handleClose = () => dispatch(handleDrawer(null))
-
-  const selectedDrawer = settings.selectedDrawer
-
-  useEffect(() => {
-    if (selectedDrawer) {
-      setDrawerSettings(new SideDrawer(drawers[selectedDrawer]))
-    }
-  }, [selectedDrawer])
-
+const AtDrawer: React.FunctionComponent<AtDrawerProps> = (
+  props: AtDrawerProps,
+) => {
   return (
     <Drawer
       anchor={'right'}
-      open={selectedDrawer !== null}
-      onClose={handleClose}
+      open={props.open}
+      onClose={props.handleClose}
       transitionDuration={{ enter: 600, exit: 300 }}
+      hideBackdrop={!props.withBackdrop}
       BackdropProps={{
         style: {
           backgroundColor: convertHexToRGBA(black, 0.5),
@@ -35,15 +20,24 @@ const AtDrawer: React.FunctionComponent = () => {
       }}
       PaperProps={{
         style: {
-          width: drawerSettings.size,
+          width: props.size,
           boxShadow: 'none',
-          backgroundColor: drawerSettings.backgroundColor,
+          backgroundColor: props.backgroundColor,
         },
       }}
     >
-      {drawerSettings.content}
+      {props.children}
     </Drawer>
   )
+}
+
+interface AtDrawerProps {
+  open: boolean
+  handleClose: () => void
+  size: string
+  backgroundColor: string
+  withBackdrop: boolean
+  children: React.ReactNode
 }
 
 export default AtDrawer

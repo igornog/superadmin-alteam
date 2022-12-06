@@ -7,14 +7,14 @@ import {
   handleInitSettings,
   handleSettingsTab,
 } from '../../../utils/redux/actions/settings.action'
+import { handleTalents } from '../../../utils/redux/actions/talents.action'
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
+import { talents } from '../../talents'
 
 const ClientsView: React.FunctionComponent = () => {
   const dispatch = useAppDispatch()
   const settings = useAppSelector((state) => state.settings)
-  const activeTab = useAppSelector((state) =>
-    getActiveTab(state, tabsClientsContent),
-  )
+  const activeTab = useAppSelector((state) => getActiveTab(state))
 
   useEffect(() => {
     dispatch(
@@ -23,6 +23,7 @@ const ClientsView: React.FunctionComponent = () => {
       }),
     )
 
+    dispatch(handleTalents(talents))
     dispatch(handleClients(clients))
   }, [dispatch])
 
@@ -33,8 +34,12 @@ const ClientsView: React.FunctionComponent = () => {
   }, [activeTab, dispatch, settings.tabs])
 
   return (
-    <AtLayout tabsContent={tabsClientsContent}>
-      {activeTab.content?.node}
+    <AtLayout>
+      {
+        tabsClientsContent?.[
+          activeTab?.title as keyof typeof tabsClientsContent
+        ]?.node
+      }
     </AtLayout>
   )
 }

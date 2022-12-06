@@ -1,4 +1,5 @@
 import React from 'react'
+import { RightClick } from '../../types';
 import { StatusType } from './status.type'
 
 export interface SettingsState {
@@ -17,6 +18,8 @@ export interface Page {
   action?: string
   active?: boolean
   settings: Settings
+  talentRightClick: RightClick[]
+  clientRightClick: RightClick[]
 }
 
 export interface Settings {
@@ -45,6 +48,7 @@ export enum DisplayMode {
 export enum SideDrawerVariant {
   Talent = 'Talent',
   Client = 'Client',
+  ClientListings = 'ClientListings',
   CreateClient = 'CreateClient',
 }
 
@@ -52,11 +56,13 @@ export class SideDrawer {
   content: React.ReactNode
   size: string
   backgroundColor: string
+  withBackdrop: boolean
 
   constructor(data: any) {
     this.content = data.content
     this.size = data.size
     this.backgroundColor = data.backgroundColor
+    this.withBackdrop = data.withBackdrop
   }
 }
 

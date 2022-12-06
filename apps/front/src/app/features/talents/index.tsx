@@ -12,45 +12,18 @@ export { default } from './components/TalentsView'
 export const tabsTalentsContent = {
   [Tabs.AllTalent]: {
     node: <AllTalentsView />,
-    rightClick: [],
   },
   [Tabs.InboundTalent]: {
     node: <InboundTalentsView />,
-    rightClick: [
-      RightClick.MoveToShortlisted,
-      RightClick.SendEmailToTalent,
-      RightClick.ShareTalent,
-      RightClick.MoveToDesclined,
-    ],
   },
   [Tabs.ShortlistTalent]: {
     node: <ShortlistLatentsView />,
-    rightClick: [
-      RightClick.MoveToAccepted,
-      RightClick.EditTalentFolders,
-      RightClick.SendEmailToTalent,
-      RightClick.ShareTalent,
-      RightClick.MoveToDesclined,
-    ],
   },
   [Tabs.AcceptedTalent]: {
     node: <AcceptedTatentsView />,
-    rightClick: [
-      RightClick.MoveToShortlisted,
-      RightClick.EditTalentFolders,
-      RightClick.SendEmailToTalent,
-      RightClick.ShareTalent,
-      RightClick.MoveToDesclined,
-    ],
   },
   [Tabs.DeclinedTalent]: {
     node: <DeclinedTalentsView />,
-    rightClick: [
-      RightClick.MoveToAccepted,
-      RightClick.MoveToShortlisted,
-      RightClick.SendEmailToTalent,
-      RightClick.ShareTalent,
-    ],
   },
 }
 
@@ -65,6 +38,8 @@ export const talentsTabs: Page[] = [
       displayMode: true,
       sortBy: true,
     },
+    talentRightClick: [],
+    clientRightClick: [],
   },
   {
     title: Tabs.InboundTalent,
@@ -77,6 +52,13 @@ export const talentsTabs: Page[] = [
       displayMode: true,
       sortBy: true,
     },
+    talentRightClick: [
+      RightClick.MoveToShortlisted,
+      RightClick.SendEmailToTalent,
+      RightClick.ShareTalent,
+      RightClick.MoveToDesclined,
+    ],
+    clientRightClick: [],
   },
   {
     title: Tabs.ShortlistTalent,
@@ -87,6 +69,14 @@ export const talentsTabs: Page[] = [
       createFolder: true,
       shareFolder: true,
     },
+    talentRightClick: [
+      RightClick.MoveToAccepted,
+      RightClick.EditTalentFolders,
+      RightClick.SendEmailToTalent,
+      RightClick.ShareTalent,
+      RightClick.MoveToDesclined,
+    ],
+    clientRightClick: [],
   },
   {
     title: Tabs.AcceptedTalent,
@@ -97,6 +87,14 @@ export const talentsTabs: Page[] = [
       createFolder: true,
       shareFolder: true,
     },
+    talentRightClick: [
+      RightClick.MoveToShortlisted,
+      RightClick.EditTalentFolders,
+      RightClick.SendEmailToTalent,
+      RightClick.ShareTalent,
+      RightClick.MoveToDesclined,
+    ],
+    clientRightClick: [],
   },
   {
     title: Tabs.DeclinedTalent,
@@ -107,11 +105,20 @@ export const talentsTabs: Page[] = [
       sortBy: true,
       displayMode: true,
     },
+    talentRightClick: [
+      RightClick.MoveToAccepted,
+      RightClick.MoveToShortlisted,
+      RightClick.SendEmailToTalent,
+      RightClick.ShareTalent,
+    ],
+    clientRightClick: [],
   },
   {
     title: Tabs.Applicants,
     active: false,
     settings: {},
+    talentRightClick: [],
+    clientRightClick: [],
   },
 ]
 

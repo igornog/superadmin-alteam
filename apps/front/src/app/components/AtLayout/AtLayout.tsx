@@ -12,12 +12,10 @@ import styled from 'styled-components'
 import { grey2 } from '../../utils/colors'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook'
 import { handleCollapsePanel } from '../../utils/redux/actions/app.action'
-import { handleDrawer } from '../../utils/redux/actions/settings.action'
 import { getActiveTab } from '../../utils/redux/selectors/settings.selector'
 import { getActiveFolder } from '../../utils/redux/selectors/tree.selector'
-import { SideDrawerVariant } from '../../utils/redux/types/settings.type'
-import { RightClick } from '../../utils/types'
 import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton'
+import DrawerCreateClient from '../AtDrawer/drawers/DrawerCreateClient/DrawerCreateClient'
 import AtDropdown from '../AtDropdown/AtDropdown'
 import ModalAddFolder from '../AtModal/modals/ModalAddFolder'
 import ModalAddTalent from '../AtModal/modals/ModalCreateTalent/ModalAddTalent'
@@ -48,18 +46,17 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
   const [openCreateFolder, setOpenCreateFolder] = useState(false)
   const [openShareFolder, setOpenShareFolder] = useState(false)
   const [openCreateTalent, setOpenCreateTalent] = useState(false)
+  const [openDrawerCreateClient, setOpenDrawerCreateClient] = useState(false)
 
   const isSmallScreen = useMediaQuery('(max-width:1079px)')
-  const activeTab = useAppSelector((state) =>
-    getActiveTab(state, props.tabsContent),
-  )
+  const activeTab = useAppSelector((state) => getActiveTab(state))
   const app = useAppSelector((state) => state.app)
 
   const dispatch = useAppDispatch()
   const activeFolder = useAppSelector((state) => getActiveFolder(state))
 
   return !isSmallScreen ? (
-    activeTab.config && (
+    activeTab && (
       <>
         <AtNavbar />
         <Grid container={true} height={'100vh'}>
@@ -78,12 +75,12 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                   marginTop={'30px'}
                 >
                   <AtTopTitle
-                    activeTab={activeTab.config}
+                    activeTab={activeTab}
                     activeFolder={activeFolder}
                   />
 
                   <Box display={'flex'} gap={'30px'}>
-                    {activeTab.config.settings.downloadCSV && (
+                    {activeTab.settings.downloadCSV && (
                       <AtButton
                         kind={AtButtonKind.Default}
                         variant={AtButtonVariant.Text}
@@ -93,7 +90,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                       />
                     )}
 
-                    {activeTab.config.settings.shareFolder &&
+                    {activeTab.settings.shareFolder &&
                       !activeFolder.isParent() && (
                         <>
                           <AtButton
@@ -112,7 +109,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                         </>
                       )}
 
-                    {activeTab.config.settings.verifyClient && (
+                    {activeTab.settings.verifyClient && (
                       <>
                         <AtButton
                           kind={AtButtonKind.Default}
@@ -129,20 +126,20 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                       </>
                     )}
 
-                    {activeTab.config.settings.createClient && (
+                    {activeTab.settings.createClient && (
                       <>
                         <AtButton
                           kind={AtButtonKind.Success}
                           variant={AtButtonVariant.Contained}
                           startIcon={<AddCircle />}
                           name={'Create Client'}
-                          onClick={() =>
-                            dispatch(
-                              handleDrawer(SideDrawerVariant.CreateClient),
-                            )
-                          }
+                          onClick={() => setOpenDrawerCreateClient(true)}
                         />
 
+                        <DrawerCreateClient
+                          open={openDrawerCreateClient}
+                          handleClose={() => setOpenDrawerCreateClient(false)}
+                        />
                         {/* <ModalAddTalent
                           isOpen={openCreateTalent}
                           onClose={() => setOpenCreateTalent(false)}
@@ -150,7 +147,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                       </>
                     )}
 
-                    {activeTab.config.settings.createFolder && (
+                    {activeTab.settings.createFolder && (
                       <>
                         <AtButton
                           kind={AtButtonKind.Success}
@@ -168,7 +165,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                       </>
                     )}
 
-                    {activeTab.config.settings.inviteTalent && (
+                    {activeTab.settings.inviteTalent && (
                       <>
                         <AtButton
                           kind={AtButtonKind.Success}
@@ -194,7 +191,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                   alignItems={'center'}
                 >
                   <Grid item={true} xs={6.5}>
-                    {activeTab.config.settings.search && (
+                    {activeTab.settings.search && (
                       <AtTextField
                         value={''}
                         type={AtTextFieldType.Text}
@@ -205,11 +202,11 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                   </Grid>
 
                   <Box display={'flex'} gap={'30px'}>
-                    {activeTab.config.settings.displayMode && (
+                    {activeTab.settings.displayMode && (
                       <AtSwitchDisplayMode />
                     )}
 
-                    {activeTab.config.settings.sortBy && (
+                    {activeTab.settings.sortBy && (
                       <Box
                         display={'flex'}
                         gap={'5px'}
@@ -274,13 +271,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
 }
 
 interface AtLayoutProps {
-  children: React.ReactNode
-  tabsContent: {
-    [Tabs: string]: {
-      node: React.ReactNode
-      rightClick: RightClick[]
-    }
-  }
+  children: any
   title?: string
   sidePanel?: React.ReactNode
   sidePanelIcon?: React.ReactNode

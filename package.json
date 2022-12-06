@@ -75,6 +75,7 @@
     "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest"
   },
   "dependencies": {
+    "@date-io/moment": "^2.16.1",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@material-ui/lab": "^4.0.0-alpha.61",
@@ -94,6 +95,7 @@
     "framer-motion": "^6.2.10",
     "iconsax-react": "^0.0.8",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.4",
     "morgan": "^1.10.0",
     "pg": "^8.8.0",
     "pg-native": "^3.0.1",

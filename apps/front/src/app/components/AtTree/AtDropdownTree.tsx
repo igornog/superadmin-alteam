@@ -133,7 +133,7 @@ const AtDropdownTree: React.FunctionComponent = () => {
       padding={'10px'}
       paddingLeft={'20px'}
     >
-      <AtTypography color={grey2}>{activeTab.config.title}</AtTypography>
+      <AtTypography color={grey2}>{activeTab.title}</AtTypography>
       <AtTreeItem menu={tree.children || []} />
     </StyledParent>
   )

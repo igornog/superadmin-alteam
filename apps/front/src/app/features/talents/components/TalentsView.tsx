@@ -20,9 +20,7 @@ import TalentsViewFilters from './TalentsViewFilters'
 const TalentsView: React.FunctionComponent = () => {
   const dispatch = useAppDispatch()
   const settings = useAppSelector((state) => state.settings)
-  const activeTab = useAppSelector((state) =>
-    getActiveTab(state, tabsTalentsContent),
-  )
+  const activeTab = useAppSelector((state) => getActiveTab(state))
 
   useEffect(() => {
     dispatch(
@@ -44,12 +42,15 @@ const TalentsView: React.FunctionComponent = () => {
 
   return (
     <AtLayout
-      tabsContent={tabsTalentsContent}
       sidePanel={<TalentsViewFilters />}
       sidePanelIcon={<FilterSquare size={20} />}
       sidePanelSize={'small'}
     >
-      {activeTab.content?.node}
+      {
+        tabsTalentsContent?.[
+          activeTab?.title as keyof typeof tabsTalentsContent
+        ]?.node
+      }
     </AtLayout>
   )
 }

@@ -8,7 +8,7 @@ import TalentLinks from '../../../features/talents/components/TalentViewProfile/
 import TalentListings from '../../../features/talents/components/TalentViewProfile/TalentListings'
 import TalentNotes from '../../../features/talents/components/TalentViewProfile/TalentNotes'
 import TalentSkills from '../../../features/talents/components/TalentViewProfile/TalentSkills'
-import { grey3 } from '../../../utils/colors'
+import { grey3, white } from '../../../utils/colors'
 import { useAppSelector } from '../../../utils/hooks/reduxHook'
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
 import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector'
@@ -21,9 +21,12 @@ import ModalAccepted from '../../AtModal/modals/ModalAccepted/ModalAccepted'
 import ModalDecline from '../../AtModal/modals/ModalDecline'
 import ModalShortlist from '../../AtModal/modals/ModalShortlist/ModalShortlist'
 import AtTypography from '../../AtTypography/AtTypography'
+import AtDrawer from '../AtDrawer'
 import AtDrawerHeader from '../AtDrawerHeader'
 
-const DrawerTalent: React.FunctionComponent = () => {
+const DrawerTalent: React.FunctionComponent<DrawerTalentProps> = (
+  props: DrawerTalentProps,
+) => {
   const selectedTalent = useAppSelector((state) => getActiveTalent(state))
   const activeTab = useAppSelector((state) => getActiveTab(state))
 
@@ -32,7 +35,13 @@ const DrawerTalent: React.FunctionComponent = () => {
   const [openModalDecline, setOpenModalDecline] = useState(false)
 
   return (
-    <Box>
+    <AtDrawer
+      size={'50%'}
+      backgroundColor={white}
+      withBackdrop={true}
+      open={props.open}
+      handleClose={props.handleClose}
+    >
       <AtDrawerHeader
         title={
           <AtTypography variant={'h4'}>{selectedTalent?.fullName}</AtTypography>
@@ -40,6 +49,7 @@ const DrawerTalent: React.FunctionComponent = () => {
         sideTitle={
           <AtTypography color={grey3}>Applied: 23.07.2022</AtTypography>
         }
+        handleClose={props.handleClose}
       />
 
       <Box
@@ -48,8 +58,8 @@ const DrawerTalent: React.FunctionComponent = () => {
         padding={'0 20px 25px 20px'}
         gap={'25px'}
       >
-        {activeTab.config.title === Tabs.ShortlistTalent ||
-          (activeTab.config.title === Tabs.AcceptedTalent && (
+        {activeTab.title === Tabs.ShortlistTalent ||
+          (activeTab.title === Tabs.AcceptedTalent && (
             <TalentListings />
           ))}
 
@@ -75,14 +85,14 @@ const DrawerTalent: React.FunctionComponent = () => {
           />
           <AtButton
             onClick={() =>
-              activeTab.config.title === Tabs.ShortlistTalent
+              activeTab.title === Tabs.ShortlistTalent
                 ? setOpenModalAccepted(true)
                 : setOpenModalShortlist(true)
             }
             kind={AtButtonKind.Success}
             variant={AtButtonVariant.Contained}
             name={
-              activeTab.config.title === Tabs.ShortlistTalent
+              activeTab.title === Tabs.ShortlistTalent
                 ? 'Accept'
                 : 'Shortlist'
             }
@@ -105,8 +115,13 @@ const DrawerTalent: React.FunctionComponent = () => {
         isOpen={openModalDecline}
         onClose={() => setOpenModalDecline(false)}
       />
-    </Box>
+    </AtDrawer>
   )
+}
+
+interface DrawerTalentProps {
+  open: boolean
+  handleClose: () => void
 }
 
 export default DrawerTalent

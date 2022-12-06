@@ -20,6 +20,7 @@ const Client: React.FunctionComponent<ClientProps> = (props: ClientProps) => {
         </AtTypography>
       }
       onClick={() => setOpenModal(true)}
+      backgroundColor={'#FBFCFF'}
     >
       <Box display={'flex'} flexDirection={'column'} gap={'15px'}>
         <Grid container={true}>

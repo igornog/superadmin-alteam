@@ -11,3 +11,14 @@ export const getActiveTalent = createDraftSafeSelector(
       : new Talent({})
   },
 )
+
+export const findTalent = createDraftSafeSelector(
+  [(state) => state.talents, (_, idTalent) => idTalent],
+  ({ listTalents }, idTalent) => {
+    const talent = listTalents.filter(
+      (talent: Talent) => talent.id === idTalent,
+    )
+
+    return new Talent(talent[0])
+  },
+)

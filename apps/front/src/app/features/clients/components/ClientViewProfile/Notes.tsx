@@ -32,6 +32,7 @@ const Notes: React.FunctionComponent = () => {
         </AtTypography>
       }
       onClick={() => setOpenModalAddNote(true)}
+      backgroundColor={'#FBFCFF'}
     >
       <Box display={'flex'} justifyContent={'space-between'}>
         <Box display={'flex'} gap={'20px'}>
