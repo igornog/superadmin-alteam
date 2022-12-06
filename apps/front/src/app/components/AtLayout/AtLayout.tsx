@@ -202,9 +202,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                   </Grid>
 
                   <Box display={'flex'} gap={'30px'}>
-                    {activeTab.settings.displayMode && (
-                      <AtSwitchDisplayMode />
-                    )}
+                    {activeTab.settings.displayMode && <AtSwitchDisplayMode />}
 
                     {activeTab.settings.sortBy && (
                       <Box

@@ -27,7 +27,9 @@ const ScreeningQuestions: React.FunctionComponent<QuestionsProps> = (
             return (
               <>
                 <Box display={'flex'} flexDirection={'column'} gap={'10px'}>
-                  <AtTypography variant={'body1'}>Question {index + 1}:</AtTypography>
+                  <AtTypography variant={'body1'}>
+                    Question {index + 1}:
+                  </AtTypography>
                   <AtTypography>{question}</AtTypography>
                 </Box>
                 {index < props.selectedListing.screeningQuestion.length - 1 && (

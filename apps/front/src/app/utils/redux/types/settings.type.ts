@@ -1,5 +1,5 @@
 import React from 'react'
-import { RightClick } from '../../types';
+import { RightClick } from '../../types'
 import { StatusType } from './status.type'
 
 export interface SettingsState {

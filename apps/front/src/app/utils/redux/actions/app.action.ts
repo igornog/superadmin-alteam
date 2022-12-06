@@ -16,7 +16,7 @@ export const handleCollapsePanel = createAsyncThunk(
 )
 
 export const handleInitPage = createAsyncThunk('app/initPage', async () => {
-  return true;
+  return true
 })
 
 export const handleTalentRightClick = createAsyncThunk(

@@ -59,9 +59,7 @@ const DrawerTalent: React.FunctionComponent<DrawerTalentProps> = (
         gap={'25px'}
       >
         {activeTab.title === Tabs.ShortlistTalent ||
-          (activeTab.title === Tabs.AcceptedTalent && (
-            <TalentListings />
-          ))}
+          (activeTab.title === Tabs.AcceptedTalent && <TalentListings />)}
 
         <TalentSkills talent={selectedTalent} />
 
@@ -92,9 +90,7 @@ const DrawerTalent: React.FunctionComponent<DrawerTalentProps> = (
             kind={AtButtonKind.Success}
             variant={AtButtonVariant.Contained}
             name={
-              activeTab.title === Tabs.ShortlistTalent
-                ? 'Accept'
-                : 'Shortlist'
+              activeTab.title === Tabs.ShortlistTalent ? 'Accept' : 'Shortlist'
             }
             endIcon={<TickSquare size={16} />}
           />

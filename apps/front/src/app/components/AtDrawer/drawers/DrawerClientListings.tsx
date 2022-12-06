@@ -56,7 +56,7 @@ const DrawerClientListings: React.FunctionComponent<
   }
 
   console.log(selectedClient)
-  
+
   return (
     <AtDrawer
       size={'calc(100% - 145px)'}

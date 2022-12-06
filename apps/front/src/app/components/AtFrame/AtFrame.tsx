@@ -44,7 +44,7 @@ interface TalentFrameProps {
   title?: string
   icon?: React.ReactNode
   onClick?: (e: React.MouseEvent) => void
-  gap?: number;
+  gap?: number
   backgroundColor?: string
 }
 

@@ -20,8 +20,9 @@ const StyledBox = styled(Box)`
   background-position: center;
 `
 
-const FinalStep: React.FunctionComponent<FinalStepProps> = (props: FinalStepProps) => {
-
+const FinalStep: React.FunctionComponent<FinalStepProps> = (
+  props: FinalStepProps,
+) => {
   return (
     <StyledBox>
       <Box
@@ -47,7 +48,7 @@ const FinalStep: React.FunctionComponent<FinalStepProps> = (props: FinalStepProp
 }
 
 interface FinalStepProps {
-  handleClose: () => void;
+  handleClose: () => void
 }
 
 export default FinalStep
