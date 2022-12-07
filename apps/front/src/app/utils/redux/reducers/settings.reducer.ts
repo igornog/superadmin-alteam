@@ -1,3 +1,4 @@
+/* eslint-disable unused-imports/no-unused-vars */
 import { createSlice } from '@reduxjs/toolkit'
 import {
   handleActiveFilter,
@@ -35,11 +36,12 @@ const { reducer } = createSlice({
       })
       .addCase(handleInitSettings.fulfilled, (state, { payload }) => {
         state.status = StatusType.Succeeded
-        state.tabs = payload.tabs
+        state.tabs = payload.tabs.map(({ node, ...rest }: any) => rest)
 
         if (payload.filters) {
           state.filters.skills = payload.filters
         }
+
         if (payload.jobTypes) {
           state.filters.jobTypes = payload.jobTypes
         }

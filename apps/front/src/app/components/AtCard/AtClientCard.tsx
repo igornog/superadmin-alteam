@@ -49,7 +49,7 @@ const AtClientCard: React.FunctionComponent<AtClientCardProps> = (
               <AtGroupTag icon={<ArrowRight2 size={10} />} />
             </Box>
             <AtTypography variant={'body1'} color={grey}>
-              {plurialize(client.listings, 'listing')}
+              {plurialize(client.listings.length, 'listing')}
             </AtTypography>
           </Box>
         </Box>

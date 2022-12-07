@@ -1,73 +1,51 @@
 import { Page } from '../../utils/redux/types/settings.type'
-import { RightClick, Tabs } from '../../utils/types'
+import { Tabs } from '../../utils/types'
 import ClientRequestsView from './components/ClientRequests/ClientRequestsView'
 import LinkedinLogo from '../../assets/images/icons/Linkedin.svg'
+import { Client } from '../../utils/redux/types/clients.type'
+import {
+  Availability,
+  Difficulty,
+  ListingStatus,
+  RateType,
+  WorkType,
+} from '../../utils/redux/types/listings.type'
 
 export { default } from './components/ClientsView'
 
-export const tabsClientsContent = {
-  [Tabs.ClientRequests]: {
-    node: <ClientRequestsView />,
-    rightClick: [],
-  },
-  [Tabs.ActiveClients]: {
-    node: <ClientRequestsView />,
-    rightClick: [
-      RightClick.MoveToShortlisted,
-      RightClick.SendEmailToTalent,
-      RightClick.ShareTalent,
-      RightClick.MoveToDesclined,
-    ],
-  },
-  [Tabs.InactiveClients]: {
-    node: <ClientRequestsView />,
-    rightClick: [
-      RightClick.MoveToAccepted,
-      RightClick.EditTalentFolders,
-      RightClick.SendEmailToTalent,
-      RightClick.ShareTalent,
-      RightClick.MoveToDesclined,
-    ],
-  },
-  [Tabs.DeclinedRequests]: {
-    node: <ClientRequestsView />,
-    rightClick: [
-      RightClick.MoveToShortlisted,
-      RightClick.EditTalentFolders,
-      RightClick.SendEmailToTalent,
-      RightClick.ShareTalent,
-      RightClick.MoveToDesclined,
-    ],
-  },
-}
-
-export const talentsTabs: Page[] = [
+export const clientsTabs: Page[] = [
   {
     title: Tabs.ClientRequests,
+    node: <ClientRequestsView />,
     badge: 5,
-    active: true,
-    settings: {
-      search: true,
-      downloadCSV: true,
-      displayMode: true,
-      sortBy: true,
-      // verifyClient: true,
-      createClient: true,
-    },
-  },
-  {
-    title: Tabs.ActiveClients,
-    badge: 150,
     active: false,
     settings: {
       search: true,
       downloadCSV: true,
       displayMode: true,
       sortBy: true,
+      createClient: true,
     },
+    talentRightClick: [],
+    clientRightClick: [],
+  },
+  {
+    title: Tabs.ActiveClients,
+    node: <ClientRequestsView />,
+    badge: 150,
+    active: true,
+    settings: {
+      search: true,
+      downloadCSV: true,
+      displayMode: true,
+      sortBy: true,
+    },
+    talentRightClick: [],
+    clientRightClick: [],
   },
   {
     title: Tabs.InactiveClients,
+    node: <ClientRequestsView />,
     badge: 20,
     active: false,
     settings: {
@@ -76,9 +54,12 @@ export const talentsTabs: Page[] = [
       displayMode: true,
       sortBy: true,
     },
+    talentRightClick: [],
+    clientRightClick: [],
   },
   {
     title: Tabs.DeclinedRequests,
+    node: <ClientRequestsView />,
     active: false,
     settings: {
       search: true,
@@ -86,18 +67,46 @@ export const talentsTabs: Page[] = [
       displayMode: true,
       sortBy: true,
     },
+    talentRightClick: [],
+    clientRightClick: [],
   },
 ]
 
-export const clients = [
+export const clients: Client[] = [
   {
     id: 1,
     name: 'Chaptr',
     logo: LinkedinLogo,
     received: '23.07.2022',
     industry: 'Web 3.0',
-    listings: 1,
-    assignee: null,
+    listings: Array.from(Array(2).keys()).map((key) => ({
+      id: key,
+      name: `Listing ${key}`,
+      nbIndividual: 1,
+      workType: WorkType.Remote,
+      timeZone: 'GMT+2',
+      availability: Availability.PartTime,
+      hours: 20,
+      projectLength: 6,
+      startDate: new Date(),
+      rateType: RateType.Fixed,
+      rateFrom: 200,
+      rateTo: 300,
+      difficulty: Difficulty.Senior,
+      learning: 'linktothevideo.com/videolink',
+      jobDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor...',
+      screeningQuestion: [
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu.',
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu.',
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu.',
+      ],
+      status: ListingStatus.Active,
+      received: '23.07.2022',
+      assignee: 0,
+      talent: [1, 2, 4, 5],
+    })),
+    assignee: 0,
     email: 'and@chaptr.com',
     phoneNumber: '+44 1234 123456',
     companyUrl: 'chaptr.com',
@@ -105,11 +114,35 @@ export const clients = [
   {
     id: 2,
     name: 'Aviva',
-    logo: null,
+    logo: undefined,
     received: '23.07.2022',
     industry: 'Web 3.0',
-    listings: 2,
-    assignee: null,
+    listings: Array.from(Array(4).keys()).map((key) => ({
+      id: key,
+      name: `Listing ${key}`,
+      nbIndividual: 1,
+      workType: WorkType.Remote,
+      timeZone: 'GMT+2',
+      availability: Availability.FullTime,
+      projectLength: 6,
+      startDate: new Date(),
+      rateType: RateType.Fixed,
+      rateFrom: 200,
+      rateTo: 300,
+      difficulty: Difficulty.Senior,
+      learning: 'linktothevideo.com/videolink',
+      jobDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque pellentesque at amet congue integer eget. At a, ante nullam tempus, mattis in aenean a. Volutpat bibendum sit egestas ultrices scelerisq...',
+      screeningQuestion: [
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu.',
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu.',
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu.',
+      ],
+      status: ListingStatus.Active,
+      received: '23.07.2022',
+      assignee: 0,
+    })),
+    assignee: 0,
     email: 'and@chaptr.com',
     phoneNumber: '+44 1234 123456',
     companyUrl: 'chaptr.com',
@@ -120,8 +153,8 @@ export const clients = [
     logo: LinkedinLogo,
     received: '23.07.2022',
     industry: 'Web 3.0',
-    listings: 3,
-    assignee: null,
+    listings: [],
+    assignee: 0,
     email: 'and@chaptr.com',
     phoneNumber: '+44 1234 123456',
     companyUrl: 'chaptr.com',
@@ -129,11 +162,11 @@ export const clients = [
   {
     id: 4,
     name: 'Heat',
-    logo: null,
+    logo: undefined,
     received: '23.07.2022',
     industry: 'Web 3.0',
-    listings: 3,
-    assignee: null,
+    listings: [],
+    assignee: 0,
     email: 'and@chaptr.com',
     phoneNumber: '+44 1234 123456',
     companyUrl: 'chaptr.com',
@@ -144,8 +177,8 @@ export const clients = [
     logo: LinkedinLogo,
     received: '23.07.2022',
     industry: 'Web 3.0',
-    listings: 3,
-    assignee: null,
+    listings: [],
+    assignee: 0,
     email: 'and@chaptr.com',
     phoneNumber: '+44 1234 123456',
     companyUrl: 'chaptr.com',
@@ -156,8 +189,8 @@ export const clients = [
     logo: LinkedinLogo,
     received: '23.07.2022',
     industry: 'Web 3.0',
-    listings: 3,
-    assignee: null,
+    listings: [],
+    assignee: 0,
     email: 'and@chaptr.com',
     phoneNumber: '+44 1234 123456',
     companyUrl: 'chaptr.com',

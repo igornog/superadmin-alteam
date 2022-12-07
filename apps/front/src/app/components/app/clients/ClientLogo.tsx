@@ -30,7 +30,7 @@ const ClientLogo: React.FunctionComponent<ClientLogoProps> = (
 }
 
 interface ClientLogoProps {
-  logo: string
+  logo?: string
   width?: string
 }
 

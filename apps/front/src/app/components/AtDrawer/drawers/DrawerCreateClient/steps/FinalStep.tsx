@@ -4,8 +4,6 @@ import React from 'react'
 import styled from 'styled-components'
 import Rocketbg from '../../../../../assets/images/icons/background_rocket.svg'
 import SmallRocket from '../../../../../assets/images/icons/small_rocket.svg'
-import { useAppDispatch } from '../../../../../utils/hooks/reduxHook'
-import { handleDrawer } from '../../../../../utils/redux/actions/settings.action'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
@@ -22,12 +20,9 @@ const StyledBox = styled(Box)`
   background-position: center;
 `
 
-const FinalStep: React.FunctionComponent = () => {
-  const dispatch = useAppDispatch()
-
-  const handleClose = () => {
-    dispatch(handleDrawer(null))
-  }
+const FinalStep: React.FunctionComponent<FinalStepProps> = (
+  props: FinalStepProps,
+) => {
   return (
     <StyledBox>
       <Box
@@ -45,11 +40,15 @@ const FinalStep: React.FunctionComponent = () => {
           variant={AtButtonVariant.Contained}
           name={'Go to Client Requests'}
           endIcon={<ArrowRight />}
-          onClick={handleClose}
+          onClick={props.handleClose}
         />
       </Box>
     </StyledBox>
   )
+}
+
+interface FinalStepProps {
+  handleClose: () => void
 }
 
 export default FinalStep

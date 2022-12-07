@@ -1,3 +1,4 @@
+import { Listing } from './listings.type'
 import { StatusType } from './status.type'
 
 export interface ClientsState {
@@ -10,10 +11,10 @@ export interface ClientsState {
 export class Client {
   id: number
   name: string
-  logo: string
+  logo?: string
   received: string
   industry: string
-  listings: number
+  listings: Listing[]
   assignee: number
   email: string
   phoneNumber: string

@@ -18,7 +18,7 @@ const TalentCard: React.FunctionComponent<TalentCardProps> = (
           flexDirection={'column'}
         >
           <AtTalentCard
-            talent={talent}
+            idTalent={talent.id}
             onClick={() => props.openTalent(talent.id)}
             fullHeight={true}
             openShortlist={props.openShortlist}

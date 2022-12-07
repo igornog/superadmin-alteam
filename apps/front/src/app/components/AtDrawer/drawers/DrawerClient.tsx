@@ -5,7 +5,7 @@ import Client from '../../../features/clients/components/ClientViewProfile/Clien
 import Company from '../../../features/clients/components/ClientViewProfile/Company'
 import Notes from '../../../features/clients/components/ClientViewProfile/Notes'
 import Request from '../../../features/clients/components/ClientViewProfile/Request'
-import { grey3 } from '../../../utils/colors'
+import { grey3, white } from '../../../utils/colors'
 import { useAppSelector } from '../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../utils/redux/selectors/clients.selector'
 import ClientLogo from '../../app/clients/ClientLogo'
@@ -16,15 +16,24 @@ import AtButton, {
 import AtLine from '../../AtLine/AtLine'
 import ModalEditClient from '../../AtModal/modals/ModalEditClient'
 import AtTypography from '../../AtTypography/AtTypography'
+import AtDrawer from '../AtDrawer'
 import AtDrawerHeader from '../AtDrawerHeader'
 
-const DrawerClient: React.FunctionComponent = () => {
+const DrawerClient: React.FunctionComponent<DrawerClientProps> = (
+  props: DrawerClientProps,
+) => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
 
   const [openEditModal, setOpenEditModal] = useState(false)
 
   return (
-    <Box>
+    <AtDrawer
+      size={'50%'}
+      backgroundColor={white}
+      withBackdrop={true}
+      open={props.open}
+      handleClose={props.handleClose}
+    >
       <AtDrawerHeader
         title={
           <Box
@@ -52,6 +61,7 @@ const DrawerClient: React.FunctionComponent = () => {
         sideTitle={
           <AtTypography color={grey3}>Applied: 23.07.2022</AtTypography>
         }
+        handleClose={props.handleClose}
       />
 
       <Box
@@ -73,8 +83,13 @@ const DrawerClient: React.FunctionComponent = () => {
         open={openEditModal}
         onClose={() => setOpenEditModal(false)}
       />
-    </Box>
+    </AtDrawer>
   )
+}
+
+interface DrawerClientProps {
+  open: boolean
+  handleClose: () => void
 }
 
 export default DrawerClient

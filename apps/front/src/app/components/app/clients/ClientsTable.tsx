@@ -97,7 +97,7 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
 
             {haveToDisplay(Column.Listings) && (
               <AtTableCell>
-                <AtTypography>{client.listings}</AtTypography>
+                <AtTypography>{client.listings.length}</AtTypography>
               </AtTableCell>
             )}
 
