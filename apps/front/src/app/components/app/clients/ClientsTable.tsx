@@ -1,12 +1,16 @@
 import { Box } from '@mui/material'
 import React, { useState } from 'react'
 import { grey, grey3 } from '../../../utils/colors'
+import { useAppSelector } from '../../../utils/hooks/reduxHook'
+import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
 import { Client } from '../../../utils/redux/types/clients.type'
 import { Column } from '../../../utils/redux/types/settings.type'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
 } from '../../AtButton/AtButton'
+import AtRightClick from '../../AtRightClick/AtRightClick'
+import ClientMenu from '../../AtRightClick/ContextMenus/ClientMenu'
 import AtTable from '../../AtTable/AtTable'
 import AtTableBody from '../../AtTable/AtTableBody'
 import AtTableCell from '../../AtTable/AtTableCell'
@@ -19,6 +23,7 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
   props: ClientTableProps,
 ) => {
   const [position, setPosition] = useState<number | null>(null)
+  const activeTab = useAppSelector((state) => getActiveTab(state))
 
   const haveToDisplay = (column: Column) => {
     return props.tableColumns?.includes(column)
@@ -53,89 +58,96 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
       </AtTableHead>
       <AtTableBody position={position}>
         {props.clients.map((client: Client) => (
-          <AtTableRow
-            key={client.id}
-            hover={true}
-            onClick={() => props.openClient(client.id)}
-            setPosition={setPosition}
+          <AtRightClick
+            disabled={activeTab.clientRightClick.length === 0}
+            contextMenu={<ClientMenu />}
           >
-            {haveToDisplay(Column.Client) && (
-              <AtTableCell>
-                <Box
-                  display={'flex'}
-                  flexDirection={'column'}
-                  textOverflow={'ellipsis'}
-                  whiteSpace={'nowrap'}
-                >
-                  <Box display={'flex'} gap={'10px'} alignItems={'center'}>
-                    <Box width={'28px'} height={'28px'}>
-                      <ClientLogo logo={client.logo} />
-                    </Box>
+            <AtTableRow
+              key={client.id}
+              hover={true}
+              onClick={() => props.openClient(client.id)}
+              setPosition={setPosition}
+            >
+              {haveToDisplay(Column.Client) && (
+                <AtTableCell>
+                  <Box
+                    display={'flex'}
+                    flexDirection={'column'}
+                    textOverflow={'ellipsis'}
+                    whiteSpace={'nowrap'}
+                  >
+                    <Box display={'flex'} gap={'10px'} alignItems={'center'}>
+                      <Box width={'28px'} height={'28px'}>
+                        <ClientLogo logo={client.logo} />
+                      </Box>
 
-                    <Box display={'flex'} flexDirection={'column'}>
-                      <AtTypography variant={'body1'} bold={true}>
-                        {client.name}
-                      </AtTypography>
-                      <AtTypography
-                        variant={'caption'}
-                        color={grey}
-                        bold={true}
-                      >
-                        {client.industry}
-                      </AtTypography>
+                      <Box display={'flex'} flexDirection={'column'}>
+                        <AtTypography variant={'body1'} bold={true}>
+                          {client.name}
+                        </AtTypography>
+                        <AtTypography
+                          variant={'caption'}
+                          color={grey}
+                          bold={true}
+                        >
+                          {client.industry}
+                        </AtTypography>
+                      </Box>
                     </Box>
                   </Box>
-                </Box>
-              </AtTableCell>
-            )}
+                </AtTableCell>
+              )}
 
-            {haveToDisplay(Column.Received) && (
-              <AtTableCell>
-                <AtTypography>{client.received}</AtTypography>
-              </AtTableCell>
-            )}
+              {haveToDisplay(Column.Received) && (
+                <AtTableCell>
+                  <AtTypography>{client.received}</AtTypography>
+                </AtTableCell>
+              )}
 
-            {haveToDisplay(Column.Listings) && (
-              <AtTableCell>
-                <AtTypography>{client.listings.length}</AtTypography>
-              </AtTableCell>
-            )}
+              {haveToDisplay(Column.Listings) && (
+                <AtTableCell>
+                  <AtTypography>{client.listings.length}</AtTypography>
+                </AtTableCell>
+              )}
 
-            {haveToDisplay(Column.Assignees) && (
-              <AtTableCell>
-                <AtTypography>
-                  {client.assignee ?? (
-                    <Box display={'flex'} gap={'10px'}>
-                      <AtTypography color={grey3}>Nobody assigned</AtTypography>
+              {haveToDisplay(Column.Assignees) && (
+                <AtTableCell>
+                  <AtTypography>
+                    {client.assignee ?? (
+                      <Box display={'flex'} gap={'10px'}>
+                        <AtTypography color={grey3}>
+                          Nobody assigned
+                        </AtTypography>
 
-                      <AtButton
-                        kind={AtButtonKind.Default}
-                        variant={AtButtonVariant.Text}
-                        name={'Assign now'}
-                        fontSize={'14px'}
-                      />
-                    </Box>
-                  )}
-                </AtTypography>
-              </AtTableCell>
-            )}
+                        <AtButton
+                          kind={AtButtonKind.Default}
+                          variant={AtButtonVariant.Text}
+                          name={'Assign now'}
+                          fontSize={'14px'}
+                        />
+                      </Box>
+                    )}
+                  </AtTypography>
+                </AtTableCell>
+              )}
 
-            {haveToDisplay(Column.Email) && (
-              <AtTableCell>
-                <AtTypography>{client.email}</AtTypography>
-              </AtTableCell>
-            )}
+              {haveToDisplay(Column.Email) && (
+                <AtTableCell>
+                  <AtTypography>{client.email}</AtTypography>
+                </AtTableCell>
+              )}
 
-            {haveToDisplay(Column.Phone) && (
-              <AtTableCell>
-                <AtTypography>{client.phoneNumber}</AtTypography>
-              </AtTableCell>
-            )}
+              {haveToDisplay(Column.Phone) && (
+                <AtTableCell>
+                  <AtTypography>{client.phoneNumber}</AtTypography>
+                </AtTableCell>
+              )}
 
-            {haveToDisplay(Column.CompanyUrl) && (
-              <AtTableCell align={'right'}>{client.companyUrl}</AtTableCell>
-            )}
-          </AtTableRow>
+              {haveToDisplay(Column.CompanyUrl) && (
+                <AtTableCell align={'right'}>{client.companyUrl}</AtTableCell>
+              )}
+            </AtTableRow>
+          </AtRightClick>
         ))}
       </AtTableBody>
     </AtTable>

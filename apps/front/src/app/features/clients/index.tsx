@@ -1,5 +1,5 @@
 import { Page } from '../../utils/redux/types/settings.type'
-import { Tabs } from '../../utils/types'
+import { RightClick, Tabs } from '../../utils/types'
 import ClientRequestsView from './components/ClientRequests/ClientRequestsView'
 import LinkedinLogo from '../../assets/images/icons/Linkedin.svg'
 import { Client } from '../../utils/redux/types/clients.type'
@@ -55,7 +55,11 @@ export const clientsTabs: Page[] = [
       sortBy: true,
     },
     talentRightClick: [],
-    clientRightClick: [],
+    clientRightClick: [
+      RightClick.MoveToActive,
+      RightClick.MoveToDeclined,
+      RightClick.ShareClient,
+    ],
   },
   {
     title: Tabs.DeclinedRequests,
@@ -68,7 +72,12 @@ export const clientsTabs: Page[] = [
       sortBy: true,
     },
     talentRightClick: [],
-    clientRightClick: [],
+    clientRightClick: [
+      RightClick.MoveToActive,
+      RightClick.MoveToInactive,
+      RightClick.ShareRequest,
+      RightClick.DeleteRequest,
+    ],
   },
 ]
 

@@ -140,10 +140,6 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                           open={openDrawerCreateClient}
                           handleClose={() => setOpenDrawerCreateClient(false)}
                         />
-                        {/* <ModalAddTalent
-                          isOpen={openCreateTalent}
-                          onClose={() => setOpenCreateTalent(false)}
-                        /> */}
                       </>
                     )}
 
@@ -269,7 +265,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
 }
 
 interface AtLayoutProps {
-  children: any
+  children: React.ReactNode
   title?: string
   sidePanel?: React.ReactNode
   sidePanelIcon?: React.ReactNode
