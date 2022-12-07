@@ -9,27 +9,10 @@ import ShortlistLatentsView from './components/ShortlistTalents/ShortlistTatents
 
 export { default } from './components/TalentsView'
 
-export const tabsTalentsContent = {
-  [Tabs.AllTalent]: {
-    node: <AllTalentsView />,
-  },
-  [Tabs.InboundTalent]: {
-    node: <InboundTalentsView />,
-  },
-  [Tabs.ShortlistTalent]: {
-    node: <ShortlistLatentsView />,
-  },
-  [Tabs.AcceptedTalent]: {
-    node: <AcceptedTatentsView />,
-  },
-  [Tabs.DeclinedTalent]: {
-    node: <DeclinedTalentsView />,
-  },
-}
-
 export const talentsTabs: Page[] = [
   {
     title: Tabs.AllTalent,
+    node: <AllTalentsView />,
     badge: 150,
     active: false,
     settings: {
@@ -43,6 +26,7 @@ export const talentsTabs: Page[] = [
   },
   {
     title: Tabs.InboundTalent,
+    node: <InboundTalentsView />,
     badge: 5,
     active: true,
     settings: {
@@ -62,6 +46,7 @@ export const talentsTabs: Page[] = [
   },
   {
     title: Tabs.ShortlistTalent,
+    node: <ShortlistLatentsView />,
     badge: 40,
     active: false,
     settings: {
@@ -80,6 +65,7 @@ export const talentsTabs: Page[] = [
   },
   {
     title: Tabs.AcceptedTalent,
+    node: <AcceptedTatentsView />,
     badge: 20,
     active: false,
     settings: {
@@ -98,6 +84,7 @@ export const talentsTabs: Page[] = [
   },
   {
     title: Tabs.DeclinedTalent,
+    node: <DeclinedTalentsView />,
     active: false,
     settings: {
       search: true,

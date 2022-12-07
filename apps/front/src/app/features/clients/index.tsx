@@ -13,25 +13,10 @@ import {
 
 export { default } from './components/ClientsView'
 
-export const tabsClientsContent = {
-  [Tabs.ClientRequests]: {
-    node: <ClientRequestsView />,
-    talentRightClick: [],
-  },
-  [Tabs.ActiveClients]: {
-    node: <ClientRequestsView />,
-  },
-  [Tabs.InactiveClients]: {
-    node: <ClientRequestsView />,
-  },
-  [Tabs.DeclinedRequests]: {
-    node: <ClientRequestsView />,
-  },
-}
-
-export const talentsTabs: Page[] = [
+export const clientsTabs: Page[] = [
   {
     title: Tabs.ClientRequests,
+    node: <ClientRequestsView />,
     badge: 5,
     active: false,
     settings: {
@@ -46,6 +31,7 @@ export const talentsTabs: Page[] = [
   },
   {
     title: Tabs.ActiveClients,
+    node: <ClientRequestsView />,
     badge: 150,
     active: true,
     settings: {
@@ -59,6 +45,7 @@ export const talentsTabs: Page[] = [
   },
   {
     title: Tabs.InactiveClients,
+    node: <ClientRequestsView />,
     badge: 20,
     active: false,
     settings: {
@@ -72,6 +59,7 @@ export const talentsTabs: Page[] = [
   },
   {
     title: Tabs.DeclinedRequests,
+    node: <ClientRequestsView />,
     active: false,
     settings: {
       search: true,
@@ -107,7 +95,7 @@ export const clients: Client[] = [
       difficulty: Difficulty.Senior,
       learning: 'linktothevideo.com/videolink',
       jobDescription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor...',
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor...',
       screeningQuestion: [
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu.',
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu.',

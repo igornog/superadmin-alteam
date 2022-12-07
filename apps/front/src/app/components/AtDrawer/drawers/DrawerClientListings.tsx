@@ -11,7 +11,7 @@ import styled from 'styled-components'
 import Client from '../../../features/clients/components/ClientViewProfile/Client'
 import Company from '../../../features/clients/components/ClientViewProfile/Company'
 import Notes from '../../../features/clients/components/ClientViewProfile/Notes'
-import { grey2 } from '../../../utils/colors'
+import { grey2, grey3 } from '../../../utils/colors'
 import { useAppSelector } from '../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../utils/redux/selectors/clients.selector'
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
@@ -54,8 +54,6 @@ const DrawerClientListings: React.FunctionComponent<
     setSelectedListing(listing)
     setOpenCreateListing(true)
   }
-
-  console.log(selectedClient)
 
   return (
     <AtDrawer
@@ -147,19 +145,33 @@ const DrawerClientListings: React.FunctionComponent<
 
             <AtTextField
               value={''}
+              disabled={selectedClient.listings?.length === 0}
               startIcon={<SearchNormal />}
               placeholder={'Search in ' + selectedClient.name + ' Listings...'}
             />
-            <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
-              {selectedClient.listings &&
-                selectedClient.listings.map((listing: Listing) => (
-                  <AtListingCard
-                    key={listing.id}
-                    listing={listing}
-                    onClick={() => selectListing(listing)}
-                  />
-                ))}
-            </Box>
+            {selectedClient.listings?.length === 0 ? (
+              <Box
+                display={'flex'}
+                alignItems={'center'}
+                justifyContent={'center'}
+                height={'70%'}
+              >
+                <AtTypography variant={'h3'} color={grey3}>
+                  No Active Listings
+                </AtTypography>
+              </Box>
+            ) : (
+              <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
+                {selectedClient.listings &&
+                  selectedClient.listings.map((listing: Listing) => (
+                    <AtListingCard
+                      key={listing.id}
+                      listing={listing}
+                      onClick={() => selectListing(listing)}
+                    />
+                  ))}
+              </Box>
+            )}
           </StyledListings>
         </Grid>
       </Grid>

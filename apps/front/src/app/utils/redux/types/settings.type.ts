@@ -14,6 +14,7 @@ export interface SettingsState {
 
 export interface Page {
   title: string
+  node?: React.ReactNode
   badge?: number
   action?: string
   active?: boolean

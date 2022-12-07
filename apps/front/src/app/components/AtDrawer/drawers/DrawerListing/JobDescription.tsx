@@ -1,6 +1,6 @@
-import { Box } from '@mui/material'
-import { ArrowDown, Edit } from 'iconsax-react'
-import React from 'react'
+import { Box, Collapse } from '@mui/material'
+import { ArrowDown, ArrowUp, Edit } from 'iconsax-react'
+import React, { useState } from 'react'
 import { grey } from '../../../../utils/colors'
 import { Listing } from '../../../../utils/redux/types/listings.type'
 import AtButton, {
@@ -13,6 +13,8 @@ import AtTypography from '../../../AtTypography/AtTypography'
 const JobDescription: React.FunctionComponent<JobDescriptionProps> = (
   props: JobDescriptionProps,
 ) => {
+  const [collapseDescription, setCollapseDescription] = useState(false)
+
   return (
     <AtFrame
       title={'Job Description'}
@@ -25,17 +27,20 @@ const JobDescription: React.FunctionComponent<JobDescriptionProps> = (
       onClick={() => undefined}
       backgroundColor={'#FBFCFF'}
     >
-      <AtTypography color={grey}>
-        {props.selectedListing.jobDescription}
-      </AtTypography>
+      <Collapse in={collapseDescription} collapsedSize={40}>
+        <AtTypography color={grey}>
+          {props.selectedListing.jobDescription}
+        </AtTypography>
+      </Collapse>
 
       <Box display={'flex'}>
         <AtButton
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
-          startIcon={<ArrowDown />}
-          name={'View Full Description'}
+          startIcon={collapseDescription ? <ArrowUp /> : <ArrowDown />}
+          name={`${collapseDescription ? 'Hide' : 'View'} Full Description`}
           fontSize={'14px'}
+          onClick={() => setCollapseDescription(!collapseDescription)}
         />
       </Box>
     </AtFrame>

@@ -54,7 +54,9 @@ const AtListingCard: React.FunctionComponent<AtListingCardProps> = (
 
         <AtLine spacingTop={6} spacingBottom={16} />
 
-        <AtTypography color={grey2}>{listing.jobDescription}</AtTypography>
+        <AtTypography color={grey2} ellipsis={3}>
+          {listing.jobDescription}
+        </AtTypography>
       </Box>
     </StyledCard>
   )

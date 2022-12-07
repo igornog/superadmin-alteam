@@ -1,12 +1,6 @@
 import { FilterSquare } from 'iconsax-react'
 import React, { useEffect } from 'react'
-import {
-  tabsTalentsContent,
-  talents,
-  talentsFilters,
-  talentsJobType,
-  talentsTabs,
-} from '..'
+import { talents, talentsFilters, talentsJobType, talentsTabs } from '..'
 import AtLayout from '../../../components/AtLayout/AtLayout'
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
 import {
@@ -46,11 +40,7 @@ const TalentsView: React.FunctionComponent = () => {
       sidePanelIcon={<FilterSquare size={20} />}
       sidePanelSize={'small'}
     >
-      {
-        tabsTalentsContent?.[
-          activeTab?.title as keyof typeof tabsTalentsContent
-        ]?.node
-      }
+      {talentsTabs.filter((item) => item.title === activeTab?.title)[0]?.node}
     </AtLayout>
   )
 }

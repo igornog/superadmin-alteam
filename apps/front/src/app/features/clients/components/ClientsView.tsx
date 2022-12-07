@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { clients, tabsClientsContent, talentsTabs } from '..'
+import { clients, clientsTabs } from '..'
 import AtLayout from '../../../components/AtLayout/AtLayout'
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
 import { handleClients } from '../../../utils/redux/actions/clients.action'
@@ -19,7 +19,7 @@ const ClientsView: React.FunctionComponent = () => {
   useEffect(() => {
     dispatch(
       handleInitSettings({
-        tabs: talentsTabs,
+        tabs: clientsTabs,
       }),
     )
 
@@ -35,11 +35,7 @@ const ClientsView: React.FunctionComponent = () => {
 
   return (
     <AtLayout>
-      {
-        tabsClientsContent?.[
-          activeTab?.title as keyof typeof tabsClientsContent
-        ]?.node
-      }
+      {clientsTabs.filter((item) => item.title === activeTab?.title)[0]?.node}
     </AtLayout>
   )
 }
