@@ -81,19 +81,23 @@ const DrawerTalent: React.FunctionComponent<DrawerTalentProps> = (
             name={'Decline'}
             endIcon={<CloseSquare size={16} />}
           />
-          <AtButton
-            onClick={() =>
-              activeTab.title === Tabs.ShortlistTalent
-                ? setOpenModalAccepted(true)
-                : setOpenModalShortlist(true)
-            }
-            kind={AtButtonKind.Success}
-            variant={AtButtonVariant.Contained}
-            name={
-              activeTab.title === Tabs.ShortlistTalent ? 'Accept' : 'Shortlist'
-            }
-            endIcon={<TickSquare size={16} />}
-          />
+          {activeTab.title === Tabs.ShortlistTalent ? (
+            <AtButton
+              onClick={() => setOpenModalAccepted(true)}
+              kind={AtButtonKind.Success}
+              variant={AtButtonVariant.Contained}
+              name={'Accept'}
+              endIcon={<TickSquare size={16} />}
+            />
+          ) : (
+            <AtButton
+              onClick={() => setOpenModalShortlist(true)}
+              kind={AtButtonKind.Success}
+              variant={AtButtonVariant.Contained}
+              name={'Shortlist'}
+              endIcon={<TickSquare size={16} />}
+            />
+          )}
         </Box>
       </Box>
 

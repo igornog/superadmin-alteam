@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { Edit } from 'iconsax-react'
+import { AddCircle, CloseSquare, Edit, TickSquare } from 'iconsax-react'
 import React, { useState } from 'react'
 import Client from '../../../features/clients/components/ClientViewProfile/Client'
 import Company from '../../../features/clients/components/ClientViewProfile/Company'
@@ -8,6 +8,8 @@ import Request from '../../../features/clients/components/ClientViewProfile/Requ
 import { grey3, white } from '../../../utils/colors'
 import { useAppSelector } from '../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../utils/redux/selectors/clients.selector'
+import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
+import { Tabs } from '../../../utils/types'
 import ClientLogo from '../../app/clients/ClientLogo'
 import AtButton, {
   AtButtonKind,
@@ -23,6 +25,7 @@ const DrawerClient: React.FunctionComponent<DrawerClientProps> = (
   props: DrawerClientProps,
 ) => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
+  const activeTab = useAppSelector((state) => getActiveTab(state))
 
   const [openEditModal, setOpenEditModal] = useState(false)
 
@@ -77,6 +80,52 @@ const DrawerClient: React.FunctionComponent<DrawerClientProps> = (
         <Client client={selectedClient} />
 
         <Notes />
+
+        <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
+          {activeTab.title === Tabs.ClientRequests ||
+          activeTab.title === Tabs.InactiveClients ? (
+            <AtButton
+              onClick={() => undefined}
+              kind={AtButtonKind.Danger}
+              variant={AtButtonVariant.Contained}
+              name={'Decline'}
+              endIcon={<CloseSquare size={16} />}
+            />
+          ) : null}
+
+          {activeTab.title === Tabs.ClientRequests ||
+          activeTab.title === Tabs.DeclinedRequests ? (
+            <AtButton
+              onClick={() => undefined}
+              kind={AtButtonKind.Default}
+              variant={
+                activeTab.title === Tabs.DeclinedRequests
+                  ? AtButtonVariant.Contained
+                  : AtButtonVariant.Outlined
+              }
+              name={'Move to Inactive'}
+              endIcon={
+                activeTab.title === Tabs.DeclinedRequests ? (
+                  <AddCircle size={16} />
+                ) : (
+                  <TickSquare size={16} />
+                )
+              }
+            />
+          ) : null}
+
+          {activeTab.title === Tabs.ClientRequests ||
+          activeTab.title === Tabs.InactiveClients ||
+          activeTab.title === Tabs.DeclinedRequests ? (
+            <AtButton
+              onClick={() => undefined}
+              kind={AtButtonKind.Success}
+              variant={AtButtonVariant.Contained}
+              name={'Move to Active'}
+              endIcon={<TickSquare size={16} />}
+            />
+          ) : null}
+        </Box>
       </Box>
 
       <ModalEditClient

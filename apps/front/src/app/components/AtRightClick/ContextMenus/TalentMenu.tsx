@@ -133,7 +133,7 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
         </AtContextMenuItem>
       ) : null}
 
-      {isCurrentTabAllowed(RightClick.MoveToDesclined) ||
+      {isCurrentTabAllowed(RightClick.MoveToDeclined) ||
       isTabAndStatusAllowed([
         TalentStatus.Shortlisted,
         TalentStatus.Inbound,
