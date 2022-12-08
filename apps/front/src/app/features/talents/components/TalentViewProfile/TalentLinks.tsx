@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import AtCopyTo from '../../../../components/AtCopyTo/AtCopyTo'
 import AtLine from '../../../../components/AtLine/AtLine'
 import ModalLink from '../../../../components/AtModal/modals/ModalLink'
-import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame'
+import AtFrame from '../../../../components/AtFrame/AtFrame'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
 import { black, grey4 } from '../../../../utils/colors'
 import { getCorrectNetwork } from '../../../../utils/helpers'
@@ -34,7 +34,7 @@ const TalentLinks: React.FunctionComponent<TalentLinksProps> = (
   return (
     <>
       {props.talent.links && props.talent?.links.length > 0 ? (
-        <AtTalentFrame
+        <AtFrame
           title={'Additional Links'}
           icon={
             <AtTypography>
@@ -61,7 +61,7 @@ const TalentLinks: React.FunctionComponent<TalentLinksProps> = (
               </Box>
             </>
           ))}
-        </AtTalentFrame>
+        </AtFrame>
       ) : (
         <StyledLink onClick={() => setOpenModal(true)}>
           <AtTypography>

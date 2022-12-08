@@ -2,7 +2,7 @@ import { Box, Grid } from '@mui/material'
 import { Edit } from 'iconsax-react'
 import React, { useState } from 'react'
 import ModalGeneralInformations from '../../../../components/AtModal/modals/ModalGeneralInformations'
-import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame'
+import AtFrame from '../../../../components/AtFrame/AtFrame'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
 import { grey, grey2 } from '../../../../utils/colors'
 import { Talent } from '../../../../utils/redux/types/talents.type'
@@ -13,7 +13,7 @@ const TalentGeneral: React.FunctionComponent<TalentGeneralProps> = (
   const [openModal, setOpenModal] = useState(false)
 
   return (
-    <AtTalentFrame
+    <AtFrame
       title={'General information'}
       icon={
         <AtTypography>
@@ -104,7 +104,7 @@ const TalentGeneral: React.FunctionComponent<TalentGeneralProps> = (
         isOpen={openModal}
         onClose={() => setOpenModal(false)}
       />
-    </AtTalentFrame>
+    </AtFrame>
   )
 }
 

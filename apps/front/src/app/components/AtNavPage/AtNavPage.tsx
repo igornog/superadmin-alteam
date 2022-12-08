@@ -84,7 +84,7 @@ const AtNavPage: React.FunctionComponent<AtNavPageProps> = (
         ))}
       </StyledNavPage>
 
-      {!app.sidePanel.isFixed && (
+      {!app.sidePanel.isFixed && props.sidePanelIcon && (
         <StyledSidePanelIcon
           onClick={() => dispatch(handleCollapsePanel(true))}
         >

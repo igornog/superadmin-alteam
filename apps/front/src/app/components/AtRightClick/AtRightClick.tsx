@@ -67,7 +67,9 @@ interface AtContextMenuItemProps extends MenuItemProps {
 const AtRightClick: React.FunctionComponent<AtRightClickProps> = (
   props: AtRightClickProps,
 ) => {
-  return (
+  return props.disabled ? (
+    props.children
+  ) : (
     <Root modal={false}>
       <ContextMenuTrigger asChild={true}>{props.children}</ContextMenuTrigger>
       <AtContextMenuContent onClick={(e: any) => e.stopPropagation()}>
@@ -80,8 +82,9 @@ const AtRightClick: React.FunctionComponent<AtRightClickProps> = (
 }
 
 interface AtRightClickProps {
-  children: React.ReactNode
+  children: React.ReactElement
   contextMenu: React.ReactNode
+  disabled?: boolean
 }
 
 export default AtRightClick

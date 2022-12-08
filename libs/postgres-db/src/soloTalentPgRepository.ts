@@ -1,8 +1,8 @@
 //eslint-disable @typescript-eslint/no-unused-vars
-import {postgresClient} from './postgresClient'
-import {SoloTalent, TalentSearch} from '@yjcapp/app'
-import {SoloTalentEntity} from './entities'
-import {soloTalentFromEntity, soloTalentToEntity} from './soloTalentConverter'
+import { postgresClient } from './postgresClient'
+import { SoloTalent, TalentSearch } from '@yjcapp/app'
+import { SoloTalentEntity } from './entities'
+import { soloTalentFromEntity, soloTalentToEntity } from './soloTalentConverter'
 
 async function createSoloTalent(
   soloTalent: Omit<SoloTalent, 'id' | 'appliedDate'>,
@@ -19,7 +19,7 @@ async function retrieveSoloTalent(id: string): Promise<SoloTalent | undefined> {
   const soloTalentRepository = (await postgresClient()).getRepository(
     SoloTalentEntity,
   )
-  const result = await soloTalentRepository.findOneBy({id: parseInt(id)})
+  const result = await soloTalentRepository.findOneBy({ id: parseInt(id) })
   return result ? soloTalentFromEntity(result) : undefined
 }
 
@@ -38,7 +38,9 @@ async function findSoloTalentBySearch(
   talentSearch.experience
   const queryBuilder = await soloTalentRepository.createQueryBuilder()
   if (talentSearch.skills) {
-    queryBuilder.andWhere('skills = ANY(:skills)', {skills: talentSearch.skills})
+    queryBuilder.andWhere('skills = ANY(:skills)', {
+      skills: talentSearch.skills,
+    })
   }
   if (talentSearch.experience) {
     queryBuilder.andWhere('experience = :experience', {
@@ -51,11 +53,11 @@ async function findSoloTalentBySearch(
     })
   }
   if (talentSearch.role) {
-    queryBuilder.andWhere('role = :role', {role: talentSearch.role})
+    queryBuilder.andWhere('role = :role', { role: talentSearch.role })
   }
 
   if (talentSearch.status) {
-    queryBuilder.andWhere('status = :status', {status: talentSearch.status})
+    queryBuilder.andWhere('status = :status', { status: talentSearch.status })
   }
   queryBuilder.limit(PAGE_SIZE)
   queryBuilder.offset(calculateOffset(talentSearch.page ?? 1, PAGE_SIZE))
@@ -63,9 +65,7 @@ async function findSoloTalentBySearch(
   return result.map(soloTalentFromEntity)
 }
 
-async function updateSoloTalent(
-  talent: SoloTalent,
-): Promise<SoloTalent> {
+async function updateSoloTalent(talent: SoloTalent): Promise<SoloTalent> {
   const soloTalentRepository = (await postgresClient()).getRepository(
     SoloTalentEntity,
   )

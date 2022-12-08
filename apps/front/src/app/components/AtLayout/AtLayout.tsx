@@ -1,5 +1,12 @@
 import { Backdrop, Box, Collapse, Grid, useMediaQuery } from '@mui/material'
-import { AddCircle, Candle, Import, SearchNormal1, Share } from 'iconsax-react'
+import {
+  AddCircle,
+  Candle,
+  Import,
+  SearchNormal1,
+  Share,
+  TickCircle,
+} from 'iconsax-react'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { grey2 } from '../../utils/colors'
@@ -8,6 +15,7 @@ import { handleCollapsePanel } from '../../utils/redux/actions/app.action'
 import { getActiveTab } from '../../utils/redux/selectors/settings.selector'
 import { getActiveFolder } from '../../utils/redux/selectors/tree.selector'
 import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton'
+import DrawerCreateClient from '../AtDrawer/drawers/DrawerCreateClient/DrawerCreateClient'
 import AtDropdown from '../AtDropdown/AtDropdown'
 import ModalAddFolder from '../AtModal/modals/ModalAddFolder'
 import ModalAddTalent from '../AtModal/modals/ModalCreateTalent/ModalAddTalent'
@@ -22,6 +30,7 @@ import AtSwitchDisplayMode from './AtSwitchDisplayMode'
 import AtTopTitle from './AtTopTitle'
 
 const StyledContent = styled(Grid)<{ $sidePanelSize?: string }>`
+  overflow: hidden;
   background-color: #f7f8fe;
   margin: 20px 20px 30px 165px;
 `
@@ -37,6 +46,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
   const [openCreateFolder, setOpenCreateFolder] = useState(false)
   const [openShareFolder, setOpenShareFolder] = useState(false)
   const [openCreateTalent, setOpenCreateTalent] = useState(false)
+  const [openDrawerCreateClient, setOpenDrawerCreateClient] = useState(false)
 
   const isSmallScreen = useMediaQuery('(max-width:1079px)')
   const activeTab = useAppSelector((state) => getActiveTab(state))
@@ -46,10 +56,10 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
   const activeFolder = useAppSelector((state) => getActiveFolder(state))
 
   return !isSmallScreen ? (
-    activeTab.config && (
+    activeTab && (
       <>
         <AtNavbar />
-        <Grid container={true}>
+        <Grid container={true} height={'100vh'}>
           <StyledContent
             item={true}
             xs={true}
@@ -65,12 +75,12 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                   marginTop={'30px'}
                 >
                   <AtTopTitle
-                    activeTab={activeTab.config}
+                    activeTab={activeTab}
                     activeFolder={activeFolder}
                   />
 
                   <Box display={'flex'} gap={'30px'}>
-                    {activeTab.config.settings.downloadCSV && (
+                    {activeTab.settings.downloadCSV && (
                       <AtButton
                         kind={AtButtonKind.Default}
                         variant={AtButtonVariant.Text}
@@ -80,25 +90,60 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                       />
                     )}
 
-                    {!activeFolder.isParent() && (
+                    {activeTab.settings.shareFolder &&
+                      !activeFolder.isParent() && (
+                        <>
+                          <AtButton
+                            kind={AtButtonKind.Default}
+                            variant={AtButtonVariant.Contained}
+                            startIcon={<Share />}
+                            onClick={() => setOpenShareFolder(true)}
+                            name={'Share Folder'}
+                          />
+
+                          <ModalShareFolder
+                            folder={activeFolder}
+                            isOpen={openShareFolder}
+                            onClose={() => setOpenShareFolder(false)}
+                          />
+                        </>
+                      )}
+
+                    {activeTab.settings.verifyClient && (
                       <>
                         <AtButton
                           kind={AtButtonKind.Default}
-                          variant={AtButtonVariant.Contained}
-                          startIcon={<Share />}
-                          onClick={() => setOpenShareFolder(true)}
-                          name={'Share Folder'}
+                          variant={AtButtonVariant.Outlined}
+                          startIcon={<TickCircle />}
+                          name={'Verifiy Client (1)'}
+                          // onClick={() => setOpenCreateTalent(true)}
                         />
 
-                        <ModalShareFolder
-                          folder={activeFolder}
-                          isOpen={openShareFolder}
-                          onClose={() => setOpenShareFolder(false)}
+                        {/* <ModalAddTalent
+                          isOpen={openCreateTalent}
+                          onClose={() => setOpenCreateTalent(false)}
+                        /> */}
+                      </>
+                    )}
+
+                    {activeTab.settings.createClient && (
+                      <>
+                        <AtButton
+                          kind={AtButtonKind.Success}
+                          variant={AtButtonVariant.Contained}
+                          startIcon={<AddCircle />}
+                          name={'Create Client'}
+                          onClick={() => setOpenDrawerCreateClient(true)}
+                        />
+
+                        <DrawerCreateClient
+                          open={openDrawerCreateClient}
+                          handleClose={() => setOpenDrawerCreateClient(false)}
                         />
                       </>
                     )}
 
-                    {activeTab.config.settings.createFolder && (
+                    {activeTab.settings.createFolder && (
                       <>
                         <AtButton
                           kind={AtButtonKind.Success}
@@ -116,7 +161,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                       </>
                     )}
 
-                    {activeTab.config.settings.inviteTalent && (
+                    {activeTab.settings.inviteTalent && (
                       <>
                         <AtButton
                           kind={AtButtonKind.Success}
@@ -142,7 +187,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                   alignItems={'center'}
                 >
                   <Grid item={true} xs={6.5}>
-                    {activeTab.config.settings.search && (
+                    {activeTab.settings.search && (
                       <AtTextField
                         value={''}
                         type={AtTextFieldType.Text}
@@ -153,11 +198,9 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                   </Grid>
 
                   <Box display={'flex'} gap={'30px'}>
-                    {activeTab.config.settings.displayMode && (
-                      <AtSwitchDisplayMode />
-                    )}
+                    {activeTab.settings.displayMode && <AtSwitchDisplayMode />}
 
-                    {activeTab.config.settings.sortBy && (
+                    {activeTab.settings.sortBy && (
                       <Box
                         display={'flex'}
                         gap={'5px'}
@@ -183,7 +226,6 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                 </Grid>
               </Box>
             </AtRightClick>
-
             {props.children}
           </StyledContent>
 

@@ -31,5 +31,5 @@ export const talentService: TalentService = {
   },
   updateSoloTalent(talent: SoloTalent): Promise<SoloTalent> {
     return soloTalentPgRepository.updateSoloTalent(talent)
-  }
+  },
 }
