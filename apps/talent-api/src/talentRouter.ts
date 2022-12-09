@@ -34,6 +34,6 @@ talentRouter.put('/talent/solo', (req, res, next) => {
 talentRouter.get('/talent/solo/:id', (req, res, next) => {
   sendPromise(talentService.retrieveSoloTalent(req.params.id), res, next)
 })
-talentRouter.get('/talent/solo/search', (req, res, next) => {
+talentRouter.get('/talent/search', (req, res, next) => {
   sendPromise(talentService.searchSoloTalent(req.query ?? {}), res, next)
 })
