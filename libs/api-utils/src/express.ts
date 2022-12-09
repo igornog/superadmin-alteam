@@ -5,7 +5,7 @@ import {lambdaHandler, startLocal} from './handler'
 import cors from "cors"
 
 export function createDefaultApp(router: Router) {
-  return express().use(morgan('combined')).use(router).use(errorHandler).use(cors())
+  return express().use(cors()).use(morgan('combined')).use(router).use(errorHandler)
 }
 
 export function startLambdaServer(router: Router, local: boolean) {
