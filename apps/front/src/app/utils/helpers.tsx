@@ -75,3 +75,7 @@ export const getText = (elem: any): string => {
 
   return getText(children)
 }
+
+export const plurialize = (count: number, word: string) => {
+  return count + ' ' + (count > 1 ? word + 's' : word)
+}

@@ -3,7 +3,10 @@ import styled, { css } from 'styled-components'
 import { black, green, white } from '../../utils/colors'
 import AtTypography from '../AtTypography/AtTypography'
 
-const StyledGroupTag = styled.div<{ icon?: React.ReactNode }>`
+const StyledGroupTag = styled.div<{
+  icon?: React.ReactNode
+  fontSize?: string
+}>`
   background-color: ${black};
   border-radius: 5px;
   color: ${white};
@@ -15,7 +18,7 @@ const StyledGroupTag = styled.div<{ icon?: React.ReactNode }>`
   min-width: 20px;
 
   & > p {
-    font-size: 10px;
+    font-size: ${({ fontSize }) => fontSize ?? '10px'};
   }
 
   ${({ icon }) =>
@@ -32,7 +35,7 @@ const AtGroupTag: React.FunctionComponent<AtGroupTagProps> = (
   props: AtGroupTagProps,
 ) => {
   return (
-    <StyledGroupTag icon={props.icon}>
+    <StyledGroupTag icon={props.icon} fontSize={props.fontSize}>
       {props.label ? <AtTypography>{props.label}</AtTypography> : props.icon}
     </StyledGroupTag>
   )
@@ -41,6 +44,7 @@ const AtGroupTag: React.FunctionComponent<AtGroupTagProps> = (
 interface AtGroupTagProps {
   label?: string
   icon?: React.ReactNode
+  fontSize?: string
 }
 
 export default AtGroupTag

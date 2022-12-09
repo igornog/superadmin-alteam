@@ -1,7 +1,11 @@
 import {
-  BaseEntity, Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn,
+  BaseEntity,
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm'
-import {Listing, ListingStatus} from '@yjcapp/app'
+import { Listing, ListingStatus } from '@yjcapp/app'
 
 @Entity({ name: 'solo_talent' })
 export class SoloTalentEntity extends BaseEntity {

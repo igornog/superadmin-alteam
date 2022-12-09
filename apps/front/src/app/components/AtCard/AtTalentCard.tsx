@@ -7,12 +7,14 @@ import AtLine from '../AtLine/AtLine'
 import AtGroupTag from '../AtGroupTag/AtGroupTag'
 import AtTypography from '../AtTypography/AtTypography'
 import AtTag from '../AtTag/AtTag'
-import { Skill, Talent } from '../../utils/redux/types/talents.type'
+import { Skill } from '../../utils/redux/types/talents.type'
 import AtRightClick from '../AtRightClick/AtRightClick'
 import { boxShadow } from '../../utils/theme'
 import TalentMenu from '../AtRightClick/ContextMenus/TalentMenu'
+import { useAppSelector } from '../../utils/hooks/reduxHook'
+import { findTalent } from '../../utils/redux/selectors/talents.selector'
 
-const StyledCard = styled.div<{ fullHeight?: boolean }>`
+export const StyledCard = styled.div<{ fullHeight?: boolean }>`
   background-color: ${white};
   border: 1px solid ${grey5};
   border-radius: 10px;
@@ -33,8 +35,10 @@ const StyledCard = styled.div<{ fullHeight?: boolean }>`
   }
 `
 
-const AtCard: React.FunctionComponent<AtCardProps> = (props: AtCardProps) => {
-  const talent = new Talent(props.talent)
+const AtTalentCard: React.FunctionComponent<AtTalentCardProps> = (
+  props: AtTalentCardProps,
+) => {
+  const talent = useAppSelector((state) => findTalent(state, props.idTalent))
 
   return (
     <StyledCard onClick={props.onClick} fullHeight={props.fullHeight}>
@@ -101,13 +105,13 @@ const AtCard: React.FunctionComponent<AtCardProps> = (props: AtCardProps) => {
   )
 }
 
-interface AtCardProps {
-  talent?: Talent
+interface AtTalentCardProps {
+  idTalent: number
   fullHeight?: boolean
   onClick?: (e: React.MouseEvent) => void
-  openShortlist: () => void
-  openAccepted: () => void
-  openEmailToTalent: () => void
+  openShortlist?: () => void
+  openAccepted?: () => void
+  openEmailToTalent?: () => void
 }
 
-export default AtCard
+export default AtTalentCard

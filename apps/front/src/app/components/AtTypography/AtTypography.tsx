@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material'
 import { Variant } from '@mui/material/styles/createTypography'
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 interface StyledTypographyProps {
   bold?: boolean
@@ -11,6 +11,7 @@ interface StyledTypographyProps {
   gap?: string
   flex?: number
   justifyContent?: string
+  ellipsis?: number
 }
 
 const StyledTypography = styled(Typography)<StyledTypographyProps>`
@@ -22,6 +23,17 @@ const StyledTypography = styled(Typography)<StyledTypographyProps>`
   gap: ${({ gap }) => gap ?? '5px'};
   flex: ${({ display }) => display};
   justify-content: ${({ justifyContent }) => justifyContent};
+
+  ${({ ellipsis }) =>
+    ellipsis &&
+    css`
+      text-overflow: ellipsis;
+      overflow: hidden;
+      display: -webkit-box !important;
+      -webkit-line-clamp: ${ellipsis};
+      -webkit-box-orient: vertical;
+      white-space: normal;
+    `}
 `
 
 const AtTypography: React.FunctionComponent<AtTypographyProps> = (
@@ -38,6 +50,7 @@ const AtTypography: React.FunctionComponent<AtTypographyProps> = (
       flex={props.flex}
       justifyContent={props.justifyContent}
       whiteSpace={props.whiteSpace ?? 'none'}
+      ellipsis={props.ellipsis}
     >
       {props.children}
     </StyledTypography>
@@ -55,6 +68,7 @@ interface AtTypographyProps {
   gap?: string
   flex?: number
   justifyContent?: string
+  ellipsis?: number
 }
 
 export default AtTypography

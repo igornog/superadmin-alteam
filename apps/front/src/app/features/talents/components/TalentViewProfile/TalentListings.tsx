@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { Edit } from 'iconsax-react'
 import React, { useState } from 'react'
 import ModalListings from '../../../../components/AtModal/modals/ModalListings'
-import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame'
+import AtFrame from '../../../../components/AtFrame/AtFrame'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
 import { grey, grey2 } from '../../../../utils/colors'
 
@@ -10,7 +10,7 @@ const TalentListings: React.FunctionComponent = () => {
   const [openModal, setOpenModal] = useState(false)
 
   return (
-    <AtTalentFrame
+    <AtFrame
       title={'Listed with'}
       icon={
         <AtTypography>
@@ -44,7 +44,7 @@ const TalentListings: React.FunctionComponent = () => {
         </Box>
       </Box>
       <ModalListings isOpen={openModal} onClose={() => setOpenModal(false)} />
-    </AtTalentFrame>
+    </AtFrame>
   )
 }
 

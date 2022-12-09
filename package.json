@@ -77,8 +77,9 @@
     "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
+    "@date-io/moment": "^2.16.1",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
     "@material-ui/lab": "^4.0.0-alpha.61",
     "@mui/lab": "^5.0.0-alpha.110",
     "@mui/material": "^5.10.16",
@@ -96,6 +97,7 @@
     "framer-motion": "^7.6.15",
     "iconsax-react": "^0.0.8",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.4",
     "morgan": "^1.10.0",
     "pg": "^8.8.0",
     "pg-native": "^3.0.1",
@@ -113,4 +115,3 @@
     "winston": "^3.8.2"
   }
 }
-

@@ -26,10 +26,14 @@ export interface SoloTalent {
   workExperience?: string
   listing?: Listing[]
   status: ListingStatus
-
 }
 
-export type ListingStatus = "shortlisted" | "rejected" | "accepted" | "inbound" | "applicable"
+export type ListingStatus =
+  | 'shortlisted'
+  | 'rejected'
+  | 'accepted'
+  | 'inbound'
+  | 'applicable'
 
 export interface Listing {
   companyName: string

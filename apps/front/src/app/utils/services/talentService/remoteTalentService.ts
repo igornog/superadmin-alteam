@@ -1,4 +1,9 @@
-import {GroupTalent, SoloTalent, TalentSearch, TalentService,} from '@yjcapp/app'
+import {
+  GroupTalent,
+  SoloTalent,
+  TalentSearch,
+  TalentService,
+} from '@yjcapp/app'
 import atAxios from '../axios'
 
 export default class RemoteTalentService implements TalentService {
@@ -19,7 +24,7 @@ export default class RemoteTalentService implements TalentService {
   }
 
   searchSoloTalent(talentSearch: TalentSearch): Promise<SoloTalent[]> {
-    return atAxios.get('/talent/solo/search', {params: talentSearch}) //TODO change this to all talent
+    return atAxios.get('/talent/solo/search', { params: talentSearch }) //TODO change this to all talent
   }
   updateSoloTalent(talent: SoloTalent): Promise<SoloTalent> {
     return atAxios.put(`/talent/solo`, talent)

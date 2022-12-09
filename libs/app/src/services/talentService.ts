@@ -1,4 +1,4 @@
-import { GroupTalent, SoloTalent, TalentSearch } from '../talent';
+import { GroupTalent, SoloTalent, TalentSearch } from '../talent'
 
 export interface TalentService {
   createGroupTalent(talent: Omit<GroupTalent, 'id'>): Promise<GroupTalent>

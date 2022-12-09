@@ -1,10 +1,17 @@
 export enum Tabs {
+  // Talents
   InboundTalent = 'Inbound Talents',
   ShortlistTalent = 'Shortlist Talents',
   AllTalent = 'All Talents',
   AcceptedTalent = 'Accepted Talents',
   DeclinedTalent = 'Declined Talents',
   Applicants = 'Applicants',
+
+  // Clients
+  ClientRequests = 'Client Requests',
+  ActiveClients = 'Active Clients',
+  InactiveClients = 'Inactive Clients',
+  DeclinedRequests = 'Declined Requests',
 }
 
 export enum RightClick {
@@ -13,5 +20,10 @@ export enum RightClick {
   EditTalentFolders = 'Edit Talent Folders',
   SendEmailToTalent = 'Send Email to Talent',
   ShareTalent = 'Share Talent',
-  MoveToDesclined = 'Move to Declined',
+  MoveToDeclined = 'Move to Declined',
+  MoveToActive = 'Move to Active',
+  ShareClient = 'Share Client',
+  MoveToInactive = 'Move to Inactive',
+  ShareRequest = 'Share Request',
+  DeleteRequest = 'Delete Request',
 }

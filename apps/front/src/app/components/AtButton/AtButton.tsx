@@ -35,10 +35,6 @@ export const buttonKind = {
       color: black,
       outlined: grey2,
     },
-    active: {
-      backgroundColor: green,
-      color: black,
-    },
     disabled: {
       backgroundColor: grey4,
       color: grey3,
@@ -54,10 +50,6 @@ export const buttonKind = {
       color: white,
       outlined: grey2,
     },
-    active: {
-      backgroundColor: black,
-      color: white,
-    },
     disabled: {
       backgroundColor: grey4,
       color: grey3,
@@ -72,10 +64,6 @@ export const buttonKind = {
       backgroundColor: black,
       color: white,
       outlined: grey2,
-    },
-    active: {
-      backgroundColor: null,
-      color: null,
     },
     disabled: {
       backgroundColor: grey4,
@@ -195,13 +183,6 @@ const StyledButton = styled(Button)<StyledButtonProps>`
               background-color: transparent;
               color: ${({ kind }) => buttonKind[kind].hover.backgroundColor};
             `}
-    }
-
-    :active {
-      transition: all 0.25s ease-in-out;
-      background-color: ${({ kind }) =>
-        buttonKind[kind].active.backgroundColor};
-      color: ${({ kind }) => buttonKind[kind].active.color};
     }
 
     &.Mui-disabled {

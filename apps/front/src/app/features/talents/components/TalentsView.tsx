@@ -40,7 +40,7 @@ const TalentsView: React.FunctionComponent = () => {
       sidePanelIcon={<FilterSquare size={20} />}
       sidePanelSize={'small'}
     >
-      {activeTab.content?.node}
+      {talentsTabs.filter((item) => item.title === activeTab?.title)[0]?.node}
     </AtLayout>
   )
 }

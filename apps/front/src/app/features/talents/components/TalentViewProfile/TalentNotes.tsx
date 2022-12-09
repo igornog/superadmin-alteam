@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import ModalAddNote from '../../../../components/AtModal/modals/ModalAddNote'
 import ModalEditNote from '../../../../components/AtModal/modals/ModalEditNote'
-import AtTalentFrame from '../../../../components/AtTalentFrame/AtTalentFrame'
+import AtFrame from '../../../../components/AtFrame/AtFrame'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
 import { black, grey, grey2, grey3 } from '../../../../utils/colors'
 
@@ -23,7 +23,7 @@ const TalentNotes: React.FunctionComponent = () => {
   const [openModalEditNote, setOpenModalEditNote] = useState(false)
 
   return (
-    <AtTalentFrame
+    <AtFrame
       title={'Notes'}
       icon={
         <AtTypography>
@@ -65,7 +65,7 @@ const TalentNotes: React.FunctionComponent = () => {
         isOpen={openModalEditNote}
         onClose={() => setOpenModalEditNote(false)}
       />
-    </AtTalentFrame>
+    </AtFrame>
   )
 }
 
