@@ -40,6 +40,7 @@ export function soloTalentToEntity(
     appliedDate: soloTalent.appliedDate,
     role: soloTalent.role,
     about: soloTalent.about,
+    status: soloTalent.status,
     assets: soloTalent.assets,
     skills: soloTalent.skills,
   }

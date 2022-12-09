@@ -83,6 +83,7 @@ function soloTalentFormToSoloTalent(
     availability: availabilityMap[availability],
     links: [portfolioLink],
     listing: [],
+    status: 'inbound',
     about,
     role,
     assets: [file],
