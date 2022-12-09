@@ -5,11 +5,16 @@ import { logger } from './logger'
 
 export const authorize: RequestHandler = (req, res, next) => {
   const { authorization } = req.headers
+  if(process.env.NODE_ENV !== 'production') {
+    next()
+    return
+  }
   if (authorization && authorization.startsWith('Bearer')) {
     const token = authorization.split(' ')[1]
     try {
       const payload = jwt.verify(token, process.env.TOKEN_SECRET)
 
+      // @ts-ignore
       if (payload.email === 'admin@alteam.io') {
         next()
       } else {
