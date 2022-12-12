@@ -1,4 +1,5 @@
 import { StatusType } from './status.type'
+import { Availability, Experience } from '@yjcapp/app'
 
 export interface ListingsState {
   listListings: Listing[]
@@ -16,12 +17,6 @@ export enum ListingStatus {
 
 export enum WorkType {
   Remote = 'Remote',
-}
-
-export enum Availability {
-  PartTime = 'PartTime',
-  EveningsWe = 'EveningsWe',
-  FullTime = 'FullTime',
 }
 
 export enum RateType {
@@ -50,7 +45,7 @@ export class Listing {
   rateFrom?: number
   rateTo?: number
   rateFixed?: number
-  difficulty: Difficulty
+  difficulty: Experience
   learning: string
   jobDescription: string
   screeningQuestion: string[]

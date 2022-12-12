@@ -1,4 +1,5 @@
 import { Edit, Share, Sms, TickCircle, TrushSquare } from 'iconsax-react'
+import { ListingStatus } from '@yjcapp/app'
 import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
 import { handleSelectTalent } from '../../../utils/redux/actions/talents.action'
@@ -7,7 +8,7 @@ import { AtContextMenuItem } from '../AtRightClick'
 import Arrow2 from '../../../assets/images/icons/arrow2.svg'
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
 import { RightClick, Tabs } from '../../../utils/types'
-import { Talent, TalentStatus } from '../../../utils/redux/types/talents.type'
+import { Talent } from '../../../utils/redux/types/talents.type'
 import { grey2 } from '../../../utils/colors'
 
 const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
@@ -21,9 +22,11 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
     return activeTab.talentRightClick.includes(rightclickFunc)
   }
 
-  const isTabAndStatusAllowed = (status: TalentStatus[]) => {
+  const isTabAndStatusAllowed = (status: ListingStatus[]) => {
     return (
-      activeTab.title === Tabs.AllTalent && status.includes(props.talent.status)
+      props.talent.status &&
+      activeTab.title === Tabs.AllTalent &&
+      status.includes(props.talent.status)
     )
   }
 
@@ -50,7 +53,7 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
 
   const copyLinkToClipboard = (e: Event) => {
     e.preventDefault()
-    navigator.clipboard.writeText(props.talent.fullName)
+    navigator.clipboard.writeText(props.talent.firstName)
     setLinkCopied(true)
   }
 
@@ -65,8 +68,8 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
     <>
       {isCurrentTabAllowed(RightClick.MoveToAccepted) ||
       isTabAndStatusAllowed([
-        TalentStatus.Shortlisted,
-        TalentStatus.Declined,
+        ListingStatus.Shortlisted,
+        ListingStatus.Rejected,
       ]) ? (
         <AtContextMenuItem onSelect={moveToAccepted}>
           <AtTypography>
@@ -78,9 +81,9 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
 
       {isCurrentTabAllowed(RightClick.MoveToShortlisted) ||
       isTabAndStatusAllowed([
-        TalentStatus.Inbound,
-        TalentStatus.Accepted,
-        TalentStatus.Declined,
+        ListingStatus.Inbound,
+        ListingStatus.Accepted,
+        ListingStatus.Rejected,
       ]) ? (
         <AtContextMenuItem onSelect={moveToShortlist}>
           <AtTypography>
@@ -92,8 +95,8 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
 
       {isCurrentTabAllowed(RightClick.EditTalentFolders) ||
       isTabAndStatusAllowed([
-        TalentStatus.Shortlisted,
-        TalentStatus.Accepted,
+        ListingStatus.Shortlisted,
+        ListingStatus.Accepted,
       ]) ? (
         <AtContextMenuItem>
           <AtTypography>
@@ -105,10 +108,10 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
 
       {isCurrentTabAllowed(RightClick.SendEmailToTalent) ||
       isTabAndStatusAllowed([
-        TalentStatus.Shortlisted,
-        TalentStatus.Inbound,
-        TalentStatus.Accepted,
-        TalentStatus.Declined,
+        ListingStatus.Shortlisted,
+        ListingStatus.Inbound,
+        ListingStatus.Accepted,
+        ListingStatus.Rejected,
       ]) ? (
         <AtContextMenuItem onSelect={sendEmailToTalent}>
           <AtTypography>
@@ -120,10 +123,10 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
 
       {isCurrentTabAllowed(RightClick.ShareTalent) ||
       isTabAndStatusAllowed([
-        TalentStatus.Shortlisted,
-        TalentStatus.Inbound,
-        TalentStatus.Accepted,
-        TalentStatus.Declined,
+        ListingStatus.Shortlisted,
+        ListingStatus.Inbound,
+        ListingStatus.Accepted,
+        ListingStatus.Rejected,
       ]) ? (
         <AtContextMenuItem onSelect={(e: Event) => copyLinkToClipboard(e)}>
           <AtTypography>
@@ -135,9 +138,9 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
 
       {isCurrentTabAllowed(RightClick.MoveToDeclined) ||
       isTabAndStatusAllowed([
-        TalentStatus.Shortlisted,
-        TalentStatus.Inbound,
-        TalentStatus.Accepted,
+        ListingStatus.Shortlisted,
+        ListingStatus.Inbound,
+        ListingStatus.Accepted,
       ]) ? (
         <AtContextMenuItem variant="danger">
           <AtTypography>

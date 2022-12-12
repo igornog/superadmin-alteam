@@ -1,20 +1,14 @@
 import { Box } from '@mui/material'
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import { grey2 } from '../../../../../../utils/colors'
-import AtTextFieldDropdown, {
-  DropdownItem,
-} from '../../../../../AtDropdown/AtTextFieldDropdown'
+import AtTextFieldDropdown from '../../../../../AtDropdown/AtTextFieldDropdown'
 import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
+import { Availability, Experience } from '@yjcapp/app'
 
-const ModalCreateTalentStep1: React.FunctionComponent = () => {
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [role, setRole] = useState('')
-  const [experience, setExperience] = useState<DropdownItem>()
-  const [availability, setAvailability] = useState<DropdownItem>()
-  const [portfolio, setPortfolio] = useState('')
-
+const ModalCreateTalentStep1: React.FunctionComponent<
+  ModalCreateTalentStep1Props
+> = (props: ModalCreateTalentStep1Props) => {
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'30px'}>
       <AtTypography color={grey2}>
@@ -25,74 +19,85 @@ const ModalCreateTalentStep1: React.FunctionComponent = () => {
 
       <AtTextField
         placeholder={'Enter First Name'}
-        value={firstName}
+        value={props.firstName}
         required={true}
         label={'First Name'}
-        onValueChange={setFirstName}
+        onValueChange={props.setFirstName}
       />
 
       <AtTextField
         placeholder={'Enter Last Name'}
-        value={lastName}
+        value={props.lastName}
         required={true}
         label={'Last Name'}
-        onValueChange={setLastName}
+        onValueChange={props.setLastName}
+      />
+
+      <AtTextField
+        placeholder={'Enter Email'}
+        value={props.email}
+        required={true}
+        label={'Email'}
+        onValueChange={props.setEmail}
       />
 
       <AtTextField
         placeholder={'Enter Role'}
-        value={role}
+        value={props.role}
         required={true}
         label={'Role'}
-        onValueChange={setRole}
+        onValueChange={props.setRole}
       />
 
       <AtTextFieldDropdown
         fullWidth={true}
-        handleSelect={(e) => setExperience(e)}
-        value={experience ? experience.label : ''}
+        handleSelect={(e) => props.setExperience(e.label as Experience)}
+        value={props.experience ? props.experience : ''}
         placeholder={'Select Experience Level'}
         required={true}
-        listItems={[
-          {
-            id: 0,
-            label: 'Junior',
-          },
-          {
-            id: 1,
-            label: 'Senior',
-          },
-        ]}
+        listItems={Object.values(Experience).map(
+          (label: Experience, index: number) => ({ id: index, label: label }),
+        )}
         label={'Experience Level'}
       />
 
       <AtTextFieldDropdown
         fullWidth={true}
-        handleSelect={(e) => setAvailability(e)}
-        value={availability ? availability.label : ''}
+        handleSelect={(e) => props.setAvailability(e.label as Availability)}
+        value={props.availability ? props.availability : ''}
         placeholder={'Select Availability'}
         required={true}
-        listItems={[
-          {
-            id: 0,
-            label: 'Availability 1',
-          },
-          {
-            id: 1,
-            label: 'Availability 2',
-          },
-        ]}
+        listItems={Object.values(Availability).map(
+          (label: Availability, index: number) => ({ id: index, label: label }),
+        )}
         label={'Avaialbility'}
       />
 
       <AtTextField
         placeholder={'Enter Portfolio Link'}
-        value={portfolio}
+        value={props.portfolio}
         label={'Portfolio Link'}
-        onValueChange={setPortfolio}
+        onValueChange={props.setPortfolio}
       />
     </Box>
   )
+}
+
+interface ModalCreateTalentStep1Props {
+  firstName: string
+  setFirstName: Dispatch<SetStateAction<string>>
+  lastName: string
+  setLastName: Dispatch<SetStateAction<string>>
+  email: string
+  setEmail: Dispatch<SetStateAction<string>>
+  role: string
+  setRole: Dispatch<SetStateAction<string>>
+  experience: Experience | undefined
+  setExperience: Dispatch<SetStateAction<Experience | undefined>>
+  availability: Availability | undefined
+  setAvailability: Dispatch<SetStateAction<Availability | undefined>>
+  portfolio: string
+  setPortfolio: Dispatch<SetStateAction<string>>
 }
 
 export default ModalCreateTalentStep1

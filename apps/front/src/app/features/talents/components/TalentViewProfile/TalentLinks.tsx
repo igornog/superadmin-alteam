@@ -2,14 +2,12 @@ import { Box } from '@mui/material'
 import { AddCircle, Edit } from 'iconsax-react'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import AtCopyTo from '../../../../components/AtCopyTo/AtCopyTo'
-import AtLine from '../../../../components/AtLine/AtLine'
 import ModalLink from '../../../../components/AtModal/modals/ModalLink'
 import AtFrame from '../../../../components/AtFrame/AtFrame'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
 import { black, grey4 } from '../../../../utils/colors'
 import { getCorrectNetwork } from '../../../../utils/helpers'
-import { Link, Talent } from '../../../../utils/redux/types/talents.type'
+import { Talent } from '../../../../utils/redux/types/talents.type'
 
 export const StyledLink = styled(Box)<{ padding?: string }>`
   border: 1px solid ${grey4};
@@ -45,7 +43,7 @@ const TalentLinks: React.FunctionComponent<TalentLinksProps> = (
           onClick={() => setOpenModal(true)}
           gap={0}
         >
-          {props.talent.links.map((item: Link) => (
+          {/* {props.talent.links.map((item: Link) => (
             <>
               <AtLine spacing={15} />
               <Box
@@ -60,7 +58,7 @@ const TalentLinks: React.FunctionComponent<TalentLinksProps> = (
                 <AtCopyTo text={item.link} />
               </Box>
             </>
-          ))}
+          ))} */}
         </AtFrame>
       ) : (
         <StyledLink onClick={() => setOpenModal(true)}>

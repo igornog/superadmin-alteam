@@ -9,7 +9,6 @@ import {
 } from '../../../utils/redux/actions/settings.action'
 import { handleTalents } from '../../../utils/redux/actions/talents.action'
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
-import { talents } from '../../talents'
 
 const ClientsView: React.FunctionComponent = () => {
   const dispatch = useAppDispatch()
@@ -23,7 +22,7 @@ const ClientsView: React.FunctionComponent = () => {
       }),
     )
 
-    dispatch(handleTalents(talents))
+    dispatch(handleTalents())
     dispatch(handleClients(clients))
   }, [dispatch])
 

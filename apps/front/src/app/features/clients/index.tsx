@@ -1,11 +1,10 @@
 import { Page } from '../../utils/redux/types/settings.type'
+import { Availability, Experience } from '@yjcapp/app'
 import { RightClick, Tabs } from '../../utils/types'
 import ClientRequestsView from './components/ClientRequests/ClientRequestsView'
 import LinkedinLogo from '../../assets/images/icons/Linkedin.svg'
 import { Client } from '../../utils/redux/types/clients.type'
 import {
-  Availability,
-  Difficulty,
   ListingStatus,
   RateType,
   WorkType,
@@ -101,7 +100,7 @@ export const clients: Client[] = [
       rateType: RateType.Fixed,
       rateFrom: 200,
       rateTo: 300,
-      difficulty: Difficulty.Senior,
+      difficulty: Experience.Senior,
       learning: 'linktothevideo.com/videolink',
       jobDescription:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor diam fringilla vestibulum eu. Magna sed auctor...',
@@ -138,7 +137,7 @@ export const clients: Client[] = [
       rateType: RateType.Fixed,
       rateFrom: 200,
       rateTo: 300,
-      difficulty: Difficulty.Senior,
+      difficulty: Experience.Senior,
       learning: 'linktothevideo.com/videolink',
       jobDescription:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque pellentesque at amet congue integer eget. At a, ante nullam tempus, mattis in aenean a. Volutpat bibendum sit egestas ultrices scelerisq...',

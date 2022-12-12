@@ -1,15 +1,32 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import { talentService } from '../../services/talentService'
+import { Talent } from '../types/talents.type'
 
 export const handleTalents = createAsyncThunk(
   'talents/initTalents',
-  async (talents: any) => {
-    return talents
+  async (_, { rejectWithValue }) => {
+    try {
+      return await talentService.searchSoloTalent({})
+    } catch (error) {
+      return rejectWithValue(error)
+    }
+  },
+)
+
+export const handleCreateTalent = createAsyncThunk(
+  'talents/createTalent',
+  async (talent: Omit<Talent, 'id'>, { rejectWithValue }) => {
+    try {
+      return await talentService.createSoloTalent(talent)
+    } catch (err) {
+      return rejectWithValue(err)
+    }
   },
 )
 
 export const handleSelectTalent = createAsyncThunk(
   'talents/selectTalent',
-  async (idTalent: number | null) => {
+  async (idTalent: string | null) => {
     return idTalent
   },
 )

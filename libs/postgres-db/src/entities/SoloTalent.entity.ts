@@ -5,7 +5,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
-import { Listing, ListingStatus } from '@yjcapp/app'
+import { Availability, Experience, Listing, ListingStatus } from '@yjcapp/app'
 
 @Entity({ name: 'solo_talent' })
 export class SoloTalentEntity extends BaseEntity {
@@ -19,10 +19,10 @@ export class SoloTalentEntity extends BaseEntity {
   lastName: string
 
   @Column({ type: 'varchar', name: 'experience' })
-  experience: string
+  experience: Experience
 
   @Column({ type: 'varchar', name: 'availability' })
-  availability: string
+  availability: Availability
 
   @Column({ type: 'varchar', array: true, name: 'links' })
   links: string[]
@@ -30,11 +30,14 @@ export class SoloTalentEntity extends BaseEntity {
   @Column({ type: 'varchar', name: 'role' })
   role: string
 
+  @Column({ type: 'varchar', name: 'email' })
+  email: string
+
   @Column({ type: 'text', name: 'about' })
   about: string
 
   @Column({ type: 'varchar', array: true, name: 'assets' })
-  assets: string[]
+  assets?: string[]
 
   @Column({ type: 'varchar', array: true, name: 'skills' })
   skills: string[]
@@ -51,8 +54,12 @@ export class SoloTalentEntity extends BaseEntity {
   @Column({ type: 'varchar', nullable: true, name: 'work_experience' })
   workExperience?: string
 
-  @UpdateDateColumn({ type: 'timestamptz', name: 'applied_date' })
-  appliedDate: Date
+  @UpdateDateColumn({
+    type: 'timestamptz',
+    nullable: true,
+    name: 'applied_date',
+  })
+  appliedDate?: Date
 
   @Column({ type: 'varchar', name: 'status' })
   status: ListingStatus

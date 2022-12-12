@@ -5,7 +5,7 @@ import { logger } from './logger'
 
 export const authorize: RequestHandler = (req, res, next) => {
   const { authorization } = req.headers
-  if(process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== 'production') {
     next()
     return
   }

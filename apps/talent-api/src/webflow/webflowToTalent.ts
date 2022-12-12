@@ -1,5 +1,5 @@
 import { GroupTalentForm, SoloTalentForm, WebflowForm } from './formTypes'
-import { GroupTalent, SoloTalent } from '@yjcapp/app'
+import { GroupTalent, ListingStatus, SoloTalent } from '@yjcapp/app'
 
 const specialtyMap = {
   Zero: 'none',
@@ -38,7 +38,7 @@ const experienceMap = {
   Sixth: 'C-level',
 }
 
-function retrieveSkills<T extends {}>(obj: T): string[] {
+function retrieveSkills<T>(obj: T): string[] {
   return Object.entries(obj).map(([key, value]) => {
     if (key.startsWith('skill') && value === true) {
       return key.slice(5)
@@ -73,6 +73,7 @@ function soloTalentFormToSoloTalent(
     availability,
     portfolioLink,
     role,
+    email,
     file,
     about,
   } = data
@@ -83,16 +84,16 @@ function soloTalentFormToSoloTalent(
     availability: availabilityMap[availability],
     links: [portfolioLink],
     listing: [],
-    status: 'inbound',
+    status: ListingStatus.Inbound,
     about,
     role,
+    email,
     assets: [file],
     skills: retrieveSkills(data),
   }
 }
 
 export function webflowWebhookToTalent(webflowForm: WebflowForm) {
-  // @ts-ignore
   if (webflowForm.data.email !== undefined) {
     return groupFormToGroupTalent(webflowForm as GroupTalentForm)
   } else {

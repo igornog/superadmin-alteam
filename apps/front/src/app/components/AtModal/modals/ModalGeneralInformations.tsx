@@ -46,16 +46,16 @@ const ModalGeneralInformations: React.FunctionComponent<
 
       <Box display={'flex'} flexDirection={'column'} gap={3.5} padding={2.5}>
         <AtTextField
-          defaultValue={selectedTalent.jobName}
+          defaultValue={selectedTalent.role}
           value={''}
-          placeholder={selectedTalent.jobName ?? 'N/A'}
+          placeholder={selectedTalent.role ?? 'N/A'}
           label={'Role'}
         />
 
         <AtTextField
-          defaultValue={selectedTalent.salary}
+          defaultValue={selectedTalent.salaryExpectation}
           value={''}
-          placeholder={selectedTalent.salary ?? 'N/A'}
+          placeholder={selectedTalent.salaryExpectation ?? 'N/A'}
           label={'Salary Expectations'}
         />
 
@@ -93,12 +93,12 @@ const ModalGeneralInformations: React.FunctionComponent<
           label={'Work Experience'}
         />
 
-        <AtTextField
-          defaultValue={selectedTalent.portfolio}
+        {/* <AtTextField
+          defaultValue={selectedTalent.links}
           value={''}
-          placeholder={selectedTalent.portfolio ?? 'N/A'}
+          placeholder={selectedTalent.links ?? 'N/A'}
           label={'Portfolio Link'}
-        />
+        /> */}
 
         <AtTextField
           defaultValue={selectedTalent.email}
@@ -108,9 +108,9 @@ const ModalGeneralInformations: React.FunctionComponent<
         />
 
         <AtTextField
-          defaultValue={selectedTalent.phone}
+          defaultValue={selectedTalent.phoneNumber}
           value={''}
-          placeholder={selectedTalent.phone ?? 'N/A'}
+          placeholder={selectedTalent.phoneNumber ?? 'N/A'}
           label={'Phone Number'}
         />
 

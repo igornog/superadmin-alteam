@@ -5,7 +5,9 @@ import { grey2 } from '../../../../../../utils/colors'
 import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
 
-const ModalCreateTalentStep2: React.FunctionComponent = () => {
+const ModalCreateTalentStep2: React.FunctionComponent<
+  ModalCreateTalentStep2Props
+> = (props: ModalCreateTalentStep2Props) => {
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'30px'}>
       <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
@@ -30,12 +32,19 @@ const ModalCreateTalentStep2: React.FunctionComponent = () => {
       <AtTextField
         multiline={true}
         rows={8}
-        value={''}
+        onValueChange={props.setAbout}
+        value={props.about}
         label={'About Talent'}
         placeholder={'Enter About Talent'}
       />
     </Box>
   )
+}
+interface ModalCreateTalentStep2Props {
+  skills: Array<string>
+  setSkills: React.Dispatch<React.SetStateAction<string[]>>
+  about: string
+  setAbout: React.Dispatch<React.SetStateAction<string>>
 }
 
 export default ModalCreateTalentStep2

@@ -31,7 +31,7 @@ const ModalLink: React.FunctionComponent<ModalLinkProps> = (
   const [newLink, setNewLink] = useState('')
 
   useEffect(() => {
-    setLinks(selectedTalent.links)
+    // setLinks(selectedTalent.links)
   }, [selectedTalent])
 
   const handleUpdateLabel = () => {

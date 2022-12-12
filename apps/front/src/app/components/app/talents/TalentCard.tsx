@@ -33,7 +33,7 @@ const TalentCard: React.FunctionComponent<TalentCardProps> = (
 
 interface TalentCardProps {
   talents: Talent[]
-  openTalent: (id: number) => void
+  openTalent: (id: string) => void
   openShortlist: () => void
   openAccepted: () => void
   openEmailToTalent: () => void

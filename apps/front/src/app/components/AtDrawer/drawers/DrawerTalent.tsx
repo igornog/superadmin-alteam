@@ -44,7 +44,9 @@ const DrawerTalent: React.FunctionComponent<DrawerTalentProps> = (
     >
       <AtDrawerHeader
         title={
-          <AtTypography variant={'h4'}>{selectedTalent?.fullName}</AtTypography>
+          <AtTypography variant={'h4'}>
+            {selectedTalent?.firstName} {selectedTalent?.lastName}
+          </AtTypography>
         }
         sideTitle={
           <AtTypography color={grey3}>Applied: 23.07.2022</AtTypography>

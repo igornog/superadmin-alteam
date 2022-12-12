@@ -53,7 +53,7 @@ const ModalEmailToTalent: React.FunctionComponent<ModalEmailToTalentProps> = (
         paddingBottom={0}
       >
         <AtTypography variant={'h4'}>
-          Send Email to {selectedTalent.fullName}
+          Send Email to {selectedTalent.firstName} {selectedTalent.lastName}
         </AtTypography>
         <AtButton
           kind={AtButtonKind.Default}

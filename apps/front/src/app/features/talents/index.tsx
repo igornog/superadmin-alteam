@@ -1,11 +1,11 @@
 import { Page } from '../../utils/redux/types/settings.type'
-import { TalentStatus } from '../../utils/redux/types/talents.type'
 import { RightClick, Tabs } from '../../utils/types'
 import AcceptedTatentsView from './components/AcceptedTalents/AcceptedTatentsView'
 import AllTalentsView from './components/AllTalents/AllTalentsView'
 import DeclinedTalentsView from './components/DeclinedTalents/DeclinedTalentsView'
 import InboundTalentsView from './components/InboundTalents/InboundTalentsView'
 import ShortlistLatentsView from './components/ShortlistTalents/ShortlistTatentsView'
+import { ListingStatus } from '@yjcapp/app'
 
 export { default } from './components/TalentsView'
 
@@ -154,7 +154,7 @@ export const talents = [
     jobName: 'UI/UX Designer',
     jobType: 'Full Time',
     applied: '23.07.2022',
-    status: TalentStatus.Shortlisted,
+    status: ListingStatus.Shortlisted,
     skills: [
       { label: 'UI/UX Design' },
       { label: 'Figma' },
@@ -192,7 +192,7 @@ export const talents = [
     fullName: 'Tom Black',
     jobName: 'React Native Developer',
     jobType: 'Part-Time',
-    status: TalentStatus.Inbound,
+    status: ListingStatus.Inbound,
     applied: '23.07.2022',
     skills: [],
     links: [],
@@ -201,7 +201,7 @@ export const talents = [
     id: 3,
     fullName: 'Abu Junjun',
     jobName: 'Graphic Designer',
-    status: TalentStatus.Accepted,
+    status: ListingStatus.Accepted,
     jobType: 'Evenings & Weekends',
     applied: '23.07.2022',
     skills: [
@@ -217,7 +217,7 @@ export const talents = [
     id: 4,
     fullName: 'Chaps D',
     jobName: 'UI/UX Design',
-    status: TalentStatus.Declined,
+    status: ListingStatus.Rejected,
     jobType: 'Part-Time',
     applied: '23.07.2022',
     group: 'Group',
@@ -234,7 +234,7 @@ export const talents = [
     id: 5,
     fullName: 'Mega Devs',
     jobName: 'Full Stack Development',
-    status: TalentStatus.Shortlisted,
+    status: ListingStatus.Shortlisted,
     jobType: 'Full Time',
     applied: '23.07.2022',
     group: 'Group',
@@ -250,7 +250,7 @@ export const talents = [
   {
     id: 6,
     fullName: 'Chaps D',
-    status: TalentStatus.Shortlisted,
+    status: ListingStatus.Shortlisted,
     jobName: 'UI/UX Design',
     jobType: 'Part-Time',
     applied: '23.07.2022',
@@ -267,7 +267,7 @@ export const talents = [
   {
     id: 7,
     fullName: 'Mega Devs',
-    status: TalentStatus.Shortlisted,
+    status: ListingStatus.Shortlisted,
     jobName: 'Full Stack Development',
     jobType: 'Full Time',
     applied: '23.07.2022',
@@ -284,7 +284,7 @@ export const talents = [
   {
     id: 8,
     fullName: 'Chaps D',
-    status: TalentStatus.Shortlisted,
+    status: ListingStatus.Shortlisted,
     jobName: 'UI/UX Design',
     jobType: 'Part-Time',
     applied: '23.07.2022',
@@ -301,7 +301,7 @@ export const talents = [
   {
     id: 9,
     fullName: 'Mega Devs',
-    status: TalentStatus.Shortlisted,
+    status: ListingStatus.Shortlisted,
     jobName: 'Full Stack Development',
     jobType: 'Full Time',
     applied: '23.07.2022',
@@ -318,7 +318,7 @@ export const talents = [
   {
     id: 10,
     fullName: 'Chaps D',
-    status: TalentStatus.Shortlisted,
+    status: ListingStatus.Shortlisted,
     jobName: 'UI/UX Design',
     jobType: 'Part-Time',
     applied: '23.07.2022',
@@ -335,7 +335,7 @@ export const talents = [
   {
     id: 11,
     fullName: 'Mega Devs',
-    status: TalentStatus.Shortlisted,
+    status: ListingStatus.Shortlisted,
     jobName: 'Full Stack Development',
     jobType: 'Full Time',
     applied: '23.07.2022',
@@ -352,7 +352,7 @@ export const talents = [
   {
     id: 12,
     fullName: 'Chaps D',
-    status: TalentStatus.Shortlisted,
+    status: ListingStatus.Shortlisted,
     jobName: 'UI/UX Design',
     jobType: 'Part-Time',
     applied: '23.07.2022',
@@ -369,7 +369,7 @@ export const talents = [
   {
     id: 13,
     fullName: 'Mega Devs',
-    status: TalentStatus.Shortlisted,
+    status: ListingStatus.Shortlisted,
     jobName: 'Full Stack Development',
     jobType: 'Full Time',
     applied: '23.07.2022',

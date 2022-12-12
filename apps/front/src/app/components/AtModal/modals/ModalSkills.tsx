@@ -60,7 +60,7 @@ const ModalSkills: React.FunctionComponent<ModalSkillsProps> = (
         <Box display={'flex'} flexWrap={'wrap'} gap={'10px'}>
           {selectedTalent.skills && selectedTalent.skills.length > 0 ? (
             selectedTalent?.skills?.map((skill, index) => {
-              return <AtTag label={skill.label} delete={true} key={index} />
+              return <AtTag label={skill} delete={true} key={index} />
             })
           ) : (
             <AtTypography color={grey2}>

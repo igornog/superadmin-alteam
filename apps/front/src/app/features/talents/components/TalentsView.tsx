@@ -1,6 +1,6 @@
 import { FilterSquare } from 'iconsax-react'
 import React, { useEffect } from 'react'
-import { talents, talentsFilters, talentsJobType, talentsTabs } from '..'
+import { talentsFilters, talentsJobType, talentsTabs } from '..'
 import AtLayout from '../../../components/AtLayout/AtLayout'
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
 import {
@@ -25,7 +25,7 @@ const TalentsView: React.FunctionComponent = () => {
       }),
     )
 
-    dispatch(handleTalents(talents))
+    dispatch(handleTalents())
   }, [dispatch])
 
   useEffect(() => {
