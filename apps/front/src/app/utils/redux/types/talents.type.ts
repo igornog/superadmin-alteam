@@ -51,8 +51,8 @@ export class Talent implements SoloTalent {
 
   constructor(data: any) {
     this.id = data.id
-    this.firstName = data.fullName
-    this.lastName = data.fullName
+    this.firstName = data.firstName
+    this.lastName = data.lastName
     this.experience = data.experience
     this.availability = data.availability
     this.links = data.links

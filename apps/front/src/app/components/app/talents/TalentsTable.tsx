@@ -154,7 +154,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
                       {talent.skills
                         ?.slice(0, maxItemPerLine)
                         .map((skill: string, index: number) => (
-                          <StyledTag label={skill} delete={false} key={index} />
+                          <StyledTag label={skill} key={index} />
                         ))}
                       {talent.skills.slice(maxItemPerLine).length > 0 && (
                         <Tooltip

@@ -71,7 +71,6 @@ const ModalListings: React.FunctionComponent<ModalListingsProps> = (
             </AtTypography>
             <StyledTag
               label={'Back-End Developer 6 Month Contract'}
-              delete={true}
             ></StyledTag>
             <AtDropdown
               align={'bottom-right'}

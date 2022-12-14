@@ -15,6 +15,7 @@ export { default } from './components/ClientsView'
 export const clientsTabs: Page[] = [
   {
     title: Tabs.ClientRequests,
+    status: null,
     node: <ClientRequestsView />,
     badge: 5,
     active: false,
@@ -30,6 +31,7 @@ export const clientsTabs: Page[] = [
   },
   {
     title: Tabs.ActiveClients,
+    status: null,
     node: <ClientRequestsView />,
     badge: 150,
     active: true,
@@ -44,6 +46,7 @@ export const clientsTabs: Page[] = [
   },
   {
     title: Tabs.InactiveClients,
+    status: null,
     node: <ClientRequestsView />,
     badge: 20,
     active: false,
@@ -62,6 +65,7 @@ export const clientsTabs: Page[] = [
   },
   {
     title: Tabs.DeclinedRequests,
+    status: null,
     node: <ClientRequestsView />,
     active: false,
     settings: {

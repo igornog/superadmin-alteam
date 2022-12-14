@@ -92,7 +92,7 @@ const AtTalentCard: React.FunctionComponent<AtTalentCardProps> = (
           {talent.skills && talent.skills.length > 0 ? (
             <Box display={'flex'} flexWrap={'wrap'} gap={'10px'}>
               {talent.skills?.map((value: string, index: number) => (
-                <AtTag label={value} delete={false} key={index} />
+                <AtTag label={value} key={index} />
               ))}
             </Box>
           ) : (

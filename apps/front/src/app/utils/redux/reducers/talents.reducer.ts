@@ -1,6 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { handleInitPage } from '../actions/app.action'
-import { handleSelectTalent, handleTalents } from '../actions/talents.action'
+import {
+  handleCreateTalent,
+  handleSelectTalent,
+  handleTalents,
+} from '../actions/talents.action'
 import { StatusType } from '../types/status.type'
 import { TalentsState } from '../types/talents.type'
 
@@ -27,6 +31,9 @@ const { reducer } = createSlice({
       .addCase(handleTalents.rejected, (state, action) => {
         state.status = StatusType.Failed
         state.error = action.error.message
+      })
+      .addCase(handleCreateTalent.fulfilled, (state, { payload }) => {
+        state.listTalents.push(payload)
       })
 
       .addCase(handleSelectTalent.fulfilled, (state, { payload }) => {

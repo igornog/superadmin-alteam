@@ -64,7 +64,7 @@ const ModalCreateTalentStep1: React.FunctionComponent<
       <AtTextFieldDropdown
         fullWidth={true}
         handleSelect={(e) => props.setAvailability(e.label as Availability)}
-        value={props.availability ? props.availability : ''}
+        value={props.availability ?? ''}
         placeholder={'Select Availability'}
         required={true}
         listItems={Object.values(Availability).map(

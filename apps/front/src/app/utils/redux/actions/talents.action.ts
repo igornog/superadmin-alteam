@@ -1,12 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { talentService } from '../../services/talentService'
 import { Talent } from '../types/talents.type'
+import { TalentSearch } from '@yjcapp/app'
 
 export const handleTalents = createAsyncThunk(
   'talents/initTalents',
-  async (_, { rejectWithValue }) => {
+  async (talentSearch: TalentSearch, { rejectWithValue }) => {
     try {
-      return await talentService.searchSoloTalent({})
+      return await talentService.searchSoloTalent(talentSearch)
     } catch (error) {
       return rejectWithValue(error)
     }

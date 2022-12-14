@@ -24,8 +24,6 @@ const TalentsView: React.FunctionComponent = () => {
         jobTypes: talentsJobType,
       }),
     )
-
-    dispatch(handleTalents())
   }, [dispatch])
 
   useEffect(() => {
@@ -33,6 +31,10 @@ const TalentsView: React.FunctionComponent = () => {
       dispatch(handleSettingsTab(activeTab.config))
     }
   }, [activeTab, dispatch, settings.tabs])
+
+  useEffect(() => {
+    dispatch(handleTalents({ status: activeTab?.status }))
+  }, [activeTab?.status, dispatch])
 
   return (
     <AtLayout

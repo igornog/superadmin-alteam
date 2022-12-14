@@ -16,8 +16,8 @@ const ModalCreateTalentStep3: React.FunctionComponent = () => {
       <AtDropBox />
 
       <Box display={'flex'} flexDirection={'column'} gap={'10px'}>
-        <AtTag label={'filenamemightbethislong.pdf'} delete={true} />
-        <AtTag label={'filenamemightbethislong.pdf'} delete={true} />
+        <AtTag label={'filenamemightbethislong.pdf'} />
+        <AtTag label={'filenamemightbethislong.pdf'} />
       </Box>
     </Box>
   )

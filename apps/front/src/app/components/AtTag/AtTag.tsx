@@ -44,15 +44,14 @@ const AtTag: React.FunctionComponent<AtTagProps> = (props: AtTagProps) => {
       variant={props.variant ?? 'filled'}
       clickable={props.hover}
       label={<AtTypography>{props.label}</AtTypography>}
-      deleteIcon={props.delete ? <StyledIcon /> : undefined}
-      onDelete={props.delete ? () => props.onDelete : undefined}
+      deleteIcon={props.onDelete ? <StyledIcon /> : undefined}
+      onDelete={props.onDelete ?? undefined}
     />
   )
 }
 
 interface AtTagProps {
   label: string
-  delete?: boolean
   hover?: boolean
   variant?: 'filled' | 'outlined'
   onDelete?: () => void

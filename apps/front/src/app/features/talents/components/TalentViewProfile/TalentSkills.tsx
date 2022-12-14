@@ -27,7 +27,7 @@ const TalentSkills: React.FunctionComponent<TalentSkillsProps> = (
       <Box display={'flex'} flexWrap={'wrap'} gap={'10px'}>
         {props.talent.skills && props.talent.skills?.length > 0 ? (
           props.talent.skills?.map((value: string, index: number) => (
-            <AtTag label={value} delete={false} key={index} />
+            <AtTag label={value} key={index} />
           ))
         ) : (
           <AtTypography color={grey}>

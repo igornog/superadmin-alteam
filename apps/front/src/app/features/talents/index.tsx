@@ -12,6 +12,7 @@ export { default } from './components/TalentsView'
 export const talentsTabs: Page[] = [
   {
     title: Tabs.AllTalent,
+    status: null,
     node: <AllTalentsView />,
     badge: 150,
     active: false,
@@ -26,6 +27,7 @@ export const talentsTabs: Page[] = [
   },
   {
     title: Tabs.InboundTalent,
+    status: ListingStatus.Inbound,
     node: <InboundTalentsView />,
     badge: 5,
     active: true,
@@ -46,6 +48,7 @@ export const talentsTabs: Page[] = [
   },
   {
     title: Tabs.ShortlistTalent,
+    status: ListingStatus.Shortlisted,
     node: <ShortlistLatentsView />,
     badge: 40,
     active: false,
@@ -65,6 +68,7 @@ export const talentsTabs: Page[] = [
   },
   {
     title: Tabs.AcceptedTalent,
+    status: ListingStatus.Accepted,
     node: <AcceptedTatentsView />,
     badge: 20,
     active: false,
@@ -84,6 +88,7 @@ export const talentsTabs: Page[] = [
   },
   {
     title: Tabs.DeclinedTalent,
+    status: ListingStatus.Rejected,
     node: <DeclinedTalentsView />,
     active: false,
     settings: {
@@ -102,6 +107,7 @@ export const talentsTabs: Page[] = [
   },
   {
     title: Tabs.Applicants,
+    status: ListingStatus.Applicable,
     active: false,
     settings: {},
     talentRightClick: [],

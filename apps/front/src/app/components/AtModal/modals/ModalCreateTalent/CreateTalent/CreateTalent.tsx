@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { CloseSquare, ArrowRight2, TickSquare } from 'iconsax-react'
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { useAppDispatch } from '../../../../../utils/hooks/reduxHook'
 import { handleCreateTalent } from '../../../../../utils/redux/actions/talents.action'
 import AtButton, {
@@ -12,6 +12,7 @@ import AtTabs from '../../../../AtTabs/AtTabs'
 import ModalCreateTalentStep1 from './steps/ModalCreateTalentStep1'
 import ModalCreateTalentStep2 from './steps/ModalCreateTalentStep2'
 import ModalCreateTalentStep3 from './steps/ModalCreateTalentStep3'
+import { isValidEmail } from '../../../../../utils/emails'
 
 const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
   props: CreateTalentProps,
@@ -25,12 +26,21 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
   const [experience, setExperience] = useState<Experience>()
   const [availability, setAvailability] = useState<Availability>()
   const [portfolio, setPortfolio] = useState('')
-  const [skills, setSkills] = useState<Array<string>>(['React'])
+  const [skills, setSkills] = useState<Array<string>>([])
   const [about, setAbout] = useState('')
 
   const handleClose = () => {
     props.handleClose()
     props.setStep(0)
+    setFirstName('')
+    setLastName('')
+    setEmail('')
+    setRole('')
+    setExperience(undefined)
+    setAvailability(undefined)
+    setPortfolio('')
+    setPortfolio('')
+    setAbout('')
   }
 
   const createTalent = () => {
@@ -40,7 +50,7 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
       role &&
       experience &&
       availability &&
-      email &&
+      isValidEmail(email) &&
       skills.length > 0
     ) {
       dispatch(
@@ -62,6 +72,13 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
 
     handleClose()
   }
+
+  useEffect(() => {
+    if (props.clearForm) {
+      handleClose()
+      props.setClearForm(false)
+    }
+  }, [handleClose, props.clearForm])
 
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'30px'}>
@@ -133,9 +150,26 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
               endIcon={<TickSquare />}
             />
           </>
+        ) : props.step === 0 ? (
+          <AtButton
+            onClick={() => props.setStep(props.step + 1)}
+            kind={AtButtonKind.Success}
+            disabled={
+              firstName === '' ||
+              lastName === '' ||
+              !isValidEmail(email) ||
+              role === '' ||
+              experience === undefined ||
+              availability === undefined
+            }
+            variant={AtButtonVariant.Contained}
+            name={'Next Step'}
+            endIcon={<ArrowRight2 size={16} />}
+          />
         ) : (
           <AtButton
             onClick={() => props.setStep(props.step + 1)}
+            disabled={skills.length === 0}
             kind={AtButtonKind.Success}
             variant={AtButtonVariant.Contained}
             name={'Next Step'}
@@ -149,6 +183,8 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
 
 interface CreateTalentProps {
   handleClose: () => void
+  clearForm: boolean
+  setClearForm: Dispatch<SetStateAction<boolean>>
   step: number
   setStep: Dispatch<SetStateAction<number>>
 }

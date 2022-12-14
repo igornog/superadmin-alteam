@@ -19,10 +19,12 @@ const ModalAddTalent: React.FunctionComponent<ModalAddTalentProps> = (
 ) => {
   const [isInviting, setIsInviting] = useState(false)
   const [step, setStep] = useState(0)
+  const [clearForm, setClearForm] = useState(false)
 
   const handleClose = () => {
     props.onClose?.()
     setIsInviting(false)
+    setClearForm(true)
   }
 
   return (
@@ -78,11 +80,19 @@ const ModalAddTalent: React.FunctionComponent<ModalAddTalentProps> = (
 
       <AtLine spacingTop={20} />
 
-      <Box display={'flex'} flexDirection={'column'} gap={2.5} padding={2.5}>
+      <Box
+        display={'flex'}
+        flexDirection={'column'}
+        gap={2.5}
+        padding={2.5}
+        overflow={'scroll'}
+      >
         {isInviting ? (
           <InviteTalent handleClose={handleClose} />
         ) : (
           <CreateTalent
+            clearForm={clearForm}
+            setClearForm={setClearForm}
             handleClose={handleClose}
             step={step}
             setStep={setStep}

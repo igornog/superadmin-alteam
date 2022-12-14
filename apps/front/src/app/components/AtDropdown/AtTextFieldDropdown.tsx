@@ -76,6 +76,12 @@ const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
     }
   }, [selectedItem])
 
+  useEffect(() => {
+    if (!props.value) {
+      setSelectedItem(undefined)
+    }
+  }, [props.value])
+
   return (
     <ClickAwayListener onClickAway={handleClose}>
       <Box

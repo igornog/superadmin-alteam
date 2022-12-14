@@ -10,7 +10,7 @@ import {
   OutlinedInput,
   outlinedInputClasses,
 } from '@mui/material'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 import {
   black,
@@ -200,6 +200,17 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
     props.onClickDropdownLabel?.()
   }
 
+  const handlePressEnter = (e: any) => {
+    if (e.keyCode === 13) {
+      props.onPressEnter?.(e.target.value)
+      setValue('')
+    }
+  }
+
+  useEffect(() => {
+    setValue(props.value)
+  }, [props.value])
+
   return (
     <Box
       position={'relative'}
@@ -258,6 +269,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
         <StyledInput
           fullWidth={true}
           onClick={props.onClick}
+          onKeyDown={handlePressEnter}
           dropdown={props.dropdown}
           $maxWidth={props.maxWidth}
           $bgColor={props.bgColor}
@@ -326,7 +338,6 @@ export interface AtTextFieldProps {
   required?: boolean
   defaultValue?: string
   value: string
-
   multiline?: boolean
   rows?: number
 
@@ -346,6 +357,7 @@ export interface AtTextFieldProps {
   bgColor?: 'black' | 'white'
   size?: 'small' | 'medium'
   onValueChange?: (value: string) => void
+  onPressEnter?: (value: string) => void
   placeholder?: string
   type?: AtTextFieldType
 
