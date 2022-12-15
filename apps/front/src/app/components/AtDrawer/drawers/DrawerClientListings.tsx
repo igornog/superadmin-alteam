@@ -27,6 +27,7 @@ import AtTextField from '../../AtTextField/AtTextField'
 import AtTypography from '../../AtTypography/AtTypography'
 import AtDrawer from '../AtDrawer'
 import DrawerListing from './DrawerListing/DrawerListing'
+import DrawerCreateListing from './DrawerCreateListing/DrawerCreateListing'
 
 const StyledListings = styled(Box)`
   display: flex;
@@ -39,12 +40,13 @@ const StyledListings = styled(Box)`
 `
 
 const DrawerClientListings: React.FunctionComponent<
-  DrawerClientListingsrops
-> = (props: DrawerClientListingsrops) => {
+  DrawerClientListingsProps
+> = (props: DrawerClientListingsProps) => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
   const activeTab = useAppSelector((state) => getActiveTab(state))
 
   const [openEditModal, setOpenEditModal] = useState(false)
+  const [openListingDetails, setOpenListingDetails] = useState(false)
   const [openCreateListing, setOpenCreateListing] = useState(false)
   const [selectedListing, setSelectedListing] = useState<Listing>(
     new Listing({}),
@@ -52,6 +54,10 @@ const DrawerClientListings: React.FunctionComponent<
 
   const selectListing = (listing: Listing) => {
     setSelectedListing(listing)
+    setOpenListingDetails(true)
+  }
+
+  const createListing = () => {
     setOpenCreateListing(true)
   }
 
@@ -139,7 +145,7 @@ const DrawerClientListings: React.FunctionComponent<
                 variant={AtButtonVariant.Contained}
                 startIcon={<AddCircle />}
                 name={'Create Listing'}
-                onClick={() => console.log('Create Listing')}
+                onClick={() => createListing()}
               />
             </Box>
 
@@ -177,15 +183,21 @@ const DrawerClientListings: React.FunctionComponent<
       </Grid>
 
       <DrawerListing
-        open={openCreateListing}
+        open={openListingDetails}
         selectedListing={selectedListing}
+        handleClose={() => setOpenListingDetails(false)}
+      />
+
+      <DrawerCreateListing
+        open={openCreateListing}
+        selectedClientName={selectedClient.name}
         handleClose={() => setOpenCreateListing(false)}
       />
     </AtDrawer>
   )
 }
 
-interface DrawerClientListingsrops {
+interface DrawerClientListingsProps {
   open: boolean
   handleClose: () => void
 }

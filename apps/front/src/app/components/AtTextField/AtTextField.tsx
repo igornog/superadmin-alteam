@@ -267,6 +267,9 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
           focused={isFocused}
           multiline={props.multiline}
           rows={props.rows}
+          inputProps={{
+            maxlength: props.maxLength,
+          }}
           disabled={props.disabled}
           value={props.dropdown ? props.placeholder : value}
           size={props.size ?? 'medium'}
@@ -322,6 +325,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
 }
 
 export interface AtTextFieldProps {
+  maxLength?: any
   fullWidth?: boolean
   required?: boolean
   defaultValue?: string
