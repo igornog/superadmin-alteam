@@ -13,8 +13,7 @@ export const StyledForm = styled.div`
 export const StyledCard = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  place-items: center;
   background-color: ${white};
   border: 1px solid ${grey5};
   border-radius: 5px;
