@@ -14,10 +14,7 @@ const Step2: React.FunctionComponent = () => {
     { label: 'UI/UX Design' },
     { label: 'Figma' },
     { label: 'Sketch' },
-    { label: 'Wireframe' },
-    { label: 'Prototyping' },
-    { label: 'Prototyping' },
-    { label: 'Wireframe' },
+    { label: 'Wireframe' }
   ])
 
   return (

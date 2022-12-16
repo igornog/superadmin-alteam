@@ -116,6 +116,11 @@ const StyledInput = styled(OutlinedInput) <{
       }
       padding: ${({ size }) => (size === 'medium' ? '18px 0' : '10px 0')};
     }
+    & textarea {
+      &::placeholder {
+        color: ${grey3};
+      }
+    }
     &.${inputBaseClasses.adornedStart} {
       input {
         padding-left: 10px;

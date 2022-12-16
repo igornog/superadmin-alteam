@@ -12,11 +12,12 @@ import AtButton, {
 import AtLine from '../../../AtLine/AtLine'
 import AtTypography from '../../../AtTypography/AtTypography'
 import AtDrawer from '../../AtDrawer'
-import CreateProjectListing from './Project/CreateProjectListing'
 import FolderIcon from '../../../../assets/images/icons/folder.svg'
 import GroupIcon from '../../../../assets/images/icons/group.svg'
 import { getActiveClient } from '../../../../utils/redux/selectors/clients.selector'
 import AtCreateListingCard from '../../../AtCard/AtCreateListingCard'
+import CreateTeamListing from './Team/CreateTeamListing'
+import CreateProjectListing from './Project/CreateProjectListing'
 
 export const StyledForm = styled.div`
   background-color: ${white};
@@ -49,9 +50,11 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
 
   const [step, setStep] = useState(0)
   const [openCreateListing, setOpenCreateListing] = useState(false)
+  const [listingType, setListingType] = useState('')
 
-  const createListing = () => {
+  const createListing = (type: string) => {
     setOpenCreateListing(true)
+    setListingType(type)
   }
 
   const handleClose = () => {
@@ -74,7 +77,23 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
       open={props.open}
       handleClose={handleClose}
     >
-      {!openCreateListing ?
+      {openCreateListing ?
+        listingType === 'Project' ?
+          <CreateProjectListing
+            listingType={listingType}
+            clientName={selectedClient.name}
+            handleClose={handleClose}
+            handleBackToCreateListing={handleCloseToCreateListing}
+          />
+          :
+          <CreateTeamListing
+            listingType={listingType}
+            clientName={selectedClient.name}
+            handleClose={handleClose}
+            handleBackToCreateListing={handleCloseToCreateListing}
+          />
+
+        :
 
         <Container>
           <Box
@@ -116,12 +135,12 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
                     <AtCreateListingCard
                       listingOption={'Project'}
                       icon={FolderIcon}
-                      onClick={() => createListing()}
+                      onClick={() => createListing('Project')}
                     />
                     <AtCreateListingCard
                       listingOption={'Team'}
                       icon={GroupIcon}
-                      onClick={() => console.log('Create Team')}
+                      onClick={() => createListing('Team')}
                     />
                   </Grid>
                 </StyledForm>
@@ -130,23 +149,17 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
           </Box>
         </Container>
 
-        :
-
-        <CreateProjectListing
-          selectedClientName={selectedClient.name}
-          handleClose={handleClose}
-          handleBackToCreateListing={handleCloseToCreateListing}
-        />
-
       }
+
     </AtDrawer>
 
   )
 }
 
+
+
 interface DrawerCreateListingProps {
   open: boolean
-  selectedClientName: string
   handleClose: () => void
 }
 

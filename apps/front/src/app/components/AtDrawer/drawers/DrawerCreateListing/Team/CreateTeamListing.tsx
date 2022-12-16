@@ -16,6 +16,7 @@ import Step1 from './steps/Step1'
 import Step2 from './steps/Step2'
 import Step3 from './steps/Step3'
 import Step4 from './steps/Step4'
+import Step5 from './steps/Step5'
 
 export const StyledForm = styled.div`
   background-color: ${white};
@@ -62,7 +63,7 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
-      {step === 4 ? (
+      {step === 5 ? (
         <FinalStep
           handleClose={handleCloseAll}
           clientName={props.clientName} />
@@ -117,13 +118,17 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
                         id: 3,
                         content: <Step4 />,
                       },
+                      {
+                        id: 4,
+                        content: <Step5 />,
+                      },
                     ]}
                     step={step}
                   />
                 </Box>
 
                 <Box display={'flex'} gap={'12px'} justifyContent={'center'}>
-                  {[...Array(4).keys()].map((item: number) => (
+                  {[...Array(5).keys()].map((item: number) => (
                     <StyledDot isActive={step === item} />
                   ))}
                 </Box>
@@ -143,7 +148,7 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
                 <AtTypography color={grey2}>
                   Step{' '}
                   <Box>
-                    <span style={{ color: black }}>{step + 1}</span>/4
+                    <span style={{ color: black }}>{step + 1}</span>/5
                   </Box>
                 </AtTypography>
                 <AtButton
@@ -164,7 +169,7 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
 
 interface DrawerCreateListingProps {
   clientName: string
-  listingType?: string
+  listingType: string
   handleClose: () => void
   handleBackToCreateListing: () => void
 }

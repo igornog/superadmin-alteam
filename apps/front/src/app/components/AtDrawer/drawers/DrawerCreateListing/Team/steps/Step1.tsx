@@ -7,7 +7,7 @@ import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
 
-const Step1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
+const Step1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {  
   return (
     <StyledForm>
       <Box padding={'20px'} display={'flex'} justifyContent={'space-between'}>
@@ -27,9 +27,9 @@ const Step1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
 
         <Box display={'flex'} gap={'30px'} flexDirection={'column'}>
           <AtTextField
-            label={'Project Name'}
+            label={'Team Project Name'}
             required={true}
-            placeholder={'Enter Project Name'}
+            placeholder={'Enter Team Project Name'}
             value={''}
           />
 
@@ -46,25 +46,27 @@ const Step1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
             fullWidth={true}
             required={true}
             value={''}
-            placeholder={'Select Number of Individuals'}
+            placeholder={'Select Team Size (max 10)'}
             listItems={[
-              {
-                id: 0,
-                label: '1 - 10',
-              },
-              {
-                id: 1,
-                label: 'More than 10',
-              },
+              { id: 0, label: '1' },
+              { id: 1, label: '2' },
+              { id: 2, label: '3' },
+              { id: 3, label: '4' },
+              { id: 4, label: '5' },
+              { id: 5, label: '6' },
+              { id: 6, label: '7' },
+              { id: 7, label: '8' },
+              { id: 8, label: '9' },
+              { id: 9, label: '10' },
             ]}
-            label={'Number of Individuals'}
+            label={'Team Size (max 10)'}
           />
 
           <Box display={'flex'} gap={'10px'} flexDirection={'column'}>
             <AtTextFieldDropdown
               fullWidth={true}
               required={true}
-              value={''}
+              value={props.selectedClientName}
               placeholder={'Select Work Type'}
               listItems={[
                 {
@@ -120,7 +122,7 @@ const Step1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
               fullWidth={true}
               required={true}
               value={''}
-              placeholder={'Select Rate'}
+              placeholder={'Select Rate Type'}
               listItems={[
                 {
                   id: 0,
@@ -131,9 +133,8 @@ const Step1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
                   label: 'Daily',
                 },
               ]}
-              label={'Rate'}
+              label={'Rate Type'}
             />
-
             <AtTextField
               placeholder={'Enter Exact Rate'}
               value={''}

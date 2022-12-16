@@ -49,7 +49,7 @@ const FinalStep: React.FunctionComponent<FinalStepProps> = (
 
 interface FinalStepProps {
   handleClose: () => void
-  clientName?: string
+  clientName: string
 }
 
 export default FinalStep

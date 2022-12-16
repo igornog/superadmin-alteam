@@ -190,7 +190,6 @@ const DrawerClientListings: React.FunctionComponent<
 
       <DrawerCreateListing
         open={openCreateListing}
-        selectedClientName={selectedClient.name}
         handleClose={() => setOpenCreateListing(false)}
       />
     </AtDrawer>
