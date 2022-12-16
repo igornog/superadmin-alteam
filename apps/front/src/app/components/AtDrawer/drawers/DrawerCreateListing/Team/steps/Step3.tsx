@@ -10,11 +10,13 @@ import AtButton, { AtButtonKind, AtButtonVariant } from '../../../../../AtButton
 import { AddSquare } from 'iconsax-react'
 import AtTextFieldDropdown from '../../../../../AtDropdown/AtTextFieldDropdown'
 
-const StyledCharCounter = styled.div`
+
+const StyledCharCounter = styled.label<{ multipleDescriptions: boolean }>`
   position: absolute;
-  bottom: 30px;
   padding: 10px;
-  color: ${grey2}
+  bottom: ${({ multipleDescriptions }) =>
+    multipleDescriptions ? '30px' : '-1px'};
+  }
 `
 
 const StyledBox = styled.div`
@@ -75,7 +77,7 @@ const Step2: React.FunctionComponent = () => {
                 placeholder={'Enter Job Description'}
               />
 
-              <StyledCharCounter>
+              <StyledCharCounter multipleDescriptions={jobDescriptions > 1}>
                 <AtTypography variant={'caption'} color={grey3}>
                   {inputValue.length}/{500}
                 </AtTypography>
