@@ -33,7 +33,7 @@ const TalentsView: React.FunctionComponent = () => {
   }, [activeTab, dispatch, settings.tabs])
 
   useEffect(() => {
-    dispatch(handleTalents({ status: activeTab?.status }))
+    dispatch(handleTalents({ status: activeTab?.status?.toLowerCase() }))
   }, [activeTab?.status, dispatch])
 
   return (

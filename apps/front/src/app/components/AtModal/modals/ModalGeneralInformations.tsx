@@ -6,18 +6,26 @@ import AtButton, {
   AtButtonVariant,
 } from '../../AtButton/AtButton'
 import AtTextField from '../../AtTextField/AtTextField'
-import { useAppSelector } from '../../../utils/hooks/reduxHook'
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
 import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector'
 import AtTypography from '../../AtTypography/AtTypography'
 import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtModal from '../AtModal'
 import AtLine from '../../AtLine/AtLine'
 import AtTextFieldDropdown from '../../AtDropdown/AtTextFieldDropdown'
+import { Availability, Experience } from '@yjcapp/app'
+import { handlePatchTalent } from '../../../utils/redux/actions/talents.action'
 
 const ModalGeneralInformations: React.FunctionComponent<
   ModalGeneralInformationsProps
 > = (props: ModalGeneralInformationsProps) => {
   const selectedTalent = useAppSelector((state) => getActiveTalent(state))
+  const dispatch = useAppDispatch()
+
+  const handleSaveGeneral = () => {
+    dispatch(handlePatchTalent({ id: selectedTalent.id, skills }))
+    props.onClose?.()
+  }
 
   return (
     <AtModal
@@ -47,49 +55,41 @@ const ModalGeneralInformations: React.FunctionComponent<
       <Box display={'flex'} flexDirection={'column'} gap={3.5} padding={2.5}>
         <AtTextField
           defaultValue={selectedTalent.role}
-          value={''}
+          value={selectedTalent.role ?? ''}
           placeholder={selectedTalent.role ?? 'N/A'}
           label={'Role'}
         />
 
         <AtTextField
           defaultValue={selectedTalent.salaryExpectation}
-          value={''}
+          value={selectedTalent.salaryExpectation ?? ''}
           placeholder={selectedTalent.salaryExpectation ?? 'N/A'}
           label={'Salary Expectations'}
         />
 
         <AtTextFieldDropdown
           fullWidth={true}
-          value={''}
+          value={selectedTalent.availability}
           placeholder={'Select Availability'}
-          listItems={[
-            {
-              id: 0,
-              label: 'Full Time',
-            },
-            {
-              id: 1,
-              label: 'Part Time',
-            },
-          ]}
+          listItems={Object.values(Availability).map(
+            (label: Availability, index: number) => ({
+              id: index,
+              label: label,
+            }),
+          )}
           label={'Availability'}
         />
 
         <AtTextFieldDropdown
           fullWidth={true}
+          value={selectedTalent.experience}
           placeholder={'Select Work Experience'}
-          value={''}
-          listItems={[
-            {
-              id: 0,
-              label: 'Senior',
-            },
-            {
-              id: 1,
-              label: 'Junior',
-            },
-          ]}
+          listItems={Object.values(Experience).map(
+            (label: Experience, index: number) => ({
+              id: index,
+              label: label,
+            }),
+          )}
           label={'Work Experience'}
         />
 
@@ -102,14 +102,14 @@ const ModalGeneralInformations: React.FunctionComponent<
 
         <AtTextField
           defaultValue={selectedTalent.email}
-          value={''}
+          value={selectedTalent.email}
           placeholder={selectedTalent.email ?? 'N/A'}
           label={'Email'}
         />
 
         <AtTextField
           defaultValue={selectedTalent.phoneNumber}
-          value={''}
+          value={selectedTalent.phoneNumber}
           placeholder={selectedTalent.phoneNumber ?? 'N/A'}
           label={'Phone Number'}
         />
@@ -123,7 +123,7 @@ const ModalGeneralInformations: React.FunctionComponent<
             endIcon={<CloseSquare size={16} />}
           />
           <AtButton
-            onClick={props.onClose}
+            onClick={handleSaveGeneral}
             kind={AtButtonKind.Success}
             variant={AtButtonVariant.Contained}
             name={'Save Changes'}

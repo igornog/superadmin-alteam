@@ -6,7 +6,6 @@ import ModalLink from '../../../../components/AtModal/modals/ModalLink'
 import AtFrame from '../../../../components/AtFrame/AtFrame'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
 import { black, grey4 } from '../../../../utils/colors'
-import { getCorrectNetwork } from '../../../../utils/helpers'
 import { Talent } from '../../../../utils/redux/types/talents.type'
 
 export const StyledLink = styled(Box)<{ padding?: string }>`

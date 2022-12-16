@@ -23,7 +23,7 @@ const AtModal: React.FunctionComponent<AtModalProps> = (
       PaperProps={{
         style: {
           padding: 0,
-          overflow: 'visible',
+          overflow: 'scroll',
           boxShadow: 'none',
           minWidth: props.minWidth,
         },

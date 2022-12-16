@@ -43,11 +43,11 @@ export enum Availability {
 }
 
 export enum ListingStatus {
-  Shortlisted = 'Shortlisted',
-  Rejected = 'Rejected',
-  Accepted = 'Accepted',
-  Inbound = 'Inbound',
-  Applicable = 'Applicable',
+  Shortlisted = 'shortlisted',
+  Rejected = 'rejected',
+  Accepted = 'accepted',
+  Inbound = 'inbound',
+  Applicable = 'applicable',
 }
 
 export interface Listing {

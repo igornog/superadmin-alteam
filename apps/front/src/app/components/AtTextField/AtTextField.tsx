@@ -201,14 +201,18 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
   }
 
   const handlePressEnter = (e: any) => {
-    if (e.keyCode === 13) {
-      props.onPressEnter?.(e.target.value)
-      setValue('')
+    if (props.onPressEnter) {
+      if (e.keyCode === 13 || e.keyCode === 9) {
+        props.onPressEnter?.(e.target.value)
+        setValue('')
+      }
     }
   }
 
   useEffect(() => {
-    setValue(props.value)
+    if (props.value) {
+      setValue(props.value)
+    }
   }, [props.value])
 
   return (
@@ -337,7 +341,7 @@ export interface AtTextFieldProps {
   fullWidth?: boolean
   required?: boolean
   defaultValue?: string
-  value: string
+  value?: string
   multiline?: boolean
   rows?: number
 

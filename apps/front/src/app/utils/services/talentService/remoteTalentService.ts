@@ -32,7 +32,15 @@ export default class RemoteTalentService implements TalentService {
     return data
   }
 
-  updateSoloTalent(talent: SoloTalent): Promise<SoloTalent> {
-    return atAxios.put(`/talent/solo`, talent)
+  async updateSoloTalent(talent: SoloTalent): Promise<SoloTalent> {
+    const { data } = await atAxios.put(`/talent/solo`, talent)
+
+    return data
+  }
+
+  async patchSoloTalent(talent: Partial<SoloTalent>): Promise<SoloTalent> {
+    const { data } = await atAxios.patch(`/talent/solo`, talent)
+
+    return data
   }
 }

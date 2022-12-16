@@ -94,8 +94,11 @@ const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
           dropdown={true}
           open={open}
           onClick={open ? handleClose : handleClick}
-          placeholder={selectedItem ? selectedItem.label : props.placeholder}
+          placeholder={
+            selectedItem ? selectedItem.label : props.value ?? props.placeholder
+          }
         />
+
         <StyledContentPopover
           in={open}
           $minWidth={dropdownRef?.current?.offsetWidth}

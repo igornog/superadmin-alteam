@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { CloseSquare, ArrowRight2, TickSquare } from 'iconsax-react'
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import React, { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
 import { useAppDispatch } from '../../../../../utils/hooks/reduxHook'
 import { handleCreateTalent } from '../../../../../utils/redux/actions/talents.action'
 import AtButton, {
@@ -29,19 +29,20 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
   const [skills, setSkills] = useState<Array<string>>([])
   const [about, setAbout] = useState('')
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     props.handleClose()
     props.setStep(0)
     setFirstName('')
     setLastName('')
     setEmail('')
     setRole('')
+    setSkills([])
     setExperience(undefined)
     setAvailability(undefined)
     setPortfolio('')
     setPortfolio('')
     setAbout('')
-  }
+  }, [props])
 
   const createTalent = () => {
     if (
@@ -78,7 +79,7 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
       handleClose()
       props.setClearForm(false)
     }
-  }, [handleClose, props.clearForm])
+  }, [handleClose, props, props.clearForm])
 
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'30px'}>

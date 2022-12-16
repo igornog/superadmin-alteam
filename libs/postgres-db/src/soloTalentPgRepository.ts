@@ -59,6 +59,7 @@ async function findSoloTalentBySearch(
   if (talentSearch.status) {
     queryBuilder.andWhere('status = :status', { status: talentSearch.status })
   }
+
   queryBuilder.limit(PAGE_SIZE)
   queryBuilder.offset(calculateOffset(talentSearch.page ?? 1, PAGE_SIZE))
   const result = await queryBuilder.getMany()

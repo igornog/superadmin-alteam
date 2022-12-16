@@ -25,6 +25,29 @@ export const handleCreateTalent = createAsyncThunk(
   },
 )
 
+export const handleUpdateTalent = createAsyncThunk(
+  'talents/updateTalent',
+  async (talent: Talent, { rejectWithValue }) => {
+    try {
+      return await talentService.updateSoloTalent(talent)
+    } catch (err) {
+      return rejectWithValue(err)
+    }
+  },
+)
+
+export const handlePatchTalent = createAsyncThunk(
+  'talents/updateTalent',
+  async (talent: Partial<Talent>, { rejectWithValue }) => {
+    try {
+      await talentService.patchSoloTalent(talent)
+      return talent
+    } catch (err) {
+      return rejectWithValue(err)
+    }
+  },
+)
+
 export const handleSelectTalent = createAsyncThunk(
   'talents/selectTalent',
   async (idTalent: string | null) => {
