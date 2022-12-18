@@ -1,13 +1,13 @@
 import { Box } from '@mui/material'
 import React from 'react'
-import { grey2 } from '../../../../../../utils/colors'
-import AtTextFieldDropdown from '../../../../../AtDropdown/AtTextFieldDropdown'
-import AtLine from '../../../../../AtLine/AtLine'
-import AtTextField from '../../../../../AtTextField/AtTextField'
-import AtTypography from '../../../../../AtTypography/AtTypography'
-import { StyledForm } from '../../DrawerCreateListing'
-import { useAppSelector } from '../../../../../../utils/hooks/reduxHook'
-import { getActiveClient } from '../../../../../../utils/redux/selectors/clients.selector'
+import { grey2 } from '../../../../utils/colors'
+import AtTextFieldDropdown from '../../../../components/AtDropdown/AtTextFieldDropdown'
+import AtLine from '../../../../components/AtLine/AtLine'
+import AtTextField from '../../../../components/AtTextField/AtTextField'
+import AtTypography from '../../../../components/AtTypography/AtTypography'
+import { StyledForm } from '../../../../components/AtDrawer/drawers/DrawerCreateListing/DrawerCreateListing'
+import { useAppSelector } from '../../../../utils/hooks/reduxHook'
+import { getActiveClient } from '../../../../utils/redux/selectors/clients.selector'
 
 const ProjectStep1: React.FunctionComponent = () => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))

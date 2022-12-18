@@ -17,7 +17,7 @@ import GroupIcon from '../../../../assets/images/icons/group.svg'
 import { getActiveClient } from '../../../../utils/redux/selectors/clients.selector'
 import AtCreateListingCard from '../../../AtCard/AtCreateListingCard'
 import { ListingType } from '../../../../utils/redux/types/listings.type'
-import CreateListing from './CreateListing'
+import CreateListing from '../../../../features/listings/CreateListing'
 
 export const StyledForm = styled.div`
   background-color: ${white};

@@ -1,23 +1,21 @@
 import { Box } from '@mui/material'
 import React, { useState } from 'react'
-import AtLine from '../../../../../AtLine/AtLine'
-import AtTextField from '../../../../../AtTextField/AtTextField'
-import AtTypography from '../../../../../AtTypography/AtTypography'
-import { StyledForm } from '../../DrawerCreateListing'
-import { grey2 } from '../../../../../../utils/colors'
+import { StyledForm } from '../../CreateListing'
+import AtTypography from '../../../../components/AtTypography/AtTypography'
+import { grey2 } from '../../../../utils/colors'
+import AtLine from '../../../../components/AtLine/AtLine'
+import AtTextField from '../../../../components/AtTextField/AtTextField'
 import { SearchNormal1 } from 'iconsax-react'
-import AtTag from '../../../../../AtTag/AtTag'
-import { Skill } from '../../../../../../utils/redux/types/talents.type'
+import { Skill } from '../../../../utils/redux/types/talents.type'
+import AtTag from '../../../../components/AtTag/AtTag'
 
-const ProjectStep3: React.FunctionComponent = () => {
+
+const Step2: React.FunctionComponent = () => {
   const [skills, setSkills] = useState([
     { label: 'UI/UX Design' },
     { label: 'Figma' },
     { label: 'Sketch' },
-    { label: 'Wireframe' },
-    { label: 'Prototyping' },
-    { label: 'Prototyping' },
-    { label: 'Wireframe' },
+    { label: 'Wireframe' }
   ])
 
   return (
@@ -56,4 +54,4 @@ const ProjectStep3: React.FunctionComponent = () => {
   )
 }
 
-export default ProjectStep3
+export default Step2
