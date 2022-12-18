@@ -4,6 +4,7 @@
   "projects": {
     "api-utils": "libs/api-utils",
     "app": "libs/app",
+    "asset-api": "apps/asset-api",
     "auth-api": "apps/auth-api",
     "client-api": "apps/client-api",
     "front": "apps/front",
