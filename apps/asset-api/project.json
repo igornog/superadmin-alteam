@@ -8,6 +8,7 @@
       "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "outputFileName": "index.js",
         "target": "node",
         "compiler": "tsc",
         "outputPath": "apps/dist/asset-api",
