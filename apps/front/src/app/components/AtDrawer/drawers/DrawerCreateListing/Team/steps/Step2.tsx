@@ -5,8 +5,12 @@ import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
 import { grey2 } from '../../../../../../utils/colors'
+import { useAppSelector } from '../../../../../../utils/hooks/reduxHook'
+import { getTeamSize } from '../../../../../../utils/redux/selectors/createListing.selector'
 
 const Step2: React.FunctionComponent = () => {
+  const listingForm = useAppSelector((state) => getTeamSize(state))
+
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
       <StyledForm>
@@ -23,48 +27,18 @@ const Step2: React.FunctionComponent = () => {
           flexDirection={'column'}
           gap={'50px'}
         >
+
           <Box display={'flex'} gap={'30px'} flexDirection={'column'}>
-            <AtTextField
-              label={'Role Name 1'}
-              required={true}
-              placeholder={'Enter Role Name'}
-              value={''}
-            />
 
-            <AtTextField
-              label={'Role Name 2'}
-              required={true}
-              placeholder={'Enter Role Name'}
-              value={''}
-            />
+            {Array.from(Array(listingForm.teamSize).keys()).map((i) => (
+              <AtTextField
+                label={`Role Name ${i+1}`}
+                required={true}
+                placeholder={'Enter Role Name'}
+                value={''}
+              />
+            ))}
 
-            <AtTextField
-              label={'Role Name 3'}
-              required={true}
-              placeholder={'Enter Role Name'}
-              value={''}
-            />
-
-            <AtTextField
-              label={'Role Name 4'}
-              required={true}
-              placeholder={'Enter Role Name'}
-              value={''}
-            />
-
-            <AtTextField
-              label={'Role Name 5'}
-              required={true}
-              placeholder={'Enter Role Name'}
-              value={''}
-            />
-
-            <AtTextField
-              label={'Role Name 6'}
-              required={true}
-              placeholder={'Enter Role Name'}
-              value={''}
-            />
           </Box>
         </Box>
       </StyledForm>

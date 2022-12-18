@@ -3,21 +3,14 @@ import AtLine from '../../../../../AtLine/AtLine'
 import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
-import { grey2, grey3 } from '../../../../../../utils/colors'
+import { grey2, red } from '../../../../../../utils/colors'
 import { Box } from '@mui/material'
 import styled from 'styled-components'
 import AtButton, { AtButtonKind, AtButtonVariant } from '../../../../../AtButton/AtButton'
 import { AddSquare } from 'iconsax-react'
 import AtTextFieldDropdown from '../../../../../AtDropdown/AtTextFieldDropdown'
+import AtTag from '../../../../../AtTag/AtTag'
 
-
-const StyledCharCounter = styled.label<{ multipleDescriptions: boolean }>`
-  position: absolute;
-  padding: 10px;
-  bottom: ${({ multipleDescriptions }) =>
-    multipleDescriptions ? '30px' : '-1px'};
-  }
-`
 
 const StyledBox = styled.div`
   position: relative;
@@ -27,14 +20,32 @@ const StyledBox = styled.div`
   padding: 20px;
 `
 
+const StyledTag = styled(AtTag)`
+  background: transparent;
+  height: auto;
+  
+  svg {
+    color: ${red} !important;
+  }
+`
+
 const Step2: React.FunctionComponent = () => {
-  const [inputValue, setInputValue] = useState('')
-  const [jobDescriptions, setJobDescriptions] = useState(1)
+  const [inputValue, setInputValue] = useState([{}])
+  const [jobDescriptions, setJobDescriptions] = useState([
+    {
+      role: '',
+      jobDescription: ''
+    }
+  ])
 
   const StyledButton = styled(AtButton)`
     width: fit-content;
     align-self: flex-end;
   `
+
+  const handleInputChange = (e: string, id: number) => {
+    setInputValue((prev) => ({ ...prev, [id]: e }));
+  };
 
   return (
     <StyledForm>
@@ -47,7 +58,7 @@ const Step2: React.FunctionComponent = () => {
       <AtLine />
 
       <StyledBox>
-        {Array.from(Array(jobDescriptions).keys()).map((i) => {
+        {jobDescriptions.map((jobDescription, i) => {
           return (
             <Box
               gap={'30px'}
@@ -57,38 +68,44 @@ const Step2: React.FunctionComponent = () => {
               alignItems={'flex-end'}
             >
 
-              <AtTextFieldDropdown
-                fullWidth={true}
-                required={true}
-                value={''}
-                placeholder={'Enter Role Name'}
-                listItems={[]}
-                label={`Role Name ${i + 1}`}
-              />
+              <Box
+                display={'flex'}
+                width={'100%'}
+              >
+                <AtTextFieldDropdown
+                  fullWidth={true}
+                  required={true}
+                  value={''}
+                  placeholder={'Enter Role Name'}
+                  listItems={[]}
+                  label={`Role Name ${i + 1}`}
+                />
+
+                {jobDescriptions.length > 1 ?
+                  <StyledTag
+                    delete={true}
+                    key={i}
+                  /> : ''}
+              </Box>
 
               <AtTextField
-                onValueChange={setInputValue}
-                value={inputValue}
+                onValueChange={(e) => handleInputChange(e, i)}
+                value={inputValue[i]}
                 maxLength={500}
                 multiline={true}
                 rows={6}
                 required={true}
                 label={`Job Description ${i + 1}`}
                 placeholder={'Enter Job Description'}
+                charCounter={true}
               />
 
-              <StyledCharCounter multipleDescriptions={jobDescriptions > 1}>
-                <AtTypography variant={'caption'} color={grey3}>
-                  {inputValue.length}/{500}
-                </AtTypography>
-              </StyledCharCounter>
-
-              {jobDescriptions > 1 ? <AtLine /> : ''}
+              {jobDescriptions.length > 1 && i !== jobDescriptions.length - 1 ? <AtLine /> : ''}
             </Box>)
         })}
 
         <StyledButton
-          onClick={() => setJobDescriptions(jobDescriptions + 1)}
+          onClick={() => setJobDescriptions([...jobDescriptions, { role: '', jobDescription: '' }])}
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Outlined}
           endIcon={<AddSquare size={16} />}

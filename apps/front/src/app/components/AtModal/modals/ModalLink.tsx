@@ -56,7 +56,7 @@ const ModalLink: React.FunctionComponent<ModalLinkProps> = (
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
           startIcon={<CloseCircle />}
-          iconSize={24}
+          iconsize={24}
           onClick={props.onClose}
         />
       </Box>
@@ -100,7 +100,7 @@ const ModalLink: React.FunctionComponent<ModalLinkProps> = (
                 kind={AtButtonKind.Danger}
                 variant={AtButtonVariant.Text}
                 startIcon={<TrushSquare />}
-                iconSize={20}
+                iconsize={20}
               />
             </Box>
           ))}
@@ -133,7 +133,7 @@ const ModalLink: React.FunctionComponent<ModalLinkProps> = (
               kind={AtButtonKind.Danger}
               variant={AtButtonVariant.Text}
               startIcon={<TrushSquare />}
-              iconSize={20}
+              iconsize={20}
             />
           </Box>
         )}

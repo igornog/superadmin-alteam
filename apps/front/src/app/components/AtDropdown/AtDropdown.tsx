@@ -131,7 +131,7 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
           name={selectedItem ? getText(selectedItem.label) : props.placeholder}
           endIcon={<ArrowDown2 size={10} />}
           fontSize={props.fontSize}
-          iconSize={10}
+          iconsize={10}
           padding={props.padding}
           flexibleHeight={props.flexibleHeight}
         />

@@ -6,8 +6,12 @@ import AtLine from '../../../../../AtLine/AtLine'
 import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
+import { useAppSelector } from '../../../../../../utils/hooks/reduxHook'
+import { getActiveClient } from '../../../../../../utils/redux/selectors/clients.selector'
 
-const Step1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
+const ProjectStep1: React.FunctionComponent = () => {
+  const selectedClient = useAppSelector((state) => getActiveClient(state))
+
   return (
     <StyledForm>
       <Box padding={'20px'} display={'flex'} justifyContent={'space-between'}>
@@ -36,8 +40,8 @@ const Step1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
           <AtTextFieldDropdown
             fullWidth={true}
             required={true}
-            value={props.selectedClientName}
-            placeholder={props.selectedClientName}
+            value={selectedClient.name}
+            placeholder={selectedClient.name}
             listItems={[]}
             label={'Client'}
           />
@@ -171,9 +175,4 @@ const Step1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
   )
 }
 
-interface Step1Props {
-  selectedClientName: string
-}
-
-
-export default Step1
+export default ProjectStep1

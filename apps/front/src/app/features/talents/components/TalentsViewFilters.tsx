@@ -87,7 +87,7 @@ const TalentsViewFilters: React.FunctionComponent = () => {
                 kind={AtButtonKind.Default}
                 variant={AtButtonVariant.Text}
                 startIcon={<ArrowRight2 size={10} />}
-                iconSize={10}
+                iconsize={10}
                 onClick={() => dispatch(handleCollapsePanel(false))}
               />
             )}

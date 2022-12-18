@@ -179,6 +179,13 @@ const StyledArrow = styled(ArrowDown2) <{ open?: boolean }>`
   transition: 0.3s;
   transform: rotate(${({ open }) => (open ? '180' : '0')}deg);
 `
+const StyledCharCounter = styled.label`
+  position: absolute;
+  padding: 10px;
+  bottom: 0px;
+  right: 0;
+}
+`
 
 const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
   props: AtTextFieldProps,
@@ -318,6 +325,13 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
             )
           }
         />
+        {props.charCounter ?
+          <StyledCharCounter >
+            <AtTypography variant={'caption'} color={grey3}>
+              {(Object.keys(value ?? value).length)}/{props.maxLength}
+            </AtTypography>
+          </StyledCharCounter>
+          : null}
 
         {props.isError && props.helperText ? (
           <FormHelperText>
@@ -330,11 +344,12 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
 }
 
 export interface AtTextFieldProps {
+  charCounter?: boolean
   maxLength?: number
   fullWidth?: boolean
   required?: boolean
   defaultValue?: string
-  value: string
+  value?: string | number | object
 
   multiline?: boolean
   rows?: number

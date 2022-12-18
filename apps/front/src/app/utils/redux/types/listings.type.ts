@@ -14,6 +14,11 @@ export enum ListingStatus {
   Ended = 'Ended',
 }
 
+export enum ListingType {
+  Project = 'Project',
+  Team = 'Team',
+}
+
 export enum WorkType {
   Remote = 'Remote',
 }
@@ -45,7 +50,7 @@ export class Listing {
   availability: Availability
   hours?: number
   projectLength: number
-  startDate: Date
+  startDate: string
   rateType: RateType
   rateFrom?: number
   rateTo?: number

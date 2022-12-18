@@ -7,7 +7,7 @@ import { grey2 } from '../../../../../../utils/colors'
 import { Box} from '@mui/material'
 import styled from 'styled-components'
 
-const Step2: React.FunctionComponent = () => {
+const ProjectStep2: React.FunctionComponent = () => {
   const [inputValue, setInputValue] = useState('')
 
   const StyledCharCounter = styled.div`
@@ -50,4 +50,4 @@ const Step2: React.FunctionComponent = () => {
   )
 }
 
-export default Step2
+export default ProjectStep2

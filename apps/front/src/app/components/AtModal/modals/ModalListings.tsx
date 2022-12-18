@@ -45,7 +45,7 @@ const ModalListings: React.FunctionComponent<ModalListingsProps> = (
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
           startIcon={<CloseCircle />}
-          iconSize={24}
+          iconsize={24}
           onClick={props.onClose}
         />
       </Box>

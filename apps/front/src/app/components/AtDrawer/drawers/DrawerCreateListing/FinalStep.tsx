@@ -2,13 +2,13 @@ import { Box } from '@mui/material'
 import { ArrowRight } from 'iconsax-react'
 import React from 'react'
 import styled from 'styled-components'
-import Rocketbg from '../../../../../../assets/images/icons/background_rocket.svg'
-import SmallRocket from '../../../../../../assets/images/icons/small_rocket.svg'
+import SmallRocket from '../../../../assets/images/icons/small_rocket.svg'
+import Rocketbg from '../../../../assets/images/icons/background_rocket.svg'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
-} from '../../../../../AtButton/AtButton'
-import AtTypography from '../../../../../AtTypography/AtTypography'
+} from '../../../AtButton/AtButton'
+import AtTypography from '../../../AtTypography/AtTypography'
 
 const StyledBox = styled(Box)`
   background-image: url(${Rocketbg});
@@ -49,7 +49,7 @@ const FinalStep: React.FunctionComponent<FinalStepProps> = (
 
 interface FinalStepProps {
   handleClose: () => void
-  clientName: string
+  clientName?: string
 }
 
 export default FinalStep

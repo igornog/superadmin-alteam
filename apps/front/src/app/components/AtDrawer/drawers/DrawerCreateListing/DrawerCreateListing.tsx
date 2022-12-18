@@ -16,8 +16,8 @@ import FolderIcon from '../../../../assets/images/icons/folder.svg'
 import GroupIcon from '../../../../assets/images/icons/group.svg'
 import { getActiveClient } from '../../../../utils/redux/selectors/clients.selector'
 import AtCreateListingCard from '../../../AtCard/AtCreateListingCard'
-import CreateTeamListing from './Team/CreateTeamListing'
-import CreateProjectListing from './Project/CreateProjectListing'
+import { ListingType } from '../../../../utils/redux/types/listings.type'
+import CreateListing from './CreateListing'
 
 export const StyledForm = styled.div`
   background-color: ${white};
@@ -48,11 +48,10 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
 ) => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
 
-  const [step, setStep] = useState(0)
   const [openCreateListing, setOpenCreateListing] = useState(false)
-  const [listingType, setListingType] = useState('')
+  const [listingType, setListingType] = useState<ListingType>()
 
-  const createListing = (type: string) => {
+  const createListing = (type: ListingType) => {
     setOpenCreateListing(true)
     setListingType(type)
   }
@@ -63,10 +62,6 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
 
   const handleCloseToCreateListing = () => {
     setOpenCreateListing(false)
-
-    setTimeout(() => {
-      setStep(0)
-    }, 500)
   }
 
   return (
@@ -78,20 +73,13 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
       handleClose={handleClose}
     >
       {openCreateListing ?
-        listingType === 'Project' ?
-          <CreateProjectListing
-            listingType={listingType}
-            clientName={selectedClient.name}
-            handleClose={handleClose}
-            handleBackToCreateListing={handleCloseToCreateListing}
-          />
-          :
-          <CreateTeamListing
-            listingType={listingType}
-            clientName={selectedClient.name}
-            handleClose={handleClose}
-            handleBackToCreateListing={handleCloseToCreateListing}
-          />
+        <CreateListing
+          listingType={listingType}
+          steps={listingType === ListingType.Project ? 4 : 5}
+          clientName={selectedClient.name}
+          handleClose={handleClose}
+          handleBackToCreateListing={handleCloseToCreateListing}
+        />
 
         :
 
@@ -107,7 +95,7 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
                 variant={AtButtonVariant.Contained}
                 startIcon={<ArrowLeft2 />}
                 kind={AtButtonKind.Default}
-                onClick={() => handleClose()}
+                onClick={handleClose}
               />
 
               <AtTypography color={grey2}>
@@ -133,14 +121,14 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
                   <AtLine />
                   <Grid container={true} justifyContent={'center'} gap={'20px'} padding={'20px'} flexWrap={'unset'}>
                     <AtCreateListingCard
-                      listingOption={'Project'}
+                      listingOption={ListingType.Project}
                       icon={FolderIcon}
-                      onClick={() => createListing('Project')}
+                      onClick={() => createListing(ListingType.Project)}
                     />
                     <AtCreateListingCard
-                      listingOption={'Team'}
+                      listingOption={ListingType.Team}
                       icon={GroupIcon}
-                      onClick={() => createListing('Team')}
+                      onClick={() => createListing(ListingType.Team)}
                     />
                   </Grid>
                 </StyledForm>

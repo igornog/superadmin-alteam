@@ -87,7 +87,7 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
                 variant={AtButtonVariant.Contained}
                 startIcon={<ArrowLeft2 />}
                 kind={AtButtonKind.Default}
-                onClick={() => handleClose()}
+                onClick={handleClose}
               />
 
               <AtTypography color={grey2}>

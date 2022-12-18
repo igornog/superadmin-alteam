@@ -145,7 +145,7 @@ const DrawerClientListings: React.FunctionComponent<
                 variant={AtButtonVariant.Contained}
                 startIcon={<AddCircle />}
                 name={'Create Listing'}
-                onClick={() => createListing()}
+                onClick={createListing}
               />
             </Box>
 

@@ -51,7 +51,7 @@ const AtTag: React.FunctionComponent<AtTagProps> = (props: AtTagProps) => {
 }
 
 interface AtTagProps {
-  label: string
+  label?: string
   delete?: boolean
   hover?: boolean
   variant?: 'filled' | 'outlined'

@@ -9,7 +9,7 @@ import { SearchNormal1 } from 'iconsax-react'
 import AtTag from '../../../../../AtTag/AtTag'
 import { Skill } from '../../../../../../utils/redux/types/talents.type'
 
-const Step2: React.FunctionComponent = () => {
+const ProjectStep3: React.FunctionComponent = () => {
   const [skills, setSkills] = useState([
     { label: 'UI/UX Design' },
     { label: 'Figma' },
@@ -56,4 +56,4 @@ const Step2: React.FunctionComponent = () => {
   )
 }
 
-export default Step2
+export default ProjectStep3

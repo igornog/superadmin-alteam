@@ -1,13 +1,26 @@
 import { Box } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import { grey2 } from '../../../../../../utils/colors'
-import AtTextFieldDropdown from '../../../../../AtDropdown/AtTextFieldDropdown'
+import AtTextFieldDropdown, { DropdownItem } from '../../../../../AtDropdown/AtTextFieldDropdown'
 import AtLine from '../../../../../AtLine/AtLine'
 import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
+import { useAppDispatch, useAppSelector } from '../../../../../../utils/hooks/reduxHook'
+import { getActiveClient } from '../../../../../../utils/redux/selectors/clients.selector'
+import { selectTeamSize } from '../../../../../../utils/redux/actions/listing.action'
 
-const Step1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {  
+const Step1: React.FunctionComponent = () => {
+  const dispatch = useAppDispatch()
+
+  const [teamSize, setTeamSize] = useState<DropdownItem>()
+  const selectedClient = useAppSelector((state) => getActiveClient(state))
+
+  const handleSelectTeamSize = (e: DropdownItem) => {
+    setTeamSize(e)
+    dispatch(selectTeamSize(parseInt(e.label)))
+  }
+
   return (
     <StyledForm>
       <Box padding={'20px'} display={'flex'} justifyContent={'space-between'}>
@@ -36,8 +49,8 @@ const Step1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
           <AtTextFieldDropdown
             fullWidth={true}
             required={true}
-            value={props.selectedClientName}
-            placeholder={props.selectedClientName}
+            value={selectedClient.name}
+            placeholder={selectedClient.name}
             listItems={[]}
             label={'Client'}
           />
@@ -45,20 +58,10 @@ const Step1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
           <AtTextFieldDropdown
             fullWidth={true}
             required={true}
-            value={''}
+            value={teamSize?.label}
+            handleSelect={(e) => handleSelectTeamSize(e)}
             placeholder={'Select Team Size (max 10)'}
-            listItems={[
-              { id: 0, label: '1' },
-              { id: 1, label: '2' },
-              { id: 2, label: '3' },
-              { id: 3, label: '4' },
-              { id: 4, label: '5' },
-              { id: 5, label: '6' },
-              { id: 6, label: '7' },
-              { id: 7, label: '8' },
-              { id: 8, label: '9' },
-              { id: 9, label: '10' },
-            ]}
+            listItems={Array.from(Array(10).keys()).map((key) => ({ id: key + 1, label: (key + 1).toString() }))}
             label={'Team Size (max 10)'}
           />
 
@@ -66,7 +69,7 @@ const Step1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
             <AtTextFieldDropdown
               fullWidth={true}
               required={true}
-              value={props.selectedClientName}
+              value={selectedClient.name}
               placeholder={'Select Work Type'}
               listItems={[
                 {
@@ -172,9 +175,8 @@ const Step1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
   )
 }
 
-interface Step1Props {
-  selectedClientName: string
+export default Step1
+function dispatch(arg0: any) {
+  throw new Error('Function not implemented.')
 }
 
-
-export default Step1

@@ -6,7 +6,7 @@ import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
 import { grey2 } from '../../../../../../utils/colors'
 
-const Step2: React.FunctionComponent = () => {
+const ProjectStep4: React.FunctionComponent = () => {
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
       <StyledForm>
@@ -49,4 +49,4 @@ const Step2: React.FunctionComponent = () => {
   )
 }
 
-export default Step2
+export default ProjectStep4

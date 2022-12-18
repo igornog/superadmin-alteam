@@ -32,7 +32,7 @@ const ModalDecline: React.FunctionComponent<ModalDeclineProps> = (
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
           startIcon={<CloseCircle />}
-          iconSize={24}
+          iconsize={24}
           onClick={props.onClose}
         />
       </Box>
