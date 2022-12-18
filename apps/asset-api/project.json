@@ -10,10 +10,9 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
-        "outputPath": "dist/apps/asset-api",
-        "main": "apps/asset-api/src/main.ts",
-        "tsConfig": "apps/asset-api/tsconfig.app.json",
-        "assets": ["apps/asset-api/src/assets"]
+        "outputPath": "apps/dist/asset-api",
+        "main": "apps/asset-api/src/index.ts",
+        "tsConfig": "apps/asset-api/tsconfig.app.json"
       },
       "configurations": {
         "production": {
@@ -61,6 +60,13 @@
       "options": {
         "cwd": "apps/asset-api/infrastructure",
         "command": "../../../infrastructure/scripts/terraformStageWrapper.sh apply asset-api"
+      }
+    },
+    "package": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "options": {
+        "command": "zip -FSqj apps/asset-api/dist/package.zip apps/asset-api/dist/index.js"
       }
     }
   },
