@@ -30,8 +30,11 @@ export class SoloTalentEntity extends BaseEntity {
   @Column({ type: 'varchar', name: 'availability' })
   availability: Availability
 
-  @Column({ type: 'json', name: 'links' })
-  links: Link[]
+  @Column({ type: 'varchar', name: 'portfolio' })
+  portfolio: string
+
+  @Column({ type: 'json', nullable: true, name: 'links' })
+  links?: Link[]
 
   @Column({ type: 'varchar', name: 'role' })
   role: string

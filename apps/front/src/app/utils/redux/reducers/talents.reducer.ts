@@ -48,7 +48,7 @@ const { reducer } = createSlice({
             value !== undefined ? { ...acc, [key]: value } : acc,
           {},
         )
-
+        console.log(talent, newObj)
         Object.assign(talent as Talent, newObj)
       })
 

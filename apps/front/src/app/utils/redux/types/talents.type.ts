@@ -5,7 +5,6 @@ import {
   ListingStatus,
   SoloTalent,
   Link,
-  LinkDomain,
 } from '@yjcapp/app'
 import { StatusType } from './status.type'
 
@@ -33,7 +32,8 @@ export class Talent implements SoloTalent {
   lastName: string
   experience: Experience
   availability: Availability
-  links: Link[]
+  portfolio: string
+  links?: Link[]
   email: string
   role: string
   about: string
@@ -52,6 +52,7 @@ export class Talent implements SoloTalent {
     this.lastName = data.lastName
     this.experience = data.experience
     this.availability = data.availability
+    this.portfolio = data.portfolio
     this.links = data.links
     this.email = data.email
     this.role = data.role
@@ -63,13 +64,5 @@ export class Talent implements SoloTalent {
     this.salaryExpectation = data.salaryExpectation
     this.listing = data.listing
     this.status = data.status
-  }
-
-  getPortfolio?(): Link {
-    return this?.links?.filter((item) => item.name === LinkDomain.Portfolio)[0]
-  }
-
-  getLinks?(): Link[] {
-    return this?.links?.filter((item) => item.name !== LinkDomain.Portfolio)
   }
 }

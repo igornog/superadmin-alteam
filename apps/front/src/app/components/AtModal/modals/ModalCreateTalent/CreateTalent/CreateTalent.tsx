@@ -72,7 +72,7 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
             email,
             about: about,
             skills: skills,
-            links: [],
+            portfolio,
             assets: [],
             status: ListingStatus.Inbound,
           }),

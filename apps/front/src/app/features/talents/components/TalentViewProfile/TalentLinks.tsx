@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { AddCircle, Edit } from 'iconsax-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import ModalLink from '../../../../components/AtModal/modals/ModalLink'
 import AtFrame from '../../../../components/AtFrame/AtFrame'
@@ -11,6 +11,7 @@ import { Link } from '@yjcapp/app'
 import { getCorrectNetwork } from '../../../../utils/helpers'
 import AtLine from '../../../../components/AtLine/AtLine'
 import AtCopyTo from '../../../../components/AtCopyTo/AtCopyTo'
+import { v4 as uuid } from 'uuid'
 
 export const StyledLink = styled(Box)<{ padding?: string }>`
   border: 1px solid ${grey4};
@@ -32,10 +33,22 @@ const TalentLinks: React.FunctionComponent<TalentLinksProps> = (
 ) => {
   const [openModal, setOpenModal] = useState(false)
   const [editModal, setEditModal] = useState(false)
+  const [links, setLinks] = useState<Link[]>([])
 
+  useEffect(() => {
+    const values = props.talent.links?.map((element: Link) => ({
+      id: uuid(),
+      name: element?.name,
+      link: element?.link ?? '',
+    }))
+
+    setLinks(values || [])
+  }, [props.talent.links])
+
+  console.log(props.talent)
   return (
     <>
-      {props.talent.getLinks && props.talent.getLinks?.()?.length > 0 ? (
+      {links.length > 0 ? (
         <AtFrame
           title={'Additional Links'}
           icon={
@@ -50,7 +63,7 @@ const TalentLinks: React.FunctionComponent<TalentLinksProps> = (
           }}
           gap={0}
         >
-          {props.talent.links.map((item: Link) => (
+          {links.map((item: Link) => (
             <>
               <AtLine spacing={15} />
               <Box

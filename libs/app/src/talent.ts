@@ -15,7 +15,8 @@ export interface SoloTalent {
   lastName: string
   experience: Experience
   availability: Availability
-  links: Link[]
+  portfolio: string
+  links?: Link[]
   role: string
   email: string
   about: string
@@ -31,7 +32,7 @@ export interface SoloTalent {
 
 export interface Link {
   id?: string
-  name?: LinkDomain
+  name?: string
   link: string
 }
 

@@ -35,7 +35,8 @@ const DrawerTalent: React.FunctionComponent<DrawerTalentProps> = (
   const [openModalShortlist, setOpenModalShortlist] = useState(false)
   const [openModalAccepted, setOpenModalAccepted] = useState(false)
   const [openModalDecline, setOpenModalDecline] = useState(false)
-
+  
+  console.log(selectedTalent)
   return (
     <AtDrawer
       size={'50%'}

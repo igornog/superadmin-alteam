@@ -6,7 +6,6 @@ import AtFrame from '../../../../components/AtFrame/AtFrame'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
 import { grey, grey2 } from '../../../../utils/colors'
 import { Talent } from '../../../../utils/redux/types/talents.type'
-import { LinkDomain } from '@yjcapp/app'
 
 const TalentGeneral: React.FunctionComponent<TalentGeneralProps> = (
   props: TalentGeneralProps,
@@ -73,9 +72,7 @@ const TalentGeneral: React.FunctionComponent<TalentGeneralProps> = (
           </Grid>
           <Grid item={true} xs={9}>
             <AtTypography color={grey}>
-              {props.talent.links?.filter(
-                (item) => item.name === LinkDomain.Portfolio,
-              )[0]?.link ?? 'N/A'}
+              {props.talent.portfolio ?? 'N/A'}
             </AtTypography>
           </Grid>
         </Box>

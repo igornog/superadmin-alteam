@@ -92,7 +92,7 @@ const ModalLink: React.FunctionComponent<ModalLinkProps> = (
   }
 
   useEffect(() => {
-    if (props.isOpen) {
+    if (props.isOpen && selectedTalent.links) {
       const values = selectedTalent.links?.map((element: Link) => ({
         id: uuid(),
         name: element?.name ?? undefined,

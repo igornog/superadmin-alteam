@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
@@ -13,7 +13,7 @@ import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtModal from '../AtModal'
 import AtLine from '../../AtLine/AtLine'
 import AtTextFieldDropdown from '../../AtDropdown/AtTextFieldDropdown'
-import { Availability, Experience, LinkDomain } from '@yjcapp/app'
+import { Availability, Experience } from '@yjcapp/app'
 import { handlePatchTalent } from '../../../utils/redux/actions/talents.action'
 
 const ModalGeneralInformations: React.FunctionComponent<
@@ -30,10 +30,6 @@ const ModalGeneralInformations: React.FunctionComponent<
   const [portfolio, setPortfolio] = useState<string | undefined>('')
   const [phone, setPhone] = useState<string>()
 
-  useEffect(() => {
-    setPortfolio(selectedTalent?.getPortfolio?.()?.link)
-  }, [selectedTalent])
-
   const handleSaveGeneral = () => {
     dispatch(
       handlePatchTalent({
@@ -43,7 +39,7 @@ const ModalGeneralInformations: React.FunctionComponent<
         availability,
         experience,
         email,
-        links: [{ name: LinkDomain.Portfolio, link: portfolio || '' }],
+        portfolio,
         phoneNumber: phone,
       }),
     )
@@ -122,7 +118,7 @@ const ModalGeneralInformations: React.FunctionComponent<
 
         <AtTextField
           defaultValue={portfolio}
-          value={''}
+          value={portfolio}
           onValueChange={setPortfolio}
           placeholder={portfolio ?? 'N/A'}
           label={'Portfolio Link'}
