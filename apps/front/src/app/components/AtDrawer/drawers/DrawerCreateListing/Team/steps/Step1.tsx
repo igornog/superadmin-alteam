@@ -176,7 +176,4 @@ const Step1: React.FunctionComponent = () => {
 }
 
 export default Step1
-function dispatch(arg0: any) {
-  throw new Error('Function not implemented.')
-}
 

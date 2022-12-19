@@ -8,9 +8,9 @@ import { Box } from '@mui/material'
 import styled from 'styled-components'
 import AtButton, { AtButtonKind, AtButtonVariant } from '../../../../../AtButton/AtButton'
 import { AddSquare } from 'iconsax-react'
-import AtTextFieldDropdown from '../../../../../AtDropdown/AtTextFieldDropdown'
+import AtTextFieldDropdown, { DropdownItem } from '../../../../../AtDropdown/AtTextFieldDropdown'
 import AtTag from '../../../../../AtTag/AtTag'
-
+import { v4 as uuid } from 'uuid'
 
 const StyledBox = styled.div`
   position: relative;
@@ -30,11 +30,11 @@ const StyledTag = styled(AtTag)`
 `
 
 const Step2: React.FunctionComponent = () => {
-  const [inputValue, setInputValue] = useState([{}])
   const [jobDescriptions, setJobDescriptions] = useState([
     {
+      id: 0,
       role: '',
-      jobDescription: ''
+      description: ''
     }
   ])
 
@@ -43,9 +43,40 @@ const Step2: React.FunctionComponent = () => {
     align-self: flex-end;
   `
 
-  const handleInputChange = (e: string, id: number) => {
-    setInputValue((prev) => ({ ...prev, [id]: e }));
-  };
+  const test = [{
+    id: 0,
+    label: 'Front End Dev'
+  }, {
+    id: 1,
+    label: 'Back End Dev'
+  }, {
+    id: 2,
+    label: 'Product Owner'
+  }]
+
+  const handleRoleChange = (e: DropdownItem, i: number) => {
+    setJobDescriptions(
+      jobDescriptions.map((item) => {
+        if (item.id === i) {
+          return { ...item, role: e.label }
+        }
+
+        return item
+      })
+    )
+  }
+
+  const handleJobDescriptionChange = (e: string, i: number) => {
+    setJobDescriptions(
+      jobDescriptions.map((item) => {
+        if (item.id === i) {
+          return { ...item, description: e }
+        }
+
+        return item
+      })
+    )
+  }
 
   return (
     <StyledForm>
@@ -75,22 +106,23 @@ const Step2: React.FunctionComponent = () => {
                 <AtTextFieldDropdown
                   fullWidth={true}
                   required={true}
-                  value={''}
+                  value={jobDescription.role}
                   placeholder={'Enter Role Name'}
-                  listItems={[]}
+                  listItems={test}
                   label={`Role Name ${i + 1}`}
+                  handleSelect={(e) => handleRoleChange(e, jobDescription.id)}
                 />
 
                 {jobDescriptions.length > 1 ?
                   <StyledTag
                     delete={true}
-                    key={i}
+                    key={jobDescription.id}
                   /> : ''}
               </Box>
 
               <AtTextField
-                onValueChange={(e) => handleInputChange(e, i)}
-                value={inputValue[i]}
+                onValueChange={(e) => handleJobDescriptionChange(e, jobDescription.id)}
+                value={jobDescription.description}
                 maxLength={500}
                 multiline={true}
                 rows={6}
@@ -105,7 +137,7 @@ const Step2: React.FunctionComponent = () => {
         })}
 
         <StyledButton
-          onClick={() => setJobDescriptions([...jobDescriptions, { role: '', jobDescription: '' }])}
+          onClick={() => setJobDescriptions([...jobDescriptions, { id: uuid(), role: '', description: '' }])}
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Outlined}
           endIcon={<AddSquare size={16} />}
@@ -113,6 +145,9 @@ const Step2: React.FunctionComponent = () => {
         />
 
       </StyledBox>
+      <>
+        {console.log('jobDescriptions', jobDescriptions)}
+      </>
     </StyledForm>
   )
 }
