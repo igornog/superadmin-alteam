@@ -1,13 +1,13 @@
-import ProjectStep1 from "./createProject/Step1"
-import ProjectStep2 from "./createProject/Step2"
-import ProjectStep3 from "./createProject/Step3"
-import ProjectStep4 from "./createProject/Step4"
+import ProjectStep1 from './Project/steps/Step1'
+import ProjectStep2 from './Project/steps/Step2'
+import ProjectStep3 from './Project/steps/Step3'
+import ProjectStep4 from './Project/steps/Step4'
 
-import TeamStep1 from './createTeam/Step1'
-import TeamStep2 from './createTeam/Step2'
-import TeamStep3 from './createTeam/Step3'
-import TeamStep4 from './createTeam/Step4'
-import TeamStep5 from './createTeam/Step5'
+import TeamStep1 from './Team/steps/Step1'
+import TeamStep2 from './Team/steps/Step2'
+import TeamStep3 from './Team/steps/Step3'
+import TeamStep4 from './Team/steps/Step4'
+import TeamStep5 from './Team/steps/Step5'
 
 export const ProjectSteps = [
     {

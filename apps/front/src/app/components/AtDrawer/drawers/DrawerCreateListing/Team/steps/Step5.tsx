@@ -1,13 +1,12 @@
 import { Box } from '@mui/material'
 import React from 'react'
-import { StyledForm } from '../../CreateListing'
-import AtTypography from '../../../../components/AtTypography/AtTypography'
-import { grey2 } from '../../../../utils/colors'
-import AtLine from '../../../../components/AtLine/AtLine'
-import AtTextField from '../../../../components/AtTextField/AtTextField'
+import AtLine from '../../../../../AtLine/AtLine'
+import AtTextField from '../../../../../AtTextField/AtTextField'
+import AtTypography from '../../../../../AtTypography/AtTypography'
+import { StyledForm } from '../../DrawerCreateListing'
+import { grey2 } from '../../../../../../utils/colors'
 
-
-const ProjectStep4: React.FunctionComponent = () => {
+const Step2: React.FunctionComponent = () => {
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
       <StyledForm>
@@ -50,4 +49,4 @@ const ProjectStep4: React.FunctionComponent = () => {
   )
 }
 
-export default ProjectStep4
+export default Step2

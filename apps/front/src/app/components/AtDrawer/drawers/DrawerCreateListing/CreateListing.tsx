@@ -2,18 +2,18 @@ import { Box, Container, Grid } from '@mui/material'
 import { ArrowLeft2, ArrowRight } from 'iconsax-react'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { white, grey2, grey5, black, grey4 } from '../../utils/colors'
-import { boxShadow } from '../../utils/theme'
+import { white, grey2, grey5, black, grey4 } from '../../../../utils/colors'
+import { boxShadow } from '../../../../utils/theme'
 import AtButton, {
   AtButtonVariant,
   AtButtonKind,
-} from '../../components/AtButton/AtButton'
-import AtLine from '../../components/AtLine/AtLine'
-import AtTabs from '../../components/AtTabs/AtTabs'
-import AtTypography from '../../components/AtTypography/AtTypography'
-import FinalStep from './FormSteps/FinalStep'
-import { ListingType } from '../../utils/redux/types/listings.type'
-import { ProjectSteps, TeamSteps } from './FormSteps/FormSteps'
+} from '../../../AtButton/AtButton'
+import AtLine from '../../../AtLine/AtLine'
+import AtTabs from '../../../AtTabs/AtTabs'
+import AtTypography from '../../../AtTypography/AtTypography'
+import FinalStep from './FinalStep'
+import { ListingType } from '../../../../utils/redux/types/listings.type'
+import { ProjectSteps, TeamSteps } from './FormSteps'
 
 export const StyledForm = styled.div`
   background-color: ${white};

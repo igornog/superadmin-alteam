@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
-import AtLine from '../../../../components/AtLine/AtLine'
-import AtTextField from '../../../../components/AtTextField/AtTextField'
-import AtTypography from '../../../../components/AtTypography/AtTypography'
-import { StyledForm } from '../../../../components/AtDrawer/drawers/DrawerCreateListing/DrawerCreateListing'
-import { grey2, red } from '../../../../utils/colors'
+import AtLine from '../../../../../AtLine/AtLine'
+import AtTextField from '../../../../../AtTextField/AtTextField'
+import AtTypography from '../../../../../AtTypography/AtTypography'
+import { StyledForm } from '../../DrawerCreateListing'
+import { grey2, red } from '../../../../../../utils/colors'
 import { Box } from '@mui/material'
 import styled from 'styled-components'
-import AtTag from '../../../../components/AtTag/AtTag'
-import AtButton, { AtButtonKind, AtButtonVariant } from '../../../../components/AtButton/AtButton'
-import AtTextFieldDropdown from '../../../../components/AtDropdown/AtTextFieldDropdown'
+import AtButton, { AtButtonKind, AtButtonVariant } from '../../../../../AtButton/AtButton'
 import { AddSquare } from 'iconsax-react'
+import AtTextFieldDropdown from '../../../../../AtDropdown/AtTextFieldDropdown'
+import AtTag from '../../../../../AtTag/AtTag'
+
 
 const StyledBox = styled.div`
   position: relative;

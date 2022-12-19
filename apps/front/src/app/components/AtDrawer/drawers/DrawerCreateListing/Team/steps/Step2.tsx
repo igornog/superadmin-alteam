@@ -1,12 +1,12 @@
 import { Box } from '@mui/material'
 import React from 'react'
-import AtLine from '../../../../components/AtLine/AtLine'
-import AtTextField from '../../../../components/AtTextField/AtTextField'
-import AtTypography from '../../../../components/AtTypography/AtTypography'
-import { StyledForm } from '../../CreateListing'
-import { grey2 } from '../../../../utils/colors'
-import { useAppSelector } from '../../../../utils/hooks/reduxHook'
-import { getTeamSize } from '../../../../utils/redux/selectors/createListing.selector'
+import AtLine from '../../../../../AtLine/AtLine'
+import AtTextField from '../../../../../AtTextField/AtTextField'
+import AtTypography from '../../../../../AtTypography/AtTypography'
+import { StyledForm } from '../../DrawerCreateListing'
+import { grey2 } from '../../../../../../utils/colors'
+import { useAppSelector } from '../../../../../../utils/hooks/reduxHook'
+import { getTeamSize } from '../../../../../../utils/redux/selectors/createListing.selector'
 
 const Step2: React.FunctionComponent = () => {
   const listingForm = useAppSelector((state) => getTeamSize(state))
@@ -29,14 +29,16 @@ const Step2: React.FunctionComponent = () => {
         >
 
           <Box display={'flex'} gap={'30px'} flexDirection={'column'}>
+
             {Array.from(Array(listingForm.teamSize).keys()).map((i) => (
               <AtTextField
-                label={`Role Name ${i + 1}`}
+                label={`Role Name ${i+1}`}
                 required={true}
                 placeholder={'Enter Role Name'}
                 value={''}
               />
             ))}
+
           </Box>
         </Box>
       </StyledForm>

@@ -2,11 +2,13 @@ import { Box } from '@mui/material'
 import { ArrowRight } from 'iconsax-react'
 import React from 'react'
 import styled from 'styled-components'
-import SmallRocket from '../../../assets/images/icons/small_rocket.svg'
-import Rocketbg from '../../../assets/images/icons/background_rocket.svg'
-import AtTypography from '../../../components/AtTypography/AtTypography'
-import AtButton, { AtButtonKind, AtButtonVariant } from '../../../components/AtButton/AtButton'
-
+import SmallRocket from '../../../../assets/images/icons/small_rocket.svg'
+import Rocketbg from '../../../../assets/images/icons/background_rocket.svg'
+import AtButton, {
+  AtButtonKind,
+  AtButtonVariant,
+} from '../../../AtButton/AtButton'
+import AtTypography from '../../../AtTypography/AtTypography'
 
 const StyledBox = styled(Box)`
   background-image: url(${Rocketbg});
