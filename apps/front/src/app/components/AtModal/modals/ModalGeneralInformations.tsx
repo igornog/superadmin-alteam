@@ -117,10 +117,10 @@ const ModalGeneralInformations: React.FunctionComponent<
         />
 
         <AtTextField
-          defaultValue={portfolio}
-          value={portfolio}
+          defaultValue={selectedTalent.portfolio}
+          value={selectedTalent.portfolio}
           onValueChange={setPortfolio}
-          placeholder={portfolio ?? 'N/A'}
+          placeholder={selectedTalent.portfolio ?? 'N/A'}
           label={'Portfolio Link'}
         />
 

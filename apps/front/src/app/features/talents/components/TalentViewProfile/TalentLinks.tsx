@@ -43,9 +43,8 @@ const TalentLinks: React.FunctionComponent<TalentLinksProps> = (
     }))
 
     setLinks(values || [])
-  }, [props.talent.links])
+  }, [props.talent])
 
-  console.log(props.talent)
   return (
     <>
       {links.length > 0 ? (

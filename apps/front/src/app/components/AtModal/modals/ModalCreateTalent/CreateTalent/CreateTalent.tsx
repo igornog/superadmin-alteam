@@ -19,7 +19,6 @@ import ModalCreateTalentStep1 from './steps/ModalCreateTalentStep1'
 import ModalCreateTalentStep2 from './steps/ModalCreateTalentStep2'
 import ModalCreateTalentStep3 from './steps/ModalCreateTalentStep3'
 import { isValidEmail } from '../../../../../utils/emails'
-import { Talent } from '../../../../../utils/redux/types/talents.type'
 
 const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
   props: CreateTalentProps,
@@ -62,21 +61,19 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
       skills.length > 0
     ) {
       dispatch(
-        handleCreateTalent(
-          new Talent({
-            firstName,
-            lastName,
-            role,
-            experience: experience,
-            availability: availability,
-            email,
-            about: about,
-            skills: skills,
-            portfolio,
-            assets: [],
-            status: ListingStatus.Inbound,
-          }),
-        ),
+        handleCreateTalent({
+          firstName,
+          lastName,
+          role,
+          experience: experience,
+          availability: availability,
+          email,
+          about: about,
+          skills: skills,
+          portfolio,
+          assets: [],
+          status: ListingStatus.Inbound,
+        }),
       )
     }
 
