@@ -28,7 +28,7 @@ const ModalClient: React.FunctionComponent<ModalClientProps> = (
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
           startIcon={<CloseCircle />}
-          iconSize={24}
+          $iconSize={24}
           onClick={props.onClose}
         />
       </Box>

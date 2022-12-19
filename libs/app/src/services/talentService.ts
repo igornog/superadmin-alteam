@@ -1,4 +1,4 @@
-import { GroupTalent, SoloTalent } from '../talent'
+import { GroupTalent, SoloTalent, TalentSearch } from '../talent'
 
 export interface TalentService {
   createGroupTalent(talent: Omit<GroupTalent, 'id'>): Promise<GroupTalent>
@@ -8,4 +8,8 @@ export interface TalentService {
   createSoloTalent(talent: Omit<SoloTalent, 'id'>): Promise<SoloTalent>
 
   retrieveSoloTalent(id: string): Promise<SoloTalent | undefined>
+
+  searchSoloTalent(talentSearch: TalentSearch): Promise<SoloTalent[]>
+
+  updateSoloTalent(talent: SoloTalent): Promise<SoloTalent>
 }

@@ -4,8 +4,7 @@ import styled from 'styled-components'
 import { grey, grey3 } from '../../../utils/colors'
 import useWindowSize from '../../../utils/hooks/useWindowSize'
 import { Column } from '../../../utils/redux/types/settings.type'
-import { Skill, Talent } from '../../../utils/redux/types/talents.type'
-import AtGroupTag from '../../AtGroupTag/AtGroupTag'
+import { Talent } from '../../../utils/redux/types/talents.type'
 import AtRightClick from '../../AtRightClick/AtRightClick'
 import TalentMenu from '../../AtRightClick/ContextMenus/TalentMenu'
 import AtTable from '../../AtTable/AtTable'
@@ -15,6 +14,7 @@ import AtTableHead from '../../AtTable/AtTableHead'
 import { AtTableRow } from '../../AtTable/AtTableRow'
 import AtTag from '../../AtTag/AtTag'
 import AtTypography from '../../AtTypography/AtTypography'
+import moment from 'moment'
 
 const StyledTag = styled(AtTag)`
   max-width: 150px;
@@ -63,6 +63,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
       <AtTableBody position={position}>
         {props.talents.map((talent: Talent) => (
           <AtRightClick
+            key={talent.id}
             contextMenu={
               <TalentMenu
                 talent={talent}
@@ -74,9 +75,9 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
           >
             <AtTableRow
               key={talent.id}
-              hover={true}
+              $hover={true}
               onClick={() => props.openTalent(talent.id)}
-              setPosition={setPosition}
+              $setPosition={setPosition}
             >
               {haveToDisplay(Column.Talent) && (
                 <AtTableCell>
@@ -87,35 +88,37 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
                     whiteSpace={'nowrap'}
                   >
                     <Box display={'flex'} gap={'5px'} alignItems={'center'}>
-                      <AtTypography variant={'body1'} bold={true}>
-                        {talent.fullName}
+                      <AtTypography variant={'body1'} $bold={true}>
+                        {talent.firstName} {talent.lastName}
                       </AtTypography>
-                      {talent.group && <AtGroupTag label={talent.group} />}
+                      {/* {talent.group && <AtGroupTag label={talent.group} />} */}
                     </Box>
                     <AtTypography variant={'caption'} color={grey}>
-                      {talent.jobName}
+                      {talent.role}
                     </AtTypography>
                   </Box>
                 </AtTableCell>
               )}
               {haveToDisplay(Column.Applied) && (
                 <AtTableCell>
-                  <AtTypography>{talent.applied}</AtTypography>
+                  <AtTypography>
+                    {moment(talent.appliedDate).format('DD.MM.YYYY')}
+                  </AtTypography>
                 </AtTableCell>
               )}
               {haveToDisplay(Column.Availability) && (
                 <AtTableCell>
-                  <AtTypography>{talent.jobType}</AtTypography>
+                  <AtTypography>{talent.availability}</AtTypography>
                 </AtTableCell>
               )}
-              {haveToDisplay(Column.Status) && (
+              {haveToDisplay(Column.Status) && talent.status ? (
                 <AtTableCell>
                   <StyledTagClients
                     variant={'outlined'}
                     label={talent.status}
                   />
                 </AtTableCell>
-              )}
+              ) : null}
               {haveToDisplay(Column.AssignedTo) && (
                 <AtTableCell>
                   <Tooltip
@@ -151,12 +154,8 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
                     >
                       {talent.skills
                         ?.slice(0, maxItemPerLine)
-                        .map((skill: Skill, index: number) => (
-                          <StyledTag
-                            label={skill.label}
-                            delete={false}
-                            key={index}
-                          />
+                        .map((skill: string, index: number) => (
+                          <StyledTag label={skill} key={index} />
                         ))}
                       {talent.skills.slice(maxItemPerLine).length > 0 && (
                         <Tooltip
@@ -168,9 +167,9 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
                             >
                               {talent.skills
                                 .slice(maxItemPerLine)
-                                .map((skill: Skill, index: number) => (
+                                .map((skill: string, index: number) => (
                                   <AtTypography key={index}>
-                                    {skill.label}
+                                    {skill}
                                   </AtTypography>
                                 ))}
                             </Box>
@@ -179,7 +178,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
                         >
                           <span>
                             <StyledTag
-                              hover={true}
+                              $hover={true}
                               variant={'outlined'}
                               label={`${
                                 talent.skills.slice(maxItemPerLine).length
@@ -192,7 +191,8 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
                   ) : (
                     <Box display={'flex'} justifyContent={'flex-end'}>
                       <AtTypography color={grey3}>
-                        No skills been added by {talent.fullName}
+                        No skills been added by {talent.firstName}{' '}
+                        {talent.lastName}
                       </AtTypography>
                     </Box>
                   )}
@@ -208,7 +208,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
 
 interface TalentsTableProps {
   talents: Talent[]
-  openTalent: (id: number) => void
+  openTalent: (id: string) => void
   openShortlist: () => void
   openAccepted: () => void
   openEmailToTalent: () => void

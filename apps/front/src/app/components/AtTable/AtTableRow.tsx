@@ -29,9 +29,9 @@ export const AtTableRow: React.FunctionComponent<AtTableRowProps> = (
     <StyledTableRow
       {...props}
       onMouseEnter={(e) => {
-        props.setPosition && props.setPosition(e.currentTarget.offsetTop)
+        props.$setPosition && props.$setPosition(e.currentTarget.offsetTop)
       }}
-      onMouseLeave={() => props.setPosition && props.setPosition(null)}
+      onMouseLeave={() => props.$setPosition && props.$setPosition(null)}
     />
   )
 }
@@ -49,7 +49,8 @@ export const AtTableLoadingRow: React.FunctionComponent<
 }
 
 interface AtTableRowProps extends TableRowProps {
-  setPosition?: React.Dispatch<React.SetStateAction<number | null>>
+  $hover?: boolean
+  $setPosition?: React.Dispatch<React.SetStateAction<number | null>>
 }
 
 interface AtTableLoadingRowProps {

@@ -1,19 +1,22 @@
+import {
+  Availability,
+  Experience,
+  Listing,
+  ListingStatus,
+  SoloTalent,
+  Link,
+} from '@yjcapp/app'
 import { StatusType } from './status.type'
 
 export interface TalentsState {
   listTalents: Talent[]
-  selectedTalent: number | null
+  selectedTalent: string | null
   status?: StatusType
   error?: string | null
 }
 
 export interface Skill {
   label: string
-}
-
-export interface Link {
-  id: number
-  link: string
 }
 
 export enum TalentStatus {
@@ -23,56 +26,43 @@ export enum TalentStatus {
   Declined = 'Declined',
 }
 
-export class Talent {
-  id: number
-  fullName: string
-  jobName: string
-  jobType: string
-  applied?: string
-  group?: string
-  skills?: Skill[]
-  salary?: string
-  experience?: string
-  portfolio?: string
-  email?: string
-  phone?: string
-  status: TalentStatus
-  links: Link[]
+export class Talent implements SoloTalent {
+  id: string
+  firstName: string
+  lastName: string
+  experience: Experience
+  availability: Availability
+  portfolio: string
+  links?: Link[]
+  email: string
+  role: string
+  about: string
+  assets?: string[]
+  skills: string[]
+  appliedDate?: Date
+  phoneNumber?: string
+  salaryExpectation?: string
+  workExperience?: string
+  listing?: Listing[]
+  status?: ListingStatus
 
   constructor(data: any) {
     this.id = data.id
-    this.fullName = data.fullName
-    this.jobName = data.jobName
-    this.jobType = data.jobType
-    this.applied = data.applied
-    this.group = data.group
-    this.skills = data.skills
-    this.salary = data.salary
+    this.firstName = data.firstName
+    this.lastName = data.lastName
     this.experience = data.experience
+    this.availability = data.availability
     this.portfolio = data.portfolio
-    this.email = data.email
-    this.phone = data.phone
-    this.status = data.status
     this.links = data.links
-  }
-
-  isEmpty(): boolean {
-    return this.id !== undefined
-  }
-
-  isInbound(): boolean {
-    return this.status === TalentStatus.Inbound
-  }
-
-  isShortlisted(): boolean {
-    return this.status === TalentStatus.Shortlisted
-  }
-
-  isAccepted(): boolean {
-    return this.status === TalentStatus.Accepted
-  }
-
-  isDeclined(): boolean {
-    return this.status === TalentStatus.Declined
+    this.email = data.email
+    this.role = data.role
+    this.about = data.about
+    this.assets = data.assets
+    this.skills = data.skills
+    this.appliedDate = data.appliedDate
+    this.phoneNumber = data.phoneNumber
+    this.salaryExpectation = data.salaryExpectation
+    this.listing = data.listing
+    this.status = data.status
   }
 }

@@ -32,14 +32,11 @@ const ModalAcceptedStep2: React.FunctionComponent = () => {
           <AtTypography color={grey2} flex={1}>
             Chaptr:
           </AtTypography>
-          <StyledTag
-            label={'Back-End Developer 6 Month Contract'}
-            delete={true}
-          ></StyledTag>
+          <StyledTag label={'Back-End Developer 6 Month Contract'}></StyledTag>
           <AtDropdown
             align={'bottom-right'}
             fontSize={'10px'}
-            listItems={[
+            $listItems={[
               {
                 id: 0,
                 value: 'Public View',

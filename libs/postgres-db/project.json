@@ -23,8 +23,7 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "./libs/postgres-db/scripts/migrateRun.sh"
-      },
-      "dependsOn": ["docker:up"]
+      }
     },
     "migration:generate": {
       "executor": "nx:run-commands",

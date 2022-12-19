@@ -1,15 +1,28 @@
 import { RequestHandler } from 'express'
 import { HttpError } from './httpError'
 import jwt from 'jsonwebtoken'
+import { logger } from './logger'
 
-export const authToken: RequestHandler = (req, res, next) => {
+export const authorize: RequestHandler = (req, res, next) => {
   const { authorization } = req.headers
+  if (process.env.NODE_ENV !== 'production') {
+    next()
+    return
+  }
   if (authorization && authorization.startsWith('Bearer')) {
     const token = authorization.split(' ')[1]
     try {
-      jwt.verify(token, process.env.TOKEN_SECRET)
-      next()
+      const payload = jwt.verify(token, process.env.TOKEN_SECRET)
+
+      // @ts-ignore
+      if (payload.email === 'admin@alteam.io') {
+        next()
+      } else {
+        logger.info({ message: 'Unauthorized', payload })
+        next(HttpError.unauthorized('Invalid sub'))
+      }
     } catch (e) {
+      logger.error('Error verifying token', { error: e })
       next(HttpError.unauthorized(e.message))
     }
   } else {

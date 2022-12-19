@@ -78,8 +78,8 @@ interface StyledButtonProps {
   $btnName?: string
   $padding?: string
   startIcon?: React.ReactNode
-  iconSize?: number
-  flexibleHeight?: boolean
+  $iconSize?: number
+  $flexibleHeight?: boolean
 }
 
 const StyledButton = styled(Button)<StyledButtonProps>`
@@ -117,7 +117,7 @@ const StyledButton = styled(Button)<StyledButtonProps>`
         : css<{
             $variant: AtButtonVariant
             $padding?: string
-            flexibleHeight?: boolean
+            $flexibleHeight?: boolean
           }>`
             padding: ${({ $variant, $padding }) =>
               $padding
@@ -126,8 +126,8 @@ const StyledButton = styled(Button)<StyledButtonProps>`
                 ? '10px 0'
                 : '10px 20px'};
 
-            ${({ flexibleHeight }) =>
-              flexibleHeight
+            ${({ $flexibleHeight }) =>
+              $flexibleHeight
                 ? css`
                     min-height: 24px;
                   `
@@ -156,8 +156,8 @@ const StyledButton = styled(Button)<StyledButtonProps>`
           `}
 
     & svg {
-      width: ${({ iconSize }) => (iconSize ? iconSize : '16px')};
-      height: ${({ iconSize }) => (iconSize ? iconSize : '16px')};
+      width: ${({ $iconSize }) => ($iconSize ? $iconSize : '16px')};
+      height: ${({ $iconSize }) => ($iconSize ? $iconSize : '16px')};
     }
 
     :hover {
@@ -222,7 +222,7 @@ const AtButton: React.FunctionComponent<AtButtonProps> = (
       $padding={props.padding}
       startIcon={props.startIcon}
       endIcon={props.endIcon}
-      iconSize={props.iconSize}
+      $iconSize={props.$iconSize}
       disabled={props.disabled}
       disableRipple={true}
       onClick={props.onClick}
@@ -250,8 +250,8 @@ export interface AtButtonProps {
   startIcon?: React.ReactNode
   endIcon?: React.ReactNode
   fontSize?: string
-  iconSize?: number
-  flexibleHeight?: boolean
+  $iconSize?: number
+  $flexibleHeight?: boolean
 }
 
 export default AtButton

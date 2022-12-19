@@ -64,9 +64,9 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
           >
             <AtTableRow
               key={client.id}
-              hover={true}
+              $hover={true}
               onClick={() => props.openClient(client.id)}
-              setPosition={setPosition}
+              $setPosition={setPosition}
             >
               {haveToDisplay(Column.Client) && (
                 <AtTableCell>
@@ -82,13 +82,13 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
                       </Box>
 
                       <Box display={'flex'} flexDirection={'column'}>
-                        <AtTypography variant={'body1'} bold={true}>
+                        <AtTypography variant={'body1'} $bold={true}>
                           {client.name}
                         </AtTypography>
                         <AtTypography
                           variant={'caption'}
                           color={grey}
-                          bold={true}
+                          $bold={true}
                         >
                           {client.industry}
                         </AtTypography>

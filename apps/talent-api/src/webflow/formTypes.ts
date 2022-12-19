@@ -23,6 +23,7 @@ export interface SoloTalentForm extends WebflowWebhook {
     availability: string
     portfolioLink: string
     role: string
+    email: string
     about: string
     file: string
   }

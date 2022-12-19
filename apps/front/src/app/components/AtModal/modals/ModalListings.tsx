@@ -45,7 +45,7 @@ const ModalListings: React.FunctionComponent<ModalListingsProps> = (
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
           startIcon={<CloseCircle />}
-          iconSize={24}
+          $iconSize={24}
           onClick={props.onClose}
         />
       </Box>
@@ -71,13 +71,12 @@ const ModalListings: React.FunctionComponent<ModalListingsProps> = (
             </AtTypography>
             <StyledTag
               label={'Back-End Developer 6 Month Contract'}
-              delete={true}
             ></StyledTag>
             <AtDropdown
               align={'bottom-right'}
               placeholder={'Shortlisted'}
               fontSize={'10px'}
-              listItems={[
+              $listItems={[
                 {
                   id: 0,
                   value: 'Public View',

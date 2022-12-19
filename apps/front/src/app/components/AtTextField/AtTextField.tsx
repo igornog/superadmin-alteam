@@ -10,7 +10,7 @@ import {
   OutlinedInput,
   outlinedInputClasses,
 } from '@mui/material'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 import {
   black,
@@ -40,7 +40,7 @@ export enum AtTextFieldType {
 const StyledLabel = styled.label<{
   $isError?: boolean
   $isSuccess?: boolean
-  focused: boolean
+  $focused: boolean
   isDisabled?: boolean
   labelDropdown?: LabelDropdown[]
 }>`
@@ -69,10 +69,10 @@ const StyledLabel = styled.label<{
 const StyledInput = styled(OutlinedInput)<{
   $isError?: boolean
   $isSuccess?: boolean
-  focused: boolean
+  $focused: boolean
   disabled?: boolean
   size?: string
-  dropdown?: boolean
+  $dropdown?: boolean
   $bgColor?: string
   $maxWidth?: number
   multiline?: boolean
@@ -90,9 +90,9 @@ const StyledInput = styled(OutlinedInput)<{
             background-color: ${({ $bgColor }) =>
               $bgColor === 'black' ? black : white};
           `
-        : css<{ focused: boolean; $isError?: boolean; $isSuccess?: boolean }>`
-            background-color: ${({ focused, $isError, $isSuccess }) =>
-              focused
+        : css<{ $focused: boolean; $isError?: boolean; $isSuccess?: boolean }>`
+            background-color: ${({ $focused, $isError, $isSuccess }) =>
+              $focused
                 ? $isError
                   ? red1
                   : $isSuccess
@@ -126,8 +126,8 @@ const StyledInput = styled(OutlinedInput)<{
         padding-right: 10px;
       }
       & > svg {
-        ${({ dropdown }) =>
-          dropdown &&
+        ${({ $dropdown }) =>
+          $dropdown &&
           css`
             &:hover {
               cursor: pointer;
@@ -184,7 +184,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
   const dropdownLabelRef = useRef<any>(null)
 
   const [value, setValue] = useState(props.defaultValue || '')
-  const [isFocused, setIsFocused] = useState(false)
+  const [isFocused, setIsFocused] = useState<boolean>(false)
 
   const returnValue = (value: string) => {
     props.onValueChange?.(value)
@@ -195,10 +195,25 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
     setShowPassword(!showPassword)
   }
 
-  const handleClickLabel = () => {
+  const handleClickLabel = (value: LabelDropdown) => {
     setShowDropdownLabel(false)
-    props.onClickDropdownLabel?.()
+    props.onClickDropdownLabel?.(value)
   }
+
+  const handlePressEnter = (e: any) => {
+    if (props.onPressEnter) {
+      if (e.keyCode === 13 || e.keyCode === 9) {
+        props.onPressEnter?.(e.target.value)
+        setValue('')
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (props.value) {
+      setValue(props.value)
+    }
+  }, [props.value])
 
   return (
     <Box
@@ -216,7 +231,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
               ref={dropdownLabelRef}
             >
               <StyledLabel
-                focused={isFocused}
+                $focused={isFocused}
                 $isError={props.isError}
                 $isSuccess={props.isSuccess}
                 isDisabled={props.disabled}
@@ -239,7 +254,9 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
                 {props.labelDropdown?.map((labelDropdown: LabelDropdown) => {
                   return (
                     <StyledDropdownElement
-                      onClick={handleClickLabel}
+                      onClick={() => {
+                        handleClickLabel(labelDropdown)
+                      }}
                       color={
                         labelDropdown.value === props.label ? black : grey2
                       }
@@ -258,13 +275,14 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
         <StyledInput
           fullWidth={true}
           onClick={props.onClick}
-          dropdown={props.dropdown}
+          onKeyDown={handlePressEnter}
+          $dropdown={props.dropdown}
           $maxWidth={props.maxWidth}
           $bgColor={props.bgColor}
           readOnly={props.dropdown}
           $isError={props.isError}
           $isSuccess={props.isSuccess}
-          focused={isFocused}
+          $focused={isFocused}
           multiline={props.multiline}
           rows={props.rows}
           disabled={props.disabled}
@@ -325,8 +343,7 @@ export interface AtTextFieldProps {
   fullWidth?: boolean
   required?: boolean
   defaultValue?: string
-  value: string
-
+  value?: string
   multiline?: boolean
   rows?: number
 
@@ -346,12 +363,13 @@ export interface AtTextFieldProps {
   bgColor?: 'black' | 'white'
   size?: 'small' | 'medium'
   onValueChange?: (value: string) => void
+  onPressEnter?: (value: string) => void
   placeholder?: string
   type?: AtTextFieldType
 
   label?: string
   labelDropdown?: LabelDropdown[]
-  onClickDropdownLabel?: () => void
+  onClickDropdownLabel?: (value: LabelDropdown) => void
 }
 
 export interface LabelDropdown {

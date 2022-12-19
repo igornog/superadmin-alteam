@@ -25,7 +25,7 @@ const Step2: React.FunctionComponent = () => {
             fullWidth={true}
             value={''}
             placeholder={'App development'}
-            listItems={[
+            $listItems={[
               {
                 id: 0,
                 label: 'Full Time',
@@ -42,7 +42,7 @@ const Step2: React.FunctionComponent = () => {
             fullWidth={true}
             value={''}
             placeholder={'One-off project'}
-            listItems={[
+            $listItems={[
               {
                 id: 0,
                 label: 'Full Time',
@@ -59,7 +59,7 @@ const Step2: React.FunctionComponent = () => {
             fullWidth={true}
             value={''}
             placeholder={'Solo freelancer'}
-            listItems={[
+            $listItems={[
               {
                 id: 0,
                 label: 'Full Time',

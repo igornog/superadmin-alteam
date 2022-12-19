@@ -14,7 +14,6 @@ import AtButton, {
   AtButtonVariant,
   AtButtonKind,
 } from '../../../AtButton/AtButton'
-import AtTalentCard from '../../../AtCard/AtTalentCard'
 import AtGroupTag from '../../../AtGroupTag/AtGroupTag'
 import AtSwitch from '../../../AtSwitch/AtSwitch'
 import AtTypography from '../../../AtTypography/AtTypography'
@@ -56,7 +55,7 @@ const DrawerListing: React.FunctionComponent<DrawerListingProps> = (
   const [collapseWhole, setCollapseWhole] = useState(false)
   const [openDrawer, setOpenDrawer] = useState(false)
 
-  const handleClickTalent = (id: number) => {
+  const handleClickTalent = (id: string) => {
     dispatch(handleSelectTalent(id))
     setOpenDrawer(true)
   }
@@ -139,7 +138,7 @@ const DrawerListing: React.FunctionComponent<DrawerListingProps> = (
               </AtTypography>
 
               <Grid container={true} spacing={2.5} alignItems={'stretch'}>
-                {props.selectedListing.talent?.map((talentId: number) => {
+                {/* {props.selectedListing.talent?.map((talentId: string) => {
                   return (
                     <Grid
                       item={true}
@@ -154,7 +153,7 @@ const DrawerListing: React.FunctionComponent<DrawerListingProps> = (
                       />
                     </Grid>
                   )
-                })}
+                })} */}
               </Grid>
             </Box>
           </Box>

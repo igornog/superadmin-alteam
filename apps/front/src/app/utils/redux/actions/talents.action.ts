@@ -1,15 +1,56 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import { talentService } from '../../services/talentService'
+import { Talent } from '../types/talents.type'
+import { TalentSearch } from '@yjcapp/app'
 
 export const handleTalents = createAsyncThunk(
   'talents/initTalents',
-  async (talents: any) => {
-    return talents
+  async (talentSearch: TalentSearch, { rejectWithValue }) => {
+    try {
+      return await talentService.searchSoloTalent(talentSearch)
+    } catch (error) {
+      return rejectWithValue(error)
+    }
+  },
+)
+
+export const handleCreateTalent = createAsyncThunk(
+  'talents/createTalent',
+  async (talent: Omit<Talent, 'id'>, { rejectWithValue }) => {
+    try {
+      return await talentService.createSoloTalent(talent)
+    } catch (err) {
+      return rejectWithValue(err)
+    }
+  },
+)
+
+export const handleUpdateTalent = createAsyncThunk(
+  'talents/updateTalent',
+  async (talent: Talent, { rejectWithValue }) => {
+    try {
+      return await talentService.updateSoloTalent(talent)
+    } catch (err) {
+      return rejectWithValue(err)
+    }
+  },
+)
+
+export const handlePatchTalent = createAsyncThunk(
+  'talents/updateTalent',
+  async (talent: Partial<Talent>, { rejectWithValue }) => {
+    try {
+      await talentService.patchSoloTalent(talent)
+      return talent
+    } catch (err) {
+      return rejectWithValue(err)
+    }
   },
 )
 
 export const handleSelectTalent = createAsyncThunk(
   'talents/selectTalent',
-  async (idTalent: number | null) => {
+  async (idTalent: string | null) => {
     return idTalent
   },
 )

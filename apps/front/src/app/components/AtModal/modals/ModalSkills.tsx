@@ -5,7 +5,7 @@ import {
   SearchNormal1,
   TickSquare,
 } from 'iconsax-react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
@@ -14,16 +14,32 @@ import AtTag from '../../AtTag/AtTag'
 import AtTextField from '../../AtTextField/AtTextField'
 import AtTypography from '../../AtTypography/AtTypography'
 import { grey2 } from '../../../utils/colors'
-import { useAppSelector } from '../../../utils/hooks/reduxHook'
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
 import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector'
 import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtModal from '../AtModal'
 import AtLine from '../../AtLine/AtLine'
+import { handlePatchTalent } from '../../../utils/redux/actions/talents.action'
 
 const ModalSkills: React.FunctionComponent<ModalSkillsProps> = (
   props: ModalSkillsProps,
 ) => {
   const selectedTalent = useAppSelector((state) => getActiveTalent(state))
+  const [skills, setSkills] = useState<string[]>([])
+  const dispatch = useAppDispatch()
+
+  const handleDeleteTag = (value: string) => {
+    setSkills(skills.filter((skill) => skill !== value))
+  }
+
+  useEffect(() => {
+    setSkills(selectedTalent.skills)
+  }, [selectedTalent.skills])
+
+  const handleSaveSkills = () => {
+    dispatch(handlePatchTalent({ id: selectedTalent.id, skills }))
+    props.onClose?.()
+  }
 
   return (
     <AtModal
@@ -43,7 +59,7 @@ const ModalSkills: React.FunctionComponent<ModalSkillsProps> = (
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
           startIcon={<CloseCircle />}
-          iconSize={24}
+          $iconSize={24}
           onClick={props.onClose}
         />
       </Box>
@@ -55,12 +71,20 @@ const ModalSkills: React.FunctionComponent<ModalSkillsProps> = (
           placeholder={'Search in Skills'}
           value={''}
           startIcon={<SearchNormal1 />}
+          onPressEnter={(e) => setSkills([...skills, e])}
           size={'small'}
         />
+
         <Box display={'flex'} flexWrap={'wrap'} gap={'10px'}>
-          {selectedTalent.skills && selectedTalent.skills.length > 0 ? (
-            selectedTalent?.skills?.map((skill, index) => {
-              return <AtTag label={skill.label} delete={true} key={index} />
+          {skills.length > 0 ? (
+            skills?.map((skill, index) => {
+              return (
+                <AtTag
+                  label={skill}
+                  key={index}
+                  onDelete={() => handleDeleteTag(skill)}
+                />
+              )
             })
           ) : (
             <AtTypography color={grey2}>
@@ -78,8 +102,9 @@ const ModalSkills: React.FunctionComponent<ModalSkillsProps> = (
             name={'Cancel'}
             endIcon={<CloseSquare size={16} />}
           />
+
           <AtButton
-            onClick={props.onClose}
+            onClick={handleSaveSkills}
             kind={AtButtonKind.Success}
             variant={AtButtonVariant.Contained}
             name={'Save Changes'}

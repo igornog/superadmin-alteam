@@ -19,7 +19,7 @@ const PagerAnimtedContainer = styled(motion.div)`
   display: flex;
 `
 
-const Page = styled.div<{ tabIndex: number; active: boolean }>`
+const Page = styled.div<{ tabIndex: number; $active: boolean }>`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -27,7 +27,7 @@ const Page = styled.div<{ tabIndex: number; active: boolean }>`
   justify-content: flex-start;
   flex-shrink: 0;
   height: 100%;
-  overflow: ${({ active }) => (active ? 'visible' : 'hidden')};
+  overflow: ${({ $active }) => ($active ? 'visible' : 'hidden')};
   outline: none;
   max-height: ${({ tabIndex }) => (tabIndex === -1 ? 0 : '100vh')};
   transition: max-height 0.3s ease;
@@ -59,7 +59,7 @@ const AtPager: React.FunctionComponent<AtPagerProps> = (
         {Children.map(props.children, (child, i) => (
           <Page
             key={i}
-            active={props.value === i}
+            $active={props.value === i}
             aria-hidden={props.value !== i}
             tabIndex={props.value === i ? 0 : -1}
           >
