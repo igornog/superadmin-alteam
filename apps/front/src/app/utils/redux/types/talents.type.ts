@@ -4,6 +4,8 @@ import {
   Listing,
   ListingStatus,
   SoloTalent,
+  Link,
+  LinkDomain,
 } from '@yjcapp/app'
 import { StatusType } from './status.type'
 
@@ -16,11 +18,6 @@ export interface TalentsState {
 
 export interface Skill {
   label: string
-}
-
-export interface Link {
-  id: number
-  link: string
 }
 
 export enum TalentStatus {
@@ -36,7 +33,7 @@ export class Talent implements SoloTalent {
   lastName: string
   experience: Experience
   availability: Availability
-  links: string[]
+  links: Link[]
   email: string
   role: string
   about: string
@@ -66,5 +63,13 @@ export class Talent implements SoloTalent {
     this.salaryExpectation = data.salaryExpectation
     this.listing = data.listing
     this.status = data.status
+  }
+
+  getPortfolio?(): Link {
+    return this?.links?.filter((item) => item.name === LinkDomain.Portfolio)[0]
+  }
+
+  getLinks?(): Link[] {
+    return this?.links?.filter((item) => item.name !== LinkDomain.Portfolio)
   }
 }

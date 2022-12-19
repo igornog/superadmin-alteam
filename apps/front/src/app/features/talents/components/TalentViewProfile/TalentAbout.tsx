@@ -6,7 +6,9 @@ import AtTypography from '../../../../components/AtTypography/AtTypography'
 import { grey } from '../../../../utils/colors'
 import { Talent } from '../../../../utils/redux/types/talents.type'
 
-const TalentAbout: React.FunctionComponent<TalentAboutProps> = (props: TalentAboutProps) => {
+const TalentAbout: React.FunctionComponent<TalentAboutProps> = (
+  props: TalentAboutProps,
+) => {
   const [openModal, setOpenModal] = useState(false)
 
   return (
@@ -20,9 +22,7 @@ const TalentAbout: React.FunctionComponent<TalentAboutProps> = (props: TalentAbo
       }
       onClick={() => setOpenModal(true)}
     >
-      <AtTypography color={grey}>
-        {props.talent.about}
-      </AtTypography>
+      <AtTypography color={grey}>{props.talent.about}</AtTypography>
 
       <ModalAbout isOpen={openModal} onClose={() => setOpenModal(false)} />
     </AtFrame>

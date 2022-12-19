@@ -7,7 +7,7 @@ import {
   handleTalents,
 } from '../actions/talents.action'
 import { StatusType } from '../types/status.type'
-import { TalentsState } from '../types/talents.type'
+import { Talent, TalentsState } from '../types/talents.type'
 
 const initialState: TalentsState = {
   listTalents: [],
@@ -35,17 +35,21 @@ const { reducer } = createSlice({
       })
 
       .addCase(handleCreateTalent.fulfilled, (state, { payload }) => {
-        state.listTalents.push(payload)
+        state.listTalents.push(new Talent(payload))
       })
 
       .addCase(handlePatchTalent.fulfilled, (state, { payload }) => {
-        const index = state.listTalents.findIndex(
-          (talent) => talent.id === payload.id,
+        const { id, ...rest } = payload
+
+        const talent = state.listTalents.find((talent) => talent.id === id)
+
+        const newObj = Object.entries(rest).reduce(
+          (acc, [key, value]) =>
+            value !== undefined ? { ...acc, [key]: value } : acc,
+          {},
         )
 
-        if (payload.skills) {
-          state.listTalents[index].skills = payload.skills
-        }
+        Object.assign(talent as Talent, newObj)
       })
 
       .addCase(handleSelectTalent.fulfilled, (state, { payload }) => {

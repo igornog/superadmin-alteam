@@ -1,11 +1,17 @@
 import { Box } from '@mui/material'
-import { AddCircle, CloseCircle, TrushSquare } from 'iconsax-react'
-import React, { useEffect, useState } from 'react'
+import {
+  AddCircle,
+  CloseCircle,
+  CloseSquare,
+  TickSquare,
+  TrushSquare,
+} from 'iconsax-react'
+import React, { useCallback, useEffect, useState } from 'react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
 } from '../../AtButton/AtButton'
-import AtTextField from '../../AtTextField/AtTextField'
+import AtTextField, { LabelDropdown } from '../../AtTextField/AtTextField'
 import AtTypography from '../../AtTypography/AtTypography'
 import { StyledLink } from '../../../features/talents/components/TalentViewProfile/TalentLinks'
 import { grey2 } from '../../../utils/colors'
@@ -14,29 +20,88 @@ import {
   availableNetworks,
   capitalizeFirstLetter,
 } from '../../../utils/helpers'
-import { useAppSelector } from '../../../utils/hooks/reduxHook'
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
 import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector'
-import { Link } from '../../../utils/redux/types/talents.type'
 import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtLine from '../../AtLine/AtLine'
 import AtModal from '../AtModal'
+import { Link, LinkDomain } from '@yjcapp/app'
+import { v4 as uuid } from 'uuid'
+import { handlePatchTalent } from '../../../utils/redux/actions/talents.action'
 
 const ModalLink: React.FunctionComponent<ModalLinkProps> = (
   props: ModalLinkProps,
 ) => {
   const selectedTalent = useAppSelector((state) => getActiveTalent(state))
   const [links, setLinks] = useState<Link[]>([])
+  const dispatch = useAppDispatch()
 
-  const [displayLink, setDisplayLink] = useState(false)
-  const [newLink, setNewLink] = useState('')
+  const handleUpdateLabel = ({ value }: LabelDropdown, id?: string) => {
+    setLinks(
+      links.map((item) => {
+        if (item.id === id) {
+          return { ...item, name: value as LinkDomain }
+        }
+        return item
+      }),
+    )
+  }
+
+  const handleUpdateLink = (value: string, id?: string) => {
+    setLinks(
+      links.map((item) => {
+        if (item.id === id) {
+          return { ...item, name: getCorrectNetwork(value, 'key'), link: value }
+        }
+        return item
+      }),
+    )
+  }
+
+  const addLink = useCallback(
+    (element?: Link) => {
+      if (!links.some((item) => item.name === undefined && item.link === '')) {
+        setLinks([
+          ...links,
+          {
+            id: uuid(),
+            name: element?.name ?? undefined,
+            link: element?.link ?? '',
+          },
+        ])
+      }
+    },
+    [links],
+  )
+
+  const removeLink = (link: Link) => {
+    setLinks(links.filter((item: Link) => item.id !== link.id))
+  }
+
+  const handleSaveChanges = () => {
+    dispatch(
+      handlePatchTalent({
+        id: selectedTalent.id,
+        links: links.map((item) => ({
+          name: item.name,
+          link: item.link,
+        })),
+      }),
+    )
+    props.onClose?.()
+  }
 
   useEffect(() => {
-    // setLinks(selectedTalent.links)
-  }, [selectedTalent])
+    if (props.isOpen) {
+      const values = selectedTalent.links?.map((element: Link) => ({
+        id: uuid(),
+        name: element?.name ?? undefined,
+        link: element?.link ?? '',
+      }))
 
-  const handleUpdateLabel = () => {
-    console.log('update label')
-  }
+      setLinks(values)
+    }
+  }, [props.isOpen, selectedTalent.links])
 
   return (
     <AtModal
@@ -51,7 +116,9 @@ const ModalLink: React.FunctionComponent<ModalLinkProps> = (
         padding={2.5}
         paddingBottom={0}
       >
-        <AtTypography variant={'h4'}>Add Links</AtTypography>
+        <AtTypography variant={'h4'}>
+          {props.edit ? 'Edit Links' : 'Add Links'}
+        </AtTypography>
         <AtButton
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
@@ -71,79 +138,74 @@ const ModalLink: React.FunctionComponent<ModalLinkProps> = (
         </AtTypography>
 
         {links &&
-          links.map((item: Link) => (
-            <Box
-              display={'flex'}
-              alignItems={'center'}
-              justifyContent={'space-between'}
-              gap={'25px'}
-            >
-              <AtTextField
-                startIcon={getCorrectNetwork(item.link)}
-                value={''}
-                label={getCorrectNetwork(item.link, 'key')}
-                defaultValue={item.link}
-                labelDropdown={Object.keys(availableNetworks).map((network) => {
-                  return {
-                    value: network,
-                    label: (
-                      <AtTypography>
-                        {availableNetworks[network]}{' '}
-                        {capitalizeFirstLetter(network)}
-                      </AtTypography>
-                    ),
+          links.map((item: Link) => {
+            return (
+              <Box
+                display={'flex'}
+                alignItems={'center'}
+                justifyContent={'space-between'}
+                gap={'25px'}
+              >
+                <AtTextField
+                  startIcon={
+                    item.name
+                      ? getCorrectNetwork(item.name)
+                      : getCorrectNetwork(item.link)
                   }
-                })}
-                onClickDropdownLabel={handleUpdateLabel}
-              />
-              <AtButton
-                kind={AtButtonKind.Danger}
-                variant={AtButtonVariant.Text}
-                startIcon={<TrushSquare />}
-                iconSize={20}
-              />
-            </Box>
-          ))}
+                  value={item.link}
+                  label={item.name ?? getCorrectNetwork(item.link, 'key')}
+                  defaultValue={item.link}
+                  onValueChange={(e: string) => handleUpdateLink(e, item.id)}
+                  labelDropdown={Object.keys(availableNetworks).map(
+                    (network) => {
+                      return {
+                        value: network,
+                        label: (
+                          <AtTypography>
+                            {availableNetworks[network]}
+                            {capitalizeFirstLetter(network)}
+                          </AtTypography>
+                        ),
+                      }
+                    },
+                  )}
+                  onClickDropdownLabel={(e) => handleUpdateLabel(e, item.id)}
+                />
 
-        {displayLink && (
-          <Box
-            display={'flex'}
-            alignItems={'center'}
-            justifyContent={'space-between'}
-            gap={'25px'}
-          >
-            <AtTextField
-              startIcon={getCorrectNetwork(newLink)}
-              value={''}
-              label={getCorrectNetwork(newLink, 'key')}
-              onValueChange={setNewLink}
-              labelDropdown={Object.keys(availableNetworks).map((network) => {
-                return {
-                  value: network,
-                  label: (
-                    <AtTypography>
-                      {availableNetworks[network]}{' '}
-                      {capitalizeFirstLetter(network)}
-                    </AtTypography>
-                  ),
-                }
-              })}
-            />
-            <AtButton
-              kind={AtButtonKind.Danger}
-              variant={AtButtonVariant.Text}
-              startIcon={<TrushSquare />}
-              iconSize={20}
-            />
-          </Box>
-        )}
+                <AtButton
+                  kind={AtButtonKind.Danger}
+                  variant={AtButtonVariant.Text}
+                  startIcon={<TrushSquare />}
+                  iconSize={20}
+                  onClick={() => removeLink(item)}
+                />
+              </Box>
+            )
+          })}
 
-        <StyledLink padding={'10px'} onClick={() => setDisplayLink(true)}>
+        <StyledLink padding={'10px'} onClick={() => addLink()}>
           <AtTypography fontSize={'16px'} bold={true}>
             Add link
             <AddCircle size={16} />
           </AtTypography>
         </StyledLink>
+
+        <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
+          <AtButton
+            onClick={props.onClose}
+            kind={AtButtonKind.Danger}
+            variant={AtButtonVariant.Text}
+            name={'Cancel'}
+            endIcon={<CloseSquare size={16} />}
+          />
+          <AtButton
+            onClick={handleSaveChanges}
+            kind={AtButtonKind.Success}
+            variant={AtButtonVariant.Contained}
+            name={'Save Changes'}
+            endIcon={<TickSquare size={16} />}
+          />
+        </Box>
       </Box>
     </AtModal>
   )
@@ -152,6 +214,7 @@ const ModalLink: React.FunctionComponent<ModalLinkProps> = (
 interface ModalLinkProps {
   isOpen: boolean
   onClose?: () => void
+  edit?: boolean
 }
 
 export default ModalLink

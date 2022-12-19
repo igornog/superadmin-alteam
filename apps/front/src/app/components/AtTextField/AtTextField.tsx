@@ -195,9 +195,10 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
     setShowPassword(!showPassword)
   }
 
-  const handleClickLabel = () => {
+  const handleClickLabel = (value: LabelDropdown) => {
+    console.log(value)
     setShowDropdownLabel(false)
-    props.onClickDropdownLabel?.()
+    props.onClickDropdownLabel?.(value)
   }
 
   const handlePressEnter = (e: any) => {
@@ -254,7 +255,9 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
                 {props.labelDropdown?.map((labelDropdown: LabelDropdown) => {
                   return (
                     <StyledDropdownElement
-                      onClick={handleClickLabel}
+                      onClick={() => {
+                        handleClickLabel(labelDropdown)
+                      }}
                       color={
                         labelDropdown.value === props.label ? black : grey2
                       }
@@ -367,7 +370,7 @@ export interface AtTextFieldProps {
 
   label?: string
   labelDropdown?: LabelDropdown[]
-  onClickDropdownLabel?: () => void
+  onClickDropdownLabel?: (value: LabelDropdown) => void
 }
 
 export interface LabelDropdown {

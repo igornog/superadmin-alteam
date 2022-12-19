@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react'
-import React from 'react'
+import React, { useState } from 'react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
@@ -10,10 +10,28 @@ import AtTypography from '../../AtTypography/AtTypography'
 import AtModal from '../AtModal'
 import AtLine from '../../AtLine/AtLine'
 import { ModalSize } from '../../../utils/redux/types/settings.type'
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
+import { handlePatchTalent } from '../../../utils/redux/actions/talents.action'
+import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector'
 
 const ModalAbout: React.FunctionComponent<ModalAboutProps> = (
   props: ModalAboutProps,
 ) => {
+  const selectedTalent = useAppSelector((state) => getActiveTalent(state))
+  const dispatch = useAppDispatch()
+
+  const [about, setAbout] = useState<string>('')
+
+  const handleSaveAbout = () => {
+    dispatch(
+      handlePatchTalent({
+        id: selectedTalent.id,
+        about,
+      }),
+    )
+    props.onClose?.()
+  }
+
   return (
     <AtModal
       isOpen={props.isOpen}
@@ -43,11 +61,10 @@ const ModalAbout: React.FunctionComponent<ModalAboutProps> = (
         <AtTextField
           multiline={true}
           rows={12}
-          value={''}
+          onValueChange={setAbout}
+          value={selectedTalent.about}
+          defaultValue={selectedTalent.about}
           label={'About Talent'}
-          defaultValue={
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque adipiscing placerat venenatis odio vel dignissim nec diam. Tincidunt ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor diam fringilla vestibulum eu.'
-          }
         />
 
         <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
@@ -59,7 +76,7 @@ const ModalAbout: React.FunctionComponent<ModalAboutProps> = (
             endIcon={<CloseSquare size={16} />}
           />
           <AtButton
-            onClick={props.onClose}
+            onClick={handleSaveAbout}
             kind={AtButtonKind.Success}
             variant={AtButtonVariant.Contained}
             name={'Save Changes'}

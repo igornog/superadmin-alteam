@@ -15,7 +15,7 @@ export interface SoloTalent {
   lastName: string
   experience: Experience
   availability: Availability
-  links: string[]
+  links: Link[]
   role: string
   email: string
   about: string
@@ -27,6 +27,24 @@ export interface SoloTalent {
   workExperience?: string
   listing?: Listing[]
   status?: ListingStatus
+}
+
+export interface Link {
+  id?: string
+  name?: LinkDomain
+  link: string
+}
+
+export enum LinkDomain {
+  Behance = 'Behance',
+  Dribble = 'Dribble',
+  Github = 'Github',
+  Instagram = 'Instagram',
+  Linkedin = 'Linkedin',
+  Stackoverflow = 'Stackoverflow',
+  Twitter = 'Twitter',
+  Youtube = 'Youtube',
+  Portfolio = 'Portfolio',
 }
 
 export enum Experience {

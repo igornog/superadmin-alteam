@@ -7,6 +7,10 @@ import AtFrame from '../../../../components/AtFrame/AtFrame'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
 import { black, grey4 } from '../../../../utils/colors'
 import { Talent } from '../../../../utils/redux/types/talents.type'
+import { Link } from '@yjcapp/app'
+import { getCorrectNetwork } from '../../../../utils/helpers'
+import AtLine from '../../../../components/AtLine/AtLine'
+import AtCopyTo from '../../../../components/AtCopyTo/AtCopyTo'
 
 export const StyledLink = styled(Box)<{ padding?: string }>`
   border: 1px solid ${grey4};
@@ -27,10 +31,11 @@ const TalentLinks: React.FunctionComponent<TalentLinksProps> = (
   props: TalentLinksProps,
 ) => {
   const [openModal, setOpenModal] = useState(false)
+  const [editModal, setEditModal] = useState(false)
 
   return (
     <>
-      {props.talent.links && props.talent?.links.length > 0 ? (
+      {props.talent.getLinks && props.talent.getLinks?.()?.length > 0 ? (
         <AtFrame
           title={'Additional Links'}
           icon={
@@ -39,10 +44,13 @@ const TalentLinks: React.FunctionComponent<TalentLinksProps> = (
               Edit
             </AtTypography>
           }
-          onClick={() => setOpenModal(true)}
+          onClick={() => {
+            setOpenModal(true)
+            setEditModal(true)
+          }}
           gap={0}
         >
-          {/* {props.talent.links.map((item: Link) => (
+          {props.talent.links.map((item: Link) => (
             <>
               <AtLine spacing={15} />
               <Box
@@ -57,16 +65,26 @@ const TalentLinks: React.FunctionComponent<TalentLinksProps> = (
                 <AtCopyTo text={item.link} />
               </Box>
             </>
-          ))} */}
+          ))}
         </AtFrame>
       ) : (
-        <StyledLink onClick={() => setOpenModal(true)}>
+        <StyledLink
+          onClick={() => {
+            setOpenModal(true)
+            setEditModal(false)
+          }}
+        >
           <AtTypography>
             <AddCircle size={20} /> Add links
           </AtTypography>
         </StyledLink>
       )}
-      <ModalLink isOpen={openModal} onClose={() => setOpenModal(false)} />
+
+      <ModalLink
+        isOpen={openModal}
+        onClose={() => setOpenModal(false)}
+        edit={editModal}
+      />
     </>
   )
 }

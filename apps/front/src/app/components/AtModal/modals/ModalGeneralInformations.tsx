@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
@@ -13,7 +13,7 @@ import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtModal from '../AtModal'
 import AtLine from '../../AtLine/AtLine'
 import AtTextFieldDropdown from '../../AtDropdown/AtTextFieldDropdown'
-import { Availability, Experience } from '@yjcapp/app'
+import { Availability, Experience, LinkDomain } from '@yjcapp/app'
 import { handlePatchTalent } from '../../../utils/redux/actions/talents.action'
 
 const ModalGeneralInformations: React.FunctionComponent<
@@ -22,8 +22,31 @@ const ModalGeneralInformations: React.FunctionComponent<
   const selectedTalent = useAppSelector((state) => getActiveTalent(state))
   const dispatch = useAppDispatch()
 
+  const [role, setRole] = useState<string>()
+  const [salary, setSalary] = useState<string>()
+  const [availability, setAvailability] = useState<Availability>()
+  const [experience, setExperience] = useState<Experience>()
+  const [email, setEmail] = useState<string>()
+  const [portfolio, setPortfolio] = useState<string | undefined>('')
+  const [phone, setPhone] = useState<string>()
+
+  useEffect(() => {
+    setPortfolio(selectedTalent?.getPortfolio?.()?.link)
+  }, [selectedTalent])
+
   const handleSaveGeneral = () => {
-    dispatch(handlePatchTalent({ id: selectedTalent.id, skills }))
+    dispatch(
+      handlePatchTalent({
+        id: selectedTalent.id,
+        role,
+        salaryExpectation: salary,
+        availability,
+        experience,
+        email,
+        links: [{ name: LinkDomain.Portfolio, link: portfolio || '' }],
+        phoneNumber: phone,
+      }),
+    )
     props.onClose?.()
   }
 
@@ -55,6 +78,7 @@ const ModalGeneralInformations: React.FunctionComponent<
       <Box display={'flex'} flexDirection={'column'} gap={3.5} padding={2.5}>
         <AtTextField
           defaultValue={selectedTalent.role}
+          onValueChange={setRole}
           value={selectedTalent.role ?? ''}
           placeholder={selectedTalent.role ?? 'N/A'}
           label={'Role'}
@@ -62,6 +86,7 @@ const ModalGeneralInformations: React.FunctionComponent<
 
         <AtTextField
           defaultValue={selectedTalent.salaryExpectation}
+          onValueChange={setSalary}
           value={selectedTalent.salaryExpectation ?? ''}
           placeholder={selectedTalent.salaryExpectation ?? 'N/A'}
           label={'Salary Expectations'}
@@ -71,6 +96,7 @@ const ModalGeneralInformations: React.FunctionComponent<
           fullWidth={true}
           value={selectedTalent.availability}
           placeholder={'Select Availability'}
+          handleSelect={(e) => setAvailability(e.label as Availability)}
           listItems={Object.values(Availability).map(
             (label: Availability, index: number) => ({
               id: index,
@@ -83,6 +109,7 @@ const ModalGeneralInformations: React.FunctionComponent<
         <AtTextFieldDropdown
           fullWidth={true}
           value={selectedTalent.experience}
+          handleSelect={(e) => setExperience(e.label as Experience)}
           placeholder={'Select Work Experience'}
           listItems={Object.values(Experience).map(
             (label: Experience, index: number) => ({
@@ -93,15 +120,17 @@ const ModalGeneralInformations: React.FunctionComponent<
           label={'Work Experience'}
         />
 
-        {/* <AtTextField
-          defaultValue={selectedTalent.links}
+        <AtTextField
+          defaultValue={portfolio}
           value={''}
-          placeholder={selectedTalent.links ?? 'N/A'}
+          onValueChange={setPortfolio}
+          placeholder={portfolio ?? 'N/A'}
           label={'Portfolio Link'}
-        /> */}
+        />
 
         <AtTextField
           defaultValue={selectedTalent.email}
+          onValueChange={setEmail}
           value={selectedTalent.email}
           placeholder={selectedTalent.email ?? 'N/A'}
           label={'Email'}
@@ -109,6 +138,7 @@ const ModalGeneralInformations: React.FunctionComponent<
 
         <AtTextField
           defaultValue={selectedTalent.phoneNumber}
+          onValueChange={setPhone}
           value={selectedTalent.phoneNumber}
           placeholder={selectedTalent.phoneNumber ?? 'N/A'}
           label={'Phone Number'}

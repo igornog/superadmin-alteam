@@ -52,7 +52,7 @@ const ModalCreateTalentStep1: React.FunctionComponent<
       <AtTextFieldDropdown
         fullWidth={true}
         handleSelect={(e) => props.setExperience(e.label as Experience)}
-        value={props.experience ? props.experience : ''}
+        value={props.experience ?? undefined}
         placeholder={'Select Experience Level'}
         required={true}
         listItems={Object.values(Experience).map(
@@ -64,7 +64,7 @@ const ModalCreateTalentStep1: React.FunctionComponent<
       <AtTextFieldDropdown
         fullWidth={true}
         handleSelect={(e) => props.setAvailability(e.label as Availability)}
-        value={props.availability ?? ''}
+        value={props.availability ?? undefined}
         placeholder={'Select Availability'}
         required={true}
         listItems={Object.values(Availability).map(

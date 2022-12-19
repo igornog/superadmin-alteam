@@ -27,8 +27,8 @@ export const StyledContentPopover = styled(Collapse)<{
 
 export const StyledDropdownElement = styled.div<{ color: string }>`
   padding: 10px;
-  transition: 0.25s;
   display: flex;
+  transition: 0.25s;
   color: ${({ color }) => color};
   &:hover {
     cursor: pointer;

@@ -16,14 +16,14 @@ export const StyledContentPopover = styled(Collapse)<{
   top?: number
   align?: string
 }>`
-  position: absolute;
+  position: fixed;
   min-width: ${({ $minWidth }) => $minWidth && $minWidth + 'px'};
   background-color: ${white};
   box-shadow: ${boxShadow};
   border: 1px solid ${grey5};
   border-radius: 5px;
   z-index: 1300;
-  padding: 10px;
+  // padding: 10px;
   margin-top: 10px;
   box-sizing: border-box;
 
@@ -60,6 +60,7 @@ export const StyledDropdownElement = styled.div<{ color: string }>`
   transition: 0.25s;
   display: flex;
   color: ${({ color }) => color};
+  padding: 10px;
 
   &:hover {
     cursor: pointer;
