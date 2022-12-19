@@ -55,7 +55,7 @@ const ModalCreateTalentStep1: React.FunctionComponent<
         value={props.experience ?? undefined}
         placeholder={'Select Experience Level'}
         required={true}
-        listItems={Object.values(Experience).map(
+        $listItems={Object.values(Experience).map(
           (label: Experience, index: number) => ({ id: index, label: label }),
         )}
         label={'Experience Level'}
@@ -67,7 +67,7 @@ const ModalCreateTalentStep1: React.FunctionComponent<
         value={props.availability ?? undefined}
         placeholder={'Select Availability'}
         required={true}
-        listItems={Object.values(Availability).map(
+        $listItems={Object.values(Availability).map(
           (label: Availability, index: number) => ({ id: index, label: label }),
         )}
         label={'Avaialbility'}

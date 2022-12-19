@@ -59,7 +59,7 @@ const ModalSkills: React.FunctionComponent<ModalSkillsProps> = (
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
           startIcon={<CloseCircle />}
-          iconSize={24}
+          $iconSize={24}
           onClick={props.onClose}
         />
       </Box>

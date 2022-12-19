@@ -4,7 +4,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 interface StyledTypographyProps {
-  bold?: boolean
+  $bold?: boolean
   color?: string
   fontSize?: string
   display?: string
@@ -16,7 +16,7 @@ interface StyledTypographyProps {
 
 const StyledTypography = styled(Typography)<StyledTypographyProps>`
   font-size: ${({ fontSize }) => fontSize && fontSize};
-  font-weight: ${({ bold }) => (bold ? 'bold' : null)};
+  font-weight: ${({ $bold }) => ($bold ? 'bold' : null)};
   color: ${({ color }) => (color ? color : null)};
   display: ${({ display }) => display ?? 'flex'};
   align-items: center;
@@ -42,7 +42,7 @@ const AtTypography: React.FunctionComponent<AtTypographyProps> = (
   return (
     <StyledTypography
       {...props}
-      bold={props.bold}
+      $bold={props.$bold}
       variant={props.variant ?? 'body2'}
       color={props.color}
       display={props.display}
@@ -60,7 +60,7 @@ const AtTypography: React.FunctionComponent<AtTypographyProps> = (
 interface AtTypographyProps {
   children: React.ReactNode
   display?: string
-  bold?: boolean
+  $bold?: boolean
   variant?: Variant
   color?: string
   fontSize?: string

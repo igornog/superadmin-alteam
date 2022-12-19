@@ -15,7 +15,7 @@ const IOSSwitch = styled(Switch).attrs(() => ({
   },
   disableRipple: true,
   focusVisibleClassName: 'focusVisible',
-}))<{ forceColors?: boolean }>`
+}))<{ $forceColors?: boolean }>`
   &.root {
     width: 65px;
     height: 27px;
@@ -31,8 +31,8 @@ const IOSSwitch = styled(Switch).attrs(() => ({
       color: white;
 
       & + .track {
-        background-color: ${({ forceColors }) =>
-          forceColors ? red : convertHexToRGBA(blue, 0.1)};
+        background-color: ${({ $forceColors }) =>
+          $forceColors ? red : convertHexToRGBA(blue, 0.1)};
         opacity: 1;
         border: none;
       }
@@ -47,15 +47,15 @@ const IOSSwitch = styled(Switch).attrs(() => ({
   .thumb {
     width: 24px;
     height: 24px;
-    background-color: ${({ forceColors }) => (forceColors ? white : green)};
+    background-color: ${({ $forceColors }) => ($forceColors ? white : green)};
     box-shadow: none;
   }
 
   & .track {
     border-radius: 13px;
     opacity: 1;
-    background-color: ${({ forceColors }) =>
-      forceColors ? green : convertHexToRGBA(blue, 0.1)};
+    background-color: ${({ $forceColors }) =>
+      $forceColors ? green : convertHexToRGBA(blue, 0.1)};
   }
 `
 
@@ -69,7 +69,7 @@ const AtSwitch: React.FunctionComponent<AtSwitchProps> = (
           sx={{ m: 1 }}
           defaultChecked={props.defaultChecked}
           onChange={props.onChange}
-          forceColors={props.forceColors}
+          $forceColors={props.forceColors || false}
         />
       }
       style={{

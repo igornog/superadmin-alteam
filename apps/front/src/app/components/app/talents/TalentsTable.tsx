@@ -63,6 +63,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
       <AtTableBody position={position}>
         {props.talents.map((talent: Talent) => (
           <AtRightClick
+            key={talent.id}
             contextMenu={
               <TalentMenu
                 talent={talent}
@@ -74,9 +75,9 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
           >
             <AtTableRow
               key={talent.id}
-              hover={true}
+              $hover={true}
               onClick={() => props.openTalent(talent.id)}
-              setPosition={setPosition}
+              $setPosition={setPosition}
             >
               {haveToDisplay(Column.Talent) && (
                 <AtTableCell>
@@ -87,7 +88,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
                     whiteSpace={'nowrap'}
                   >
                     <Box display={'flex'} gap={'5px'} alignItems={'center'}>
-                      <AtTypography variant={'body1'} bold={true}>
+                      <AtTypography variant={'body1'} $bold={true}>
                         {talent.firstName} {talent.lastName}
                       </AtTypography>
                       {/* {talent.group && <AtGroupTag label={talent.group} />} */}
@@ -177,7 +178,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
                         >
                           <span>
                             <StyledTag
-                              hover={true}
+                              $hover={true}
                               variant={'outlined'}
                               label={`${
                                 talent.skills.slice(maxItemPerLine).length

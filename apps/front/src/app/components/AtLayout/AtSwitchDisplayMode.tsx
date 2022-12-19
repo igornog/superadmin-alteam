@@ -7,9 +7,9 @@ import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook'
 import { handleSwitchDisplayMode } from '../../utils/redux/actions/settings.action'
 import { DisplayMode } from '../../utils/redux/types/settings.type'
 
-const sharedIconStyle = css<{ active: boolean }>`
+const sharedIconStyle = css<{ $active: boolean }>`
   transition: 0.3s;
-  color: ${({ active }) => (active ? white : grey)};
+  color: ${({ $active }) => ($active ? white : grey)};
   position: relative;
 
   &:hover {
@@ -74,13 +74,13 @@ const AtSwitchDisplayMode: React.FunctionComponent = () => {
 
         <StyledElement3
           size={20}
-          active={isGrid}
+          $active={isGrid}
           onClick={() => handleSwitchMode(DisplayMode.Grid, transition + 35)}
         />
 
         <StyledRowVertical
           size={20}
-          active={isList}
+          $active={isList}
           onClick={() => handleSwitchMode(DisplayMode.List, transition - 35)}
         />
       </StyledIconsBox>

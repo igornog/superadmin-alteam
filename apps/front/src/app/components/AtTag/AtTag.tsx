@@ -42,7 +42,7 @@ const AtTag: React.FunctionComponent<AtTagProps> = (props: AtTagProps) => {
     <StyledChip
       {...props}
       variant={props.variant ?? 'filled'}
-      clickable={props.hover}
+      clickable={props.$hover}
       label={<AtTypography>{props.label}</AtTypography>}
       deleteIcon={props.onDelete ? <StyledIcon /> : undefined}
       onDelete={props.onDelete ?? undefined}
@@ -52,7 +52,7 @@ const AtTag: React.FunctionComponent<AtTagProps> = (props: AtTagProps) => {
 
 interface AtTagProps {
   label: string
-  hover?: boolean
+  $hover?: boolean
   variant?: 'filled' | 'outlined'
   onDelete?: () => void
 }

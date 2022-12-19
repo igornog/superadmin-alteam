@@ -123,7 +123,7 @@ const ModalLink: React.FunctionComponent<ModalLinkProps> = (
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
           startIcon={<CloseCircle />}
-          iconSize={24}
+          $iconSize={24}
           onClick={props.onClose}
         />
       </Box>
@@ -176,7 +176,7 @@ const ModalLink: React.FunctionComponent<ModalLinkProps> = (
                   kind={AtButtonKind.Danger}
                   variant={AtButtonVariant.Text}
                   startIcon={<TrushSquare />}
-                  iconSize={20}
+                  $iconSize={20}
                   onClick={() => removeLink(item)}
                 />
               </Box>
@@ -184,7 +184,7 @@ const ModalLink: React.FunctionComponent<ModalLinkProps> = (
           })}
 
         <StyledLink padding={'10px'} onClick={() => addLink()}>
-          <AtTypography fontSize={'16px'} bold={true}>
+          <AtTypography fontSize={'16px'} $bold={true}>
             Add link
             <AddCircle size={16} />
           </AtTypography>

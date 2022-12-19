@@ -35,7 +35,7 @@ const ModalEditClient: React.FunctionComponent<ModalEditClientProps> = (
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
           startIcon={<CloseCircle />}
-          iconSize={24}
+          $iconSize={24}
           onClick={props.onClose}
         />
       </Box>

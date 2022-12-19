@@ -28,14 +28,14 @@ const sharedTreeState = css`
 `
 
 const StyledTreeItem = styled(TreeItem)<{
-  isParent: boolean
+  $isParent: boolean
 }>`
   padding-top: 10px;
   position: relative;
 
   & > .${treeItemClasses.content} {
-    ${({ isParent }) =>
-      isParent &&
+    ${({ $isParent }) =>
+      $isParent &&
       css`
         .${treeItemClasses.iconContainer} {
           display: none;
@@ -64,8 +64,8 @@ const StyledTreeItem = styled(TreeItem)<{
     background-color: transparent;
     align-items: flex-start;
 
-    ${({ isParent }) =>
-      !isParent &&
+    ${({ $isParent }) =>
+      !$isParent &&
       css`
         &:hover {
           background-color: transparent;
@@ -221,7 +221,7 @@ const AtTreeItem: React.FunctionComponent<AtTreeItemProps> = (
     <StyledTreeItem
       key={node.id}
       nodeId={node.id}
-      isParent={node.isParent()}
+      $isParent={node.isParent()}
       label={
         <Box display={'flex'} flexDirection={'column'}>
           <Box

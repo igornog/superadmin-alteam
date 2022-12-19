@@ -103,7 +103,7 @@ const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
           in={open}
           $minWidth={dropdownRef?.current?.offsetWidth}
         >
-          {props.listItems.map((item: DropdownItem) => (
+          {props.$listItems.map((item: DropdownItem) => (
             <StyledDropdownElement
               key={item.id}
               onClick={() => handleSelect(item)}
@@ -124,7 +124,7 @@ export interface DropdownItem {
 }
 
 interface AtTextFieldDropdownProps extends AtTextFieldProps {
-  listItems: DropdownItem[]
+  $listItems: DropdownItem[]
   handleSelect?: (item: DropdownItem) => void
 }
 

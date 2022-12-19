@@ -40,7 +40,7 @@ export enum AtTextFieldType {
 const StyledLabel = styled.label<{
   $isError?: boolean
   $isSuccess?: boolean
-  focused: boolean
+  $focused: boolean
   isDisabled?: boolean
   labelDropdown?: LabelDropdown[]
 }>`
@@ -69,10 +69,10 @@ const StyledLabel = styled.label<{
 const StyledInput = styled(OutlinedInput)<{
   $isError?: boolean
   $isSuccess?: boolean
-  focused: boolean
+  $focused: boolean
   disabled?: boolean
   size?: string
-  dropdown?: boolean
+  $dropdown?: boolean
   $bgColor?: string
   $maxWidth?: number
   multiline?: boolean
@@ -90,9 +90,9 @@ const StyledInput = styled(OutlinedInput)<{
             background-color: ${({ $bgColor }) =>
               $bgColor === 'black' ? black : white};
           `
-        : css<{ focused: boolean; $isError?: boolean; $isSuccess?: boolean }>`
-            background-color: ${({ focused, $isError, $isSuccess }) =>
-              focused
+        : css<{ $focused: boolean; $isError?: boolean; $isSuccess?: boolean }>`
+            background-color: ${({ $focused, $isError, $isSuccess }) =>
+              $focused
                 ? $isError
                   ? red1
                   : $isSuccess
@@ -126,8 +126,8 @@ const StyledInput = styled(OutlinedInput)<{
         padding-right: 10px;
       }
       & > svg {
-        ${({ dropdown }) =>
-          dropdown &&
+        ${({ $dropdown }) =>
+          $dropdown &&
           css`
             &:hover {
               cursor: pointer;
@@ -184,7 +184,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
   const dropdownLabelRef = useRef<any>(null)
 
   const [value, setValue] = useState(props.defaultValue || '')
-  const [isFocused, setIsFocused] = useState(false)
+  const [isFocused, setIsFocused] = useState<boolean>(false)
 
   const returnValue = (value: string) => {
     props.onValueChange?.(value)
@@ -232,7 +232,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
               ref={dropdownLabelRef}
             >
               <StyledLabel
-                focused={isFocused}
+                $focused={isFocused}
                 $isError={props.isError}
                 $isSuccess={props.isSuccess}
                 isDisabled={props.disabled}
@@ -277,13 +277,13 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
           fullWidth={true}
           onClick={props.onClick}
           onKeyDown={handlePressEnter}
-          dropdown={props.dropdown}
+          $dropdown={props.dropdown}
           $maxWidth={props.maxWidth}
           $bgColor={props.bgColor}
           readOnly={props.dropdown}
           $isError={props.isError}
           $isSuccess={props.isSuccess}
-          focused={isFocused}
+          $focused={isFocused}
           multiline={props.multiline}
           rows={props.rows}
           disabled={props.disabled}

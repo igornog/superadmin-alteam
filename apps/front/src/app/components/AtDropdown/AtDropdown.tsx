@@ -132,9 +132,9 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
           name={selectedItem ? getText(selectedItem.label) : props.placeholder}
           endIcon={<ArrowDown2 size={10} />}
           fontSize={props.fontSize}
-          iconSize={10}
+          $iconSize={10}
           padding={props.padding}
-          flexibleHeight={props.flexibleHeight}
+          $flexibleHeight={props.$flexibleHeight}
         />
 
         <StyledContentPopover
@@ -143,7 +143,7 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
           align={props.align ?? 'bottom-left'}
         >
           <Box display={'flex'} flexDirection={'column'} gap={'10px'}>
-            {props.listItems.map((item: DropdownItem) => (
+            {props?.$listItems?.map((item: DropdownItem) => (
               <StyledDropdownElement
                 key={item.id}
                 onClick={() => handleSelect(item)}
@@ -168,7 +168,7 @@ interface DropdownItem {
 }
 
 interface AtDropdownProps extends AtButtonProps {
-  listItems: DropdownItem[]
+  $listItems: DropdownItem[]
   placeholder?: string
   label?: string
   handleSelect?: (item: DropdownItem) => void

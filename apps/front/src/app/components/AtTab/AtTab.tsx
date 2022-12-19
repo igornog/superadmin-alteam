@@ -3,11 +3,11 @@ import styled, { css } from 'styled-components'
 import { black, grey2, grey5, white } from '../../utils/colors'
 import AtTypography from '../AtTypography/AtTypography'
 
-const StyledTab = styled.div<{ active?: boolean; $width?: string }>`
+const StyledTab = styled.div<{ $active?: boolean; $width?: string }>`
   border: 1px solid ${grey5};
   transition: 0.3s;
-  ${({ active }) =>
-    active
+  ${({ $active }) =>
+    $active
       ? css`
             background-color ${black};
             color: ${white};
@@ -30,9 +30,9 @@ const StyledTab = styled.div<{ active?: boolean; $width?: string }>`
   justify-content: center;
 `
 
-const StyledBadge = styled.div<{ active?: boolean }>`
-  background-color: ${({ active }) => (active ? white : black)};
-  color: ${({ active }) => (active ? black : white)};
+const StyledBadge = styled.div<{ $active?: boolean }>`
+  background-color: ${({ $active }) => ($active ? white : black)};
+  color: ${({ $active }) => ($active ? black : white)};
   border-radius: 5px;
   padding: 3px 5px 1px 5px;
   font-size: 10px;
@@ -48,13 +48,13 @@ const StyledTypography = styled(AtTypography)`
 const AtTab: React.FunctionComponent<AtTabProps> = (props: AtTabProps) => {
   return (
     <StyledTab
-      active={props.active}
+      $active={props.$active}
       onClick={props.onClick}
       $width={props.width}
     >
       <StyledTypography>{props.label}</StyledTypography>
       {props.badge && (
-        <StyledBadge active={props.active}>
+        <StyledBadge $active={props.$active}>
           <AtTypography fontSize={'10px'}>{props.badge}</AtTypography>
         </StyledBadge>
       )}
@@ -65,7 +65,7 @@ const AtTab: React.FunctionComponent<AtTabProps> = (props: AtTabProps) => {
 interface AtTabProps {
   label: string
   badge?: number
-  active?: boolean
+  $active?: boolean
   onClick?: () => void
   width?: string
 }

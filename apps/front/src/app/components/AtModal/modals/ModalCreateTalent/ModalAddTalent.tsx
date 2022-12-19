@@ -71,7 +71,7 @@ const ModalAddTalent: React.FunctionComponent<ModalAddTalentProps> = (
               kind={AtButtonKind.Default}
               variant={AtButtonVariant.Text}
               startIcon={<CloseCircle />}
-              iconSize={24}
+              $iconSize={24}
               onClick={handleClose}
             />
           </Box>

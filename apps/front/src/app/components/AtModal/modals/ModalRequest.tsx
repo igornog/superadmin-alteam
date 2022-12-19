@@ -29,7 +29,7 @@ const ModalRequest: React.FunctionComponent<ModalRequestProps> = (
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
           startIcon={<CloseCircle />}
-          iconSize={24}
+          $iconSize={24}
           onClick={props.onClose}
         />
       </Box>
@@ -41,7 +41,7 @@ const ModalRequest: React.FunctionComponent<ModalRequestProps> = (
           fullWidth={true}
           value={''}
           placeholder={'App development'}
-          listItems={[
+          $listItems={[
             {
               id: 0,
               label: 'Full Time',
@@ -58,7 +58,7 @@ const ModalRequest: React.FunctionComponent<ModalRequestProps> = (
           fullWidth={true}
           value={''}
           placeholder={'One-off project'}
-          listItems={[
+          $listItems={[
             {
               id: 0,
               label: 'Full Time',
@@ -75,7 +75,7 @@ const ModalRequest: React.FunctionComponent<ModalRequestProps> = (
           fullWidth={true}
           value={''}
           placeholder={'Solo freelancer'}
-          listItems={[
+          $listItems={[
             {
               id: 0,
               label: 'Full Time',

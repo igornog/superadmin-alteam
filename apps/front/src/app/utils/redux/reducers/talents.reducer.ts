@@ -7,7 +7,7 @@ import {
   handleTalents,
 } from '../actions/talents.action'
 import { StatusType } from '../types/status.type'
-import { Talent, TalentsState } from '../types/talents.type'
+import { TalentsState } from '../types/talents.type'
 
 const initialState: TalentsState = {
   listTalents: [],
@@ -35,7 +35,7 @@ const { reducer } = createSlice({
       })
 
       .addCase(handleCreateTalent.fulfilled, (state, { payload }) => {
-        state.listTalents.push(new Talent(payload))
+        state.listTalents.push(payload)
       })
 
       .addCase(handlePatchTalent.fulfilled, (state, { payload }) => {
@@ -48,8 +48,14 @@ const { reducer } = createSlice({
             value !== undefined ? { ...acc, [key]: value } : acc,
           {},
         )
-        console.log(talent, newObj)
-        Object.assign(talent as Talent, newObj)
+
+        if (talent) {
+          const updatedTalent = { ...talent, ...newObj } as any
+
+          const talentIndex = state.listTalents.indexOf(talent)
+
+          state.listTalents.splice(talentIndex, 1, updatedTalent)
+        }
       })
 
       .addCase(handleSelectTalent.fulfilled, (state, { payload }) => {

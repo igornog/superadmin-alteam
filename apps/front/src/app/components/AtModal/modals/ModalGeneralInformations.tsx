@@ -64,7 +64,7 @@ const ModalGeneralInformations: React.FunctionComponent<
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
           startIcon={<CloseCircle />}
-          iconSize={24}
+          $iconSize={24}
           onClick={props.onClose}
         />
       </Box>
@@ -93,7 +93,7 @@ const ModalGeneralInformations: React.FunctionComponent<
           value={selectedTalent.availability}
           placeholder={'Select Availability'}
           handleSelect={(e) => setAvailability(e.label as Availability)}
-          listItems={Object.values(Availability).map(
+          $listItems={Object.values(Availability).map(
             (label: Availability, index: number) => ({
               id: index,
               label: label,
@@ -107,7 +107,7 @@ const ModalGeneralInformations: React.FunctionComponent<
           value={selectedTalent.experience}
           handleSelect={(e) => setExperience(e.label as Experience)}
           placeholder={'Select Work Experience'}
-          listItems={Object.values(Experience).map(
+          $listItems={Object.values(Experience).map(
             (label: Experience, index: number) => ({
               id: index,
               label: label,

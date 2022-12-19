@@ -36,7 +36,7 @@ const ModalAcceptedStep2: React.FunctionComponent = () => {
           <AtDropdown
             align={'bottom-right'}
             fontSize={'10px'}
-            listItems={[
+            $listItems={[
               {
                 id: 0,
                 value: 'Public View',
