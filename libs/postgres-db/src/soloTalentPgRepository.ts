@@ -11,7 +11,6 @@ async function createSoloTalent(
     SoloTalentEntity,
   )
   const entity = soloTalentToEntity(soloTalent)
-  console.log(soloTalent)
   const result = await soloTalentRepository.save(entity)
   return soloTalentFromEntity(result)
 }

@@ -196,7 +196,6 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
   }
 
   const handleClickLabel = (value: LabelDropdown) => {
-    console.log(value)
     setShowDropdownLabel(false)
     props.onClickDropdownLabel?.(value)
   }
