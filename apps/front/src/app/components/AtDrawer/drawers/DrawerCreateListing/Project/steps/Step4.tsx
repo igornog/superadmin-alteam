@@ -27,18 +27,21 @@ const ProjectStep4: React.FunctionComponent = () => {
             <AtTextField
               label={'Screening Question 1'}
               placeholder={'Enter Screening Question'}
+              maxLength={100}
               value={''}
             />
 
             <AtTextField
               label={'Screening Question 2'}
               placeholder={'Enter Screening Question'}
+              maxLength={100}
               value={''}
             />
 
             <AtTextField
               label={'Screening Question 3'}
               placeholder={'Enter Screening Question'}
+              maxLength={100}
               value={''}
             />
           </Box>

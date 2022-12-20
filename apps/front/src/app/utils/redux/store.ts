@@ -3,7 +3,6 @@ import appReducer from './reducers/app.reducer'
 import clientsReducer from './reducers/clients.reducer'
 import settingsReducer from './reducers/settings.reducer'
 import talentsReducer from './reducers/talents.reducer'
-import listingsReducer from './reducers/listings.reducer'
 import treeReducer from './reducers/tree.reducer'
 
 const store = configureStore({
@@ -12,7 +11,6 @@ const store = configureStore({
     settings: settingsReducer,
     talents: talentsReducer,
     clients: clientsReducer,
-    listings: listingsReducer,
     tree: treeReducer,
   },
 })

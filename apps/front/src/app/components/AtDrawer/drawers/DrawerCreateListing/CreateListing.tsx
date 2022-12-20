@@ -12,8 +12,19 @@ import AtLine from '../../../AtLine/AtLine'
 import AtTabs from '../../../AtTabs/AtTabs'
 import AtTypography from '../../../AtTypography/AtTypography'
 import FinalStep from './FinalStep'
-import { ListingType } from '../../../../utils/redux/types/listings.type'
-import { ProjectSteps, TeamSteps } from './FormSteps'
+import { Availability, ListingType, Difficulty, WorkType } from '../../../../utils/redux/types/listings.type'
+import { DropdownItem } from '../../../AtDropdown/AtTextFieldDropdown'
+
+import ProjectStep1 from './Project/steps/Step1'
+import ProjectStep2 from './Project/steps/Step2'
+import ProjectStep3 from './Project/steps/Step3'
+import ProjectStep4 from './Project/steps/Step4'
+import TeamStep1 from './Team/steps/Step1'
+import TeamStep2 from './Team/steps/Step2'
+import TeamStep3 from './Team/steps/Step3'
+import TeamStep4 from './Team/steps/Step4'
+import TeamStep5 from './Team/steps/Step5'
+
 
 export const StyledForm = styled.div`
   background-color: ${white};
@@ -54,6 +65,23 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
   props: DrawerCreateListingProps,
 ) => {
   const [step, setStep] = useState(0)
+  const [teamSize, setTeamSize] = useState<DropdownItem>()
+  const [formData, setFormData] = useState<FormFields>({
+    nbIndividual: 0,
+    workType: undefined,
+    availability: undefined,
+    hours: 0,
+    projectLength: 0,
+    startDate: '',
+    rateType: undefined,
+    rateFrom: 0,
+    rateTo: 0,
+    rateFixed: 0,
+    difficulty: undefined,
+    learning: '',
+    jobDescription: '',
+    screeningQuestion: undefined
+  })
 
   const handleCloseAll = () => {
     props.handleClose()
@@ -99,7 +127,45 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
             >
               <Box position={'relative'} zIndex={0}>
                 <AtTabs
-                  tabs={props.listingType === ListingType.Project ? ProjectSteps : TeamSteps}
+                  tabs={props.listingType === ListingType.Project ? [
+                    {
+                      id: 0,
+                      content: <ProjectStep1 />,
+                    },
+                    {
+                      id: 1,
+                      content: <ProjectStep2 />,
+                    },
+                    {
+                      id: 2,
+                      content: <ProjectStep3 />,
+                    },
+                    {
+                      id: 3,
+                      content: <ProjectStep4 />,
+                    },
+                  ] : [
+                    {
+                      id: 0,
+                      content: <TeamStep1 setFormData={setFormData} formData={formData} />,
+                    },
+                    {
+                      id: 1,
+                      content: <TeamStep2 formData={formData} />,
+                    },
+                    {
+                      id: 2,
+                      content: <TeamStep3 />,
+                    },
+                    {
+                      id: 3,
+                      content: <TeamStep4 />,
+                    },
+                    {
+                      id: 4,
+                      content: <TeamStep5 />,
+                    },
+                  ]}
                   step={step}
                 />
               </Box>
@@ -148,6 +214,24 @@ interface DrawerCreateListingProps {
   listingType?: ListingType
   handleClose: () => void
   handleBackToCreateListing: () => void
+}
+
+export interface FormFields {
+  nbIndividual?: number
+  workType?: WorkType
+  timeZone?: string
+  availability?: Availability
+  hours?: number
+  projectLength?: number
+  startDate?: string
+  rateType?: string
+  rateFrom?: number
+  rateTo?: number
+  rateFixed?: number
+  difficulty?: Difficulty
+  learning?: string
+  jobDescription?: string
+  screeningQuestion?: string[]
 }
 
 export default DrawerCreateListing

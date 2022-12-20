@@ -273,7 +273,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
           dropdown={props.dropdown}
           $maxWidth={props.maxWidth}
           $bgColor={props.bgColor}
-          readOnly={props.dropdown}
+          readOnly={props.readonly}
           $isError={props.isError}
           $isSuccess={props.isSuccess}
           focused={isFocused}
@@ -358,6 +358,7 @@ export interface AtTextFieldProps {
   isError?: boolean
   helperText?: string
   disabled?: boolean
+  readonly?: boolean
 
   startIcon?: React.ReactNode
   endIcon?: React.ReactNode

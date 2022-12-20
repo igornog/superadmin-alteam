@@ -29,7 +29,7 @@ const StyledTag = styled(AtTag)`
   }
 `
 
-const Step2: React.FunctionComponent = () => {
+const TeamStep3: React.FunctionComponent = () => {
   const [jobDescriptions, setJobDescriptions] = useState([
     {
       id: 0,
@@ -152,4 +152,4 @@ const Step2: React.FunctionComponent = () => {
   )
 }
 
-export default Step2
+export default TeamStep3

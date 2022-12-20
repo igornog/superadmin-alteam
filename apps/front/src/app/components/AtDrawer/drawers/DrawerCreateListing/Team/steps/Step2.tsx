@@ -5,11 +5,11 @@ import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
 import { grey2 } from '../../../../../../utils/colors'
-import { useAppSelector } from '../../../../../../utils/hooks/reduxHook'
-import { getTeamSize } from '../../../../../../utils/redux/selectors/createListing.selector'
+import { FormFields } from '../../CreateListing'
 
-const Step2: React.FunctionComponent = () => {
-  const listingForm = useAppSelector((state) => getTeamSize(state))
+const TeamStep2: React.FunctionComponent<Step2Props> = (
+  props: Step2Props
+) => {
 
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
@@ -30,14 +30,16 @@ const Step2: React.FunctionComponent = () => {
 
           <Box display={'flex'} gap={'30px'} flexDirection={'column'}>
 
-            {Array.from(Array(listingForm.teamSize).keys()).map((i) => (
-              <AtTextField
-                label={`Role Name ${i+1}`}
-                required={true}
-                placeholder={'Enter Role Name'}
-                value={''}
-              />
-            ))}
+            {props.formData.nbIndividual ?
+              Array.from(Array(props.formData.nbIndividual).keys()).map((i) => (
+                <AtTextField
+                  label={`Role Name ${i + 1}`}
+                  required={true}
+                  placeholder={'Enter Role Name'}
+                  value={''}
+                />
+              ))
+              : ''}
 
           </Box>
         </Box>
@@ -47,4 +49,8 @@ const Step2: React.FunctionComponent = () => {
   )
 }
 
-export default Step2
+interface Step2Props {
+  formData: FormFields
+}
+
+export default TeamStep2

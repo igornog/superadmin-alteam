@@ -1,24 +1,33 @@
 import { Box } from '@mui/material'
-import React, { useState } from 'react'
 import { grey2 } from '../../../../../../utils/colors'
 import AtTextFieldDropdown, { DropdownItem } from '../../../../../AtDropdown/AtTextFieldDropdown'
 import AtLine from '../../../../../AtLine/AtLine'
 import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
-import { useAppDispatch, useAppSelector } from '../../../../../../utils/hooks/reduxHook'
+import { useAppSelector } from '../../../../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../../../../utils/redux/selectors/clients.selector'
-import { selectTeamSize } from '../../../../../../utils/redux/actions/listing.action'
+import { FormFields } from '../../CreateListing'
+import { RateType } from '../../../../../../utils/redux/types/listings.type'
 
-const Step1: React.FunctionComponent = () => {
-  const dispatch = useAppDispatch()
-
-  const [teamSize, setTeamSize] = useState<DropdownItem>()
+const TeamStep1: React.FunctionComponent<Step1Props> = (
+  props: Step1Props
+) => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
 
   const handleSelectTeamSize = (e: DropdownItem) => {
-    setTeamSize(e)
-    dispatch(selectTeamSize(parseInt(e.label)))
+    const teamSize = parseInt(e.label)
+    props.setFormData({
+      ...props.formData,
+      nbIndividual: teamSize,
+    })
+  }
+
+  const handleSelectRateType = (e: DropdownItem) => {
+    props.setFormData({
+      ...props.formData,
+      rateType: e.label,
+    })
   }
 
   return (
@@ -43,22 +52,20 @@ const Step1: React.FunctionComponent = () => {
             label={'Team Project Name'}
             required={true}
             placeholder={'Enter Team Project Name'}
+            maxLength={30}
             value={''}
           />
 
-          <AtTextFieldDropdown
-            fullWidth={true}
-            required={true}
-            value={selectedClient.name}
-            placeholder={selectedClient.name}
-            listItems={[]}
+          <AtTextField
             label={'Client'}
+            readonly={true}
+            defaultValue={selectedClient.name}
           />
 
           <AtTextFieldDropdown
             fullWidth={true}
             required={true}
-            value={teamSize?.label}
+            value={props.formData.nbIndividual}
             handleSelect={(e) => handleSelectTeamSize(e)}
             placeholder={'Select Team Size (max 10)'}
             listItems={Array.from(Array(10).keys()).map((key) => ({ id: key + 1, label: (key + 1).toString() }))}
@@ -83,10 +90,20 @@ const Step1: React.FunctionComponent = () => {
               ]}
               label={'Work Type'}
             />
-            <AtTextField
-              placeholder={'Enter Timezone'}
+
+            <AtTextFieldDropdown
+              fullWidth={true}
+              required={true}
               value={''}
+              placeholder={'Enter Timezone'}
+              listItems={Array.from(Array(25).keys()).map((key) => (
+                {
+                  id: key,
+                  label: `GMT${(key > 0 ? key <= 12 ? '-' + key : '+' + (key - 12) : '')}`
+                }
+              ))}
             />
+
           </Box>
           <AtTextFieldDropdown
             fullWidth={true}
@@ -110,6 +127,7 @@ const Step1: React.FunctionComponent = () => {
             label={'Project Length'}
             required={true}
             placeholder={'Enter Project Length'}
+            maxLength={30}
             value={''}
           />
 
@@ -124,7 +142,8 @@ const Step1: React.FunctionComponent = () => {
             <AtTextFieldDropdown
               fullWidth={true}
               required={true}
-              value={''}
+              value={props.formData.rateType}
+              handleSelect={(e) => handleSelectRateType(e)}
               placeholder={'Select Rate Type'}
               listItems={[
                 {
@@ -135,13 +154,38 @@ const Step1: React.FunctionComponent = () => {
                   id: 1,
                   label: 'Daily',
                 },
+                {
+                  id: 2,
+                  label: 'Hourly',
+                },
               ]}
               label={'Rate Type'}
             />
-            <AtTextField
-              placeholder={'Enter Exact Rate'}
-              value={''}
-            />
+
+            {props.formData.rateType === RateType.Fixed ?
+              <AtTextField
+                placeholder={'Enter Exact Rate'}
+                maxLength={30}
+                value={''}
+              />
+              : props.formData.rateType ?
+                <>
+                  <AtTextField
+                    placeholder={`Enter ${props.formData.rateType} Rate`}
+                    maxLength={5}
+                    value={''}
+                  />
+
+                  <AtTextField
+                    placeholder={`Enter Number of ${props.formData.rateType === 'Daily' ? `Days` : `Hours`} Per Week`}
+                    maxLength={5}
+                    value={''}
+                  />
+                </>
+
+                : ''
+            }
+
           </Box>
 
           <AtTextFieldDropdown
@@ -175,5 +219,10 @@ const Step1: React.FunctionComponent = () => {
   )
 }
 
-export default Step1
+interface Step1Props {
+  setFormData: React.Dispatch<React.SetStateAction<FormFields>>
+  formData: FormFields
+}
+
+export default TeamStep1
 

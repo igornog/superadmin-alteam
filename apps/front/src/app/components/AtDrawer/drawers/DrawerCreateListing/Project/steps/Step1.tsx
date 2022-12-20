@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import { grey2 } from '../../../../../../utils/colors'
 import AtTextFieldDropdown from '../../../../../AtDropdown/AtTextFieldDropdown'
 import AtLine from '../../../../../AtLine/AtLine'
@@ -11,6 +11,7 @@ import { getActiveClient } from '../../../../../../utils/redux/selectors/clients
 
 const ProjectStep1: React.FunctionComponent = () => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
+  const [client, setClient] = useState(selectedClient.name)
 
   return (
     <StyledForm>
@@ -35,15 +36,13 @@ const ProjectStep1: React.FunctionComponent = () => {
             required={true}
             placeholder={'Enter Project Name'}
             value={''}
+            maxLength={30}
           />
 
-          <AtTextFieldDropdown
-            fullWidth={true}
-            required={true}
-            value={selectedClient.name}
-            placeholder={selectedClient.name}
-            listItems={[]}
+          <AtTextField
             label={'Client'}
+            readonly={true}
+            defaultValue={selectedClient.name}
           />
 
           <AtTextFieldDropdown
@@ -82,10 +81,20 @@ const ProjectStep1: React.FunctionComponent = () => {
               ]}
               label={'Work Type'}
             />
-            <AtTextField
-              placeholder={'Enter Timezone'}
+
+            <AtTextFieldDropdown
+              fullWidth={true}
+              required={true}
               value={''}
+              placeholder={'Enter Timezone'}
+              listItems={Array.from(Array(25).keys()).map((key) => (
+                {
+                  id: key,
+                  label: `GMT${(key > 0 ? key <= 12 ? '-' + key : '+' + (key - 12) : '')}`
+                }
+              ))}
             />
+
           </Box>
           <AtTextFieldDropdown
             fullWidth={true}
@@ -109,6 +118,7 @@ const ProjectStep1: React.FunctionComponent = () => {
             label={'Project Length'}
             required={true}
             placeholder={'Enter Project Length'}
+            maxLength={30}
             value={''}
           />
 
@@ -140,6 +150,7 @@ const ProjectStep1: React.FunctionComponent = () => {
 
             <AtTextField
               placeholder={'Enter Exact Rate'}
+              maxLength={30}
               value={''}
             />
           </Box>
