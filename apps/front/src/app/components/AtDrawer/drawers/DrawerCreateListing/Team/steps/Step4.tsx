@@ -37,7 +37,7 @@ const TeamStep4: React.FunctionComponent = () => {
           <Box display={'flex'} flexWrap={'wrap'} gap={'10px'}>
             {skills && skills.length > 0 ? (
               skills?.map((skill: Skill, index) => {
-                return <AtTag label={skill.label} delete={true} key={index} />
+                return <AtTag label={skill.label} key={index} />
               })
             ) : (
               <AtTypography color={grey2}>

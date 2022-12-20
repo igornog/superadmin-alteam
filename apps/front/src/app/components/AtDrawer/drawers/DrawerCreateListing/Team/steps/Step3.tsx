@@ -106,17 +106,17 @@ const TeamStep3: React.FunctionComponent = () => {
                 <AtTextFieldDropdown
                   fullWidth={true}
                   required={true}
-                  value={jobDescription.role}
                   placeholder={'Enter Role Name'}
-                  listItems={test}
+                  $listItems={test}
                   label={`Role Name ${i + 1}`}
                   handleSelect={(e) => handleRoleChange(e, jobDescription.id)}
                 />
 
                 {jobDescriptions.length > 1 ?
                   <StyledTag
-                    delete={true}
+                    label={''}
                     key={jobDescription.id}
+                    onDelete={() => console.log()}
                   /> : ''}
               </Box>
 

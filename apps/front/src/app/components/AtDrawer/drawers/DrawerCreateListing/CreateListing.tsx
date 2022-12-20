@@ -12,8 +12,7 @@ import AtLine from '../../../AtLine/AtLine'
 import AtTabs from '../../../AtTabs/AtTabs'
 import AtTypography from '../../../AtTypography/AtTypography'
 import FinalStep from './FinalStep'
-import { Availability, ListingType, Difficulty, WorkType } from '../../../../utils/redux/types/listings.type'
-import { DropdownItem } from '../../../AtDropdown/AtTextFieldDropdown'
+import { ListingType, Difficulty, WorkType } from '../../../../utils/redux/types/listings.type'
 
 import ProjectStep1 from './Project/steps/Step1'
 import ProjectStep2 from './Project/steps/Step2'
@@ -24,6 +23,7 @@ import TeamStep2 from './Team/steps/Step2'
 import TeamStep3 from './Team/steps/Step3'
 import TeamStep4 from './Team/steps/Step4'
 import TeamStep5 from './Team/steps/Step5'
+import { Availability } from '@yjcapp/app'
 
 
 export const StyledForm = styled.div`
@@ -65,7 +65,6 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
   props: DrawerCreateListingProps,
 ) => {
   const [step, setStep] = useState(0)
-  const [teamSize, setTeamSize] = useState<DropdownItem>()
   const [formData, setFormData] = useState<FormFields>({
     nbIndividual: 0,
     workType: undefined,

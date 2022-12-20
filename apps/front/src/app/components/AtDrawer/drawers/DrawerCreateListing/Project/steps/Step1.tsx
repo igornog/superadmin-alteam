@@ -50,7 +50,7 @@ const ProjectStep1: React.FunctionComponent = () => {
             required={true}
             value={''}
             placeholder={'Select Number of Individuals'}
-            listItems={[
+            $listItems={[
               {
                 id: 0,
                 label: '1 - 10',
@@ -69,7 +69,7 @@ const ProjectStep1: React.FunctionComponent = () => {
               required={true}
               value={''}
               placeholder={'Select Work Type'}
-              listItems={[
+              $listItems={[
                 {
                   id: 0,
                   label: 'Remote',
@@ -87,7 +87,7 @@ const ProjectStep1: React.FunctionComponent = () => {
               required={true}
               value={''}
               placeholder={'Enter Timezone'}
-              listItems={Array.from(Array(25).keys()).map((key) => (
+              $listItems={Array.from(Array(25).keys()).map((key) => (
                 {
                   id: key,
                   label: `GMT${(key > 0 ? key <= 12 ? '-' + key : '+' + (key - 12) : '')}`
@@ -101,7 +101,7 @@ const ProjectStep1: React.FunctionComponent = () => {
             required={true}
             value={''}
             placeholder={'Select Avaliability'}
-            listItems={[
+            $listItems={[
               {
                 id: 0,
                 label: 'Part-Time',
@@ -135,7 +135,7 @@ const ProjectStep1: React.FunctionComponent = () => {
               required={true}
               value={''}
               placeholder={'Select Rate'}
-              listItems={[
+              $listItems={[
                 {
                   id: 0,
                   label: 'Fixed',
@@ -160,7 +160,7 @@ const ProjectStep1: React.FunctionComponent = () => {
             required={true}
             value={''}
             placeholder={'Select Difficulty'}
-            listItems={[
+            $listItems={[
               {
                 id: 0,
                 label: 'Easy/Junior',

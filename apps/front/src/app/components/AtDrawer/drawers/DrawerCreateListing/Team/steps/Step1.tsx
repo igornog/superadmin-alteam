@@ -53,7 +53,7 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (
             required={true}
             placeholder={'Enter Team Project Name'}
             maxLength={30}
-            value={''}
+
           />
 
           <AtTextField
@@ -64,11 +64,10 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (
 
           <AtTextFieldDropdown
             fullWidth={true}
-            required={true}
-            value={props.formData.nbIndividual}
-            handleSelect={(e) => handleSelectTeamSize(e)}
             placeholder={'Select Team Size (max 10)'}
-            listItems={Array.from(Array(10).keys()).map((key) => ({ id: key + 1, label: (key + 1).toString() }))}
+            required={true}
+            handleSelect={(e) => handleSelectTeamSize(e)}
+            $listItems={Array.from(Array(10).keys()).map((key) => ({ id: key + 1, label: (key + 1).toString() }))}
             label={'Team Size (max 10)'}
           />
 
@@ -76,9 +75,9 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (
             <AtTextFieldDropdown
               fullWidth={true}
               required={true}
-              value={selectedClient.name}
+
               placeholder={'Select Work Type'}
-              listItems={[
+              $listItems={[
                 {
                   id: 0,
                   label: 'Remote',
@@ -94,9 +93,9 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (
             <AtTextFieldDropdown
               fullWidth={true}
               required={true}
-              value={''}
+
               placeholder={'Enter Timezone'}
-              listItems={Array.from(Array(25).keys()).map((key) => (
+              $listItems={Array.from(Array(25).keys()).map((key) => (
                 {
                   id: key,
                   label: `GMT${(key > 0 ? key <= 12 ? '-' + key : '+' + (key - 12) : '')}`
@@ -108,9 +107,9 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (
           <AtTextFieldDropdown
             fullWidth={true}
             required={true}
-            value={''}
+
             placeholder={'Select Avaliability'}
-            listItems={[
+            $listItems={[
               {
                 id: 0,
                 label: 'Part-Time',
@@ -128,14 +127,14 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (
             required={true}
             placeholder={'Enter Project Length'}
             maxLength={30}
-            value={''}
+
           />
 
           <AtTextField
             label={'Start Date'}
             required={true}
             placeholder={'Enter Start Date'}
-            value={''}
+
           />
 
           <Box display={'flex'} gap={'10px'} flexDirection={'column'}>
@@ -145,7 +144,7 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (
               value={props.formData.rateType}
               handleSelect={(e) => handleSelectRateType(e)}
               placeholder={'Select Rate Type'}
-              listItems={[
+              $listItems={[
                 {
                   id: 0,
                   label: 'Fixed',
@@ -166,20 +165,20 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (
               <AtTextField
                 placeholder={'Enter Exact Rate'}
                 maxLength={30}
-                value={''}
+
               />
               : props.formData.rateType ?
                 <>
                   <AtTextField
                     placeholder={`Enter ${props.formData.rateType} Rate`}
                     maxLength={5}
-                    value={''}
+
                   />
 
                   <AtTextField
                     placeholder={`Enter Number of ${props.formData.rateType === 'Daily' ? `Days` : `Hours`} Per Week`}
                     maxLength={5}
-                    value={''}
+
                   />
                 </>
 
@@ -191,9 +190,8 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (
           <AtTextFieldDropdown
             fullWidth={true}
             required={true}
-            value={''}
             placeholder={'Select Difficulty'}
-            listItems={[
+            $listItems={[
               {
                 id: 0,
                 label: 'Easy/Junior',
@@ -210,7 +208,7 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (
             label={'Learning'}
             required={true}
             placeholder={'Enter Learning Link'}
-            value={''}
+
           />
 
         </Box>
