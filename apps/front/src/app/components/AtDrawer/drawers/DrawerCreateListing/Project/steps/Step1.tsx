@@ -48,7 +48,6 @@ const ProjectStep1: React.FunctionComponent = () => {
           <AtTextFieldDropdown
             fullWidth={true}
             required={true}
-            value={''}
             placeholder={'Select Number of Individuals'}
             $listItems={[
               {
@@ -67,7 +66,6 @@ const ProjectStep1: React.FunctionComponent = () => {
             <AtTextFieldDropdown
               fullWidth={true}
               required={true}
-              value={''}
               placeholder={'Select Work Type'}
               $listItems={[
                 {
@@ -85,7 +83,6 @@ const ProjectStep1: React.FunctionComponent = () => {
             <AtTextFieldDropdown
               fullWidth={true}
               required={true}
-              value={''}
               placeholder={'Enter Timezone'}
               $listItems={Array.from(Array(25).keys()).map((key) => (
                 {
@@ -99,7 +96,6 @@ const ProjectStep1: React.FunctionComponent = () => {
           <AtTextFieldDropdown
             fullWidth={true}
             required={true}
-            value={''}
             placeholder={'Select Avaliability'}
             $listItems={[
               {
@@ -133,7 +129,6 @@ const ProjectStep1: React.FunctionComponent = () => {
             <AtTextFieldDropdown
               fullWidth={true}
               required={true}
-              value={''}
               placeholder={'Select Rate'}
               $listItems={[
                 {
@@ -158,7 +153,6 @@ const ProjectStep1: React.FunctionComponent = () => {
           <AtTextFieldDropdown
             fullWidth={true}
             required={true}
-            value={''}
             placeholder={'Select Difficulty'}
             $listItems={[
               {

@@ -20,6 +20,10 @@ const ProjectStep3: React.FunctionComponent = () => {
     { label: 'Wireframe' },
   ])
 
+  const handleDeleteTag = (value: string) => {
+    setSkills(skills.filter((skill) => skill.label !== value))
+  }
+
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
       <StyledForm>
@@ -40,7 +44,7 @@ const ProjectStep3: React.FunctionComponent = () => {
           <Box display={'flex'} flexWrap={'wrap'} gap={'10px'}>
             {skills && skills.length > 0 ? (
               skills?.map((skill: Skill, index) => {
-                return <AtTag label={skill.label} key={index} />
+                return <AtTag label={skill.label} onDelete={() => handleDeleteTag(skill.label)} key={index} />
               })
             ) : (
               <AtTypography color={grey2}>

@@ -38,6 +38,10 @@ const TeamStep3: React.FunctionComponent = () => {
     }
   ])
 
+  const handleDeleteTag = (value: number) => {
+    setJobDescriptions(jobDescriptions.filter((jobDescription) => jobDescription.id !== value))
+  }
+
   const StyledButton = styled(AtButton)`
     width: fit-content;
     align-self: flex-end;
@@ -116,7 +120,7 @@ const TeamStep3: React.FunctionComponent = () => {
                   <StyledTag
                     label={''}
                     key={jobDescription.id}
-                    onDelete={() => console.log()}
+                    onDelete={() => handleDeleteTag(jobDescription.id)}
                   /> : ''}
               </Box>
 
@@ -145,9 +149,6 @@ const TeamStep3: React.FunctionComponent = () => {
         />
 
       </StyledBox>
-      <>
-        {console.log('jobDescriptions', jobDescriptions)}
-      </>
     </StyledForm>
   )
 }
