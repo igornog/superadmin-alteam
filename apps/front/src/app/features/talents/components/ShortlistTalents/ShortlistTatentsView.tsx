@@ -1,15 +1,22 @@
 import { Grid } from '@mui/material'
 import React, { useEffect } from 'react'
 import TalentsSwitchMode from '../../../../components/app/talents/TalentsSwitchMode'
+import AtNoResult from '../../../../components/AtLayout/AtNoResult'
 import AtLine from '../../../../components/AtLine/AtLine'
 import AtSpace from '../../../../components/AtSpace/AtSpace'
-import { useAppDispatch } from '../../../../utils/hooks/reduxHook'
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../../utils/hooks/reduxHook'
 import { handleLoadTree } from '../../../../utils/redux/actions/tree.action'
 import { Column } from '../../../../utils/redux/types/settings.type'
 import ShortlistFolderListing from './ShortlistFolderListing'
 import ShortlistTalentsHeader from './ShortlistTalentsHeader'
 
 const ShortlistTalentsView: React.FunctionComponent = () => {
+  const talents = useAppSelector((state) => state.talents)
+  const listTalent = talents.listTalents
+
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -27,15 +34,19 @@ const ShortlistTalentsView: React.FunctionComponent = () => {
 
         <AtSpace direction={'vertical'} spacing={'20'} />
 
-        <TalentsSwitchMode
-          tableColumns={[
-            Column.Talent,
-            Column.Applied,
-            Column.Availability,
-            Column.AssignedTo,
-            Column.Skills,
-          ]}
-        />
+        {listTalent.length === 0 ? (
+          <AtNoResult sentence={`No Shortlisted Talents`} />
+        ) : (
+          <TalentsSwitchMode
+            tableColumns={[
+              Column.Talent,
+              Column.Applied,
+              Column.Availability,
+              Column.AssignedTo,
+              Column.Skills,
+            ]}
+          />
+        )}
       </Grid>
     </Grid>
   )

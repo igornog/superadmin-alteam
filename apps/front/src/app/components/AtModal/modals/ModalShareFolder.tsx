@@ -40,7 +40,7 @@ const ModalShareFolder: React.FunctionComponent<ModalShareFolderProps> = (
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
           startIcon={<CloseCircle />}
-          iconsize={24}
+          $iconSize={24}
           onClick={handleClose}
         />
       </Box>
@@ -55,10 +55,10 @@ const ModalShareFolder: React.FunctionComponent<ModalShareFolderProps> = (
           onValueChange={setEmail}
           endIcon={
             <AtDropdown
-              flexibleHeight={true}
+              $flexibleHeight={true}
               fontSize={'10px'}
               placeholder={'Public View'}
-              listItems={[
+              $listItems={[
                 { id: 0, value: 'Public View2', label: 'Public View' },
                 { id: 1, value: 'Private View', label: 'Private View' },
               ]}
@@ -82,7 +82,7 @@ const ModalShareFolder: React.FunctionComponent<ModalShareFolderProps> = (
               align={'bottom-right'}
               fontSize={'10px'}
               placeholder={'Public View'}
-              listItems={[
+              $listItems={[
                 {
                   id: 0,
                   value: 'Public View',

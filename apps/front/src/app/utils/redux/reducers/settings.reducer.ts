@@ -56,17 +56,20 @@ const { reducer } = createSlice({
       })
 
       .addCase(handleActiveTab.fulfilled, (state, { payload }) => {
-        const activeIndex = state.tabs.findIndex((tab) => tab.active === true)
-        const index = state.tabs.findIndex((tab) => tab.title === payload.title)
-        state.tabs[activeIndex].active = false
-        state.tabs[index].active = true
+        const activeIndex = state.tabs.find((tab) => tab.active === true)
+        const index = state.tabs.find((tab) => tab.title === payload.title)
+
+        if (activeIndex) activeIndex.active = false
+
+        if (index) index.active = true
       })
 
       .addCase(handleActiveFilter.fulfilled, (state, { payload }) => {
-        const index = state.filters[payload.section].findIndex(
+        const activeIndex = state.filters[payload.section].find(
           (filter) => filter.label === payload.filter.label,
         )
-        state.filters[payload.section][index].active = !payload.filter.active
+
+        if (activeIndex) activeIndex.active = !payload.filter.active
       })
 
       .addCase(handleRefreshFilters.fulfilled, (state: SettingsState) => {

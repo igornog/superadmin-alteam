@@ -7,7 +7,6 @@ import AtLine from '../AtLine/AtLine'
 import AtGroupTag from '../AtGroupTag/AtGroupTag'
 import AtTypography from '../AtTypography/AtTypography'
 import AtTag from '../AtTag/AtTag'
-import { Skill } from '../../utils/redux/types/talents.type'
 import AtRightClick from '../AtRightClick/AtRightClick'
 import { boxShadow } from '../../utils/theme'
 import TalentMenu from '../AtRightClick/ContextMenus/TalentMenu'
@@ -60,11 +59,13 @@ const AtTalentCard: React.FunctionComponent<AtTalentCardProps> = (
           >
             <Box display={'flex'} gap={'5px'} flexDirection={'column'}>
               <Box display={'flex'} gap={'5px'} alignItems={'center'}>
-                <AtTypography variant={'h5'}>{talent.fullName}</AtTypography>
-                {talent.group && <AtGroupTag label={talent.group} />}
+                <AtTypography variant={'h5'}>
+                  {talent.firstName} {talent.lastName}
+                </AtTypography>
+                {/* {talent.group && <AtGroupTag label={talent.group} />} */}
               </Box>
               <AtTypography variant={'body1'} color={grey}>
-                {talent.jobName}
+                {talent.role}
               </AtTypography>
             </Box>
 
@@ -76,12 +77,12 @@ const AtTalentCard: React.FunctionComponent<AtTalentCardProps> = (
             >
               <Box display={'flex'} gap={'10px'} alignItems={'center'}>
                 <AtTypography color={grey3}>
-                  Applied: {talent.applied}
+                  <>Applied: {talent.appliedDate}</>
                 </AtTypography>
                 <AtGroupTag icon={<ArrowRight2 size={10} />} />
               </Box>
               <AtTypography variant={'body1'} color={grey}>
-                {talent.jobType}
+                {talent.availability}
               </AtTypography>
             </Box>
           </Box>
@@ -90,13 +91,13 @@ const AtTalentCard: React.FunctionComponent<AtTalentCardProps> = (
 
           {talent.skills && talent.skills.length > 0 ? (
             <Box display={'flex'} flexWrap={'wrap'} gap={'10px'}>
-              {talent.skills?.map((skill: Skill, index: number) => (
-                <AtTag label={skill.label} delete={false} key={index} />
+              {talent.skills?.map((value: string, index: number) => (
+                <AtTag label={value} key={index} />
               ))}
             </Box>
           ) : (
             <AtTypography color={grey3}>
-              No skills been added by {talent.fullName}
+              No skills been added by {talent.firstName} {talent.lastName}
             </AtTypography>
           )}
         </Box>
@@ -106,7 +107,7 @@ const AtTalentCard: React.FunctionComponent<AtTalentCardProps> = (
 }
 
 interface AtTalentCardProps {
-  idTalent: number
+  idTalent: string
   fullHeight?: boolean
   onClick?: (e: React.MouseEvent) => void
   openShortlist?: () => void

@@ -29,7 +29,7 @@ const TalentGeneral: React.FunctionComponent<TalentGeneralProps> = (
             <AtTypography color={grey2}>Role:</AtTypography>
           </Grid>
           <Grid item={true} xs={9}>
-            <AtTypography color={grey}>{props.talent.jobName}</AtTypography>
+            <AtTypography color={grey}>{props.talent.role}</AtTypography>
           </Grid>
         </Box>
 
@@ -39,7 +39,7 @@ const TalentGeneral: React.FunctionComponent<TalentGeneralProps> = (
           </Grid>
           <Grid item={true} xs={9}>
             <AtTypography color={grey}>
-              {props.talent.jobType ?? 'N/A'}
+              {props.talent.availability ?? 'N/A'}
             </AtTypography>
           </Grid>
         </Box>
@@ -50,7 +50,7 @@ const TalentGeneral: React.FunctionComponent<TalentGeneralProps> = (
           </Grid>
           <Grid item={true} xs={9}>
             <AtTypography color={grey}>
-              {props.talent.salary ?? 'N/A'}
+              {props.talent.salaryExpectation ?? 'N/A'}
             </AtTypography>
           </Grid>
         </Box>
@@ -94,7 +94,7 @@ const TalentGeneral: React.FunctionComponent<TalentGeneralProps> = (
           </Grid>
           <Grid item={true} xs={9}>
             <AtTypography color={grey}>
-              {props.talent.phone ?? 'N/A'}
+              {props.talent.phoneNumber ?? 'N/A'}
             </AtTypography>
           </Grid>
         </Box>

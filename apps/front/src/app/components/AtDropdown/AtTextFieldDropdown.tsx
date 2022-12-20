@@ -27,8 +27,8 @@ export const StyledContentPopover = styled(Collapse)<{
 
 export const StyledDropdownElement = styled.div<{ color: string }>`
   padding: 10px;
-  transition: 0.25s;
   display: flex;
+  transition: 0.25s;
   color: ${({ color }) => color};
   &:hover {
     cursor: pointer;
@@ -76,6 +76,12 @@ const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
     }
   }, [selectedItem])
 
+  useEffect(() => {
+    if (!props.value) {
+      setSelectedItem(undefined)
+    }
+  }, [props.value])
+
   return (
     <ClickAwayListener onClickAway={handleClose}>
       <Box
@@ -88,13 +94,16 @@ const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
           dropdown={true}
           open={open}
           onClick={open ? handleClose : handleClick}
-          placeholder={selectedItem ? selectedItem.label : props.placeholder}
+          placeholder={
+            selectedItem ? selectedItem.label : props.value ?? props.placeholder
+          }
         />
+
         <StyledContentPopover
           in={open}
           $minWidth={dropdownRef?.current?.offsetWidth}
         >
-          {props.listItems.map((item: DropdownItem) => (
+          {props.$listItems.map((item: DropdownItem) => (
             <StyledDropdownElement
               key={item.id}
               onClick={() => handleSelect(item)}
@@ -115,7 +124,7 @@ export interface DropdownItem {
 }
 
 interface AtTextFieldDropdownProps extends AtTextFieldProps {
-  listItems: DropdownItem[]
+  $listItems: DropdownItem[]
   handleSelect?: (item: DropdownItem) => void
 }
 

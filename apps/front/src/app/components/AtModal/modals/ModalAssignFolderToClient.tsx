@@ -54,7 +54,7 @@ const ModalAssignFolderToClient: React.FunctionComponent<
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
           startIcon={<CloseCircle />}
-          iconsize={24}
+          $iconSize={24}
           onClick={handleClose}
         />
       </Box>
@@ -70,7 +70,7 @@ const ModalAssignFolderToClient: React.FunctionComponent<
         </AtTypography>
 
         <StyledDropdown
-          listItems={[
+          $listItems={[
             { id: 0, value: 'None', label: 'None' },
             { id: 1, value: 'None', label: 'None' },
           ]}

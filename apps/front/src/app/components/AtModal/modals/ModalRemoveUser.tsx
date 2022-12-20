@@ -31,7 +31,7 @@ const ModalRemoveUser: React.FunctionComponent<ModalRemoveUserProps> = (
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
           startIcon={<CloseCircle />}
-          iconsize={24}
+          $iconSize={24}
           onClick={props.onClose}
         />
       </Box>

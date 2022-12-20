@@ -16,14 +16,14 @@ export const StyledContentPopover = styled(Collapse)<{
   top?: number
   align?: string
 }>`
-  position: absolute;
+  position: fixed;
   min-width: ${({ $minWidth }) => $minWidth && $minWidth + 'px'};
   background-color: ${white};
   box-shadow: ${boxShadow};
   border: 1px solid ${grey5};
   border-radius: 5px;
   z-index: 1300;
-  padding: 10px;
+  // padding: 10px;
   margin-top: 10px;
   box-sizing: border-box;
 
@@ -60,6 +60,7 @@ export const StyledDropdownElement = styled.div<{ color: string }>`
   transition: 0.25s;
   display: flex;
   color: ${({ color }) => color};
+  padding: 10px;
 
   &:hover {
     cursor: pointer;
@@ -131,9 +132,9 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
           name={selectedItem ? getText(selectedItem.label) : props.placeholder}
           endIcon={<ArrowDown2 size={10} />}
           fontSize={props.fontSize}
-          iconsize={10}
+          $iconSize={10}
           padding={props.padding}
-          flexibleHeight={props.flexibleHeight}
+          $flexibleHeight={props.$flexibleHeight}
         />
 
         <StyledContentPopover
@@ -142,7 +143,7 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
           align={props.align ?? 'bottom-left'}
         >
           <Box display={'flex'} flexDirection={'column'} gap={'10px'}>
-            {props.listItems.map((item: DropdownItem) => (
+            {props?.$listItems?.map((item: DropdownItem) => (
               <StyledDropdownElement
                 key={item.id}
                 onClick={() => handleSelect(item)}
@@ -167,7 +168,7 @@ interface DropdownItem {
 }
 
 interface AtDropdownProps extends AtButtonProps {
-  listItems: DropdownItem[]
+  $listItems: DropdownItem[]
   placeholder?: string
   label?: string
   handleSelect?: (item: DropdownItem) => void

@@ -73,7 +73,7 @@ const AtNavPage: React.FunctionComponent<AtNavPageProps> = (
             label={page.title}
             badge={page.badge}
             key={index}
-            active={page.active}
+            $active={page.active}
             onClick={() => handleClick(page)}
             width={
               isWideScreen

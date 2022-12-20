@@ -50,7 +50,7 @@ const ShortlistTalentsHeader: React.FunctionComponent = () => {
             </AtTypography>
             <AtDropdown
               placeholder={'None'}
-              listItems={[
+              $listItems={[
                 { id: 0, value: 'None', label: 'None' },
                 { id: 1, value: 'None', label: 'None' },
               ]}

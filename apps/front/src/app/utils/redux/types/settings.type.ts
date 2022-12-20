@@ -1,6 +1,7 @@
 import React from 'react'
 import { RightClick } from '../../types'
 import { StatusType } from './status.type'
+import { ListingStatus } from '@yjcapp/app'
 
 export interface SettingsState {
   tabs: Page[]
@@ -14,6 +15,7 @@ export interface SettingsState {
 
 export interface Page {
   title: string
+  status: ListingStatus | null
   node?: React.ReactNode
   badge?: number
   action?: string

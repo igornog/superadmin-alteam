@@ -1,8 +1,11 @@
 import axios from 'axios'
+import { environment } from '../../../environments/environment'
 import { authHeader } from './axios-header'
 
 const atAxios = axios.create({
-  baseURL: 'https://dev.api.alteam.io',
+  baseURL: environment.production
+    ? 'https://dev.api.alteam.io'
+    : 'http://localhost:8080/',
   responseType: 'json',
 })
 

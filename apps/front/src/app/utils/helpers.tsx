@@ -29,7 +29,7 @@ export const capitalizeFirstLetter = (value: string) => {
 }
 
 export const availableNetworks: any = {
-  behance: <Be size={20} />,
+  LinkDomain: <Be size={20} />,
   dribble: <Dribbble size={20} />,
   github: <img src={Github} alt={'linkedin icon'} width={20} />,
   instagram: <Instagram size={20} />,

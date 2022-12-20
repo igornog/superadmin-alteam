@@ -45,7 +45,7 @@ const ModalRemoveFolder: React.FunctionComponent<ModalRemoveFolderProps> = (
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
           startIcon={<CloseCircle />}
-          iconsize={24}
+          $iconSize={24}
           onClick={handleClose}
         />
       </Box>

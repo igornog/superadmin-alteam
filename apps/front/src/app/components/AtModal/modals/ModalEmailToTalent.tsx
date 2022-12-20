@@ -53,13 +53,13 @@ const ModalEmailToTalent: React.FunctionComponent<ModalEmailToTalentProps> = (
         paddingBottom={0}
       >
         <AtTypography variant={'h4'}>
-          Send Email to {selectedTalent.fullName}
+          Send Email to {selectedTalent.firstName} {selectedTalent.lastName}
         </AtTypography>
         <AtButton
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Text}
           startIcon={<CloseCircle />}
-          iconsize={24}
+          $iconSize={24}
           onClick={handleClose}
         />
       </Box>
@@ -88,7 +88,7 @@ const ModalEmailToTalent: React.FunctionComponent<ModalEmailToTalentProps> = (
         />
 
         <StyledDropdown
-          listItems={[
+          $listItems={[
             { id: 0, value: 'None', label: 'None' },
             { id: 1, value: 'None', label: 'None' },
           ]}

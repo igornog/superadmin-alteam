@@ -40,19 +40,19 @@ const StyledFilters = styled.div<{ isFixed: boolean }>`
   justify-content: space-between;
 `
 
-const StyledAddCircle = styled(AddCircle)<{ active?: boolean }>`
+const StyledAddCircle = styled(AddCircle)<{ $active?: boolean }>`
   transition: transform 0.3s;
-  transform: rotate(${({ active }) => (active ? '225' : '0')}deg);
+  transform: rotate(${({ $active }) => ($active ? '225' : '0')}deg);
 `
 
-const StyledBox = styled(Box)<{ active?: boolean }>`
+const StyledBox = styled(Box)<{ $active?: boolean }>`
   transition: 0.3s;
-  color: ${({ active }) => (active ? black : grey2)};
+  color: ${({ $active }) => ($active ? black : grey2)};
 
   &:hover {
     transition: 0.3s;
 
-    color: ${({ active }) => (active ? green : black)};
+    color: ${({ $active }) => ($active ? green : black)};
     cursor: pointer;
   }
 `
@@ -87,7 +87,7 @@ const TalentsViewFilters: React.FunctionComponent = () => {
                 kind={AtButtonKind.Default}
                 variant={AtButtonVariant.Text}
                 startIcon={<ArrowRight2 size={10} />}
-                iconsize={10}
+                $iconSize={10}
                 onClick={() => dispatch(handleCollapsePanel(false))}
               />
             )}
@@ -121,11 +121,11 @@ const TalentsViewFilters: React.FunctionComponent = () => {
                 width={'100%'}
                 justifyContent={'space-between'}
                 key={index}
-                active={filter.active}
+                $active={filter.active}
                 onClick={() => handleClick(filter, 'skills')}
               >
                 <AtTypography>{filter.label}</AtTypography>
-                <StyledAddCircle size={20} active={filter.active} />
+                <StyledAddCircle size={20} $active={filter.active} />
               </StyledBox>
             ))}
           </Box>
@@ -146,12 +146,12 @@ const TalentsViewFilters: React.FunctionComponent = () => {
                 width={'100%'}
                 justifyContent={'space-between'}
                 key={index}
-                active={jobType.active}
+                $active={jobType.active}
                 color={jobType.active ? black : grey2}
                 onClick={() => handleClick(jobType, 'jobTypes')}
               >
                 <AtTypography>{jobType.label}</AtTypography>
-                <StyledAddCircle size={20} active={jobType.active} />
+                <StyledAddCircle size={20} $active={jobType.active} />
               </StyledBox>
             ))}
           </Box>
