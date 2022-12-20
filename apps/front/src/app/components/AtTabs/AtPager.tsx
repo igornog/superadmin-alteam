@@ -29,7 +29,7 @@ const Page = styled.div<{ tabIndex: number; $active: boolean }>`
   height: 100%;
   overflow: ${({ $active }) => ($active ? 'visible' : 'hidden')};
   outline: none;
-  max-height: ${({ tabIndex }) => (tabIndex === -1 ? 0 : '100vh')};
+  max-height: ${({ tabIndex }) => (tabIndex === -1 ? 0 : 'auto')};
   transition: max-height 0.3s ease;
 `
 
