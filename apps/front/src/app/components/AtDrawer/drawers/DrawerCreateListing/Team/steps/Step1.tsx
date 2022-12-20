@@ -180,6 +180,8 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (
                     maxLength={5}
 
                   />
+
+                  <AtTypography variant={'caption'} color={grey2}>Please fill the forms above as a {props.formData.rateType.toLowerCase()} rate for whole team.</AtTypography>
                 </>
 
                 : ''
