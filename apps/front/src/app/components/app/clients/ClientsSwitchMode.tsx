@@ -22,7 +22,7 @@ const ClientsSwitchMode: React.FunctionComponent<ClientsSwitchModeProps> = (
   const [openDrawerClient, setOpenDrawerClient] = useState(false)
   const [openDrawerClientListing, setOpenDrawerClientListing] = useState(false)
 
-  const handleClickClient = (id: number) => {
+  const handleClickClient = (id: string) => {
     dispatch(handleSelectClient(id))
 
     setOpenDrawerClientListing(activeTab.title === Tabs.ActiveClients)

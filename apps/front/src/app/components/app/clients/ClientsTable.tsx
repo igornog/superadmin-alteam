@@ -65,7 +65,7 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
             <AtTableRow
               key={client.id}
               $hover={true}
-              onClick={() => props.openClient(client.id)}
+              onClick={() => client.id && props.openClient(client.id)}
               $setPosition={setPosition}
             >
               {haveToDisplay(Column.Client) && (
@@ -83,7 +83,7 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
 
                       <Box display={'flex'} flexDirection={'column'}>
                         <AtTypography variant={'body1'} $bold={true}>
-                          {client.name}
+                          {client.companyName}
                         </AtTypography>
                         <AtTypography
                           variant={'caption'}
@@ -100,20 +100,20 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
 
               {haveToDisplay(Column.Received) && (
                 <AtTableCell>
-                  <AtTypography>{client.received}</AtTypography>
+                  {/* <AtTypography>{client.received}</AtTypography> */}
                 </AtTableCell>
               )}
 
               {haveToDisplay(Column.Listings) && (
                 <AtTableCell>
-                  <AtTypography>{client.listings.length}</AtTypography>
+                  {/* <AtTypography>{client.listings.length}</AtTypography> */}
                 </AtTableCell>
               )}
 
               {haveToDisplay(Column.Assignees) && (
                 <AtTableCell>
                   <AtTypography>
-                    {client.assignee ?? (
+                    {/* {client.assignee ?? (
                       <Box display={'flex'} gap={'10px'}>
                         <AtTypography color={grey3}>
                           Nobody assigned
@@ -126,7 +126,7 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
                           fontSize={'14px'}
                         />
                       </Box>
-                    )}
+                    )} */}
                   </AtTypography>
                 </AtTableCell>
               )}
@@ -156,7 +156,7 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
 
 interface ClientTableProps {
   clients: Client[]
-  openClient: (id: number) => void
+  openClient: (id: string) => void
   tableColumns?: Column[]
 }
 

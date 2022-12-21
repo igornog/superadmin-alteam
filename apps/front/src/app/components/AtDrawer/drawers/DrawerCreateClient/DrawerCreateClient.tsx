@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { white, grey2, grey5, black, grey4 } from '../../../../utils/colors'
 import { useAppSelector } from '../../../../utils/hooks/reduxHook'
 import { getActiveTab } from '../../../../utils/redux/selectors/settings.selector'
+import { Client } from '../../../../utils/redux/types/clients.type'
 import { boxShadow } from '../../../../utils/theme'
 import AtButton, {
   AtButtonVariant,
@@ -55,6 +56,21 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
 ) => {
   const activeTab = useAppSelector((state) => getActiveTab(state))
   const [step, setStep] = useState(0)
+
+  const [client, setClient] = useState<Client>({
+    companyName: '',
+    phoneNumber: '',
+    companyUrl: '',
+    linkedinUrl: '',
+    industry: '',
+    projectType: undefined,
+    deliveryType: undefined,
+    teamRequest: undefined,
+    request: '',
+    email: '',
+    fullName: '',
+    position: '',
+  })
 
   const handleClose = () => {
     props.handleClose()
@@ -111,11 +127,15 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
                     tabs={[
                       {
                         id: 0,
-                        content: <Step1 />,
+                        content: (
+                          <Step1 client={client} setClient={setClient} />
+                        ),
                       },
                       {
                         id: 1,
-                        content: <Step2 />,
+                        content: (
+                          <Step2 client={client} setClient={setClient} />
+                        ),
                       },
                     ]}
                     step={step}
@@ -157,6 +177,11 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
                 )}
                 <AtButton
                   kind={AtButtonKind.Success}
+                  disabled={
+                    client.companyName === '' ||
+                    client.phoneNumber === '' ||
+                    client.companyUrl === ''
+                  }
                   variant={AtButtonVariant.Contained}
                   name={'Next Step'}
                   onClick={() => setStep(step + 1)}

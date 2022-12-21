@@ -59,7 +59,7 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (
           <AtTextField
             label={'Client'}
             readonly={true}
-            defaultValue={selectedClient.name}
+            defaultValue={selectedClient.companyName}
           />
 
           <AtTextFieldDropdown

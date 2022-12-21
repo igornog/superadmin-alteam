@@ -48,7 +48,7 @@ const DrawerClient: React.FunctionComponent<DrawerClientProps> = (
             <AtLine direction={'vertical'} />
             <Box display={'flex'} gap={'10px'}>
               <ClientLogo logo={selectedClient.logo} width={'40px'} />
-              <AtTypography variant={'h4'}>{selectedClient?.name}</AtTypography>
+              <AtTypography variant={'h4'}>{selectedClient?.companyName}</AtTypography>
             </Box>
 
             <AtButton

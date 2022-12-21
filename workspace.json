@@ -5,6 +5,7 @@
     "api-utils": "libs/api-utils",
     "app": "libs/app",
     "auth-api": "apps/auth-api",
+    "client-api": "apps/client-api",
     "front": "apps/front",
     "infrastructure": "infrastructure",
     "postgres-db": "libs/postgres-db",

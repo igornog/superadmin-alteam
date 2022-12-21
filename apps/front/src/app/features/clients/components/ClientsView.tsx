@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { clients, clientsTabs } from '..'
+import { clientsTabs } from '..'
 import AtLayout from '../../../components/AtLayout/AtLayout'
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
 import { handleClients } from '../../../utils/redux/actions/clients.action'
@@ -23,7 +23,7 @@ const ClientsView: React.FunctionComponent = () => {
     )
 
     dispatch(handleTalents({}))
-    dispatch(handleClients(clients))
+    // dispatch(handleClients(clients))
   }, [dispatch])
 
   useEffect(() => {

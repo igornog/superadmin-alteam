@@ -11,7 +11,7 @@ import { getActiveClient } from '../../../../../../utils/redux/selectors/clients
 
 const ProjectStep1: React.FunctionComponent = () => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
-  const [client, setClient] = useState(selectedClient.name)
+  const [client, setClient] = useState(selectedClient.companyName)
 
   return (
     <StyledForm>
@@ -42,7 +42,7 @@ const ProjectStep1: React.FunctionComponent = () => {
           <AtTextField
             label={'Client'}
             readonly={true}
-            defaultValue={selectedClient.name}
+            defaultValue={selectedClient.companyName}
           />
 
           <AtTextFieldDropdown

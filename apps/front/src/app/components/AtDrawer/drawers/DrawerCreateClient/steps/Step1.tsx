@@ -1,8 +1,9 @@
 import { Box } from '@mui/material'
 import { Gallery, AddCircle } from 'iconsax-react'
-import React from 'react'
+import React, { Dispatch } from 'react'
 import styled from 'styled-components'
 import { white, grey5, grey2, grey3 } from '../../../../../utils/colors'
+import { Client } from '../../../../../utils/redux/types/clients.type'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
@@ -23,7 +24,7 @@ const StyledPlaceholderLogo = styled.div`
   border-radius: 5px;
 `
 
-const Step1: React.FunctionComponent = () => {
+const Step1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
   return (
     <StyledForm>
       <Box padding={'20px'} display={'flex'} justifyContent={'space-between'}>
@@ -32,6 +33,7 @@ const Step1: React.FunctionComponent = () => {
           Fields with * are mandatory
         </AtTypography>
       </Box>
+
       <AtLine />
 
       <Box
@@ -69,40 +71,55 @@ const Step1: React.FunctionComponent = () => {
             label={'Company Name'}
             required={true}
             placeholder={'Enter Email'}
-            value={''}
+            onValueChange={(e) =>
+              props.setClient({ ...props.client, companyName: e })
+            }
           />
 
           <AtTextField
             label={'Phone Number'}
             required={true}
             placeholder={'Enter Phone'}
-            value={''}
+            onValueChange={(e) =>
+              props.setClient({ ...props.client, phoneNumber: e })
+            }
           />
 
           <AtTextField
             label={'Company URL'}
             required={true}
             placeholder={'Enter Company URL'}
-            value={''}
+            onValueChange={(e) =>
+              props.setClient({ ...props.client, companyUrl: e })
+            }
           />
 
           <AtTextField
             label={'Linkedin URL'}
             required={true}
             placeholder={'Enter Linkedin URL'}
-            value={''}
+            onValueChange={(e) =>
+              props.setClient({ ...props.client, linkedinUrl: e })
+            }
           />
 
           <AtTextField
             label={'Industry'}
             required={true}
             placeholder={'Enter Industry'}
-            value={''}
+            onValueChange={(e) =>
+              props.setClient({ ...props.client, industry: e })
+            }
           />
         </Box>
       </Box>
     </StyledForm>
   )
+}
+
+interface Step1Props {
+  client: Client
+  setClient: Dispatch<React.SetStateAction<Client>>
 }
 
 export default Step1

@@ -76,7 +76,7 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
         <CreateListing
           listingType={listingType}
           steps={listingType === ListingType.Project ? 4 : 5}
-          clientName={selectedClient.name}
+          clientName={selectedClient.companyName}
           handleClose={handleClose}
           handleBackToCreateListing={handleCloseToCreateListing}
         />
@@ -99,7 +99,7 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
               />
 
               <AtTypography color={grey2}>
-                Back to {selectedClient.name} Listings
+                Back to {selectedClient.companyName} Listings
               </AtTypography>
             </Box>
 

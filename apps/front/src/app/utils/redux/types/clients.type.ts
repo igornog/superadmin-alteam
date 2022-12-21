@@ -1,33 +1,40 @@
-import { Listing } from './listings.type'
+import { DeliveryType, ProjectType, SoloClient, TeamRequest } from '@yjcapp/app'
 import { StatusType } from './status.type'
 
 export interface ClientsState {
   listClients: Client[]
-  selectedClient: number | null
+  selectedClient: string | null
   status?: StatusType
   error?: string | null
 }
 
-export class Client {
-  id: number
-  name: string
+export class Client implements SoloClient {
+  id?: string
   logo?: string
-  received: string
-  industry: string
-  listings: Listing[]
-  assignee: number
-  email: string
+  companyName: string
   phoneNumber: string
   companyUrl: string
+  linkedinUrl?: string
+  industry?: string
+  projectType?: ProjectType
+  deliveryType?: DeliveryType
+  teamRequest?: TeamRequest
+  request?: string
+  email?: string
+  fullName?: string
+  position?: string
 
   constructor(data: any) {
     this.id = data.id
-    this.name = data.name
-    this.logo = data.logo
-    this.received = data.received
+    this.companyName = data.name
+    this.linkedinUrl = data.logo
+    this.request = data.received
     this.industry = data.industry
-    this.listings = data.listings
-    this.assignee = data.assignee
+    this.projectType = data.projectType
+    this.deliveryType = data.deliveryType
+    this.teamRequest = data.teamRequest
+    this.fullName = data.listings
+    this.position = data.assignee
     this.email = data.email
     this.phoneNumber = data.phoneNumber
     this.companyUrl = data.companyUrl

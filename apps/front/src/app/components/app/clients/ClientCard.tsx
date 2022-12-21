@@ -19,7 +19,7 @@ const ClientCard: React.FunctionComponent<ClientCardProps> = (
         >
           <AtClientCard
             client={client}
-            onClick={() => props.openClient(client.id)}
+            onClick={() => client.id && props.openClient(client.id)}
             fullHeight={true}
           />
         </Grid>
@@ -30,7 +30,7 @@ const ClientCard: React.FunctionComponent<ClientCardProps> = (
 
 interface ClientCardProps {
   clients: Client[]
-  openClient: (id: number) => void
+  openClient: (id: string) => void
 }
 
 export default ClientCard

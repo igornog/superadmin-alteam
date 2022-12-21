@@ -6,14 +6,13 @@ import AtGroupTag from '../AtGroupTag/AtGroupTag'
 import AtTypography from '../AtTypography/AtTypography'
 import { StyledCard } from './AtTalentCard'
 import { Client } from '../../utils/redux/types/clients.type'
-import { plurialize } from '../../utils/helpers'
 import AtLine from '../AtLine/AtLine'
 import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton'
-import ClientLogo from '../app/clients/ClientLogo'
 import ClientMenu from '../AtRightClick/ContextMenus/ClientMenu'
 import AtRightClick from '../AtRightClick/AtRightClick'
 import { useAppSelector } from '../../utils/hooks/reduxHook'
 import { getActiveTab } from '../../utils/redux/selectors/settings.selector'
+import ClientLogo from '../app/clients/ClientLogo'
 
 const AtClientCard: React.FunctionComponent<AtClientCardProps> = (
   props: AtClientCardProps,
@@ -38,7 +37,7 @@ const AtClientCard: React.FunctionComponent<AtClientCardProps> = (
                 <Box width={'28px'} height={'28px'}>
                   <ClientLogo logo={client.logo} />
                 </Box>
-                <AtTypography variant={'h5'}>{client.name}</AtTypography>
+                <AtTypography variant={'h5'}>{client.companyName}</AtTypography>
               </Box>
               <AtTypography variant={'body1'} color={grey}>
                 {client.industry}
@@ -53,12 +52,12 @@ const AtClientCard: React.FunctionComponent<AtClientCardProps> = (
             >
               <Box display={'flex'} gap={'10px'} alignItems={'center'}>
                 <AtTypography color={grey3}>
-                  Received: {client.received}
+                  {/* Received: {client.received} */}
                 </AtTypography>
                 <AtGroupTag icon={<ArrowRight2 size={10} />} />
               </Box>
               <AtTypography variant={'body1'} color={grey}>
-                {plurialize(client.listings.length, 'listing')}
+                {/* {plurialize(client.listings.length, 'listing')} */}
               </AtTypography>
             </Box>
           </Box>

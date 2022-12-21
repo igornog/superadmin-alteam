@@ -100,7 +100,7 @@ const DrawerClientListings: React.FunctionComponent<
                 <Box display={'flex'} gap={'10px'}>
                   <ClientLogo logo={selectedClient.logo} width={'40px'} />
                   <AtTypography variant={'h3'}>
-                    {selectedClient.name}
+                    {selectedClient.companyName}
                   </AtTypography>
                 </Box>
                 <AtButton
@@ -138,7 +138,7 @@ const DrawerClientListings: React.FunctionComponent<
           <StyledListings paddingTop={'30px'} paddingX={'20px'}>
             <Box display={'flex'} justifyContent={'space-between'}>
               <AtTypography variant={'h4'}>
-                All {selectedClient.name} Listings
+                All {selectedClient.companyName} Listings
               </AtTypography>
               <AtButton
                 kind={AtButtonKind.Success}
@@ -151,11 +151,11 @@ const DrawerClientListings: React.FunctionComponent<
 
             <AtTextField
               value={''}
-              disabled={selectedClient.listings?.length === 0}
+              // disabled={selectedClient.listings?.length === 0}
               startIcon={<SearchNormal />}
-              placeholder={'Search in ' + selectedClient.name + ' Listings...'}
+              placeholder={'Search in ' + selectedClient.companyName + ' Listings...'}
             />
-            {selectedClient.listings?.length === 0 ? (
+            {/* {selectedClient.listings?.length === 0 ? (
               <Box
                 display={'flex'}
                 alignItems={'center'}
@@ -177,7 +177,7 @@ const DrawerClientListings: React.FunctionComponent<
                     />
                   ))}
               </Box>
-            )}
+            )} */}
           </StyledListings>
         </Grid>
       </Grid>
