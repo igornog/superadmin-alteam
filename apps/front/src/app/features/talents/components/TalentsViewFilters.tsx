@@ -115,7 +115,7 @@ const TalentsViewFilters: React.FunctionComponent = () => {
             flexDirection={'column'}
             gap={1.5}
           >
-            {settings.filters.skills.map((filter: Filter, index: number) => (
+            {settings.filters.skills?.map((filter: Filter, index: number) => (
               <StyledBox
                 display={'flex'}
                 width={'100%'}
@@ -140,20 +140,22 @@ const TalentsViewFilters: React.FunctionComponent = () => {
             flexDirection={'column'}
             gap={1.5}
           >
-            {settings.filters.jobTypes.map((jobType: Filter, index: number) => (
-              <StyledBox
-                display={'flex'}
-                width={'100%'}
-                justifyContent={'space-between'}
-                key={index}
-                $active={jobType.active}
-                color={jobType.active ? black : grey2}
-                onClick={() => handleClick(jobType, 'jobTypes')}
-              >
-                <AtTypography>{jobType.label}</AtTypography>
-                <StyledAddCircle size={20} $active={jobType.active} />
-              </StyledBox>
-            ))}
+            {settings.filters.jobTypes?.map(
+              (jobType: Filter, index: number) => (
+                <StyledBox
+                  display={'flex'}
+                  width={'100%'}
+                  justifyContent={'space-between'}
+                  key={index}
+                  $active={jobType.active}
+                  color={jobType.active ? black : grey2}
+                  onClick={() => handleClick(jobType, 'jobTypes')}
+                >
+                  <AtTypography>{jobType.label}</AtTypography>
+                  <StyledAddCircle size={20} $active={jobType.active} />
+                </StyledBox>
+              ),
+            )}
           </Box>
         </Box>
 

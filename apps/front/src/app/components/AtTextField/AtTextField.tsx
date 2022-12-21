@@ -210,7 +210,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
   }
 
   useEffect(() => {
-    if (props.value) {
+    if (props.value !== undefined) {
       setValue(props.value)
     }
   }, [props.value])

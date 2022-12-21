@@ -115,14 +115,14 @@ export const talentsTabs: Page[] = [
   },
 ]
 
-export const talentsFilters = [
+export const skillsFilters = [
   {
     label: 'Figma',
     active: false,
   },
   {
     label: 'UI/UX Design',
-    active: true,
+    active: false,
   },
   {
     label: 'Web Development',
@@ -138,7 +138,7 @@ export const talentsFilters = [
   },
 ]
 
-export const talentsJobType = [
+export const availabilityFilters = [
   {
     label: 'Full-Time',
     active: false,

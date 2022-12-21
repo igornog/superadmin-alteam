@@ -5,12 +5,17 @@ import { ListingStatus } from '@yjcapp/app'
 
 export interface SettingsState {
   tabs: Page[]
-  filters: { skills: Filter[]; jobTypes: Filter[] }
+  filters: FilterInterface
   header: Settings
   displayMode: DisplayMode
-  selectedDrawer: SideDrawerVariant | null
   status?: StatusType
   error?: string | null
+}
+
+export interface FilterInterface {
+  skills?: Filter[]
+  jobTypes?: Filter[]
+  talentSearch?: string
 }
 
 export interface Page {
@@ -39,7 +44,7 @@ export interface Settings {
 }
 
 export interface Filter {
-  label?: string
+  label: string
   active?: boolean
 }
 

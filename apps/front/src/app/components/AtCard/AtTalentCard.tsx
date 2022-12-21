@@ -12,6 +12,7 @@ import { boxShadow } from '../../utils/theme'
 import TalentMenu from '../AtRightClick/ContextMenus/TalentMenu'
 import { useAppSelector } from '../../utils/hooks/reduxHook'
 import { findTalent } from '../../utils/redux/selectors/talents.selector'
+import { stringMatch } from '../../utils/helpers'
 
 export const StyledCard = styled.div<{ fullHeight?: boolean }>`
   background-color: ${white};
@@ -38,6 +39,8 @@ const AtTalentCard: React.FunctionComponent<AtTalentCardProps> = (
   props: AtTalentCardProps,
 ) => {
   const talent = useAppSelector((state) => findTalent(state, props.idTalent))
+  const fullName = talent.firstName + ' ' + talent.lastName
+  const settings = useAppSelector((state) => state.settings)
 
   return (
     <StyledCard onClick={props.onClick} fullHeight={props.fullHeight}>
@@ -59,8 +62,8 @@ const AtTalentCard: React.FunctionComponent<AtTalentCardProps> = (
           >
             <Box display={'flex'} gap={'5px'} flexDirection={'column'}>
               <Box display={'flex'} gap={'5px'} alignItems={'center'}>
-                <AtTypography variant={'h5'}>
-                  {talent.firstName} {talent.lastName}
+                <AtTypography variant={'h5'} gap={'0'}>
+                  {stringMatch(fullName, settings.filters.talentSearch ?? '')}
                 </AtTypography>
                 {/* {talent.group && <AtGroupTag label={talent.group} />} */}
               </Box>
