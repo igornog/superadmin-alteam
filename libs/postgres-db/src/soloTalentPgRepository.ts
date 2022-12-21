@@ -51,7 +51,7 @@ async function findSoloTalentBySearch(
   }
 
   if (talentSearch.availability) {
-    queryBuilder.andWhere('availability = :availability', {
+    queryBuilder.andWhere('availability @> ARRAY[:...availability]', {
       availability: talentSearch.availability,
     })
   }

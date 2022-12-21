@@ -11,6 +11,7 @@ import { handleTalents } from '../../../utils/redux/actions/talents.action'
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
 import { Filter } from '../../../utils/redux/types/settings.type'
 import TalentsViewFilters from './TalentsViewFilters'
+import { Availability } from '@yjcapp/app'
 
 const TalentsView: React.FunctionComponent = () => {
   const dispatch = useAppDispatch()
@@ -41,9 +42,11 @@ const TalentsView: React.FunctionComponent = () => {
           skills: settings.filters.skills
             ?.filter((skill) => skill.active)
             .map((item: Filter) => item.label),
+
           availability: settings.filters.jobTypes
             ?.filter((jobType) => jobType.active)
-            .map((item: Filter) => item.label),
+            .map((item: Filter) => item.label as Availability),
+
           status: activeTab?.status?.toLowerCase(),
         }),
       )
