@@ -2,10 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import {
   DisplayMode,
   Filter,
+  FilterInterface,
   HandlesettingsProps,
   Page,
   Settings,
-  SideDrawerVariant,
 } from '../types/settings.type'
 
 export const handleInitSettings = createAsyncThunk(
@@ -36,6 +36,13 @@ export const handleActiveTab = createAsyncThunk(
   },
 )
 
+export const handleUpdateFilter = createAsyncThunk(
+  'settings/updateFilter',
+  async (filters: FilterInterface) => {
+    return filters
+  },
+)
+
 export const handleActiveFilter = createAsyncThunk(
   'settings/activeFilter',
   async (props: { filter: Filter; section: 'skills' | 'jobTypes' }) => {
@@ -47,12 +54,5 @@ export const handleRefreshFilters = createAsyncThunk(
   'settings/refreshFilters',
   async () => {
     return true
-  },
-)
-
-export const handleDrawer = createAsyncThunk(
-  'settings/selectedDrawer',
-  async (drawer: SideDrawerVariant | null) => {
-    return drawer
   },
 )

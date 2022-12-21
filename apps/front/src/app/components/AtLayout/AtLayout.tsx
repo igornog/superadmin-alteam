@@ -28,6 +28,8 @@ import AtTextField, { AtTextFieldType } from '../AtTextField/AtTextField'
 import AtTypography from '../AtTypography/AtTypography'
 import AtSwitchDisplayMode from './AtSwitchDisplayMode'
 import AtTopTitle from './AtTopTitle'
+import debounce from 'lodash.debounce'
+import { handleUpdateFilter } from '../../utils/redux/actions/settings.action'
 
 const StyledContent = styled(Grid)<{ $sidePanelSize?: string }>`
   overflow: hidden;
@@ -54,6 +56,14 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
 
   const dispatch = useAppDispatch()
   const activeFolder = useAppSelector((state) => getActiveFolder(state))
+
+  const debouncedSearch = debounce((searchValue: string) => {
+    dispatch(handleUpdateFilter({ talentSearch: searchValue }))
+  }, 500)
+
+  const handleSearchChange = (searchValue: string) => {
+    debouncedSearch(searchValue)
+  }
 
   return !isSmallScreen ? (
     activeTab && (
@@ -189,7 +199,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                   <Grid item={true} xs={6.5}>
                     {activeTab.settings.search && (
                       <AtTextField
-                        value={''}
+                        onValueChange={handleSearchChange}
                         type={AtTextFieldType.Text}
                         placeholder={'Search in most recent...'}
                         startIcon={<SearchNormal1 />}

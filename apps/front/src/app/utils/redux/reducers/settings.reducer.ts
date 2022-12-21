@@ -1,15 +1,15 @@
-/* eslint-disable unused-imports/no-unused-vars */
 import { createSlice } from '@reduxjs/toolkit'
+import { skillsFilters, availabilityFilters } from '../../../features/talents'
 import {
   handleActiveFilter,
   handleActiveTab,
-  handleRefreshFilters,
   handleInitSettings,
+  handleRefreshFilters,
   handleSettingsTab,
   handleSwitchDisplayMode,
-  handleDrawer,
+  handleUpdateFilter,
 } from '../actions/settings.action'
-import { DisplayMode, Filter, SettingsState } from '../types/settings.type'
+import { DisplayMode, SettingsState } from '../types/settings.type'
 import { StatusType } from '../types/status.type'
 
 const initialState: SettingsState = {
@@ -17,10 +17,10 @@ const initialState: SettingsState = {
   filters: {
     skills: [],
     jobTypes: [],
+    talentSearch: '',
   },
   header: {},
   displayMode: DisplayMode.List,
-  selectedDrawer: null,
   status: StatusType.Idle,
   error: null,
 }
@@ -34,6 +34,7 @@ const { reducer } = createSlice({
       .addCase(handleInitSettings.pending, (state) => {
         state.status = StatusType.Loading
       })
+
       .addCase(handleInitSettings.fulfilled, (state, { payload }) => {
         state.status = StatusType.Succeeded
         state.tabs = payload.tabs.map(({ node, ...rest }: any) => rest)
@@ -46,6 +47,7 @@ const { reducer } = createSlice({
           state.filters.jobTypes = payload.jobTypes
         }
       })
+
       .addCase(handleInitSettings.rejected, (state, action) => {
         state.status = StatusType.Failed
         state.error = action.error.message
@@ -65,29 +67,25 @@ const { reducer } = createSlice({
       })
 
       .addCase(handleActiveFilter.fulfilled, (state, { payload }) => {
-        const activeIndex = state.filters[payload.section].find(
+        const activeIndex = state.filters[payload.section]?.find(
           (filter) => filter.label === payload.filter.label,
         )
 
         if (activeIndex) activeIndex.active = !payload.filter.active
       })
 
+      .addCase(handleUpdateFilter.fulfilled, (state, { payload }) => {
+        state.filters.talentSearch = payload.talentSearch
+      })
+
       .addCase(handleRefreshFilters.fulfilled, (state: SettingsState) => {
-        Object.keys(state.filters).forEach((item: string) => {
-          state.filters[item as keyof typeof state.filters].forEach(
-            (filter: Filter) => {
-              filter.active = false
-            },
-          )
-        })
+        state.filters.skills = skillsFilters
+        state.filters.jobTypes = availabilityFilters
+        state.filters.talentSearch = ''
       })
 
       .addCase(handleSwitchDisplayMode.fulfilled, (state, { payload }) => {
         state.displayMode = payload
-      })
-
-      .addCase(handleDrawer.fulfilled, (state, { payload }) => {
-        state.selectedDrawer = payload
       })
   },
 })

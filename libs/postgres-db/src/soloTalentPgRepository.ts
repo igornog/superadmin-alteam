@@ -35,20 +35,23 @@ async function findSoloTalentBySearch(
   const soloTalentRepository = (await postgresClient()).getRepository(
     SoloTalentEntity,
   )
-  talentSearch.experience
+
   const queryBuilder = await soloTalentRepository.createQueryBuilder()
+
   if (talentSearch.skills) {
-    queryBuilder.andWhere('skills = ANY(:skills)', {
+    queryBuilder.andWhere('skills @> ARRAY[:...skills]', {
       skills: talentSearch.skills,
     })
   }
+
   if (talentSearch.experience) {
     queryBuilder.andWhere('experience = :experience', {
       experience: talentSearch.experience,
     })
   }
+
   if (talentSearch.availability) {
-    queryBuilder.andWhere('availability = :availability', {
+    queryBuilder.andWhere('availability @> ARRAY[:...availability]', {
       availability: talentSearch.availability,
     })
   }
@@ -60,9 +63,15 @@ async function findSoloTalentBySearch(
     queryBuilder.andWhere('status = :status', { status: talentSearch.status })
   }
 
+  queryBuilder.andWhere("(first_name || ' ' || last_name LIKE :talentName)", {
+    talentName: '%' + talentSearch.talentName + '%',
+  })
+
   queryBuilder.limit(PAGE_SIZE)
   queryBuilder.offset(calculateOffset(talentSearch.page ?? 1, PAGE_SIZE))
+
   const result = await queryBuilder.getMany()
+
   return result.map(soloTalentFromEntity)
 }
 
