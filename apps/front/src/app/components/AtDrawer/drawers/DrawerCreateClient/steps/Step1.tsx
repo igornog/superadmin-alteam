@@ -70,7 +70,7 @@ const Step1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
           <AtTextField
             label={'Company Name'}
             required={true}
-            placeholder={'Enter Email'}
+            placeholder={'Enter Name'}
             onValueChange={(e) =>
               props.setClient({ ...props.client, companyName: e })
             }
@@ -96,7 +96,6 @@ const Step1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
 
           <AtTextField
             label={'Linkedin URL'}
-            required={true}
             placeholder={'Enter Linkedin URL'}
             onValueChange={(e) =>
               props.setClient({ ...props.client, linkedinUrl: e })
@@ -105,7 +104,6 @@ const Step1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
 
           <AtTextField
             label={'Industry'}
-            required={true}
             placeholder={'Enter Industry'}
             onValueChange={(e) =>
               props.setClient({ ...props.client, industry: e })

@@ -153,7 +153,9 @@ const DrawerClientListings: React.FunctionComponent<
               value={''}
               // disabled={selectedClient.listings?.length === 0}
               startIcon={<SearchNormal />}
-              placeholder={'Search in ' + selectedClient.companyName + ' Listings...'}
+              placeholder={
+                'Search in ' + selectedClient.companyName + ' Listings...'
+              }
             />
             {/* {selectedClient.listings?.length === 0 ? (
               <Box

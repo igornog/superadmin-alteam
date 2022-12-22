@@ -1,4 +1,10 @@
-import { DeliveryType, ProjectType, SoloClient, TeamRequest } from '@yjcapp/app'
+import {
+  ClientStatus,
+  DeliveryType,
+  ProjectType,
+  SoloClient,
+  TeamRequest,
+} from '@yjcapp/app'
 import { StatusType } from './status.type'
 
 export interface ClientsState {
@@ -23,6 +29,7 @@ export class Client implements SoloClient {
   email?: string
   fullName?: string
   position?: string
+  status: ClientStatus
 
   constructor(data: any) {
     this.id = data.id
@@ -38,5 +45,6 @@ export class Client implements SoloClient {
     this.email = data.email
     this.phoneNumber = data.phoneNumber
     this.companyUrl = data.companyUrl
+    this.status = data.status
   }
 }

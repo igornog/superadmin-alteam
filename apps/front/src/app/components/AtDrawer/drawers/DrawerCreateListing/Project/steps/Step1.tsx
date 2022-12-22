@@ -29,7 +29,6 @@ const ProjectStep1: React.FunctionComponent = () => {
         flexDirection={'column'}
         gap={'50px'}
       >
-
         <Box display={'flex'} gap={'30px'} flexDirection={'column'}>
           <AtTextField
             label={'Project Name'}
@@ -84,14 +83,13 @@ const ProjectStep1: React.FunctionComponent = () => {
               fullWidth={true}
               required={true}
               placeholder={'Enter Timezone'}
-              $listItems={Array.from(Array(25).keys()).map((key) => (
-                {
-                  id: key,
-                  label: `GMT${(key > 0 ? key <= 12 ? '-' + key : '+' + (key - 12) : '')}`
-                }
-              ))}
+              $listItems={Array.from(Array(25).keys()).map((key) => ({
+                id: key,
+                label: `GMT${
+                  key > 0 ? (key <= 12 ? '-' + key : '+' + (key - 12)) : ''
+                }`,
+              }))}
             />
-
           </Box>
           <AtTextFieldDropdown
             fullWidth={true}
@@ -173,7 +171,6 @@ const ProjectStep1: React.FunctionComponent = () => {
             placeholder={'Enter Learning Link'}
             value={''}
           />
-
         </Box>
       </Box>
     </StyledForm>

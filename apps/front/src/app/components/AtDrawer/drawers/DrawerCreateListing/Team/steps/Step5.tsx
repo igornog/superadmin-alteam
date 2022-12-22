@@ -44,7 +44,6 @@ const TeamStep5: React.FunctionComponent = () => {
           </Box>
         </Box>
       </StyledForm>
-
     </Box>
   )
 }

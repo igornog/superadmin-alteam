@@ -6,9 +6,14 @@ import { StyledForm } from '../../DrawerCreateListing'
 import { grey2, red } from '../../../../../../utils/colors'
 import { Box } from '@mui/material'
 import styled from 'styled-components'
-import AtButton, { AtButtonKind, AtButtonVariant } from '../../../../../AtButton/AtButton'
+import AtButton, {
+  AtButtonKind,
+  AtButtonVariant,
+} from '../../../../../AtButton/AtButton'
 import { AddSquare } from 'iconsax-react'
-import AtTextFieldDropdown, { DropdownItem } from '../../../../../AtDropdown/AtTextFieldDropdown'
+import AtTextFieldDropdown, {
+  DropdownItem,
+} from '../../../../../AtDropdown/AtTextFieldDropdown'
 import AtTag from '../../../../../AtTag/AtTag'
 import { v4 as uuid } from 'uuid'
 
@@ -23,7 +28,7 @@ const StyledBox = styled.div`
 const StyledTag = styled(AtTag)`
   background: transparent;
   height: auto;
-  
+
   svg {
     color: ${red} !important;
   }
@@ -34,12 +39,14 @@ const TeamStep3: React.FunctionComponent = () => {
     {
       id: 0,
       role: '',
-      description: ''
-    }
+      description: '',
+    },
   ])
 
   const handleDeleteTag = (value: number) => {
-    setJobDescriptions(jobDescriptions.filter((jobDescription) => jobDescription.id !== value))
+    setJobDescriptions(
+      jobDescriptions.filter((jobDescription) => jobDescription.id !== value),
+    )
   }
 
   const StyledButton = styled(AtButton)`
@@ -47,16 +54,20 @@ const TeamStep3: React.FunctionComponent = () => {
     align-self: flex-end;
   `
 
-  const test = [{
-    id: 0,
-    label: 'Front End Dev'
-  }, {
-    id: 1,
-    label: 'Back End Dev'
-  }, {
-    id: 2,
-    label: 'Product Owner'
-  }]
+  const test = [
+    {
+      id: 0,
+      label: 'Front End Dev',
+    },
+    {
+      id: 1,
+      label: 'Back End Dev',
+    },
+    {
+      id: 2,
+      label: 'Product Owner',
+    },
+  ]
 
   const handleRoleChange = (e: DropdownItem, i: number) => {
     setJobDescriptions(
@@ -66,7 +77,7 @@ const TeamStep3: React.FunctionComponent = () => {
         }
 
         return item
-      })
+      }),
     )
   }
 
@@ -78,7 +89,7 @@ const TeamStep3: React.FunctionComponent = () => {
         }
 
         return item
-      })
+      }),
     )
   }
 
@@ -102,11 +113,7 @@ const TeamStep3: React.FunctionComponent = () => {
               position={'relative'}
               alignItems={'flex-end'}
             >
-
-              <Box
-                display={'flex'}
-                width={'100%'}
-              >
+              <Box display={'flex'} width={'100%'}>
                 <AtTextFieldDropdown
                   fullWidth={true}
                   required={true}
@@ -116,16 +123,21 @@ const TeamStep3: React.FunctionComponent = () => {
                   handleSelect={(e) => handleRoleChange(e, jobDescription.id)}
                 />
 
-                {jobDescriptions.length > 1 ?
+                {jobDescriptions.length > 1 ? (
                   <StyledTag
                     label={''}
                     key={jobDescription.id}
                     onDelete={() => handleDeleteTag(jobDescription.id)}
-                  /> : ''}
+                  />
+                ) : (
+                  ''
+                )}
               </Box>
 
               <AtTextField
-                onValueChange={(e) => handleJobDescriptionChange(e, jobDescription.id)}
+                onValueChange={(e) =>
+                  handleJobDescriptionChange(e, jobDescription.id)
+                }
                 value={jobDescription.description}
                 maxLength={500}
                 multiline={true}
@@ -136,18 +148,28 @@ const TeamStep3: React.FunctionComponent = () => {
                 charCounter={true}
               />
 
-              {jobDescriptions.length > 1 && i !== jobDescriptions.length - 1 ? <AtLine /> : ''}
-            </Box>)
+              {jobDescriptions.length > 1 &&
+              i !== jobDescriptions.length - 1 ? (
+                <AtLine />
+              ) : (
+                ''
+              )}
+            </Box>
+          )
         })}
 
         <StyledButton
-          onClick={() => setJobDescriptions([...jobDescriptions, { id: uuid(), role: '', description: '' }])}
+          onClick={() =>
+            setJobDescriptions([
+              ...jobDescriptions,
+              { id: uuid(), role: '', description: '' },
+            ])
+          }
           kind={AtButtonKind.Default}
           variant={AtButtonVariant.Outlined}
           endIcon={<AddSquare size={16} />}
           name={'Add Another Job Description'}
         />
-
       </StyledBox>
     </StyledForm>
   )

@@ -13,6 +13,7 @@ export interface SoloClient {
   email?: string
   fullName?: string
   position?: string
+  status: ClientStatus
 }
 
 export enum ProjectType {
@@ -25,4 +26,11 @@ export enum DeliveryType {
 
 export enum TeamRequest {
   SoloFreelancer = 'Solo freelancer',
+}
+
+export enum ClientStatus {
+  Request = 'request',
+  Active = 'active',
+  Inactive = 'inactive',
+  Declined = 'declined',
 }

@@ -4,7 +4,7 @@ import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
 import { grey2 } from '../../../../../../utils/colors'
-import { Box} from '@mui/material'
+import { Box } from '@mui/material'
 import styled from 'styled-components'
 
 const ProjectStep2: React.FunctionComponent = () => {
@@ -14,7 +14,7 @@ const ProjectStep2: React.FunctionComponent = () => {
     position: absolute;
     bottom: 20px;
     padding: 10px;
-    color: ${grey2}
+    color: ${grey2};
   `
 
   return (
@@ -27,7 +27,13 @@ const ProjectStep2: React.FunctionComponent = () => {
           </AtTypography>
         </Box>
         <AtLine />
-        <Box padding={'20px'} position={'relative'} display={'flex'} flexDirection={'row'} justifyContent={'flex-end'} gap={'50px'}
+        <Box
+          padding={'20px'}
+          position={'relative'}
+          display={'flex'}
+          flexDirection={'row'}
+          justifyContent={'flex-end'}
+          gap={'50px'}
         >
           <AtTextField
             onValueChange={setInputValue}
@@ -39,7 +45,7 @@ const ProjectStep2: React.FunctionComponent = () => {
             label={'Job Description'}
             placeholder={'Enter Job Description'}
           />
-          <StyledCharCounter>          
+          <StyledCharCounter>
             <AtTypography variant={'caption'} color={grey2}>
               {inputValue.length}/500
             </AtTypography>

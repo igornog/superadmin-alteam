@@ -1,12 +1,17 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
-import { DeliveryType, ProjectType, TeamRequest } from '@yjcapp/app'
+import {
+  ClientStatus,
+  DeliveryType,
+  ProjectType,
+  TeamRequest,
+} from '@yjcapp/app'
 
 @Entity({ name: 'solo_client' })
 export class SoloClientEntity extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int' })
   id: number
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: true })
   logo?: string
 
   @Column({ type: 'varchar' })
@@ -44,4 +49,7 @@ export class SoloClientEntity extends BaseEntity {
 
   @Column({ type: 'varchar' })
   position?: string
+
+  @Column({ type: 'varchar' })
+  status: ClientStatus
 }

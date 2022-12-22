@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { handleClients, handleSelectClient } from '../actions/clients.action'
+import {
+  handleClients,
+  handleCreateClient,
+  handleSelectClient,
+} from '../actions/clients.action'
 import { ClientsState } from '../types/clients.type'
 import { StatusType } from '../types/status.type'
 
@@ -30,6 +34,10 @@ const { reducer } = createSlice({
 
       .addCase(handleSelectClient.fulfilled, (state, { payload }) => {
         state.selectedClient = payload
+      })
+
+      .addCase(handleCreateClient.fulfilled, (state, { payload }) => {
+        state.listClients.push(payload)
       })
   },
 })

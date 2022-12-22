@@ -14,7 +14,7 @@ const TeamStep4: React.FunctionComponent = () => {
     { label: 'UI/UX Design' },
     { label: 'Figma' },
     { label: 'Sketch' },
-    { label: 'Wireframe' }
+    { label: 'Wireframe' },
   ])
 
   const handleDeleteTag = (value: string) => {
@@ -41,18 +41,24 @@ const TeamStep4: React.FunctionComponent = () => {
           <Box display={'flex'} flexWrap={'wrap'} gap={'10px'}>
             {skills && skills.length > 0 ? (
               skills?.map((skill: Skill, index) => {
-                return <AtTag label={skill.label} key={index} onDelete={() => handleDeleteTag(skill.label)}/>
+                return (
+                  <AtTag
+                    label={skill.label}
+                    key={index}
+                    onDelete={() => handleDeleteTag(skill.label)}
+                  />
+                )
               })
             ) : (
               <AtTypography color={grey2}>
                 No skills have been added by the talent, please add them by
-                searching below. Please note that you may add only up to 5 skills.{' '}
+                searching below. Please note that you may add only up to 5
+                skills.{' '}
               </AtTypography>
             )}
           </Box>
         </Box>
       </StyledForm>
-
     </Box>
   )
 }

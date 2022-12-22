@@ -10,16 +10,17 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
-        "outputPath": "dist/apps/client-api",
-        "main": "apps/client-api/src/main.ts",
-        "tsConfig": "apps/client-api/tsconfig.app.json",
-        "assets": ["apps/client-api/src/assets"]
+        "outputFileName": "index.js",
+        "outputPath": "apps/client-api/dist",
+        "main": "apps/client-api/src/index.ts",
+        "tsConfig": "apps/client-api/tsconfig.app.json"
       },
       "configurations": {
         "production": {
           "optimization": true,
           "extractLicenses": true,
           "inspect": false,
+          "externalDependencies": "none",
           "fileReplacements": [
             {
               "replace": "apps/client-api/src/environments/environment.ts",
@@ -29,11 +30,26 @@
         }
       }
     },
+    "package": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "inputs": ["production", "^production"],
+      "options": {
+        "command": "zip -FSqj apps/client-api/dist/package.zip apps/client-api/dist/index.js"
+      }
+    },
     "serve": {
-      "executor": "@nrwl/js:node",
+      "executor": "@nrwl/node:node",
       "options": {
         "buildTarget": "client-api:build"
       },
+      "dependsOn": [
+        {
+          "target": "migration:run",
+          "params": "forward",
+          "projects": "dependencies"
+        }
+      ],
       "configurations": {
         "production": {
           "buildTarget": "client-api:build:production"
@@ -49,12 +65,21 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": ["{workspaceRoot}/coverage/apps/client-api"],
       "options": {
         "jestConfig": "apps/client-api/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["package"],
+      "options": {
+        "cwd": "apps/client-api/infrastructure",
+        "command": "../../../infrastructure/scripts/terraformStageWrapper.sh apply talent-api"
+      }
     }
   },
+  "implicitDependencies": ["postgres-db"],
   "tags": []
 }

@@ -90,7 +90,10 @@ const DrawerListing: React.FunctionComponent<DrawerListingProps> = (
 
             <Box display={'flex'} justifyContent={'space-between'}>
               <Box display={'flex'} alignItems={'center'} gap={'10px'}>
-                <AtGroupTag label={selectedClient.companyName} fontSize={'14px'} />
+                <AtGroupTag
+                  label={selectedClient.companyName}
+                  fontSize={'14px'}
+                />
                 <AtTypography variant={'h3'}>
                   {props.selectedListing.name}
                 </AtTypography>

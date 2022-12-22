@@ -67,7 +67,10 @@ const ModalEditClient: React.FunctionComponent<ModalEditClientProps> = (
 
         <AtSpace direction={'vertical'} spacing={'2'} />
 
-        <AtTextField value={selectedClient.companyName} label={'Company Name'} />
+        <AtTextField
+          value={selectedClient.companyName}
+          label={'Company Name'}
+        />
 
         <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
           <AtButton

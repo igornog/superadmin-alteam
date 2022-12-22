@@ -3,7 +3,11 @@ import { ArrowLeft2, ArrowRight, CloseSquare } from 'iconsax-react'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { white, grey2, grey5, black, grey4 } from '../../../../utils/colors'
-import { useAppSelector } from '../../../../utils/hooks/reduxHook'
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../../utils/hooks/reduxHook'
+import { handleCreateClient } from '../../../../utils/redux/actions/clients.action'
 import { getActiveTab } from '../../../../utils/redux/selectors/settings.selector'
 import { Client } from '../../../../utils/redux/types/clients.type'
 import { boxShadow } from '../../../../utils/theme'
@@ -18,6 +22,7 @@ import AtDrawer from '../../AtDrawer'
 import FinalStep from './steps/FinalStep'
 import Step1 from './steps/Step1'
 import Step2 from './steps/Step2'
+import { ClientStatus } from '@yjcapp/app'
 
 export const StyledForm = styled.div`
   background-color: ${white};
@@ -56,6 +61,7 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
 ) => {
   const activeTab = useAppSelector((state) => getActiveTab(state))
   const [step, setStep] = useState(0)
+  const dispatch = useAppDispatch()
 
   const [client, setClient] = useState<Client>({
     companyName: '',
@@ -70,6 +76,7 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
     email: '',
     fullName: '',
     position: '',
+    status: ClientStatus.Active,
   })
 
   const handleClose = () => {
@@ -78,6 +85,11 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
     setTimeout(() => {
       setStep(0)
     }, 500)
+  }
+
+  const createClient = () => {
+    dispatch(handleCreateClient(client))
+    setStep(step + 1)
   }
 
   return (
@@ -166,15 +178,17 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
                     <span style={{ color: black }}>{step + 1}</span>/2
                   </Box>
                 </AtTypography>
+
                 {step > 0 && (
                   <AtButton
                     kind={AtButtonKind.Default}
                     variant={AtButtonVariant.Outlined}
                     name={'Skip Step'}
-                    onClick={() => setStep(step + 1)}
+                    onClick={createClient}
                     endIcon={<CloseSquare />}
                   />
                 )}
+
                 <AtButton
                   kind={AtButtonKind.Success}
                   disabled={
@@ -184,7 +198,7 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
                   }
                   variant={AtButtonVariant.Contained}
                   name={'Next Step'}
-                  onClick={() => setStep(step + 1)}
+                  onClick={createClient}
                   endIcon={<ArrowRight />}
                 />
               </StyledFormStepper>

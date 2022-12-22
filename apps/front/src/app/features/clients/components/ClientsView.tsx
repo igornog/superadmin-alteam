@@ -22,7 +22,7 @@ const ClientsView: React.FunctionComponent = () => {
       }),
     )
 
-    dispatch(handleTalents({}))
+    // dispatch(handleTalents({}))
     // dispatch(handleClients(clients))
   }, [dispatch])
 

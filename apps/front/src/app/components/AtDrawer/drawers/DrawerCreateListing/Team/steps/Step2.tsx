@@ -7,10 +7,7 @@ import { StyledForm } from '../../DrawerCreateListing'
 import { grey2 } from '../../../../../../utils/colors'
 import { FormFields } from '../../CreateListing'
 
-const TeamStep2: React.FunctionComponent<Step2Props> = (
-  props: Step2Props
-) => {
-
+const TeamStep2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
       <StyledForm>
@@ -27,24 +24,22 @@ const TeamStep2: React.FunctionComponent<Step2Props> = (
           flexDirection={'column'}
           gap={'50px'}
         >
-
           <Box display={'flex'} gap={'30px'} flexDirection={'column'}>
-
-            {props.formData.nbIndividual ?
-              Array.from(Array(props.formData.nbIndividual).keys()).map((i) => (
-                <AtTextField
-                  label={`Role Name ${i + 1}`}
-                  required={true}
-                  placeholder={'Enter Role Name'}
-                  value={''}
-                />
-              ))
+            {props.formData.nbIndividual
+              ? Array.from(Array(props.formData.nbIndividual).keys()).map(
+                  (i) => (
+                    <AtTextField
+                      label={`Role Name ${i + 1}`}
+                      required={true}
+                      placeholder={'Enter Role Name'}
+                      value={''}
+                    />
+                  ),
+                )
               : ''}
-
           </Box>
         </Box>
       </StyledForm>
-
     </Box>
   )
 }
