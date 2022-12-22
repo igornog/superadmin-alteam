@@ -36,8 +36,6 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
   const [about, setAbout] = useState('')
 
   const handleClose = useCallback(() => {
-    props.handleClose()
-    props.setStep(0)
     setFirstName('')
     setLastName('')
     setEmail('')
@@ -48,6 +46,8 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
     setPortfolio('')
     setPortfolio('')
     setAbout('')
+    props.handleClose()
+    props.setStep(0)
   }, [props])
 
   const createTalent = () => {

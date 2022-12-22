@@ -3,6 +3,7 @@ import Github from '../assets/images/icons/Github.svg'
 import Linkedin from '../assets/images/icons/Linkedin.svg'
 import Stackoverflow from '../assets/images/icons/Stackoverflow.svg'
 import Twitter from '../assets/images/icons/Twitter.svg'
+import { green } from './colors'
 
 export const convertHexToRGBA = (hexCode: string, opacity = 1) => {
   let hex = hexCode.replace('#', '')
@@ -78,4 +79,24 @@ export const getText = (elem: any): string => {
 
 export const plurialize = (count: number, word: string) => {
   return count + ' ' + (count > 1 ? word + 's' : word)
+}
+
+export const stringMatch = (fullString: string, toMatch: string) => {
+  const startIndex = fullString.indexOf(toMatch)
+  const endIndex = startIndex + toMatch.length
+
+  if (startIndex === -1) {
+    return fullString
+  }
+
+  return (
+    <div
+      dangerouslySetInnerHTML={{
+        __html:
+          fullString.slice(0, startIndex) +
+          `<span style="color: ${green}">${toMatch}</span>` +
+          fullString.slice(endIndex),
+      }}
+    />
+  )
 }

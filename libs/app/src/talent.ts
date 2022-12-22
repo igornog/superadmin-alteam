@@ -79,10 +79,11 @@ export interface Listing {
 export interface TalentSearch {
   skills?: string[]
   experience?: string
-  availability?: string
+  availability?: Availability[]
   role?: string
   status?: ListingStatus
   page?: number
+  talentName?: string
 }
 
 export type Talent = GroupTalent | SoloTalent
