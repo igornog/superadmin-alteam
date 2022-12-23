@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { ClientStatus } from '@yjcapp/app'
 import {
   handleClients,
   handleCreateClient,
@@ -37,7 +38,9 @@ const { reducer } = createSlice({
       })
 
       .addCase(handleCreateClient.fulfilled, (state, { payload }) => {
-        state.listClients.push(payload)
+        if (payload.status === ClientStatus.Request) {
+          state.listClients.push(payload)
+        }
       })
   },
 })

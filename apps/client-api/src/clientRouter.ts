@@ -10,3 +10,7 @@ clientRouter.use(authorize)
 clientRouter.post('/client', (req, res, next) => {
   sendPromise(clientService.createClient(req.body), res, next)
 })
+
+clientRouter.get('/client/search', (req, res, next) => {
+  sendPromise(clientService.searchClient(req.query ?? {}), res, next)
+})

@@ -1,8 +1,10 @@
 import {
   ClientStatus,
   DeliveryType,
+  Listing,
   ProjectType,
   SoloClient,
+  Talent,
   TeamRequest,
 } from '@yjcapp/app'
 import { StatusType } from './status.type'
@@ -29,22 +31,28 @@ export class Client implements SoloClient {
   email?: string
   fullName?: string
   position?: string
+  received?: Date
+  listings?: Listing[]
+  assignee?: Talent[]
   status: ClientStatus
 
   constructor(data: any) {
     this.id = data.id
-    this.companyName = data.name
-    this.linkedinUrl = data.logo
-    this.request = data.received
+    this.companyName = data.companyName
+    this.phoneNumber = data.phoneNumber
+    this.companyUrl = data.companyUrl
+    this.linkedinUrl = data.linkedinUrl
     this.industry = data.industry
     this.projectType = data.projectType
     this.deliveryType = data.deliveryType
     this.teamRequest = data.teamRequest
-    this.fullName = data.listings
-    this.position = data.assignee
+    this.request = data.request
     this.email = data.email
-    this.phoneNumber = data.phoneNumber
-    this.companyUrl = data.companyUrl
+    this.fullName = data.fullName
+    this.position = data.position
+    this.received = data.received
+    this.listings = data.listings
+    this.assignee = data.assignee
     this.status = data.status
   }
 }

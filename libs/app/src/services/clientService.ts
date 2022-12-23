@@ -1,5 +1,7 @@
-import { SoloClient } from '../client'
+import { ClientSearch, SoloClient } from '../client'
 
 export interface ClientService {
   createClient(client: Omit<SoloClient, 'id'>): Promise<SoloClient>
+
+  searchClient(talentSearch: ClientSearch): Promise<SoloClient[]>
 }

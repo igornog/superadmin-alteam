@@ -62,8 +62,7 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
   const activeTab = useAppSelector((state) => getActiveTab(state))
   const [step, setStep] = useState(0)
   const dispatch = useAppDispatch()
-
-  const [client, setClient] = useState<Client>({
+  const defaultClient = {
     companyName: '',
     phoneNumber: '',
     companyUrl: '',
@@ -76,10 +75,13 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
     email: '',
     fullName: '',
     position: '',
-    status: ClientStatus.Active,
-  })
+    status: ClientStatus.Request,
+  }
+
+  const [client, setClient] = useState<Client>(defaultClient)
 
   const handleClose = () => {
+    setClient(defaultClient)
     props.handleClose()
 
     setTimeout(() => {
@@ -88,7 +90,22 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
   }
 
   const createClient = () => {
-    dispatch(handleCreateClient(client))
+    if (step === 1) {
+      if (
+        client.projectType &&
+        client.deliveryType &&
+        client.teamRequest &&
+        client.request &&
+        client.email &&
+        client.fullName &&
+        client.position
+      ) {
+        dispatch(handleCreateClient({ ...client, status: ClientStatus.Active }))
+      } else {
+        dispatch(handleCreateClient(client))
+      }
+    }
+
     setStep(step + 1)
   }
 
@@ -192,9 +209,9 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
                 <AtButton
                   kind={AtButtonKind.Success}
                   disabled={
-                    client.companyName === '' ||
-                    client.phoneNumber === '' ||
-                    client.companyUrl === ''
+                    !client.companyName ||
+                    !client.phoneNumber ||
+                    !client.companyUrl
                   }
                   variant={AtButtonVariant.Contained}
                   name={'Next Step'}

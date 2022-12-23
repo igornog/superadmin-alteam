@@ -1,3 +1,5 @@
+import { Listing, Talent } from './talent'
+
 export interface SoloClient {
   id?: string
   logo?: string
@@ -13,6 +15,9 @@ export interface SoloClient {
   email?: string
   fullName?: string
   position?: string
+  received?: Date
+  listings?: Listing[]
+  assignee?: Talent[]
   status: ClientStatus
 }
 
@@ -33,4 +38,10 @@ export enum ClientStatus {
   Active = 'active',
   Inactive = 'inactive',
   Declined = 'declined',
+}
+
+export interface ClientSearch {
+  status?: ClientStatus
+  clientName?: string
+  page?: number
 }

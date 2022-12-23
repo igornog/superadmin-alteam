@@ -5,9 +5,9 @@ import { TalentSearch } from '@yjcapp/app'
 
 export const handleTalents = createAsyncThunk(
   'talents/initTalents',
-  async (talentSearch: TalentSearch, { rejectWithValue }) => {
+  async (searchName: TalentSearch, { rejectWithValue }) => {
     try {
-      return await talentService.searchSoloTalent(talentSearch)
+      return await talentService.searchSoloTalent(searchName)
     } catch (error) {
       return rejectWithValue(error)
     }

@@ -7,7 +7,6 @@ import {
   handleInitSettings,
   handleSettingsTab,
 } from '../../../utils/redux/actions/settings.action'
-import { handleTalents } from '../../../utils/redux/actions/talents.action'
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
 
 const ClientsView: React.FunctionComponent = () => {
@@ -21,9 +20,6 @@ const ClientsView: React.FunctionComponent = () => {
         tabs: clientsTabs,
       }),
     )
-
-    // dispatch(handleTalents({}))
-    // dispatch(handleClients(clients))
   }, [dispatch])
 
   useEffect(() => {
@@ -31,6 +27,17 @@ const ClientsView: React.FunctionComponent = () => {
       dispatch(handleSettingsTab(activeTab.config))
     }
   }, [activeTab, dispatch, settings.tabs])
+
+  useEffect(() => {
+    if (activeTab?.status) {
+      dispatch(
+        handleClients({
+          clientName: settings.filters.searchName,
+          status: activeTab?.status?.toLowerCase(),
+        }),
+      )
+    }
+  }, [activeTab?.status, dispatch, settings.filters.searchName])
 
   return (
     <AtLayout>

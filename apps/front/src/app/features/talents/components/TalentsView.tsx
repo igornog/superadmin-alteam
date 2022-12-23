@@ -38,7 +38,7 @@ const TalentsView: React.FunctionComponent = () => {
     if (activeTab?.status) {
       dispatch(
         handleTalents({
-          talentName: settings.filters.talentSearch,
+          talentName: settings.filters.searchName,
           skills: settings.filters.skills
             ?.filter((skill) => skill.active)
             .map((item: Filter) => item.label),
@@ -56,7 +56,7 @@ const TalentsView: React.FunctionComponent = () => {
     dispatch,
     settings.filters.jobTypes,
     settings.filters.skills,
-    settings.filters.talentSearch,
+    settings.filters.searchName,
   ])
 
   return (

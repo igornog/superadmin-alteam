@@ -58,7 +58,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
   const activeFolder = useAppSelector((state) => getActiveFolder(state))
 
   const debouncedSearch = debounce((searchValue: string) => {
-    dispatch(handleUpdateFilter({ talentSearch: searchValue }))
+    dispatch(handleUpdateFilter({ searchName: searchValue }))
   }, 500)
 
   const handleSearchChange = (searchValue: string) => {

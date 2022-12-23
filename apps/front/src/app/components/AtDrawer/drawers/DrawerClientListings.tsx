@@ -11,7 +11,7 @@ import styled from 'styled-components'
 import Client from '../../../features/clients/components/ClientViewProfile/Client'
 import Company from '../../../features/clients/components/ClientViewProfile/Company'
 import Notes from '../../../features/clients/components/ClientViewProfile/Notes'
-import { grey2, grey3 } from '../../../utils/colors'
+import { grey2 } from '../../../utils/colors'
 import { useAppSelector } from '../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../utils/redux/selectors/clients.selector'
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
@@ -21,7 +21,6 @@ import AtButton, {
   AtButtonKind,
   AtButtonVariant,
 } from '../../AtButton/AtButton'
-import AtListingCard from '../../AtCard/AtListingCard'
 import ModalEditClient from '../../AtModal/modals/ModalEditClient'
 import AtTextField from '../../AtTextField/AtTextField'
 import AtTypography from '../../AtTypography/AtTypography'
@@ -96,7 +95,7 @@ const DrawerClientListings: React.FunctionComponent<
               justifyContent={'space-between'}
               alignItems={'center'}
             >
-              <Box display={'flex'} gap={'20px'}>
+              <Box display={'flex'} gap={'20px'} alignItems={'center'}>
                 <Box display={'flex'} gap={'10px'}>
                   <ClientLogo logo={selectedClient.logo} width={'40px'} />
                   <AtTypography variant={'h3'}>
@@ -104,6 +103,7 @@ const DrawerClientListings: React.FunctionComponent<
                   </AtTypography>
                 </Box>
                 <AtButton
+                  padding={'0'}
                   kind={AtButtonKind.Default}
                   variant={AtButtonVariant.Text}
                   onClick={() => console.log('test')}

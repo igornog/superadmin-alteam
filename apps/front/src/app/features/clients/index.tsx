@@ -1,13 +1,14 @@
 import { Page } from '../../utils/redux/types/settings.type'
 import { RightClick, Tabs } from '../../utils/types'
 import ClientRequestsView from './components/ClientRequests/ClientRequestsView'
+import { ClientStatus } from '@yjcapp/app'
 
 export { default } from './components/ClientsView'
 
 export const clientsTabs: Page[] = [
   {
     title: Tabs.ClientRequests,
-    status: null,
+    status: ClientStatus.Request,
     node: <ClientRequestsView />,
     badge: 5,
     active: false,
@@ -23,7 +24,7 @@ export const clientsTabs: Page[] = [
   },
   {
     title: Tabs.ActiveClients,
-    status: null,
+    status: ClientStatus.Active,
     node: <ClientRequestsView />,
     badge: 150,
     active: true,
@@ -38,7 +39,7 @@ export const clientsTabs: Page[] = [
   },
   {
     title: Tabs.InactiveClients,
-    status: null,
+    status: ClientStatus.Inactive,
     node: <ClientRequestsView />,
     badge: 20,
     active: false,
@@ -57,7 +58,7 @@ export const clientsTabs: Page[] = [
   },
   {
     title: Tabs.DeclinedRequests,
-    status: null,
+    status: ClientStatus.Declined,
     node: <ClientRequestsView />,
     active: false,
     settings: {
