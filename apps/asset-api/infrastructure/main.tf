@@ -23,7 +23,7 @@ module "api" {
   namespace         = module.asset_label.id
   namespace_tags    = module.asset_label.tags
   api_mapping_key = "asset"
-  env_variables = module.auth_env.env_variables
+  env_variables = merge(module.auth_env.env_variables,{S3_BUCKET : module.asset_distribution.bucket_id })
 }
 module "asset_distribution" {
   source = "./modules/assetDistribution"
