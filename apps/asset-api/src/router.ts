@@ -4,7 +4,7 @@ import { v4} from "uuid";
 import {saveAsset} from "./s3AssetStorage";
 export const router = express.Router()
   .use(fileUpload())
-router.post("/user/:id/assets", async (req, res) => {
+router.post("/assets/user/:id", async (req, res) => {
   if(!req.files.file) {
     res.status(400).send("No files were uploaded");
     return;
