@@ -25,3 +25,9 @@ module "api" {
   api_mapping_key = "asset"
   env_variables = module.auth_env.env_variables
 }
+module "asset_distribution" {
+  source = "./modules/assetDistribution"
+  stage  = var.stage
+  id = module.asset_label.id
+  tags = module.asset_label.tags
+}

@@ -11,7 +11,7 @@
         "outputFileName": "index.js",
         "target": "node",
         "compiler": "tsc",
-        "outputPath": "apps/dist/asset-api",
+        "outputPath": "apps/asset-api/dist",
         "main": "apps/asset-api/src/index.ts",
         "tsConfig": "apps/asset-api/tsconfig.app.json"
       },
