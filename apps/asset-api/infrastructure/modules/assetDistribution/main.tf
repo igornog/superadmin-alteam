@@ -2,22 +2,17 @@ locals {
   isProd = var.stage == "prod"
   cName  = "assets.alteam.io"
 }
-module "bucket_label" {
-  source = "../../../../../infrastructure/modules/naming"
-  stage  = var.stage
-  name   = "assets"
-}
 
 resource "aws_s3_bucket" "s3" {
   bucket        = "s3-${var.id}"
-  tags          = module.bucket_label.tags
+  tags          = var.tags
   force_destroy = !local.isProd
 }
 
 resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
   bucket = aws_s3_bucket.s3.id
   policy = templatefile("${path.module}/s3-website-policy.json", {
-    bucket-name : module.bucket_label.id
+    bucket-name : aws_s3_bucket.s3.id
     origin_access_identity_id : aws_cloudfront_origin_access_identity.oai.id
   })
 }
@@ -48,7 +43,7 @@ resource "aws_cloudfront_origin_access_identity" "oai" {
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
     domain_name = aws_s3_bucket.s3.bucket_regional_domain_name
-    origin_id   = aws_s3_bucket.s3.id
+    origin_id   = "S3Origin"
 
     s3_origin_config {
       origin_access_identity = aws_cloudfront_origin_access_identity.oai.cloudfront_access_identity_path
