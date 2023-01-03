@@ -78,7 +78,7 @@ const DrawerClient: React.FunctionComponent<DrawerClientProps> = (
       >
         <Company client={selectedClient} />
 
-        <Request />
+        <Request client={selectedClient} />
 
         <Client client={selectedClient} />
 

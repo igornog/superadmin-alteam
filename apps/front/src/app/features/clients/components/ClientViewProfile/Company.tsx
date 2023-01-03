@@ -29,7 +29,9 @@ const Company: React.FunctionComponent<CompanyProps> = (
             <AtTypography color={grey2}>Phone: </AtTypography>
           </Grid>
           <Grid item={true} xs={8}>
-            <AtTypography color={grey}>{props.client.phoneNumber}</AtTypography>
+            <AtTypography color={grey}>
+              {props.client.phoneNumber || 'N/A'}
+            </AtTypography>
           </Grid>
         </Grid>
 
@@ -38,7 +40,9 @@ const Company: React.FunctionComponent<CompanyProps> = (
             <AtTypography color={grey2}>Company URL: </AtTypography>
           </Grid>
           <Grid item={true} xs={8}>
-            <AtTypography color={grey}>{props.client.companyUrl}</AtTypography>
+            <AtTypography color={grey}>
+              {props.client.companyUrl || 'N/A'}
+            </AtTypography>
           </Grid>
         </Grid>
 
@@ -47,7 +51,9 @@ const Company: React.FunctionComponent<CompanyProps> = (
             <AtTypography color={grey2}>Industry: </AtTypography>
           </Grid>
           <Grid item={true} xs={8}>
-            <AtTypography color={grey}>{props.client.industry}</AtTypography>
+            <AtTypography color={grey}>
+              {props.client.industry || 'N/A'}
+            </AtTypography>
           </Grid>
         </Grid>
 
@@ -56,7 +62,7 @@ const Company: React.FunctionComponent<CompanyProps> = (
             <AtTypography color={grey2}>Linkedin URL: </AtTypography>
           </Grid>
           <Grid item={true} xs={8}>
-            <AtTypography color={grey}>linkedin.com/</AtTypography>
+            <AtTypography color={grey}>{props.client.linkedinUrl || 'N/A'}</AtTypography>
           </Grid>
         </Grid>
       </Box>
