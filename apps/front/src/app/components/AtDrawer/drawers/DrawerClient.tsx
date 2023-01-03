@@ -25,6 +25,7 @@ const DrawerClient: React.FunctionComponent<DrawerClientProps> = (
   props: DrawerClientProps,
 ) => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
+
   const activeTab = useAppSelector((state) => getActiveTab(state))
 
   const [openEditModal, setOpenEditModal] = useState(false)

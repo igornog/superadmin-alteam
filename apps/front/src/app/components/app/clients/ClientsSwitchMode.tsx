@@ -29,6 +29,12 @@ const ClientsSwitchMode: React.FunctionComponent<ClientsSwitchModeProps> = (
     setOpenDrawerClient(activeTab.title !== Tabs.ActiveClients)
   }
 
+  const handleClose = () => {
+    dispatch(handleSelectClient(null))
+    setOpenDrawerClient(false)
+    setOpenDrawerClientListing(false)
+  }
+
   return (
     <Grid container={true} spacing={2.5} alignItems={'stretch'}>
       {settings.displayMode === DisplayMode.Grid ? (
@@ -43,14 +49,11 @@ const ClientsSwitchMode: React.FunctionComponent<ClientsSwitchModeProps> = (
         </Grid>
       )}
 
-      <DrawerClient
-        open={openDrawerClient}
-        handleClose={() => setOpenDrawerClient(false)}
-      />
+      <DrawerClient open={openDrawerClient} handleClose={handleClose} />
 
       <DrawerClientListings
         open={openDrawerClientListing}
-        handleClose={() => setOpenDrawerClientListing(false)}
+        handleClose={handleClose}
       />
     </Grid>
   )
