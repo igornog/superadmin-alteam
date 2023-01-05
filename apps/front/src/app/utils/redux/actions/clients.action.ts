@@ -31,3 +31,27 @@ export const handleCreateClient = createAsyncThunk(
     }
   },
 )
+
+export const handlePathClientStatus = createAsyncThunk(
+  'clients/updateClientStatus',
+  async (client: Partial<Client>, { rejectWithValue }) => {
+    try {
+      await clientService.patchSoloClient(client)
+      return client
+    } catch (err) {
+      return rejectWithValue(err)
+    }
+  },
+)
+
+export const handlePatchClient = createAsyncThunk(
+  'clients/updateClient',
+  async (client: Partial<Client>, { rejectWithValue }) => {
+    try {
+      await clientService.patchSoloClient(client)
+      return client
+    } catch (err) {
+      return rejectWithValue(err)
+    }
+  },
+)

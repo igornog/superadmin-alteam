@@ -22,13 +22,13 @@ export class SoloClientEntity extends BaseEntity {
   @Column({ type: 'varchar', nullable: true })
   logo?: string
 
-  @Column({ type: 'varchar', name: 'company_name' })
+  @Column({ type: 'varchar', name: 'company_name', nullable: true })
   companyName: string
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: true })
   phoneNumber: string
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: true })
   companyUrl: string
 
   @Column({ type: 'varchar', nullable: true })

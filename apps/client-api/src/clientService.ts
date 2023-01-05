@@ -9,4 +9,8 @@ export const clientService: ClientService = {
   searchClient(talentSearch: ClientSearch): Promise<SoloClient[]> {
     return soloClientPgRepository.findClient(talentSearch)
   },
+
+  updateSoloClient(client: SoloClient): Promise<SoloClient> {
+    return soloClientPgRepository.updateSoloClient(client)
+  },
 }

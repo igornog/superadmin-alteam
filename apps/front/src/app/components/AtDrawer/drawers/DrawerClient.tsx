@@ -6,7 +6,7 @@ import Company from '../../../features/clients/components/ClientViewProfile/Comp
 import Notes from '../../../features/clients/components/ClientViewProfile/Notes'
 import Request from '../../../features/clients/components/ClientViewProfile/Request'
 import { grey3, white } from '../../../utils/colors'
-import { useAppSelector } from '../../../utils/hooks/reduxHook'
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../utils/redux/selectors/clients.selector'
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
 import { Tabs } from '../../../utils/types'
@@ -20,15 +20,23 @@ import ModalEditClient from '../../AtModal/modals/ModalEditClient'
 import AtTypography from '../../AtTypography/AtTypography'
 import AtDrawer from '../AtDrawer'
 import AtDrawerHeader from '../AtDrawerHeader'
+import { ClientStatus } from '@yjcapp/app'
+import { handlePathClientStatus } from '../../../utils/redux/actions/clients.action'
 
 const DrawerClient: React.FunctionComponent<DrawerClientProps> = (
   props: DrawerClientProps,
 ) => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
+  const dispatch = useAppDispatch()
 
   const activeTab = useAppSelector((state) => getActiveTab(state))
 
   const [openEditModal, setOpenEditModal] = useState(false)
+
+  const updateStatus = (status: ClientStatus) => {
+    dispatch(handlePathClientStatus({ id: selectedClient.id, status }))
+    props.handleClose()
+  }
 
   return (
     <AtDrawer
@@ -88,7 +96,7 @@ const DrawerClient: React.FunctionComponent<DrawerClientProps> = (
           {activeTab.title === Tabs.ClientRequests ||
           activeTab.title === Tabs.InactiveClients ? (
             <AtButton
-              onClick={() => undefined}
+              onClick={() => updateStatus(ClientStatus.Declined)}
               kind={AtButtonKind.Danger}
               variant={AtButtonVariant.Contained}
               name={'Decline'}
@@ -99,7 +107,7 @@ const DrawerClient: React.FunctionComponent<DrawerClientProps> = (
           {activeTab.title === Tabs.ClientRequests ||
           activeTab.title === Tabs.DeclinedRequests ? (
             <AtButton
-              onClick={() => undefined}
+              onClick={() => updateStatus(ClientStatus.Inactive)}
               kind={AtButtonKind.Default}
               variant={
                 activeTab.title === Tabs.DeclinedRequests
@@ -121,7 +129,7 @@ const DrawerClient: React.FunctionComponent<DrawerClientProps> = (
           activeTab.title === Tabs.InactiveClients ||
           activeTab.title === Tabs.DeclinedRequests ? (
             <AtButton
-              onClick={() => undefined}
+              onClick={() => updateStatus(ClientStatus.Active)}
               kind={AtButtonKind.Success}
               variant={AtButtonVariant.Contained}
               name={'Move to Active'}

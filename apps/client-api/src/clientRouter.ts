@@ -14,3 +14,7 @@ clientRouter.post('/client', (req, res, next) => {
 clientRouter.get('/client/search', (req, res, next) => {
   sendPromise(clientService.searchClient(req.query ?? {}), res, next)
 })
+
+clientRouter.patch('/client', (req, res, next) => {
+  sendPromise(clientService.updateSoloClient(req.body), res.status(204), next)
+})

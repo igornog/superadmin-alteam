@@ -13,4 +13,16 @@ export default class RemoteClientService implements ClientService {
     })
     return data
   }
+
+  async updateSoloClient(talent: SoloClient): Promise<SoloClient> {
+    const { data } = await atAxios.put('/client', talent)
+
+    return data
+  }
+
+  async patchSoloClient(client: Partial<SoloClient>): Promise<SoloClient> {
+    const { data } = await atAxios.patch('/client/', client)
+
+    return data
+  }
 }

@@ -44,7 +44,17 @@ async function findClient(talentSearch: ClientSearch): Promise<SoloClient[]> {
   return result.map(clientFromEntity)
 }
 
+async function updateSoloClient(client: SoloClient): Promise<SoloClient> {
+  const soloTalentRepository = (await postgresClient()).getRepository(
+    SoloClientEntity,
+  )
+  const entity = clientToEntity(client)
+  const result = await soloTalentRepository.save(entity)
+  return clientFromEntity(result)
+}
+
 export const soloClientPgRepository = {
   createSoloClient,
   findClient,
+  updateSoloClient,
 }

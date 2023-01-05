@@ -1,6 +1,8 @@
 import { Box } from '@mui/material'
 import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react'
 import React from 'react'
+import { useAppSelector } from '../../../utils/hooks/reduxHook'
+import { getActiveClient } from '../../../utils/redux/selectors/clients.selector'
 import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtButton, {
   AtButtonKind,
@@ -14,6 +16,8 @@ import AtModal from '../AtModal'
 const ModalCompany: React.FunctionComponent<ModalCompanyProps> = (
   props: ModalCompanyProps,
 ) => {
+  const selectedClient = useAppSelector((state) => getActiveClient(state))
+
   return (
     <AtModal isOpen={props.open} size={ModalSize.Small} onClose={props.onClose}>
       <Box
@@ -36,13 +40,13 @@ const ModalCompany: React.FunctionComponent<ModalCompanyProps> = (
       <AtLine spacingTop={20} spacingBottom={5} />
 
       <Box display={'flex'} flexDirection={'column'} gap={2.5} padding={2.5}>
-        <AtTextField label={'Phone Number'} value={'+44 1234 12456'} />
+        <AtTextField label={'Phone Number'} value={selectedClient.phoneNumber} />
 
-        <AtTextField label={'Company URL'} value={'chaptr.com'} />
+        <AtTextField label={'Company URL'} value={selectedClient.companyUrl} />
 
-        <AtTextField label={'Industry'} value={'N/A'} />
+        <AtTextField label={'Industry'} value={selectedClient.industry} />
 
-        <AtTextField label={'Linkedin URL'} value={'linkedin.com/chaptr'} />
+        <AtTextField label={'Linkedin URL'} value={selectedClient.linkedinUrl} />
 
         <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
           <AtButton

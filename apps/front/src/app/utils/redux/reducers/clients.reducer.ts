@@ -3,7 +3,9 @@ import { ClientStatus } from '@yjcapp/app'
 import {
   handleClients,
   handleCreateClient,
+  handlePatchClient,
   handleSelectClient,
+  handlePathClientStatus,
 } from '../actions/clients.action'
 import { ClientsState } from '../types/clients.type'
 import { StatusType } from '../types/status.type'
@@ -40,6 +42,39 @@ const { reducer } = createSlice({
       .addCase(handleCreateClient.fulfilled, (state, { payload }) => {
         if (payload.status === ClientStatus.Request) {
           state.listClients.push(payload)
+        }
+      })
+
+      .addCase(handlePathClientStatus.fulfilled, (state, { payload }) => {
+        const { id } = payload
+        state.selectedClient = null
+
+        const clientIndex = state.listClients.findIndex(
+          (client) => client.id === id,
+        )
+
+        if (clientIndex !== -1) {
+          state.listClients.splice(clientIndex, 1)
+        }
+      })
+
+      .addCase(handlePatchClient.fulfilled, (state, { payload }) => {
+        const { id, ...rest } = payload
+
+        const client = state.listClients.find((client) => client.id === id)
+
+        const newObj = Object.entries(rest).reduce(
+          (acc, [key, value]) =>
+            value !== undefined ? { ...acc, [key]: value } : acc,
+          {},
+        )
+
+        if (client) {
+          const updatedTalent = { ...client, ...newObj } as any
+
+          const talentIndex = state.listClients.indexOf(client)
+
+          state.listClients.splice(talentIndex, 1, updatedTalent)
         }
       })
   },
