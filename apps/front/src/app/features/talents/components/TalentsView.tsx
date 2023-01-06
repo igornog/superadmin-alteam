@@ -35,10 +35,10 @@ const TalentsView: React.FunctionComponent = () => {
   }, [activeTab, dispatch, settings.tabs])
 
   useEffect(() => {
-    if (activeTab?.status) {
+    // if (activeTab?.status) {
       dispatch(
         handleTalents({
-          talentName: settings.filters.searchName,
+          talentName: settings.filters.searchName || '',
           skills: settings.filters.skills
             ?.filter((skill) => skill.active)
             .map((item: Filter) => item.label),
@@ -50,7 +50,7 @@ const TalentsView: React.FunctionComponent = () => {
           status: activeTab?.status?.toLowerCase(),
         }),
       )
-    }
+    // }
   }, [
     activeTab?.status,
     dispatch,

@@ -27,7 +27,7 @@ export class SoloTalentEntity extends BaseEntity {
   @Column({ type: 'varchar', name: 'experience' })
   experience: Experience
 
-  @Column({ type: 'text', array: true, name: 'availability' })
+  @Column({ type: 'text', name: 'availability' })
   availability: Availability
 
   @Column({ type: 'varchar', name: 'portfolio' })

@@ -1,8 +1,9 @@
 import { Box } from '@mui/material'
 import { CloseCircle, CloseSquare, Refresh, TickSquare } from 'iconsax-react'
-import React from 'react'
+import React, { useState } from 'react'
 import { grey2 } from '../../../utils/colors'
-import { useAppSelector } from '../../../utils/hooks/reduxHook'
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
+import { handlePatchClient } from '../../../utils/redux/actions/clients.action'
 import { getActiveClient } from '../../../utils/redux/selectors/clients.selector'
 import { ModalSize } from '../../../utils/redux/types/settings.type'
 import ClientLogo from '../../app/clients/ClientLogo'
@@ -20,6 +21,19 @@ const ModalEditClient: React.FunctionComponent<ModalEditClientProps> = (
   props: ModalEditClientProps,
 ) => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
+
+  const [companyName, setCompanyName] = useState<string>()
+  const dispatch = useAppDispatch()
+
+  const handleSave = () => {
+    dispatch(
+      handlePatchClient({
+        id: selectedClient.id,
+        companyName,
+      }),
+    )
+    props.onClose?.()
+  }
 
   return (
     <AtModal isOpen={props.open} size={ModalSize.Small} onClose={props.onClose}>
@@ -69,6 +83,7 @@ const ModalEditClient: React.FunctionComponent<ModalEditClientProps> = (
 
         <AtTextField
           value={selectedClient.companyName}
+          onValueChange={setCompanyName}
           label={'Company Name'}
         />
 
@@ -81,7 +96,7 @@ const ModalEditClient: React.FunctionComponent<ModalEditClientProps> = (
             endIcon={<CloseSquare size={16} />}
           />
           <AtButton
-            onClick={props.onClose}
+            onClick={handleSave}
             kind={AtButtonKind.Success}
             variant={AtButtonVariant.Contained}
             name={'Save Changes'}

@@ -106,7 +106,7 @@ const DrawerClientListings: React.FunctionComponent<
                   padding={'0'}
                   kind={AtButtonKind.Default}
                   variant={AtButtonVariant.Text}
-                  onClick={() => console.log('test')}
+                  onClick={() => setOpenEditModal(true)}
                   name={'Edit'}
                   startIcon={<Edit size={16} />}
                   fontSize={'14px'}
