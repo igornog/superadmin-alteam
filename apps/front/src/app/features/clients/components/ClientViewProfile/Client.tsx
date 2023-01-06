@@ -27,7 +27,9 @@ const Client: React.FunctionComponent<ClientProps> = (props: ClientProps) => {
             <AtTypography color={grey2}>Email: </AtTypography>
           </Grid>
           <Grid item={true} xs={8}>
-            <AtTypography color={grey}>{props.client.email || 'N/A'}</AtTypography>
+            <AtTypography color={grey}>
+              {props.client.email || 'N/A'}
+            </AtTypography>
           </Grid>
         </Grid>
 
@@ -36,7 +38,9 @@ const Client: React.FunctionComponent<ClientProps> = (props: ClientProps) => {
             <AtTypography color={grey2}>Full Name: </AtTypography>
           </Grid>
           <Grid item={true} xs={8}>
-            <AtTypography color={grey}>{props.client.fullName || 'N/A'}</AtTypography>
+            <AtTypography color={grey}>
+              {props.client.fullName || 'N/A'}
+            </AtTypography>
           </Grid>
         </Grid>
 
@@ -45,7 +49,9 @@ const Client: React.FunctionComponent<ClientProps> = (props: ClientProps) => {
             <AtTypography color={grey2}>Position: </AtTypography>
           </Grid>
           <Grid item={true} xs={8}>
-            <AtTypography color={grey}>{props.client.position || 'N/A'}</AtTypography>
+            <AtTypography color={grey}>
+              {props.client.position || 'N/A'}
+            </AtTypography>
           </Grid>
         </Grid>
       </Box>

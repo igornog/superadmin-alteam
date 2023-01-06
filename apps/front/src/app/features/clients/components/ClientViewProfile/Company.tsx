@@ -62,7 +62,9 @@ const Company: React.FunctionComponent<CompanyProps> = (
             <AtTypography color={grey2}>Linkedin URL: </AtTypography>
           </Grid>
           <Grid item={true} xs={8}>
-            <AtTypography color={grey}>{props.client.linkedinUrl || 'N/A'}</AtTypography>
+            <AtTypography color={grey}>
+              {props.client.linkedinUrl || 'N/A'}
+            </AtTypography>
           </Grid>
         </Grid>
       </Box>

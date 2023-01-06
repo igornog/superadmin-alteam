@@ -29,7 +29,9 @@ const Request: React.FunctionComponent<RequestProps> = (
             <AtTypography color={grey2}>Project Type: </AtTypography>
           </Grid>
           <Grid item={true} xs={8}>
-            <AtTypography color={grey}>{props.client.projectType || 'N/A'}</AtTypography>
+            <AtTypography color={grey}>
+              {props.client.projectType || 'N/A'}
+            </AtTypography>
           </Grid>
         </Grid>
 
@@ -38,7 +40,9 @@ const Request: React.FunctionComponent<RequestProps> = (
             <AtTypography color={grey2}>Delivery Type: </AtTypography>
           </Grid>
           <Grid item={true} xs={8}>
-            <AtTypography color={grey}>{props.client.deliveryType || 'N/A'}</AtTypography>
+            <AtTypography color={grey}>
+              {props.client.deliveryType || 'N/A'}
+            </AtTypography>
           </Grid>
         </Grid>
 
@@ -47,7 +51,9 @@ const Request: React.FunctionComponent<RequestProps> = (
             <AtTypography color={grey2}>Team Request: </AtTypography>
           </Grid>
           <Grid item={true} xs={8}>
-            <AtTypography color={grey}>{props.client.teamRequest || 'N/A'}</AtTypography>
+            <AtTypography color={grey}>
+              {props.client.teamRequest || 'N/A'}
+            </AtTypography>
           </Grid>
         </Grid>
 
@@ -56,7 +62,9 @@ const Request: React.FunctionComponent<RequestProps> = (
             <AtTypography color={grey2}>Description: </AtTypography>
           </Grid>
           <Grid item={true} xs={8}>
-            <AtTypography color={grey}>{props.client.request || 'N/A'}</AtTypography>
+            <AtTypography color={grey}>
+              {props.client.request || 'N/A'}
+            </AtTypography>
           </Grid>
         </Grid>
       </Box>
