@@ -1,6 +1,6 @@
 export interface SoloTalentAsset {
   name: string
-  asset: Buffer
+  asset: Blob
 }
 
 export interface AssetService {

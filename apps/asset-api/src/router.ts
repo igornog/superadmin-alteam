@@ -7,7 +7,7 @@ import {soloTalentPgRepository} from "@yjcapp/postgres-db";
 
 export const router = express.Router()
   .use(fileUpload())
-router.post("/assets/solo-talent/:id/:name", async (req, res) => {
+router.post("/assets/solo/:id/:name", async (req, res) => {
   if (!req.files.file) {
     res.status(400).send("No files were uploaded");
     return;
@@ -18,7 +18,7 @@ router.post("/assets/solo-talent/:id/:name", async (req, res) => {
   }
   const fileLocation = await assetService.createTalentAsset(req.params.id, {
     name: req.params.name,
-    asset: req.files.file.data
+    asset: new Blob([req.files.file.data])
   });
 
   // returning fileupload location
@@ -29,7 +29,7 @@ const assetService: AssetService = {
   async createTalentAsset(talentId: string, soloTalentAsset: SoloTalentAsset): Promise<string> {
     const assetId = v4();
     const path = `users/${talentId}/${assetId}`;
-    await saveAsset(path, soloTalentAsset.asset);
+    await saveAsset(path, Buffer.from(await soloTalentAsset.asset.arrayBuffer()));
     const fullAssetPath = "https://dev.assets.alteam.io/" + path;
     const talent = await soloTalentPgRepository.retrieveSoloTalent(talentId)
     const talentAssets = talent.assets ?? [];
