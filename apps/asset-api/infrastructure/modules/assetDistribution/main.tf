@@ -1,6 +1,6 @@
 locals {
   isProd = var.stage == "prod"
-  cName  = "assets.alteam.io"
+  cName  = "${var.stage}.assets.alteam.io"
 }
 
 resource "aws_s3_bucket" "s3" {

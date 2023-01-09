@@ -1,11 +1,14 @@
 import express from "express";
 import fileUpload from "express-fileupload";
-import { v4} from "uuid";
+import {v4} from "uuid";
 import {saveAsset} from "./s3AssetStorage";
+import {AssetService, SoloTalentAsset} from "@yjcapp/app";
+import {soloTalentPgRepository} from "@yjcapp/postgres-db";
+
 export const router = express.Router()
   .use(fileUpload())
-router.post("/assets/user/:id", async (req, res) => {
-  if(!req.files.file) {
+router.post("/assets/solo-talent/:id/:name", async (req, res) => {
+  if (!req.files.file) {
     res.status(400).send("No files were uploaded");
     return;
   }
@@ -13,16 +16,33 @@ router.post("/assets/user/:id", async (req, res) => {
     res.status(400).send("Only one file can be uploaded at a time");
     return;
   }
-  const fileLocation = await uploadUserAsset(req.params.id, req.files.file.data);
+  const fileLocation = await assetService.createTalentAsset(req.params.id, {
+    name: req.params.name,
+    asset: req.files.file.data
+  });
 
   // returning fileupload location
-  return res.status(200).json({ location: fileLocation });
+  return res.status(200).json({location: fileLocation});
 });
 
-async function uploadUserAsset(userId: string, file: Buffer): Promise<string> {
+const assetService: AssetService = {
+  async createTalentAsset(talentId: string, soloTalentAsset: SoloTalentAsset): Promise<string> {
+    const assetId = v4();
+    const path = `users/${talentId}/${assetId}`;
+    await saveAsset(path, soloTalentAsset.asset);
+    const fullAssetPath = "https://dev.assets.alteam.io/" + path;
+    const talent = await soloTalentPgRepository.retrieveSoloTalent(talentId)
+    const talentAssets = talent.assets ?? [];
+    talentAssets.push({name: soloTalentAsset.name, link: fullAssetPath});
+    await soloTalentPgRepository.updateSoloTalent({...talent, assets: talentAssets});
+    return fullAssetPath;
+  }
+}
+
+async function uploadSoloTalentAsset(talentId: string, file: Buffer): Promise<string> {
   const assetId = v4();
-  const path = `users/${userId}/${assetId}`;
+  const path = `users/${talentId}/${assetId}`;
   await saveAsset(path, file);
-  return path
+  return "https://dev.assets.alteam.io/" + path;
 }
 
