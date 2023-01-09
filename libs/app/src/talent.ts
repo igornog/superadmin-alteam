@@ -8,10 +8,7 @@ export interface GroupTalent {
   about: string
   assets: string[]
 }
-interface Asset {
-  name : string
-  link : string
-}
+
 export interface SoloTalent {
   id: string
   firstName: string
@@ -23,7 +20,7 @@ export interface SoloTalent {
   role: string
   email: string
   about: string
-  assets?: Asset[] // ["https://assets.alteam.io/users/2/065c5c49-c94a-4500-a407-390be61e2a4d"]
+  assets?: Asset[]
   skills: string[]
   appliedDate?: Date
   phoneNumber?: string
@@ -32,7 +29,10 @@ export interface SoloTalent {
   listing?: any
   status?: ListingStatus
 }
-
+export interface Asset {
+  name : string
+  link : string
+}
 export interface Link {
   id?: string
   name?: string
