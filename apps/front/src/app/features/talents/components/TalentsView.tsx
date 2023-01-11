@@ -35,28 +35,28 @@ const TalentsView: React.FunctionComponent = () => {
   }, [activeTab, dispatch, settings.tabs])
 
   useEffect(() => {
-    if (activeTab?.status) {
-      dispatch(
-        handleTalents({
-          talentName: settings.filters.talentSearch,
-          skills: settings.filters.skills
-            ?.filter((skill) => skill.active)
-            .map((item: Filter) => item.label),
+    // if (activeTab?.status) {
+    dispatch(
+      handleTalents({
+        talentName: settings.filters.searchName || '',
+        skills: settings.filters.skills
+          ?.filter((skill) => skill.active)
+          .map((item: Filter) => item.label),
 
-          availability: settings.filters.jobTypes
-            ?.filter((jobType) => jobType.active)
-            .map((item: Filter) => item.label as Availability),
+        availability: settings.filters.jobTypes
+          ?.filter((jobType) => jobType.active)
+          .map((item: Filter) => item.label as Availability),
 
-          status: activeTab?.status?.toLowerCase(),
-        }),
-      )
-    }
+        status: activeTab?.status?.toLowerCase(),
+      }),
+    )
+    // }
   }, [
     activeTab?.status,
     dispatch,
     settings.filters.jobTypes,
     settings.filters.skills,
-    settings.filters.talentSearch,
+    settings.filters.searchName,
   ])
 
   return (

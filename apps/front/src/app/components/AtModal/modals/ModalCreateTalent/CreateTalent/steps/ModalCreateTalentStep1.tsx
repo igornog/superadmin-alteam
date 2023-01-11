@@ -70,7 +70,7 @@ const ModalCreateTalentStep1: React.FunctionComponent<
         $listItems={Object.values(Availability).map(
           (label: Availability, index: number) => ({ id: index, label: label }),
         )}
-        label={'Avaialbility'}
+        label={'Availability'}
       />
 
       <AtTextField

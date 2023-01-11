@@ -5,10 +5,7 @@ import { useAppSelector } from '../../../utils/hooks/reduxHook'
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
 import { Client } from '../../../utils/redux/types/clients.type'
 import { Column } from '../../../utils/redux/types/settings.type'
-import AtButton, {
-  AtButtonKind,
-  AtButtonVariant,
-} from '../../AtButton/AtButton'
+import moment from 'moment'
 import AtRightClick from '../../AtRightClick/AtRightClick'
 import ClientMenu from '../../AtRightClick/ContextMenus/ClientMenu'
 import AtTable from '../../AtTable/AtTable'
@@ -18,12 +15,18 @@ import AtTableHead from '../../AtTable/AtTableHead'
 import { AtTableRow } from '../../AtTable/AtTableRow'
 import AtTypography from '../../AtTypography/AtTypography'
 import ClientLogo from './ClientLogo'
+import AtButton, {
+  AtButtonKind,
+  AtButtonVariant,
+} from '../../AtButton/AtButton'
+import { stringMatch } from '../../../utils/helpers'
 
 const ClientsTable: React.FunctionComponent<ClientTableProps> = (
   props: ClientTableProps,
 ) => {
   const [position, setPosition] = useState<number | null>(null)
   const activeTab = useAppSelector((state) => getActiveTab(state))
+  const settings = useAppSelector((state) => state.settings)
 
   const haveToDisplay = (column: Column) => {
     return props.tableColumns?.includes(column)
@@ -65,7 +68,7 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
             <AtTableRow
               key={client.id}
               $hover={true}
-              onClick={() => props.openClient(client.id)}
+              onClick={() => client.id && props.openClient(client.id)}
               $setPosition={setPosition}
             >
               {haveToDisplay(Column.Client) && (
@@ -83,7 +86,10 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
 
                       <Box display={'flex'} flexDirection={'column'}>
                         <AtTypography variant={'body1'} $bold={true}>
-                          {client.name}
+                          {stringMatch(
+                            client.companyName,
+                            settings.filters.searchName ?? '',
+                          )}
                         </AtTypography>
                         <AtTypography
                           variant={'caption'}
@@ -100,33 +106,31 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
 
               {haveToDisplay(Column.Received) && (
                 <AtTableCell>
-                  <AtTypography>{client.received}</AtTypography>
+                  <AtTypography>
+                    {moment(client.received).format('DD.MM.YYYY')}
+                  </AtTypography>
                 </AtTableCell>
               )}
 
               {haveToDisplay(Column.Listings) && (
                 <AtTableCell>
-                  <AtTypography>{client.listings.length}</AtTypography>
+                  <AtTypography>{client.listings?.length ?? 0}</AtTypography>
                 </AtTableCell>
               )}
 
               {haveToDisplay(Column.Assignees) && (
                 <AtTableCell>
                   <AtTypography>
-                    {client.assignee ?? (
-                      <Box display={'flex'} gap={'10px'}>
-                        <AtTypography color={grey3}>
-                          Nobody assigned
-                        </AtTypography>
+                    <Box display={'flex'} gap={'10px'}>
+                      <AtTypography color={grey3}>Nobody assigned</AtTypography>
 
-                        <AtButton
-                          kind={AtButtonKind.Default}
-                          variant={AtButtonVariant.Text}
-                          name={'Assign now'}
-                          fontSize={'14px'}
-                        />
-                      </Box>
-                    )}
+                      <AtButton
+                        kind={AtButtonKind.Default}
+                        variant={AtButtonVariant.Text}
+                        name={'Assign now'}
+                        fontSize={'14px'}
+                      />
+                    </Box>
                   </AtTypography>
                 </AtTableCell>
               )}
@@ -156,7 +160,7 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
 
 interface ClientTableProps {
   clients: Client[]
-  openClient: (id: number) => void
+  openClient: (id: string) => void
   tableColumns?: Column[]
 }
 

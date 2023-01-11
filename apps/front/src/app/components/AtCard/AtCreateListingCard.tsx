@@ -30,13 +30,12 @@ export const StyledCard = styled.div`
   div {
     place-items: center;
     padding: 52px;
-    
+
     img {
       width: 40px;
       height: 40px;
     }
   }
-
 `
 
 const AtCreateListingCard: React.FunctionComponent<CreateListingCardProps> = (
@@ -44,17 +43,17 @@ const AtCreateListingCard: React.FunctionComponent<CreateListingCardProps> = (
 ) => {
   return (
     <StyledCard onClick={props.onClick}>
-      <Box display={'flex'} flexDirection={'column'} gap={'20px'} >
+      <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
         <img src={props.icon} alt={'Folder'} />
         <AtTypography variant={'h5'}>{props.listingOption}</AtTypography>
       </Box>
-    </StyledCard >
+    </StyledCard>
   )
 }
 
 interface CreateListingCardProps {
-  listingOption?: string,
-  icon?: string,
+  listingOption?: string
+  icon?: string
   onClick?: (e: React.MouseEvent) => void
 }
 

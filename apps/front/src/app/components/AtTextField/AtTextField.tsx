@@ -66,7 +66,7 @@ const StyledLabel = styled.label<{
 }
 `
 
-const StyledInput = styled(OutlinedInput) <{
+const StyledInput = styled(OutlinedInput)<{
   $isError?: boolean
   $isSuccess?: boolean
   $focused: boolean
@@ -79,16 +79,16 @@ const StyledInput = styled(OutlinedInput) <{
 }>`
   &.${outlinedInputClasses.root} {
     ${({ multiline }) =>
-    !multiline &&
-    css`
+      !multiline &&
+      css`
         padding: 0 20px;
       `}
     justify-content: space-between;
     ${({ $bgColor }) =>
-    $bgColor
-      ? css<{ $bgColor?: string }>`
+      $bgColor
+        ? css<{ $bgColor?: string }>`
             background-color: ${({ $bgColor }) =>
-          $bgColor === 'black' ? black : white};
+              $bgColor === 'black' ? black : white};
           `
         : css<{ $focused: boolean; $isError?: boolean; $isSuccess?: boolean }>`
             background-color: ${({ $focused, $isError, $isSuccess }) =>
@@ -103,7 +103,7 @@ const StyledInput = styled(OutlinedInput) <{
     & input {
       max-width: ${({ $maxWidth }) => $maxWidth && $maxWidth + 'ch'};
       color: ${({ disabled, $bgColor }) =>
-    $bgColor === 'black' ? white : disabled ? grey3 : black};
+        $bgColor === 'black' ? white : disabled ? grey3 : black};
       font-size: ${({ size }) => (size === 'medium' ? '16px' : '14px')};
       &::placeholder {
         color: ${grey3};
@@ -140,13 +140,13 @@ const StyledInput = styled(OutlinedInput) <{
           `}
         width: 20px;
         color: ${({ disabled, $bgColor }) =>
-    $bgColor === 'black' ? white : disabled ? grey3 : black};
+          $bgColor === 'black' ? white : disabled ? grey3 : black};
       }
     }
     .${inputAdornmentClasses.positionStart} {
       width: ${({ size }) => (size === 'medium' ? '20px' : '15px')};
       color: ${({ $isError, $isSuccess, disabled }) =>
-    disabled ? grey3 : $isError ? red : $isSuccess ? green : grey2};
+        disabled ? grey3 : $isError ? red : $isSuccess ? green : grey2};
       margin-right: 0;
     }
   }
@@ -157,11 +157,11 @@ const StyledInput = styled(OutlinedInput) <{
       transition: 0.3s;
       border-width: 1px;
       border-color: ${({ $isError, $isSuccess, $bgColor }) =>
-    $bgColor === 'black'
-      ? null
-      : $isError
-        ? red
-        : $isSuccess
+        $bgColor === 'black'
+          ? null
+          : $isError
+          ? red
+          : $isSuccess
           ? green
           : grey5};
     }
@@ -170,12 +170,12 @@ const StyledInput = styled(OutlinedInput) <{
     fieldset {
       transition: 0.3s;
       border-color: ${({ $isError, $isSuccess }) =>
-    $isError ? red : $isSuccess ? green : grey3};
+        $isError ? red : $isSuccess ? green : grey3};
     }
   }
 `
 
-const StyledArrow = styled(ArrowDown2) <{ open?: boolean }>`
+const StyledArrow = styled(ArrowDown2)<{ open?: boolean }>`
   transition: 0.3s;
   transform: rotate(${({ open }) => (open ? '180' : '0')}deg);
 `
@@ -343,13 +343,13 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
             )
           }
         />
-        {props.charCounter ?
-          <StyledCharCounter >
+        {props.charCounter ? (
+          <StyledCharCounter>
             <AtTypography variant={'caption'} color={grey3}>
-              {(Object.keys(value ?? value).length)}/{props.maxLength}
+              {Object.keys(value ?? value).length}/{props.maxLength}
             </AtTypography>
           </StyledCharCounter>
-          : null}
+        ) : null}
 
         {props.isError && props.helperText ? (
           <FormHelperText>

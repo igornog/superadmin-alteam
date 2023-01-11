@@ -1,6 +1,8 @@
 import { Box } from '@mui/material'
 import { grey2 } from '../../../../../../utils/colors'
-import AtTextFieldDropdown, { DropdownItem } from '../../../../../AtDropdown/AtTextFieldDropdown'
+import AtTextFieldDropdown, {
+  DropdownItem,
+} from '../../../../../AtDropdown/AtTextFieldDropdown'
 import AtLine from '../../../../../AtLine/AtLine'
 import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
@@ -10,9 +12,7 @@ import { getActiveClient } from '../../../../../../utils/redux/selectors/clients
 import { FormFields } from '../../CreateListing'
 import { RateType } from '../../../../../../utils/redux/types/listings.type'
 
-const TeamStep1: React.FunctionComponent<Step1Props> = (
-  props: Step1Props
-) => {
+const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
 
   const handleSelectTeamSize = (e: DropdownItem) => {
@@ -46,20 +46,18 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (
         flexDirection={'column'}
         gap={'50px'}
       >
-
         <Box display={'flex'} gap={'30px'} flexDirection={'column'}>
           <AtTextField
             label={'Team Project Name'}
             required={true}
             placeholder={'Enter Team Project Name'}
             maxLength={30}
-
           />
 
           <AtTextField
             label={'Client'}
             readonly={true}
-            defaultValue={selectedClient.name}
+            defaultValue={selectedClient.companyName}
           />
 
           <AtTextFieldDropdown
@@ -67,7 +65,10 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (
             placeholder={'Select Team Size (max 10)'}
             required={true}
             handleSelect={(e) => handleSelectTeamSize(e)}
-            $listItems={Array.from(Array(10).keys()).map((key) => ({ id: key + 1, label: (key + 1).toString() }))}
+            $listItems={Array.from(Array(10).keys()).map((key) => ({
+              id: key + 1,
+              label: (key + 1).toString(),
+            }))}
             label={'Team Size (max 10)'}
           />
 
@@ -75,7 +76,6 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (
             <AtTextFieldDropdown
               fullWidth={true}
               required={true}
-
               placeholder={'Select Work Type'}
               $listItems={[
                 {
@@ -93,21 +93,18 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (
             <AtTextFieldDropdown
               fullWidth={true}
               required={true}
-
               placeholder={'Enter Timezone'}
-              $listItems={Array.from(Array(25).keys()).map((key) => (
-                {
-                  id: key,
-                  label: `GMT${(key > 0 ? key <= 12 ? '-' + key : '+' + (key - 12) : '')}`
-                }
-              ))}
+              $listItems={Array.from(Array(25).keys()).map((key) => ({
+                id: key,
+                label: `GMT${
+                  key > 0 ? (key <= 12 ? '-' + key : '+' + (key - 12)) : ''
+                }`,
+              }))}
             />
-
           </Box>
           <AtTextFieldDropdown
             fullWidth={true}
             required={true}
-
             placeholder={'Select Avaliability'}
             $listItems={[
               {
@@ -127,14 +124,12 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (
             required={true}
             placeholder={'Enter Project Length'}
             maxLength={30}
-
           />
 
           <AtTextField
             label={'Start Date'}
             required={true}
             placeholder={'Enter Start Date'}
-
           />
 
           <Box display={'flex'} gap={'10px'} flexDirection={'column'}>
@@ -161,32 +156,30 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (
               label={'Rate Type'}
             />
 
-            {props.formData.rateType === RateType.Fixed ?
-              <AtTextField
-                placeholder={'Enter Exact Rate'}
-                maxLength={30}
+            {props.formData.rateType === RateType.Fixed ? (
+              <AtTextField placeholder={'Enter Exact Rate'} maxLength={30} />
+            ) : props.formData.rateType ? (
+              <>
+                <AtTextField
+                  placeholder={`Enter ${props.formData.rateType} Rate`}
+                  maxLength={5}
+                />
 
-              />
-              : props.formData.rateType ?
-                <>
-                  <AtTextField
-                    placeholder={`Enter ${props.formData.rateType} Rate`}
-                    maxLength={5}
+                <AtTextField
+                  placeholder={`Enter Number of ${
+                    props.formData.rateType === 'Daily' ? `Days` : `Hours`
+                  } Per Week`}
+                  maxLength={5}
+                />
 
-                  />
-
-                  <AtTextField
-                    placeholder={`Enter Number of ${props.formData.rateType === 'Daily' ? `Days` : `Hours`} Per Week`}
-                    maxLength={5}
-
-                  />
-
-                  <AtTypography variant={'caption'} color={grey2}>Please fill the forms above as a {props.formData.rateType.toLowerCase()} rate for whole team.</AtTypography>
-                </>
-
-                : ''
-            }
-
+                <AtTypography variant={'caption'} color={grey2}>
+                  Please fill the forms above as a{' '}
+                  {props.formData.rateType.toLowerCase()} rate for whole team.
+                </AtTypography>
+              </>
+            ) : (
+              ''
+            )}
           </Box>
 
           <AtTextFieldDropdown
@@ -210,9 +203,7 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (
             label={'Learning'}
             required={true}
             placeholder={'Enter Learning Link'}
-
           />
-
         </Box>
       </Box>
     </StyledForm>
@@ -225,4 +216,3 @@ interface Step1Props {
 }
 
 export default TeamStep1
-

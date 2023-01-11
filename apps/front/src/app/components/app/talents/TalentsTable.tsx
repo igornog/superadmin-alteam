@@ -97,7 +97,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
                         <AtTypography variant={'body1'} $bold={true}>
                           {stringMatch(
                             fullName,
-                            settings.filters.talentSearch ?? '',
+                            settings.filters.searchName ?? '',
                           )}
                         </AtTypography>
                         {/* {talent.group && <AtGroupTag label={talent.group} />} */}

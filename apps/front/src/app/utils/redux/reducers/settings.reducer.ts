@@ -17,7 +17,7 @@ const initialState: SettingsState = {
   filters: {
     skills: [],
     jobTypes: [],
-    talentSearch: '',
+    searchName: '',
   },
   header: {},
   displayMode: DisplayMode.List,
@@ -75,13 +75,13 @@ const { reducer } = createSlice({
       })
 
       .addCase(handleUpdateFilter.fulfilled, (state, { payload }) => {
-        state.filters.talentSearch = payload.talentSearch
+        state.filters.searchName = payload.searchName
       })
 
       .addCase(handleRefreshFilters.fulfilled, (state: SettingsState) => {
         state.filters.skills = skillsFilters
         state.filters.jobTypes = availabilityFilters
-        state.filters.talentSearch = ''
+        state.filters.searchName = ''
       })
 
       .addCase(handleSwitchDisplayMode.fulfilled, (state, { payload }) => {

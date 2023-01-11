@@ -25,9 +25,9 @@ export default class RemoteTalentService implements TalentService {
     return data
   }
 
-  async searchSoloTalent(talentSearch: TalentSearch): Promise<SoloTalent[]> {
+  async searchSoloTalent(searchName: TalentSearch): Promise<SoloTalent[]> {
     const { data } = await atAxios.get('/talent/search', {
-      params: talentSearch,
+      params: searchName,
     })
     return data
   }

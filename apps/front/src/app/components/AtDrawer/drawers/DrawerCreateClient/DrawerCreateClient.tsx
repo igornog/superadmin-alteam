@@ -3,8 +3,13 @@ import { ArrowLeft2, ArrowRight, CloseSquare } from 'iconsax-react'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { white, grey2, grey5, black, grey4 } from '../../../../utils/colors'
-import { useAppSelector } from '../../../../utils/hooks/reduxHook'
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../../utils/hooks/reduxHook'
+import { handleCreateClient } from '../../../../utils/redux/actions/clients.action'
 import { getActiveTab } from '../../../../utils/redux/selectors/settings.selector'
+import { Client } from '../../../../utils/redux/types/clients.type'
 import { boxShadow } from '../../../../utils/theme'
 import AtButton, {
   AtButtonVariant,
@@ -17,6 +22,7 @@ import AtDrawer from '../../AtDrawer'
 import FinalStep from './steps/FinalStep'
 import Step1 from './steps/Step1'
 import Step2 from './steps/Step2'
+import { ClientStatus } from '@yjcapp/app'
 
 export const StyledForm = styled.div`
   background-color: ${white};
@@ -55,13 +61,52 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
 ) => {
   const activeTab = useAppSelector((state) => getActiveTab(state))
   const [step, setStep] = useState(0)
+  const dispatch = useAppDispatch()
+  const defaultClient = {
+    companyName: '',
+    phoneNumber: '',
+    companyUrl: '',
+    linkedinUrl: '',
+    industry: '',
+    projectType: undefined,
+    deliveryType: undefined,
+    teamRequest: undefined,
+    request: '',
+    email: '',
+    fullName: '',
+    position: '',
+    status: ClientStatus.Request,
+  }
+
+  const [client, setClient] = useState<Client>(defaultClient)
 
   const handleClose = () => {
+    setClient(defaultClient)
     props.handleClose()
 
     setTimeout(() => {
       setStep(0)
     }, 500)
+  }
+
+  const createClient = () => {
+    if (step === 1) {
+      if (
+        client.projectType &&
+        client.deliveryType &&
+        client.teamRequest &&
+        client.request &&
+        client.email &&
+        client.fullName &&
+        client.position
+      ) {
+        dispatch(handleCreateClient({ ...client, status: ClientStatus.Active }))
+      } else {
+        dispatch(handleCreateClient(client))
+      }
+    }
+
+    setStep(step + 1)
   }
 
   return (
@@ -111,11 +156,15 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
                     tabs={[
                       {
                         id: 0,
-                        content: <Step1 />,
+                        content: (
+                          <Step1 client={client} setClient={setClient} />
+                        ),
                       },
                       {
                         id: 1,
-                        content: <Step2 />,
+                        content: (
+                          <Step2 client={client} setClient={setClient} />
+                        ),
                       },
                     ]}
                     step={step}
@@ -146,20 +195,27 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
                     <span style={{ color: black }}>{step + 1}</span>/2
                   </Box>
                 </AtTypography>
+
                 {step > 0 && (
                   <AtButton
                     kind={AtButtonKind.Default}
                     variant={AtButtonVariant.Outlined}
                     name={'Skip Step'}
-                    onClick={() => setStep(step + 1)}
+                    onClick={createClient}
                     endIcon={<CloseSquare />}
                   />
                 )}
+
                 <AtButton
                   kind={AtButtonKind.Success}
+                  disabled={
+                    !client.companyName ||
+                    !client.phoneNumber ||
+                    !client.companyUrl
+                  }
                   variant={AtButtonVariant.Contained}
                   name={'Next Step'}
-                  onClick={() => setStep(step + 1)}
+                  onClick={createClient}
                   endIcon={<ArrowRight />}
                 />
               </StyledFormStepper>

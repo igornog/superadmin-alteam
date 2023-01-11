@@ -1,7 +1,7 @@
 import React from 'react'
 import { RightClick } from '../../types'
 import { StatusType } from './status.type'
-import { ListingStatus } from '@yjcapp/app'
+import { ClientStatus, ListingStatus } from '@yjcapp/app'
 
 export interface SettingsState {
   tabs: Page[]
@@ -15,12 +15,12 @@ export interface SettingsState {
 export interface FilterInterface {
   skills?: Filter[]
   jobTypes?: Filter[]
-  talentSearch?: string
+  searchName?: string
 }
 
 export interface Page {
   title: string
-  status: ListingStatus | null
+  status: ListingStatus | ClientStatus | null
   node?: React.ReactNode
   badge?: number
   action?: string

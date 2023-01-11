@@ -5,8 +5,11 @@ import AtFrame from '../../../../components/AtFrame/AtFrame'
 import ModalRequest from '../../../../components/AtModal/modals/ModalRequest'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
 import { grey, grey2 } from '../../../../utils/colors'
+import { Client } from '../../../../utils/redux/types/clients.type'
 
-const Request: React.FunctionComponent = () => {
+const Request: React.FunctionComponent<RequestProps> = (
+  props: RequestProps,
+) => {
   const [openModal, setOpenModal] = useState(false)
 
   return (
@@ -26,7 +29,9 @@ const Request: React.FunctionComponent = () => {
             <AtTypography color={grey2}>Project Type: </AtTypography>
           </Grid>
           <Grid item={true} xs={8}>
-            <AtTypography color={grey}>App Development</AtTypography>
+            <AtTypography color={grey}>
+              {props.client.projectType || 'N/A'}
+            </AtTypography>
           </Grid>
         </Grid>
 
@@ -35,7 +40,9 @@ const Request: React.FunctionComponent = () => {
             <AtTypography color={grey2}>Delivery Type: </AtTypography>
           </Grid>
           <Grid item={true} xs={8}>
-            <AtTypography color={grey}>One-off project</AtTypography>
+            <AtTypography color={grey}>
+              {props.client.deliveryType || 'N/A'}
+            </AtTypography>
           </Grid>
         </Grid>
 
@@ -44,7 +51,9 @@ const Request: React.FunctionComponent = () => {
             <AtTypography color={grey2}>Team Request: </AtTypography>
           </Grid>
           <Grid item={true} xs={8}>
-            <AtTypography color={grey}>Solo freelancer</AtTypography>
+            <AtTypography color={grey}>
+              {props.client.teamRequest || 'N/A'}
+            </AtTypography>
           </Grid>
         </Grid>
 
@@ -54,8 +63,7 @@ const Request: React.FunctionComponent = () => {
           </Grid>
           <Grid item={true} xs={8}>
             <AtTypography color={grey}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque
-              adipiscing placerat venenatis odio vel dignissim nec diam.
+              {props.client.request || 'N/A'}
             </AtTypography>
           </Grid>
         </Grid>
@@ -64,6 +72,10 @@ const Request: React.FunctionComponent = () => {
       <ModalRequest open={openModal} onClose={() => setOpenModal(false)} />
     </AtFrame>
   )
+}
+
+interface RequestProps {
+  client: Client
 }
 
 export default Request

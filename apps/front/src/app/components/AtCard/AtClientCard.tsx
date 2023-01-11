@@ -6,20 +6,22 @@ import AtGroupTag from '../AtGroupTag/AtGroupTag'
 import AtTypography from '../AtTypography/AtTypography'
 import { StyledCard } from './AtTalentCard'
 import { Client } from '../../utils/redux/types/clients.type'
-import { plurialize } from '../../utils/helpers'
 import AtLine from '../AtLine/AtLine'
 import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton'
-import ClientLogo from '../app/clients/ClientLogo'
 import ClientMenu from '../AtRightClick/ContextMenus/ClientMenu'
 import AtRightClick from '../AtRightClick/AtRightClick'
 import { useAppSelector } from '../../utils/hooks/reduxHook'
 import { getActiveTab } from '../../utils/redux/selectors/settings.selector'
+import ClientLogo from '../app/clients/ClientLogo'
+import moment from 'moment'
+import { plurialize, stringMatch } from '../../utils/helpers'
 
 const AtClientCard: React.FunctionComponent<AtClientCardProps> = (
   props: AtClientCardProps,
 ) => {
   const client = new Client(props.client)
   const activeTab = useAppSelector((state) => getActiveTab(state))
+  const settings = useAppSelector((state) => state.settings)
 
   return (
     <StyledCard onClick={props.onClick} fullHeight={props.fullHeight}>
@@ -31,34 +33,44 @@ const AtClientCard: React.FunctionComponent<AtClientCardProps> = (
           <Box
             display={'flex'}
             alignItems={'center'}
+            flexDirection={'column'}
             justifyContent={'space-between'}
+            gap={'5px'}
           >
-            <Box display={'flex'} gap={'5px'} flexDirection={'column'}>
+            <Box
+              display={'flex'}
+              justifyContent={'space-between'}
+              width={'100%'}
+            >
               <Box display={'flex'} gap={'10px'} alignItems={'center'}>
                 <Box width={'28px'} height={'28px'}>
                   <ClientLogo logo={client.logo} />
                 </Box>
-                <AtTypography variant={'h5'}>{client.name}</AtTypography>
+                <AtTypography variant={'h5'}>
+                  {stringMatch(
+                    client.companyName,
+                    settings.filters.searchName ?? '',
+                  )}
+                </AtTypography>
               </Box>
-              <AtTypography variant={'body1'} color={grey}>
-                {client.industry}
-              </AtTypography>
+              <Box display={'flex'} gap={'10px'} alignItems={'center'}>
+                <AtTypography color={grey3}>
+                  Received: {moment(client.received).format('DD.MM.YYYY')}
+                </AtTypography>
+                <AtGroupTag icon={<ArrowRight2 size={10} />} />
+              </Box>
             </Box>
 
             <Box
               display={'flex'}
-              gap={'5px'}
-              flexDirection={'column'}
-              alignItems={'flex-end'}
+              justifyContent={'space-between'}
+              width={'100%'}
             >
-              <Box display={'flex'} gap={'10px'} alignItems={'center'}>
-                <AtTypography color={grey3}>
-                  Received: {client.received}
-                </AtTypography>
-                <AtGroupTag icon={<ArrowRight2 size={10} />} />
-              </Box>
               <AtTypography variant={'body1'} color={grey}>
-                {plurialize(client.listings.length, 'listing')}
+                {client.industry}
+              </AtTypography>
+              <AtTypography variant={'body1'} color={grey}>
+                {plurialize(client.listings?.length ?? 0, 'listing')}
               </AtTypography>
             </Box>
           </Box>

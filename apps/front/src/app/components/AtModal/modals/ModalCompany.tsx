@@ -1,6 +1,9 @@
 import { Box } from '@mui/material'
 import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react'
-import React from 'react'
+import React, { useState } from 'react'
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
+import { handlePatchClient } from '../../../utils/redux/actions/clients.action'
+import { getActiveClient } from '../../../utils/redux/selectors/clients.selector'
 import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtButton, {
   AtButtonKind,
@@ -14,6 +17,27 @@ import AtModal from '../AtModal'
 const ModalCompany: React.FunctionComponent<ModalCompanyProps> = (
   props: ModalCompanyProps,
 ) => {
+  const selectedClient = useAppSelector((state) => getActiveClient(state))
+  const dispatch = useAppDispatch()
+
+  const [phoneNumber, setPhoneNumber] = useState<string>()
+  const [companyUrl, setCompanyUrl] = useState<string>()
+  const [industry, setIndustry] = useState<string>()
+  const [linkedinUrl, setLinkedinUrl] = useState<string>()
+
+  const handleSave = () => {
+    dispatch(
+      handlePatchClient({
+        id: selectedClient.id,
+        phoneNumber,
+        companyUrl,
+        industry,
+        linkedinUrl,
+      }),
+    )
+    props.onClose?.()
+  }
+
   return (
     <AtModal isOpen={props.open} size={ModalSize.Small} onClose={props.onClose}>
       <Box
@@ -36,13 +60,29 @@ const ModalCompany: React.FunctionComponent<ModalCompanyProps> = (
       <AtLine spacingTop={20} spacingBottom={5} />
 
       <Box display={'flex'} flexDirection={'column'} gap={2.5} padding={2.5}>
-        <AtTextField label={'Phone Number'} value={'+44 1234 12456'} />
+        <AtTextField
+          label={'Phone Number'}
+          onValueChange={setPhoneNumber}
+          value={selectedClient.phoneNumber}
+        />
 
-        <AtTextField label={'Company URL'} value={'chaptr.com'} />
+        <AtTextField
+          label={'Company URL'}
+          value={selectedClient.companyUrl}
+          onValueChange={setCompanyUrl}
+        />
 
-        <AtTextField label={'Industry'} value={'N/A'} />
+        <AtTextField
+          label={'Industry'}
+          value={selectedClient.industry}
+          onValueChange={setIndustry}
+        />
 
-        <AtTextField label={'Linkedin URL'} value={'linkedin.com/chaptr'} />
+        <AtTextField
+          label={'Linkedin URL'}
+          value={selectedClient.linkedinUrl}
+          onValueChange={setLinkedinUrl}
+        />
 
         <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
           <AtButton
@@ -53,7 +93,7 @@ const ModalCompany: React.FunctionComponent<ModalCompanyProps> = (
             endIcon={<CloseSquare size={16} />}
           />
           <AtButton
-            onClick={props.onClose}
+            onClick={handleSave}
             kind={AtButtonKind.Success}
             variant={AtButtonVariant.Contained}
             name={'Save Changes'}

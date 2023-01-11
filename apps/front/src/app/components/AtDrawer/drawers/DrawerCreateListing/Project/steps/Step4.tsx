@@ -47,7 +47,6 @@ const ProjectStep4: React.FunctionComponent = () => {
           </Box>
         </Box>
       </StyledForm>
-
     </Box>
   )
 }

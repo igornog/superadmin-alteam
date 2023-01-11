@@ -44,18 +44,24 @@ const ProjectStep3: React.FunctionComponent = () => {
           <Box display={'flex'} flexWrap={'wrap'} gap={'10px'}>
             {skills && skills.length > 0 ? (
               skills?.map((skill: Skill, index) => {
-                return <AtTag label={skill.label} onDelete={() => handleDeleteTag(skill.label)} key={index} />
+                return (
+                  <AtTag
+                    label={skill.label}
+                    onDelete={() => handleDeleteTag(skill.label)}
+                    key={index}
+                  />
+                )
               })
             ) : (
               <AtTypography color={grey2}>
                 No skills have been added by the talent, please add them by
-                searching below. Please note that you may add only up to 5 skills.{' '}
+                searching below. Please note that you may add only up to 5
+                skills.{' '}
               </AtTypography>
             )}
           </Box>
         </Box>
       </StyledForm>
-
     </Box>
   )
 }

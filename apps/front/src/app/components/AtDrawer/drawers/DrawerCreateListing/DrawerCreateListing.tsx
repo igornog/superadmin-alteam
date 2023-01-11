@@ -72,17 +72,15 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
       open={props.open}
       handleClose={handleClose}
     >
-      {openCreateListing ?
+      {openCreateListing ? (
         <CreateListing
           listingType={listingType}
           steps={listingType === ListingType.Project ? 4 : 5}
-          clientName={selectedClient.name}
+          clientName={selectedClient.companyName}
           handleClose={handleClose}
           handleBackToCreateListing={handleCloseToCreateListing}
         />
-
-        :
-
+      ) : (
         <Container>
           <Box
             paddingY={'30px'}
@@ -99,7 +97,7 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
               />
 
               <AtTypography color={grey2}>
-                Back to {selectedClient.name} Listings
+                Back to {selectedClient.companyName} Listings
               </AtTypography>
             </Box>
 
@@ -115,11 +113,23 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
                 gap={'20px'}
               >
                 <StyledForm>
-                  <Box padding={'20px'} display={'flex'} justifyContent={'space-between'}>
-                    <AtTypography variant={'h4'}>Select Project or Team</AtTypography>
+                  <Box
+                    padding={'20px'}
+                    display={'flex'}
+                    justifyContent={'space-between'}
+                  >
+                    <AtTypography variant={'h4'}>
+                      Select Project or Team
+                    </AtTypography>
                   </Box>
                   <AtLine />
-                  <Grid container={true} justifyContent={'center'} gap={'20px'} padding={'20px'} flexWrap={'unset'}>
+                  <Grid
+                    container={true}
+                    justifyContent={'center'}
+                    gap={'20px'}
+                    padding={'20px'}
+                    flexWrap={'unset'}
+                  >
                     <AtCreateListingCard
                       listingOption={ListingType.Project}
                       icon={FolderIcon}
@@ -136,15 +146,10 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
             </Grid>
           </Box>
         </Container>
-
-      }
-
+      )}
     </AtDrawer>
-
   )
 }
-
-
 
 interface DrawerCreateListingProps {
   open: boolean

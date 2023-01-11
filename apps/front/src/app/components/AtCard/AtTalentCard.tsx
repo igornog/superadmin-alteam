@@ -63,7 +63,7 @@ const AtTalentCard: React.FunctionComponent<AtTalentCardProps> = (
             <Box display={'flex'} gap={'5px'} flexDirection={'column'}>
               <Box display={'flex'} gap={'5px'} alignItems={'center'}>
                 <AtTypography variant={'h5'}>
-                  {stringMatch(fullName, settings.filters.talentSearch ?? '')}
+                  {stringMatch(fullName, settings.filters.searchName ?? '')}
                 </AtTypography>
                 {/* {talent.group && <AtGroupTag label={talent.group} />} */}
               </Box>

@@ -1,6 +1,9 @@
 import { Box } from '@mui/material'
 import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react'
-import React from 'react'
+import React, { useState } from 'react'
+import { useAppSelector, useAppDispatch } from '../../../utils/hooks/reduxHook'
+import { handlePatchClient } from '../../../utils/redux/actions/clients.action'
+import { getActiveClient } from '../../../utils/redux/selectors/clients.selector'
 import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtButton, {
   AtButtonKind,
@@ -14,6 +17,25 @@ import AtModal from '../AtModal'
 const ModalClient: React.FunctionComponent<ModalClientProps> = (
   props: ModalClientProps,
 ) => {
+  const dispatch = useAppDispatch()
+  const selectedClient = useAppSelector((state) => getActiveClient(state))
+
+  const [email, setEmail] = useState<string>()
+  const [fullName, setFullName] = useState<string>()
+  const [position, setPosition] = useState<string>()
+
+  const handleSaveGeneral = () => {
+    dispatch(
+      handlePatchClient({
+        id: selectedClient.id,
+        email,
+        fullName,
+        position,
+      }),
+    )
+    props.onClose?.()
+  }
+
   return (
     <AtModal isOpen={props.open} size={ModalSize.Small} onClose={props.onClose}>
       <Box
@@ -36,11 +58,23 @@ const ModalClient: React.FunctionComponent<ModalClientProps> = (
       <AtLine spacingTop={20} spacingBottom={5} />
 
       <Box display={'flex'} flexDirection={'column'} gap={2.5} padding={2.5}>
-        <AtTextField label={'Email'} value={'andy@chaptr.com'} />
+        <AtTextField
+          label={'Email'}
+          value={selectedClient.email}
+          onValueChange={setEmail}
+        />
 
-        <AtTextField label={'Full Name'} value={'Andrew Gigs'} />
+        <AtTextField
+          label={'Full Name'}
+          value={selectedClient.fullName}
+          onValueChange={setFullName}
+        />
 
-        <AtTextField label={'Position'} value={'Co-Founder'} />
+        <AtTextField
+          label={'Position'}
+          value={selectedClient.position}
+          onValueChange={setPosition}
+        />
 
         <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
           <AtButton
@@ -51,7 +85,7 @@ const ModalClient: React.FunctionComponent<ModalClientProps> = (
             endIcon={<CloseSquare size={16} />}
           />
           <AtButton
-            onClick={props.onClose}
+            onClick={handleSaveGeneral}
             kind={AtButtonKind.Success}
             variant={AtButtonVariant.Contained}
             name={'Save Changes'}

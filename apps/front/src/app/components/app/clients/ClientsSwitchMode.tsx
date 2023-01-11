@@ -22,11 +22,17 @@ const ClientsSwitchMode: React.FunctionComponent<ClientsSwitchModeProps> = (
   const [openDrawerClient, setOpenDrawerClient] = useState(false)
   const [openDrawerClientListing, setOpenDrawerClientListing] = useState(false)
 
-  const handleClickClient = (id: number) => {
+  const handleClickClient = (id: string) => {
     dispatch(handleSelectClient(id))
 
     setOpenDrawerClientListing(activeTab.title === Tabs.ActiveClients)
     setOpenDrawerClient(activeTab.title !== Tabs.ActiveClients)
+  }
+
+  const handleClose = () => {
+    dispatch(handleSelectClient(null))
+    setOpenDrawerClient(false)
+    setOpenDrawerClientListing(false)
   }
 
   return (
@@ -43,14 +49,11 @@ const ClientsSwitchMode: React.FunctionComponent<ClientsSwitchModeProps> = (
         </Grid>
       )}
 
-      <DrawerClient
-        open={openDrawerClient}
-        handleClose={() => setOpenDrawerClient(false)}
-      />
+      <DrawerClient open={openDrawerClient} handleClose={handleClose} />
 
       <DrawerClientListings
         open={openDrawerClientListing}
-        handleClose={() => setOpenDrawerClientListing(false)}
+        handleClose={handleClose}
       />
     </Grid>
   )
