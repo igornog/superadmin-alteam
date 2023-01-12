@@ -13,6 +13,7 @@ import TalentMenu from '../AtRightClick/ContextMenus/TalentMenu'
 import { useAppSelector } from '../../utils/hooks/reduxHook'
 import { findTalent } from '../../utils/redux/selectors/talents.selector'
 import { stringMatch } from '../../utils/helpers'
+import moment from 'moment'
 
 export const StyledCard = styled.div<{ fullHeight?: boolean }>`
   background-color: ${white};
@@ -80,7 +81,7 @@ const AtTalentCard: React.FunctionComponent<AtTalentCardProps> = (
             >
               <Box display={'flex'} gap={'10px'} alignItems={'center'}>
                 <AtTypography color={grey3}>
-                  <>Applied: {talent.appliedDate}</>
+                  <>Applied: {moment(talent.appliedDate).format('DD.MM.YYYY')}</>
                 </AtTypography>
                 <AtGroupTag icon={<ArrowRight2 size={10} />} />
               </Box>
