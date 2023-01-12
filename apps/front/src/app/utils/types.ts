@@ -5,7 +5,7 @@ export enum Tabs {
   AllTalent = 'All Talents',
   AcceptedTalent = 'Accepted Talents',
   DeclinedTalent = 'Declined Talents',
-  Applicants = 'Applicants',
+  SignUp = 'Sign up',
 
   // Clients
   ClientRequests = 'Client Requests',

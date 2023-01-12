@@ -106,7 +106,7 @@ export const talentsTabs: Page[] = [
     clientRightClick: [],
   },
   {
-    title: Tabs.Applicants,
+    title: Tabs.SignUp,
     status: ListingStatus.Applicable,
     active: false,
     settings: {},

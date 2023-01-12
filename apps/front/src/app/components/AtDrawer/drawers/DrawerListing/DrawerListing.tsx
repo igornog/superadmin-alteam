@@ -9,7 +9,6 @@ import {
 } from '../../../../utils/hooks/reduxHook'
 import { handleSelectTalent } from '../../../../utils/redux/actions/talents.action'
 import { getActiveClient } from '../../../../utils/redux/selectors/clients.selector'
-import { Listing } from '../../../../utils/redux/types/listings.type'
 import AtButton, {
   AtButtonVariant,
   AtButtonKind,
@@ -174,7 +173,7 @@ const DrawerListing: React.FunctionComponent<DrawerListingProps> = (
 interface DrawerListingProps {
   open: boolean
   handleClose: () => void
-  selectedListing: Listing
+  selectedListing: any
 }
 
 export default DrawerListing

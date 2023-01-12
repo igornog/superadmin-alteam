@@ -15,7 +15,6 @@ import { grey2 } from '../../../utils/colors'
 import { useAppSelector } from '../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../utils/redux/selectors/clients.selector'
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
-import { Listing } from '../../../utils/redux/types/listings.type'
 import ClientLogo from '../../app/clients/ClientLogo'
 import AtButton, {
   AtButtonKind,
@@ -27,6 +26,7 @@ import AtTypography from '../../AtTypography/AtTypography'
 import AtDrawer from '../AtDrawer'
 import DrawerListing from './DrawerListing/DrawerListing'
 import DrawerCreateListing from './DrawerCreateListing/DrawerCreateListing'
+import { Project } from '../../../utils/redux/types/listings.type'
 
 const StyledListings = styled(Box)`
   display: flex;
@@ -47,11 +47,11 @@ const DrawerClientListings: React.FunctionComponent<
   const [openEditModal, setOpenEditModal] = useState(false)
   const [openListingDetails, setOpenListingDetails] = useState(false)
   const [openCreateListing, setOpenCreateListing] = useState(false)
-  const [selectedListing, setSelectedListing] = useState<Listing>(
-    new Listing({}),
+  const [selectedListing, setSelectedListing] = useState<Project>(
+    new Project({}),
   )
 
-  const selectListing = (listing: Listing) => {
+  const selectListing = (listing: Project) => {
     setSelectedListing(listing)
     setOpenListingDetails(true)
   }
@@ -138,7 +138,7 @@ const DrawerClientListings: React.FunctionComponent<
           <StyledListings paddingTop={'30px'} paddingX={'20px'}>
             <Box display={'flex'} justifyContent={'space-between'}>
               <AtTypography variant={'h4'}>
-                All {selectedClient.companyName} Listings
+                All Listings
               </AtTypography>
               <AtButton
                 kind={AtButtonKind.Success}
@@ -151,7 +151,7 @@ const DrawerClientListings: React.FunctionComponent<
 
             <AtTextField
               value={''}
-              // disabled={selectedClient.listings?.length === 0}
+              disabled={!selectedClient.listings?.length}
               startIcon={<SearchNormal />}
               placeholder={
                 'Search in ' + selectedClient.companyName + ' Listings...'

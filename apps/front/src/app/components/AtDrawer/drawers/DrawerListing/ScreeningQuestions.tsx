@@ -1,7 +1,6 @@
 import { Box } from '@mui/material'
 import { Edit } from 'iconsax-react'
 import React from 'react'
-import { Listing } from '../../../../utils/redux/types/listings.type'
 import AtFrame from '../../../AtFrame/AtFrame'
 import AtLine from '../../../AtLine/AtLine'
 import AtTypography from '../../../AtTypography/AtTypography'
@@ -45,7 +44,7 @@ const ScreeningQuestions: React.FunctionComponent<QuestionsProps> = (
 }
 
 interface QuestionsProps {
-  selectedListing: Listing
+  selectedListing: any
 }
 
 export default ScreeningQuestions

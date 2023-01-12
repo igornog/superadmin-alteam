@@ -1,82 +1,68 @@
 import { StatusType } from './status.type'
-import { Availability, Experience } from '@yjcapp/app'
+import {
+  Availability,
+  ClientListing,
+  ClientProject,
+  Difficulty,
+  WorkType,
+} from '@yjcapp/app'
 
 export interface ListingsState {
-  listListings: Listing[]
+  listListings: ClientListing[]
   selectedListing: number | null
   status?: StatusType
   error?: string | null
 }
 
-export enum ListingStatus {
-  Active = 'Active',
-  Inactive = 'Inactive',
-  Draft = 'Draft',
-  Ended = 'Ended',
-}
+// export enum ListingStatus {
+//   Active = 'Active',
+//   Inactive = 'Inactive',
+//   Draft = 'Draft',
+//   Ended = 'Ended',
+// }
 
-export enum ListingType {
-  Project = 'Project',
-  Team = 'Team',
-}
-
-export enum WorkType {
-  Remote = 'Remote',
-}
-
-export enum RateType {
-  Fixed = 'Fixed',
-  Variable = 'Variable',
-}
-
-export enum Difficulty {
-  Junior = 'Junior',
-  MidSenior = 'MidSenior',
-  Senior = 'Senior',
-  Lead = 'Lead',
-}
-
-export class Listing {
-  id: number
-  name: string
-  nbIndividual: number
+export class Project implements ClientProject {
+  id?: string
+  projectName: string
+  individuals: number
   workType: WorkType
-  timeZone?: string
+  timeZone: string
   availability: Availability
   hours?: number
-  projectLength: number
-  startDate: string
-  rateType: RateType
-  rateFrom?: number
-  rateTo?: number
-  rateFixed?: number
-  difficulty: Experience
-  learning: string
+  projectLength: string
+  startDate: Date
+  rateFrom: number
+  rateTo: number
+  difficulty: Difficulty
+  learningLink: string
   jobDescription: string
-  screeningQuestion: string[]
-  status: ListingStatus
-  received: string
-  talent?: number[]
+  skills: string[]
+  questions: string[]
+  // status: ListingStatus
 
   constructor(data: any) {
     this.id = data.id
-    this.name = data.name
-    this.nbIndividual = data.nbIndividual
+    this.projectName = data.projectName
+    this.individuals = data.individuals
     this.workType = data.workType
     this.timeZone = data.timeZone
     this.availability = data.availability
     this.projectLength = data.projectLength
     this.startDate = data.startDate
-    this.rateType = data.rateType
     this.rateFrom = data.rateFrom
     this.rateTo = data.rateTo
-    this.rateFixed = data.rateFixed
     this.difficulty = data.difficulty
-    this.learning = data.learning
+    this.learningLink = data.learning
     this.jobDescription = data.jobDescription
-    this.screeningQuestion = data.screeningQuestion
-    this.status = data.status
-    this.received = data.received
-    this.talent = data.talent
+    this.skills = data.skills || []
+    this.questions = data.questions || []
+    // this.status = data.status
+    // this.received = data.received
+    // this.talent = data.talent
   }
+}
+
+export enum ListingType {
+  Project = 'Project',
+  Team = 'Team',
 }

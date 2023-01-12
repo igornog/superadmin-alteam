@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import React, { useState } from 'react'
+import React, { Dispatch } from 'react'
 import AtLine from '../../../../../AtLine/AtLine'
 import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
@@ -7,23 +7,11 @@ import { StyledForm } from '../../DrawerCreateListing'
 import { grey2 } from '../../../../../../utils/colors'
 import { SearchNormal1 } from 'iconsax-react'
 import AtTag from '../../../../../AtTag/AtTag'
-import { Skill } from '../../../../../../utils/redux/types/talents.type'
+import { ClientProject } from '@yjcapp/app'
 
-const ProjectStep3: React.FunctionComponent = () => {
-  const [skills, setSkills] = useState([
-    { label: 'UI/UX Design' },
-    { label: 'Figma' },
-    { label: 'Sketch' },
-    { label: 'Wireframe' },
-    { label: 'Prototyping' },
-    { label: 'Prototyping' },
-    { label: 'Wireframe' },
-  ])
-
-  const handleDeleteTag = (value: string) => {
-    setSkills(skills.filter((skill) => skill.label !== value))
-  }
-
+const ProjectStep3: React.FunctionComponent<Step3Props> = (
+  props: Step3Props,
+) => {
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
       <StyledForm>
@@ -33,22 +21,37 @@ const ProjectStep3: React.FunctionComponent = () => {
             Fields with * are mandatory
           </AtTypography>
         </Box>
+
         <AtLine />
+
         <Box display={'flex'} flexDirection={'column'} gap={2.5} padding={2.5}>
           <AtTextField
             placeholder={'Search in Skills'}
-            value={''}
+            onPressEnter={(e) =>
+              props.setProject({
+                ...props.project,
+                skills: [...props.project.skills, e],
+              })
+            }
             startIcon={<SearchNormal1 />}
             size={'small'}
           />
+
           <Box display={'flex'} flexWrap={'wrap'} gap={'10px'}>
-            {skills && skills.length > 0 ? (
-              skills?.map((skill: Skill, index) => {
+            {props.project.skills?.length > 0 ? (
+              props.project.skills?.map((skill, index) => {
                 return (
                   <AtTag
-                    label={skill.label}
-                    onDelete={() => handleDeleteTag(skill.label)}
+                    label={skill}
                     key={index}
+                    onDelete={() =>
+                      props.setProject({
+                        ...props.project,
+                        skills: props.project.skills.filter(
+                          (item) => item !== skill,
+                        ),
+                      })
+                    }
                   />
                 )
               })
@@ -64,6 +67,11 @@ const ProjectStep3: React.FunctionComponent = () => {
       </StyledForm>
     </Box>
   )
+}
+
+interface Step3Props {
+  setProject: Dispatch<React.SetStateAction<ClientProject>>
+  project: ClientProject
 }
 
 export default ProjectStep3

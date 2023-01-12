@@ -9,8 +9,7 @@ import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
 import { useAppSelector } from '../../../../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../../../../utils/redux/selectors/clients.selector'
-import { FormFields } from '../../CreateListing'
-import { RateType } from '../../../../../../utils/redux/types/listings.type'
+import { RateType } from '@yjcapp/app'
 
 const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
@@ -105,7 +104,7 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
           <AtTextFieldDropdown
             fullWidth={true}
             required={true}
-            placeholder={'Select Avaliability'}
+            placeholder={'Select Availability'}
             $listItems={[
               {
                 id: 0,
@@ -116,7 +115,7 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
                 label: 'Full-Time',
               },
             ]}
-            label={'Avaliability'}
+            label={'Availability'}
           />
 
           <AtTextField
@@ -211,8 +210,8 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
 }
 
 interface Step1Props {
-  setFormData: React.Dispatch<React.SetStateAction<FormFields>>
-  formData: FormFields
+  setFormData: React.Dispatch<React.SetStateAction<any>>
+  formData: any
 }
 
 export default TeamStep1

@@ -7,7 +7,7 @@ export function lambdaHandler(app: Express): APIGatewayProxyHandler {
   return server({ app })
 }
 
-export function startLocal(app: Express) {
+export function startLocal(app: Express, port = 8080) {
   // eslint-disable-next-line no-console
-  app.listen(8080, () => logger.info('Connected successfully on port 8080'))
+  app.listen(port, () => logger.info(`Connected successfully on port ${port}`))
 }

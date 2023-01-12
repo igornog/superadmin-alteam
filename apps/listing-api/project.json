@@ -1,0 +1,85 @@
+{
+  "name": "listing-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/listing-api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputFileName": "index.js",
+        "outputPath": "apps/listing-api/dist",
+        "main": "apps/listing-api/src/index.ts",
+        "tsConfig": "apps/listing-api/tsconfig.app.json"
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "externalDependencies": "none",
+          "fileReplacements": [
+            {
+              "replace": "apps/listing-api/src/environments/environment.ts",
+              "with": "apps/listing-api/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "package": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "inputs": ["production", "^production"],
+      "options": {
+        "command": "zip -FSqj apps/listing-api/dist/package.zip apps/listing-api/dist/index.js"
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "listing-api:build"
+      },
+      "dependsOn": [
+        {
+          "target": "migration:run",
+          "params": "forward",
+          "projects": "dependencies"
+        }
+      ],
+      "configurations": {
+        "production": {
+          "buildTarget": "listing-api:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/listing-api/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/listing-api"],
+      "options": {
+        "jestConfig": "apps/listing-api/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["package"],
+      "options": {
+        "cwd": "apps/listing-api/infrastructure",
+        "command": "../../../infrastructure/scripts/terraformStageWrapper.sh apply listing-api"
+      }
+    }
+  },
+  "implicitDependencies": ["postgres-db"],
+  "tags": []
+}

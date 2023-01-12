@@ -5,7 +5,6 @@ import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
 import { grey2 } from '../../../../../../utils/colors'
-import { FormFields } from '../../CreateListing'
 
 const TeamStep2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
   return (
@@ -45,7 +44,7 @@ const TeamStep2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
 }
 
 interface Step2Props {
-  formData: FormFields
+  formData: any
 }
 
 export default TeamStep2

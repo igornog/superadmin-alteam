@@ -1,17 +1,21 @@
 import { Box } from '@mui/material'
-import React, { useState } from 'react'
+import React, { Dispatch } from 'react'
 import { grey2 } from '../../../../../../utils/colors'
-import AtTextFieldDropdown from '../../../../../AtDropdown/AtTextFieldDropdown'
 import AtLine from '../../../../../AtLine/AtLine'
-import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
 import { useAppSelector } from '../../../../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../../../../utils/redux/selectors/clients.selector'
+import { Availability, Difficulty, RateType, WorkType } from '@yjcapp/app'
+import { ClientProject } from '@yjcapp/app'
+import AtTextFieldDropdown from '../../../../../AtDropdown/AtTextFieldDropdown'
+import AtTextField from '../../../../../AtTextField/AtTextField'
+import AtTextFieldDate from '../../../../../AtTextField/AtTextFieldDate'
 
-const ProjectStep1: React.FunctionComponent = () => {
+const ProjectStep1: React.FunctionComponent<Step1Props> = (
+  props: Step1Props,
+) => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
-  const [client, setClient] = useState(selectedClient.companyName)
 
   return (
     <StyledForm>
@@ -34,7 +38,9 @@ const ProjectStep1: React.FunctionComponent = () => {
             label={'Project Name'}
             required={true}
             placeholder={'Enter Project Name'}
-            value={''}
+            onValueChange={(e) =>
+              props.setProject({ ...props.project, projectName: e })
+            }
             maxLength={30}
           />
 
@@ -48,64 +54,71 @@ const ProjectStep1: React.FunctionComponent = () => {
             fullWidth={true}
             required={true}
             placeholder={'Select Number of Individuals'}
-            $listItems={[
-              {
-                id: 0,
-                label: '1 - 10',
-              },
-              {
-                id: 1,
-                label: 'More than 10',
-              },
-            ]}
+            $listItems={Array.from(Array(10).keys()).map((key) => ({
+              id: key + 1,
+              label: (key + 1).toString(),
+            }))}
+            handleSelect={(e) =>
+              props.setProject({
+                ...props.project,
+                individuals: parseInt(e.label) as number,
+              })
+            }
             label={'Number of Individuals'}
           />
 
           <Box display={'flex'} gap={'10px'} flexDirection={'column'}>
-            <AtTextFieldDropdown
-              fullWidth={true}
-              required={true}
-              placeholder={'Select Work Type'}
-              $listItems={[
-                {
-                  id: 0,
-                  label: 'Remote',
-                },
-                {
-                  id: 1,
-                  label: 'Hybrid',
-                },
-              ]}
-              label={'Work Type'}
-            />
+            <Box display={'flex'} gap={'16px'}>
+              <AtTextFieldDropdown
+                fullWidth={true}
+                required={true}
+                placeholder={'Select Work Type'}
+                $listItems={Object.values(WorkType).map(
+                  (label: WorkType, index: number) => ({
+                    id: index,
+                    label: label,
+                  }),
+                )}
+                handleSelect={(e) =>
+                  props.setProject({
+                    ...props.project,
+                    workType: e.label as WorkType,
+                  })
+                }
+                label={'Work Type'}
+              />
 
-            <AtTextFieldDropdown
-              fullWidth={true}
-              required={true}
-              placeholder={'Enter Timezone'}
-              $listItems={Array.from(Array(25).keys()).map((key) => ({
-                id: key,
-                label: `GMT${
-                  key > 0 ? (key <= 12 ? '-' + key : '+' + (key - 12)) : ''
-                }`,
-              }))}
-            />
+              {props.project.workType === WorkType.Hybrid ||
+              props.project.workType === WorkType.Remote ? (
+                <AtTextField
+                  fullWidth={true}
+                  required={true}
+                  placeholder={'Enter Timezone'}
+                  onValueChange={(e) =>
+                    props.setProject({ ...props.project, timeZone: e })
+                  }
+                  maxLength={6}
+                />
+              ) : null}
+            </Box>
           </Box>
           <AtTextFieldDropdown
             fullWidth={true}
             required={true}
-            placeholder={'Select Avaliability'}
-            $listItems={[
-              {
-                id: 0,
-                label: 'Part-Time',
-              },
-              {
-                id: 1,
-                label: 'Full-Time',
-              },
-            ]}
-            label={'Avaliability'}
+            placeholder={'Select Availability'}
+            $listItems={Object.values(Availability).map(
+              (label: Availability, index: number) => ({
+                id: index,
+                label: label,
+              }),
+            )}
+            handleSelect={(e) =>
+              props.setProject({
+                ...props.project,
+                availability: e.label as Availability,
+              })
+            }
+            label={'Availability'}
           />
 
           <AtTextField
@@ -113,14 +126,27 @@ const ProjectStep1: React.FunctionComponent = () => {
             required={true}
             placeholder={'Enter Project Length'}
             maxLength={30}
-            value={''}
+            onValueChange={(e) =>
+              props.setProject({ ...props.project, projectLength: e })
+            }
+          />
+
+          <AtTextFieldDate
+            label={'Start Date'}
+            required={true}
+            placeholder={'Enter Start Date'}
+            onValueChange={(e) =>
+              props.setProject({ ...props.project, startDate: e as any })
+            }
           />
 
           <AtTextField
             label={'Start Date'}
             required={true}
             placeholder={'Enter Start Date'}
-            value={''}
+            onValueChange={(e) =>
+              props.setProject({ ...props.project, startDate: e as any })
+            }
           />
 
           <Box display={'flex'} gap={'10px'} flexDirection={'column'}>
@@ -128,40 +154,61 @@ const ProjectStep1: React.FunctionComponent = () => {
               fullWidth={true}
               required={true}
               placeholder={'Select Rate'}
-              $listItems={[
-                {
-                  id: 0,
-                  label: 'Fixed',
-                },
-                {
-                  id: 1,
-                  label: 'Daily',
-                },
-              ]}
+              $listItems={Object.values(RateType).map(
+                (label: RateType, index: number) => ({
+                  id: index,
+                  label: label,
+                }),
+              )}
+              handleSelect={(e) => props.setRateType(e.label as RateType)}
               label={'Rate'}
             />
 
-            <AtTextField
-              placeholder={'Enter Exact Rate'}
-              maxLength={30}
-              value={''}
-            />
+            <Box display={'flex'} gap={'16px'}>
+              {props.rateType && (
+                <AtTextField
+                  placeholder={
+                    props.rateType === RateType.Variable
+                      ? 'Rate From'
+                      : 'Enter Exact Rate'
+                  }
+                  maxLength={30}
+                  value={props.project.rateFrom?.toString()}
+                  onValueChange={(e) =>
+                    props.setProject({ ...props.project, rateFrom: parseFloat(e) })
+                  }
+                />
+              )}
+
+              {props.rateType === RateType.Variable && (
+                <AtTextField
+                  placeholder={'Rate To'}
+                  maxLength={30}
+                  value={props.project.rateTo?.toString()}
+                  onValueChange={(e) =>
+                    props.setProject({ ...props.project, rateTo: parseFloat(e) })
+                  }
+                />
+              )}
+            </Box>
           </Box>
 
           <AtTextFieldDropdown
             fullWidth={true}
             required={true}
             placeholder={'Select Difficulty'}
-            $listItems={[
-              {
-                id: 0,
-                label: 'Easy/Junior',
-              },
-              {
-                id: 1,
-                label: 'Hard/Senior',
-              },
-            ]}
+            $listItems={Object.values(Difficulty).map(
+              (label: Difficulty, index: number) => ({
+                id: index,
+                label: label,
+              }),
+            )}
+            handleSelect={(e) =>
+              props.setProject({
+                ...props.project,
+                difficulty: e.label as Difficulty,
+              })
+            }
             label={'Difficulty'}
           />
 
@@ -169,12 +216,21 @@ const ProjectStep1: React.FunctionComponent = () => {
             label={'Learning'}
             required={true}
             placeholder={'Enter Learning Link'}
-            value={''}
+            onValueChange={(e) =>
+              props.setProject({ ...props.project, learningLink: e })
+            }
           />
         </Box>
       </Box>
     </StyledForm>
   )
+}
+
+interface Step1Props {
+  setProject: Dispatch<React.SetStateAction<ClientProject>>
+  project: ClientProject
+  rateType?: RateType
+  setRateType: Dispatch<React.SetStateAction<RateType | undefined>>
 }
 
 export default ProjectStep1
