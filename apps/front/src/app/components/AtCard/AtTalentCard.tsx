@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { ArrowRight2 } from 'iconsax-react'
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { green, grey, grey3, grey5, white } from '../../utils/colors'
+import { black, green, grey, grey3, grey5, white } from '../../utils/colors'
 import AtLine from '../AtLine/AtLine'
 import AtGroupTag from '../AtGroupTag/AtGroupTag'
 import AtTypography from '../AtTypography/AtTypography'
@@ -14,6 +14,13 @@ import { useAppSelector } from '../../utils/hooks/reduxHook'
 import { findTalent } from '../../utils/redux/selectors/talents.selector'
 import { stringMatch } from '../../utils/helpers'
 import moment from 'moment'
+import { ListingStatus } from '@yjcapp/app'
+
+export const StyledTagClients = styled(AtTag) <{ marketplace?: ListingStatus | boolean }>`
+border-radius: 5px;
+background-color: ${({ marketplace }) => marketplace ? `${black}`: `${white}`};
+color: ${({ marketplace }) => marketplace ? `${white}`: `${black}`};
+`
 
 export const StyledCard = styled.div<{ fullHeight?: boolean }>`
   background-color: ${white};
@@ -93,6 +100,20 @@ const AtTalentCard: React.FunctionComponent<AtTalentCardProps> = (
 
           <AtLine spacing={16} />
 
+          {props.displayStatusTag &&
+            <>
+              <AtTypography color={grey3}>Status :
+                <StyledTagClients
+                  // marketplace={!talent.status}
+                  marketplace={talent.status}
+                  // label={talent.status ?? ListingStatus.Marketplace}
+                  label={ListingStatus.Marketplace}
+                />
+              </AtTypography>
+              <AtLine spacing={16} />
+            </>
+          }
+
           {talent.skills && talent.skills.length > 0 ? (
             <Box display={'flex'} flexWrap={'wrap'} gap={'10px'}>
               {talent.skills?.map((value: string, index: number) => (
@@ -107,12 +128,14 @@ const AtTalentCard: React.FunctionComponent<AtTalentCardProps> = (
         </Box>
       </AtRightClick>
     </StyledCard>
+
   )
 }
 
 interface AtTalentCardProps {
   idTalent: string
   fullHeight?: boolean
+  displayStatusTag?: boolean | null
   onClick?: (e: React.MouseEvent) => void
   openShortlist?: () => void
   openAccepted?: () => void

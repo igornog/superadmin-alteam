@@ -21,6 +21,7 @@ const TalentCard: React.FunctionComponent<TalentCardProps> = (
             idTalent={talent.id}
             onClick={() => props.openTalent(talent.id)}
             fullHeight={true}
+            displayStatusTag={props.displayStatusTag}
             openShortlist={props.openShortlist}
             openAccepted={props.openAccepted}
             openEmailToTalent={props.openEmailToTalent}
@@ -33,6 +34,7 @@ const TalentCard: React.FunctionComponent<TalentCardProps> = (
 
 interface TalentCardProps {
   talents: Talent[]
+  displayStatusTag?: boolean
   openTalent: (id: string) => void
   openShortlist: () => void
   openAccepted: () => void
