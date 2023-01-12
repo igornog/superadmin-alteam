@@ -104,15 +104,7 @@ export const talentsTabs: Page[] = [
       RightClick.ShareTalent,
     ],
     clientRightClick: [],
-  },
-  {
-    title: Tabs.Applicants,
-    status: ListingStatus.Applicable,
-    active: false,
-    settings: {},
-    talentRightClick: [],
-    clientRightClick: [],
-  },
+  }
 ]
 
 export const skillsFilters = [

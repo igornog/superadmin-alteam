@@ -8,6 +8,7 @@ import {
   Briefcase,
   Setting2,
   Category,
+  MonitorMobbile
 } from 'iconsax-react'
 import Clients from './features/clients'
 
@@ -29,6 +30,12 @@ export const Navigation: NavigationProps[] = [
     element: <Talents />,
     icon: <Briefcase />,
     name: 'Listings',
+  },
+  {
+    link: '/marketplace',
+    element: <Talents />,
+    icon: <MonitorMobbile />,
+    name: 'Marketplace',
   },
   {
     link: '/settings',
