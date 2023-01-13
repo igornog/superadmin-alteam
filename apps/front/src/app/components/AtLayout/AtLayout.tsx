@@ -226,7 +226,6 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                             { id: 0, value: 'None', label: 'None' },
                             { id: 1, value: 'None', label: 'None' },
                           ]}
-                          align={'bottom-right'}
                           kind={AtButtonKind.Default}
                           variant={AtButtonVariant.Contained}
                         />

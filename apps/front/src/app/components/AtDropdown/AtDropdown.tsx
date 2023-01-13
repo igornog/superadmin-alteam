@@ -26,6 +26,8 @@ export const StyledContentPopover = styled(Collapse)<{
   // padding: 10px;
   margin-top: 10px;
   box-sizing: border-box;
+  top: unset;
+  left: unset;
 
   ${({ align }) =>
     align === 'bottom-left' &&
@@ -140,7 +142,7 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
         <StyledContentPopover
           in={open}
           $minWidth={dropdownRef?.current?.offsetWidth}
-          align={props.align ?? 'bottom-left'}
+          align={props.align ?? 'unset'}
         >
           <Box display={'flex'} flexDirection={'column'} gap={'10px'}>
             {props?.$listItems?.map((item: DropdownItem) => (
@@ -172,7 +174,7 @@ interface AtDropdownProps extends AtButtonProps {
   placeholder?: string
   label?: string
   handleSelect?: (item: DropdownItem) => void
-  align?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+  align?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'none'
 }
 
 export default AtDropdown

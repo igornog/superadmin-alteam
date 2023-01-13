@@ -12,7 +12,7 @@ import AtButton, {
   AtButtonKind,
   AtButtonVariant,
 } from '../../../AtButton/AtButton'
-import { useAppDispatch } from '../../../../utils/hooks/reduxHook'
+import { useAppDispatch, useAppSelector } from '../../../../utils/hooks/reduxHook'
 import { ModalSize } from '../../../../utils/redux/types/settings.type'
 import AtModal from '../../AtModal'
 import AtLine from '../../../AtLine/AtLine'
@@ -22,11 +22,15 @@ import { black, grey2 } from '../../../../utils/colors'
 import ModalShortlistStep2 from './steps/ModalShortlistStep2'
 import ModalShortlistStep3 from './steps/ModalShortlistStep3'
 import AtTabs from '../../../AtTabs/AtTabs'
+import { handlePatchTalent } from '../../../../utils/redux/actions/talents.action'
+import { getActiveTalent } from '../../../../utils/redux/selectors/talents.selector'
+import { ListingStatus } from '@yjcapp/app'
 
 const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
   props: ModalShortlistProps,
 ) => {
   const dispatch = useAppDispatch()
+  const selectedTalent = useAppSelector((state) => getActiveTalent(state))
   const [step, setStep] = useState(0)
 
   useEffect(() => {
@@ -36,7 +40,8 @@ const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
   }, [dispatch, props.isOpen])
 
   const moveTalent = () => {
-    console.log('move talent')
+    dispatch(handlePatchTalent({ id: selectedTalent.id, status: ListingStatus.Shortlisted }))
+    props.onClose?.()
   }
 
   const handleClose = () => {

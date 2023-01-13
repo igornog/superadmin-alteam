@@ -104,10 +104,9 @@ const AtTalentCard: React.FunctionComponent<AtTalentCardProps> = (
             <>
               <AtTypography color={grey3}>Status :
                 <StyledTagClients
-                  // marketplace={!talent.status}
-                  marketplace={talent.status}
-                  // label={talent.status ?? ListingStatus.Marketplace}
-                  label={ListingStatus.Marketplace}
+                  variant={'outlined'}
+                  marketplace={!talent.status}
+                  label={talent.status ?? ListingStatus.Marketplace}
                 />
               </AtTypography>
               <AtLine spacing={16} />

@@ -80,15 +80,13 @@ const DrawerTalent: React.FunctionComponent<DrawerTalentProps> = (
         <TalentNotes />
 
         <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
-          {selectedTalent.status !== ListingStatus.Rejected && (
-            <AtButton
-              onClick={() => setOpenModalDecline(true)}
-              kind={AtButtonKind.Danger}
-              variant={AtButtonVariant.Contained}
-              name={'Decline'}
-              endIcon={<CloseSquare size={16} />}
-            />
-          )}
+          <AtButton
+            onClick={() => setOpenModalDecline(true)}
+            kind={AtButtonKind.Danger}
+            variant={AtButtonVariant.Contained}
+            name={'Decline'}
+            endIcon={<CloseSquare size={16} />}
+          />
 
           {selectedTalent.status === ListingStatus.Inbound ||
           selectedTalent.status === ListingStatus.Accepted ? (
@@ -101,8 +99,7 @@ const DrawerTalent: React.FunctionComponent<DrawerTalentProps> = (
             />
           ) : null}
 
-          {selectedTalent.status === ListingStatus.Shortlisted ||
-          selectedTalent.status === ListingStatus.Rejected ? (
+          {selectedTalent.status === ListingStatus.Shortlisted ? (
             <AtButton
               onClick={() => setOpenModalAccepted(true)}
               kind={AtButtonKind.Success}

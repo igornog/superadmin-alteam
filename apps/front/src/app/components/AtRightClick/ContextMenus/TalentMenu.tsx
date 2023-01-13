@@ -69,7 +69,6 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
       {isCurrentTabAllowed(RightClick.MoveToAccepted) ||
       isTabAndStatusAllowed([
         ListingStatus.Shortlisted,
-        ListingStatus.Rejected,
       ]) ? (
         <AtContextMenuItem onSelect={moveToAccepted}>
           <AtTypography>
@@ -83,7 +82,6 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
       isTabAndStatusAllowed([
         ListingStatus.Inbound,
         ListingStatus.Accepted,
-        ListingStatus.Rejected,
       ]) ? (
         <AtContextMenuItem onSelect={moveToShortlist}>
           <AtTypography>
@@ -111,7 +109,6 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
         ListingStatus.Shortlisted,
         ListingStatus.Inbound,
         ListingStatus.Accepted,
-        ListingStatus.Rejected,
       ]) ? (
         <AtContextMenuItem onSelect={sendEmailToTalent}>
           <AtTypography>
@@ -126,7 +123,6 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
         ListingStatus.Shortlisted,
         ListingStatus.Inbound,
         ListingStatus.Accepted,
-        ListingStatus.Rejected,
       ]) ? (
         <AtContextMenuItem onSelect={(e: Event) => copyLinkToClipboard(e)}>
           <AtTypography>

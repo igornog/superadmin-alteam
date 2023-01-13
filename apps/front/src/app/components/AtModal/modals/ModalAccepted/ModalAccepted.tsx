@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { CloseCircle, CloseSquare, ArrowRight2 } from 'iconsax-react'
 import React, { useEffect, useState } from 'react'
 import { grey2, black } from '../../../../utils/colors'
-import { useAppDispatch } from '../../../../utils/hooks/reduxHook'
+import { useAppDispatch, useAppSelector } from '../../../../utils/hooks/reduxHook'
 import { handleLoadTree } from '../../../../utils/redux/actions/tree.action'
 import { ModalSize } from '../../../../utils/redux/types/settings.type'
 import AtButton, {
@@ -15,11 +15,15 @@ import AtTypography from '../../../AtTypography/AtTypography'
 import AtModal from '../../AtModal'
 import ModalAcceptedStep1 from './steps/ModalAcceptedStep1'
 import ModalAcceptedStep2 from './steps/ModalAcceptedStep2'
+import { handlePatchTalent } from '../../../../utils/redux/actions/talents.action'
+import { getActiveTalent } from '../../../../utils/redux/selectors/talents.selector'
+import { ListingStatus } from '@yjcapp/app'
 
 const ModalAccepted: React.FunctionComponent<ModalAcceptedProps> = (
   props: ModalAcceptedProps,
 ) => {
   const dispatch = useAppDispatch()
+  const selectedTalent = useAppSelector((state) => getActiveTalent(state))
   const [step, setStep] = useState(0)
 
   useEffect(() => {
@@ -29,7 +33,8 @@ const ModalAccepted: React.FunctionComponent<ModalAcceptedProps> = (
   }, [dispatch, props.isOpen])
 
   const moveTalent = () => {
-    console.log('move talent')
+    dispatch(handlePatchTalent({ id: selectedTalent.id, status: ListingStatus.Accepted }))
+    props.onClose?.()
   }
 
   const handleClose = () => {

@@ -18,7 +18,6 @@ import moment from 'moment'
 import { useAppSelector } from '../../../utils/hooks/reduxHook'
 import { stringMatch } from '../../../utils/helpers'
 import { StyledTagClients } from '../../AtCard/AtTalentCard'
-import { ListingStatus } from '@yjcapp/app'
 
 const StyledTag = styled(AtTag)`
   max-width: 150px;
@@ -120,10 +119,8 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
                 {haveToDisplay(Column.Status) && talent.status ? (
                   <AtTableCell>
                     <StyledTagClients
-                      marketplace={true}
-                      label={ListingStatus.Marketplace}
-                      // variant={'outlined'}
-                      // label={talent.status}
+                      variant={'outlined'}
+                      label={talent.status}
                     />
                   </AtTableCell>
                 ) : null}

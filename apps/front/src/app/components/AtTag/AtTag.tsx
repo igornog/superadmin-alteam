@@ -17,6 +17,7 @@ const StyledIcon = styled(TrushSquare)`
 
 const StyledChip = styled(Chip)<{ clickable?: boolean; variant: string }>`
   color: ${grey};
+  border-color: ${grey};
   background-color: ${({ variant }) =>
     variant === 'filled' && convertHexToRGBA(black, 0.05)};
   justify-content: space-between;
