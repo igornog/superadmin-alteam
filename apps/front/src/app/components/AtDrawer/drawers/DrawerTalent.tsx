@@ -113,17 +113,17 @@ const DrawerTalent: React.FunctionComponent<DrawerTalentProps> = (
 
       <ModalShortlist
         isOpen={openModalShortlist}
-        onClose={() => setOpenModalShortlist(false)}
+        onClose={() => {setOpenModalShortlist(false); props.handleClose()}}
       />
 
       <ModalAccepted
         isOpen={openModalAccepted}
-        onClose={() => setOpenModalAccepted(false)}
+        onClose={() => {setOpenModalAccepted(false); props.handleClose()}}
       />
 
       <ModalDecline
         isOpen={openModalDecline}
-        onClose={() => setOpenModalDecline(false)}
+        onClose={() => {setOpenModalDecline(false); props.handleClose()}}
       />
     </AtDrawer>
   )

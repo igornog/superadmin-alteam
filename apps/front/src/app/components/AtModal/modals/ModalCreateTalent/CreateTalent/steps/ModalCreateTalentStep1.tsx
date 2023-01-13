@@ -42,6 +42,14 @@ const ModalCreateTalentStep1: React.FunctionComponent<
       />
 
       <AtTextField
+        placeholder={'Enter Phone Number'}
+        value={props.phoneNumber}
+        required={true}
+        label={'Phone Number'}
+        onValueChange={props.setPhoneNumber}
+      />
+
+      <AtTextField
         placeholder={'Enter Role'}
         value={props.role}
         required={true}
@@ -59,6 +67,14 @@ const ModalCreateTalentStep1: React.FunctionComponent<
           (label: Experience, index: number) => ({ id: index, label: label }),
         )}
         label={'Experience Level'}
+      />
+
+      <AtTextField
+        placeholder={'Enter Salary Expectations'}
+        value={props.salaryExpectation}
+        required={true}
+        label={'Salary Expectations'}
+        onValueChange={props.setSalaryExpectation}
       />
 
       <AtTextFieldDropdown
@@ -90,6 +106,10 @@ interface ModalCreateTalentStep1Props {
   setLastName: Dispatch<SetStateAction<string>>
   email: string
   setEmail: Dispatch<SetStateAction<string>>
+  phoneNumber: string
+  setPhoneNumber: Dispatch<SetStateAction<string>>
+  salaryExpectation: string
+  setSalaryExpectation: Dispatch<SetStateAction<string>>
   role: string
   setRole: Dispatch<SetStateAction<string>>
   experience: Experience | undefined

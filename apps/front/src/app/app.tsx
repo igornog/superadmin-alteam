@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Auth from './features/auth'
 import Talents from './features/talents'
+// import Marketplace from './features/marketplace'
 import {
   Personalcard,
   Profile,

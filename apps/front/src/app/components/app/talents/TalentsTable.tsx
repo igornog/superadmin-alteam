@@ -30,7 +30,7 @@ const StyledTable = styled(AtTable)`
         width: 25%;
       }
       &:last-of-type {
-        width: inherit;
+        width: 50%;
       }
     }
   }
@@ -46,7 +46,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
   const settings = useAppSelector((state) => state.settings)
 
   useEffect(() => {
-    setMaxItemPerLine(Math.floor(skillsRef.current?.clientWidth / 150))
+    setMaxItemPerLine(Math.floor(skillsRef.current?.clientWidth / 100))
   }, [windowSize])
 
   const haveToDisplay = (column: Column) => {
