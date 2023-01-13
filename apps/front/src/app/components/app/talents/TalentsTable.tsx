@@ -27,7 +27,7 @@ const StyledTable = styled(AtTable)`
     td {
       width: 12.5%;
       &:first-of-type {
-        width: 25%;
+        width: 20%;
       }
       &:last-of-type {
         width: 50%;
