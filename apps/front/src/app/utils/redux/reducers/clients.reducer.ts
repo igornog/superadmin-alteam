@@ -7,7 +7,8 @@ import {
   handleSelectClient,
   handlePathClientStatus,
 } from '../actions/clients.action'
-import { ClientsState } from '../types/clients.type'
+import { handleCreateProject } from '../actions/listing.action'
+import { Client, ClientsState } from '../types/clients.type'
 import { StatusType } from '../types/status.type'
 
 const initialState: ClientsState = {
@@ -75,6 +76,20 @@ const { reducer } = createSlice({
           const talentIndex = state.listClients.indexOf(client)
 
           state.listClients.splice(talentIndex, 1, updatedTalent)
+        }
+      })
+
+      .addCase(handleCreateProject.fulfilled, (state, { payload }) => {
+        if (payload.id) {
+          const currentClientId = state.selectedClient
+
+          if (currentClientId) {
+            const client = state.listClients.find(
+              (client: Client) => client.id === currentClientId,
+            )
+
+            client?.projects?.push(payload)
+          }
         }
       })
   },

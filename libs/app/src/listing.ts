@@ -1,3 +1,4 @@
+import { SoloClient } from './client'
 import { Availability } from './talent'
 
 export interface ClientTeam {
@@ -5,7 +6,8 @@ export interface ClientTeam {
 }
 
 export interface ClientProject {
-  id?: string
+  id: number
+  soloClient: SoloClient
   projectName: string
   individuals: number
   workType?: WorkType

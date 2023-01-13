@@ -9,7 +9,6 @@ import {
 import {
   ClientStatus,
   DeliveryType,
-  Listing,
   ProjectType,
   Talent,
   TeamRequest,
@@ -66,9 +65,6 @@ export class SoloClientEntity extends BaseEntity {
     name: 'applied_date',
   })
   received?: Date
-
-  @Column({ type: 'json', nullable: true })
-  listings?: Listing[]
 
   @Column({ type: 'json', nullable: true })
   assignee?: Talent[]

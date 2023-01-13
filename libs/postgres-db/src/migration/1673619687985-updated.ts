@@ -1,17 +1,17 @@
 import { MigrationInterface, QueryRunner } from 'typeorm'
 
-export class updateprops1673455861270 implements MigrationInterface {
-  name = 'updateprops1673455861270'
+export class updated1673619687985 implements MigrationInterface {
+  name = 'updated1673619687985'
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
-      `ALTER TABLE "client_project" RENAME COLUMN "skill" TO "skills"`,
+      `ALTER TABLE "client_project" ALTER COLUMN "learningLink" DROP NOT NULL`,
     )
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
-      `ALTER TABLE "client_project" RENAME COLUMN "skills" TO "skill"`,
+      `ALTER TABLE "client_project" ALTER COLUMN "learningLink" SET NOT NULL`,
     )
   }
 }

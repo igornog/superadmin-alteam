@@ -30,7 +30,7 @@ const ClientCard: React.FunctionComponent<ClientCardProps> = (
 
 interface ClientCardProps {
   clients: Client[]
-  openClient: (id: string) => void
+  openClient: (id: number) => void
 }
 
 export default ClientCard

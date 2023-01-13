@@ -114,7 +114,7 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
 
               {haveToDisplay(Column.Listings) && (
                 <AtTableCell>
-                  <AtTypography>{client.listings?.length ?? 0}</AtTypography>
+                  {/* <AtTypography>{client.listings?.length ?? 0}</AtTypography> */}
                 </AtTableCell>
               )}
 
@@ -160,7 +160,7 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
 
 interface ClientTableProps {
   clients: Client[]
-  openClient: (id: string) => void
+  openClient: (id: number) => void
   tableColumns?: Column[]
 }
 

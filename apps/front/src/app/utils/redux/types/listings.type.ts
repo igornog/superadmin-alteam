@@ -6,6 +6,7 @@ import {
   Difficulty,
   WorkType,
 } from '@yjcapp/app'
+import { Client } from './clients.type'
 
 export interface ListingsState {
   listListings: ClientListing[]
@@ -22,7 +23,8 @@ export interface ListingsState {
 // }
 
 export class Project implements ClientProject {
-  id?: string
+  id: number
+  soloClient: Client
   projectName: string
   individuals: number
   workType: WorkType
@@ -42,6 +44,7 @@ export class Project implements ClientProject {
 
   constructor(data: any) {
     this.id = data.id
+    this.soloClient = data.soloClient
     this.projectName = data.projectName
     this.individuals = data.individuals
     this.workType = data.workType

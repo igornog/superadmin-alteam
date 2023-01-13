@@ -21,7 +21,7 @@ const ScreeningQuestions: React.FunctionComponent<QuestionsProps> = (
       backgroundColor={'#FBFCFF'}
     >
       <Box display={'flex'} flexDirection={'column'}>
-        {props.selectedListing.screeningQuestion.map(
+        {props.selectedListing.screeningQuestion?.map(
           (question: string, index: number) => {
             return (
               <>

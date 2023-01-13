@@ -16,7 +16,7 @@ export const handleClients = createAsyncThunk(
 
 export const handleSelectClient = createAsyncThunk(
   'talents/selectClient',
-  async (idClient: string | null) => {
+  async (idClient: number | null) => {
     return idClient
   },
 )

@@ -8,6 +8,7 @@ import { grey2 } from '../../../../../../utils/colors'
 import { SearchNormal1 } from 'iconsax-react'
 import AtTag from '../../../../../AtTag/AtTag'
 import { ClientProject } from '@yjcapp/app'
+import { Project } from '../../../../../../utils/redux/types/listings.type'
 
 const ProjectStep3: React.FunctionComponent<Step3Props> = (
   props: Step3Props,
@@ -70,8 +71,8 @@ const ProjectStep3: React.FunctionComponent<Step3Props> = (
 }
 
 interface Step3Props {
-  setProject: Dispatch<React.SetStateAction<ClientProject>>
-  project: ClientProject
+  setProject: Dispatch<React.SetStateAction<Project>>
+  project: Project
 }
 
 export default ProjectStep3

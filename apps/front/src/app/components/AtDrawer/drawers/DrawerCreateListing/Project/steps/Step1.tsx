@@ -7,10 +7,10 @@ import { StyledForm } from '../../DrawerCreateListing'
 import { useAppSelector } from '../../../../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../../../../utils/redux/selectors/clients.selector'
 import { Availability, Difficulty, RateType, WorkType } from '@yjcapp/app'
-import { ClientProject } from '@yjcapp/app'
 import AtTextFieldDropdown from '../../../../../AtDropdown/AtTextFieldDropdown'
 import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTextFieldDate from '../../../../../AtTextField/AtTextFieldDate'
+import { Project } from '../../../../../../utils/redux/types/listings.type'
 
 const ProjectStep1: React.FunctionComponent<Step1Props> = (
   props: Step1Props,
@@ -175,7 +175,10 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
                   maxLength={30}
                   value={props.project.rateFrom?.toString()}
                   onValueChange={(e) =>
-                    props.setProject({ ...props.project, rateFrom: parseFloat(e) })
+                    props.setProject({
+                      ...props.project,
+                      rateFrom: parseFloat(e),
+                    })
                   }
                 />
               )}
@@ -186,7 +189,10 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
                   maxLength={30}
                   value={props.project.rateTo?.toString()}
                   onValueChange={(e) =>
-                    props.setProject({ ...props.project, rateTo: parseFloat(e) })
+                    props.setProject({
+                      ...props.project,
+                      rateTo: parseFloat(e),
+                    })
                   }
                 />
               )}
@@ -214,7 +220,6 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
 
           <AtTextField
             label={'Learning'}
-            required={true}
             placeholder={'Enter Learning Link'}
             onValueChange={(e) =>
               props.setProject({ ...props.project, learningLink: e })
@@ -227,8 +232,8 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
 }
 
 interface Step1Props {
-  setProject: Dispatch<React.SetStateAction<ClientProject>>
-  project: ClientProject
+  setProject: Dispatch<React.SetStateAction<Project>>
+  project: Project
   rateType?: RateType
   setRateType: Dispatch<React.SetStateAction<RateType | undefined>>
 }

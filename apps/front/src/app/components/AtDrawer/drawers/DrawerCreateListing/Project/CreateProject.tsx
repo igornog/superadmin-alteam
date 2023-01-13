@@ -15,16 +15,22 @@ import ProjectStep2 from './steps/Step2'
 import ProjectStep3 from './steps/Step3'
 import ProjectStep4 from './steps/Step4'
 import { Project } from '../../../../../utils/redux/types/listings.type'
-import { useAppDispatch } from '../../../../../utils/hooks/reduxHook'
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../../../utils/hooks/reduxHook'
 import { handleCreateProject } from '../../../../../utils/redux/actions/listing.action'
+import { getActiveClient } from '../../../../../utils/redux/selectors/clients.selector'
+import { Client } from '../../../../../utils/redux/types/clients.type'
 
 const CreateProject: React.FunctionComponent<CreateProjectProps> = (
   props: CreateProjectProps,
 ) => {
   const [rateType, setRateType] = useState<RateType>()
   const dispatch = useAppDispatch()
+  const selectedClient = useAppSelector((state) => getActiveClient(state))
 
-  const [project, setProject] = useState<ClientProject>(new Project({}))
+  const [project, setProject] = useState<Project>(new Project({}))
 
   const tabs = [
     {
@@ -67,7 +73,6 @@ const CreateProject: React.FunctionComponent<CreateProjectProps> = (
           'rateFrom',
           'rateTo',
           'difficulty',
-          'learningLink',
         ],
         workTypeDependant: 'timeZone',
         rateToDependant: rateType === RateType.Variable,
@@ -111,10 +116,15 @@ const CreateProject: React.FunctionComponent<CreateProjectProps> = (
 
   const handleSubmitProject = () => {
     if (props.step + 1 === tabs.length) {
-      dispatch(handleCreateProject(project))
-    } else {
-      props.setStep(props.step + 1)
+      dispatch(
+        handleCreateProject({
+          ...project,
+          soloClient: { id: selectedClient.id } as Client,
+        }),
+      )
     }
+
+    props.setStep(props.step + 1)
   }
 
   return (

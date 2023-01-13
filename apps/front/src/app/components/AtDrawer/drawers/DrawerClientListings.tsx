@@ -11,7 +11,7 @@ import styled from 'styled-components'
 import Client from '../../../features/clients/components/ClientViewProfile/Client'
 import Company from '../../../features/clients/components/ClientViewProfile/Company'
 import Notes from '../../../features/clients/components/ClientViewProfile/Notes'
-import { grey2 } from '../../../utils/colors'
+import { grey2, grey3 } from '../../../utils/colors'
 import { useAppSelector } from '../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../utils/redux/selectors/clients.selector'
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
@@ -27,6 +27,7 @@ import AtDrawer from '../AtDrawer'
 import DrawerListing from './DrawerListing/DrawerListing'
 import DrawerCreateListing from './DrawerCreateListing/DrawerCreateListing'
 import { Project } from '../../../utils/redux/types/listings.type'
+import AtListingCard from '../../AtCard/AtListingCard'
 
 const StyledListings = styled(Box)`
   display: flex;
@@ -137,9 +138,7 @@ const DrawerClientListings: React.FunctionComponent<
         <Grid xs={4}>
           <StyledListings paddingTop={'30px'} paddingX={'20px'}>
             <Box display={'flex'} justifyContent={'space-between'}>
-              <AtTypography variant={'h4'}>
-                All Listings
-              </AtTypography>
+              <AtTypography variant={'h4'}>All Listings</AtTypography>
               <AtButton
                 kind={AtButtonKind.Success}
                 variant={AtButtonVariant.Contained}
@@ -151,13 +150,13 @@ const DrawerClientListings: React.FunctionComponent<
 
             <AtTextField
               value={''}
-              disabled={!selectedClient.listings?.length}
+              disabled={!selectedClient.projects?.length}
               startIcon={<SearchNormal />}
               placeholder={
                 'Search in ' + selectedClient.companyName + ' Listings...'
               }
             />
-            {/* {selectedClient.listings?.length === 0 ? (
+            {selectedClient.projects?.length === 0 ? (
               <Box
                 display={'flex'}
                 alignItems={'center'}
@@ -170,16 +169,16 @@ const DrawerClientListings: React.FunctionComponent<
               </Box>
             ) : (
               <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
-                {selectedClient.listings &&
-                  selectedClient.listings.map((listing: Listing) => (
+                {selectedClient.projects &&
+                  selectedClient.projects.map((project: Project) => (
                     <AtListingCard
-                      key={listing.id}
-                      listing={listing}
-                      onClick={() => selectListing(listing)}
+                      project={project}
+                      key={project.id}
+                      onClick={() => selectListing(project)}
                     />
                   ))}
               </Box>
-            )} */}
+            )}
           </StyledListings>
         </Grid>
       </Grid>

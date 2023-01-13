@@ -1,4 +1,3 @@
-//eslint-disable @typescript-eslint/no-unused-vars
 import { postgresClient } from './postgresClient'
 import { ClientProject } from '@yjcapp/app'
 import {

@@ -1,7 +1,8 @@
-import { Listing, Talent } from './talent'
+import { ClientProject } from './listing'
+import { Talent } from './talent'
 
 export interface SoloClient {
-  id?: string
+  id?: number
   logo?: string
   companyName: string
   phoneNumber: string
@@ -16,7 +17,7 @@ export interface SoloClient {
   fullName?: string
   position?: string
   received?: Date
-  listings?: Listing[]
+  projects: ClientProject[]
   assignee?: Talent[]
   status: ClientStatus
 }

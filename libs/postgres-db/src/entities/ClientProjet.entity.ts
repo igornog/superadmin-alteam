@@ -25,7 +25,7 @@ export class ClientProjectEntity extends BaseEntity {
   @Column({ type: 'varchar' })
   workType: WorkType
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: true })
   timeZone: string
 
   @Column({ type: 'varchar' })
@@ -37,19 +37,19 @@ export class ClientProjectEntity extends BaseEntity {
   @Column({ type: 'text' })
   startDate: Date
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   rateType: RateType
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   rateFrom: number
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   rateTo: number
 
   @Column({ type: 'text' })
   difficulty: Difficulty
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   learningLink: string
 
   @Column({ type: 'text' })

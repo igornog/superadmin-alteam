@@ -5,7 +5,7 @@ import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
 import { grey2 } from '../../../../../../utils/colors'
-import { ClientProject } from '@yjcapp/app'
+import { Project } from '../../../../../../utils/redux/types/listings.type'
 
 const ProjectStep4: React.FunctionComponent<Step4Props> = (
   props: Step4Props,
@@ -23,8 +23,6 @@ const ProjectStep4: React.FunctionComponent<Step4Props> = (
       questions: newArray,
     })
   }
-
-  console.log(props.project)
 
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
@@ -96,8 +94,8 @@ const ProjectStep4: React.FunctionComponent<Step4Props> = (
 }
 
 interface Step4Props {
-  setProject: Dispatch<React.SetStateAction<ClientProject>>
-  project: ClientProject
+  setProject: Dispatch<React.SetStateAction<Project>>
+  project: Project
 }
 
 export default ProjectStep4

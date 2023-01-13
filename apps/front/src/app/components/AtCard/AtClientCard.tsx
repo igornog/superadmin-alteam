@@ -70,7 +70,7 @@ const AtClientCard: React.FunctionComponent<AtClientCardProps> = (
                 {client.industry}
               </AtTypography>
               <AtTypography variant={'body1'} color={grey}>
-                {plurialize(client.listings?.length ?? 0, 'listing')}
+                {/* {plurialize(client.listings?.length ?? 0, 'listing')} */}
               </AtTypography>
             </Box>
           </Box>

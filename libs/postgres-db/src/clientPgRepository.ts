@@ -26,7 +26,9 @@ async function findClient(talentSearch: ClientSearch): Promise<SoloClient[]> {
     SoloClientEntity,
   )
 
-  const queryBuilder = await soloTalentRepository.createQueryBuilder()
+  const queryBuilder = await soloTalentRepository.createQueryBuilder(
+    'solo_client',
+  )
 
   if (talentSearch.status) {
     queryBuilder.andWhere('status = :status', { status: talentSearch.status })
@@ -38,6 +40,8 @@ async function findClient(talentSearch: ClientSearch): Promise<SoloClient[]> {
 
   queryBuilder.limit(PAGE_SIZE)
   queryBuilder.offset(calculateOffset(talentSearch.page ?? 1, PAGE_SIZE))
+
+  queryBuilder.leftJoinAndSelect('solo_client.projects', 'projects')
 
   const result = await queryBuilder.getMany()
 

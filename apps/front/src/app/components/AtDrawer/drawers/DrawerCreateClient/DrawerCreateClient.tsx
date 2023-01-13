@@ -71,6 +71,7 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
     projectType: undefined,
     deliveryType: undefined,
     teamRequest: undefined,
+    projects: [],
     request: '',
     email: '',
     fullName: '',

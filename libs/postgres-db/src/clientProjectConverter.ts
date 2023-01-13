@@ -6,7 +6,8 @@ export function clientProjectFromEntity(
   entity: ClientProjectEntity,
 ): ClientProject {
   return {
-    id: entity.id.toString(),
+    id: entity.id,
+    soloClient: entity.soloClient,
     projectName: entity.projectName,
     individuals: entity.individuals,
     workType: entity.workType,
@@ -28,7 +29,8 @@ export function clientProjectToEntity(
   clientProject: DeepPartial<ClientProject>,
 ): DeepPartial<ClientProjectEntity> {
   return {
-    id: clientProject.id ? parseInt(clientProject.id) : undefined,
+    id: clientProject.id,
+    soloClient: clientProject.soloClient,
     projectName: clientProject.projectName,
     individuals: clientProject.individuals,
     workType: clientProject.workType,
