@@ -67,6 +67,7 @@ export enum ListingStatus {
   Accepted = 'accepted',
   Inbound = 'inbound',
   Applicable = 'applicable',
+  Marketplace = 'marketplace',
 }
 
 export interface Listing {
