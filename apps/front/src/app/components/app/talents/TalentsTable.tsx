@@ -22,6 +22,20 @@ import { StyledTagClients } from '../../AtCard/AtTalentCard'
 const StyledTag = styled(AtTag)`
   max-width: 150px;
 `
+const StyledTable = styled(AtTable)`
+  tr {
+    td {
+      width: 12.5%;
+      &:first-of-type {
+        width: 25%;
+      }
+      &:last-of-type {
+        width: inherit;
+      }
+    }
+  }
+`
+
 const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
   props: TalentsTableProps,
 ) => {
@@ -40,7 +54,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
   }
 
   return (
-    <AtTable>
+    <StyledTable>
       <AtTableHead>
         <AtTableRow>
           {haveToDisplay(Column.Talent) && <AtTableCell>Talent</AtTableCell>}
@@ -208,7 +222,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
           )
         })}
       </AtTableBody>
-    </AtTable>
+    </StyledTable>
   )
 }
 
