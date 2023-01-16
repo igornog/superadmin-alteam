@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, capitalize } from '@mui/material'
 import React, { Dispatch } from 'react'
 import { Client } from '../../../../../utils/redux/types/clients.type'
 import AtTextFieldDropdown from '../../../../AtDropdown/AtTextFieldDropdown'
@@ -6,7 +6,7 @@ import AtLine from '../../../../AtLine/AtLine'
 import AtTextField from '../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../AtTypography/AtTypography'
 import { StyledForm } from '../DrawerCreateClient'
-import { DeliveryType, ProjectType, CreateClientStatus, TeamRequest } from '@yjcapp/app'
+import { DeliveryType, ProjectType, CreateClientStatus, TeamRequest, ClientStatus } from '@yjcapp/app'
 import { grey2 } from '../../../../../utils/colors'
 
 const Step2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
@@ -154,17 +154,17 @@ const Step2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
             fullWidth={true}
             required={true}
             placeholder={'Select option...'}
-            value={CreateClientStatus[0].label}
+            value={'Client Request'}
             $listItems={CreateClientStatus.map(
               (status, index) => ({
                 id: index,
-                label: status.label,
+                label: index === 0 ? 'Client Request' : capitalize(status.label)+' clients',
               }),
             )}
             handleSelect={(e) =>
               props.setClient({
                 ...props.client,
-                status: e.label,
+                status: e.label as ClientStatus,
               })
             }
             label={'Is the client qualified?'}
