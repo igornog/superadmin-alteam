@@ -6,7 +6,8 @@ import AtLine from '../../../../AtLine/AtLine'
 import AtTextField from '../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../AtTypography/AtTypography'
 import { StyledForm } from '../DrawerCreateClient'
-import { DeliveryType, ProjectType, TeamRequest } from '@yjcapp/app'
+import { DeliveryType, ProjectType, CreateClientStatus, TeamRequest } from '@yjcapp/app'
+import { grey2 } from '../../../../../utils/colors'
 
 const Step2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
   return (
@@ -129,6 +130,46 @@ const Step2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
               props.setClient({ ...props.client, position: e })
             }
           />
+        </Box>
+      </StyledForm>
+
+      <StyledForm>
+        <Box padding={'20px'} display={'flex'} justifyContent={'space-between'}>
+          <AtTypography variant={'h4'}>Client Status</AtTypography>
+          <AtTypography variant={'caption'} color={grey2}>
+          Fields with * are mandatory
+        </AtTypography>
+        </Box>
+
+        <AtLine />
+
+        <Box
+          padding={'20px'}
+          paddingTop={'30px'}
+          display={'flex'}
+          flexDirection={'column'}
+          gap={'30px'}
+        >
+          <AtTextFieldDropdown
+            fullWidth={true}
+            required={true}
+            placeholder={'Select option...'}
+            value={CreateClientStatus[0].label}
+            $listItems={CreateClientStatus.map(
+              (status, index) => ({
+                id: index,
+                label: status.label,
+              }),
+            )}
+            handleSelect={(e) =>
+              props.setClient({
+                ...props.client,
+                status: e.label,
+              })
+            }
+            label={'Is the client qualified?'}
+          />
+
         </Box>
       </StyledForm>
     </Box>

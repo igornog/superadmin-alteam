@@ -1,5 +1,4 @@
 import {
-  ClientStatus,
   DeliveryType,
   Listing,
   ProjectType,
@@ -34,7 +33,7 @@ export class Client implements SoloClient {
   received?: Date
   listings?: Listing[]
   assignee?: Talent[]
-  status: ClientStatus
+  status: string
 
   constructor(data: any) {
     this.id = data.id
