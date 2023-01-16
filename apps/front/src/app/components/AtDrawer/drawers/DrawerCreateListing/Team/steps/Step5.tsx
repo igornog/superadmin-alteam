@@ -5,8 +5,23 @@ import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
 import { grey2 } from '../../../../../../utils/colors'
+import { Team } from '../../../../../../utils/redux/types/listings.type'
 
-const TeamStep5: React.FunctionComponent = () => {
+const TeamStep5: React.FunctionComponent<Step5Props> = (props: Step5Props) => {
+  const handleArrayValueChange = (
+    index: number,
+    setFunc: (val: any) => void,
+    array: any[],
+    newValue: string,
+  ) => {
+    const newArray = [...array]
+    newArray[index] = newValue
+    setFunc({
+      ...props.team,
+      questions: newArray,
+    })
+  }
+
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
       <StyledForm>
@@ -16,7 +31,9 @@ const TeamStep5: React.FunctionComponent = () => {
             Fields with * are mandatory
           </AtTypography>
         </Box>
+
         <AtLine />
+
         <Box
           padding={'20px'}
           display={'flex'}
@@ -27,25 +44,56 @@ const TeamStep5: React.FunctionComponent = () => {
             <AtTextField
               label={'Screening Question 1'}
               placeholder={'Enter Screening Question'}
-              value={''}
+              maxLength={100}
+              onValueChange={(e) =>
+                handleArrayValueChange(
+                  0,
+                  props.setTeam,
+                  props.team.questions,
+                  e,
+                )
+              }
             />
 
             <AtTextField
               label={'Screening Question 2'}
               placeholder={'Enter Screening Question'}
-              value={''}
+              maxLength={100}
+              disabled={props.team.questions?.length < 1}
+              onValueChange={(e) =>
+                handleArrayValueChange(
+                  1,
+                  props.setTeam,
+                  props.team.questions,
+                  e,
+                )
+              }
             />
 
             <AtTextField
               label={'Screening Question 3'}
               placeholder={'Enter Screening Question'}
-              value={''}
+              maxLength={100}
+              disabled={props.team.questions?.length < 2}
+              onValueChange={(e) =>
+                handleArrayValueChange(
+                  2,
+                  props.setTeam,
+                  props.team.questions,
+                  e,
+                )
+              }
             />
           </Box>
         </Box>
       </StyledForm>
     </Box>
   )
+}
+
+interface Step5Props {
+  setTeam: React.Dispatch<React.SetStateAction<Team>>
+  team: Team
 }
 
 export default TeamStep5

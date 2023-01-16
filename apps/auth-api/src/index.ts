@@ -16,8 +16,9 @@ const router = express
       res.sendStatus(403)
     }
   })
+
 export const handler = startLambdaServer(
   router,
   !environment.production,
-  !environment.production ? 8085 : 8080,
+  !environment.production ? 8084 : 8080,
 )

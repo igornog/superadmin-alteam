@@ -77,8 +77,12 @@ export const getText = (elem: any): string => {
   return getText(children)
 }
 
-export const plurialize = (count: number, word: string) => {
-  return count + ' ' + (count > 1 ? word + 's' : word)
+export const plurialize = (
+  count: number,
+  word: string,
+  hideNumber?: boolean,
+) => {
+  return (!hideNumber ? count + ' ' : '') + (count > 1 ? word + 's' : word)
 }
 
 export const stringMatch = (fullString: string, toMatch: string) => {

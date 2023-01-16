@@ -1,14 +1,16 @@
 import { Box } from '@mui/material'
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import { grey2 } from '../../../../../../utils/colors'
 import AtTextFieldDropdown from '../../../../../AtDropdown/AtTextFieldDropdown'
 import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
-import { Availability, Experience } from '@yjcapp/app'
+import { Availability, Experience, RateType } from '@yjcapp/app'
 
 const ModalCreateTalentStep1: React.FunctionComponent<
   ModalCreateTalentStep1Props
 > = (props: ModalCreateTalentStep1Props) => {
+  const [rateType, setRateType] = useState<RateType>()
+
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'30px'}>
       <AtTypography color={grey2}>
@@ -39,6 +41,13 @@ const ModalCreateTalentStep1: React.FunctionComponent<
         required={true}
         label={'Email'}
         onValueChange={props.setEmail}
+      />
+
+      <AtTextField
+        placeholder={'Enter Portfolio Link'}
+        value={props.portfolio}
+        label={'Portfolio Link'}
+        onValueChange={props.setPortfolio}
       />
 
       <AtTextField
@@ -73,12 +82,55 @@ const ModalCreateTalentStep1: React.FunctionComponent<
         label={'Availability'}
       />
 
-      <AtTextField
-        placeholder={'Enter Portfolio Link'}
-        value={props.portfolio}
-        label={'Portfolio Link'}
-        onValueChange={props.setPortfolio}
-      />
+      <Box display={'flex'} gap={'10px'} flexDirection={'column'}>
+        <AtTextFieldDropdown
+          fullWidth={true}
+          required={true}
+          placeholder={'Select Rate'}
+          $listItems={Object.values(RateType).map(
+            (label: RateType, index: number) => ({
+              id: index,
+              label: label,
+            }),
+          )}
+          handleSelect={(e) => setRateType(e.label as RateType)}
+          label={'Rate'}
+        />
+
+        <Box display={'flex'} gap={'16px'}>
+          {rateType && (
+            <AtTextField
+              placeholder={
+                rateType === RateType.Variable
+                  ? 'Rate From'
+                  : 'Enter Exact Rate'
+              }
+              maxLength={30}
+              // value={project.rateFrom?.toString()}
+              // onValueChange={(e) =>
+              //   setProject({
+              //     ...project,
+              //     rateFrom: parseFloat(e),
+              //   })
+              // }
+            />
+          )}
+
+          {rateType === RateType.Variable && (
+            <AtTextField
+              placeholder={'Rate To'}
+              maxLength={30}
+              // value={project.rateTo?.toString()}
+              // onValueChange={(e) =>
+              //   setProject({
+              //     ...project,
+              //     rateTo: parseFloat(e),
+              //   })
+              // }
+            />
+          )}
+        </Box>
+      </Box>
     </Box>
   )
 }

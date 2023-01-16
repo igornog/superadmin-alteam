@@ -14,6 +14,7 @@ import {
   TeamRequest,
 } from '@yjcapp/app'
 import { ClientProjectEntity } from './ClientProjet.entity'
+import { ClientTeamEntity } from './ClientTeam.entity'
 
 @Entity({ name: 'solo_client' })
 export class SoloClientEntity extends BaseEntity {
@@ -74,6 +75,9 @@ export class SoloClientEntity extends BaseEntity {
     (clientProject) => clientProject.soloClient,
   )
   projects: ClientProjectEntity[]
+
+  @OneToMany(() => ClientTeamEntity, (clientTeam) => clientTeam.soloClient)
+  teams: ClientTeamEntity[]
 
   @Column({ type: 'varchar' })
   status: ClientStatus

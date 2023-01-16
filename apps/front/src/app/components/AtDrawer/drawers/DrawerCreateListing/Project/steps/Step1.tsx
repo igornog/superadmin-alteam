@@ -8,7 +8,9 @@ import { useAppSelector } from '../../../../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../../../../utils/redux/selectors/clients.selector'
 import { Availability, Difficulty, RateType, WorkType } from '@yjcapp/app'
 import AtTextFieldDropdown from '../../../../../AtDropdown/AtTextFieldDropdown'
-import AtTextField from '../../../../../AtTextField/AtTextField'
+import AtTextField, {
+  AtTextFieldType,
+} from '../../../../../AtTextField/AtTextField'
 import AtTextFieldDate from '../../../../../AtTextField/AtTextFieldDate'
 import { Project } from '../../../../../../utils/redux/types/listings.type'
 
@@ -123,11 +125,12 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
 
           <AtTextField
             label={'Project Length'}
+            type={AtTextFieldType.Number}
             required={true}
             placeholder={'Enter Project Length'}
             maxLength={30}
             onValueChange={(e) =>
-              props.setProject({ ...props.project, projectLength: e })
+              props.setProject({ ...props.project, projectLength: parseInt(e) })
             }
           />
 

@@ -7,7 +7,6 @@ import { StyledForm } from '../../DrawerCreateListing'
 import { grey2 } from '../../../../../../utils/colors'
 import { SearchNormal1 } from 'iconsax-react'
 import AtTag from '../../../../../AtTag/AtTag'
-import { ClientProject } from '@yjcapp/app'
 import { Project } from '../../../../../../utils/redux/types/listings.type'
 
 const ProjectStep3: React.FunctionComponent<Step3Props> = (
@@ -40,7 +39,7 @@ const ProjectStep3: React.FunctionComponent<Step3Props> = (
 
           <Box display={'flex'} flexWrap={'wrap'} gap={'10px'}>
             {props.project.skills?.length > 0 ? (
-              props.project.skills?.map((skill, index) => {
+              props.project.skills?.map((skill: string, index: number) => {
                 return (
                   <AtTag
                     label={skill}
@@ -49,7 +48,7 @@ const ProjectStep3: React.FunctionComponent<Step3Props> = (
                       props.setProject({
                         ...props.project,
                         skills: props.project.skills.filter(
-                          (item) => item !== skill,
+                          (item: string) => item !== skill,
                         ),
                       })
                     }
@@ -59,8 +58,8 @@ const ProjectStep3: React.FunctionComponent<Step3Props> = (
             ) : (
               <AtTypography color={grey2}>
                 No skills have been added by the talent, please add them by
-                searching below. Please note that you may add only up to 5
-                skills.{' '}
+                searching below. Please note that you may add only up to 7
+                skills.
               </AtTypography>
             )}
           </Box>

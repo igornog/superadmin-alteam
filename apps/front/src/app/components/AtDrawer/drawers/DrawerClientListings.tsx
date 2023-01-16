@@ -4,7 +4,7 @@ import {
   ArrowLeft2,
   Edit,
   Import,
-  SearchNormal,
+  SearchNormal1,
 } from 'iconsax-react'
 import React, { useState } from 'react'
 import styled from 'styled-components'
@@ -28,6 +28,9 @@ import DrawerListing from './DrawerListing/DrawerListing'
 import DrawerCreateListing from './DrawerCreateListing/DrawerCreateListing'
 import { Project } from '../../../utils/redux/types/listings.type'
 import AtListingCard from '../../AtCard/AtListingCard'
+import { StyledNavPage } from '../../AtNavPage/AtNavPage'
+import AtTab from '../../AtTab/AtTab'
+import { ListingType } from '@yjcapp/app'
 
 const StyledListings = styled(Box)`
   display: flex;
@@ -36,7 +39,8 @@ const StyledListings = styled(Box)`
   background-color: #f0f1fd;
   box-sizing: border-box;
   height: 100vh;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `
 
 const DrawerClientListings: React.FunctionComponent<
@@ -44,6 +48,10 @@ const DrawerClientListings: React.FunctionComponent<
 > = (props: DrawerClientListingsProps) => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
   const activeTab = useAppSelector((state) => getActiveTab(state))
+
+  const [listingFilter, setListingFilter] = useState<ListingType>(
+    ListingType.Project,
+  )
 
   const [openEditModal, setOpenEditModal] = useState(false)
   const [openListingDetails, setOpenListingDetails] = useState(false)
@@ -60,6 +68,17 @@ const DrawerClientListings: React.FunctionComponent<
   const createListing = () => {
     setOpenCreateListing(true)
   }
+
+  // useEffect(() => {
+  //   if (props.open) {
+  //     dispatch(
+  //       handleListing({
+  //         listingType: listingFilter,
+  //         clientId: selectedClient.id,
+  //       }),
+  //     )
+  //   }
+  // }, [dispatch, listingFilter, props.open, selectedClient.id])
 
   return (
     <AtDrawer
@@ -148,10 +167,26 @@ const DrawerClientListings: React.FunctionComponent<
               />
             </Box>
 
+            <StyledNavPage>
+              <AtTab
+                label={'Project'}
+                badge={selectedClient.projects.length}
+                $active={listingFilter === ListingType.Project}
+                width={'50%'}
+                onClick={() => setListingFilter(ListingType.Project)}
+              />
+              <AtTab
+                label={'Teams'}
+                badge={selectedClient.projects.length}
+                width={'50%'}
+                $active={listingFilter === ListingType.Team}
+                onClick={() => setListingFilter(ListingType.Team)}
+              />
+            </StyledNavPage>
+
             <AtTextField
-              value={''}
               disabled={!selectedClient.projects?.length}
-              startIcon={<SearchNormal />}
+              startIcon={<SearchNormal1 />}
               placeholder={
                 'Search in ' + selectedClient.companyName + ' Listings...'
               }

@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import React, { useState } from 'react'
+import React from 'react'
 import AtLine from '../../../../../AtLine/AtLine'
 import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
@@ -7,20 +7,9 @@ import { StyledForm } from '../../DrawerCreateListing'
 import { grey2 } from '../../../../../../utils/colors'
 import { SearchNormal1 } from 'iconsax-react'
 import AtTag from '../../../../../AtTag/AtTag'
-import { Skill } from '../../../../../../utils/redux/types/talents.type'
+import { Team } from '../../../../../../utils/redux/types/listings.type'
 
-const TeamStep4: React.FunctionComponent = () => {
-  const [skills, setSkills] = useState([
-    { label: 'UI/UX Design' },
-    { label: 'Figma' },
-    { label: 'Sketch' },
-    { label: 'Wireframe' },
-  ])
-
-  const handleDeleteTag = (value: string) => {
-    setSkills(skills.filter((skill) => skill.label !== value))
-  }
-
+const TeamStep4: React.FunctionComponent<Step4Props> = (props: Step4Props) => {
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
       <StyledForm>
@@ -34,26 +23,38 @@ const TeamStep4: React.FunctionComponent = () => {
         <Box display={'flex'} flexDirection={'column'} gap={2.5} padding={2.5}>
           <AtTextField
             placeholder={'Search in Skills'}
-            value={''}
+            onPressEnter={(e) =>
+              props.setTeam({
+                ...props.team,
+                skills: [...props.team.skills, e],
+              })
+            }
             startIcon={<SearchNormal1 />}
             size={'small'}
           />
           <Box display={'flex'} flexWrap={'wrap'} gap={'10px'}>
-            {skills && skills.length > 0 ? (
-              skills?.map((skill: Skill, index) => {
+            {props.team.skills?.length > 0 ? (
+              props.team.skills?.map((skill: string, index: number) => {
                 return (
                   <AtTag
-                    label={skill.label}
+                    label={skill}
                     key={index}
-                    onDelete={() => handleDeleteTag(skill.label)}
+                    onDelete={() =>
+                      props.setTeam({
+                        ...props.team,
+                        skills: props.team.skills.filter(
+                          (item: string) => item !== skill,
+                        ),
+                      })
+                    }
                   />
                 )
               })
             ) : (
               <AtTypography color={grey2}>
                 No skills have been added by the talent, please add them by
-                searching below. Please note that you may add only up to 5
-                skills.{' '}
+                searching below. Please note that you may add only up to 7
+                skills.
               </AtTypography>
             )}
           </Box>
@@ -61,6 +62,11 @@ const TeamStep4: React.FunctionComponent = () => {
       </StyledForm>
     </Box>
   )
+}
+
+interface Step4Props {
+  setTeam: React.Dispatch<React.SetStateAction<Team>>
+  team: Team
 }
 
 export default TeamStep4

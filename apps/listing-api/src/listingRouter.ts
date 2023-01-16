@@ -10,3 +10,11 @@ listingRouter.use(authorize)
 listingRouter.post('/listing/project', (req, res, next) => {
   sendPromise(listingService.createProject(req.body), res, next)
 })
+
+listingRouter.post('/listing/team', (req, res, next) => {
+  sendPromise(listingService.createTeam(req.body), res, next)
+})
+
+listingRouter.get('/listing/search', (req, res, next) => {
+  sendPromise(listingService.searchListing(req.query ?? {}), res, next)
+})

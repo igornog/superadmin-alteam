@@ -3,7 +3,9 @@ import {
   Availability,
   ClientListing,
   ClientProject,
+  ClientTeam,
   Difficulty,
+  Role,
   WorkType,
 } from '@yjcapp/app'
 import { Client } from './clients.type'
@@ -31,7 +33,7 @@ export class Project implements ClientProject {
   timeZone: string
   availability: Availability
   hours?: number
-  projectLength: string
+  projectLength: number
   startDate: Date
   rateFrom: number
   rateTo: number
@@ -65,7 +67,43 @@ export class Project implements ClientProject {
   }
 }
 
-export enum ListingType {
-  Project = 'Project',
-  Team = 'Team',
+export class Team implements ClientTeam {
+  id: number
+  soloClient: Client
+  teamName: string
+  teamSize: number
+  workType?: WorkType
+  timeZone: string
+  availability: Availability
+  projectLength: number
+  startDate?: Date
+  exactRate?: number
+  difficulty: Difficulty
+  learningLink: string
+  roles: Role[]
+  skills: string[]
+  questions: string[]
+  jobDescription?: string
+
+  constructor(data: any) {
+    this.id = data.id
+    this.soloClient = data.soloClient
+    this.teamName = data.teamName
+    this.teamSize = data.teamSize
+    this.workType = data.workType
+    this.timeZone = data.timeZone
+    this.availability = data.availability
+    this.projectLength = data.projectLength
+    this.startDate = data.startDate
+    this.exactRate = data.exactRate
+    this.difficulty = data.difficulty
+    this.learningLink = data.learning
+    this.roles = data.roles || []
+    this.skills = data.skills || []
+    this.questions = data.questions || []
+    this.jobDescription = data.jobDescription
+    // this.status = data.status
+    // this.received = data.received
+    // this.talent = data.talent
+  }
 }

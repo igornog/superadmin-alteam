@@ -15,10 +15,6 @@ export interface TalentsState {
   error?: string | null
 }
 
-export interface Skill {
-  label: string
-}
-
 export enum TalentStatus {
   Inbound = 'Inbound',
   Shortlisted = 'Shortlisted',

@@ -16,8 +16,8 @@ import FolderIcon from '../../../../assets/images/icons/folder.svg'
 import GroupIcon from '../../../../assets/images/icons/group.svg'
 import { getActiveClient } from '../../../../utils/redux/selectors/clients.selector'
 import AtCreateListingCard from '../../../AtCard/AtCreateListingCard'
-import { ListingType } from '../../../../utils/redux/types/listings.type'
 import CreateListing from './CreateListing'
+import { ListingType } from '@yjcapp/app'
 
 export const StyledForm = styled.div`
   background-color: ${white};

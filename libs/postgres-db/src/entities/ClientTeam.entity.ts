@@ -5,22 +5,22 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
-import { Availability, Difficulty, WorkType } from '@yjcapp/app'
+import { Availability, Difficulty, Role, WorkType } from '@yjcapp/app'
 import { SoloClientEntity } from './SoloClient.entity'
 
-@Entity({ name: 'client_project' })
-export class ClientProjectEntity extends BaseEntity {
+@Entity({ name: 'client_team' })
+export class ClientTeamEntity extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int' })
   id: number
 
-  @ManyToOne(() => SoloClientEntity, (soloClient) => soloClient.projects)
+  @ManyToOne(() => SoloClientEntity, (soloClient) => soloClient.teams)
   soloClient: SoloClientEntity
 
-  @Column({ type: 'varchar', name: 'project_name' })
-  projectName: string
+  @Column({ type: 'varchar', name: 'team_name' })
+  teamName: string
 
   @Column({ type: 'varchar' })
-  individuals: number
+  teamSize: number
 
   @Column({ type: 'varchar' })
   workType: WorkType
@@ -38,10 +38,7 @@ export class ClientProjectEntity extends BaseEntity {
   startDate: Date
 
   @Column({ type: 'text', nullable: true })
-  rateFrom: number
-
-  @Column({ type: 'text', nullable: true })
-  rateTo: number
+  exactRate: number
 
   @Column({ type: 'text' })
   difficulty: Difficulty
@@ -50,11 +47,14 @@ export class ClientProjectEntity extends BaseEntity {
   learningLink: string
 
   @Column({ type: 'text' })
-  jobDescription: string
+  roles: Role[]
 
   @Column({ type: 'text' })
   skills: string[]
 
   @Column({ type: 'text' })
   questions: string[]
+
+  @Column({ type: 'text', nullable: true })
+  jobDescription: string
 }

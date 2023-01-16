@@ -7,7 +7,10 @@ import {
   handleSelectClient,
   handlePathClientStatus,
 } from '../actions/clients.action'
-import { handleCreateProject } from '../actions/listing.action'
+import {
+  handleCreateProject,
+  handleCreateTeam,
+} from '../actions/listing.action'
 import { Client, ClientsState } from '../types/clients.type'
 import { StatusType } from '../types/status.type'
 
@@ -89,6 +92,20 @@ const { reducer } = createSlice({
             )
 
             client?.projects?.push(payload)
+          }
+        }
+      })
+
+      .addCase(handleCreateTeam.fulfilled, (state, { payload }) => {
+        if (payload.id) {
+          const currentClientId = state.selectedClient
+
+          if (currentClientId) {
+            const client = state.listClients.find(
+              (client: Client) => client.id === currentClientId,
+            )
+
+            client?.teams?.push(payload)
           }
         }
       })

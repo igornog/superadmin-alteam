@@ -91,11 +91,7 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
                             settings.filters.searchName ?? '',
                           )}
                         </AtTypography>
-                        <AtTypography
-                          variant={'caption'}
-                          color={grey}
-                          $bold={true}
-                        >
+                        <AtTypography variant={'caption'} color={grey}>
                           {client.industry}
                         </AtTypography>
                       </Box>

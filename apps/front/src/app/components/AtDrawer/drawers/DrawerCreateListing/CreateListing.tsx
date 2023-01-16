@@ -2,6 +2,7 @@ import { Box, Container } from '@mui/material'
 import { ArrowLeft2 } from 'iconsax-react'
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { ListingType } from '@yjcapp/app'
 import { white, grey2 } from '../../../../utils/colors'
 import AtButton, {
   AtButtonVariant,
@@ -12,6 +13,7 @@ import AtTypography from '../../../AtTypography/AtTypography'
 import FinalStep from './FinalStep'
 
 import CreateProject from './Project/CreateProject'
+import CreateTeam from './Team/CreateTeam'
 
 export const StyledForm = styled.div`
   background-color: ${white};
@@ -52,7 +54,11 @@ const CreateListing: React.FunctionComponent<CreateListingProps> = (
 
         <AtLine />
 
-        <CreateProject step={step} setStep={setStep} />
+        {props.listingType === ListingType.Project ? (
+          <CreateProject step={step} setStep={setStep} />
+        ) : props.listingType === ListingType.Team ? (
+          <CreateTeam step={step} setStep={setStep} />
+        ) : null}
       </Box>
     </Container>
   )
@@ -61,7 +67,7 @@ const CreateListing: React.FunctionComponent<CreateListingProps> = (
 interface CreateListingProps {
   clientName: string
   steps: number
-  listingType?: any
+  listingType?: ListingType
   handleClose: () => void
   handleBackToCreateListing: () => void
 }

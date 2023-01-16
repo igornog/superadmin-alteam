@@ -10,7 +10,7 @@ import {
   OutlinedInput,
   outlinedInputClasses,
 } from '@mui/material'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 import {
   black,
@@ -35,6 +35,7 @@ export enum AtTextFieldType {
   Text = 'text',
   Email = 'email',
   Password = 'password',
+  Number = 'number',
 }
 
 const StyledLabel = styled.label<{
@@ -100,7 +101,7 @@ const StyledInput = styled(OutlinedInput)<{
                   : white
                 : white};
           `};
-    & input {
+    & > input {
       max-width: ${({ $maxWidth }) => $maxWidth && $maxWidth + 'ch'};
       color: ${({ disabled, $bgColor }) =>
         $bgColor === 'black' ? white : disabled ? grey3 : black};
@@ -122,12 +123,12 @@ const StyledInput = styled(OutlinedInput)<{
       }
     }
     &.${inputBaseClasses.adornedStart} {
-      input {
+      & > input {
         padding-left: 10px;
       }
     }
     &.${inputBaseClasses.adornedEnd} {
-      input {
+      & > input {
         padding-right: 10px;
       }
       & > svg {
@@ -219,6 +220,16 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
         setValue('')
       }
     }
+  }
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (props.type === AtTextFieldType.Number) {
+      const value = e.target.value
+      if (isNaN(Number(value))) {
+        return
+      }
+    }
+
+    returnValue(e.target.value)
   }
 
   useEffect(() => {
@@ -312,9 +323,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
               : props.type || AtTextFieldType.Text
           }
           placeholder={props.placeholder}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            returnValue(e.target.value)
-          }}
+          onChange={handleChange}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           startAdornment={
