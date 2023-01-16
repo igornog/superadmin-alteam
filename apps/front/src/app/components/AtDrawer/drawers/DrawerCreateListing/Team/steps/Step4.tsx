@@ -7,7 +7,7 @@ import { StyledForm } from '../../DrawerCreateListing'
 import { grey2 } from '../../../../../../utils/colors'
 import { SearchNormal1 } from 'iconsax-react'
 import AtTag from '../../../../../AtTag/AtTag'
-import { Team } from '../../../../../../utils/redux/types/listings.type'
+import { Listing } from '../../../../../../utils/redux/types/listings.type'
 
 const TeamStep4: React.FunctionComponent<Step4Props> = (props: Step4Props) => {
   return (
@@ -65,8 +65,8 @@ const TeamStep4: React.FunctionComponent<Step4Props> = (props: Step4Props) => {
 }
 
 interface Step4Props {
-  setTeam: React.Dispatch<React.SetStateAction<Team>>
-  team: Team
+  setTeam: React.Dispatch<React.SetStateAction<Listing>>
+  team: Listing
 }
 
 export default TeamStep4

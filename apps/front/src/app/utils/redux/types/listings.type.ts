@@ -2,9 +2,8 @@ import { StatusType } from './status.type'
 import {
   Availability,
   ClientListing,
-  ClientProject,
-  ClientTeam,
   Difficulty,
+  ListingType,
   Role,
   WorkType,
 } from '@yjcapp/app'
@@ -17,93 +16,46 @@ export interface ListingsState {
   error?: string | null
 }
 
-// export enum ListingStatus {
-//   Active = 'Active',
-//   Inactive = 'Inactive',
-//   Draft = 'Draft',
-//   Ended = 'Ended',
-// }
-
-export class Project implements ClientProject {
+export class Listing implements ClientListing {
   id: number
   soloClient: Client
-  projectName: string
+  listingName: string
   individuals: number
-  workType: WorkType
-  timeZone: string
-  availability: Availability
-  hours?: number
-  projectLength: number
-  startDate: Date
-  rateFrom: number
-  rateTo: number
-  difficulty: Difficulty
-  learningLink: string
-  jobDescription: string
-  skills: string[]
-  questions: string[]
-  // status: ListingStatus
-
-  constructor(data: any) {
-    this.id = data.id
-    this.soloClient = data.soloClient
-    this.projectName = data.projectName
-    this.individuals = data.individuals
-    this.workType = data.workType
-    this.timeZone = data.timeZone
-    this.availability = data.availability
-    this.projectLength = data.projectLength
-    this.startDate = data.startDate
-    this.rateFrom = data.rateFrom
-    this.rateTo = data.rateTo
-    this.difficulty = data.difficulty
-    this.learningLink = data.learning
-    this.jobDescription = data.jobDescription
-    this.skills = data.skills || []
-    this.questions = data.questions || []
-    // this.status = data.status
-    // this.received = data.received
-    // this.talent = data.talent
-  }
-}
-
-export class Team implements ClientTeam {
-  id: number
-  soloClient: Client
-  teamName: string
-  teamSize: number
   workType?: WorkType
   timeZone: string
   availability: Availability
   projectLength: number
   startDate?: Date
   exactRate?: number
+  rateFrom?: number
+  rateTo?: number
   difficulty: Difficulty
   learningLink: string
   roles: Role[]
   skills: string[]
   questions: string[]
   jobDescription?: string
+  status: ListingType
 
   constructor(data: any) {
     this.id = data.id
     this.soloClient = data.soloClient
-    this.teamName = data.teamName
-    this.teamSize = data.teamSize
+    this.listingName = data.listingName
+    this.individuals = data.individuals
     this.workType = data.workType
     this.timeZone = data.timeZone
     this.availability = data.availability
     this.projectLength = data.projectLength
     this.startDate = data.startDate
     this.exactRate = data.exactRate
+    this.rateFrom = data.rateFrom
+    this.rateTo = data.rateTo
     this.difficulty = data.difficulty
-    this.learningLink = data.learning
+    this.learningLink = data.learningLink
     this.roles = data.roles || []
     this.skills = data.skills || []
     this.questions = data.questions || []
     this.jobDescription = data.jobDescription
-    // this.status = data.status
-    // this.received = data.received
-    // this.talent = data.talent
+    this.status = data.status
   }
 }

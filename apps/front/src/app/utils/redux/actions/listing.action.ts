@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { ListingSearch } from '@yjcapp/app'
 import { listingService } from '../../services/listingService'
-import { Project, Team } from '../types/listings.type'
+import { Listing } from '../types/listings.type'
 
-export const handleListing = createAsyncThunk(
+export const handleInitListing = createAsyncThunk(
   'listing/initListing',
   async (clientSearch: ListingSearch, { rejectWithValue }) => {
     try {
@@ -14,22 +14,11 @@ export const handleListing = createAsyncThunk(
   },
 )
 
-export const handleCreateProject = createAsyncThunk(
-  'listing/createProject',
-  async (project: Omit<Project, 'id'>, { rejectWithValue }) => {
+export const handleCreateListing = createAsyncThunk(
+  'listing/createListing',
+  async (listing: Omit<Listing, 'id'>, { rejectWithValue }) => {
     try {
-      return await listingService.createProject(project)
-    } catch (err) {
-      return rejectWithValue(err)
-    }
-  },
-)
-
-export const handleCreateTeam = createAsyncThunk(
-  'listing/createTeam',
-  async (team: Omit<Team, 'id'>, { rejectWithValue }) => {
-    try {
-      return await listingService.createTeam(team)
+      return await listingService.createListing(listing)
     } catch (err) {
       return rejectWithValue(err)
     }

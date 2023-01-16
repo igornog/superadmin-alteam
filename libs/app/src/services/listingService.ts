@@ -1,12 +1,6 @@
-import {
-  ClientListing,
-  ClientProject,
-  ClientTeam,
-  ListingSearch,
-} from '../listing'
+import { ClientListing, ListingSearch } from '../listing'
 
 export interface ListingService {
-  createProject(project: Omit<ClientProject, 'id'>): Promise<ClientProject>
-  createTeam(team: Omit<ClientTeam, 'id'>): Promise<ClientTeam>
+  createListing(team: Omit<ClientListing, 'id'>): Promise<ClientListing>
   searchListing(listingSearch: ListingSearch): Promise<ClientListing[]>
 }

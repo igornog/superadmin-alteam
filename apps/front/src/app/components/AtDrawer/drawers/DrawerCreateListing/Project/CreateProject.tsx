@@ -1,7 +1,7 @@
 import { Grid, Box } from '@mui/material'
 import { ArrowLeft2, ArrowRight } from 'iconsax-react'
 import { Dispatch, useState } from 'react'
-import { ClientProject, RateType, WorkType } from '@yjcapp/app'
+import { RateType, WorkType } from '@yjcapp/app'
 import { grey2, black } from '../../../../../utils/colors'
 import AtButton, {
   AtButtonVariant,
@@ -14,14 +14,14 @@ import ProjectStep1 from './steps/Step1'
 import ProjectStep2 from './steps/Step2'
 import ProjectStep3 from './steps/Step3'
 import ProjectStep4 from './steps/Step4'
-import { Project } from '../../../../../utils/redux/types/listings.type'
 import {
   useAppDispatch,
   useAppSelector,
 } from '../../../../../utils/hooks/reduxHook'
-import { handleCreateProject } from '../../../../../utils/redux/actions/listing.action'
 import { getActiveClient } from '../../../../../utils/redux/selectors/clients.selector'
 import { Client } from '../../../../../utils/redux/types/clients.type'
+import { Listing } from '../../../../../utils/redux/types/listings.type'
+import { handleCreateListing } from '../../../../../utils/redux/actions/listing.action'
 
 const CreateProject: React.FunctionComponent<CreateProjectProps> = (
   props: CreateProjectProps,
@@ -30,7 +30,7 @@ const CreateProject: React.FunctionComponent<CreateProjectProps> = (
   const dispatch = useAppDispatch()
   const selectedClient = useAppSelector((state) => getActiveClient(state))
 
-  const [project, setProject] = useState<Project>(new Project({}))
+  const [project, setProject] = useState<Listing>(new Listing({}))
 
   const tabs = [
     {
@@ -105,9 +105,9 @@ const CreateProject: React.FunctionComponent<CreateProjectProps> = (
     } else if (props.step <= 1) {
       return !fieldsToCheck?.every(
         (field: any) =>
-          project[field as keyof ClientProject] !== '' &&
-          project[field as keyof ClientProject] !== undefined &&
-          project[field as keyof ClientProject] !== 0,
+          project[field as keyof Listing] !== '' &&
+          project[field as keyof Listing] !== undefined &&
+          project[field as keyof Listing] !== 0,
       )
     } else {
       return false
@@ -117,7 +117,7 @@ const CreateProject: React.FunctionComponent<CreateProjectProps> = (
   const handleSubmitProject = () => {
     if (props.step + 1 === tabs.length) {
       dispatch(
-        handleCreateProject({
+        handleCreateListing({
           ...project,
           soloClient: { id: selectedClient.id } as Client,
         }),

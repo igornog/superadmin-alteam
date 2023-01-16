@@ -101,9 +101,10 @@ const StyledInput = styled(OutlinedInput)<{
                   : white
                 : white};
           `};
+
     & > input {
       max-width: ${({ $maxWidth }) => $maxWidth && $maxWidth + 'ch'};
-      color: ${({ disabled, $bgColor }) =>
+      color: ${({ disabled, $bgColor }: any) =>
         $bgColor === 'black' ? white : disabled ? grey3 : black};
       font-size: ${({ size }) => (size === 'medium' ? '16px' : '14px')};
       &::placeholder {
@@ -116,6 +117,15 @@ const StyledInput = styled(OutlinedInput)<{
         }
       }
       padding: ${({ size }) => (size === 'medium' ? '18px 0' : '10px 0')};
+
+      ::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      ::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
     }
     & textarea {
       &::placeholder {

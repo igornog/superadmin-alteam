@@ -13,7 +13,11 @@ const { reducer } = createSlice({
   name: 'clients',
   initialState,
   reducers: {},
-  extraReducers: {},
+  extraReducers: (builder) => {
+    // builder.addCase(handleListing.fulfilled, (state, { payload }) => {
+    //   console.log(payload[0]?.skills)
+    // })
+  },
 })
 
 export default reducer

@@ -41,8 +41,6 @@ async function findClient(talentSearch: ClientSearch): Promise<SoloClient[]> {
   queryBuilder.limit(PAGE_SIZE)
   queryBuilder.offset(calculateOffset(talentSearch.page ?? 1, PAGE_SIZE))
 
-  queryBuilder.leftJoinAndSelect('solo_client.projects', 'projects')
-
   const result = await queryBuilder.getMany()
 
   return result.map(clientFromEntity)

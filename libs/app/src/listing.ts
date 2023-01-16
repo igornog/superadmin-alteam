@@ -1,42 +1,24 @@
-import { SoloClient } from './client'
 import { Availability } from './talent'
 
-export interface ClientTeam {
+export interface ClientListing {
   id?: number
-  soloClient: SoloClient
-  teamName: string
-  teamSize: number
+  listingName: string
+  individuals: number
   workType?: WorkType
   timeZone: string
   availability: Availability
   projectLength: number
-  exactRate?: number
   startDate?: Date
+  exactRate?: number
+  rateFrom?: number
+  rateTo?: number
   difficulty: Difficulty
   learningLink: string
   roles: Role[]
   skills: string[]
   questions: string[]
   jobDescription?: string
-}
-
-export interface ClientProject {
-  id: number
-  soloClient: SoloClient
-  projectName: string
-  individuals: number
-  workType?: WorkType
-  timeZone: string
-  availability?: Availability
-  projectLength: number
-  startDate?: Date
-  rateFrom?: number
-  rateTo?: number
-  difficulty?: Difficulty
-  learningLink: string
-  jobDescription: string
-  skills: string[]
-  questions: string[]
+  status: ListingType
 }
 
 export interface Role {
@@ -78,9 +60,6 @@ export enum ListingType {
 }
 
 export interface ListingSearch {
-  listingType?: ListingType
   listingName?: string
   clientId?: number
 }
-
-export type ClientListing = ClientProject | ClientTeam

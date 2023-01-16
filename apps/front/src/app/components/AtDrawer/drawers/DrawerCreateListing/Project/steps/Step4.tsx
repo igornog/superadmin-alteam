@@ -5,7 +5,7 @@ import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
 import { grey2 } from '../../../../../../utils/colors'
-import { Project } from '../../../../../../utils/redux/types/listings.type'
+import { Listing } from '../../../../../../utils/redux/types/listings.type'
 
 const ProjectStep4: React.FunctionComponent<Step4Props> = (
   props: Step4Props,
@@ -94,8 +94,8 @@ const ProjectStep4: React.FunctionComponent<Step4Props> = (
 }
 
 interface Step4Props {
-  setProject: Dispatch<React.SetStateAction<Project>>
-  project: Project
+  setProject: Dispatch<React.SetStateAction<Listing>>
+  project: Listing
 }
 
 export default ProjectStep4

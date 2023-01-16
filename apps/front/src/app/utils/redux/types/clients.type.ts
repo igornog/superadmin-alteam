@@ -6,7 +6,6 @@ import {
   Talent,
   TeamRequest,
 } from '@yjcapp/app'
-import { Project, Team } from './listings.type'
 import { StatusType } from './status.type'
 
 export interface ClientsState {
@@ -32,8 +31,6 @@ export class Client implements SoloClient {
   fullName?: string
   position?: string
   received?: Date
-  projects: Project[]
-  teams: Team[]
   assignee?: Talent[]
   status: ClientStatus
 
@@ -52,8 +49,6 @@ export class Client implements SoloClient {
     this.fullName = data.fullName
     this.position = data.position
     this.received = data.received
-    this.projects = data.projects || []
-    this.teams = data.teams || []
     this.assignee = data.assignee || []
     this.status = data.status
   }

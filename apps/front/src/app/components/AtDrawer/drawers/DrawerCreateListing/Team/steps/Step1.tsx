@@ -12,7 +12,7 @@ import AtTextField, {
   AtTextFieldType,
 } from '../../../../../AtTextField/AtTextField'
 import AtTextFieldDate from '../../../../../AtTextField/AtTextFieldDate'
-import { Team } from '../../../../../../utils/redux/types/listings.type'
+import { Listing } from '../../../../../../utils/redux/types/listings.type'
 import AtSwitch from '../../../../../AtSwitch/AtSwitch'
 import { plurialize } from '../../../../../../utils/helpers'
 import styled from 'styled-components'
@@ -37,9 +37,9 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
   }, [props.knownTotalPrice, props])
 
   useEffect(() => {
-    if (props.team.roles.length < props.team.teamSize) {
+    if (props.team.roles.length < props.team.individuals) {
       const newRoles = Array(
-        props.team.teamSize - props.team.roles.length,
+        props.team.individuals - props.team.roles.length,
       ).fill({
         roleName: '',
         description: '',
@@ -49,11 +49,11 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
       props.team.roles.push(...newRoles)
     } else {
       props.team.roles.splice(
-        props.team.teamSize,
-        props.team.roles.length - props.team.teamSize,
+        props.team.individuals,
+        props.team.roles.length - props.team.individuals,
       )
     }
-  }, [props.team.roles, props.team.teamSize])
+  }, [props.team.roles, props.team.individuals])
 
   return (
     <StyledForm>
@@ -76,7 +76,7 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
             label={'Project Name'}
             required={true}
             placeholder={'Enter Team Project Name'}
-            onValueChange={(e) => props.setTeam({ ...props.team, teamName: e })}
+            onValueChange={(e) => props.setTeam({ ...props.team, listingName: e })}
             maxLength={30}
           />
 
@@ -97,7 +97,7 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
             handleSelect={(e) =>
               props.setTeam({
                 ...props.team,
-                teamSize: parseInt(e.label) as number,
+                individuals: parseInt(e.label) as number,
               })
             }
             label={'Number of Individuals'}
@@ -260,8 +260,8 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
 }
 
 interface Step1Props {
-  setTeam: Dispatch<React.SetStateAction<Team>>
-  team: Team
+  setTeam: Dispatch<React.SetStateAction<Listing>>
+  team: Listing
   knownTotalPrice: boolean
   setKnownTotalPrice: Dispatch<React.SetStateAction<boolean>>
 }

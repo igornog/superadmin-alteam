@@ -6,8 +6,7 @@ import { StyledForm } from '../../DrawerCreateListing'
 import { grey2 } from '../../../../../../utils/colors'
 import { Box } from '@mui/material'
 import styled from 'styled-components'
-import { ClientProject } from '@yjcapp/app'
-import { Project } from '../../../../../../utils/redux/types/listings.type'
+import { Listing } from '../../../../../../utils/redux/types/listings.type'
 
 const StyledCharCounter = styled.div`
   position: absolute;
@@ -60,8 +59,8 @@ const ProjectStep2: React.FunctionComponent<Step2Props> = (
 }
 
 interface Step2Props {
-  setProject: Dispatch<React.SetStateAction<Project>>
-  project: Project
+  setProject: Dispatch<React.SetStateAction<Listing>>
+  project: Listing
 }
 
 export default ProjectStep2

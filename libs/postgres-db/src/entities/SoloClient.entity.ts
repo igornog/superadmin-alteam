@@ -2,7 +2,6 @@ import {
   BaseEntity,
   Column,
   Entity,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
@@ -13,8 +12,6 @@ import {
   Talent,
   TeamRequest,
 } from '@yjcapp/app'
-import { ClientProjectEntity } from './ClientProjet.entity'
-import { ClientTeamEntity } from './ClientTeam.entity'
 
 @Entity({ name: 'solo_client' })
 export class SoloClientEntity extends BaseEntity {
@@ -69,15 +66,6 @@ export class SoloClientEntity extends BaseEntity {
 
   @Column({ type: 'json', nullable: true })
   assignee?: Talent[]
-
-  @OneToMany(
-    () => ClientProjectEntity,
-    (clientProject) => clientProject.soloClient,
-  )
-  projects: ClientProjectEntity[]
-
-  @OneToMany(() => ClientTeamEntity, (clientTeam) => clientTeam.soloClient)
-  teams: ClientTeamEntity[]
 
   @Column({ type: 'varchar' })
   status: ClientStatus

@@ -12,7 +12,7 @@ import AtTextField, {
   AtTextFieldType,
 } from '../../../../../AtTextField/AtTextField'
 import AtTextFieldDate from '../../../../../AtTextField/AtTextFieldDate'
-import { Project } from '../../../../../../utils/redux/types/listings.type'
+import { Listing } from '../../../../../../utils/redux/types/listings.type'
 
 const ProjectStep1: React.FunctionComponent<Step1Props> = (
   props: Step1Props,
@@ -41,7 +41,7 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
             required={true}
             placeholder={'Enter Project Name'}
             onValueChange={(e) =>
-              props.setProject({ ...props.project, projectName: e })
+              props.setProject({ ...props.project, listingName: e })
             }
             maxLength={30}
           />
@@ -235,8 +235,8 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
 }
 
 interface Step1Props {
-  setProject: Dispatch<React.SetStateAction<Project>>
-  project: Project
+  setProject: Dispatch<React.SetStateAction<Listing>>
+  project: Listing
   rateType?: RateType
   setRateType: Dispatch<React.SetStateAction<RateType | undefined>>
 }

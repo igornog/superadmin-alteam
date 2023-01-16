@@ -1,5 +1,4 @@
 export { GroupTalentEntity } from './GroupTalent.entity'
 export { SoloTalentEntity } from './SoloTalent.entity'
 export { SoloClientEntity } from './SoloClient.entity'
-export { ClientProjectEntity } from './ClientProjet.entity'
-export { ClientTeamEntity } from './ClientTeam.entity'
+export { ListingEntity } from './Listing.entity'

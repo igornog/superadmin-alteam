@@ -6,7 +6,12 @@ import AtLine from '../../../../AtLine/AtLine'
 import AtTextField from '../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../AtTypography/AtTypography'
 import { StyledForm } from '../DrawerCreateClient'
-import { DeliveryType, ProjectType, TeamRequest } from '@yjcapp/app'
+import {
+  ClientStatus,
+  DeliveryType,
+  ProjectType,
+  TeamRequest,
+} from '@yjcapp/app'
 
 const Step2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
   return (
@@ -128,6 +133,41 @@ const Step2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
             onValueChange={(e) =>
               props.setClient({ ...props.client, position: e })
             }
+          />
+        </Box>
+      </StyledForm>
+
+      <StyledForm>
+        <Box padding={'20px'}>
+          <AtTypography variant={'h4'}>Client Status</AtTypography>
+        </Box>
+
+        <AtLine />
+
+        <Box
+          padding={'20px'}
+          paddingTop={'30px'}
+          display={'flex'}
+          flexDirection={'column'}
+          gap={'30px'}
+        >
+          <AtTextFieldDropdown
+            fullWidth={true}
+            value={undefined}
+            placeholder={'Select option...'}
+            handleSelect={(e) =>
+              props.setClient({
+                ...props.client,
+                status: e.label as ClientStatus,
+              })
+            }
+            $listItems={[ClientStatus.Request, ClientStatus.Active].map(
+              (label: ClientStatus, index: number) => ({
+                id: index,
+                label: label,
+              }),
+            )}
+            label={'Select Status'}
           />
         </Box>
       </StyledForm>

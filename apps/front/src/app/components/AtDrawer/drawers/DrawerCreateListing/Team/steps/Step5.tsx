@@ -5,7 +5,7 @@ import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
 import { grey2 } from '../../../../../../utils/colors'
-import { Team } from '../../../../../../utils/redux/types/listings.type'
+import { Listing } from '../../../../../../utils/redux/types/listings.type'
 
 const TeamStep5: React.FunctionComponent<Step5Props> = (props: Step5Props) => {
   const handleArrayValueChange = (
@@ -92,8 +92,8 @@ const TeamStep5: React.FunctionComponent<Step5Props> = (props: Step5Props) => {
 }
 
 interface Step5Props {
-  setTeam: React.Dispatch<React.SetStateAction<Team>>
-  team: Team
+  setTeam: React.Dispatch<React.SetStateAction<Listing>>
+  team: Listing
 }
 
 export default TeamStep5

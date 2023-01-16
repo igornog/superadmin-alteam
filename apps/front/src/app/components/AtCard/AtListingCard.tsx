@@ -7,12 +7,12 @@ import AtTypography from '../AtTypography/AtTypography'
 import { StyledCard } from './AtTalentCard'
 import AtLine from '../AtLine/AtLine'
 import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton'
-import { Project } from '../../utils/redux/types/listings.type'
+import { Listing } from '../../utils/redux/types/listings.type'
 
 const AtListingCard: React.FunctionComponent<AtListingCardProps> = (
   props: AtListingCardProps,
 ) => {
-  const listing = new Project(props.project)
+  const listing = new Listing(props.project)
 
   return (
     <StyledCard onClick={props.onClick} fullHeight={props.fullHeight}>
@@ -22,7 +22,7 @@ const AtListingCard: React.FunctionComponent<AtListingCardProps> = (
           justifyContent={'space-between'}
           alignItems={'center'}
         >
-          <AtTypography variant={'h5'}>{listing.projectName}</AtTypography>
+          <AtTypography variant={'h5'}>{listing.listingName}</AtTypography>
           <AtGroupTag icon={<ArrowRight2 size={10} />} />
         </Box>
 
@@ -63,7 +63,7 @@ const AtListingCard: React.FunctionComponent<AtListingCardProps> = (
 }
 
 interface AtListingCardProps {
-  project?: Project
+  project: Listing
   fullHeight?: boolean
   onClick?: (e: React.MouseEvent) => void
 }

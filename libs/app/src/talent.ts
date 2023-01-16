@@ -26,7 +26,7 @@ export interface SoloTalent {
   phoneNumber?: string
   salaryExpectation?: string
   workExperience?: string
-  listing?: Listing[]
+  // listing?: Listing[]
   status?: ListingStatus
 }
 
@@ -67,13 +67,6 @@ export enum ListingStatus {
   Accepted = 'accepted',
   Inbound = 'inbound',
   Applicable = 'applicable',
-}
-
-export interface Listing {
-  companyName: string
-  duration: string
-  jobType: string
-  status: ListingStatus
 }
 
 export interface TalentSearch {

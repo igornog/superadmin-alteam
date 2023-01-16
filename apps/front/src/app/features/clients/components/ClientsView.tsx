@@ -37,7 +37,7 @@ const ClientsView: React.FunctionComponent = () => {
       dispatch(
         handleClients({
           clientName: settings.filters.searchName,
-          status: activeTab?.status?.toLowerCase(),
+          status: activeTab?.status,
         }),
       )
     }

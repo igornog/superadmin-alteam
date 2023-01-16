@@ -6,45 +6,9 @@ import AtTextField, {
 } from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
-import { black, grey2, white } from '../../../../../../utils/colors'
-import { Team } from '../../../../../../utils/redux/types/listings.type'
-import styled from 'styled-components'
-
-const StyledPercentage = styled.div`
-  background-color: ${black};
-  color: ${white};
-  border-radius: 5px;
-  padding: 2px 20px 2px 5px;
-`
-
-const StyledInput = styled.input`
-  padding: 0;
-  background: transparent;
-  border: none;
-  color: white;
-  text-align: center;
-  position: relative;
-  display: inline-block;
-  width: 30px;
-
-  ::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  ::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  &:focus {
-    outline: none;
-  }
-`
-
-const StyledSpan = styled.span`
-  position: absolute;
-  right: 25px;
-`
+import { black, grey2 } from '../../../../../../utils/colors'
+import { Listing } from '../../../../../../utils/redux/types/listings.type'
+import { convertHexToRGBA } from '../../../../../../utils/helpers'
 
 const TeamStep2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
   const [totalCost, setTotalCost] = useState(0)
@@ -89,7 +53,7 @@ const TeamStep2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
         return acc
       }, 0) * props.team.projectLength,
     )
-  }, [props.team.projectLength, props.team.roles, props.team.teamSize])
+  }, [props.team.projectLength, props.team.roles, props.team.individuals])
 
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
@@ -140,7 +104,7 @@ const TeamStep2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
                         label={`Percentage`}
                         value={props.team?.roles[i]?.percentage?.toFixed(0)}
                         onValueChange={(e) => onPercentageChange(e, i)}
-                        endIcon={'%'}
+                        endIcon={<AtTypography color={convertHexToRGBA(black, 0.5)}>%</AtTypography>}
                       />
                     </Box>
                   )}
@@ -151,7 +115,8 @@ const TeamStep2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
                       label={`Cost per month`}
                       value={props.team?.roles[i]?.price?.toString()}
                       onValueChange={(e) => onPriceChange(e, i)}
-                    />
+                      endIcon={<AtTypography color={convertHexToRGBA(black, 0.5)}>£</AtTypography>}
+                      />
                   </Box>
                 </Box>
               )
@@ -190,8 +155,8 @@ const TeamStep2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
 }
 
 interface Step2Props {
-  setTeam: React.Dispatch<React.SetStateAction<Team>>
-  team: Team
+  setTeam: React.Dispatch<React.SetStateAction<Listing>>
+  team: Listing
 }
 
 export default TeamStep2

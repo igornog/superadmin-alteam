@@ -7,12 +7,8 @@ listingRouter.use(express.json())
 
 listingRouter.use(authorize)
 
-listingRouter.post('/listing/project', (req, res, next) => {
-  sendPromise(listingService.createProject(req.body), res, next)
-})
-
-listingRouter.post('/listing/team', (req, res, next) => {
-  sendPromise(listingService.createTeam(req.body), res, next)
+listingRouter.post('/listing', (req, res, next) => {
+  sendPromise(listingService.createListing(req.body), res, next)
 })
 
 listingRouter.get('/listing/search', (req, res, next) => {

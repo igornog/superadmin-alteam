@@ -1,7 +1,7 @@
 import { Grid, Box } from '@mui/material'
 import { ArrowLeft2, ArrowRight } from 'iconsax-react'
 import { Dispatch, useState } from 'react'
-import { ClientTeam, Role, WorkType } from '@yjcapp/app'
+import { Role, WorkType } from '@yjcapp/app'
 import { grey2, black } from '../../../../../utils/colors'
 import AtButton, {
   AtButtonVariant,
@@ -14,15 +14,15 @@ import TeamStep1 from './steps/Step1'
 import TeamStep2 from './steps/Step2'
 import TeamStep3 from './steps/Step3'
 import TeamStep4 from './steps/Step4'
-import { Team } from '../../../../../utils/redux/types/listings.type'
 import {
   useAppDispatch,
   useAppSelector,
 } from '../../../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../../../utils/redux/selectors/clients.selector'
 import TeamStep5 from './steps/Step5'
-import { handleCreateTeam } from '../../../../../utils/redux/actions/listing.action'
 import { Client } from '../../../../../utils/redux/types/clients.type'
+import { Listing } from '../../../../../utils/redux/types/listings.type'
+import { handleCreateListing } from '../../../../../utils/redux/actions/listing.action'
 
 const CreateTeam: React.FunctionComponent<CreateTeamProps> = (
   props: CreateTeamProps,
@@ -30,7 +30,7 @@ const CreateTeam: React.FunctionComponent<CreateTeamProps> = (
   const dispatch = useAppDispatch()
   const selectedClient = useAppSelector((state) => getActiveClient(state))
 
-  const [team, setTeam] = useState<Team>(new Team({}))
+  const [team, setTeam] = useState<Listing>(new Listing({}))
   const [knownTotalPrice, setKnownTotalPrice] = useState<boolean>(false)
 
   const tabs = [
@@ -112,9 +112,9 @@ const CreateTeam: React.FunctionComponent<CreateTeamProps> = (
     } else if (props.step <= 1) {
       return !fieldsToCheck?.every(
         (field: any) =>
-          team[field as keyof ClientTeam] !== '' &&
-          team[field as keyof ClientTeam] !== undefined &&
-          team[field as keyof ClientTeam] !== 0,
+          team[field as keyof Listing] !== '' &&
+          team[field as keyof Listing] !== undefined &&
+          team[field as keyof Listing] !== 0,
       )
     } else {
       return false
@@ -124,7 +124,7 @@ const CreateTeam: React.FunctionComponent<CreateTeamProps> = (
   const handleSubmitProject = () => {
     if (props.step + 1 === tabs.length) {
       dispatch(
-        handleCreateTeam({
+        handleCreateListing({
           ...team,
           soloClient: { id: selectedClient.id } as Client,
         }),

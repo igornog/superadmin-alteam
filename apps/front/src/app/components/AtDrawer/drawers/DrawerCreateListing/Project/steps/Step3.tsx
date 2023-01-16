@@ -7,7 +7,7 @@ import { StyledForm } from '../../DrawerCreateListing'
 import { grey2 } from '../../../../../../utils/colors'
 import { SearchNormal1 } from 'iconsax-react'
 import AtTag from '../../../../../AtTag/AtTag'
-import { Project } from '../../../../../../utils/redux/types/listings.type'
+import { Listing } from '../../../../../../utils/redux/types/listings.type'
 
 const ProjectStep3: React.FunctionComponent<Step3Props> = (
   props: Step3Props,
@@ -70,8 +70,8 @@ const ProjectStep3: React.FunctionComponent<Step3Props> = (
 }
 
 interface Step3Props {
-  setProject: Dispatch<React.SetStateAction<Project>>
-  project: Project
+  setProject: Dispatch<React.SetStateAction<Listing>>
+  project: Listing
 }
 
 export default ProjectStep3

@@ -16,8 +16,8 @@ import AtTextFieldDropdown, {
 } from '../../../../../AtDropdown/AtTextFieldDropdown'
 import AtTag from '../../../../../AtTag/AtTag'
 import { v4 as uuid } from 'uuid'
-import { Team } from '../../../../../../utils/redux/types/listings.type'
 import { Role } from '@yjcapp/app'
+import { Listing } from '../../../../../../utils/redux/types/listings.type'
 
 const StyledBox = styled.div`
   position: relative;
@@ -155,7 +155,7 @@ const TeamStep3: React.FunctionComponent<Step3Props> = (props: Step3Props) => {
                       $listItems={[
                         ...props.team.roles
                           .filter(
-                            (role) =>
+                            (role: Role) =>
                               !jobDescriptions
                                 .map((item: JobDescriptionProps) => item.role)
                                 .includes(role.roleName),
@@ -220,8 +220,8 @@ const TeamStep3: React.FunctionComponent<Step3Props> = (props: Step3Props) => {
 }
 
 interface Step3Props {
-  setTeam: React.Dispatch<React.SetStateAction<Team>>
-  team: Team
+  setTeam: React.Dispatch<React.SetStateAction<Listing>>
+  team: Listing
 }
 
 export default TeamStep3

@@ -75,21 +75,10 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
 
   const createClient = () => {
     if (step === 1) {
-      if (
-        client.projectType &&
-        client.deliveryType &&
-        client.teamRequest &&
-        client.request &&
-        client.email &&
-        client.fullName &&
-        client.position
-      ) {
-        dispatch(handleCreateClient({ ...client, status: ClientStatus.Active }))
-      } else {
-        dispatch(handleCreateClient(client))
-      }
+      const status = client.status ?? ClientStatus.Active
+      dispatch(handleCreateClient({ ...client, status }))
     }
-
+    
     setStep(step + 1)
   }
 

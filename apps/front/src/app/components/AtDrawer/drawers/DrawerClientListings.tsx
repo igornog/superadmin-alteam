@@ -6,13 +6,13 @@ import {
   Import,
   SearchNormal1,
 } from 'iconsax-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Client from '../../../features/clients/components/ClientViewProfile/Client'
 import Company from '../../../features/clients/components/ClientViewProfile/Company'
 import Notes from '../../../features/clients/components/ClientViewProfile/Notes'
-import { grey2, grey3 } from '../../../utils/colors'
-import { useAppSelector } from '../../../utils/hooks/reduxHook'
+import { grey2 } from '../../../utils/colors'
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../utils/redux/selectors/clients.selector'
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
 import ClientLogo from '../../app/clients/ClientLogo'
@@ -26,11 +26,11 @@ import AtTypography from '../../AtTypography/AtTypography'
 import AtDrawer from '../AtDrawer'
 import DrawerListing from './DrawerListing/DrawerListing'
 import DrawerCreateListing from './DrawerCreateListing/DrawerCreateListing'
-import { Project } from '../../../utils/redux/types/listings.type'
-import AtListingCard from '../../AtCard/AtListingCard'
 import { StyledNavPage } from '../../AtNavPage/AtNavPage'
 import AtTab from '../../AtTab/AtTab'
 import { ListingType } from '@yjcapp/app'
+import { Listing } from '../../../utils/redux/types/listings.type'
+import { handleInitListing } from '../../../utils/redux/actions/listing.action'
 
 const StyledListings = styled(Box)`
   display: flex;
@@ -48,6 +48,7 @@ const DrawerClientListings: React.FunctionComponent<
 > = (props: DrawerClientListingsProps) => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
   const activeTab = useAppSelector((state) => getActiveTab(state))
+  const dispatch = useAppDispatch()
 
   const [listingFilter, setListingFilter] = useState<ListingType>(
     ListingType.Project,
@@ -56,11 +57,11 @@ const DrawerClientListings: React.FunctionComponent<
   const [openEditModal, setOpenEditModal] = useState(false)
   const [openListingDetails, setOpenListingDetails] = useState(false)
   const [openCreateListing, setOpenCreateListing] = useState(false)
-  const [selectedListing, setSelectedListing] = useState<Project>(
-    new Project({}),
+  const [selectedListing, setSelectedListing] = useState<Listing>(
+    new Listing({}),
   )
 
-  const selectListing = (listing: Project) => {
+  const selectListing = (listing: Listing) => {
     setSelectedListing(listing)
     setOpenListingDetails(true)
   }
@@ -69,16 +70,15 @@ const DrawerClientListings: React.FunctionComponent<
     setOpenCreateListing(true)
   }
 
-  // useEffect(() => {
-  //   if (props.open) {
-  //     dispatch(
-  //       handleListing({
-  //         listingType: listingFilter,
-  //         clientId: selectedClient.id,
-  //       }),
-  //     )
-  //   }
-  // }, [dispatch, listingFilter, props.open, selectedClient.id])
+  useEffect(() => {
+    if (props.open && selectedClient.id) {
+        dispatch(
+          handleInitListing({
+            clientId: selectedClient.id,
+          }),
+        )
+    }
+  }, [dispatch, listingFilter, props.open, selectedClient.id])
 
   return (
     <AtDrawer
@@ -170,14 +170,14 @@ const DrawerClientListings: React.FunctionComponent<
             <StyledNavPage>
               <AtTab
                 label={'Project'}
-                badge={selectedClient.projects.length}
+                // badge={selectedClient.projects.length}
                 $active={listingFilter === ListingType.Project}
                 width={'50%'}
                 onClick={() => setListingFilter(ListingType.Project)}
               />
               <AtTab
                 label={'Teams'}
-                badge={selectedClient.projects.length}
+                // badge={selectedClient.projects.length}
                 width={'50%'}
                 $active={listingFilter === ListingType.Team}
                 onClick={() => setListingFilter(ListingType.Team)}
@@ -185,13 +185,15 @@ const DrawerClientListings: React.FunctionComponent<
             </StyledNavPage>
 
             <AtTextField
-              disabled={!selectedClient.projects?.length}
+              // disabled={!selectedClient.projects?.length}
               startIcon={<SearchNormal1 />}
               placeholder={
                 'Search in ' + selectedClient.companyName + ' Listings...'
               }
             />
-            {selectedClient.projects?.length === 0 ? (
+            {/* 
+            {selectedClient.projects?.length === 0 &&
+            selectedClient.teams.length === 0 ? (
               <Box
                 display={'flex'}
                 alignItems={'center'}
@@ -213,7 +215,7 @@ const DrawerClientListings: React.FunctionComponent<
                     />
                   ))}
               </Box>
-            )}
+            )} */}
           </StyledListings>
         </Grid>
       </Grid>
