@@ -121,6 +121,7 @@ const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
 export interface DropdownItem {
   id: number | string
   label: string
+  value?: string
 }
 
 interface AtTextFieldDropdownProps extends AtTextFieldProps {

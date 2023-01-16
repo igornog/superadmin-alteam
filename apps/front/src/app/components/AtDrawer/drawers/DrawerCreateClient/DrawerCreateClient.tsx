@@ -100,7 +100,7 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
         client.fullName &&
         client.position
       ) {
-        dispatch(handleCreateClient({ ...client, status: ClientStatus.Active }))
+        dispatch(handleCreateClient({ ...client, status: ClientStatus.Request }))
       } else {
         dispatch(handleCreateClient(client))
       }

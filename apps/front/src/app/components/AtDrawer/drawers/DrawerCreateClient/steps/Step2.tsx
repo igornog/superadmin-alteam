@@ -144,8 +144,7 @@ const Step2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
         <AtLine />
 
         <Box
-          padding={'20px'}
-          paddingTop={'30px'}
+          padding={'30px 20px 100px'}
           display={'flex'}
           flexDirection={'column'}
           gap={'30px'}
@@ -153,18 +152,18 @@ const Step2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
           <AtTextFieldDropdown
             fullWidth={true}
             required={true}
-            placeholder={'Select option...'}
-            value={'Client Request'}
+            placeholder={'Client Request'}
+            value={undefined}
             $listItems={CreateClientStatus.map(
               (status, index) => ({
                 id: index,
-                label: index === 0 ? 'Client Request' : capitalize(status.label)+' clients',
+                label: status.label,
               }),
             )}
             handleSelect={(e) =>
               props.setClient({
                 ...props.client,
-                status: e.label as ClientStatus,
+                status: e.value as ClientStatus,
               })
             }
             label={'Is the client qualified?'}
