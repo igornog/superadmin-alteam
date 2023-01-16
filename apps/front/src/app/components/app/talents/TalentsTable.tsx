@@ -166,7 +166,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
                     {talent.skills && talent.skills.length > 0 ? (
                       <Box
                         display={'flex'}
-                        flexWrap={'wrap'}
+                        flexWrap={'nowrap'}
                         gap={'10px'}
                         justifyContent={'flex-end'}
                         ref={skillsRef}
