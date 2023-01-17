@@ -39,7 +39,7 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
   }
 
   const MoveToDeclined = () => {
-    dispatch(handlePatchTalent({ id: props.talent.id, status: ListingStatus.Rejected }))
+    dispatch(handlePatchTalent({ id: props.talent.id, status: ListingStatus.Declined }))
   }
 
   const MoveToInbound = () => {
@@ -118,7 +118,7 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
           ListingStatus.Shortlisted,
           ListingStatus.Inbound,
           ListingStatus.Accepted,
-          ListingStatus.Rejected,
+          ListingStatus.Declined,
         ]) ? (
         <AtContextMenuItem onSelect={sendEmailToTalent}>
           <AtTypography>

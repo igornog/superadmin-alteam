@@ -88,7 +88,7 @@ export const talentsTabs: Page[] = [
   },
   {
     title: Tabs.DeclinedTalent,
-    status: ListingStatus.Rejected,
+    status: ListingStatus.Declined,
     node: <DeclinedTalentsView />,
     active: false,
     settings: {
