@@ -40,6 +40,24 @@ export enum ClientStatus {
   Declined = 'declined',
 }
 
+export const CreateClientStatus = [
+  {
+    id: 0,
+    label: 'Client Request',
+    value: 'request'
+  },
+  {
+    id: 1,
+    label: 'Active clients',
+    value: 'active',
+  },
+  {
+    id: 2,
+    label: 'Inactive clients',
+    value: 'inactive',
+  }
+]
+
 export interface ClientSearch {
   status?: ClientStatus
   clientName?: string
