@@ -3,9 +3,10 @@ import { useAppSelector } from '../../../utils/hooks/reduxHook'
 import AtTypography from '../../AtTypography/AtTypography'
 import { AtContextMenuItem } from '../AtRightClick'
 import Arrow2 from '../../../assets/images/icons/arrow2.svg'
+import ArrowCircle from '../../../assets/images/icons/refresh-circle.svg'
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
 import { RightClick } from '../../../utils/types'
-import { ArrowCircleLeft2, Share, TrushSquare } from 'iconsax-react'
+import { Share, TrushSquare } from 'iconsax-react'
 
 const ClientMenu: React.FunctionComponent = () => {
   const activeTab = useAppSelector((state) => getActiveTab(state))
@@ -28,7 +29,7 @@ const ClientMenu: React.FunctionComponent = () => {
       {isCurrentTabAllowed(RightClick.MoveToInactive) && (
         <AtContextMenuItem onSelect={() => console.log(undefined)}>
           <AtTypography>
-            <ArrowCircleLeft2 size={20} />
+            <img src={ArrowCircle} alt={'ArrowCircle'} width={20} />
             {RightClick.MoveToInactive}
           </AtTypography>
         </AtContextMenuItem>
@@ -44,7 +45,7 @@ const ClientMenu: React.FunctionComponent = () => {
       )}
 
       {isCurrentTabAllowed(RightClick.MoveToDeclined) && (
-        <AtContextMenuItem onSelect={() => console.log(undefined)}>
+        <AtContextMenuItem variant="danger" onSelect={() => console.log(undefined)}>
           <AtTypography>
             <TrushSquare size={20} />
             {RightClick.MoveToDeclined}

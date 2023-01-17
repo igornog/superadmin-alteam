@@ -1,4 +1,4 @@
-import { Box, capitalize } from '@mui/material'
+import { Box } from '@mui/material'
 import React, { Dispatch } from 'react'
 import { Client } from '../../../../../utils/redux/types/clients.type'
 import AtTextFieldDropdown from '../../../../AtDropdown/AtTextFieldDropdown'

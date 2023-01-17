@@ -20,7 +20,12 @@ export const clientsTabs: Page[] = [
       createClient: true,
     },
     talentRightClick: [],
-    clientRightClick: [],
+    clientRightClick: [
+      RightClick.MoveToActive,
+      RightClick.MoveToInactive,
+      RightClick.ShareRequest,
+      RightClick.MoveToDeclined,
+    ],
   },
   {
     title: Tabs.ActiveClients,
@@ -35,7 +40,11 @@ export const clientsTabs: Page[] = [
       sortBy: true,
     },
     talentRightClick: [],
-    clientRightClick: [],
+    clientRightClick: [
+      RightClick.MoveToInactive,
+      RightClick.ShareRequest,
+      RightClick.MoveToDeclined,
+    ],
   },
   {
     title: Tabs.InactiveClients,
