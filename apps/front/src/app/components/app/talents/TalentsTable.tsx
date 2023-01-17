@@ -19,7 +19,7 @@ import { useAppSelector } from '../../../utils/hooks/reduxHook'
 import { stringMatch } from '../../../utils/helpers'
 import { StyledTagClients } from '../../AtCard/AtTalentCard'
 
-const StyledTag = styled(AtTag)`
+export const StyledTag = styled(AtTag)`
   max-width: 150px;
 `
 const StyledTable = styled(AtTable)`

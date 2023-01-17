@@ -62,6 +62,7 @@ export const talentsTabs: Page[] = [
       RightClick.EditTalentFolders,
       RightClick.SendEmailToTalent,
       RightClick.ShareTalent,
+      RightClick.MoveToInbound,
       RightClick.MoveToDeclined,
     ],
     clientRightClick: [],
