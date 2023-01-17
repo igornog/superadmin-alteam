@@ -1,10 +1,26 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
-import { Availability, Difficulty, ListingType, Role, WorkType } from '@yjcapp/app'
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm'
+import {
+  Availability,
+  Difficulty,
+  ListingType,
+  Role,
+  WorkType,
+} from '@yjcapp/app'
+import { SoloClientEntity } from './SoloClient.entity'
 
 @Entity({ name: 'listing' })
 export class ListingEntity extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int' })
   id: number
+
+  @ManyToOne(() => SoloClientEntity, (soloClient) => soloClient.listings)
+  soloClient: SoloClientEntity
 
   @Column({ type: 'varchar', name: 'listing_name' })
   listingName: string
@@ -24,7 +40,7 @@ export class ListingEntity extends BaseEntity {
   @Column({ type: 'int' })
   projectLength: number
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   startDate: Date
 
   @Column({ type: 'text', nullable: true })

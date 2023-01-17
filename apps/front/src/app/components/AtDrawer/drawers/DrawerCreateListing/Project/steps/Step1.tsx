@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import React, { Dispatch } from 'react'
-import { grey2 } from '../../../../../../utils/colors'
+import { black, grey2, white } from '../../../../../../utils/colors'
 import AtLine from '../../../../../AtLine/AtLine'
 import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
@@ -13,6 +13,15 @@ import AtTextField, {
 } from '../../../../../AtTextField/AtTextField'
 import AtTextFieldDate from '../../../../../AtTextField/AtTextFieldDate'
 import { Listing } from '../../../../../../utils/redux/types/listings.type'
+import styled from 'styled-components'
+import { plurialize } from '../../../../../../utils/helpers'
+
+const StyledPeriod = styled.div`
+  background-color: ${black};
+  color: ${white};
+  border-radius: 5px;
+  padding: 2px 5px;
+`
 
 const ProjectStep1: React.FunctionComponent<Step1Props> = (
   props: Step1Props,
@@ -131,6 +140,13 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
             maxLength={30}
             onValueChange={(e) =>
               props.setProject({ ...props.project, projectLength: parseInt(e) })
+            }
+            endIcon={
+              <StyledPeriod>
+                <AtTypography variant={'caption'}>
+                  {plurialize(props.project.projectLength ?? 0, 'Month', true)}
+                </AtTypography>
+              </StyledPeriod>
             }
           />
 

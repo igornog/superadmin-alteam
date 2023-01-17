@@ -1,7 +1,7 @@
 import { Grid, Box } from '@mui/material'
 import { ArrowLeft2, ArrowRight } from 'iconsax-react'
 import { Dispatch, useState } from 'react'
-import { Role, WorkType } from '@yjcapp/app'
+import { ListingType, Role, WorkType } from '@yjcapp/app'
 import { grey2, black } from '../../../../../utils/colors'
 import AtButton, {
   AtButtonVariant,
@@ -68,8 +68,8 @@ const CreateTeam: React.FunctionComponent<CreateTeamProps> = (
     const fieldsConfig: any = {
       step1: {
         requiredFields: [
-          'teamName',
-          'teamSize',
+          'listingName',
+          'individuals',
           'workType',
           'timeZone',
           'availability',
@@ -80,6 +80,9 @@ const CreateTeam: React.FunctionComponent<CreateTeamProps> = (
         ],
         workTypeDependant: 'timeZone',
         totalPriceDependant: 'exactRate',
+      },
+      step3: {
+        requiredFields: ['jobDescription'],
       },
       step4: {
         requiredFields: ['skills'],
@@ -109,7 +112,7 @@ const CreateTeam: React.FunctionComponent<CreateTeamProps> = (
       return !team.roles.every((obj: Role) => obj.roleName && obj.price)
     } else if (props.step === 3) {
       return !(team.skills?.length > 0)
-    } else if (props.step <= 1) {
+    } else if (props.step <= 2) {
       return !fieldsToCheck?.every(
         (field: any) =>
           team[field as keyof Listing] !== '' &&
@@ -127,6 +130,7 @@ const CreateTeam: React.FunctionComponent<CreateTeamProps> = (
         handleCreateListing({
           ...team,
           soloClient: { id: selectedClient.id } as Client,
+          status: ListingType.Team,
         }),
       )
     }

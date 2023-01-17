@@ -76,7 +76,9 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
             label={'Project Name'}
             required={true}
             placeholder={'Enter Team Project Name'}
-            onValueChange={(e) => props.setTeam({ ...props.team, listingName: e })}
+            onValueChange={(e) =>
+              props.setTeam({ ...props.team, listingName: e })
+            }
             maxLength={30}
           />
 

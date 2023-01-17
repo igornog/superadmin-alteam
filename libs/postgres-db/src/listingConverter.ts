@@ -5,6 +5,7 @@ import { ListingEntity } from './entities'
 export function clientListingFromEntity(entity: ListingEntity): ClientListing {
   return {
     id: entity.id,
+    soloClient: entity.soloClient,
     listingName: entity.listingName,
     individuals: entity.individuals,
     workType: entity.workType,
@@ -26,25 +27,26 @@ export function clientListingFromEntity(entity: ListingEntity): ClientListing {
 }
 
 export function clientListingToEntity(
-  clientProject: DeepPartial<ClientListing>,
+  clientListing: DeepPartial<ClientListing>,
 ): DeepPartial<ListingEntity> {
   return {
-    id: clientProject.id,
-    listingName: clientProject.listingName,
-    individuals: clientProject.individuals,
-    workType: clientProject.workType,
-    timeZone: clientProject.timeZone,
-    availability: clientProject.availability,
-    projectLength: clientProject.projectLength,
-    exactRate: clientProject.exactRate,
-    rateFrom: clientProject.rateFrom,
-    rateTo: clientProject.rateTo,
-    difficulty: clientProject.difficulty,
-    learningLink: clientProject.learningLink,
-    roles: clientProject.roles,
-    skills: clientProject.skills,
-    questions: clientProject.questions,
-    jobDescription: clientProject.jobDescription,
-    status: clientProject.status,
+    id: clientListing.id,
+    soloClient: clientListing.soloClient,
+    listingName: clientListing.listingName,
+    individuals: clientListing.individuals,
+    workType: clientListing.workType,
+    timeZone: clientListing.timeZone,
+    availability: clientListing.availability,
+    projectLength: clientListing.projectLength,
+    exactRate: clientListing.exactRate,
+    rateFrom: clientListing.rateFrom,
+    rateTo: clientListing.rateTo,
+    difficulty: clientListing.difficulty,
+    learningLink: clientListing.learningLink,
+    roles: clientListing.roles,
+    skills: clientListing.skills,
+    questions: clientListing.questions,
+    jobDescription: clientListing.jobDescription,
+    status: clientListing.status,
   }
 }

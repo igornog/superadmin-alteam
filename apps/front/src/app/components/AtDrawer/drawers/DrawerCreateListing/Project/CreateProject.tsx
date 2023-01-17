@@ -1,7 +1,7 @@
 import { Grid, Box } from '@mui/material'
 import { ArrowLeft2, ArrowRight } from 'iconsax-react'
 import { Dispatch, useState } from 'react'
-import { RateType, WorkType } from '@yjcapp/app'
+import { ListingType, RateType, WorkType } from '@yjcapp/app'
 import { grey2, black } from '../../../../../utils/colors'
 import AtButton, {
   AtButtonVariant,
@@ -63,7 +63,7 @@ const CreateProject: React.FunctionComponent<CreateProjectProps> = (
     const fieldsConfig: any = {
       step1: {
         requiredFields: [
-          'projectName',
+          'listingName',
           'individuals',
           'workType',
           'timeZone',
@@ -120,6 +120,7 @@ const CreateProject: React.FunctionComponent<CreateProjectProps> = (
         handleCreateListing({
           ...project,
           soloClient: { id: selectedClient.id } as Client,
+          status: ListingType.Project,
         }),
       )
     }

@@ -1,17 +1,17 @@
 import { MigrationInterface, QueryRunner } from 'typeorm'
 
-export class nullValue1673534004582 implements MigrationInterface {
-  name = 'nullValue1673534004582'
+export class updateProperties1673888376987 implements MigrationInterface {
+  name = 'updateProperties1673888376987'
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
-      `ALTER TABLE "client_project" ALTER COLUMN "rateFrom" DROP NOT NULL`,
+      `ALTER TABLE "listing" ALTER COLUMN "startDate" DROP NOT NULL`,
     )
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
-      `ALTER TABLE "client_project" ALTER COLUMN "rateFrom" SET NOT NULL`,
+      `ALTER TABLE "listing" ALTER COLUMN "startDate" SET NOT NULL`,
     )
   }
 }

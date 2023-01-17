@@ -26,7 +26,7 @@ export interface SoloTalent {
   phoneNumber?: string
   salaryExpectation?: string
   workExperience?: string
-  // listing?: Listing[]
+  listing?: any
   status?: ListingStatus
 }
 

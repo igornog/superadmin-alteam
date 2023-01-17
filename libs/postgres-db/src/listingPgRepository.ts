@@ -7,13 +7,13 @@ import {
 } from './listingConverter'
 
 async function createListing(
-  clientTeam: Omit<ClientListing, 'id'>,
+  clientListing: Omit<ClientListing, 'id'>,
 ): Promise<ClientListing> {
   const soloClientRepository = (await postgresClient()).getRepository(
     ListingEntity,
   )
 
-  const entity = clientListingToEntity(clientTeam)
+  const entity = clientListingToEntity(clientListing)
   const result = await soloClientRepository.save(entity)
   return clientListingFromEntity(result)
 }
@@ -25,16 +25,26 @@ async function findListing(
     ListingEntity,
   )
 
-  const queryBuilderProject =
+  const queryBuilderListing =
     await listingProjectRepository.createQueryBuilder()
 
   if (listingSearch.listingName) {
-    queryBuilderProject.andWhere('listing_name LIKE :listingName', {
+    queryBuilderListing.andWhere('listing_name LIKE :listingName', {
       listingName: '%' + listingSearch.listingName + '%',
     })
   }
 
-  const resultProject = await await queryBuilderProject.getMany()
+  if (listingSearch.listingType) {
+    queryBuilderListing.andWhere('ListingEntity.status = :status', {
+      status: listingSearch.listingType,
+    })
+  }
+
+  queryBuilderListing
+    .leftJoin('ListingEntity.soloClient', 'soloClient')
+    .select(['ListingEntity', 'soloClient.id'])
+
+  const resultProject = await queryBuilderListing.getMany()
 
   return resultProject.map(clientListingFromEntity)
 }

@@ -12,7 +12,7 @@ import { Listing } from '../../utils/redux/types/listings.type'
 const AtListingCard: React.FunctionComponent<AtListingCardProps> = (
   props: AtListingCardProps,
 ) => {
-  const listing = new Listing(props.project)
+  const listing = new Listing(props.listing)
 
   return (
     <StyledCard onClick={props.onClick} fullHeight={props.fullHeight}>
@@ -63,7 +63,7 @@ const AtListingCard: React.FunctionComponent<AtListingCardProps> = (
 }
 
 interface AtListingCardProps {
-  project: Listing
+  listing: Listing
   fullHeight?: boolean
   onClick?: (e: React.MouseEvent) => void
 }

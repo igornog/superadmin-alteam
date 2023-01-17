@@ -1,7 +1,9 @@
+import { SoloClient } from './client'
 import { Availability } from './talent'
 
 export interface ClientListing {
   id?: number
+  soloClient: SoloClient
   listingName: string
   individuals: number
   workType?: WorkType
@@ -61,5 +63,6 @@ export enum ListingType {
 
 export interface ListingSearch {
   listingName?: string
+  listingType?: ListingType
   clientId?: number
 }

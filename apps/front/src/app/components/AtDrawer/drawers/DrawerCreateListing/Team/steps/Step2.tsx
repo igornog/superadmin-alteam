@@ -104,7 +104,11 @@ const TeamStep2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
                         label={`Percentage`}
                         value={props.team?.roles[i]?.percentage?.toFixed(0)}
                         onValueChange={(e) => onPercentageChange(e, i)}
-                        endIcon={<AtTypography color={convertHexToRGBA(black, 0.5)}>%</AtTypography>}
+                        endIcon={
+                          <AtTypography color={convertHexToRGBA(black, 0.5)}>
+                            %
+                          </AtTypography>
+                        }
                       />
                     </Box>
                   )}
@@ -115,8 +119,12 @@ const TeamStep2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
                       label={`Cost per month`}
                       value={props.team?.roles[i]?.price?.toString()}
                       onValueChange={(e) => onPriceChange(e, i)}
-                      endIcon={<AtTypography color={convertHexToRGBA(black, 0.5)}>£</AtTypography>}
-                      />
+                      endIcon={
+                        <AtTypography color={convertHexToRGBA(black, 0.5)}>
+                          £
+                        </AtTypography>
+                      }
+                    />
                   </Box>
                 </Box>
               )

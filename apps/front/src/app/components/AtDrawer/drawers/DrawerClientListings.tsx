@@ -11,7 +11,7 @@ import styled from 'styled-components'
 import Client from '../../../features/clients/components/ClientViewProfile/Client'
 import Company from '../../../features/clients/components/ClientViewProfile/Company'
 import Notes from '../../../features/clients/components/ClientViewProfile/Notes'
-import { grey2 } from '../../../utils/colors'
+import { grey2, grey3 } from '../../../utils/colors'
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../utils/redux/selectors/clients.selector'
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
@@ -31,6 +31,12 @@ import AtTab from '../../AtTab/AtTab'
 import { ListingType } from '@yjcapp/app'
 import { Listing } from '../../../utils/redux/types/listings.type'
 import { handleInitListing } from '../../../utils/redux/actions/listing.action'
+import AtListingCard from '../../AtCard/AtListingCard'
+import {
+  getListingProjects,
+  getListings,
+  getListingTeams,
+} from '../../../utils/redux/selectors/listing.selector'
 
 const StyledListings = styled(Box)`
   display: flex;
@@ -47,11 +53,18 @@ const DrawerClientListings: React.FunctionComponent<
   DrawerClientListingsProps
 > = (props: DrawerClientListingsProps) => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
+  const listProjects = useAppSelector((state) => getListingProjects(state))
+  const listTeams = useAppSelector((state) => getListingTeams(state))
+
   const activeTab = useAppSelector((state) => getActiveTab(state))
   const dispatch = useAppDispatch()
 
   const [listingFilter, setListingFilter] = useState<ListingType>(
     ListingType.Project,
+  )
+
+  const listListings = useAppSelector((state) =>
+    getListings(state, listingFilter),
   )
 
   const [openEditModal, setOpenEditModal] = useState(false)
@@ -72,11 +85,12 @@ const DrawerClientListings: React.FunctionComponent<
 
   useEffect(() => {
     if (props.open && selectedClient.id) {
-        dispatch(
-          handleInitListing({
-            clientId: selectedClient.id,
-          }),
-        )
+      dispatch(
+        handleInitListing({
+          clientId: selectedClient.id,
+          // listingType: listingFilter,
+        }),
+      )
     }
   }, [dispatch, listingFilter, props.open, selectedClient.id])
 
@@ -170,14 +184,14 @@ const DrawerClientListings: React.FunctionComponent<
             <StyledNavPage>
               <AtTab
                 label={'Project'}
-                // badge={selectedClient.projects.length}
+                badge={listProjects.length}
                 $active={listingFilter === ListingType.Project}
                 width={'50%'}
                 onClick={() => setListingFilter(ListingType.Project)}
               />
               <AtTab
                 label={'Teams'}
-                // badge={selectedClient.projects.length}
+                badge={listTeams.length}
                 width={'50%'}
                 $active={listingFilter === ListingType.Team}
                 onClick={() => setListingFilter(ListingType.Team)}
@@ -185,15 +199,14 @@ const DrawerClientListings: React.FunctionComponent<
             </StyledNavPage>
 
             <AtTextField
-              // disabled={!selectedClient.projects?.length}
+              disabled={!listListings?.length}
               startIcon={<SearchNormal1 />}
               placeholder={
                 'Search in ' + selectedClient.companyName + ' Listings...'
               }
             />
-            {/* 
-            {selectedClient.projects?.length === 0 &&
-            selectedClient.teams.length === 0 ? (
+
+            {listListings.length === 0 ? (
               <Box
                 display={'flex'}
                 alignItems={'center'}
@@ -206,16 +219,15 @@ const DrawerClientListings: React.FunctionComponent<
               </Box>
             ) : (
               <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
-                {selectedClient.projects &&
-                  selectedClient.projects.map((project: Project) => (
-                    <AtListingCard
-                      project={project}
-                      key={project.id}
-                      onClick={() => selectListing(project)}
-                    />
-                  ))}
+                {listListings.map((listing: Listing) => (
+                  <AtListingCard
+                    listing={listing}
+                    key={listing.id}
+                    onClick={() => selectListing(listing)}
+                  />
+                ))}
               </Box>
-            )} */}
+            )}
           </StyledListings>
         </Grid>
       </Grid>

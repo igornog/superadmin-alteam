@@ -78,7 +78,7 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
       const status = client.status ?? ClientStatus.Active
       dispatch(handleCreateClient({ ...client, status }))
     }
-    
+
     setStep(step + 1)
   }
 
