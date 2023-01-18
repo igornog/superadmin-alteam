@@ -38,6 +38,7 @@ const ShortlistTalentsView: React.FunctionComponent = () => {
           <AtNoResult sentence={`No Shortlisted Talents`} />
         ) : (
           <TalentsSwitchMode
+            listTalents={listTalent}
             tableColumns={[
               Column.Talent,
               Column.Applied,

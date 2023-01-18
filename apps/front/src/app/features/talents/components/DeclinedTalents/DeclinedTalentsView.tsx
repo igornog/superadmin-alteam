@@ -15,6 +15,7 @@ const DeclinedTalentsView: React.FunctionComponent = () => {
     <Grid container={true} spacing={2.5} marginTop={0} alignItems={'stretch'}>
       <Grid item={true} xs={12}>
         <TalentsSwitchMode
+          listTalents={listTalent}
           tableColumns={[
             Column.Talent,
             Column.Applied,

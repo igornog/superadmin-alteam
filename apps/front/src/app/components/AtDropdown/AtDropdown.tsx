@@ -137,6 +137,8 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
           $iconSize={10}
           padding={props.padding}
           $flexibleHeight={props.$flexibleHeight}
+          dropdown={true}
+          open={open}
         />
 
         <StyledContentPopover

@@ -9,14 +9,13 @@ import ModalEmailToTalent from '../../AtModal/modals/ModalEmailToTalent'
 import ModalShortlist from '../../AtModal/modals/ModalShortlist/ModalShortlist'
 import TalentCard from './TalentCard'
 import TalentsTable from './TalentsTable'
+import { Talent } from '../../../utils/redux/types/talents.type'
 
 const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
   props: TalentsSwitchModeProps,
 ) => {
   const dispatch = useAppDispatch()
   const settings = useAppSelector((state) => state.settings)
-  const talents = useAppSelector((state) => state.talents)
-  const listTalent = talents.listTalents
 
   const [openDrawer, setOpenDrawer] = useState(false)
   const [openShortlistModal, setOpenShortlistModal] = useState(false)
@@ -32,7 +31,7 @@ const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
     <Grid container={true} spacing={2.5} alignItems={'stretch'}>
       {settings.displayMode === DisplayMode.Grid ? (
         <TalentCard
-          talents={listTalent}
+          talents={props.listTalents}
           displayStatusTag={props.displayStatusTag}
           openTalent={handleClickTalent}
           openShortlist={() => setOpenShortlistModal(true)}
@@ -42,7 +41,7 @@ const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
       ) : (
         <Grid item={true} xs={12}>
           <TalentsTable
-            talents={listTalent}
+            talents={props.listTalents}
             openTalent={handleClickTalent}
             tableColumns={props.tableColumns}
             openShortlist={() => setOpenShortlistModal(true)}
@@ -77,6 +76,7 @@ const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
 
 interface TalentsSwitchModeProps {
   tableColumns: Column[]
+  listTalents: Talent[]
   displayStatusTag?: boolean
 }
 

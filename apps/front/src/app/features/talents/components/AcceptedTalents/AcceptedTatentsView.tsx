@@ -38,6 +38,7 @@ const AcceptedTatentsView: React.FunctionComponent = () => {
           <AtNoResult sentence={`No Accepted Talents`} />
         ) : (
           <TalentsSwitchMode
+            listTalents={listTalent}
             tableColumns={[
               Column.Talent,
               Column.Applied,
