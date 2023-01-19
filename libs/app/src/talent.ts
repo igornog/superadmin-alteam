@@ -79,6 +79,7 @@ export interface Listing {
 
 export interface TalentSearch {
   skills?: string[]
+  sort?: string | null
   experience?: string
   availability?: Availability[]
   role?: string
