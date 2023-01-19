@@ -15,8 +15,8 @@ const InboundTalentsView: React.FunctionComponent = () => {
     <Grid container={true} spacing={2.5} marginTop={0} alignItems={'stretch'}>
       <Grid item={true} xs={12}>
         <TalentsSwitchMode
-          displayStatusTag={false}
           listTalents={listTalent}
+          displayStatusTag={false}
           tableColumns={[
             Column.Talent,
             Column.Applied,

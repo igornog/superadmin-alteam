@@ -6,6 +6,7 @@ import { ClientStatus, ListingStatus } from '@yjcapp/app'
 export interface SettingsState {
   tabs: Page[]
   filters: FilterInterface
+  sort: string | null
   header: Settings
   displayMode: DisplayMode
   status?: StatusType
@@ -17,7 +18,6 @@ export interface FilterInterface {
   jobTypes?: Filter[]
   searchName?: string
 }
-
 export interface Page {
   title: string
   status: ListingStatus | ClientStatus | null
@@ -47,6 +47,16 @@ export interface Settings {
 export interface Filter {
   label: string
   active?: boolean
+}
+
+export interface Sort {
+  value: string
+}
+
+export enum SortTypes {
+  Alphabetical = 'alphabetical',
+  MostRecent = 'mostRecent',
+  Status = 'status',
 }
 
 export enum DisplayMode {
@@ -86,6 +96,7 @@ export enum ModalSize {
 export interface HandlesettingsProps {
   tabs: Page[]
   filters?: Filter[]
+  sort?: Sort
   jobTypes?: Filter[]
 }
 

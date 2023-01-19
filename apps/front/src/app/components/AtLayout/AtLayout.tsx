@@ -16,7 +16,7 @@ import { getActiveTab } from '../../utils/redux/selectors/settings.selector'
 import { getActiveFolder } from '../../utils/redux/selectors/tree.selector'
 import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton'
 import DrawerCreateClient from '../AtDrawer/drawers/DrawerCreateClient/DrawerCreateClient'
-import AtDropdown from '../AtDropdown/AtDropdown'
+import AtDropdown, { DropdownItem } from '../AtDropdown/AtDropdown'
 import ModalAddFolder from '../AtModal/modals/ModalAddFolder'
 import ModalAddTalent from '../AtModal/modals/ModalCreateTalent/ModalAddTalent'
 import ModalShareFolder from '../AtModal/modals/ModalShareFolder'
@@ -29,16 +29,17 @@ import AtTypography from '../AtTypography/AtTypography'
 import AtSwitchDisplayMode from './AtSwitchDisplayMode'
 import AtTopTitle from './AtTopTitle'
 import debounce from 'lodash.debounce'
-import { handleUpdateFilter } from '../../utils/redux/actions/settings.action'
+import { handleActiveSort, handleUpdateFilter } from '../../utils/redux/actions/settings.action'
+import { SortTypes } from '../../utils/redux/types/settings.type'
 
 const SortOptions = [
-  { id: 0, value: '', label: 'None' },
-  { id: 1, value: 'alphabetical', label: 'A to Z' },
-  { id: 1, value: 'mostRecent', label: 'Most Recent' },
-  { id: 1, value: 'status', label: 'Status' },
+  { id: 0, value: null, label: 'None' },
+  { id: 1, value: SortTypes.Alphabetical, label: 'A to Z' },
+  { id: 2, value: SortTypes.MostRecent, label: 'Most Recent' },
+  { id: 3, value: SortTypes.Status, label: 'Status' },
 ]
 
-const StyledContent = styled(Grid)<{ $sidePanelSize?: string }>`
+const StyledContent = styled(Grid) <{ $sidePanelSize?: string }>`
   overflow: hidden;
   background-color: #f7f8fe;
   margin: 20px 20px 30px 165px;
@@ -70,6 +71,10 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
 
   const handleSearchChange = (searchValue: string) => {
     debouncedSearch(searchValue)
+  }
+
+  const handleSort = (item: DropdownItem) => {
+    dispatch(handleActiveSort({ sort: item.value as string }))
   }
 
   return !isSmallScreen ? (
@@ -133,7 +138,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                           variant={AtButtonVariant.Outlined}
                           startIcon={<TickCircle />}
                           name={'Verifiy Client (1)'}
-                          // onClick={() => setOpenCreateTalent(true)}
+                        // onClick={() => setOpenCreateTalent(true)}
                         />
 
                         {/* <ModalAddTalent
@@ -230,6 +235,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                           $listItems={SortOptions}
                           kind={AtButtonKind.Default}
                           variant={AtButtonVariant.Contained}
+                          handleSelect={handleSort}
                         />
                       </Box>
                     )}

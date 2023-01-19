@@ -165,9 +165,9 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
   )
 }
 
-interface DropdownItem {
+export interface DropdownItem {
   id: number | string
-  value: string
+  value: string | null
   label: React.ReactNode
 }
 

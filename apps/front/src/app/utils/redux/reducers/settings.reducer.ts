@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { skillsFilters, availabilityFilters } from '../../../features/talents'
 import {
   handleActiveFilter,
+  handleActiveSort,
   handleActiveTab,
   handleInitSettings,
   handleRefreshFilters,
@@ -19,6 +20,7 @@ const initialState: SettingsState = {
     jobTypes: [],
     searchName: '',
   },
+  sort: null,
   header: {},
   displayMode: DisplayMode.List,
   status: StatusType.Idle,
@@ -44,7 +46,8 @@ const { reducer } = createSlice({
         }
 
         if (payload.jobTypes) {
-          state.filters.jobTypes = payload.jobTypes
+          state.filters
+          .jobTypes = payload.jobTypes
         }
       })
 
@@ -64,6 +67,10 @@ const { reducer } = createSlice({
         if (activeIndex) activeIndex.active = false
 
         if (index) index.active = true
+      })
+
+      .addCase(handleActiveSort.fulfilled, (state, { payload }) => {
+        state.sort = payload.sort
       })
 
       .addCase(handleActiveFilter.fulfilled, (state, { payload }) => {

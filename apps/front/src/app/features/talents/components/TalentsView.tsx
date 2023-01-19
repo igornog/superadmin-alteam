@@ -35,29 +35,34 @@ const TalentsView: React.FunctionComponent = () => {
   }, [activeTab, dispatch, settings.tabs])
 
   useEffect(() => {
-    // if (activeTab?.status) {
-    dispatch(
-      handleTalents({
-        talentName: settings.filters.searchName || '',
-        skills: settings.filters.skills
-          ?.filter((skill) => skill.active)
-          .map((item: Filter) => item.label),
+    if (activeTab) {
+      dispatch(
+        handleTalents({
+          talentName: settings.filters.searchName || '',
+          skills: settings.filters.skills
+            ?.filter((skill) => skill.active)
+            .map((item: Filter) => item.label),
 
-        availability: settings.filters.jobTypes
-          ?.filter((jobType) => jobType.active)
-          .map((item: Filter) => item.label as Availability),
+          sort: settings.sort,
 
-        status: activeTab?.status?.toLowerCase(),
-      }),
-    )
-    // }
-  }, [
-    activeTab?.status,
-    dispatch,
-    settings.filters.jobTypes,
-    settings.filters.skills,
-    settings.filters.searchName,
-  ])
+          availability: settings.filters.jobTypes
+            ?.filter((jobType) => jobType.active)
+            .map((item: Filter) => item.label as Availability),
+
+          status: activeTab?.status,
+        }),
+      )
+    }
+  },
+    [
+      activeTab,
+      dispatch,
+      settings.filters.jobTypes,
+      settings.filters.skills,
+      settings.sort,
+      settings.filters.searchName,
+    ]
+  )
 
   return (
     <AtLayout
@@ -65,7 +70,7 @@ const TalentsView: React.FunctionComponent = () => {
       sidePanelIcon={<FilterSquare size={20} />}
       sidePanelSize={'small'}
     >
-      {talentsTabs.filter((item) => item.title === activeTab?.title)[0]?.node}
+      {talentsTabs.filter((item) => item.status === activeTab?.status)[0]?.node}
     </AtLayout>
   )
 }
