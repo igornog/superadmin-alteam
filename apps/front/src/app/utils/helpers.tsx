@@ -4,6 +4,7 @@ import Linkedin from '../assets/images/icons/Linkedin.svg'
 import Stackoverflow from '../assets/images/icons/Stackoverflow.svg'
 import Twitter from '../assets/images/icons/Twitter.svg'
 import { green } from './colors'
+import { Currency } from '@yjcapp/app'
 
 export const convertHexToRGBA = (hexCode: string, opacity = 1) => {
   let hex = hexCode.replace('#', '')
@@ -103,4 +104,20 @@ export const stringMatch = (fullString: string, toMatch: string) => {
       }}
     />
   )
+}
+
+export const getCurrencySymbol = (label?: Currency) => {
+  switch (label) {
+    case Currency.Dollars:
+      return '$'
+
+    case Currency.Euros:
+      return '€'
+
+    case Currency.Pounds:
+      return '£'
+
+    default:
+      return '£'
+  }
 }

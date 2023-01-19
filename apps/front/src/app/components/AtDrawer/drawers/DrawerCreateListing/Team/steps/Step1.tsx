@@ -6,7 +6,7 @@ import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
 import { useAppSelector } from '../../../../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../../../../utils/redux/selectors/clients.selector'
-import { Availability, Difficulty, WorkType } from '@yjcapp/app'
+import { Availability, Currency, Difficulty, WorkType } from '@yjcapp/app'
 import AtTextFieldDropdown from '../../../../../AtDropdown/AtTextFieldDropdown'
 import AtTextField, {
   AtTextFieldType,
@@ -14,7 +14,7 @@ import AtTextField, {
 import AtTextFieldDate from '../../../../../AtTextField/AtTextFieldDate'
 import { Listing } from '../../../../../../utils/redux/types/listings.type'
 import AtSwitch from '../../../../../AtSwitch/AtSwitch'
-import { plurialize } from '../../../../../../utils/helpers'
+import { convertHexToRGBA, getCurrencySymbol, plurialize } from '../../../../../../utils/helpers'
 import styled from 'styled-components'
 
 const StyledPeriod = styled.div`
@@ -194,6 +194,25 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
             }
           />
 
+          <AtTextFieldDropdown
+            fullWidth={true}
+            placeholder={'Select Your Currency'}
+            $listItems={Object.values(Currency).map(
+              (label: Currency, index: number) => ({
+                id: index,
+                key: label,
+                label: label + ` (${getCurrencySymbol(label)})`,
+              }),
+            )}
+            handleSelect={(e) =>
+              props.setTeam({
+                ...props.team,
+                currency: e.key as Currency,
+              })
+            }
+            label={'Currency'}
+          />
+
           <Box
             display={'flex'}
             gap={props.knownTotalPrice ? '20px' : 0}
@@ -216,6 +235,11 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
                   label={'Team Rate'}
                   type={AtTextFieldType.Number}
                   placeholder={'Enter Exact Rate'}
+                  startIcon={
+                    <AtTypography color={convertHexToRGBA(black, 0.5)}>
+                      {getCurrencySymbol(props.team.currency)}
+                    </AtTypography>
+                  }
                   maxLength={30}
                   value={props.team.exactRate?.toString()}
                   onValueChange={(e) =>

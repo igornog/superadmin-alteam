@@ -2,6 +2,7 @@ import { StatusType } from './status.type'
 import {
   Availability,
   ClientListing,
+  Currency,
   Difficulty,
   ListingType,
   Role,
@@ -27,6 +28,7 @@ export class Listing implements ClientListing {
   projectLength: number
   startDate?: Date
   exactRate?: number
+  currency?: Currency
   rateFrom?: number
   rateTo?: number
   difficulty: Difficulty

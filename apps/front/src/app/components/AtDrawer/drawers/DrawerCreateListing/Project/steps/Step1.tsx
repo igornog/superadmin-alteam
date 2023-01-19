@@ -6,7 +6,13 @@ import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
 import { useAppSelector } from '../../../../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../../../../utils/redux/selectors/clients.selector'
-import { Availability, Difficulty, RateType, WorkType } from '@yjcapp/app'
+import {
+  Availability,
+  Currency,
+  Difficulty,
+  RateType,
+  WorkType,
+} from '@yjcapp/app'
 import AtTextFieldDropdown from '../../../../../AtDropdown/AtTextFieldDropdown'
 import AtTextField, {
   AtTextFieldType,
@@ -14,7 +20,12 @@ import AtTextField, {
 import AtTextFieldDate from '../../../../../AtTextField/AtTextFieldDate'
 import { Listing } from '../../../../../../utils/redux/types/listings.type'
 import styled from 'styled-components'
-import { plurialize } from '../../../../../../utils/helpers'
+import {
+  convertHexToRGBA,
+  getCurrencySymbol,
+  plurialize,
+} from '../../../../../../utils/helpers'
+import AtTimezoneDropdown from '../../../../../AtDropdown/AtTimezoneDropdown'
 
 const StyledPeriod = styled.div`
   background-color: ${black};
@@ -27,6 +38,9 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
   props: Step1Props,
 ) => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
+  const isDifferentOnSite =
+    props.project.workType === WorkType.Hybrid ||
+    props.project.workType === WorkType.Remote
 
   return (
     <StyledForm>
@@ -80,36 +94,37 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
 
           <Box display={'flex'} gap={'10px'} flexDirection={'column'}>
             <Box display={'flex'} gap={'16px'}>
-              <AtTextFieldDropdown
-                fullWidth={true}
-                required={true}
-                placeholder={'Select Work Type'}
-                $listItems={Object.values(WorkType).map(
-                  (label: WorkType, index: number) => ({
-                    id: index,
-                    label: label,
-                  }),
-                )}
-                handleSelect={(e) =>
-                  props.setProject({
-                    ...props.project,
-                    workType: e.label as WorkType,
-                  })
-                }
-                label={'Work Type'}
-              />
-
-              {props.project.workType === WorkType.Hybrid ||
-              props.project.workType === WorkType.Remote ? (
-                <AtTextField
+              <Box width={isDifferentOnSite ? '50%' : '100%'}>
+                <AtTextFieldDropdown
                   fullWidth={true}
                   required={true}
-                  placeholder={'Enter Timezone'}
-                  onValueChange={(e) =>
-                    props.setProject({ ...props.project, timeZone: e })
+                  placeholder={'Select Work Type'}
+                  $listItems={Object.values(WorkType).map(
+                    (label: WorkType, index: number) => ({
+                      id: index,
+                      label: label,
+                    }),
+                  )}
+                  handleSelect={(e) =>
+                    props.setProject({
+                      ...props.project,
+                      workType: e.label as WorkType,
+                    })
                   }
-                  maxLength={6}
+                  label={'Work Type'}
                 />
+              </Box>
+
+              {isDifferentOnSite ? (
+                <Box width={'50%'}>
+                  <AtTimezoneDropdown
+                    fullWidth={true}
+                    placeholder={'Enter Timezone'}
+                    handleSelect={(e) =>
+                      props.setProject({ ...props.project, timeZone: e })
+                    }
+                  />
+                </Box>
               ) : null}
             </Box>
           </Box>
@@ -168,6 +183,25 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
             }
           />
 
+          <AtTextFieldDropdown
+            fullWidth={true}
+            placeholder={'Select Your Currency'}
+            $listItems={Object.values(Currency).map(
+              (label: Currency, index: number) => ({
+                id: index,
+                key: label,
+                label: label + ` (${getCurrencySymbol(label)})`,
+              }),
+            )}
+            handleSelect={(e) =>
+              props.setProject({
+                ...props.project,
+                currency: e.key as Currency,
+              })
+            }
+            label={'Currency'}
+          />
+
           <Box display={'flex'} gap={'10px'} flexDirection={'column'}>
             <AtTextFieldDropdown
               fullWidth={true}
@@ -191,6 +225,11 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
                       ? 'Rate From'
                       : 'Enter Exact Rate'
                   }
+                  startIcon={
+                    <AtTypography color={convertHexToRGBA(black, 0.5)}>
+                      {getCurrencySymbol(props.project.currency)}
+                    </AtTypography>
+                  }
                   maxLength={30}
                   value={props.project.rateFrom?.toString()}
                   onValueChange={(e) =>
@@ -206,6 +245,11 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
                 <AtTextField
                   placeholder={'Rate To'}
                   maxLength={30}
+                  startIcon={
+                    <AtTypography color={convertHexToRGBA(black, 0.5)}>
+                      {getCurrencySymbol(props.project.currency)}
+                    </AtTypography>
+                  }
                   value={props.project.rateTo?.toString()}
                   onValueChange={(e) =>
                     props.setProject({

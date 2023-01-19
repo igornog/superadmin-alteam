@@ -11,6 +11,7 @@ export interface ClientListing {
   availability: Availability
   projectLength: number
   startDate?: Date
+  currency?: Currency
   exactRate?: number
   rateFrom?: number
   rateTo?: number
@@ -59,6 +60,12 @@ export enum Difficulty {
 export enum ListingType {
   Project = 'Project',
   Team = 'Team',
+}
+
+export enum Currency {
+  Dollars = 'Dollars',
+  Euros = 'Euros',
+  Pounds = 'Pounds',
 }
 
 export interface ListingSearch {

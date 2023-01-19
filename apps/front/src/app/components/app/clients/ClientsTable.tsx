@@ -85,7 +85,7 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
                       </Box>
 
                       <Box display={'flex'} flexDirection={'column'}>
-                        <AtTypography variant={'body1'} $bold={true}>
+                        <AtTypography variant={'body1'}>
                           {stringMatch(
                             client.companyName,
                             settings.filters.searchName ?? '',

@@ -7,6 +7,7 @@ import {
 } from 'typeorm'
 import {
   Availability,
+  Currency,
   Difficulty,
   ListingType,
   Role,
@@ -45,6 +46,9 @@ export class ListingEntity extends BaseEntity {
 
   @Column({ type: 'text', nullable: true })
   exactRate: number
+
+  @Column({ type: 'text', nullable: true })
+  currency: Currency
 
   @Column({ type: 'text', nullable: true })
   rateFrom: number

@@ -107,9 +107,11 @@ const StyledInput = styled(OutlinedInput)<{
       color: ${({ disabled, $bgColor }: any) =>
         $bgColor === 'black' ? white : disabled ? grey3 : black};
       font-size: ${({ size }) => (size === 'medium' ? '16px' : '14px')};
+
       &::placeholder {
         color: ${grey3};
       }
+
       &:hover {
         cursor: pointer;
         &::placeholder {
@@ -322,7 +324,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
             maxlength: props.maxLength,
           }}
           disabled={props.disabled}
-          value={props.dropdown ? props.placeholder : value}
+          value={value}
           size={props.size ?? 'medium'}
           required={props.required}
           type={

@@ -66,7 +66,9 @@ export class SoloClientEntity extends BaseEntity {
   })
   received?: Date
 
-  @OneToMany(() => ListingEntity, (clientListing) => clientListing.soloClient)
+  @OneToMany(() => ListingEntity, (clientListing) => clientListing.soloClient, {
+    cascade: true,
+  })
   listings: ListingEntity[]
 
   @Column({ type: 'json', nullable: true })

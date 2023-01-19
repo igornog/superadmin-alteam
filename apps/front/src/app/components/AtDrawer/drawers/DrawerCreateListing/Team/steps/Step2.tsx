@@ -8,7 +8,10 @@ import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
 import { black, grey2 } from '../../../../../../utils/colors'
 import { Listing } from '../../../../../../utils/redux/types/listings.type'
-import { convertHexToRGBA } from '../../../../../../utils/helpers'
+import {
+  convertHexToRGBA,
+  getCurrencySymbol,
+} from '../../../../../../utils/helpers'
 
 const TeamStep2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
   const [totalCost, setTotalCost] = useState(0)
@@ -119,9 +122,9 @@ const TeamStep2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
                       label={`Cost per month`}
                       value={props.team?.roles[i]?.price?.toString()}
                       onValueChange={(e) => onPriceChange(e, i)}
-                      endIcon={
+                      startIcon={
                         <AtTypography color={convertHexToRGBA(black, 0.5)}>
-                          £
+                          {getCurrencySymbol(props.team.currency)}
                         </AtTypography>
                       }
                     />
@@ -142,7 +145,7 @@ const TeamStep2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
 
                       return acc
                     }, 0)}
-                    £
+                    {getCurrencySymbol(props.team.currency)}
                   </AtTypography>
                 </Box>
               </AtTypography>
@@ -150,7 +153,8 @@ const TeamStep2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
                 <Box display={'flex'} gap={'4px'}>
                   Total cost of the project :{' '}
                   <AtTypography $bold={true}>
-                    {props.team.exactRate ?? totalCost}£
+                    {props.team.exactRate ?? totalCost}
+                    {getCurrencySymbol(props.team.currency)}
                   </AtTypography>
                 </Box>
               </AtTypography>
