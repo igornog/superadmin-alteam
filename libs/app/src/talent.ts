@@ -62,6 +62,7 @@ export enum Availability {
 }
 
 export enum ListingStatus {
+  All = '',
   Shortlisted = 'shortlisted',
   Declined = 'declined',
   Accepted = 'accepted',
