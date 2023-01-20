@@ -20,7 +20,6 @@ import {
 } from '../../../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../../../utils/redux/selectors/clients.selector'
 import TeamStep5 from './steps/Step5'
-import { Client } from '../../../../../utils/redux/types/clients.type'
 import { Listing } from '../../../../../utils/redux/types/listings.type'
 import { handleCreateListing } from '../../../../../utils/redux/actions/listing.action'
 
@@ -129,7 +128,7 @@ const CreateTeam: React.FunctionComponent<CreateTeamProps> = (
       dispatch(
         handleCreateListing({
           ...team,
-          soloClient: { id: selectedClient.id } as Client,
+          soloClient: team.soloClient ?? selectedClient,
           listingType: ListingType.Team,
           status: status,
         }),

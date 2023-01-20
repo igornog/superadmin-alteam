@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import React, { Dispatch, useEffect } from 'react'
+import React, { Dispatch, useEffect, useState } from 'react'
 import { black, grey2, white } from '../../../../../../utils/colors'
 import AtLine from '../../../../../AtLine/AtLine'
 import AtTypography from '../../../../../AtTypography/AtTypography'
@@ -20,6 +20,8 @@ import {
   plurialize,
 } from '../../../../../../utils/helpers'
 import styled from 'styled-components'
+import { Client } from '../../../../../../utils/redux/types/clients.type'
+import { clientService } from '../../../../../../utils/services/clientService'
 
 const StyledPeriod = styled.div`
   background-color: ${black};
@@ -30,6 +32,7 @@ const StyledPeriod = styled.div`
 
 const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
+  const [listClients, setListClients] = useState<Client[]>()
 
   useEffect(() => {
     if (!props.knownTotalPrice) {
@@ -59,6 +62,16 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
     }
   }, [props.team.roles, props.team.individuals])
 
+  useEffect(() => {
+    const getListClients = async () => {
+      const list = await clientService.searchClient({ clientName: '' })
+      console.log(list)
+      setListClients(list)
+    }
+
+    getListClients()
+  }, [])
+
   return (
     <StyledForm>
       <Box padding={'20px'} display={'flex'} justifyContent={'space-between'}>
@@ -86,11 +99,31 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
             maxLength={30}
           />
 
-          <AtTextField
-            label={'Client'}
-            readonly={true}
-            defaultValue={selectedClient.companyName}
-          />
+          {listClients && (
+            <AtTextFieldDropdown
+              fullWidth={true}
+              required={true}
+              value={selectedClient.companyName}
+              placeholder={'Client'}
+              $listItems={listClients.map((client: Client, index: number) => ({
+                id: index,
+                label: client.companyName,
+              }))}
+              handleSelect={(e) => {
+                const getClientFromName = listClients.find(
+                  (item: Client) => item.companyName === e.label,
+                )
+
+                if (getClientFromName) {
+                  props.setTeam({
+                    ...props.team,
+                    soloClient: getClientFromName,
+                  })
+                }
+              }}
+              label={'Client'}
+            />
+          )}
 
           <AtTextFieldDropdown
             fullWidth={true}

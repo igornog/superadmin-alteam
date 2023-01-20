@@ -19,7 +19,6 @@ import {
   useAppSelector,
 } from '../../../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../../../utils/redux/selectors/clients.selector'
-import { Client } from '../../../../../utils/redux/types/clients.type'
 import { Listing } from '../../../../../utils/redux/types/listings.type'
 import { handleCreateListing } from '../../../../../utils/redux/actions/listing.action'
 
@@ -119,7 +118,7 @@ const CreateProject: React.FunctionComponent<CreateProjectProps> = (
       dispatch(
         handleCreateListing({
           ...project,
-          soloClient: { id: selectedClient.id } as Client,
+          soloClient: project.soloClient ?? selectedClient,
           listingType: ListingType.Project,
           status: status,
         }),

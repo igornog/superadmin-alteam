@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import React, { Dispatch } from 'react'
+import React, { Dispatch, useEffect, useState } from 'react'
 import { black, grey2, white } from '../../../../../../utils/colors'
 import AtLine from '../../../../../AtLine/AtLine'
 import AtTypography from '../../../../../AtTypography/AtTypography'
@@ -26,6 +26,8 @@ import {
 } from '../../../../../../utils/helpers'
 import AtTimezoneDropdown from '../../../../../AtDropdown/AtTimezoneDropdown'
 import AtTextFieldDate from '../../../../../AtTextField/AtTextFieldDate'
+import { Client } from '../../../../../../utils/redux/types/clients.type'
+import { clientService } from '../../../../../../utils/services/clientService'
 
 const StyledPeriod = styled.div`
   background-color: ${black};
@@ -41,6 +43,17 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
   const isDifferentOnSite =
     props.project.workType === WorkType.Hybrid ||
     props.project.workType === WorkType.Remote
+  const [listClients, setListClients] = useState<Client[]>()
+
+  useEffect(() => {
+    const getListClients = async () => {
+      const list = await clientService.searchClient({ clientName: '' })
+      console.log(list)
+      setListClients(list)
+    }
+
+    getListClients()
+  }, [])
 
   return (
     <StyledForm>
@@ -69,11 +82,31 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
             maxLength={30}
           />
 
-          <AtTextField
-            label={'Client'}
-            readonly={true}
-            defaultValue={selectedClient.companyName}
-          />
+          {listClients && (
+            <AtTextFieldDropdown
+              fullWidth={true}
+              required={true}
+              value={selectedClient.companyName}
+              placeholder={'Client'}
+              $listItems={listClients.map((client: Client, index: number) => ({
+                id: index,
+                label: client.companyName,
+              }))}
+              handleSelect={(e) => {
+                const getClientFromName = listClients.find(
+                  (item: Client) => item.companyName === e.label,
+                )
+
+                if (getClientFromName) {
+                  props.setProject({
+                    ...props.project,
+                    soloClient: getClientFromName,
+                  })
+                }
+              }}
+              label={'Client'}
+            />
+          )}
 
           <AtTextFieldDropdown
             fullWidth={true}
