@@ -14,7 +14,11 @@ import AtTextField, {
 import AtTextFieldDate from '../../../../../AtTextField/AtTextFieldDate'
 import { Listing } from '../../../../../../utils/redux/types/listings.type'
 import AtSwitch from '../../../../../AtSwitch/AtSwitch'
-import { convertHexToRGBA, getCurrencySymbol, plurialize } from '../../../../../../utils/helpers'
+import {
+  convertHexToRGBA,
+  getCurrencySymbol,
+  plurialize,
+} from '../../../../../../utils/helpers'
 import styled from 'styled-components'
 
 const StyledPeriod = styled.div`
@@ -177,18 +181,8 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
           />
 
           <AtTextFieldDate
-            label={'Start Date'}
             required={true}
-            placeholder={'Enter Start Date'}
-            onValueChange={(e) =>
-              props.setTeam({ ...props.team, startDate: e as any })
-            }
-          />
-
-          <AtTextField
             label={'Start Date'}
-            required={true}
-            placeholder={'Enter Start Date'}
             onValueChange={(e) =>
               props.setTeam({ ...props.team, startDate: e as any })
             }

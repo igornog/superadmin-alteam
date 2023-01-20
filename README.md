@@ -1,14 +1,21 @@
 # Yjcapp
+
 This project was generated using [Nx](https://nx.dev).
+
 ## Init Project
+
 - Install Dependencies
+
   - `yarn` or `npm i`
 
 - Then run this command to start stack :
+
   - `docker-compose -f ./libs/postgres-db/scripts/docker-compose.dev.yml up -d`
 
 - Run project
+
   - To start all the app :
+
     - `yarn run all`
 
   - To start just an app

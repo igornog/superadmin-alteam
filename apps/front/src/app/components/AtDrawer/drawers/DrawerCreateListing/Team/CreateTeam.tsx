@@ -1,7 +1,7 @@
 import { Grid, Box } from '@mui/material'
 import { ArrowLeft2, ArrowRight } from 'iconsax-react'
 import { Dispatch, useState } from 'react'
-import { ListingType, Role, WorkType } from '@yjcapp/app'
+import { ListingState, ListingType, Role, WorkType } from '@yjcapp/app'
 import { grey2, black } from '../../../../../utils/colors'
 import AtButton, {
   AtButtonVariant,
@@ -130,7 +130,8 @@ const CreateTeam: React.FunctionComponent<CreateTeamProps> = (
         handleCreateListing({
           ...team,
           soloClient: { id: selectedClient.id } as Client,
-          status: ListingType.Team,
+          listingType: ListingType.Team,
+          status: ListingState.Draft,
         }),
       )
     }

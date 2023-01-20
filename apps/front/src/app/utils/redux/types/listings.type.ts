@@ -4,6 +4,7 @@ import {
   ClientListing,
   Currency,
   Difficulty,
+  ListingState,
   ListingType,
   Role,
   WorkType,
@@ -37,7 +38,8 @@ export class Listing implements ClientListing {
   skills: string[]
   questions: string[]
   jobDescription?: string
-  status: ListingType
+  listingType: ListingType
+  status: ListingState
 
   constructor(data: any) {
     this.id = data.id
@@ -58,6 +60,7 @@ export class Listing implements ClientListing {
     this.skills = data.skills || []
     this.questions = data.questions || []
     this.jobDescription = data.jobDescription
+    this.listingType = data.listingType
     this.status = data.status
   }
 }

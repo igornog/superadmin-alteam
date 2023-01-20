@@ -192,6 +192,7 @@ const StyledArrow = styled(ArrowDown2)<{ open?: boolean }>`
   transition: 0.3s;
   transform: rotate(${({ open }) => (open ? '180' : '0')}deg);
 `
+
 const StyledCharCounter = styled.label`
   position: absolute;
   padding: 10px;
@@ -322,6 +323,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
           rows={props.rows}
           inputProps={{
             maxlength: props.maxLength,
+            ...props.inputProps,
           }}
           disabled={props.disabled}
           value={value}
@@ -391,6 +393,7 @@ export interface AtTextFieldProps {
   value?: string
   multiline?: boolean
   rows?: number
+  inputProps?: any
 
   isSuccess?: boolean
   isError?: boolean
@@ -408,7 +411,7 @@ export interface AtTextFieldProps {
   maxWidth?: number
   bgColor?: 'black' | 'white'
   size?: 'small' | 'medium'
-  onValueChange?: (value: string) => void
+  onValueChange?: (value: any) => void
   onPressEnter?: (value: string) => void
   placeholder?: string
   type?: AtTextFieldType

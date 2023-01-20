@@ -21,7 +21,8 @@ export interface ClientListing {
   skills: string[]
   questions: string[]
   jobDescription?: string
-  status: ListingType
+  listingType: ListingType
+  status: ListingState
 }
 
 export interface Role {
@@ -60,6 +61,12 @@ export enum Difficulty {
 export enum ListingType {
   Project = 'Project',
   Team = 'Team',
+}
+
+export enum ListingState {
+  Draft = 'Draft',
+  Active = 'Active',
+  Deactivate = 'Deactivate',
 }
 
 export enum Currency {

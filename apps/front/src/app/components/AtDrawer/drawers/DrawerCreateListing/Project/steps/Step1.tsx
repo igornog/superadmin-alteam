@@ -17,7 +17,6 @@ import AtTextFieldDropdown from '../../../../../AtDropdown/AtTextFieldDropdown'
 import AtTextField, {
   AtTextFieldType,
 } from '../../../../../AtTextField/AtTextField'
-import AtTextFieldDate from '../../../../../AtTextField/AtTextFieldDate'
 import { Listing } from '../../../../../../utils/redux/types/listings.type'
 import styled from 'styled-components'
 import {
@@ -26,6 +25,7 @@ import {
   plurialize,
 } from '../../../../../../utils/helpers'
 import AtTimezoneDropdown from '../../../../../AtDropdown/AtTimezoneDropdown'
+import AtTextFieldDate from '../../../../../AtTextField/AtTextFieldDate'
 
 const StyledPeriod = styled.div`
   background-color: ${black};
@@ -166,18 +166,8 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
           />
 
           <AtTextFieldDate
-            label={'Start Date'}
             required={true}
-            placeholder={'Enter Start Date'}
-            onValueChange={(e) =>
-              props.setProject({ ...props.project, startDate: e as any })
-            }
-          />
-
-          <AtTextField
             label={'Start Date'}
-            required={true}
-            placeholder={'Enter Start Date'}
             onValueChange={(e) =>
               props.setProject({ ...props.project, startDate: e as any })
             }

@@ -9,6 +9,7 @@ import {
   Availability,
   Currency,
   Difficulty,
+  ListingState,
   ListingType,
   Role,
   WorkType,
@@ -41,7 +42,7 @@ export class ListingEntity extends BaseEntity {
   @Column({ type: 'int' })
   projectLength: number
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: 'timestamptz', nullable: true })
   startDate: Date
 
   @Column({ type: 'text', nullable: true })
@@ -75,5 +76,8 @@ export class ListingEntity extends BaseEntity {
   jobDescription: string
 
   @Column({ type: 'text' })
-  status: ListingType
+  listingType: ListingType
+
+  @Column({ type: 'text' })
+  status: ListingState
 }

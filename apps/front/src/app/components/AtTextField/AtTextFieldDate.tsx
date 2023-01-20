@@ -1,33 +1,72 @@
-import React from 'react'
-import { AtTextFieldProps } from './AtTextField'
-import { LocalizationProvider, DesktopDatePicker } from '@mui/lab'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { TextField } from '@mui/material'
+import React, { useRef } from 'react'
+import AtTextField, { AtTextFieldProps, AtTextFieldType } from './AtTextField'
+import { DesktopDatePicker } from '@mui/x-date-pickers'
+import { Box } from '@mui/material'
+import { black, green } from '../../utils/colors'
+import moment from 'moment'
 
 const AtTextFieldDate: React.FunctionComponent<AtTextFieldProps> = (
   props: AtTextFieldProps,
 ) => {
   const [value, setValue] = React.useState<any>(null)
+  const dropdownRef = useRef<any>(null)
+  const [isOpen, setIsOpen] = React.useState(false)
+  const [anchorEl, setAnchorEl] = React.useState(null)
+
+  const handleClick = (event: any) => {
+    setIsOpen((isOpen) => !isOpen)
+    setAnchorEl(event.currentTarget)
+  }
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      {/* <DatePicker
-        label="Basic example"
+    <Box ref={dropdownRef}>
+      <DesktopDatePicker
         value={value}
-        onChange={(newValue: string) => {
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        PopperProps={{
+          placement: 'bottom-end',
+          anchorEl: anchorEl,
+          sx: {
+            '& .MuiPickersDay-root': {
+              '&.Mui-selected': {
+                backgroundColor: green,
+
+                '&:hover': {
+                  backgroundColor: black,
+                },
+
+                '&:focus': {
+                  backgroundColor: green,
+                },
+              },
+            },
+          },
+        }}
+        renderInput={(params: any) => {
+          return (
+            <AtTextField
+              {...params.inputProps}
+              {...props}
+              type={AtTextFieldType.Number}
+              label={props.label}
+              endIcon={
+                <span onClick={handleClick}>
+                  {params.InputProps?.endAdornment}
+                </span>
+              }
+              inputProps={params.inputProps}
+            />
+          )
+        }}
+        onChange={(newValue) => {
+          const formatedDate = moment(newValue).utc()
+
+          props?.onValueChange?.(formatedDate)
           setValue(newValue)
         }}
-        renderInput={(params: any) => <AtTextField {...props} />}
-      /> */}
-
-      <DesktopDatePicker
-        label={'Start'}
-        inputFormat="DD/MM/YYYY"
-        renderInput={(params: any) => (
-          <TextField {...params} variant="standard" />
-        )}
       />
-    </LocalizationProvider>
+    </Box>
   )
 }
 

@@ -8,7 +8,7 @@ export const getListings = createDraftSafeSelector(
     return clients.selectedClient !== null && listings.listListings
       ? listings.listListings.filter((listing: Listing) =>
           listing.soloClient.id === clients.selectedClient && listingType
-            ? listing.status === listingType
+            ? listing.listingType === listingType
             : null,
         )
       : []
@@ -22,7 +22,7 @@ export const getListingTeams = createDraftSafeSelector(
       ? listings.listListings.filter(
           (listing: Listing) =>
             listing.soloClient.id === clients.selectedClient &&
-            listing.status === ListingType.Team,
+            listing.listingType === ListingType.Team,
         )
       : []
   },
@@ -35,7 +35,7 @@ export const getListingProjects = createDraftSafeSelector(
       ? listings.listListings.filter(
           (listing: Listing) =>
             listing.soloClient.id === clients.selectedClient &&
-            listing.status === ListingType.Project,
+            listing.listingType === ListingType.Project,
         )
       : []
   },

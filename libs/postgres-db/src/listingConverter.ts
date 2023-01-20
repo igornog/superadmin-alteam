@@ -23,6 +23,7 @@ export function clientListingFromEntity(entity: ListingEntity): ClientListing {
     skills: entity.skills,
     questions: entity.questions,
     jobDescription: entity.jobDescription,
+    listingType: entity.listingType,
     status: entity.status,
   }
 }
@@ -39,6 +40,7 @@ export function clientListingToEntity(
     timeZone: clientListing.timeZone,
     availability: clientListing.availability,
     projectLength: clientListing.projectLength,
+    startDate: clientListing.startDate,
     currency: clientListing.currency,
     exactRate: clientListing.exactRate,
     rateFrom: clientListing.rateFrom,
@@ -49,6 +51,7 @@ export function clientListingToEntity(
     skills: clientListing.skills,
     questions: clientListing.questions,
     jobDescription: clientListing.jobDescription,
+    listingType: clientListing.listingType,
     status: clientListing.status,
   }
 }

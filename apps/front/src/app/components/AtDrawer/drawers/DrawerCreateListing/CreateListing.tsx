@@ -27,7 +27,7 @@ const CreateListing: React.FunctionComponent<CreateListingProps> = (
 
   const handleCloseAll = () => {
     props.handleClose()
-    
+
     setTimeout(() => {
       props.handleBackToCreateListing()
     }, 1500)

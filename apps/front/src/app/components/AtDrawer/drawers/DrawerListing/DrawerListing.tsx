@@ -94,7 +94,7 @@ const DrawerListing: React.FunctionComponent<DrawerListingProps> = (
                   fontSize={'14px'}
                 />
                 <AtTypography variant={'h3'}>
-                  {props.selectedListing.name}
+                  {props.selectedListing.listingName}
                 </AtTypography>
               </Box>
 
