@@ -1,5 +1,5 @@
 import { Grid, Box } from '@mui/material'
-import { ArrowLeft2, ArrowRight } from 'iconsax-react'
+import { ArrowLeft2, ArrowRight, CloseCircle, TickCircle } from 'iconsax-react'
 import { Dispatch, useState } from 'react'
 import { ListingState, ListingType, RateType, WorkType } from '@yjcapp/app'
 import { grey2, black } from '../../../../../utils/colors'
@@ -114,20 +114,22 @@ const CreateProject: React.FunctionComponent<CreateProjectProps> = (
     }
   }
 
-  const handleSubmitProject = () => {
+  const handleSubmitProject = (status: ListingState) => {
     if (props.step + 1 === tabs.length) {
       dispatch(
         handleCreateListing({
           ...project,
           soloClient: { id: selectedClient.id } as Client,
           listingType: ListingType.Project,
-          status: ListingState.Draft,
+          status: status,
         }),
       )
     }
 
     props.setStep(props.step + 1)
   }
+
+  const isLastStep = props.step + 1 === tabs.length
 
   return (
     <>
@@ -164,13 +166,24 @@ const CreateProject: React.FunctionComponent<CreateProjectProps> = (
               {tabs.length}
             </Box>
           </AtTypography>
+
+          {isLastStep ? (
+            <AtButton
+              kind={AtButtonKind.Default}
+              variant={AtButtonVariant.Outlined}
+              name={'Save as Draft'}
+              onClick={() => handleSubmitProject(ListingState.Draft)}
+              endIcon={<CloseCircle />}
+            />
+          ) : null}
+
           <AtButton
             kind={AtButtonKind.Success}
             variant={AtButtonVariant.Contained}
-            name={'Next Step'}
+            name={isLastStep ? 'Activate' : 'Next Step'}
             disabled={isDisabled()}
-            onClick={handleSubmitProject}
-            endIcon={<ArrowRight />}
+            onClick={() => handleSubmitProject(ListingState.Active)}
+            endIcon={isLastStep ? <TickCircle /> : <ArrowRight />}
           />
         </StyledFormStepper>
       </StyledStepper>
