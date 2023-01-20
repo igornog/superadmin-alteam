@@ -62,10 +62,26 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
   const activeTab = useAppSelector((state) => getActiveTab(state))
   const [step, setStep] = useState(0)
   const dispatch = useAppDispatch()
-  const [client, setClient] = useState<Client>(new Client({}))
+  const defaultClient = {
+    companyName: '',
+    phoneNumber: '',
+    companyUrl: '',
+    linkedinUrl: '',
+    industry: '',
+    projectType: undefined,
+    deliveryType: undefined,
+    teamRequest: undefined,
+    request: '',
+    email: '',
+    fullName: '',
+    position: '',
+    status: ClientStatus.Request,
+  }
+
+  const [client, setClient] = useState<Client>(defaultClient)
 
   const handleClose = () => {
-    setClient(new Client({}))
+    setClient(defaultClient)
     props.handleClose()
 
     setTimeout(() => {
@@ -75,8 +91,19 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
 
   const createClient = () => {
     if (step === 1) {
-      const status = client.status ?? ClientStatus.Active
-      dispatch(handleCreateClient({ ...client, status }))
+      if (
+        client.projectType &&
+        client.deliveryType &&
+        client.teamRequest &&
+        client.request &&
+        client.email &&
+        client.fullName &&
+        client.position
+      ) {
+        dispatch(handleCreateClient({ ...client, status: ClientStatus.Active }))
+      } else {
+        dispatch(handleCreateClient(client))
+      }
     }
 
     setStep(step + 1)
