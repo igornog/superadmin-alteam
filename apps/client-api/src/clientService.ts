@@ -6,8 +6,8 @@ export const clientService: ClientService = {
     return soloClientPgRepository.createSoloClient(client)
   },
 
-  searchClient(talentSearch: ClientSearch): Promise<SoloClient[]> {
-    return soloClientPgRepository.findClient(talentSearch)
+  searchClient(clientSearch: ClientSearch): Promise<SoloClient[]> {
+    return soloClientPgRepository.findClient(clientSearch)
   },
 
   updateSoloClient(client: SoloClient): Promise<SoloClient> {

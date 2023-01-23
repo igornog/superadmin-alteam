@@ -1,7 +1,6 @@
 import {
   Availability,
   Experience,
-  Listing,
   ListingStatus,
   SoloTalent,
   Link,
@@ -13,10 +12,6 @@ export interface TalentsState {
   selectedTalent: string | null
   status?: StatusType
   error?: string | null
-}
-
-export interface Skill {
-  label: string
 }
 
 export enum TalentStatus {
@@ -43,7 +38,7 @@ export class Talent implements SoloTalent {
   phoneNumber?: string
   salaryExpectation?: string
   workExperience?: string
-  listing?: Listing[]
+  // listing?: Listing[]
   status?: ListingStatus
 
   constructor(data: any) {
@@ -62,7 +57,7 @@ export class Talent implements SoloTalent {
     this.appliedDate = data.appliedDate
     this.phoneNumber = data.phoneNumber
     this.salaryExpectation = data.salaryExpectation
-    this.listing = data.listing
+    // this.listing = data.listing
     this.status = data.status
   }
 }

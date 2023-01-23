@@ -26,7 +26,9 @@ async function findClient(talentSearch: ClientSearch): Promise<SoloClient[]> {
     SoloClientEntity,
   )
 
-  const queryBuilder = await soloTalentRepository.createQueryBuilder()
+  const queryBuilder = await soloTalentRepository.createQueryBuilder(
+    'solo_client',
+  )
 
   if (talentSearch.status) {
     queryBuilder.andWhere('status = :status', { status: talentSearch.status })

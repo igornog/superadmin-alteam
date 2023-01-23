@@ -9,5 +9,5 @@ export const PostgresDataSource = new DataSource({
   database: process.env.DB_NAME ?? 'postgres',
   entities: Object.values(entities),
   migrations: [`${__dirname}/migration/*.ts`],
-  synchronize: false,
+  synchronize: true,
 })

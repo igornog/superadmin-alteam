@@ -51,7 +51,7 @@ const ModalShareFolder: React.FunctionComponent<ModalShareFolderProps> = (
         <AtTextField
           value={email}
           placeholder={'Enter Email'}
-          label={'Invit User'}
+          label={'Invite User'}
           onValueChange={setEmail}
           endIcon={
             <AtDropdown

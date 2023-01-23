@@ -104,7 +104,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
                       whiteSpace={'nowrap'}
                     >
                       <Box display={'flex'} gap={'5px'} alignItems={'center'}>
-                        <AtTypography variant={'body1'} $bold={true}>
+                        <AtTypography variant={'body1'}>
                           {stringMatch(
                             fullName,
                             settings.filters.searchName ?? '',

@@ -1,7 +1,6 @@
 import { Box, Grid } from '@mui/material'
 import React from 'react'
 import { grey, grey2 } from '../../../../utils/colors'
-import { Listing } from '../../../../utils/redux/types/listings.type'
 import AtTypography from '../../../AtTypography/AtTypography'
 import moment from 'moment'
 import { plurialize } from '../../../../utils/helpers'
@@ -130,7 +129,7 @@ const GeneralInformations: React.FunctionComponent<GeneralProps> = (
 }
 
 interface GeneralProps {
-  selectedListing: Listing
+  selectedListing: any
 }
 
 export default GeneralInformations
