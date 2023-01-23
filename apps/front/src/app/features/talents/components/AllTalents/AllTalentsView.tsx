@@ -33,7 +33,7 @@ const AllTalentsView: React.FunctionComponent = () => {
     return listTalentsByGroup.concat(statusGroup.inbound, statusGroup.shortlisted, statusGroup.accepted)
   }
 
-  if (settings.sort) {
+  if (settings.sort && listTalents.length > 0) {
     switch (settings.sort) {
       case SortTypes.Alphabetical:
         listTalents = listTalents.sort((a, b) => (a.firstName > b.firstName) ? 1 : -1)
@@ -45,6 +45,8 @@ const AllTalentsView: React.FunctionComponent = () => {
         listTalents = sortByStatus()
         break;
     }
+
+    listTalents.filter(item => item)
   }
 
   return listTalents.length === 0 ? (
