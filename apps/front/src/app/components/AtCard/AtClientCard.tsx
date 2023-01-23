@@ -14,7 +14,7 @@ import { useAppSelector } from '../../utils/hooks/reduxHook'
 import { getActiveTab } from '../../utils/redux/selectors/settings.selector'
 import ClientLogo from '../app/clients/ClientLogo'
 import moment from 'moment'
-import { plurialize, stringMatch } from '../../utils/helpers'
+import { stringMatch } from '../../utils/helpers'
 
 const AtClientCard: React.FunctionComponent<AtClientCardProps> = (
   props: AtClientCardProps,

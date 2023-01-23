@@ -85,6 +85,7 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
           {listClients && (
             <AtTextFieldDropdown
               fullWidth={true}
+              searchable={true}
               required={true}
               value={selectedClient.companyName}
               placeholder={'Client'}

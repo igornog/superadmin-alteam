@@ -326,7 +326,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
             ...props.inputProps,
           }}
           disabled={props.disabled}
-          value={value}
+          value={props.dropdown ? props.value : value}
           size={props.size ?? 'medium'}
           required={props.required}
           type={

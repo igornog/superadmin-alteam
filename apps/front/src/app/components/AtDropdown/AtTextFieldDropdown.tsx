@@ -53,6 +53,7 @@ const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
   const dropdownRef = useRef<any>(null)
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
   const [selectedItem, setSelectedItem] = useState<DropdownItem>()
+  const [valueSearchable, setValueSearchable] = useState('')
 
   const handleClose = () => {
     setAnchorEl(null)
@@ -78,10 +79,31 @@ const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
   }, [selectedItem])
 
   useEffect(() => {
+    setValueSearchable(props.value || '')
+
     if (!props.value) {
       setSelectedItem(undefined)
     }
   }, [props.value])
+
+  const filterSearch = () => {
+    return valueSearchable && props.searchable
+      ? props.$listItems.filter((item: DropdownItem) =>
+          item.label.toLowerCase().includes(valueSearchable.toLowerCase()),
+        )
+      : props.$listItems
+  }
+
+  useEffect(() => {
+    if (!open) {
+      if (selectedItem) {
+        setSelectedItem(selectedItem)
+        setValueSearchable(selectedItem.label)
+      }
+    } else {
+      setValueSearchable('')
+    }
+  }, [open, selectedItem])
 
   return (
     <ClickAwayListener onClickAway={handleClose}>
@@ -94,16 +116,17 @@ const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
           {...props}
           dropdown={true}
           open={open}
+          onValueChange={(e) => setValueSearchable(e)}
           onClick={open ? handleClose : handleClick}
           placeholder={props.placeholder}
-          value={selectedItem ? selectedItem.label : props.value}
+          value={valueSearchable}
         />
 
         <StyledContentPopover
           in={open}
           $minWidth={dropdownRef?.current?.offsetWidth}
         >
-          {props.$listItems.map((item: DropdownItem) => (
+          {filterSearch().map((item: DropdownItem) => (
             <StyledDropdownElement
               key={item.id}
               onClick={() => handleSelect(item)}
@@ -125,6 +148,7 @@ export interface DropdownItem {
 }
 
 interface AtTextFieldDropdownProps extends AtTextFieldProps {
+  searchable?: boolean
   $listItems: DropdownItem[]
   handleSelect?: (item: DropdownItem) => void
 }
