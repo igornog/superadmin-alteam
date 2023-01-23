@@ -39,6 +39,7 @@ const StyledUl = styled.ul`
 const StyledLi = styled.li<{ isActive: boolean }>`
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   align-items: center;
   gap: 10px;
   position: relative;
@@ -49,14 +50,12 @@ const StyledLi = styled.li<{ isActive: boolean }>`
     transition: 0.3s;
     position: absolute;
     background-color: ${({ isActive }) => (isActive ? green : white)};
-    top: -7px;
-    left: -56%;
     content: '';
     z-index: -1;
     width: 100%;
     height: 100%;
     border-radius: 5px;
-    padding: 5px 35px;
+    padding: 5px 1rem;
   }
 
   &:hover {

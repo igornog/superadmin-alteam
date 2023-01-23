@@ -158,13 +158,16 @@ const Step2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
               (status, index) => ({
                 id: index,
                 label: status.label,
+                value: status.value
               }),
             )}
-            handleSelect={(e) =>
+            handleSelect={(e) => {
               props.setClient({
                 ...props.client,
                 status: e.value as ClientStatus,
               })
+            }
+              
             }
             label={'Is the client qualified?'}
           />

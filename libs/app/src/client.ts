@@ -44,17 +44,17 @@ export const CreateClientStatus = [
   {
     id: 0,
     label: 'Client Request',
-    value: 'request'
+    value: ClientStatus.Request
   },
   {
     id: 1,
     label: 'Active clients',
-    value: 'active',
+    value: ClientStatus.Active
   },
   {
     id: 2,
     label: 'Inactive clients',
-    value: 'inactive',
+    value: ClientStatus.Inactive
   }
 ]
 
