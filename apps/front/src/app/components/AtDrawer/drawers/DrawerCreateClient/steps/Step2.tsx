@@ -144,7 +144,8 @@ const Step2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
         <AtLine />
 
         <Box
-          padding={'30px 20px 100px'}
+          padding={'20px'}
+          marginBottom={'60px'}
           display={'flex'}
           flexDirection={'column'}
           gap={'30px'}
