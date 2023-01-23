@@ -20,7 +20,7 @@ export interface SoloTalent {
   role: string
   email: string
   about: string
-  assets?: string[]
+  assets?: Asset[]
   skills: string[]
   appliedDate?: Date
   phoneNumber?: string
@@ -29,7 +29,10 @@ export interface SoloTalent {
   listing?: any
   status?: ListingStatus
 }
-
+export interface Asset {
+  name : string
+  link : string
+}
 export interface Link {
   id?: string
   name?: string

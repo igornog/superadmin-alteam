@@ -5,7 +5,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
-import { Availability, Experience, Link, ListingStatus } from '@yjcapp/app'
+import {   Asset,
+  Availability, Experience, Link, ListingStatus } from '@yjcapp/app'
 
 @Entity({ name: 'solo_talent' })
 export class SoloTalentEntity extends BaseEntity {
@@ -39,8 +40,8 @@ export class SoloTalentEntity extends BaseEntity {
   @Column({ type: 'text', name: 'about' })
   about: string
 
-  @Column({ type: 'varchar', array: true, name: 'assets' })
-  assets?: string[]
+  @Column({ type: 'json', array: true, name: 'assets', nullable: true })
+  assets?: Asset[]
 
   @Column({ type: 'text', array: true, name: 'skills' })
   skills: string[]

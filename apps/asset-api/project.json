@@ -1,0 +1,76 @@
+{
+  "name": "asset-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/asset-api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputFileName": "index.js",
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "apps/asset-api/dist",
+        "main": "apps/asset-api/src/index.ts",
+        "tsConfig": "apps/asset-api/tsconfig.app.json"
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "externalDependencies": ["aws-sdk"],
+          "fileReplacements": [
+            {
+              "replace": "apps/asset-api/src/environments/environment.ts",
+              "with": "apps/asset-api/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "asset-api:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "asset-api:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/asset-api/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/asset-api/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["package"],
+      "options": {
+        "cwd": "apps/asset-api/infrastructure",
+        "command": "../../../infrastructure/scripts/terraformStageWrapper.sh apply asset-api"
+      }
+    },
+    "package": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "options": {
+        "command": "zip -FSqj apps/asset-api/dist/package.zip apps/asset-api/dist/index.js"
+      }
+    }
+  },
+  "tags": []
+}
