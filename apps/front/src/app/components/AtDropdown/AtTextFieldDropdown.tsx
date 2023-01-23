@@ -145,6 +145,7 @@ export interface DropdownItem {
   id: number | string
   key?: string
   label: string
+  value?: string
 }
 
 interface AtTextFieldDropdownProps extends AtTextFieldProps {

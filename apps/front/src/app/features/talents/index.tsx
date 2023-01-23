@@ -62,6 +62,7 @@ export const talentsTabs: Page[] = [
       RightClick.EditTalentFolders,
       RightClick.SendEmailToTalent,
       RightClick.ShareTalent,
+      RightClick.MoveToInbound,
       RightClick.MoveToDeclined,
     ],
     clientRightClick: [],
@@ -88,7 +89,7 @@ export const talentsTabs: Page[] = [
   },
   {
     title: Tabs.DeclinedTalent,
-    status: ListingStatus.Rejected,
+    status: ListingStatus.Declined,
     node: <DeclinedTalentsView />,
     active: false,
     settings: {

@@ -31,6 +31,13 @@ import AtTopTitle from './AtTopTitle'
 import debounce from 'lodash.debounce'
 import { handleUpdateFilter } from '../../utils/redux/actions/settings.action'
 
+const SortOptions = [
+  { id: 0, value: '', label: 'None' },
+  { id: 1, value: 'alphabetical', label: 'A to Z' },
+  { id: 1, value: 'mostRecent', label: 'Most Recent' },
+  { id: 1, value: 'status', label: 'Status' },
+]
+
 const StyledContent = styled(Grid)<{ $sidePanelSize?: string }>`
   overflow: hidden;
   background-color: #f7f8fe;
@@ -206,10 +213,8 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                       />
                     )}
                   </Grid>
-
                   <Box display={'flex'} gap={'30px'}>
                     {activeTab.settings.displayMode && <AtSwitchDisplayMode />}
-
                     {activeTab.settings.sortBy && (
                       <Box
                         display={'flex'}
@@ -222,11 +227,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                         </AtTypography>
                         <AtDropdown
                           placeholder={'None'}
-                          $listItems={[
-                            { id: 0, value: 'None', label: 'None' },
-                            { id: 1, value: 'None', label: 'None' },
-                          ]}
-                          align={'bottom-right'}
+                          $listItems={SortOptions}
                           kind={AtButtonKind.Default}
                           variant={AtButtonVariant.Contained}
                         />

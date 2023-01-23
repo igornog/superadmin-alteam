@@ -10,10 +10,22 @@ import AtTypography from '../../AtTypography/AtTypography'
 import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtLine from '../../AtLine/AtLine'
 import AtModal from '../AtModal'
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
+import { handlePatchTalent } from '../../../utils/redux/actions/talents.action'
+import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector'
+import { ListingStatus } from '@yjcapp/app'
 
 const ModalDecline: React.FunctionComponent<ModalDeclineProps> = (
   props: ModalDeclineProps,
 ) => {
+  const dispatch = useAppDispatch()
+  const selectedTalent = useAppSelector((state) => getActiveTalent(state))
+  
+  const moveTalent = () => {
+    dispatch(handlePatchTalent({ id: selectedTalent.id, status: ListingStatus.Declined }))
+    props.onClose?.()
+  }
+
   return (
     <AtModal
       isOpen={props.isOpen}
@@ -59,7 +71,7 @@ const ModalDecline: React.FunctionComponent<ModalDeclineProps> = (
             startIcon={<CloseSquare size={16} />}
           />
           <AtButton
-            onClick={props.onClose}
+            onClick={moveTalent}
             kind={AtButtonKind.Success}
             variant={AtButtonVariant.Contained}
             name={'Decline'}

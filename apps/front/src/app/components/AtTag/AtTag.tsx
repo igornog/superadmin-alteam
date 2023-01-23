@@ -4,7 +4,7 @@ import { TrushSquare } from 'iconsax-react'
 import styled, { css } from 'styled-components'
 import { white, red, grey, black } from '../../utils/colors'
 import AtTypography from '../AtTypography/AtTypography'
-import { convertHexToRGBA } from '../../utils/helpers'
+import { capitalizeFirstLetter, convertHexToRGBA } from '../../utils/helpers'
 
 const StyledIcon = styled(TrushSquare)`
   transition: 0.3s;
@@ -17,6 +17,7 @@ const StyledIcon = styled(TrushSquare)`
 
 const StyledChip = styled(Chip)<{ clickable?: boolean; variant: string }>`
   color: ${grey};
+  border-color: ${grey};
   background-color: ${({ variant }) =>
     variant === 'filled' && convertHexToRGBA(black, 0.05)};
   justify-content: space-between;
@@ -43,7 +44,7 @@ const AtTag: React.FunctionComponent<AtTagProps> = (props: AtTagProps) => {
       {...props}
       variant={props.variant ?? 'filled'}
       clickable={props.$hover}
-      label={<AtTypography>{props.label}</AtTypography>}
+      label={<AtTypography>{capitalizeFirstLetter(props.label)}</AtTypography>}
       deleteIcon={props.onDelete ? <StyledIcon /> : undefined}
       onDelete={props.onDelete ?? undefined}
     />

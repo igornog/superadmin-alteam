@@ -17,13 +17,23 @@ import AtTypography from '../../AtTypography/AtTypography'
 import moment from 'moment'
 import { useAppSelector } from '../../../utils/hooks/reduxHook'
 import { stringMatch } from '../../../utils/helpers'
+import { StyledTagClients } from '../../AtCard/AtTalentCard'
 
-const StyledTag = styled(AtTag)`
+export const StyledTag = styled(AtTag)`
   max-width: 150px;
 `
-
-const StyledTagClients = styled(AtTag)`
-  border-radius: 5px;
+const StyledTable = styled(AtTable)`
+  tr {
+    td {
+      width: 12.5%;
+      &:first-of-type {
+        width: 20%;
+      }
+      &:last-of-type {
+        width: 50%;
+      }
+    }
+  }
 `
 
 const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
@@ -36,7 +46,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
   const settings = useAppSelector((state) => state.settings)
 
   useEffect(() => {
-    setMaxItemPerLine(Math.floor(skillsRef.current?.clientWidth / 150))
+    setMaxItemPerLine(Math.floor(skillsRef.current?.clientWidth / 100))
   }, [windowSize])
 
   const haveToDisplay = (column: Column) => {
@@ -44,7 +54,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
   }
 
   return (
-    <AtTable>
+    <StyledTable>
       <AtTableHead>
         <AtTableRow>
           {haveToDisplay(Column.Talent) && <AtTableCell>Talent</AtTableCell>}
@@ -156,7 +166,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
                     {talent.skills && talent.skills.length > 0 ? (
                       <Box
                         display={'flex'}
-                        flexWrap={'wrap'}
+                        flexWrap={'nowrap'}
                         gap={'10px'}
                         justifyContent={'flex-end'}
                         ref={skillsRef}
@@ -212,7 +222,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
           )
         })}
       </AtTableBody>
-    </AtTable>
+    </StyledTable>
   )
 }
 

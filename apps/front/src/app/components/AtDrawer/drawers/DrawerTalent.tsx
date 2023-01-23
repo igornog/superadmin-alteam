@@ -11,7 +11,7 @@ import TalentListings from '../../../features/talents/components/TalentViewProfi
 import TalentNotes from '../../../features/talents/components/TalentViewProfile/TalentNotes'
 import TalentSkills from '../../../features/talents/components/TalentViewProfile/TalentSkills'
 import { grey3, white } from '../../../utils/colors'
-import { useAppSelector } from '../../../utils/hooks/reduxHook'
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
 import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector'
 import { Tabs } from '../../../utils/types'
@@ -25,16 +25,24 @@ import ModalShortlist from '../../AtModal/modals/ModalShortlist/ModalShortlist'
 import AtTypography from '../../AtTypography/AtTypography'
 import AtDrawer from '../AtDrawer'
 import AtDrawerHeader from '../AtDrawerHeader'
+import { handlePatchTalent } from '../../../utils/redux/actions/talents.action'
 
 const DrawerTalent: React.FunctionComponent<DrawerTalentProps> = (
   props: DrawerTalentProps,
 ) => {
+  const dispatch = useAppDispatch()
+  
   const selectedTalent = useAppSelector((state) => getActiveTalent(state))
   const activeTab = useAppSelector((state) => getActiveTab(state))
 
   const [openModalShortlist, setOpenModalShortlist] = useState(false)
   const [openModalAccepted, setOpenModalAccepted] = useState(false)
   const [openModalDecline, setOpenModalDecline] = useState(false)
+
+  const moveToInbound = () => {
+      dispatch(handlePatchTalent({ id: selectedTalent.id, status: ListingStatus.Inbound }))
+      props.handleClose()
+  }
 
   return (
     <AtDrawer
@@ -80,7 +88,8 @@ const DrawerTalent: React.FunctionComponent<DrawerTalentProps> = (
         <TalentNotes />
 
         <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
-          {selectedTalent.status !== ListingStatus.Rejected && (
+
+          {selectedTalent.status !== ListingStatus.Declined ? (
             <AtButton
               onClick={() => setOpenModalDecline(true)}
               kind={AtButtonKind.Danger}
@@ -88,21 +97,28 @@ const DrawerTalent: React.FunctionComponent<DrawerTalentProps> = (
               name={'Decline'}
               endIcon={<CloseSquare size={16} />}
             />
-          )}
+          ) : null}
 
           {selectedTalent.status === ListingStatus.Inbound ||
-          selectedTalent.status === ListingStatus.Accepted ? (
+            selectedTalent.status === ListingStatus.Accepted ? (
             <AtButton
               onClick={() => setOpenModalShortlist(true)}
-              kind={AtButtonKind.Success}
-              variant={AtButtonVariant.Contained}
+              kind={AtButtonKind.Default}
+              variant={AtButtonVariant.Outlined}
               name={'Shortlist'}
-              endIcon={<TickSquare size={16} />}
             />
           ) : null}
 
-          {selectedTalent.status === ListingStatus.Shortlisted ||
-          selectedTalent.status === ListingStatus.Rejected ? (
+          {selectedTalent.status === ListingStatus.Shortlisted? (
+            <AtButton
+              onClick={moveToInbound}
+              kind={AtButtonKind.Default}
+              variant={AtButtonVariant.Outlined}
+              name={'Back to Inbound'}
+            />
+          ) : null}
+
+          {selectedTalent.status !== ListingStatus.Declined ? (
             <AtButton
               onClick={() => setOpenModalAccepted(true)}
               kind={AtButtonKind.Success}
@@ -116,17 +132,17 @@ const DrawerTalent: React.FunctionComponent<DrawerTalentProps> = (
 
       <ModalShortlist
         isOpen={openModalShortlist}
-        onClose={() => setOpenModalShortlist(false)}
+        onClose={() => { setOpenModalShortlist(false); props.handleClose() }}
       />
 
       <ModalAccepted
         isOpen={openModalAccepted}
-        onClose={() => setOpenModalAccepted(false)}
+        onClose={() => { setOpenModalAccepted(false); props.handleClose() }}
       />
 
       <ModalDecline
         isOpen={openModalDecline}
-        onClose={() => setOpenModalDecline(false)}
+        onClose={() => { setOpenModalDecline(false); props.handleClose() }}
       />
     </AtDrawer>
   )

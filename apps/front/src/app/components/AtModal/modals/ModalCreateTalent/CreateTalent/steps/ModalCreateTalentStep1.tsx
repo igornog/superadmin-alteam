@@ -44,6 +44,14 @@ const ModalCreateTalentStep1: React.FunctionComponent<
       />
 
       <AtTextField
+        placeholder={'Enter Phone Number'}
+        value={props.phoneNumber}
+        required={true}
+        label={'Phone Number'}
+        onValueChange={props.setPhoneNumber}
+      />
+
+      <AtTextField
         placeholder={'Enter Portfolio Link'}
         value={props.portfolio}
         label={'Portfolio Link'}
@@ -68,6 +76,14 @@ const ModalCreateTalentStep1: React.FunctionComponent<
           (label: Experience, index: number) => ({ id: index, label: label }),
         )}
         label={'Experience Level'}
+      />
+
+      <AtTextField
+        placeholder={'Enter Salary Expectations'}
+        value={props.salaryExpectation}
+        required={true}
+        label={'Salary Expectations'}
+        onValueChange={props.setSalaryExpectation}
       />
 
       <AtTextFieldDropdown
@@ -106,13 +122,13 @@ const ModalCreateTalentStep1: React.FunctionComponent<
                   : 'Enter Exact Rate'
               }
               maxLength={30}
-              // value={project.rateFrom?.toString()}
-              // onValueChange={(e) =>
-              //   setProject({
-              //     ...project,
-              //     rateFrom: parseFloat(e),
-              //   })
-              // }
+            // value={project.rateFrom?.toString()}
+            // onValueChange={(e) =>
+            //   setProject({
+            //     ...project,
+            //     rateFrom: parseFloat(e),
+            //   })
+            // }
             />
           )}
 
@@ -120,13 +136,13 @@ const ModalCreateTalentStep1: React.FunctionComponent<
             <AtTextField
               placeholder={'Rate To'}
               maxLength={30}
-              // value={project.rateTo?.toString()}
-              // onValueChange={(e) =>
-              //   setProject({
-              //     ...project,
-              //     rateTo: parseFloat(e),
-              //   })
-              // }
+            // value={project.rateTo?.toString()}
+            // onValueChange={(e) =>
+            //   setProject({
+            //     ...project,
+            //     rateTo: parseFloat(e),
+            //   })
+            // }
             />
           )}
         </Box>
@@ -142,6 +158,10 @@ interface ModalCreateTalentStep1Props {
   setLastName: Dispatch<SetStateAction<string>>
   email: string
   setEmail: Dispatch<SetStateAction<string>>
+  phoneNumber: string
+  setPhoneNumber: Dispatch<SetStateAction<string>>
+  salaryExpectation: string
+  setSalaryExpectation: Dispatch<SetStateAction<string>>
   role: string
   setRole: Dispatch<SetStateAction<string>>
   experience: Experience | undefined

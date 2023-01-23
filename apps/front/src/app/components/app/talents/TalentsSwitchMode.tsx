@@ -33,6 +33,7 @@ const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
       {settings.displayMode === DisplayMode.Grid ? (
         <TalentCard
           talents={listTalent}
+          displayStatusTag={props.displayStatusTag}
           openTalent={handleClickTalent}
           openShortlist={() => setOpenShortlistModal(true)}
           openAccepted={() => setOpenAcceptedModal(true)}
@@ -76,6 +77,7 @@ const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
 
 interface TalentsSwitchModeProps {
   tableColumns: Column[]
+  displayStatusTag?: boolean
 }
 
 export default TalentsSwitchMode

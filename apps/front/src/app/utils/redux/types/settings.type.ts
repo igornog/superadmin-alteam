@@ -35,6 +35,7 @@ export interface Settings {
   downloadCSV?: boolean
   inviteTalent?: boolean
   displayMode?: boolean
+  displayStatus?: boolean
   sortBy?: boolean
   shareFolder?: boolean
   verifyClient?: boolean

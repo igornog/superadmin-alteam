@@ -28,6 +28,8 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [salaryExpectation, setSalaryExpectation] = useState('')
   const [role, setRole] = useState('')
   const [experience, setExperience] = useState<Experience>()
   const [availability, setAvailability] = useState<Availability>()
@@ -39,6 +41,8 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
     setFirstName('')
     setLastName('')
     setEmail('')
+    setPhoneNumber('')
+    setSalaryExpectation('')
     setRole('')
     setSkills([])
     setExperience(undefined)
@@ -65,6 +69,8 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
           firstName,
           lastName,
           role,
+          phoneNumber,
+          salaryExpectation,
           experience: experience,
           availability: availability,
           email,
@@ -101,6 +107,10 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
                 setLastName={setLastName}
                 email={email}
                 setEmail={setEmail}
+                phoneNumber={phoneNumber}
+                setPhoneNumber={setPhoneNumber}
+                salaryExpectation={salaryExpectation}
+                setSalaryExpectation={setSalaryExpectation}
                 role={role}
                 setRole={setRole}
                 experience={experience}

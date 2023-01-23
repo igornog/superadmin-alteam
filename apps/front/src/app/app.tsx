@@ -2,12 +2,14 @@ import React from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Auth from './features/auth'
 import Talents from './features/talents'
+// import Marketplace from './features/marketplace'
 import {
   Personalcard,
   Profile,
   Briefcase,
   Setting2,
   Category,
+  MonitorMobbile
 } from 'iconsax-react'
 import Clients from './features/clients'
 export const Navigation: NavigationProps[] = [
@@ -28,6 +30,12 @@ export const Navigation: NavigationProps[] = [
     element: <Talents />,
     icon: <Briefcase />,
     name: 'Listings',
+  },
+  {
+    link: '/marketplace',
+    element: <Talents />,
+    icon: <MonitorMobbile />,
+    name: 'Marketplace',
   },
   {
     link: '/settings',
