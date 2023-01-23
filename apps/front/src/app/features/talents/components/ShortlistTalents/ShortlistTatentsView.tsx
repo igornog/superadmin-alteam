@@ -9,14 +9,14 @@ import {
   useAppSelector,
 } from '../../../../utils/hooks/reduxHook'
 import { handleLoadTree } from '../../../../utils/redux/actions/tree.action'
-import { Column, SortTypes } from '../../../../utils/redux/types/settings.type'
+import { Column } from '../../../../utils/redux/types/settings.type'
 import ShortlistFolderListing from './ShortlistFolderListing'
 import ShortlistTalentsHeader from './ShortlistTalentsHeader'
+import { sortBy } from '../../../../utils/helpers'
 
 const ShortlistTalentsView: React.FunctionComponent = () => {
   const settings = useAppSelector((state) => state.settings)
   const talents = useAppSelector((state) => state.talents)
-  let listTalents = talents.listTalents
 
   const dispatch = useAppDispatch()
 
@@ -24,22 +24,7 @@ const ShortlistTalentsView: React.FunctionComponent = () => {
     dispatch(handleLoadTree())
   }, [dispatch])
 
-  if (settings.sort && listTalents.length > 0) {
-    let arrayForSort = []
-
-    switch (settings.sort) {
-      case SortTypes.Alphabetical:
-        arrayForSort = [...listTalents]
-        listTalents = arrayForSort.sort((a, b) => (a.firstName > b.firstName) ? 1 : -1)
-        break;
-      case SortTypes.MostRecent:
-        arrayForSort = [...listTalents]
-        listTalents = arrayForSort.sort((a: any, b: any) => (a.appliedDate < b.appliedDate) ? 1 : -1)
-        break;
-    }
-
-    listTalents.filter(item => item)
-  }
+  const talentsSorted = settings.sort ? sortBy(settings.sort, talents.listTalents) : talents.listTalents
 
   return (
     <Grid container={true}>
@@ -52,11 +37,11 @@ const ShortlistTalentsView: React.FunctionComponent = () => {
 
         <AtSpace direction={'vertical'} spacing={'20'} />
 
-        {listTalents.length === 0 ? (
+        {talentsSorted.length === 0 ? (
           <AtNoResult sentence={`No Shortlisted Talents`} />
         ) : (
           <TalentsSwitchMode
-            listTalents={listTalents}
+            listTalents={talentsSorted}
             tableColumns={[
               Column.Talent,
               Column.Applied,

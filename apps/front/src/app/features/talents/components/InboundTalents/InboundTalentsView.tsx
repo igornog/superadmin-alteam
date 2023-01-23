@@ -3,37 +3,22 @@ import React from 'react'
 import TalentsSwitchMode from '../../../../components/app/talents/TalentsSwitchMode'
 import AtNoResult from '../../../../components/AtLayout/AtNoResult'
 import { useAppSelector } from '../../../../utils/hooks/reduxHook'
-import { Column, SortTypes } from '../../../../utils/redux/types/settings.type'
+import { Column } from '../../../../utils/redux/types/settings.type'
+import { sortBy } from '../../../../utils/helpers'
 
 const InboundTalentsView: React.FunctionComponent = () => {
-  const settings = useAppSelector((state) => state.settings)
   const talents = useAppSelector((state) => state.talents)
-  let listTalents = talents.listTalents
+  const settings = useAppSelector((state) => state.settings)
 
-  if (settings.sort && listTalents.length > 0) {
-    let arrayForSort = []
+  const talentsSorted = settings.sort ? sortBy(settings.sort, talents.listTalents) : talents.listTalents
 
-    switch (settings.sort) {
-      case SortTypes.Alphabetical:
-        arrayForSort = [...listTalents]
-        listTalents = arrayForSort.sort((a, b) => (a.firstName > b.firstName) ? 1 : -1)
-        break;
-      case SortTypes.MostRecent:
-        arrayForSort = [...listTalents]
-        listTalents = arrayForSort.sort((a: any, b: any) => (a.appliedDate < b.appliedDate) ? 1 : -1)
-        break;
-    }
-
-    listTalents.filter(item => item)
-  }
-
-  return listTalents.length === 0 ? (
+  return talentsSorted.length === 0 ? (
     <AtNoResult sentence={`No Inbound Talents`} />
   ) : (
     <Grid container={true} spacing={2.5} marginTop={0} alignItems={'stretch'}>
       <Grid item={true} xs={12}>
         <TalentsSwitchMode
-          listTalents={listTalents}
+          listTalents={talentsSorted}
           displayStatusTag={false}
           tableColumns={[
             Column.Talent,

@@ -18,6 +18,7 @@ export interface FilterInterface {
   jobTypes?: Filter[]
   searchName?: string
 }
+
 export interface Page {
   title: string
   status: ListingStatus | ClientStatus | null

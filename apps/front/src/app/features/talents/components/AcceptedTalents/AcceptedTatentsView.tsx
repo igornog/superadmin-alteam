@@ -12,9 +12,11 @@ import { handleLoadTree } from '../../../../utils/redux/actions/tree.action'
 import { Column } from '../../../../utils/redux/types/settings.type'
 import AcceptedFolderListing from './AcceptedFolderListing'
 import AcceptedTalentsHeader from './AcceptedTalentsHeader'
+import { sortBy } from '../../../../utils/helpers'
 
 const AcceptedTatentsView: React.FunctionComponent = () => {
   const talents = useAppSelector((state) => state.talents)
+  const settings = useAppSelector((state) => state.settings)
   const listTalent = talents.listTalents
 
   const dispatch = useAppDispatch()
@@ -22,6 +24,8 @@ const AcceptedTatentsView: React.FunctionComponent = () => {
   useEffect(() => {
     dispatch(handleLoadTree())
   }, [dispatch])
+
+  const talentsSorted = settings.sort ? sortBy(settings.sort, talents.listTalents) : talents.listTalents
 
   return (
     <Grid container={true}>
@@ -38,7 +42,7 @@ const AcceptedTatentsView: React.FunctionComponent = () => {
           <AtNoResult sentence={`No Accepted Talents`} />
         ) : (
           <TalentsSwitchMode
-            listTalents={listTalent}
+            listTalents={talentsSorted}
             tableColumns={[
               Column.Talent,
               Column.Applied,

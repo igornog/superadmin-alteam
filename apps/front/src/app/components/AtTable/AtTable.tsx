@@ -8,7 +8,7 @@ const StyledBackground = styled(Box)`
   height: calc(100% + 10px);
   border-radius: 10px;
   overflow: visible;
-  padding: 4px 20px 0 20px;
+  padding: 4px 20px;
   width: 100%;
   box-sizing: border-box;
   z-index: -2;

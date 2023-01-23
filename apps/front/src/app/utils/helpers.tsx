@@ -118,18 +118,21 @@ export const sortByStatus = (array: any[]) => {
   return listTalentsByGroup.concat(statusGroup.inbound, statusGroup.shortlisted, statusGroup.accepted)
 }
 
-export const SortOptions = (activeTab: { status: string }) => {
-  const options = [
-    { id: 0, value: null, label: 'None' },
-    { id: 1, value: SortTypes.Alphabetical, label: 'A to Z' },
-    { id: 2, value: SortTypes.MostRecent, label: 'Most Recent' },
-  ]
+export const sortBy = (sort: string, talents: any[]) => {
+  let arrayForSort = []
+  let listSorted = []
 
-  if(!activeTab.status){
-    options.push(
-      { id: 3, value: SortTypes.Status, label: 'Status' }
-    )
+  switch (sort) {
+    case SortTypes.Alphabetical:
+      arrayForSort = [...talents]
+      listSorted = arrayForSort.sort((a, b) => (a.firstName > b.firstName) ? 1 : -1)
+      break;
+    case SortTypes.MostRecent:
+      arrayForSort = [...talents]
+      listSorted = arrayForSort.sort((a: any, b: any) => (a.appliedDate < b.appliedDate) ? 1 : -1)
+      break;
   }
-  
-  return options
+
+  listSorted.filter(item => item)
+  return listSorted
 }

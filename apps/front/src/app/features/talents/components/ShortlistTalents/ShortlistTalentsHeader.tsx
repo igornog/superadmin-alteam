@@ -13,17 +13,21 @@ import { grey2 } from '../../../../utils/colors'
 import { useAppDispatch, useAppSelector } from '../../../../utils/hooks/reduxHook'
 import { getActiveFolder } from '../../../../utils/redux/selectors/tree.selector'
 import { handleActiveSort } from '../../../../utils/redux/actions/settings.action'
-import { getActiveTab } from '../../../../utils/redux/selectors/settings.selector'
-import { SortOptions } from '../../../../utils/helpers'
+import { SortTypes } from '../../../../utils/redux/types/settings.type'
 
 const ShortlistTalentsHeader: React.FunctionComponent = () => {
   const activeFolder = useAppSelector((state) => getActiveFolder(state))
-  const activeTab = useAppSelector((state) => getActiveTab(state))
   const dispatch = useAppDispatch()
 
   const handleSort = (item: DropdownItem) => {
     dispatch(handleActiveSort({ sort: item.value as string }))
   }
+
+  const sortOptions = [
+    { id: 0, value: null, label: 'None' },
+    { id: 1, value: SortTypes.Alphabetical, label: 'A to Z' },
+    { id: 2, value: SortTypes.MostRecent, label: 'Most Recent' },
+  ]
 
   return (
     <Box
@@ -58,7 +62,7 @@ const ShortlistTalentsHeader: React.FunctionComponent = () => {
             </AtTypography>
             <AtDropdown
               placeholder={'None'}
-              $listItems={SortOptions(activeTab)}
+              $listItems={sortOptions}
               kind={AtButtonKind.Default}
               variant={AtButtonVariant.Contained}
               handleSelect={handleSort}
