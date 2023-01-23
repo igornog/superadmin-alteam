@@ -1,5 +1,5 @@
 import { FilterSquare } from 'iconsax-react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { skillsFilters, availabilityFilters, talentsTabs } from '..'
 import AtLayout from '../../../components/AtLayout/AtLayout'
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
@@ -14,6 +14,8 @@ import TalentsViewFilters from './TalentsViewFilters'
 import { Availability } from '@yjcapp/app'
 
 const TalentsView: React.FunctionComponent = () => {
+  const [settingsLoaded, setSettingsLoaded] = useState(false)
+
   const dispatch = useAppDispatch()
   const settings = useAppSelector((state) => state.settings)
   const activeTab = useAppSelector((state) => getActiveTab(state))
@@ -26,6 +28,8 @@ const TalentsView: React.FunctionComponent = () => {
         jobTypes: availabilityFilters,
       }),
     )
+
+    setSettingsLoaded(true)
   }, [dispatch])
 
   useEffect(() => {
@@ -35,28 +39,29 @@ const TalentsView: React.FunctionComponent = () => {
   }, [activeTab, dispatch, settings.tabs])
 
   useEffect(() => {
-    // if (activeTab?.status) {
-    dispatch(
-      handleTalents({
-        talentName: settings.filters.searchName || '',
-        skills: settings.filters.skills
-          ?.filter((skill) => skill.active)
-          .map((item: Filter) => item.label),
+    if (settingsLoaded) {
+      dispatch(
+        handleTalents({
+          talentName: settings.filters.searchName || '',
+          skills: settings.filters.skills
+            ?.filter((skill) => skill.active)
+            .map((item: Filter) => item.label),
 
-        availability: settings.filters.jobTypes
-          ?.filter((jobType) => jobType.active)
-          .map((item: Filter) => item.label as Availability),
+          availability: settings.filters.jobTypes
+            ?.filter((jobType) => jobType.active)
+            .map((item: Filter) => item.label as Availability),
 
-        status: activeTab?.status?.toLowerCase(),
-      }),
-    )
-    // }
+          status: activeTab?.status?.toLowerCase(),
+        }),
+      )
+    }
   }, [
     activeTab?.status,
     dispatch,
     settings.filters.jobTypes,
-    settings.filters.skills,
     settings.filters.searchName,
+    settings.filters.skills,
+    settingsLoaded,
   ])
 
   return (

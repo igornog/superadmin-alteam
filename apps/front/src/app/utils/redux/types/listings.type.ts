@@ -1,82 +1,66 @@
 import { StatusType } from './status.type'
-import { Availability, Experience } from '@yjcapp/app'
+import {
+  Availability,
+  ClientListing,
+  Currency,
+  Difficulty,
+  ListingState,
+  ListingType,
+  Role,
+  WorkType,
+} from '@yjcapp/app'
+import { Client } from './clients.type'
 
 export interface ListingsState {
-  listListings: Listing[]
+  listListings: ClientListing[]
   selectedListing: number | null
   status?: StatusType
   error?: string | null
 }
 
-export enum ListingStatus {
-  Active = 'Active',
-  Inactive = 'Inactive',
-  Draft = 'Draft',
-  Ended = 'Ended',
-}
-
-export enum ListingType {
-  Project = 'Project',
-  Team = 'Team',
-}
-
-export enum WorkType {
-  Remote = 'Remote',
-}
-
-export enum RateType {
-  Fixed = 'Fixed',
-  Variable = 'Variable',
-}
-
-export enum Difficulty {
-  Junior = 'Junior',
-  MidSenior = 'MidSenior',
-  Senior = 'Senior',
-  Lead = 'Lead',
-}
-
-export class Listing {
+export class Listing implements ClientListing {
   id: number
-  name: string
-  nbIndividual: number
-  workType: WorkType
-  timeZone?: string
+  soloClient: Client
+  listingName: string
+  individuals: number
+  workType?: WorkType
+  timeZone: string
   availability: Availability
-  hours?: number
   projectLength: number
-  startDate: string
-  rateType: RateType
+  startDate?: Date
+  exactRate?: number
+  currency?: Currency
   rateFrom?: number
   rateTo?: number
-  rateFixed?: number
-  difficulty: Experience
-  learning: string
-  jobDescription: string
-  screeningQuestion: string[]
-  status: ListingStatus
-  received: string
-  talent?: number[]
+  difficulty: Difficulty
+  learningLink: string
+  roles: Role[]
+  skills: string[]
+  questions: string[]
+  jobDescription?: string
+  listingType: ListingType
+  status: ListingState
 
   constructor(data: any) {
     this.id = data.id
-    this.name = data.name
-    this.nbIndividual = data.nbIndividual
+    this.soloClient = data.soloClient
+    this.listingName = data.listingName
+    this.individuals = data.individuals
     this.workType = data.workType
     this.timeZone = data.timeZone
     this.availability = data.availability
     this.projectLength = data.projectLength
     this.startDate = data.startDate
-    this.rateType = data.rateType
+    this.exactRate = data.exactRate
     this.rateFrom = data.rateFrom
     this.rateTo = data.rateTo
-    this.rateFixed = data.rateFixed
     this.difficulty = data.difficulty
-    this.learning = data.learning
+    this.learningLink = data.learningLink
+    this.roles = data.roles || []
+    this.skills = data.skills || []
+    this.questions = data.questions || []
     this.jobDescription = data.jobDescription
-    this.screeningQuestion = data.screeningQuestion
+    this.listingType = data.listingType
     this.status = data.status
-    this.received = data.received
-    this.talent = data.talent
   }
 }

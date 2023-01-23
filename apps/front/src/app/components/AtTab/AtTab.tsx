@@ -53,7 +53,7 @@ const AtTab: React.FunctionComponent<AtTabProps> = (props: AtTabProps) => {
       $width={props.width}
     >
       <StyledTypography>{props.label}</StyledTypography>
-      {props.badge && (
+      {props.badge !== undefined && props.badge >= 0 && (
         <StyledBadge $active={props.$active}>
           <AtTypography fontSize={'10px'}>{props.badge}</AtTypography>
         </StyledBadge>

@@ -2,7 +2,6 @@ import { Box, Collapse } from '@mui/material'
 import { ArrowDown, ArrowUp, Edit } from 'iconsax-react'
 import React, { useState } from 'react'
 import { grey } from '../../../../utils/colors'
-import { Listing } from '../../../../utils/redux/types/listings.type'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
@@ -48,7 +47,7 @@ const JobDescription: React.FunctionComponent<JobDescriptionProps> = (
 }
 
 interface JobDescriptionProps {
-  selectedListing: Listing
+  selectedListing: any
 }
 
 export default JobDescription

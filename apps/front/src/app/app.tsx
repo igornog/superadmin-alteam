@@ -10,7 +10,6 @@ import {
   Category,
 } from 'iconsax-react'
 import Clients from './features/clients'
-
 export const Navigation: NavigationProps[] = [
   {
     link: '/talents',

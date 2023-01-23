@@ -2,17 +2,18 @@ import {
   BaseEntity,
   Column,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
 import {
   ClientStatus,
   DeliveryType,
-  Listing,
   ProjectType,
   Talent,
   TeamRequest,
 } from '@yjcapp/app'
+import { ListingEntity } from './Listing.entity'
 
 @Entity({ name: 'solo_client' })
 export class SoloClientEntity extends BaseEntity {
@@ -65,8 +66,10 @@ export class SoloClientEntity extends BaseEntity {
   })
   received?: Date
 
-  @Column({ type: 'json', nullable: true })
-  listings?: Listing[]
+  @OneToMany(() => ListingEntity, (clientListing) => clientListing.soloClient, {
+    cascade: true,
+  })
+  listings: ListingEntity[]
 
   @Column({ type: 'json', nullable: true })
   assignee?: Talent[]

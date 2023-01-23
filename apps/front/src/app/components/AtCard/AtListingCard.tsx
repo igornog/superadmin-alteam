@@ -22,7 +22,9 @@ const AtListingCard: React.FunctionComponent<AtListingCardProps> = (
           justifyContent={'space-between'}
           alignItems={'center'}
         >
-          <AtTypography variant={'h5'}>{listing.name}</AtTypography>
+          <AtTypography variant={'h5'} $bold={true}>
+            {listing.listingName}
+          </AtTypography>
           <AtGroupTag icon={<ArrowRight2 size={10} />} />
         </Box>
 
@@ -34,9 +36,9 @@ const AtListingCard: React.FunctionComponent<AtListingCardProps> = (
           <AtTypography color={grey} variant={'body1'}>
             {listing.status}
           </AtTypography>
-          <AtTypography color={grey3}>
+          {/* <AtTypography color={grey3}>
             Received: {listing.received}
-          </AtTypography>
+          </AtTypography> */}
         </Box>
 
         <AtLine spacingTop={16} spacingBottom={6} />
@@ -63,7 +65,7 @@ const AtListingCard: React.FunctionComponent<AtListingCardProps> = (
 }
 
 interface AtListingCardProps {
-  listing?: Listing
+  listing: Listing
   fullHeight?: boolean
   onClick?: (e: React.MouseEvent) => void
 }

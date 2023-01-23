@@ -4,7 +4,7 @@ import { SoloClientEntity } from './entities/SoloClient.entity'
 
 export function clientFromEntity(entity: SoloClientEntity): SoloClient {
   return {
-    id: entity.id.toString(),
+    id: entity.id,
     logo: entity.logo,
     companyName: entity.companyName,
     phoneNumber: entity.phoneNumber,
@@ -26,7 +26,7 @@ export function clientToEntity(
   client: DeepPartial<SoloClient>,
 ): DeepPartial<SoloClientEntity> {
   return {
-    id: client.id ? parseInt(client.id) : undefined,
+    id: client.id,
     logo: client.logo,
     companyName: client.companyName,
     phoneNumber: client.phoneNumber,

@@ -20,7 +20,7 @@ export const StyledContentPopover = styled(Collapse)<{
   border: 1px solid ${grey5};
   border-radius: 5px;
   margin-top: 5px;
-  z-index: 999;
+  z-index: 9999;
   left: ${({ left }) => left && left + 'px'};
   top: ${({ top }) => top && top + 'px'};
 `
@@ -39,10 +39,11 @@ export const StyledDropdownElement = styled.div<{ color: string }>`
   }
 `
 
-const StyledTextField = styled(AtTextField)`
+const StyledTextField = styled(AtTextField)<{ placeholder: any }>`
   justify-content: space-between;
+
   & input {
-    color: ${grey4} !important;
+    color: ${({ placeholder }) => (placeholder ? black : grey4)};
   }
 `
 
@@ -94,9 +95,8 @@ const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
           dropdown={true}
           open={open}
           onClick={open ? handleClose : handleClick}
-          placeholder={
-            selectedItem ? selectedItem.label : props.value ?? props.placeholder
-          }
+          placeholder={props.placeholder}
+          value={selectedItem ? selectedItem.label : props.value}
         />
 
         <StyledContentPopover
@@ -120,6 +120,7 @@ const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
 
 export interface DropdownItem {
   id: number | string
+  key?: string
   label: string
 }
 

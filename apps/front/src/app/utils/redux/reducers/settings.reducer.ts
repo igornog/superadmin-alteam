@@ -37,7 +37,7 @@ const { reducer } = createSlice({
 
       .addCase(handleInitSettings.fulfilled, (state, { payload }) => {
         state.status = StatusType.Succeeded
-        state.tabs = payload.tabs.map(({ node, ...rest }: any) => rest)
+        state.tabs = payload.tabs.map(({ _, ...rest }: any) => rest)
 
         if (payload.filters) {
           state.filters.skills = payload.filters

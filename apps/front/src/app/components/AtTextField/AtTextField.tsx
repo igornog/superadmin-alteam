@@ -10,7 +10,7 @@ import {
   OutlinedInput,
   outlinedInputClasses,
 } from '@mui/material'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 import {
   black,
@@ -35,6 +35,7 @@ export enum AtTextFieldType {
   Text = 'text',
   Email = 'email',
   Password = 'password',
+  Number = 'number',
 }
 
 const StyledLabel = styled.label<{
@@ -100,14 +101,17 @@ const StyledInput = styled(OutlinedInput)<{
                   : white
                 : white};
           `};
-    & input {
+
+    & > input {
       max-width: ${({ $maxWidth }) => $maxWidth && $maxWidth + 'ch'};
-      color: ${({ disabled, $bgColor }) =>
+      color: ${({ disabled, $bgColor }: any) =>
         $bgColor === 'black' ? white : disabled ? grey3 : black};
       font-size: ${({ size }) => (size === 'medium' ? '16px' : '14px')};
+
       &::placeholder {
         color: ${grey3};
       }
+
       &:hover {
         cursor: pointer;
         &::placeholder {
@@ -115,6 +119,15 @@ const StyledInput = styled(OutlinedInput)<{
         }
       }
       padding: ${({ size }) => (size === 'medium' ? '18px 0' : '10px 0')};
+
+      ::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      ::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
     }
     & textarea {
       &::placeholder {
@@ -122,12 +135,12 @@ const StyledInput = styled(OutlinedInput)<{
       }
     }
     &.${inputBaseClasses.adornedStart} {
-      input {
+      & > input {
         padding-left: 10px;
       }
     }
     &.${inputBaseClasses.adornedEnd} {
-      input {
+      & > input {
         padding-right: 10px;
       }
       & > svg {
@@ -179,6 +192,7 @@ const StyledArrow = styled(ArrowDown2)<{ open?: boolean }>`
   transition: 0.3s;
   transform: rotate(${({ open }) => (open ? '180' : '0')}deg);
 `
+
 const StyledCharCounter = styled.label`
   position: absolute;
   padding: 10px;
@@ -219,6 +233,16 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
         setValue('')
       }
     }
+  }
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (props.type === AtTextFieldType.Number) {
+      const value = e.target.value
+      if (isNaN(Number(value))) {
+        return
+      }
+    }
+
+    returnValue(e.target.value)
   }
 
   useEffect(() => {
@@ -299,9 +323,10 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
           rows={props.rows}
           inputProps={{
             maxlength: props.maxLength,
+            ...props.inputProps,
           }}
           disabled={props.disabled}
-          value={props.dropdown ? props.placeholder : value}
+          value={value}
           size={props.size ?? 'medium'}
           required={props.required}
           type={
@@ -312,9 +337,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
               : props.type || AtTextFieldType.Text
           }
           placeholder={props.placeholder}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            returnValue(e.target.value)
-          }}
+          onChange={handleChange}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           startAdornment={
@@ -370,6 +393,7 @@ export interface AtTextFieldProps {
   value?: string
   multiline?: boolean
   rows?: number
+  inputProps?: any
 
   isSuccess?: boolean
   isError?: boolean
@@ -387,7 +411,7 @@ export interface AtTextFieldProps {
   maxWidth?: number
   bgColor?: 'black' | 'white'
   size?: 'small' | 'medium'
-  onValueChange?: (value: string) => void
+  onValueChange?: (value: any) => void
   onPressEnter?: (value: string) => void
   placeholder?: string
   type?: AtTextFieldType

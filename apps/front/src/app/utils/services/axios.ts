@@ -10,7 +10,7 @@ const atAxios = axios.create({
 })
 
 atAxios.interceptors.request.use(
-  async function (config) {
+  async function (config: any) {
     config.headers = { ...config.headers, ...authHeader() }
     return config
   },
