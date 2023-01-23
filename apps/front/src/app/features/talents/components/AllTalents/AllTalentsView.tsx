@@ -6,6 +6,7 @@ import { useAppSelector } from '../../../../utils/hooks/reduxHook'
 import { Column, SortTypes } from '../../../../utils/redux/types/settings.type'
 import { getActiveTab } from '../../../../utils/redux/selectors/settings.selector'
 import { ListingStatus } from '@yjcapp/app'
+import { sortByStatus } from '../../../../utils/helpers'
 
 const AllTalentsView: React.FunctionComponent = () => {
   const talents = useAppSelector((state) => state.talents)
@@ -17,22 +18,6 @@ const AllTalentsView: React.FunctionComponent = () => {
     listTalents = listTalents.filter((talent: any) => talent.status !== ListingStatus.Declined)
   }
 
-  const groupBy = (array: any[], key: string) => {
-    return array.reduce((result, currentValue) => {
-      (result[currentValue[key]] = result[currentValue[key]] || []).push(
-        currentValue
-      );
-      return result;
-    }, {});
-  };
-
-  const sortByStatus = () => {
-    const listTalentsByGroup: string | any[] = []
-    const statusGroup = groupBy(listTalents, 'status')
-
-    return listTalentsByGroup.concat(statusGroup.inbound, statusGroup.shortlisted, statusGroup.accepted)
-  }
-
   if (settings.sort && listTalents.length > 0) {
     switch (settings.sort) {
       case SortTypes.Alphabetical:
@@ -42,7 +27,7 @@ const AllTalentsView: React.FunctionComponent = () => {
         listTalents = listTalents.sort((a: any, b: any) => (a.appliedDate < b.appliedDate) ? 1 : -1)
         break;
       case SortTypes.Status:
-        listTalents = sortByStatus()
+        listTalents = sortByStatus(listTalents)
         break;
     }
 
@@ -71,3 +56,4 @@ const AllTalentsView: React.FunctionComponent = () => {
 }
 
 export default AllTalentsView
+

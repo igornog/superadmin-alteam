@@ -4,6 +4,7 @@ import Linkedin from '../assets/images/icons/Linkedin.svg'
 import Stackoverflow from '../assets/images/icons/Stackoverflow.svg'
 import Twitter from '../assets/images/icons/Twitter.svg'
 import { green } from './colors'
+import { SortTypes } from './redux/types/settings.type'
 
 export const convertHexToRGBA = (hexCode: string, opacity = 1) => {
   let hex = hexCode.replace('#', '')
@@ -99,4 +100,36 @@ export const stringMatch = (fullString: string, toMatch: string) => {
       }}
     />
   )
+}
+
+const groupBy = (array: any[], key: string) => {
+  return array.reduce((result, currentValue) => {
+    (result[currentValue[key]] = result[currentValue[key]] || []).push(
+      currentValue
+    );
+    return result;
+  }, {});
+};
+
+export const sortByStatus = (array: any[]) => {
+  const listTalentsByGroup: string | any[] = []
+  const statusGroup = groupBy(array, 'status')
+
+  return listTalentsByGroup.concat(statusGroup.inbound, statusGroup.shortlisted, statusGroup.accepted)
+}
+
+export const SortOptions = (activeTab: { status: string }) => {
+  const options = [
+    { id: 0, value: null, label: 'None' },
+    { id: 1, value: SortTypes.Alphabetical, label: 'A to Z' },
+    { id: 2, value: SortTypes.MostRecent, label: 'Most Recent' },
+  ]
+
+  if(!activeTab.status){
+    options.push(
+      { id: 3, value: SortTypes.Status, label: 'Status' }
+    )
+  }
+  
+  return options
 }
