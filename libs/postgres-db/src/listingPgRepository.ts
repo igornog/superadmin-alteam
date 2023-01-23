@@ -12,9 +12,8 @@ async function createListing(
   const soloClientRepository = (await postgresClient()).getRepository(
     ListingEntity,
   )
-  console.log(clientListing)
   const entity = clientListingToEntity(clientListing)
-  console.log(entity)
+
   const result = await soloClientRepository.save(entity)
   return clientListingFromEntity(result)
 }
