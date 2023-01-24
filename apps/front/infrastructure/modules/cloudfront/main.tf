@@ -8,7 +8,7 @@ locals {
   origin_id           = "S3Origin"
   isProd              = var.stage == "prod"
   acm_certificate_arn = var.certificate_arn
-  domain_name         = "admin.alteam.io"
+  domain_name         = "alteam.io"
   cname               = local.isProd ? "www.${local.domain_name}.io" : lower("${var.stage}.${local.domain_name}.io")
 }
 
