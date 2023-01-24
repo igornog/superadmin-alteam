@@ -1,7 +1,5 @@
-import { Listing, Talent } from './talent'
-
 export interface SoloClient {
-  id?: string
+  id?: number
   logo?: string
   companyName: string
   phoneNumber: string
@@ -16,8 +14,6 @@ export interface SoloClient {
   fullName?: string
   position?: string
   received?: Date
-  listings?: Listing[]
-  assignee?: Talent[]
   status: ClientStatus
 }
 
@@ -34,27 +30,27 @@ export enum TeamRequest {
 }
 
 export enum ClientStatus {
-  Request = 'request',
-  Active = 'active',
-  Inactive = 'inactive',
-  Declined = 'declined',
+  Request = 'Request',
+  Active = 'Active',
+  Inactive = 'Inactive',
+  Declined = 'Declined',
 }
 
 export const CreateClientStatus = [
   {
     id: 0,
     label: 'Client Request',
-    value: 'request'
+    value: ClientStatus.Request
   },
   {
     id: 1,
     label: 'Active clients',
-    value: 'active',
+    value: ClientStatus.Active
   },
   {
     id: 2,
     label: 'Inactive clients',
-    value: 'inactive',
+    value: ClientStatus.Inactive
   }
 ]
 

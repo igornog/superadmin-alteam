@@ -20,7 +20,7 @@ export const StyledContentPopover = styled(Collapse)<{
   border: 1px solid ${grey5};
   border-radius: 5px;
   margin-top: 5px;
-  z-index: 999;
+  z-index: 9999;
   left: ${({ left }) => left && left + 'px'};
   top: ${({ top }) => top && top + 'px'};
 `
@@ -39,10 +39,11 @@ export const StyledDropdownElement = styled.div<{ color: string }>`
   }
 `
 
-const StyledTextField = styled(AtTextField)`
+const StyledTextField = styled(AtTextField)<{ placeholder: any }>`
   justify-content: space-between;
+
   & input {
-    color: ${grey4} !important;
+    color: ${({ placeholder }) => (placeholder ? black : grey4)};
   }
 `
 
@@ -52,6 +53,7 @@ const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
   const dropdownRef = useRef<any>(null)
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
   const [selectedItem, setSelectedItem] = useState<DropdownItem>()
+  const [valueSearchable, setValueSearchable] = useState('')
 
   const handleClose = () => {
     setAnchorEl(null)
@@ -77,10 +79,31 @@ const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
   }, [selectedItem])
 
   useEffect(() => {
+    setValueSearchable(props.value || '')
+
     if (!props.value) {
       setSelectedItem(undefined)
     }
   }, [props.value])
+
+  const filterSearch = () => {
+    return valueSearchable && props.searchable
+      ? props.$listItems.filter((item: DropdownItem) =>
+          item.label.toLowerCase().includes(valueSearchable.toLowerCase()),
+        )
+      : props.$listItems
+  }
+
+  useEffect(() => {
+    if (!open) {
+      if (selectedItem) {
+        setSelectedItem(selectedItem)
+        setValueSearchable(selectedItem.label)
+      }
+    } else {
+      setValueSearchable('')
+    }
+  }, [open, selectedItem])
 
   return (
     <ClickAwayListener onClickAway={handleClose}>
@@ -93,17 +116,17 @@ const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
           {...props}
           dropdown={true}
           open={open}
+          onValueChange={(e) => setValueSearchable(e)}
           onClick={open ? handleClose : handleClick}
-          placeholder={
-            selectedItem ? selectedItem.label : props.value ?? props.placeholder
-          }
+          placeholder={props.placeholder}
+          value={valueSearchable}
         />
 
         <StyledContentPopover
           in={open}
           $minWidth={dropdownRef?.current?.offsetWidth}
         >
-          {props.$listItems.map((item: DropdownItem) => (
+          {filterSearch().map((item: DropdownItem) => (
             <StyledDropdownElement
               key={item.id}
               onClick={() => handleSelect(item)}
@@ -120,11 +143,13 @@ const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
 
 export interface DropdownItem {
   id: number | string
+  key?: string
   label: string
   value?: string
 }
 
 interface AtTextFieldDropdownProps extends AtTextFieldProps {
+  searchable?: boolean
   $listItems: DropdownItem[]
   handleSelect?: (item: DropdownItem) => void
 }

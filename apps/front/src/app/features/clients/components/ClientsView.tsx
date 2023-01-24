@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { clientsTabs } from '..'
 import AtLayout from '../../../components/AtLayout/AtLayout'
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
@@ -10,6 +10,8 @@ import {
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
 
 const ClientsView: React.FunctionComponent = () => {
+  const [settingsLoaded, setSettingsLoaded] = useState(false)
+
   const dispatch = useAppDispatch()
   const settings = useAppSelector((state) => state.settings)
   const activeTab = useAppSelector((state) => getActiveTab(state))
@@ -20,6 +22,8 @@ const ClientsView: React.FunctionComponent = () => {
         tabs: clientsTabs,
       }),
     )
+
+    setSettingsLoaded(true)
   }, [dispatch])
 
   useEffect(() => {
@@ -29,15 +33,15 @@ const ClientsView: React.FunctionComponent = () => {
   }, [activeTab, dispatch, settings.tabs])
 
   useEffect(() => {
-    if (activeTab?.status) {
+    if (activeTab?.status && settingsLoaded) {
       dispatch(
         handleClients({
           clientName: settings.filters.searchName,
-          status: activeTab?.status?.toLowerCase(),
+          status: activeTab?.status,
         }),
       )
     }
-  }, [activeTab?.status, dispatch, settings.filters.searchName])
+  }, [settingsLoaded, activeTab?.status, dispatch, settings.filters.searchName])
 
   return (
     <AtLayout>

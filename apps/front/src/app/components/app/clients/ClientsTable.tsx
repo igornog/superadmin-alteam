@@ -85,17 +85,13 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
                       </Box>
 
                       <Box display={'flex'} flexDirection={'column'}>
-                        <AtTypography variant={'body1'} $bold={true}>
+                        <AtTypography variant={'body1'}>
                           {stringMatch(
                             client.companyName,
                             settings.filters.searchName ?? '',
                           )}
                         </AtTypography>
-                        <AtTypography
-                          variant={'caption'}
-                          color={grey}
-                          $bold={true}
-                        >
+                        <AtTypography variant={'caption'} color={grey}>
                           {client.industry}
                         </AtTypography>
                       </Box>
@@ -114,7 +110,7 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
 
               {haveToDisplay(Column.Listings) && (
                 <AtTableCell>
-                  <AtTypography>{client.listings?.length ?? 0}</AtTypography>
+                  {/* <AtTypography>{client.listings?.length ?? 0}</AtTypography> */}
                 </AtTableCell>
               )}
 
@@ -160,7 +156,7 @@ const ClientsTable: React.FunctionComponent<ClientTableProps> = (
 
 interface ClientTableProps {
   clients: Client[]
-  openClient: (id: string) => void
+  openClient: (id: number) => void
   tableColumns?: Column[]
 }
 

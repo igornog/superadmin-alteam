@@ -14,7 +14,7 @@ import { useAppSelector } from '../../utils/hooks/reduxHook'
 import { getActiveTab } from '../../utils/redux/selectors/settings.selector'
 import ClientLogo from '../app/clients/ClientLogo'
 import moment from 'moment'
-import { plurialize, stringMatch } from '../../utils/helpers'
+import { stringMatch } from '../../utils/helpers'
 
 const AtClientCard: React.FunctionComponent<AtClientCardProps> = (
   props: AtClientCardProps,
@@ -70,7 +70,7 @@ const AtClientCard: React.FunctionComponent<AtClientCardProps> = (
                 {client.industry}
               </AtTypography>
               <AtTypography variant={'body1'} color={grey}>
-                {plurialize(client.listings?.length ?? 0, 'listing')}
+                {/* {plurialize(client.listings?.length ?? 0, 'listing')} */}
               </AtTypography>
             </Box>
           </Box>

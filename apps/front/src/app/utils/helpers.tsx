@@ -5,6 +5,7 @@ import Stackoverflow from '../assets/images/icons/Stackoverflow.svg'
 import Twitter from '../assets/images/icons/Twitter.svg'
 import { green } from './colors'
 import { SortTypes } from './redux/types/settings.type'
+import { Currency } from '@yjcapp/app'
 
 export const convertHexToRGBA = (hexCode: string, opacity = 1) => {
   let hex = hexCode.replace('#', '')
@@ -78,8 +79,12 @@ export const getText = (elem: any): string => {
   return getText(children)
 }
 
-export const plurialize = (count: number, word: string) => {
-  return count + ' ' + (count > 1 ? word + 's' : word)
+export const plurialize = (
+  count: number,
+  word: string,
+  hideNumber?: boolean,
+) => {
+  return (!hideNumber ? count + ' ' : '') + (count > 1 ? word + 's' : word)
 }
 
 export const stringMatch = (fullString: string, toMatch: string) => {
@@ -135,4 +140,19 @@ export const sortBy = (sort: string, talents: any[]) => {
 
   listSorted.filter(item => item)
   return listSorted
+}
+export const getCurrencySymbol = (label?: Currency) => {
+  switch (label) {
+    case Currency.Dollars:
+      return '$'
+
+    case Currency.Euros:
+      return '€'
+
+    case Currency.Pounds:
+      return '£'
+
+    default:
+      return '£'
+  }
 }

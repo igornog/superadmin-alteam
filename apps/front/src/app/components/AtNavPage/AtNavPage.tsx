@@ -13,7 +13,7 @@ import { handleActiveTab } from '../../utils/redux/actions/settings.action'
 import { Page } from '../../utils/redux/types/settings.type'
 import AtTab from '../AtTab/AtTab'
 
-const StyledNavPage = styled.div<{ isWideScreen: boolean }>`
+export const StyledNavPage = styled.div<{ isWideScreen?: boolean }>`
   background-color: #0f152708;
   display: flex;
   gap: 10px;

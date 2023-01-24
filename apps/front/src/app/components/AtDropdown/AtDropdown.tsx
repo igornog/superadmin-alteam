@@ -12,34 +12,34 @@ import AtTypography from '../AtTypography/AtTypography'
 
 export const StyledContentPopover = styled(Collapse)<{
   $minWidth?: number
+  $currentHeight?: number
   left?: number
   top?: number
   align?: string
 }>`
-  position: fixed;
+  position: absolute;
   min-width: ${({ $minWidth }) => $minWidth && $minWidth + 'px'};
   background-color: ${white};
   box-shadow: ${boxShadow};
   border: 1px solid ${grey5};
   border-radius: 5px;
   z-index: 1300;
-  // padding: 10px;
   margin-top: 10px;
   box-sizing: border-box;
   top: unset;
   left: unset;
 
-  ${({ align }) =>
+  ${({ align, $currentHeight }) =>
     align === 'bottom-left' &&
     css`
-      top: 35px;
+      top: ${$currentHeight};
       left: 0;
     `}
 
-  ${({ align }) =>
+  ${({ align, $currentHeight }) =>
     align === 'bottom-right' &&
     css`
-      top: 35px;
+      top: ${$currentHeight};
       right: 0;
     `}
 
@@ -146,7 +146,7 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
           $minWidth={dropdownRef?.current?.offsetWidth}
           align={props.align ?? 'unset'}
         >
-          <Box display={'flex'} flexDirection={'column'} gap={'10px'}>
+          <Box display={'flex'} flexDirection={'column'}>
             {props?.$listItems?.map((item: DropdownItem) => (
               <StyledDropdownElement
                 key={item.id}

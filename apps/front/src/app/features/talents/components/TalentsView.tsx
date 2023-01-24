@@ -1,5 +1,5 @@
 import { FilterSquare } from 'iconsax-react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { skillsFilters, availabilityFilters, talentsTabs } from '..'
 import AtLayout from '../../../components/AtLayout/AtLayout'
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
@@ -14,6 +14,8 @@ import TalentsViewFilters from './TalentsViewFilters'
 import { Availability } from '@yjcapp/app'
 
 const TalentsView: React.FunctionComponent = () => {
+  const [settingsLoaded, setSettingsLoaded] = useState(false)
+
   const dispatch = useAppDispatch()
   const settings = useAppSelector((state) => state.settings)
   const activeTab = useAppSelector((state) => getActiveTab(state))
@@ -26,6 +28,8 @@ const TalentsView: React.FunctionComponent = () => {
         jobTypes: availabilityFilters,
       }),
     )
+
+    setSettingsLoaded(true)
   }, [dispatch])
 
   useEffect(() => {

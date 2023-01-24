@@ -1,34 +1,76 @@
 import { Box } from '@mui/material'
-import { grey2 } from '../../../../../../utils/colors'
-import AtTextFieldDropdown, {
-  DropdownItem,
-} from '../../../../../AtDropdown/AtTextFieldDropdown'
+import React, { Dispatch, useEffect, useState } from 'react'
+import { black, grey2, white } from '../../../../../../utils/colors'
 import AtLine from '../../../../../AtLine/AtLine'
-import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
 import { StyledForm } from '../../DrawerCreateListing'
 import { useAppSelector } from '../../../../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../../../../utils/redux/selectors/clients.selector'
-import { FormFields } from '../../CreateListing'
-import { RateType } from '../../../../../../utils/redux/types/listings.type'
+import { Availability, Currency, Difficulty, WorkType } from '@yjcapp/app'
+import AtTextFieldDropdown from '../../../../../AtDropdown/AtTextFieldDropdown'
+import AtTextField, {
+  AtTextFieldType,
+} from '../../../../../AtTextField/AtTextField'
+import AtTextFieldDate from '../../../../../AtTextField/AtTextFieldDate'
+import { Listing } from '../../../../../../utils/redux/types/listings.type'
+import AtSwitch from '../../../../../AtSwitch/AtSwitch'
+import {
+  convertHexToRGBA,
+  getCurrencySymbol,
+  plurialize,
+} from '../../../../../../utils/helpers'
+import styled from 'styled-components'
+import { Client } from '../../../../../../utils/redux/types/clients.type'
+import { clientService } from '../../../../../../utils/services/clientService'
+
+const StyledPeriod = styled.div`
+  background-color: ${black};
+  color: ${white};
+  border-radius: 5px;
+  padding: 2px 5px;
+`
 
 const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
+  const [listClients, setListClients] = useState<Client[]>()
 
-  const handleSelectTeamSize = (e: DropdownItem) => {
-    const teamSize = parseInt(e.label)
-    props.setFormData({
-      ...props.formData,
-      nbIndividual: teamSize,
-    })
-  }
+  useEffect(() => {
+    if (!props.knownTotalPrice) {
+      props.setTeam({
+        ...props.team,
+        exactRate: undefined,
+      })
+    }
+  }, [props.knownTotalPrice, props])
 
-  const handleSelectRateType = (e: DropdownItem) => {
-    props.setFormData({
-      ...props.formData,
-      rateType: e.label,
-    })
-  }
+  useEffect(() => {
+    if (props.team.roles.length < props.team.individuals) {
+      const newRoles = Array(
+        props.team.individuals - props.team.roles.length,
+      ).fill({
+        roleName: '',
+        description: '',
+        price: 0,
+        percentage: 0,
+      })
+      props.team.roles.push(...newRoles)
+    } else {
+      props.team.roles.splice(
+        props.team.individuals,
+        props.team.roles.length - props.team.individuals,
+      )
+    }
+  }, [props.team.roles, props.team.individuals])
+
+  useEffect(() => {
+    const getListClients = async () => {
+      const list = await clientService.searchClient({ clientName: '' })
+      console.log(list)
+      setListClients(list)
+    }
+
+    getListClients()
+  }, [])
 
   return (
     <StyledForm>
@@ -48,161 +90,221 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
       >
         <Box display={'flex'} gap={'30px'} flexDirection={'column'}>
           <AtTextField
-            label={'Team Project Name'}
+            label={'Project Name'}
             required={true}
             placeholder={'Enter Team Project Name'}
+            onValueChange={(e) =>
+              props.setTeam({ ...props.team, listingName: e })
+            }
             maxLength={30}
           />
 
-          <AtTextField
-            label={'Client'}
-            readonly={true}
-            defaultValue={selectedClient.companyName}
-          />
+          {listClients && (
+            <AtTextFieldDropdown
+              fullWidth={true}
+              required={true}
+              value={selectedClient.companyName}
+              placeholder={'Client'}
+              $listItems={listClients.map((client: Client, index: number) => ({
+                id: index,
+                label: client.companyName,
+              }))}
+              handleSelect={(e) => {
+                const getClientFromName = listClients.find(
+                  (item: Client) => item.companyName === e.label,
+                )
+
+                if (getClientFromName) {
+                  props.setTeam({
+                    ...props.team,
+                    soloClient: getClientFromName,
+                  })
+                }
+              }}
+              label={'Client'}
+            />
+          )}
 
           <AtTextFieldDropdown
             fullWidth={true}
-            placeholder={'Select Team Size (max 10)'}
             required={true}
-            handleSelect={(e) => handleSelectTeamSize(e)}
+            placeholder={'Select Number of Individuals'}
             $listItems={Array.from(Array(10).keys()).map((key) => ({
               id: key + 1,
               label: (key + 1).toString(),
             }))}
-            label={'Team Size (max 10)'}
+            handleSelect={(e) =>
+              props.setTeam({
+                ...props.team,
+                individuals: parseInt(e.label) as number,
+              })
+            }
+            label={'Number of Individuals'}
           />
 
           <Box display={'flex'} gap={'10px'} flexDirection={'column'}>
-            <AtTextFieldDropdown
-              fullWidth={true}
-              required={true}
-              placeholder={'Select Work Type'}
-              $listItems={[
-                {
-                  id: 0,
-                  label: 'Remote',
-                },
-                {
-                  id: 1,
-                  label: 'Hybrid',
-                },
-              ]}
-              label={'Work Type'}
-            />
+            <Box display={'flex'} gap={'16px'}>
+              <AtTextFieldDropdown
+                fullWidth={true}
+                required={true}
+                placeholder={'Select Work Type'}
+                $listItems={Object.values(WorkType).map(
+                  (label: WorkType, index: number) => ({
+                    id: index,
+                    label: label,
+                  }),
+                )}
+                handleSelect={(e) =>
+                  props.setTeam({
+                    ...props.team,
+                    workType: e.label as WorkType,
+                  })
+                }
+                label={'Work Type'}
+              />
 
-            <AtTextFieldDropdown
-              fullWidth={true}
-              required={true}
-              placeholder={'Enter Timezone'}
-              $listItems={Array.from(Array(25).keys()).map((key) => ({
-                id: key,
-                label: `GMT${
-                  key > 0 ? (key <= 12 ? '-' + key : '+' + (key - 12)) : ''
-                }`,
-              }))}
-            />
+              {props.team.workType === WorkType.Hybrid ||
+              props.team.workType === WorkType.Remote ? (
+                <AtTextField
+                  fullWidth={true}
+                  required={true}
+                  placeholder={'Enter Timezone'}
+                  onValueChange={(e) =>
+                    props.setTeam({ ...props.team, timeZone: e })
+                  }
+                  maxLength={6}
+                />
+              ) : null}
+            </Box>
           </Box>
           <AtTextFieldDropdown
             fullWidth={true}
             required={true}
-            placeholder={'Select Avaliability'}
-            $listItems={[
-              {
-                id: 0,
-                label: 'Part-Time',
-              },
-              {
-                id: 1,
-                label: 'Full-Time',
-              },
-            ]}
-            label={'Avaliability'}
+            placeholder={'Select Availability'}
+            $listItems={Object.values(Availability).map(
+              (label: Availability, index: number) => ({
+                id: index,
+                label: label,
+              }),
+            )}
+            handleSelect={(e) =>
+              props.setTeam({
+                ...props.team,
+                availability: e.label as Availability,
+              })
+            }
+            label={'Availability'}
           />
 
           <AtTextField
+            placeholder={'Enter Project Length'}
+            type={AtTextFieldType.Number}
             label={'Project Length'}
             required={true}
-            placeholder={'Enter Project Length'}
-            maxLength={30}
-          />
-
-          <AtTextField
-            label={'Start Date'}
-            required={true}
-            placeholder={'Enter Start Date'}
-          />
-
-          <Box display={'flex'} gap={'10px'} flexDirection={'column'}>
-            <AtTextFieldDropdown
-              fullWidth={true}
-              required={true}
-              value={props.formData.rateType}
-              handleSelect={(e) => handleSelectRateType(e)}
-              placeholder={'Select Rate Type'}
-              $listItems={[
-                {
-                  id: 0,
-                  label: 'Fixed',
-                },
-                {
-                  id: 1,
-                  label: 'Daily',
-                },
-                {
-                  id: 2,
-                  label: 'Hourly',
-                },
-              ]}
-              label={'Rate Type'}
-            />
-
-            {props.formData.rateType === RateType.Fixed ? (
-              <AtTextField placeholder={'Enter Exact Rate'} maxLength={30} />
-            ) : props.formData.rateType ? (
-              <>
-                <AtTextField
-                  placeholder={`Enter ${props.formData.rateType} Rate`}
-                  maxLength={5}
-                />
-
-                <AtTextField
-                  placeholder={`Enter Number of ${
-                    props.formData.rateType === 'Daily' ? `Days` : `Hours`
-                  } Per Week`}
-                  maxLength={5}
-                />
-
-                <AtTypography variant={'caption'} color={grey2}>
-                  Please fill the forms above as a{' '}
-                  {props.formData.rateType.toLowerCase()} rate for whole team.
+            onValueChange={(e) =>
+              props.setTeam({ ...props.team, projectLength: parseInt(e) })
+            }
+            endIcon={
+              <StyledPeriod>
+                <AtTypography variant={'caption'}>
+                  {plurialize(props.team.projectLength ?? 0, 'Month', true)}
                 </AtTypography>
-              </>
-            ) : (
-              ''
+              </StyledPeriod>
+            }
+          />
+
+          <AtTextFieldDate
+            required={true}
+            label={'Start Date'}
+            onValueChange={(e) =>
+              props.setTeam({ ...props.team, startDate: e as any })
+            }
+          />
+
+          <AtTextFieldDropdown
+            fullWidth={true}
+            placeholder={'Select Your Currency'}
+            $listItems={Object.values(Currency).map(
+              (label: Currency, index: number) => ({
+                id: index,
+                key: label,
+                label: label + ` (${getCurrencySymbol(label)})`,
+              }),
             )}
+            handleSelect={(e) =>
+              props.setTeam({
+                ...props.team,
+                currency: e.key as Currency,
+              })
+            }
+            label={'Currency'}
+          />
+
+          <Box
+            display={'flex'}
+            gap={props.knownTotalPrice ? '20px' : 0}
+            flexDirection={'column'}
+          >
+            <Box display={'flex'} flexDirection={'column'} gap={'10px'}>
+              <AtTypography>Do you know in monthly team cost?</AtTypography>
+              <AtSwitch
+                label={props.knownTotalPrice ? 'Yes' : 'No'}
+                placement={'end'}
+                onChange={() =>
+                  props.setKnownTotalPrice(!props.knownTotalPrice)
+                }
+              />
+            </Box>
+
+            <Box display={'flex'} gap={'16px'} width={'100%'}>
+              {props.knownTotalPrice && (
+                <AtTextField
+                  label={'Team Rate'}
+                  type={AtTextFieldType.Number}
+                  placeholder={'Enter Exact Rate'}
+                  startIcon={
+                    <AtTypography color={convertHexToRGBA(black, 0.5)}>
+                      {getCurrencySymbol(props.team.currency)}
+                    </AtTypography>
+                  }
+                  maxLength={30}
+                  value={props.team.exactRate?.toString()}
+                  onValueChange={(e) =>
+                    props.setTeam({
+                      ...props.team,
+                      exactRate: parseFloat(e),
+                    })
+                  }
+                />
+              )}
+            </Box>
           </Box>
 
           <AtTextFieldDropdown
             fullWidth={true}
             required={true}
             placeholder={'Select Difficulty'}
-            $listItems={[
-              {
-                id: 0,
-                label: 'Easy/Junior',
-              },
-              {
-                id: 1,
-                label: 'Hard/Senior',
-              },
-            ]}
+            $listItems={Object.values(Difficulty).map(
+              (label: Difficulty, index: number) => ({
+                id: index,
+                label: label,
+              }),
+            )}
+            handleSelect={(e) =>
+              props.setTeam({
+                ...props.team,
+                difficulty: e.label as Difficulty,
+              })
+            }
             label={'Difficulty'}
           />
 
           <AtTextField
             label={'Learning'}
-            required={true}
             placeholder={'Enter Learning Link'}
+            onValueChange={(e) =>
+              props.setTeam({ ...props.team, learningLink: e })
+            }
           />
         </Box>
       </Box>
@@ -211,8 +313,10 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
 }
 
 interface Step1Props {
-  setFormData: React.Dispatch<React.SetStateAction<FormFields>>
-  formData: FormFields
+  setTeam: Dispatch<React.SetStateAction<Listing>>
+  team: Listing
+  knownTotalPrice: boolean
+  setKnownTotalPrice: Dispatch<React.SetStateAction<boolean>>
 }
 
 export default TeamStep1

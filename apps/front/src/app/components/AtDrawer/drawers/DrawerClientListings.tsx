@@ -4,18 +4,17 @@ import {
   ArrowLeft2,
   Edit,
   Import,
-  SearchNormal,
+  SearchNormal1,
 } from 'iconsax-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Client from '../../../features/clients/components/ClientViewProfile/Client'
 import Company from '../../../features/clients/components/ClientViewProfile/Company'
 import Notes from '../../../features/clients/components/ClientViewProfile/Notes'
-import { grey2 } from '../../../utils/colors'
-import { useAppSelector } from '../../../utils/hooks/reduxHook'
+import { grey2, grey3 } from '../../../utils/colors'
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
 import { getActiveClient } from '../../../utils/redux/selectors/clients.selector'
 import { getActiveTab } from '../../../utils/redux/selectors/settings.selector'
-import { Listing } from '../../../utils/redux/types/listings.type'
 import ClientLogo from '../../app/clients/ClientLogo'
 import AtButton, {
   AtButtonKind,
@@ -27,6 +26,17 @@ import AtTypography from '../../AtTypography/AtTypography'
 import AtDrawer from '../AtDrawer'
 import DrawerListing from './DrawerListing/DrawerListing'
 import DrawerCreateListing from './DrawerCreateListing/DrawerCreateListing'
+import { StyledNavPage } from '../../AtNavPage/AtNavPage'
+import AtTab from '../../AtTab/AtTab'
+import { ListingType } from '@yjcapp/app'
+import { Listing } from '../../../utils/redux/types/listings.type'
+import { handleInitListing } from '../../../utils/redux/actions/listing.action'
+import AtListingCard from '../../AtCard/AtListingCard'
+import {
+  getListingProjects,
+  getListings,
+  getListingTeams,
+} from '../../../utils/redux/selectors/listing.selector'
 
 const StyledListings = styled(Box)`
   display: flex;
@@ -35,14 +45,27 @@ const StyledListings = styled(Box)`
   background-color: #f0f1fd;
   box-sizing: border-box;
   height: 100vh;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `
 
 const DrawerClientListings: React.FunctionComponent<
   DrawerClientListingsProps
 > = (props: DrawerClientListingsProps) => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
+  const listProjects = useAppSelector((state) => getListingProjects(state))
+  const listTeams = useAppSelector((state) => getListingTeams(state))
+
   const activeTab = useAppSelector((state) => getActiveTab(state))
+  const dispatch = useAppDispatch()
+
+  const [listingFilter, setListingFilter] = useState<ListingType>(
+    ListingType.Project,
+  )
+
+  const listListings = useAppSelector((state) =>
+    getListings(state, listingFilter),
+  )
 
   const [openEditModal, setOpenEditModal] = useState(false)
   const [openListingDetails, setOpenListingDetails] = useState(false)
@@ -59,6 +82,17 @@ const DrawerClientListings: React.FunctionComponent<
   const createListing = () => {
     setOpenCreateListing(true)
   }
+
+  useEffect(() => {
+    if (props.open && selectedClient.id) {
+      dispatch(
+        handleInitListing({
+          clientId: selectedClient.id,
+          // listingType: listingFilter,
+        }),
+      )
+    }
+  }, [dispatch, listingFilter, props.open, selectedClient.id])
 
   return (
     <AtDrawer
@@ -137,9 +171,7 @@ const DrawerClientListings: React.FunctionComponent<
         <Grid xs={4}>
           <StyledListings paddingTop={'30px'} paddingX={'20px'}>
             <Box display={'flex'} justifyContent={'space-between'}>
-              <AtTypography variant={'h4'}>
-                All {selectedClient.companyName} Listings
-              </AtTypography>
+              <AtTypography variant={'h4'}>All Listings</AtTypography>
               <AtButton
                 kind={AtButtonKind.Success}
                 variant={AtButtonVariant.Contained}
@@ -149,15 +181,32 @@ const DrawerClientListings: React.FunctionComponent<
               />
             </Box>
 
+            <StyledNavPage>
+              <AtTab
+                label={'Project'}
+                badge={listProjects.length}
+                $active={listingFilter === ListingType.Project}
+                width={'50%'}
+                onClick={() => setListingFilter(ListingType.Project)}
+              />
+              <AtTab
+                label={'Teams'}
+                badge={listTeams.length}
+                width={'50%'}
+                $active={listingFilter === ListingType.Team}
+                onClick={() => setListingFilter(ListingType.Team)}
+              />
+            </StyledNavPage>
+
             <AtTextField
-              value={''}
-              // disabled={selectedClient.listings?.length === 0}
-              startIcon={<SearchNormal />}
+              disabled={!listListings?.length}
+              startIcon={<SearchNormal1 />}
               placeholder={
                 'Search in ' + selectedClient.companyName + ' Listings...'
               }
             />
-            {/* {selectedClient.listings?.length === 0 ? (
+
+            {listListings.length === 0 ? (
               <Box
                 display={'flex'}
                 alignItems={'center'}
@@ -170,16 +219,15 @@ const DrawerClientListings: React.FunctionComponent<
               </Box>
             ) : (
               <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
-                {selectedClient.listings &&
-                  selectedClient.listings.map((listing: Listing) => (
-                    <AtListingCard
-                      key={listing.id}
-                      listing={listing}
-                      onClick={() => selectListing(listing)}
-                    />
-                  ))}
+                {listListings.map((listing: Listing) => (
+                  <AtListingCard
+                    listing={listing}
+                    key={listing.id}
+                    onClick={() => selectListing(listing)}
+                  />
+                ))}
               </Box>
-            )} */}
+            )}
           </StyledListings>
         </Grid>
       </Grid>

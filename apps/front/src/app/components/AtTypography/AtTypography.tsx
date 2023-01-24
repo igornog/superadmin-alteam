@@ -16,7 +16,12 @@ interface StyledTypographyProps {
 
 const StyledTypography = styled(Typography)<StyledTypographyProps>`
   font-size: ${({ fontSize }) => fontSize && fontSize};
-  font-weight: ${({ $bold }) => ($bold ? 'bold' : null)};
+  ${({ $bold }) =>
+    $bold &&
+    css`
+      font-family: 'Inter-Bold';
+    `}
+
   color: ${({ color }) => (color ? color : null)};
   display: ${({ display }) => display ?? 'flex'};
   align-items: center;

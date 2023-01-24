@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Dispatch } from 'react'
 import AtLine from '../../../../../AtLine/AtLine'
 import AtTextField from '../../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../../AtTypography/AtTypography'
@@ -6,17 +6,18 @@ import { StyledForm } from '../../DrawerCreateListing'
 import { grey2 } from '../../../../../../utils/colors'
 import { Box } from '@mui/material'
 import styled from 'styled-components'
+import { Listing } from '../../../../../../utils/redux/types/listings.type'
 
-const ProjectStep2: React.FunctionComponent = () => {
-  const [inputValue, setInputValue] = useState('')
+const StyledCharCounter = styled.div`
+  position: absolute;
+  bottom: 20px;
+  padding: 10px;
+  color: ${grey2};
+`
 
-  const StyledCharCounter = styled.div`
-    position: absolute;
-    bottom: 20px;
-    padding: 10px;
-    color: ${grey2};
-  `
-
+const ProjectStep2: React.FunctionComponent<Step2Props> = (
+  props: Step2Props,
+) => {
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
       <StyledForm>
@@ -36,8 +37,9 @@ const ProjectStep2: React.FunctionComponent = () => {
           gap={'50px'}
         >
           <AtTextField
-            onValueChange={setInputValue}
-            value={inputValue}
+            onValueChange={(e) =>
+              props.setProject({ ...props.project, jobDescription: e })
+            }
             maxLength={500}
             multiline={true}
             rows={6}
@@ -47,13 +49,18 @@ const ProjectStep2: React.FunctionComponent = () => {
           />
           <StyledCharCounter>
             <AtTypography variant={'caption'} color={grey2}>
-              {inputValue.length}/500
+              {props.project.jobDescription?.length}/500
             </AtTypography>
           </StyledCharCounter>
         </Box>
       </StyledForm>
     </Box>
   )
+}
+
+interface Step2Props {
+  setProject: Dispatch<React.SetStateAction<Listing>>
+  project: Listing
 }
 
 export default ProjectStep2

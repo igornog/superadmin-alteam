@@ -12,9 +12,9 @@ export function createDefaultApp(router: Router) {
     .use(errorHandler)
 }
 
-export function startLambdaServer(router: Router, local: boolean) {
+export function startLambdaServer(router: Router, local: boolean, port = 8080) {
   if (local) {
-    startLocal(createDefaultApp(router))
+    startLocal(createDefaultApp(router), port)
   } else {
     return lambdaHandler(createDefaultApp(router))
   }
