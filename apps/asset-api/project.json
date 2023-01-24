@@ -56,14 +56,6 @@
         "passWithNoTests": true
       }
     },
-    "deploy": {
-      "executor": "nx:run-commands",
-      "dependsOn": ["package"],
-      "options": {
-        "cwd": "apps/asset-api/infrastructure",
-        "command": "../../../infrastructure/scripts/terraformStageWrapper.sh apply asset-api"
-      }
-    },
     "package": {
       "executor": "nx:run-commands",
       "dependsOn": ["build"],
