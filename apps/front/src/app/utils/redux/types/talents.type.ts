@@ -4,6 +4,7 @@ import {
   ListingStatus,
   SoloTalent,
   Link,
+  Asset,
 } from '@yjcapp/app'
 import { StatusType } from './status.type'
 
@@ -32,7 +33,7 @@ export class Talent implements SoloTalent {
   email: string
   role: string
   about: string
-  assets?: string[]
+  assets?: Asset[]
   skills: string[]
   appliedDate?: Date
   phoneNumber?: string
