@@ -9,7 +9,7 @@ locals {
   isProd              = var.stage == "prod"
   acm_certificate_arn = var.certificate_arn
   domain_name         = "admin.alteam.io"
-  cname               = local.isProd ? "www.${local.domain_name}" : lower("${var.stage}.${local.domain_name}")
+  cname               = local.isProd ? local.domain_name : lower("${var.stage}.${local.domain_name}")
 }
 
 resource "aws_cloudfront_origin_access_identity" "oai" {
