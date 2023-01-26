@@ -5,8 +5,13 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
-import {   Asset,
-  Availability, Experience, Link, ListingStatus } from '@yjcapp/app'
+import {
+  Asset,
+  Availability,
+  Experience,
+  Link,
+  ListingStatus,
+} from '@yjcapp/app'
 
 @Entity({ name: 'solo_talent' })
 export class SoloTalentEntity extends BaseEntity {

@@ -11,7 +11,7 @@ import React, {
 import styled, { css } from 'styled-components'
 import { black, blue, green, grey2 } from '../../utils/colors'
 import { convertHexToRGBA } from '../../utils/helpers'
-import { Tree, TreeInterface } from '../../utils/redux/types/tree.type'
+import { Group, GroupInterface } from '../../utils/redux/types/groups.type'
 import AtCheckbox from '../AtCheckbox/AtCheckbox'
 import AtTypography from '../AtTypography/AtTypography'
 
@@ -95,7 +95,7 @@ const StyledAddFolder = styled(AddCircle)`
 `
 
 const getNodeById = (
-  node: TreeInterface,
+  node: GroupInterface,
   id: string,
   parentsPath: string[],
 ): any => {
@@ -120,16 +120,16 @@ const getNodeById = (
   return result
 }
 
-const AtTreeItem: React.FunctionComponent<AtTreeItemProps> = (
-  props: AtTreeItemProps,
+const AtGroupItem: React.FunctionComponent<AtGroupItemProps> = (
+  props: AtGroupItemProps,
 ) => {
   const selectedSet = useMemo(() => new Set(props.selected), [props.selected])
-  const node = new Tree(props.nodes)
+  const node = new Group(props.nodes)
 
   const parentMap = goThroughAllNodes(node)
 
   function goThroughAllNodes(
-    nodes: TreeInterface,
+    nodes: GroupInterface,
     map: Record<string, any> = {},
   ) {
     if (!nodes.children) {
@@ -146,7 +146,7 @@ const AtTreeItem: React.FunctionComponent<AtTreeItemProps> = (
   }
 
   function getAllChild(
-    childNode: TreeInterface | null,
+    childNode: GroupInterface | null,
     collectedNodes: string[] = [],
   ) {
     if (childNode === null) return collectedNodes
@@ -162,7 +162,7 @@ const AtTreeItem: React.FunctionComponent<AtTreeItemProps> = (
     return collectedNodes
   }
 
-  const getChildById = (nodes: TreeInterface, id: string) => {
+  const getChildById = (nodes: GroupInterface, id: string) => {
     const array: string[] = []
     const path: string[] = []
 
@@ -171,7 +171,7 @@ const AtTreeItem: React.FunctionComponent<AtTreeItemProps> = (
     return { childNodesToToggle: getAllChild(nodeToToggle, array), path }
   }
 
-  function getOnChange(checked: boolean, nodes: TreeInterface) {
+  function getOnChange(checked: boolean, nodes: GroupInterface) {
     const { childNodesToToggle, path } = getChildById(node, nodes.id)
 
     let array = checked
@@ -206,12 +206,12 @@ const AtTreeItem: React.FunctionComponent<AtTreeItemProps> = (
     props.setSelected([...props.selected, node.id])
   }
 
-  const handleClickRow = (e: React.MouseEvent, nodes: TreeInterface) => {
+  const handleClickRow = (e: React.MouseEvent, nodes: GroupInterface) => {
     e.stopPropagation()
     getOnChange(!checkboxRef.current.checked, nodes)
   }
 
-  const handleCreateFolder = (e: React.MouseEvent, node: TreeInterface) => {
+  const handleCreateFolder = (e: React.MouseEvent, node: GroupInterface) => {
     props.setSelectedFolder(node)
     props.setOpenCreateFolder(true)
     e.stopPropagation()
@@ -274,8 +274,8 @@ const AtTreeItem: React.FunctionComponent<AtTreeItemProps> = (
       }
     >
       {Array.isArray(node.children)
-        ? node.children.map((node: TreeInterface, index: number) => (
-            <AtTreeItem
+        ? node.children.map((node: GroupInterface, index: number) => (
+            <AtGroupItem
               nodes={node}
               setOpenCreateFolder={props.setOpenCreateFolder}
               setSelectedFolder={props.setSelectedFolder}
@@ -289,12 +289,12 @@ const AtTreeItem: React.FunctionComponent<AtTreeItemProps> = (
   )
 }
 
-interface AtTreeItemProps {
-  nodes: TreeInterface
+interface AtGroupItemProps {
+  nodes: GroupInterface
   setOpenCreateFolder: Dispatch<SetStateAction<boolean>>
-  setSelectedFolder: Dispatch<SetStateAction<TreeInterface | undefined>>
+  setSelectedFolder: Dispatch<SetStateAction<GroupInterface | undefined>>
   selected: string[]
   setSelected: Dispatch<SetStateAction<string[]>>
 }
 
-export default AtTreeItem
+export default AtGroupItem

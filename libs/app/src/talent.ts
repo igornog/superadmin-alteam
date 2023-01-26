@@ -1,5 +1,5 @@
 export interface GroupTalent {
-  id: string
+  id: number
   email: string
   phone: string
   speciality: string
@@ -10,7 +10,7 @@ export interface GroupTalent {
 }
 
 export interface SoloTalent {
-  id: string
+  id: number
   firstName: string
   lastName: string
   experience: Experience

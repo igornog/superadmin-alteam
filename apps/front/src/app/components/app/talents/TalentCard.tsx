@@ -35,7 +35,7 @@ const TalentCard: React.FunctionComponent<TalentCardProps> = (
 interface TalentCardProps {
   talents: Talent[]
   displayStatusTag?: boolean
-  openTalent: (id: string) => void
+  openTalent: (id: number) => void
   openShortlist: () => void
   openAccepted: () => void
   openEmailToTalent: () => void

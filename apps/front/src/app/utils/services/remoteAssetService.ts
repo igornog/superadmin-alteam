@@ -1,9 +1,9 @@
 import {AssetService, SoloTalentAsset,} from '@yjcapp/app'
-import atAxios from '../axios'
+import atAxios from './axios';
 
 export default class RemoteAssetService implements AssetService {
   createTalentAsset(talentId: string, file: SoloTalentAsset): Promise<string> {
-    var formData = new FormData();
+    const formData = new FormData();
     formData.append("file", file.asset);
     return atAxios.post(`/assets/solo/${talentId}/${file.name}`, formData, {
       headers: {

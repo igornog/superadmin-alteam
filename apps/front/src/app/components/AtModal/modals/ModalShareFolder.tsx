@@ -10,10 +10,10 @@ import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtLine from '../../AtLine/AtLine'
 import AtModal from '../AtModal'
 import AtTextField from '../../AtTextField/AtTextField'
-import { TreeInterface } from '../../../utils/redux/types/tree.type'
 import { grey3, red } from '../../../utils/colors'
 import AtDropdown from '../../AtDropdown/AtDropdown'
 import ModalRemoveUser from './ModalRemoveUser'
+import { GroupInterface } from '../../../utils/redux/types/groups.type'
 
 const ModalShareFolder: React.FunctionComponent<ModalShareFolderProps> = (
   props: ModalShareFolderProps,
@@ -135,7 +135,7 @@ const ModalShareFolder: React.FunctionComponent<ModalShareFolderProps> = (
 }
 
 interface ModalShareFolderProps {
-  folder?: TreeInterface | undefined
+  folder?: GroupInterface | undefined
   isOpen: boolean
   onClose?: () => void
 }

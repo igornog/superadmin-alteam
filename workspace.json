@@ -8,6 +8,7 @@
     "auth-api": "apps/auth-api",
     "client-api": "apps/client-api",
     "front": "apps/front",
+    "group-api": "apps/group-api",
     "infrastructure": "infrastructure",
     "listing-api": "apps/listing-api",
     "postgres-db": "libs/postgres-db",

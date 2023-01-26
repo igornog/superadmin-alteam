@@ -27,7 +27,7 @@ import {
 import AtTimezoneDropdown from '../../../../../AtDropdown/AtTimezoneDropdown'
 import AtTextFieldDate from '../../../../../AtTextField/AtTextFieldDate'
 import { Client } from '../../../../../../utils/redux/types/clients.type'
-import { clientService } from '../../../../../../utils/services/clientService'
+import { clientService } from '../../../../../../utils/services'
 
 const StyledPeriod = styled.div`
   background-color: ${black};

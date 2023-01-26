@@ -21,7 +21,7 @@ import {
 } from '../../../../../../utils/helpers'
 import styled from 'styled-components'
 import { Client } from '../../../../../../utils/redux/types/clients.type'
-import { clientService } from '../../../../../../utils/services/clientService'
+import { clientService } from '../../../../../../utils/services'
 
 const StyledPeriod = styled.div`
   background-color: ${black};

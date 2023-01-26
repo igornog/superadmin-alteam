@@ -16,7 +16,7 @@ import { useAppDispatch, useAppSelector } from '../../../../utils/hooks/reduxHoo
 import { ModalSize } from '../../../../utils/redux/types/settings.type'
 import AtModal from '../../AtModal'
 import AtLine from '../../../AtLine/AtLine'
-import { handleLoadTree } from '../../../../utils/redux/actions/tree.action'
+import { handleLoadGroups } from '../../../../utils/redux/actions/group.action'
 import ModalShortlistStep1 from './steps/ModalShortlistStep1'
 import { black, grey2 } from '../../../../utils/colors'
 import ModalShortlistStep2 from './steps/ModalShortlistStep2'
@@ -35,7 +35,7 @@ const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
 
   useEffect(() => {
     if (props.isOpen) {
-      dispatch(handleLoadTree())
+      dispatch(handleLoadGroups({}))
     }
   }, [dispatch, props.isOpen])
 

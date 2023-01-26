@@ -1,6 +1,6 @@
 import { ClientListing, ListingSearch, ListingService } from '@yjcapp/app'
-import { Listing } from '../../redux/types/listings.type'
-import atAxios from '../axios'
+import { Listing } from '../redux/types/listings.type'
+import atAxios from './axios'
 
 export default class RemoteListingService implements ListingService {
   async createListing(project: Omit<Listing, 'id'>): Promise<Listing> {

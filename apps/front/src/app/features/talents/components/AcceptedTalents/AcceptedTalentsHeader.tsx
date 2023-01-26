@@ -11,10 +11,10 @@ import AtTextField from '../../../../components/AtTextField/AtTextField'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
 import { grey2 } from '../../../../utils/colors'
 import { useAppSelector } from '../../../../utils/hooks/reduxHook'
-import { getActiveFolder } from '../../../../utils/redux/selectors/tree.selector'
+import { getActiveGroup } from '../../../../utils/redux/selectors/group.selector'
 
 const AcceptedTalentsHeader: React.FunctionComponent = () => {
-  const activeFolder = useAppSelector((state) => getActiveFolder(state))
+  const activeFolder = useAppSelector((state) => getActiveGroup(state))
 
   return (
     <Box

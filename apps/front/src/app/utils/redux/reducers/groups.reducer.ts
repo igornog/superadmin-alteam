@@ -1,46 +1,46 @@
 import { createSlice } from '@reduxjs/toolkit'
 import {
-  handleAddFolder,
-  handleLoadTree,
-  handleSelectFolder,
-} from '../actions/tree.action'
+  handleAddGroup,
+  handleLoadGroups,
+  handleSelectGroup,
+} from '../actions/group.action'
 import { StatusType } from '../types/status.type'
-import { TreeState } from '../types/tree.type'
 import { v4 as uuidv4 } from 'uuid'
-import { searchFolder } from '../selectors/tree.selector'
 import { handleInitPage } from '../actions/app.action'
+import { GroupState } from '../types/groups.type'
+import { searchGroup } from '../selectors/group.selector'
 
-const initialState: TreeState = {
+const initialState: GroupState = {
   data: {
     id: '',
     name: '',
     children: [],
   },
-  selectedFolder: undefined,
+  selectedGroup: undefined,
   status: StatusType.Idle,
   error: null,
 }
 
 const { reducer } = createSlice({
-  name: 'tree',
+  name: 'group',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(handleLoadTree.pending, (state) => {
+      .addCase(handleLoadGroups.pending, (state) => {
         state.status = StatusType.Loading
       })
-      .addCase(handleLoadTree.fulfilled, (state, { payload }) => {
+      .addCase(handleLoadGroups.fulfilled, (state, { payload }) => {
         state.data = payload
         state.status = StatusType.Succeeded
       })
-      .addCase(handleLoadTree.rejected, (state, action) => {
+      .addCase(handleLoadGroups.rejected, (state, action) => {
         state.status = StatusType.Failed
         state.error = action.error.message
       })
 
-      .addCase(handleAddFolder.fulfilled, (state, { payload }) => {
-        const currentNode = searchFolder(state.data, payload.targetId)
+      .addCase(handleAddGroup.fulfilled, (state, { payload }) => {
+        const currentNode = searchGroup(state.data, payload.targetId)
 
         if (!Object.prototype.hasOwnProperty.call(currentNode, 'children')) {
           currentNode.children = []
@@ -53,17 +53,17 @@ const { reducer } = createSlice({
         })
       })
 
-      .addCase(handleSelectFolder.pending, (state) => {
+      .addCase(handleSelectGroup.pending, (state) => {
         state.status = StatusType.Loading
       })
 
-      .addCase(handleSelectFolder.fulfilled, (state, { payload }) => {
+      .addCase(handleSelectGroup.fulfilled, (state, { payload }) => {
         state.status = StatusType.Succeeded
-        state.selectedFolder = payload
+        state.selectedGroup = payload
       })
 
       .addCase(handleInitPage.fulfilled, (state) => {
-        state.selectedFolder = undefined
+        state.selectedGroup = undefined
       })
   },
 })

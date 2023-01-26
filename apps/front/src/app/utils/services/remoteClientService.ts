@@ -1,6 +1,6 @@
 import { ClientSearch, ClientService, SoloClient } from '@yjcapp/app'
-import { Client } from '../../redux/types/clients.type'
-import atAxios from '../axios'
+import { Client } from '../redux/types/clients.type'
+import atAxios from './axios'
 
 export default class RemoteClientService implements ClientService {
   async createClient(client: Omit<SoloClient, 'id'>): Promise<Client> {

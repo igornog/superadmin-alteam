@@ -8,7 +8,7 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '../../../../utils/hooks/reduxHook'
-import { handleLoadTree } from '../../../../utils/redux/actions/tree.action'
+import { handleLoadGroups } from '../../../../utils/redux/actions/group.action'
 import { Column } from '../../../../utils/redux/types/settings.type'
 import ShortlistFolderListing from './ShortlistFolderListing'
 import ShortlistTalentsHeader from './ShortlistTalentsHeader'
@@ -20,7 +20,7 @@ const ShortlistTalentsView: React.FunctionComponent = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(handleLoadTree())
+    dispatch(handleLoadGroups({}))
   }, [dispatch])
 
   return (

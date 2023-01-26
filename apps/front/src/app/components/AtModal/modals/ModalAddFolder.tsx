@@ -10,9 +10,9 @@ import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtLine from '../../AtLine/AtLine'
 import AtModal from '../AtModal'
 import AtTextField from '../../AtTextField/AtTextField'
-import { Tree, TreeInterface } from '../../../utils/redux/types/tree.type'
 import { useAppDispatch } from '../../../utils/hooks/reduxHook'
-import { handleAddFolder } from '../../../utils/redux/actions/tree.action'
+import { handleAddGroup } from '../../../utils/redux/actions/group.action'
+import { Group, GroupInterface } from '../../../utils/redux/types/groups.type'
 
 const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
   props: ModalAddFolderProps,
@@ -20,11 +20,11 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
   const dispatch = useAppDispatch()
   const [folderName, setFolderName] = useState('')
 
-  const [folder, setFolder] = useState(new Tree({}))
+  const [folder, setFolder] = useState(new Group({}))
 
   useEffect(() => {
     if (props.folder) {
-      setFolder(new Tree(props.folder))
+      setFolder(new Group(props.folder))
     }
   }, [props.folder])
 
@@ -35,7 +35,7 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
 
   const addNewFolder = () => {
     if (folder.id) {
-      dispatch(handleAddFolder({ folderName, targetId: folder.id }))
+      dispatch(handleAddGroup({ folderName, targetId: folder.id }))
       handleClose()
     }
   }
@@ -97,7 +97,7 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
 }
 
 interface ModalAddFolderProps {
-  folder?: TreeInterface | undefined
+  folder?: GroupInterface | undefined
   isOpen: boolean
   onClose?: () => void
 }

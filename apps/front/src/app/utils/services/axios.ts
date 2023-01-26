@@ -24,7 +24,7 @@ atAxios.interceptors.response.use(
     return Promise.resolve(response)
   },
   async function (error) {
-    if (error.response.status === 401) {
+    if (error?.response?.status === 401) {
       localStorage.clear()
       window.location.href = '/'
     }

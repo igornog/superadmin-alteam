@@ -23,7 +23,7 @@ const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
   const [openAcceptedModal, setOpenAcceptedModal] = useState(false)
   const [openEmailToTalent, setOpenEmailToTalent] = useState(false)
 
-  const handleClickTalent = (id: string) => {
+  const handleClickTalent = (id: number) => {
     dispatch(handleSelectTalent(id))
     setOpenDrawer(true)
   }

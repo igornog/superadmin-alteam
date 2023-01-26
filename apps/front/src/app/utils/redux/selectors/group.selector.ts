@@ -1,5 +1,5 @@
 import { createDraftSafeSelector } from '@reduxjs/toolkit'
-import { Tree, TreeInterface } from '../types/tree.type'
+import { Group, GroupInterface } from '../types/groups.type'
 
 export const mapRecursive = <T>(
   oldArray: Array<T & { children?: T[] }>,
@@ -24,14 +24,14 @@ export const mapRecursive = <T>(
   }
 }
 
-export const searchFolder: any = (tree: TreeInterface, targetId: string) => {
-  if (tree.id === targetId || !targetId) {
-    return tree
+export const searchGroup: any = (group: GroupInterface, targetId: string) => {
+  if (group.id === targetId || !targetId) {
+    return group
   }
 
-  if (tree.children) {
-    for (const child of tree.children) {
-      const found = searchFolder(child, targetId)
+  if (group.children) {
+    for (const child of group.children) {
+      const found = searchGroup(child, targetId)
 
       if (found) {
         return found
@@ -40,9 +40,9 @@ export const searchFolder: any = (tree: TreeInterface, targetId: string) => {
   }
 }
 
-export const getActiveFolder = createDraftSafeSelector(
-  [(state) => state.tree],
-  ({ data, selectedFolder }) => {
-    return new Tree(searchFolder(data, selectedFolder))
+export const getActiveGroup = createDraftSafeSelector(
+  [(state) => state.groups],
+  ({ data, selectedGroup }) => {
+    return new Group(searchGroup(data, selectedGroup))
   },
 )

@@ -6,27 +6,27 @@ import {
   useAppSelector,
   useAppDispatch,
 } from '../../../../utils/hooks/reduxHook'
-import { handleSelectFolder } from '../../../../utils/redux/actions/tree.action'
-import { getActiveFolder } from '../../../../utils/redux/selectors/tree.selector'
+import { handleSelectGroup } from '../../../../utils/redux/actions/group.action'
+import { getActiveGroup } from '../../../../utils/redux/selectors/group.selector'
+import { Group, GroupInterface } from '../../../../utils/redux/types/groups.type'
 import { StatusType } from '../../../../utils/redux/types/status.type'
-import { Tree, TreeInterface } from '../../../../utils/redux/types/tree.type'
 
 const AcceptedFolderListing: React.FunctionComponent = () => {
-  const tree = useAppSelector((state) => state.tree)
+  const group = useAppSelector((state) => state.groups)
   const dispatch = useAppDispatch()
-  const folder = useAppSelector((state) => getActiveFolder(state))
-  const selectedFolder = folder ?? new Tree(tree.data)
+  const folder = useAppSelector((state) => getActiveGroup(state))
+  const selectedFolder = folder ?? new Group(group.data)
   const nbChildren = selectedFolder?.children?.length ?? false
 
   const selectFolder = (idFolder: string) => {
-    dispatch(handleSelectFolder(idFolder))
+    dispatch(handleSelectGroup(idFolder))
   }
 
   return (
     <Grid container={true} spacing={2.5}>
-      {tree.status === StatusType.Succeeded ? (
+      {group.status === StatusType.Succeeded ? (
         selectedFolder.hasChildren() ? (
-          selectedFolder.children?.map((item: TreeInterface) => {
+          selectedFolder.children?.map((item: GroupInterface) => {
             return (
               <Grid item={true} xs={nbChildren > 4 ? 2.4 : 3}>
                 <AtFolder

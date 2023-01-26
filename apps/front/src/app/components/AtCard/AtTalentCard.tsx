@@ -143,7 +143,7 @@ const AtTalentCard: React.FunctionComponent<AtTalentCardProps> = (
 }
 
 interface AtTalentCardProps {
-  idTalent: string
+  idTalent: number
   fullHeight?: boolean
   displayStatusTag?: boolean | null
   onClick?: (e: React.MouseEvent) => void
