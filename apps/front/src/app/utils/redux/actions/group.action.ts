@@ -15,14 +15,14 @@ export const handleLoadGroups = createAsyncThunk(
 
 export const handleAddGroup = createAsyncThunk(
   'group/addGroup',
-  async (props: { folderName: string; targetId: string }) => {
+  async (props: { folderName: string; targetId: number }) => {
     return props
   },
 )
 
 export const handleSelectGroup = createAsyncThunk(
   'group/selectGroup',
-  async (idFolder: string | undefined) => {
+  async (idFolder: number | undefined) => {
     return idFolder
   },
 )

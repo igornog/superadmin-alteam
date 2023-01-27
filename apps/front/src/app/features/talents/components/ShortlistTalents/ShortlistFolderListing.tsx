@@ -11,7 +11,7 @@ import { StatusType } from '../../../../utils/redux/types/status.type'
 import { getActiveGroup } from '../../../../utils/redux/selectors/group.selector'
 import {
   Group,
-  GroupInterface,
+  GroupInterface
 } from '../../../../utils/redux/types/groups.type'
 
 const ShortlistFolderListing: React.FunctionComponent = () => {
@@ -19,9 +19,9 @@ const ShortlistFolderListing: React.FunctionComponent = () => {
   const dispatch = useAppDispatch()
   const folder = useAppSelector((state) => getActiveGroup(state))
   const selectedFolder = folder ?? new Group(group.data)
-  const nbChildren = selectedFolder?.children?.length ?? false
+  const nbChildren = selectedFolder?.subGroups?.length ?? false
 
-  const selectFolder = (idFolder: string) => {
+  const selectFolder = (idFolder: number) => {
     dispatch(handleSelectGroup(idFolder))
   }
 
@@ -29,7 +29,7 @@ const ShortlistFolderListing: React.FunctionComponent = () => {
     <Grid container={true} spacing={2.5}>
       {group.status === StatusType.Succeeded ? (
         selectedFolder.hasChildren() ? (
-          selectedFolder.children?.map(
+          selectedFolder.subGroups?.map(
             (item: GroupInterface) => {
               return (
                 <Grid item={true} xs={nbChildren > 4 ? 2.4 : 3} key={item.id}>

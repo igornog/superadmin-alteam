@@ -16,17 +16,17 @@ const AcceptedFolderListing: React.FunctionComponent = () => {
   const dispatch = useAppDispatch()
   const folder = useAppSelector((state) => getActiveGroup(state))
   const selectedFolder = folder ?? new Group(group.data)
-  const nbChildren = selectedFolder?.children?.length ?? false
+  const nbChildren = selectedFolder?.subGroups?.length ?? false
 
-  const selectFolder = (idFolder: string) => {
+  const selectFolder = (idFolder: number) => {
     dispatch(handleSelectGroup(idFolder))
   }
-
+  console.log(selectedFolder)
   return (
     <Grid container={true} spacing={2.5}>
       {group.status === StatusType.Succeeded ? (
         selectedFolder.hasChildren() ? (
-          selectedFolder.children?.map((item: GroupInterface) => {
+          selectedFolder.subGroups?.map((item: GroupInterface) => {
             return (
               <Grid item={true} xs={nbChildren > 4 ? 2.4 : 3}>
                 <AtFolder

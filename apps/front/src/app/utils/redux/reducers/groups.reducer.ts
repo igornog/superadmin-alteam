@@ -11,11 +11,7 @@ import { GroupState } from '../types/groups.type'
 import { searchGroup } from '../selectors/group.selector'
 
 const initialState: GroupState = {
-  data: {
-    id: '',
-    name: '',
-    children: [],
-  },
+  data: [],
   selectedGroup: undefined,
   status: StatusType.Idle,
   error: null,
@@ -31,7 +27,7 @@ const { reducer } = createSlice({
         state.status = StatusType.Loading
       })
       .addCase(handleLoadGroups.fulfilled, (state, { payload }) => {
-        state.data = payload
+        console.log(payload)
         state.status = StatusType.Succeeded
       })
       .addCase(handleLoadGroups.rejected, (state, action) => {

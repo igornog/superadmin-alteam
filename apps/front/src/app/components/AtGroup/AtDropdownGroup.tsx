@@ -71,7 +71,7 @@ const AtGroupItem: React.FunctionComponent<AtGroupProps> = ({
     setMenu(menuProp)
   }, [menuProp])
 
-  const open = (id: string) => () => {
+  const open = (id: number) => () => {
     setMenu((prevMenu) =>
       mapRecursive(prevMenu, (item: any) => {
         if (item.id === id) {
@@ -104,16 +104,16 @@ const AtGroupItem: React.FunctionComponent<AtGroupProps> = ({
             <Box onClick={() => dispatch(handleSelectGroup(item.id))}>
               <AtTypography>{item.name}</AtTypography>
             </Box>
-            {item.children &&
+            {item.subGroups &&
               (item.open ? (
                 <ArrowUp2 size={10} onClick={open(item.id)} />
               ) : (
                 <ArrowDown2 size={10} onClick={open(item.id)} />
               ))}
           </StyledItem>
-          {item.children && (
+          {item.subGroups && (
             <Collapse in={item.open} timeout="auto">
-              <AtGroupItem menu={item.children} level={level + 1} />
+              <AtGroupItem menu={item.subGroups} level={level + 1} />
             </Collapse>
           )}
         </React.Fragment>
@@ -134,7 +134,7 @@ const AtDropdownGroup: React.FunctionComponent = () => {
       paddingLeft={'20px'}
     >
       <AtTypography color={grey2}>{activeTab.title}</AtTypography>
-      <AtGroupItem menu={group.children || []} />
+      <AtGroupItem menu={group.subGroups || []} />
     </StyledParent>
   )
 }

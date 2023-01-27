@@ -24,13 +24,13 @@ export const mapRecursive = <T>(
   }
 }
 
-export const searchGroup: any = (group: GroupInterface, targetId: string) => {
+export const searchGroup: any = (group: GroupInterface, targetId: number) => {
   if (group.id === targetId || !targetId) {
     return group
   }
 
-  if (group.children) {
-    for (const child of group.children) {
+  if (group.subGroups) {
+    for (const child of group.subGroups) {
       const found = searchGroup(child, targetId)
 
       if (found) {

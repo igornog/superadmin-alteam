@@ -38,7 +38,7 @@ const AtTopTitle: React.FunctionComponent<AtTopTitle> = (props: AtTopTitle) => {
   const [openDropdown, setOpenDropdown] = useState(false)
 
   const handlePreviousFolder = () => {
-    dispatch(handleSelectGroup(props.activeGroup?.idParent))
+    dispatch(handleSelectGroup(props.activeGroup?.id))
   }
 
   const handleClose = () => {

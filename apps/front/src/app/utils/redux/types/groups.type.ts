@@ -4,8 +4,8 @@ import { Client } from './clients.type'
 import { Talent } from './talents.type'
 
 export interface GroupState {
-  data: Group
-  selectedGroup: string | undefined
+  data: Group[]
+  selectedGroup: number | undefined
   status?: StatusType
   error?: string | null
 }
@@ -35,7 +35,10 @@ export class Group implements AtGroup {
   }
 
   hasChildren(): boolean | undefined {
-    return true
-    // return this.children && this.children.length > 0
+    return this.subGroups && this.subGroups.length > 0
   }
+}
+
+export interface GroupInterface extends Group {
+  open?: boolean
 }

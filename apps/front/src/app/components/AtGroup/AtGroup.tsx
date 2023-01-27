@@ -21,7 +21,7 @@ const AtGroup: React.FunctionComponent = () => {
   const [openCreateFolder, setOpenCreateFolder] = useState(false)
   const [selectedFolder, setSelectedFolder] = useState<GroupInterface>()
   const group = useAppSelector((state) => state.groups)
-  const [selected, setSelected] = useState<string[]>([])
+  const [selected, setSelected] = useState<number[]>([])
 
   return (
     <StyledTreeView

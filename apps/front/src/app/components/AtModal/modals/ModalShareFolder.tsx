@@ -13,7 +13,7 @@ import AtTextField from '../../AtTextField/AtTextField'
 import { grey3, red } from '../../../utils/colors'
 import AtDropdown from '../../AtDropdown/AtDropdown'
 import ModalRemoveUser from './ModalRemoveUser'
-import { GroupInterface } from '../../../utils/redux/types/groups.type'
+import { Group } from '../../../utils/redux/types/groups.type'
 
 const ModalShareFolder: React.FunctionComponent<ModalShareFolderProps> = (
   props: ModalShareFolderProps,
@@ -135,7 +135,7 @@ const ModalShareFolder: React.FunctionComponent<ModalShareFolderProps> = (
 }
 
 interface ModalShareFolderProps {
-  folder?: GroupInterface | undefined
+  folder?: Group | undefined
   isOpen: boolean
   onClose?: () => void
 }

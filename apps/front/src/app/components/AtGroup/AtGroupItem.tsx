@@ -96,15 +96,15 @@ const StyledAddFolder = styled(AddCircle)`
 
 const getNodeById = (
   node: GroupInterface,
-  id: string,
-  parentsPath: string[],
+  id: number,
+  parentsPath: number[],
 ): any => {
   let result = null
 
   if (node.id === id) {
     return node
-  } else if (Array.isArray(node.children)) {
-    for (const childNode of node.children) {
+  } else if (Array.isArray(node.subGroups)) {
+    for (const childNode of node.subGroups) {
       result = getNodeById(childNode, id, parentsPath)
 
       // eslint-disable-next-line no-extra-boolean-cast
@@ -132,13 +132,13 @@ const AtGroupItem: React.FunctionComponent<AtGroupItemProps> = (
     nodes: GroupInterface,
     map: Record<string, any> = {},
   ) {
-    if (!nodes.children) {
+    if (!nodes.subGroups) {
       return null
     }
 
     map[nodes.id] = getAllChild(nodes).splice(1)
 
-    for (const childNode of nodes.children) {
+    for (const childNode of nodes.subGroups) {
       goThroughAllNodes(childNode, map)
     }
 
@@ -147,14 +147,14 @@ const AtGroupItem: React.FunctionComponent<AtGroupItemProps> = (
 
   function getAllChild(
     childNode: GroupInterface | null,
-    collectedNodes: string[] = [],
+    collectedNodes: number[] = [],
   ) {
     if (childNode === null) return collectedNodes
 
     collectedNodes.push(childNode.id)
 
-    if (Array.isArray(childNode.children)) {
-      for (const node of childNode.children) {
+    if (Array.isArray(childNode.subGroups)) {
+      for (const node of childNode.subGroups) {
         getAllChild(node, collectedNodes)
       }
     }
@@ -162,9 +162,9 @@ const AtGroupItem: React.FunctionComponent<AtGroupItemProps> = (
     return collectedNodes
   }
 
-  const getChildById = (nodes: GroupInterface, id: string) => {
-    const array: string[] = []
-    const path: string[] = []
+  const getChildById = (nodes: GroupInterface, id: number) => {
+    const array: number[] = []
+    const path: number[] = []
 
     const nodeToToggle = getNodeById(nodes, id, path)
 
@@ -177,10 +177,10 @@ const AtGroupItem: React.FunctionComponent<AtGroupItemProps> = (
     let array = checked
       ? [...props.selected, ...childNodesToToggle]
       : props.selected
-          .filter((value: string) => !childNodesToToggle.includes(value))
-          .filter((value: string) => !path.includes(value))
+          .filter((value: number) => !childNodesToToggle.includes(value))
+          .filter((value: number) => !path.includes(value))
 
-    array = array.filter((v: string, i: number) => array.indexOf(v) === i)
+    array = array.filter((v: number, i: number) => array.indexOf(v) === i)
 
     props.setSelected(array)
   }
@@ -190,14 +190,14 @@ const AtGroupItem: React.FunctionComponent<AtGroupItemProps> = (
 
   const allSelectedChildren =
     parentMap &&
-    parentMap[node.id]?.every((childNodeId: string) =>
+    parentMap[node.id]?.every((childNodeId: number) =>
       selectedSet.has(childNodeId),
     )
   const checked = selectedSet.has(node.id) || allSelectedChildren || false
 
   const indeterminate =
     (parentMap &&
-      parentMap[node.id]?.some((childNodeId: string) =>
+      parentMap[node.id]?.some((childNodeId: number) =>
         selectedSet.has(childNodeId),
       )) ||
     false
@@ -220,7 +220,7 @@ const AtGroupItem: React.FunctionComponent<AtGroupItemProps> = (
   return (
     <StyledTreeItem
       key={node.id}
-      nodeId={node.id}
+      nodeId={node?.id?.toString()}
       $isParent={node.isParent()}
       label={
         <Box display={'flex'} flexDirection={'column'}>
@@ -273,8 +273,8 @@ const AtGroupItem: React.FunctionComponent<AtGroupItemProps> = (
         </Box>
       }
     >
-      {Array.isArray(node.children)
-        ? node.children.map((node: GroupInterface, index: number) => (
+      {Array.isArray(node.subGroups)
+        ? node.subGroups.map((node: GroupInterface, index: number) => (
             <AtGroupItem
               nodes={node}
               setOpenCreateFolder={props.setOpenCreateFolder}
@@ -290,11 +290,11 @@ const AtGroupItem: React.FunctionComponent<AtGroupItemProps> = (
 }
 
 interface AtGroupItemProps {
-  nodes: GroupInterface
+  nodes: GroupInterface[] | GroupInterface
   setOpenCreateFolder: Dispatch<SetStateAction<boolean>>
   setSelectedFolder: Dispatch<SetStateAction<GroupInterface | undefined>>
-  selected: string[]
-  setSelected: Dispatch<SetStateAction<string[]>>
+  selected: number[]
+  setSelected: Dispatch<SetStateAction<number[]>>
 }
 
 export default AtGroupItem
