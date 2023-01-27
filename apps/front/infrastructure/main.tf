@@ -17,7 +17,7 @@ module "cloudfront" {
   source             = "./modules/cloudfront"
   bucket_domain_name = module.website.regional_domain_name
   stage              = var.stage
-  certificate_arn    = module.data.alteam_cert_arn
+  certificate_arn    = module.data.admin_alteam_cert_arn
   zone_id            = module.data.hosted_zone_id
 }
 resource "null_resource" "deploy" {
