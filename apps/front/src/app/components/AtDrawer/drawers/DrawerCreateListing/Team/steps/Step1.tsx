@@ -65,7 +65,6 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
   useEffect(() => {
     const getListClients = async () => {
       const list = await clientService.searchClient({ clientName: '' })
-      console.log(list)
       setListClients(list)
     }
 

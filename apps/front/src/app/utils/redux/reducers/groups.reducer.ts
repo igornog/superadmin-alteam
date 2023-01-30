@@ -5,9 +5,8 @@ import {
   handleSelectGroup,
 } from '../actions/group.action'
 import { StatusType } from '../types/status.type'
-import { v4 as uuidv4 } from 'uuid'
 import { handleInitPage } from '../actions/app.action'
-import { GroupState } from '../types/groups.type'
+import { Group, GroupInterface, GroupState } from '../types/groups.type'
 import { searchGroup } from '../selectors/group.selector'
 
 const initialState: GroupState = {
@@ -27,7 +26,10 @@ const { reducer } = createSlice({
         state.status = StatusType.Loading
       })
       .addCase(handleLoadGroups.fulfilled, (state, { payload }) => {
-        console.log(payload)
+        state.data = payload.map((item) =>
+          Object.assign(new Group(item), { open: false }),
+        )
+
         state.status = StatusType.Succeeded
       })
       .addCase(handleLoadGroups.rejected, (state, action) => {
@@ -36,17 +38,15 @@ const { reducer } = createSlice({
       })
 
       .addCase(handleAddGroup.fulfilled, (state, { payload }) => {
-        const currentNode = searchGroup(state.data, payload.targetId)
+        const { data, targetId } = payload
+        const currentNode = searchGroup(state.data, targetId)
 
-        if (!Object.prototype.hasOwnProperty.call(currentNode, 'children')) {
-          currentNode.children = []
+        console.log(currentNode)
+        if (currentNode) {
+          currentNode.subGroups.push(data as GroupInterface)
+        } else {
+          state.data.push(data as GroupInterface)
         }
-
-        currentNode.children.push({
-          id: uuidv4(),
-          idParent: payload.targetId,
-          name: payload.folderName,
-        })
       })
 
       .addCase(handleSelectGroup.pending, (state) => {
@@ -54,8 +54,12 @@ const { reducer } = createSlice({
       })
 
       .addCase(handleSelectGroup.fulfilled, (state, { payload }) => {
+        const { idFolder, goBack } = payload
+
+        const currentNode = searchGroup(state.data, idFolder)
+
         state.status = StatusType.Succeeded
-        state.selectedGroup = payload
+        state.selectedGroup = goBack ? currentNode?.parent?.id : idFolder
       })
 
       .addCase(handleInitPage.fulfilled, (state) => {

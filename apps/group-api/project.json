@@ -10,16 +10,17 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
-        "outputPath": "dist/apps/group-api",
-        "main": "apps/group-api/src/main.ts",
-        "tsConfig": "apps/group-api/tsconfig.app.json",
-        "assets": ["apps/group-api/src/assets"]
+        "outputFileName": "index.js",
+        "outputPath": "apps/group-api/dist",
+        "main": "apps/group-api/src/index.ts",
+        "tsConfig": "apps/group-api/tsconfig.app.json"
       },
       "configurations": {
         "production": {
           "optimization": true,
           "extractLicenses": true,
           "inspect": false,
+          "externalDependencies": "none",
           "fileReplacements": [
             {
               "replace": "apps/group-api/src/environments/environment.ts",
@@ -29,11 +30,26 @@
         }
       }
     },
+    "package": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "inputs": ["production", "^production"],
+      "options": {
+        "command": "zip -FSqj apps/group-api/dist/package.zip apps/group-api/dist/index.js"
+      }
+    },
     "serve": {
-      "executor": "@nrwl/js:node",
+      "executor": "@nrwl/node:node",
       "options": {
         "buildTarget": "group-api:build"
       },
+      "dependsOn": [
+        {
+          "target": "migration:run",
+          "params": "forward",
+          "projects": "dependencies"
+        }
+      ],
       "configurations": {
         "production": {
           "buildTarget": "group-api:build:production"
@@ -49,12 +65,21 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": ["{workspaceRoot}/coverage/apps/group-api"],
       "options": {
         "jestConfig": "apps/group-api/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["package"],
+      "options": {
+        "cwd": "apps/group-api/infrastructure",
+        "command": "../../../infrastructure/scripts/terraformStageWrapper.sh apply group-api"
+      }
     }
   },
+  "implicitDependencies": ["postgres-db"],
   "tags": []
 }

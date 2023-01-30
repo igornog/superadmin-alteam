@@ -10,15 +10,17 @@ import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtLine from '../../AtLine/AtLine'
 import AtModal from '../AtModal'
 import AtTextField from '../../AtTextField/AtTextField'
-import { useAppDispatch } from '../../../utils/hooks/reduxHook'
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
 import { handleAddGroup } from '../../../utils/redux/actions/group.action'
 import { Group, GroupInterface } from '../../../utils/redux/types/groups.type'
+import { getActiveGroup } from '../../../utils/redux/selectors/group.selector'
 
 const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
   props: ModalAddFolderProps,
 ) => {
   const dispatch = useAppDispatch()
   const [folderName, setFolderName] = useState('')
+  const activeFolder = useAppSelector((state) => getActiveGroup(state))
 
   const [folder, setFolder] = useState(new Group({}))
 
@@ -34,10 +36,8 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
   }
 
   const addNewFolder = () => {
-    if (folder.id) {
-      dispatch(handleAddGroup({ folderName, targetId: folder.id }))
-      handleClose()
-    }
+    dispatch(handleAddGroup({ folderName, targetId: activeFolder.id }))
+    // handleClose()
   }
 
   return (

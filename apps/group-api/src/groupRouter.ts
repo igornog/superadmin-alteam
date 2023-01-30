@@ -10,3 +10,7 @@ groupRouter.use(authorize)
 groupRouter.post('/group', (req, res, next) => {
   sendPromise(groupService.createGroup(req.body), res, next)
 })
+
+groupRouter.get('/group', (req, res, next) => {
+  sendPromise(groupService.searchGroup(req.body), res, next)
+})

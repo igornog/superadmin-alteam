@@ -8,7 +8,7 @@ export interface Group {
   talents?: SoloTalent[]
   groupTalents?: GroupTalent[]
   subGroups?: Group[]
-  parent: Group
+  parent: Group | null
 }
 
 export interface GroupSearch {

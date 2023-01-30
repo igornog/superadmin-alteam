@@ -6,11 +6,13 @@ export function groupFromEntity(entity: GroupEntity): Group {
   return {
     id: entity.id,
     name: entity.name,
-    client: entity.client,
-    talents: entity.talents,
-    groupTalents: entity.groupTalents,
-    subGroups: entity.subGroups,
-    parent: entity.parent,
+    client: entity.client || null,
+    talents: entity.talents || [],
+    groupTalents: entity.groupTalents || [],
+    subGroups: Array.isArray(entity.subGroups)
+      ? entity.subGroups.map(groupFromEntity)
+      : [],
+    parent: entity.parent ? groupFromEntity(entity.parent) : null,
   }
 }
 

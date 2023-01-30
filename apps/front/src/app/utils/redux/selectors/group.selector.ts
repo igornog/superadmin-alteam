@@ -24,25 +24,34 @@ export const mapRecursive = <T>(
   }
 }
 
-export const searchGroup: any = (group: GroupInterface, targetId: number) => {
-  if (group.id === targetId || !targetId) {
-    return group
+export const searchGroup = (
+  data: GroupInterface[],
+  id: number | undefined,
+): GroupInterface | undefined => {
+  if (!id) {
+    return undefined
   }
-
-  if (group.subGroups) {
-    for (const child of group.subGroups) {
-      const found = searchGroup(child, targetId)
-
-      if (found) {
-        return found
+  let result = data.find((group) => group.id === id)
+  if (!result) {
+    for (const group of data) {
+      if (group.subGroups) {
+        result = searchGroup(group.subGroups, id)
+        if (result) {
+          break
+        }
       }
     }
   }
+  return result
 }
 
 export const getActiveGroup = createDraftSafeSelector(
   [(state) => state.groups],
   ({ data, selectedGroup }) => {
-    return new Group(searchGroup(data, selectedGroup))
+    if (selectedGroup) {
+      return new Group(searchGroup(data, selectedGroup))
+    } else {
+      return new Group({})
+    }
   },
 )

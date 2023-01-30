@@ -101,7 +101,9 @@ const AtGroupItem: React.FunctionComponent<AtGroupProps> = ({
             isActive={activeFolder.id === item.id}
             paddingTop={'10px'}
           >
-            <Box onClick={() => dispatch(handleSelectGroup(item.id))}>
+            <Box
+              onClick={() => dispatch(handleSelectGroup({ idFolder: item.id }))}
+            >
               <AtTypography>{item.name}</AtTypography>
             </Box>
             {item.subGroups &&

@@ -9,28 +9,26 @@ import {
 import { handleSelectGroup } from '../../../../utils/redux/actions/group.action'
 import { StatusType } from '../../../../utils/redux/types/status.type'
 import { getActiveGroup } from '../../../../utils/redux/selectors/group.selector'
-import {
-  Group,
-  GroupInterface
-} from '../../../../utils/redux/types/groups.type'
+import { GroupInterface } from '../../../../utils/redux/types/groups.type'
 
 const ShortlistFolderListing: React.FunctionComponent = () => {
   const group = useAppSelector((state) => state.groups)
   const dispatch = useAppDispatch()
-  const folder = useAppSelector((state) => getActiveGroup(state))
-  const selectedFolder = folder ?? new Group(group.data)
+  const selectedFolder = useAppSelector((state) => getActiveGroup(state))
   const nbChildren = selectedFolder?.subGroups?.length ?? false
 
+  // const selectedFolder = folder.id !== undefined ? folder : group.data
+
   const selectFolder = (idFolder: number) => {
-    dispatch(handleSelectGroup(idFolder))
+    dispatch(handleSelectGroup({ idFolder }))
   }
 
   return (
     <Grid container={true} spacing={2.5}>
       {group.status === StatusType.Succeeded ? (
-        selectedFolder.hasChildren() ? (
-          selectedFolder.subGroups?.map(
-            (item: GroupInterface) => {
+        selectedFolder.id ? (
+          selectedFolder.hasChildren() ? (
+            selectedFolder.subGroups?.map((item: GroupInterface) => {
               return (
                 <Grid item={true} xs={nbChildren > 4 ? 2.4 : 3} key={item.id}>
                   <AtFolder
@@ -40,18 +38,28 @@ const ShortlistFolderListing: React.FunctionComponent = () => {
                   />
                 </Grid>
               )
-            },
+            })
+          ) : (
+            <Grid item={true} xs={3}>
+              <AtCreateFolder />
+            </Grid>
           )
         ) : (
-          <Grid item={true} xs={3}>
-            <AtCreateFolder />
-          </Grid>
+          group.data.map((group: GroupInterface) => {
+            const nbChildren = group?.subGroups?.length ?? false
+
+            return (
+              <Grid item={true} xs={nbChildren > 4 ? 2.4 : 3} key={group.id}>
+                <AtFolder
+                  folder={group}
+                  onClick={() => selectFolder(group.id)}
+                  minimize={nbChildren > 4}
+                />
+              </Grid>
+            )
+          })
         )
-      ) : (
-        <Grid item={true} xs={3}>
-          <AtFolder loading={true} />
-        </Grid>
-      )}
+      ) : null}
     </Grid>
   )
 }

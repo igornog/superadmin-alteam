@@ -5,6 +5,9 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
   OneToOne,
+  JoinColumn,
+  JoinTable,
+  ManyToOne,
 } from 'typeorm'
 import { GroupTalentEntity } from './GroupTalent.entity'
 import { SoloClientEntity } from './SoloClient.entity'
@@ -21,16 +24,19 @@ export class GroupEntity extends BaseEntity {
   @OneToOne(() => SoloClientEntity, (client) => client.id, {
     nullable: true,
   })
+  @JoinColumn({ name: 'clientId' })
   client: SoloClientEntity
 
   @OneToMany(() => SoloTalentEntity, (talent) => talent.id, {
     nullable: true,
   })
+  @JoinTable()
   talents: SoloTalentEntity[]
 
   @OneToMany(() => GroupTalentEntity, (talent) => talent.id, {
     nullable: true,
   })
+  @JoinTable()
   groupTalents: GroupTalentEntity[]
 
   @OneToMany(() => GroupEntity, (subGroup) => subGroup.id, {
@@ -38,8 +44,9 @@ export class GroupEntity extends BaseEntity {
   })
   subGroups: GroupEntity[]
 
-  @OneToOne(() => GroupEntity, (group) => group.id, {
+  @ManyToOne(() => GroupEntity, (group) => group.id, {
     nullable: true,
   })
+  @JoinColumn({ name: 'parentId' })
   parent: GroupEntity
 }
