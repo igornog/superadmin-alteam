@@ -29,9 +29,10 @@ export interface SoloTalent {
   listing?: any
   status?: ListingStatus
 }
+
 export interface Asset {
-  name : string
-  link : string
+  name: string
+  link: string
 }
 export interface Link {
   id?: string
