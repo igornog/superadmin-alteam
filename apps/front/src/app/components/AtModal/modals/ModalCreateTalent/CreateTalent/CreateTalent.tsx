@@ -77,7 +77,7 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
           about: about,
           skills: skills,
           portfolio,
-          assets: [],
+          assets: undefined,
           status: ListingStatus.Inbound,
         }),
       )

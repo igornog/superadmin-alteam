@@ -1,12 +1,6 @@
 #!/bin/bash
-if [[ ! -v $STAGE ]]; then
-  STAGE=$(git branch --show-current)
-  if [ "${STAGE}" == "develop" ]
-  then
+if [[ ! -v STAGE ]]; then
     echo "dev"
-  else
-    echo "dev"
-  fi
 else
     echo "$STAGE"
 fi
