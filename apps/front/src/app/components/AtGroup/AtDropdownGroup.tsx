@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { Collapse, Box } from '@mui/material'
 import { ArrowDown2, ArrowUp2 } from 'iconsax-react'
 import {
-  getActiveFolder,
+  getActiveGroup,
+  getTopGroup,
   mapRecursive,
-} from '../../utils/redux/selectors/tree.selector'
-import { Tree, TreeInterface } from '../../utils/redux/types/tree.type'
+} from '../../utils/redux/selectors/group.selector'
 import AtTypography from '../AtTypography/AtTypography'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook'
 import { black, green, grey2, grey5 } from '../../utils/colors'
 import styled, { css } from 'styled-components'
 import { getActiveTab } from '../../utils/redux/selectors/settings.selector'
-import { handleSelectFolder } from '../../utils/redux/actions/tree.action'
+import { handleSelectGroup } from '../../utils/redux/actions/group.action'
+import { GroupInterface } from '../../utils/redux/types/groups.type'
 
 const StyledItem = styled(Box)<{
   level: number
@@ -58,20 +59,20 @@ const StyledParent = styled(Box)<{ level: number; heightBefore: string }>`
   }
 `
 
-const AtTreeItem: React.FunctionComponent<AtTreeProps> = ({
+const AtGroupItem: React.FunctionComponent<AtGroupProps> = ({
   level = 1,
   menu: menuProp,
 }) => {
-  const [menu, setMenu] = useState<TreeInterface[]>(menuProp || [])
+  const [menu, setMenu] = useState<GroupInterface[]>(menuProp || [])
   const [paddingLeft, setPaddingLeft] = useState<number>()
-  const activeFolder = useAppSelector((state) => getActiveFolder(state))
+  const activeFolder = useAppSelector((state) => getActiveGroup(state))
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     setMenu(menuProp)
   }, [menuProp])
 
-  const open = (id: string) => () => {
+  const open = (id: number) => () => {
     setMenu((prevMenu) =>
       mapRecursive(prevMenu, (item: any) => {
         if (item.id === id) {
@@ -90,41 +91,47 @@ const AtTreeItem: React.FunctionComponent<AtTreeProps> = ({
 
   return (
     <StyledParent level={level} heightBefore={'10px'}>
-      {menu.map((item, index) => (
-        <React.Fragment key={`${index}-${item.id}`}>
-          <StyledItem
-            level={level}
-            paddingLeft={paddingLeft + 'px'}
-            display={'flex'}
-            alignItems={'center'}
-            justifyContent={'space-between'}
-            isActive={activeFolder.id === item.id}
-            paddingTop={'10px'}
-          >
-            <Box onClick={() => dispatch(handleSelectFolder(item.id))}>
-              <AtTypography>{item.name}</AtTypography>
-            </Box>
-            {item.children &&
-              (item.open ? (
-                <ArrowUp2 size={10} onClick={open(item.id)} />
-              ) : (
-                <ArrowDown2 size={10} onClick={open(item.id)} />
-              ))}
-          </StyledItem>
-          {item.children && (
-            <Collapse in={item.open} timeout="auto">
-              <AtTreeItem menu={item.children} level={level + 1} />
-            </Collapse>
-          )}
-        </React.Fragment>
-      ))}
+      {menu.map((item, index) => {
+        return (
+          <React.Fragment key={`${index}-${item.id}`}>
+            <StyledItem
+              level={level}
+              paddingLeft={paddingLeft + 'px'}
+              display={'flex'}
+              alignItems={'center'}
+              justifyContent={'space-between'}
+              isActive={activeFolder.id === item.id}
+              paddingTop={'10px'}
+            >
+              <Box
+                onClick={() =>
+                  dispatch(handleSelectGroup({ idFolder: item.id }))
+                }
+              >
+                <AtTypography>{item.name}</AtTypography>
+              </Box>
+              {item.subGroups.length > 0 &&
+                (item.open ? (
+                  <ArrowUp2 size={10} onClick={open(item.id)} />
+                ) : (
+                  <ArrowDown2 size={10} onClick={open(item.id)} />
+                ))}
+            </StyledItem>
+            {item.subGroups && (
+              <Collapse in={item.open} timeout="auto">
+                <AtGroupItem menu={item.subGroups} level={level + 1} />
+              </Collapse>
+            )}
+          </React.Fragment>
+        )
+      })}
     </StyledParent>
   )
 }
 
-const AtDropdownTree: React.FunctionComponent = () => {
+const AtDropdownGroup: React.FunctionComponent = () => {
   const activeTab = useAppSelector((state) => getActiveTab(state))
-  const tree = useAppSelector((state) => new Tree(state.tree.data))
+  const topParenGroup = useAppSelector((state) => getTopGroup(state))
 
   return (
     <StyledParent
@@ -134,13 +141,13 @@ const AtDropdownTree: React.FunctionComponent = () => {
       paddingLeft={'20px'}
     >
       <AtTypography color={grey2}>{activeTab.title}</AtTypography>
-      <AtTreeItem menu={tree.children || []} />
+      <AtGroupItem menu={topParenGroup?.subGroups || []} />
     </StyledParent>
   )
 }
 
-export interface AtTreeProps {
-  menu: TreeInterface[]
+export interface AtGroupProps {
+  menu: GroupInterface[]
   level?: number
 }
-export default AtDropdownTree
+export default AtDropdownGroup

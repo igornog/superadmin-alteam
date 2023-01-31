@@ -1,6 +1,6 @@
-import process from "process";
+import process from 'process'
 
 export const environment = {
   production: true,
-  S3_BUCKET : process.env.S3_BUCKET,
+  S3_BUCKET: process.env.S3_BUCKET,
 }

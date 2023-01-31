@@ -10,7 +10,7 @@ import { StatusType } from './status.type'
 
 export interface TalentsState {
   listTalents: Talent[]
-  selectedTalent: string | null
+  selectedTalent: number | null
   status?: StatusType
   error?: string | null
 }
@@ -23,7 +23,7 @@ export enum TalentStatus {
 }
 
 export class Talent implements SoloTalent {
-  id: string
+  id: number
   firstName: string
   lastName: string
   experience: Experience

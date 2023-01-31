@@ -4,7 +4,7 @@ import {
   TalentSearch,
   TalentService,
 } from '@yjcapp/app'
-import atAxios from '../axios'
+import atAxios from './axios'
 
 export default class RemoteTalentService implements TalentService {
   retrieveGroupTalent(id: string): Promise<GroupTalent | undefined> {

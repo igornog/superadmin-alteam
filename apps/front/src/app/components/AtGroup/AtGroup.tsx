@@ -3,9 +3,9 @@ import { TreeView } from '@mui/lab'
 import { ArrowDown2, ArrowRight2 } from 'iconsax-react'
 import styled from 'styled-components'
 import ModalAddFolder from '../AtModal/modals/ModalAddFolder'
-import { TreeInterface } from '../../utils/redux/types/tree.type'
 import { useAppSelector } from '../../utils/hooks/reduxHook'
-import AtTreeItem from './AtTreeItem'
+import AtGroupItem from './AtGroupItem'
+import { GroupInterface } from '../../utils/redux/types/groups.type'
 
 const StyledTreeView = styled(TreeView)`
   background-color: #f7f8fe;
@@ -17,11 +17,11 @@ const StyledTreeView = styled(TreeView)`
   overflow-x: hidden;
 `
 
-const AtTree: React.FunctionComponent = () => {
+const AtGroup: React.FunctionComponent = () => {
   const [openCreateFolder, setOpenCreateFolder] = useState(false)
-  const [selectedFolder, setSelectedFolder] = useState<TreeInterface>()
-  const tree = useAppSelector((state) => state.tree)
-  const [selected, setSelected] = useState<string[]>([])
+  const [selectedFolder, setSelectedFolder] = useState<GroupInterface>()
+  const group = useAppSelector((state) => state.groups)
+  const [selected, setSelected] = useState<number[]>([])
 
   return (
     <StyledTreeView
@@ -29,8 +29,8 @@ const AtTree: React.FunctionComponent = () => {
       defaultExpanded={['Parent']}
       defaultExpandIcon={<ArrowRight2 />}
     >
-      <AtTreeItem
-        nodes={tree.data}
+      <AtGroupItem
+        nodes={group.data}
         setOpenCreateFolder={setOpenCreateFolder}
         setSelectedFolder={setSelectedFolder}
         selected={selected}
@@ -46,4 +46,4 @@ const AtTree: React.FunctionComponent = () => {
   )
 }
 
-export default AtTree
+export default AtGroup

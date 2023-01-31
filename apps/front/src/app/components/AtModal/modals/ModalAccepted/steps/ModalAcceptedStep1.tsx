@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import React from 'react'
 import { grey2 } from '../../../../../utils/colors'
-import AtTree from '../../../../AtTree/AtTree'
+import AtGroup from '../../../../AtGroup/AtGroup'
 import AtTypography from '../../../../AtTypography/AtTypography'
 
 const ModalAcceptedStep1: React.FunctionComponent = () => {
@@ -12,7 +12,7 @@ const ModalAcceptedStep1: React.FunctionComponent = () => {
         multiple folders/clients, and select folders inside.
       </AtTypography>
 
-      <AtTree />
+      <AtGroup />
     </Box>
   )
 }

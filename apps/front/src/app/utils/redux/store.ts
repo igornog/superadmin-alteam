@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 import appReducer from './reducers/app.reducer'
 import clientsReducer from './reducers/clients.reducer'
+import groupsReducer from './reducers/groups.reducer'
 import listingReducer from './reducers/listing.reducer'
 import settingsReducer from './reducers/settings.reducer'
 import talentsReducer from './reducers/talents.reducer'
-import treeReducer from './reducers/tree.reducer'
 
 const store = configureStore({
   reducer: {
@@ -13,7 +13,7 @@ const store = configureStore({
     talents: talentsReducer,
     clients: clientsReducer,
     listings: listingReducer,
-    tree: treeReducer,
+    groups: groupsReducer,
   },
 })
 

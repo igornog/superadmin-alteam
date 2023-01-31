@@ -4,7 +4,7 @@ import { SoloTalentEntity } from './entities'
 
 export function soloTalentFromEntity(entity: SoloTalentEntity): SoloTalent {
   return {
-    id: entity.id.toString(),
+    id: entity.id,
     firstName: entity.firstName,
     lastName: entity.lastName,
     experience: entity.experience,
@@ -28,7 +28,7 @@ export function soloTalentToEntity(
   soloTalent: DeepPartial<SoloTalent>,
 ): DeepPartial<SoloTalentEntity> {
   return {
-    id: soloTalent.id ? parseInt(soloTalent.id) : undefined,
+    id: soloTalent.id,
     firstName: soloTalent.firstName,
     lastName: soloTalent.lastName,
     experience: soloTalent.experience,

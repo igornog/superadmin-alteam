@@ -6,7 +6,13 @@ import AtLine from '../../../../AtLine/AtLine'
 import AtTextField from '../../../../AtTextField/AtTextField'
 import AtTypography from '../../../../AtTypography/AtTypography'
 import { StyledForm } from '../DrawerCreateClient'
-import { DeliveryType, ProjectType, CreateClientStatus, TeamRequest, ClientStatus } from '@yjcapp/app'
+import {
+  DeliveryType,
+  ProjectType,
+  CreateClientStatus,
+  TeamRequest,
+  ClientStatus,
+} from '@yjcapp/app'
 import { grey2 } from '../../../../../utils/colors'
 
 const Step2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
@@ -137,8 +143,8 @@ const Step2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
         <Box padding={'20px'} display={'flex'} justifyContent={'space-between'}>
           <AtTypography variant={'h4'}>Client Status</AtTypography>
           <AtTypography variant={'caption'} color={grey2}>
-          Fields with * are mandatory
-        </AtTypography>
+            Fields with * are mandatory
+          </AtTypography>
         </Box>
 
         <AtLine />
@@ -155,24 +161,19 @@ const Step2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
             required={true}
             placeholder={'Client Request'}
             value={undefined}
-            $listItems={CreateClientStatus.map(
-              (status, index) => ({
-                id: index,
-                label: status.label,
-                value: status.value
-              }),
-            )}
+            $listItems={CreateClientStatus.map((status, index) => ({
+              id: index,
+              label: status.label,
+              value: status.value,
+            }))}
             handleSelect={(e) => {
               props.setClient({
                 ...props.client,
                 status: e.value as ClientStatus,
               })
-            }
-              
-            }
+            }}
             label={'Is the client qualified?'}
           />
-
         </Box>
       </StyledForm>
     </Box>
