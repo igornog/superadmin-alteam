@@ -31,18 +31,22 @@ export const searchGroup = (
   if (!id) {
     return undefined
   }
-  let result = data.find((group) => group.id === id)
-  if (!result) {
-    for (const group of data) {
-      if (group.subGroups) {
-        result = searchGroup(group.subGroups, id)
-        if (result) {
-          break
+
+  if (data) {
+    let result = data.find((group) => group.id === id)
+    if (!result) {
+      for (const group of data) {
+        if (group.subGroups) {
+          result = searchGroup(group.subGroups, id)
+          if (result) {
+            break
+          }
         }
       }
     }
+    return result
   }
-  return result
+  return undefined
 }
 
 export const getActiveGroup = createDraftSafeSelector(
@@ -53,5 +57,18 @@ export const getActiveGroup = createDraftSafeSelector(
     } else {
       return new Group({})
     }
+  },
+)
+
+export const getTopGroup = createDraftSafeSelector(
+  (state: any) => state,
+  (state) => {
+    let currentGroup: any = getActiveGroup(state)
+
+    while (currentGroup?.parent !== null && currentGroup.id !== undefined) {
+      currentGroup = searchGroup(state.groups.data, currentGroup?.parent?.id)
+    }
+
+    return new Group(currentGroup)
   },
 )

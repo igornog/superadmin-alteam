@@ -37,7 +37,7 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
 
   const addNewFolder = () => {
     dispatch(handleAddGroup({ folderName, targetId: activeFolder.id }))
-    // handleClose()
+    handleClose()
   }
 
   return (

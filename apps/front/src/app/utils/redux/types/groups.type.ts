@@ -30,7 +30,7 @@ export class Group implements AtGroup {
   }
 
   isParent(): boolean {
-    return this.parent === undefined;
+    return this.parent === undefined
   }
 
   hasChildren(): boolean | undefined {

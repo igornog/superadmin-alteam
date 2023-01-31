@@ -17,10 +17,13 @@ import moment from 'moment'
 import { ListingStatus } from '@yjcapp/app'
 import { StyledTag } from '../app/talents/TalentsTable'
 
-export const StyledTagClients = styled(AtTag) <{ marketplace?: ListingStatus | boolean }>`
-border-radius: 5px;
-background-color: ${({ marketplace }) => marketplace ? `${black}` : `${white}`};
-color: ${({ marketplace }) => marketplace ? `${white}` : `${black}`};
+export const StyledTagClients = styled(AtTag)<{
+  marketplace?: ListingStatus | boolean
+}>`
+  border-radius: 5px;
+  background-color: ${({ marketplace }) =>
+    marketplace ? `${black}` : `${white}`};
+  color: ${({ marketplace }) => (marketplace ? `${white}` : `${black}`)};
 `
 
 export const StyledCard = styled.div<{ fullHeight?: boolean }>`
@@ -90,7 +93,9 @@ const AtTalentCard: React.FunctionComponent<AtTalentCardProps> = (
             >
               <Box display={'flex'} gap={'10px'} alignItems={'center'}>
                 <AtTypography color={grey3}>
-                  <>Applied: {moment(talent.appliedDate).format('DD.MM.YYYY')}</>
+                  <>
+                    Applied: {moment(talent.appliedDate).format('DD.MM.YYYY')}
+                  </>
                 </AtTypography>
                 <AtGroupTag icon={<ArrowRight2 size={10} />} />
               </Box>
@@ -102,9 +107,10 @@ const AtTalentCard: React.FunctionComponent<AtTalentCardProps> = (
 
           <AtLine spacing={16} />
 
-          {props.displayStatusTag &&
+          {props.displayStatusTag && (
             <>
-              <AtTypography color={grey3}>Status :
+              <AtTypography color={grey3}>
+                Status :
                 <StyledTagClients
                   variant={'outlined'}
                   marketplace={!talent.status}
@@ -113,22 +119,24 @@ const AtTalentCard: React.FunctionComponent<AtTalentCardProps> = (
               </AtTypography>
               <AtLine spacing={16} />
             </>
-          }
+          )}
 
           {talent.skills && talent.skills.length > 0 ? (
             <Box display={'flex'} flexWrap={'wrap'} gap={'10px'}>
-              {talent.skills?.slice(0, maxItemPerLine).map((value: string, index: number) => (
-                <AtTag label={value} key={index} />
-              ))}
-              {talent.skills.slice(maxItemPerLine).length > 0 &&
-              <span>
-                <StyledTag
-                  $hover={true}
-                  variant={'outlined'}
-                  label={`${talent.skills.slice(maxItemPerLine).length
-                    } more`}
-                />
-              </span>}
+              {talent.skills
+                ?.slice(0, maxItemPerLine)
+                .map((value: string, index: number) => (
+                  <AtTag label={value} key={index} />
+                ))}
+              {talent.skills.slice(maxItemPerLine).length > 0 && (
+                <span>
+                  <StyledTag
+                    $hover={true}
+                    variant={'outlined'}
+                    label={`${talent.skills.slice(maxItemPerLine).length} more`}
+                  />
+                </span>
+              )}
             </Box>
           ) : (
             <AtTypography color={grey3}>
@@ -138,7 +146,6 @@ const AtTalentCard: React.FunctionComponent<AtTalentCardProps> = (
         </Box>
       </AtRightClick>
     </StyledCard>
-
   )
 }
 

@@ -2,7 +2,10 @@ import { Edit, Share, Sms, TickCircle, TrushSquare } from 'iconsax-react'
 import { ListingStatus } from '@yjcapp/app'
 import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
-import { handlePatchTalent, handleSelectTalent } from '../../../utils/redux/actions/talents.action'
+import {
+  handlePatchTalent,
+  handleSelectTalent,
+} from '../../../utils/redux/actions/talents.action'
 import AtTypography from '../../AtTypography/AtTypography'
 import { AtContextMenuItem } from '../AtRightClick'
 import Arrow from '../../../assets/images/icons/arrow2.svg'
@@ -39,11 +42,18 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
   }
 
   const MoveToDeclined = () => {
-    dispatch(handlePatchTalent({ id: props.talent.id, status: ListingStatus.Declined }))
+    dispatch(
+      handlePatchTalent({
+        id: props.talent.id,
+        status: ListingStatus.Declined,
+      }),
+    )
   }
 
   const MoveToInbound = () => {
-    dispatch(handlePatchTalent({ id: props.talent.id, status: ListingStatus.Inbound }))
+    dispatch(
+      handlePatchTalent({ id: props.talent.id, status: ListingStatus.Inbound }),
+    )
   }
 
   const moveToShortlist = () => {
@@ -76,9 +86,7 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
   ) : (
     <>
       {isCurrentTabAllowed(RightClick.MoveToAccepted) ||
-        isTabAndStatusAllowed([
-          ListingStatus.Shortlisted,
-        ]) ? (
+      isTabAndStatusAllowed([ListingStatus.Shortlisted]) ? (
         <AtContextMenuItem onSelect={moveToAccepted}>
           <AtTypography>
             <img src={Arrow} alt={'Arrow'} width={20} />
@@ -88,23 +96,24 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
       ) : null}
 
       {isCurrentTabAllowed(RightClick.MoveToShortlisted) ||
-        isTabAndStatusAllowed([
-          ListingStatus.Inbound,
-          ListingStatus.Accepted,
-        ]) ? (
+      isTabAndStatusAllowed([ListingStatus.Inbound, ListingStatus.Accepted]) ? (
         <AtContextMenuItem onSelect={moveToShortlist}>
           <AtTypography>
-            {ListingStatus.Inbound ? <img src={Arrow} alt={'Arrow'} width={20} /> : <img src={ArrowRefresh} alt={'Arrow'} width={20} />}
+            {ListingStatus.Inbound ? (
+              <img src={Arrow} alt={'Arrow'} width={20} />
+            ) : (
+              <img src={ArrowRefresh} alt={'Arrow'} width={20} />
+            )}
             Move to Shortlisted
           </AtTypography>
         </AtContextMenuItem>
       ) : null}
 
       {isCurrentTabAllowed(RightClick.EditTalentFolders) ||
-        isTabAndStatusAllowed([
-          ListingStatus.Shortlisted,
-          ListingStatus.Accepted,
-        ]) ? (
+      isTabAndStatusAllowed([
+        ListingStatus.Shortlisted,
+        ListingStatus.Accepted,
+      ]) ? (
         <AtContextMenuItem>
           <AtTypography>
             <Edit size={20} />
@@ -114,12 +123,12 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
       ) : null}
 
       {isCurrentTabAllowed(RightClick.SendEmailToTalent) ||
-        isTabAndStatusAllowed([
-          ListingStatus.Shortlisted,
-          ListingStatus.Inbound,
-          ListingStatus.Accepted,
-          ListingStatus.Declined,
-        ]) ? (
+      isTabAndStatusAllowed([
+        ListingStatus.Shortlisted,
+        ListingStatus.Inbound,
+        ListingStatus.Accepted,
+        ListingStatus.Declined,
+      ]) ? (
         <AtContextMenuItem onSelect={sendEmailToTalent}>
           <AtTypography>
             <Sms size={20} />
@@ -129,11 +138,11 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
       ) : null}
 
       {isCurrentTabAllowed(RightClick.ShareTalent) ||
-        isTabAndStatusAllowed([
-          ListingStatus.Shortlisted,
-          ListingStatus.Inbound,
-          ListingStatus.Accepted
-        ]) ? (
+      isTabAndStatusAllowed([
+        ListingStatus.Shortlisted,
+        ListingStatus.Inbound,
+        ListingStatus.Accepted,
+      ]) ? (
         <AtContextMenuItem onSelect={(e: Event) => copyLinkToClipboard(e)}>
           <AtTypography>
             <Share size={20} />
@@ -143,10 +152,10 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
       ) : null}
 
       {isCurrentTabAllowed(RightClick.MoveToInbound) ||
-        isTabAndStatusAllowed([
-          ListingStatus.Shortlisted,
-          ListingStatus.Accepted
-        ]) ? (
+      isTabAndStatusAllowed([
+        ListingStatus.Shortlisted,
+        ListingStatus.Accepted,
+      ]) ? (
         <AtContextMenuItem onSelect={MoveToInbound}>
           <AtTypography>
             <img src={ArrowRefresh} alt={'Arrow'} width={20} />
@@ -156,11 +165,11 @@ const TalentMenu: React.FunctionComponent<TalentMenuProps> = (
       ) : null}
 
       {isCurrentTabAllowed(RightClick.MoveToDeclined) ||
-        isTabAndStatusAllowed([
-          ListingStatus.Shortlisted,
-          ListingStatus.Inbound,
-          ListingStatus.Accepted,
-        ]) ? (
+      isTabAndStatusAllowed([
+        ListingStatus.Shortlisted,
+        ListingStatus.Inbound,
+        ListingStatus.Accepted,
+      ]) ? (
         <AtContextMenuItem variant="danger" onSelect={MoveToDeclined}>
           <AtTypography>
             <TrushSquare size={20} />

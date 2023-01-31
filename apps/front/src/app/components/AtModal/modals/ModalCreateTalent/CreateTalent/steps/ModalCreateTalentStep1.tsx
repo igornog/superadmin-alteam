@@ -122,13 +122,13 @@ const ModalCreateTalentStep1: React.FunctionComponent<
                   : 'Enter Exact Rate'
               }
               maxLength={30}
-            // value={project.rateFrom?.toString()}
-            // onValueChange={(e) =>
-            //   setProject({
-            //     ...project,
-            //     rateFrom: parseFloat(e),
-            //   })
-            // }
+              // value={project.rateFrom?.toString()}
+              // onValueChange={(e) =>
+              //   setProject({
+              //     ...project,
+              //     rateFrom: parseFloat(e),
+              //   })
+              // }
             />
           )}
 
@@ -136,13 +136,13 @@ const ModalCreateTalentStep1: React.FunctionComponent<
             <AtTextField
               placeholder={'Rate To'}
               maxLength={30}
-            // value={project.rateTo?.toString()}
-            // onValueChange={(e) =>
-            //   setProject({
-            //     ...project,
-            //     rateTo: parseFloat(e),
-            //   })
-            // }
+              // value={project.rateTo?.toString()}
+              // onValueChange={(e) =>
+              //   setProject({
+              //     ...project,
+              //     rateTo: parseFloat(e),
+              //   })
+              // }
             />
           )}
         </Box>

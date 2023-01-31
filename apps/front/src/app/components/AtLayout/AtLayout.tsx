@@ -91,10 +91,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                   justifyContent={'space-between'}
                   marginTop={'30px'}
                 >
-                  <AtTopTitle
-                    activeTab={activeTab}
-                    activeGroup={activeGroup}
-                  />
+                  <AtTopTitle activeTab={activeTab} activeGroup={activeGroup} />
 
                   <Box display={'flex'} gap={'30px'}>
                     {activeTab.settings.downloadCSV && (

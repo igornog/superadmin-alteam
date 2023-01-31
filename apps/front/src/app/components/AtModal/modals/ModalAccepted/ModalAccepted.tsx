@@ -2,7 +2,10 @@ import { Box } from '@mui/material'
 import { CloseCircle, CloseSquare, ArrowRight2 } from 'iconsax-react'
 import React, { useEffect, useState } from 'react'
 import { grey2, black } from '../../../../utils/colors'
-import { useAppDispatch, useAppSelector } from '../../../../utils/hooks/reduxHook'
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../../utils/hooks/reduxHook'
 import { handleLoadGroups } from '../../../../utils/redux/actions/group.action'
 import { ModalSize } from '../../../../utils/redux/types/settings.type'
 import AtButton, {
@@ -33,7 +36,12 @@ const ModalAccepted: React.FunctionComponent<ModalAcceptedProps> = (
   }, [dispatch, props.isOpen])
 
   const moveTalent = () => {
-    dispatch(handlePatchTalent({ id: selectedTalent.id, status: ListingStatus.Accepted }))
+    dispatch(
+      handlePatchTalent({
+        id: selectedTalent.id,
+        status: ListingStatus.Accepted,
+      }),
+    )
     props.onClose?.()
   }
 

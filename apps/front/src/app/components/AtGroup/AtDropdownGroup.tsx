@@ -3,6 +3,7 @@ import { Collapse, Box } from '@mui/material'
 import { ArrowDown2, ArrowUp2 } from 'iconsax-react'
 import {
   getActiveGroup,
+  getTopGroup,
   mapRecursive,
 } from '../../utils/redux/selectors/group.selector'
 import AtTypography from '../AtTypography/AtTypography'
@@ -11,7 +12,7 @@ import { black, green, grey2, grey5 } from '../../utils/colors'
 import styled, { css } from 'styled-components'
 import { getActiveTab } from '../../utils/redux/selectors/settings.selector'
 import { handleSelectGroup } from '../../utils/redux/actions/group.action'
-import { Group, GroupInterface } from '../../utils/redux/types/groups.type'
+import { GroupInterface } from '../../utils/redux/types/groups.type'
 
 const StyledItem = styled(Box)<{
   level: number
@@ -90,43 +91,47 @@ const AtGroupItem: React.FunctionComponent<AtGroupProps> = ({
 
   return (
     <StyledParent level={level} heightBefore={'10px'}>
-      {menu.map((item, index) => (
-        <React.Fragment key={`${index}-${item.id}`}>
-          <StyledItem
-            level={level}
-            paddingLeft={paddingLeft + 'px'}
-            display={'flex'}
-            alignItems={'center'}
-            justifyContent={'space-between'}
-            isActive={activeFolder.id === item.id}
-            paddingTop={'10px'}
-          >
-            <Box
-              onClick={() => dispatch(handleSelectGroup({ idFolder: item.id }))}
+      {menu.map((item, index) => {
+        return (
+          <React.Fragment key={`${index}-${item.id}`}>
+            <StyledItem
+              level={level}
+              paddingLeft={paddingLeft + 'px'}
+              display={'flex'}
+              alignItems={'center'}
+              justifyContent={'space-between'}
+              isActive={activeFolder.id === item.id}
+              paddingTop={'10px'}
             >
-              <AtTypography>{item.name}</AtTypography>
-            </Box>
-            {item.subGroups &&
-              (item.open ? (
-                <ArrowUp2 size={10} onClick={open(item.id)} />
-              ) : (
-                <ArrowDown2 size={10} onClick={open(item.id)} />
-              ))}
-          </StyledItem>
-          {item.subGroups && (
-            <Collapse in={item.open} timeout="auto">
-              <AtGroupItem menu={item.subGroups} level={level + 1} />
-            </Collapse>
-          )}
-        </React.Fragment>
-      ))}
+              <Box
+                onClick={() =>
+                  dispatch(handleSelectGroup({ idFolder: item.id }))
+                }
+              >
+                <AtTypography>{item.name}</AtTypography>
+              </Box>
+              {item.subGroups.length > 0 &&
+                (item.open ? (
+                  <ArrowUp2 size={10} onClick={open(item.id)} />
+                ) : (
+                  <ArrowDown2 size={10} onClick={open(item.id)} />
+                ))}
+            </StyledItem>
+            {item.subGroups && (
+              <Collapse in={item.open} timeout="auto">
+                <AtGroupItem menu={item.subGroups} level={level + 1} />
+              </Collapse>
+            )}
+          </React.Fragment>
+        )
+      })}
     </StyledParent>
   )
 }
 
 const AtDropdownGroup: React.FunctionComponent = () => {
   const activeTab = useAppSelector((state) => getActiveTab(state))
-  const group = useAppSelector((state) => new Group(state.groups.data))
+  const topParenGroup = useAppSelector((state) => getTopGroup(state))
 
   return (
     <StyledParent
@@ -136,7 +141,7 @@ const AtDropdownGroup: React.FunctionComponent = () => {
       paddingLeft={'20px'}
     >
       <AtTypography color={grey2}>{activeTab.title}</AtTypography>
-      <AtGroupItem menu={group.subGroups || []} />
+      <AtGroupItem menu={topParenGroup?.subGroups || []} />
     </StyledParent>
   )
 }

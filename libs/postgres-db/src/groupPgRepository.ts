@@ -45,6 +45,10 @@ async function findGroups(groupSearch: GroupSearch): Promise<Group[]> {
         }
       }
     }
+    if (!result) {
+      result = groupFromEntity(resultProject.find((g) => g.id === parentId))
+      data.push(result)
+    }
     return result
   }
 
@@ -52,11 +56,7 @@ async function findGroups(groupSearch: GroupSearch): Promise<Group[]> {
     if (!group.parent) {
       groups.push(groupFromEntity(group))
     } else {
-      const correctGroup = searchGroup(resultProject, group.parent.id)
-      console.log('subGroups' in correctGroup )
-      if ('subGroups' in correctGroup === false) {
-        correctGroup.subGroups = []
-      }
+      const correctGroup = searchGroup(groups, group.parent.id)
       correctGroup?.subGroups?.push(groupFromEntity(group))
     }
   })

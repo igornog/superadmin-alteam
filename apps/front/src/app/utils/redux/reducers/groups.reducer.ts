@@ -37,16 +37,20 @@ const { reducer } = createSlice({
         state.error = action.error.message
       })
 
+      .addCase(handleAddGroup.pending, (state) => {
+        state.status = StatusType.Loading
+      })
       .addCase(handleAddGroup.fulfilled, (state, { payload }) => {
         const { data, targetId } = payload
         const currentNode = searchGroup(state.data, targetId)
 
-        console.log(currentNode)
         if (currentNode) {
           currentNode.subGroups.push(data as GroupInterface)
         } else {
           state.data.push(data as GroupInterface)
         }
+
+        state.status = StatusType.Succeeded
       })
 
       .addCase(handleSelectGroup.pending, (state) => {

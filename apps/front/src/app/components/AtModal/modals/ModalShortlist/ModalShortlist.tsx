@@ -12,7 +12,10 @@ import AtButton, {
   AtButtonKind,
   AtButtonVariant,
 } from '../../../AtButton/AtButton'
-import { useAppDispatch, useAppSelector } from '../../../../utils/hooks/reduxHook'
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../../utils/hooks/reduxHook'
 import { ModalSize } from '../../../../utils/redux/types/settings.type'
 import AtModal from '../../AtModal'
 import AtLine from '../../../AtLine/AtLine'
@@ -40,7 +43,12 @@ const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
   }, [dispatch, props.isOpen])
 
   const moveTalent = () => {
-    dispatch(handlePatchTalent({ id: selectedTalent.id, status: ListingStatus.Shortlisted }))
+    dispatch(
+      handlePatchTalent({
+        id: selectedTalent.id,
+        status: ListingStatus.Shortlisted,
+      }),
+    )
     props.onClose?.()
   }
 
