@@ -42,7 +42,7 @@ const ShortlistFolderListing: React.FunctionComponent = () => {
               <AtCreateFolder />
             </Grid>
           )
-        ) : (
+        ) : groups.data.length > 0 ? (
           groups.data.map((group: GroupInterface) => {
             const nbChildren = groups?.data?.length ?? false
 
@@ -56,16 +56,15 @@ const ShortlistFolderListing: React.FunctionComponent = () => {
               </Grid>
             )
           })
+        ) : (
+          <Grid item={true} xs={3}>
+            <AtCreateFolder />
+          </Grid>
         )
       ) : (
-        <>
-          <Grid item={true} xs={3}>
-            <AtFolder loading={true} />
-          </Grid>
-          <Grid item={true} xs={3}>
-            <AtFolder loading={true} />
-          </Grid>
-        </>
+        <Grid item={true} xs={3}>
+          <AtFolder loading={true} />
+        </Grid>
       )}
     </Grid>
   )

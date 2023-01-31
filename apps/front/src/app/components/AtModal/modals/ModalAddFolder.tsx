@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
@@ -22,13 +22,7 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
   const [folderName, setFolderName] = useState('')
   const activeFolder = useAppSelector((state) => getActiveGroup(state))
 
-  const [folder, setFolder] = useState(new Group({}))
-
-  useEffect(() => {
-    if (props.folder) {
-      setFolder(new Group(props.folder))
-    }
-  }, [props.folder])
+  const folder = new Group({ ...props.folder })
 
   const handleClose = () => {
     props.onClose?.()
@@ -36,7 +30,9 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
   }
 
   const addNewFolder = () => {
-    dispatch(handleAddGroup({ folderName, targetId: activeFolder.id }))
+    dispatch(
+      handleAddGroup({ folderName, targetId: folder.id ?? activeFolder.id }),
+    )
     handleClose()
   }
 

@@ -1,6 +1,6 @@
 import { Box, CircularProgress, Skeleton } from '@mui/material'
 import { Folder } from 'iconsax-react'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { black, grey3, grey5, white } from '../../utils/colors'
 import AtRightClick from '../AtRightClick/AtRightClick'
@@ -44,13 +44,7 @@ const AtFolder: React.FunctionComponent<AtFolderProps> = (
   const [openAssignFolderToClient, setOpenAssignFolderToClient] =
     useState(false)
 
-  const [folder, setFolder] = useState(new Group({}))
-
-  useEffect(() => {
-    if (props.folder) {
-      setFolder(new Group(props.folder))
-    }
-  }, [props.folder])
+  const folder = new Group({ ...props.folder })
 
   return (
     <>
