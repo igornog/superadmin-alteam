@@ -3,3 +3,5 @@ export * from './soloTalentPgRepository'
 
 export * from './clientPgRepository'
 export * from './listingPgRepository'
+
+export * from './groupPgRepository'

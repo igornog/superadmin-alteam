@@ -5,5 +5,4 @@ export interface SoloTalentAsset {
 
 export interface AssetService {
   createTalentAsset(talentId: string, file: SoloTalentAsset): Promise<string>
-
 }

@@ -9,10 +9,10 @@ import AtTypography from '../../AtTypography/AtTypography'
 import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtLine from '../../AtLine/AtLine'
 import AtModal from '../AtModal'
-import { TreeInterface } from '../../../utils/redux/types/tree.type'
 import { grey2, grey3, grey5 } from '../../../utils/colors'
 import styled from 'styled-components'
 import AtDropdown from '../../AtDropdown/AtDropdown'
+import { Group } from '../../../utils/redux/types/groups.type'
 
 const StyledDropdown = styled(AtDropdown)`
   justify-content: space-between;
@@ -105,7 +105,7 @@ const ModalAssignFolderToClient: React.FunctionComponent<
 }
 
 interface ModalAssignFolderToClientProps {
-  folder?: TreeInterface | undefined
+  folder?: Group | undefined
   isOpen: boolean
   onClose?: () => void
 }

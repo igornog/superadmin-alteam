@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { clientService } from '../../services/clientService'
 import { Client } from '../types/clients.type'
 import { ClientSearch } from '@yjcapp/app'
+import { clientService } from '../../services'
 
 export const handleClients = createAsyncThunk(
   'clients/initClients',

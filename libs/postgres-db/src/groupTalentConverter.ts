@@ -4,7 +4,7 @@ import { GroupTalentEntity } from './entities'
 
 export function groupTalentFromEntity(entity: GroupTalentEntity): GroupTalent {
   return {
-    id: entity.id.toString(),
+    id: entity.id,
     email: entity.email,
     phone: entity.phone,
     speciality: entity.speciality,
@@ -19,7 +19,7 @@ export function groupTalentToEntity(
   groupTalent: DeepPartial<GroupTalent>,
 ): DeepPartial<GroupTalentEntity> {
   return {
-    id: groupTalent.id ? parseInt(groupTalent.id) : undefined,
+    id: groupTalent.id,
     email: groupTalent.email,
     phone: groupTalent.phone,
     speciality: groupTalent.speciality,

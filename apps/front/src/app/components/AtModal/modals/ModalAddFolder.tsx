@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { CloseCircle, CloseSquare, TickSquare } from 'iconsax-react'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
@@ -10,23 +10,19 @@ import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtLine from '../../AtLine/AtLine'
 import AtModal from '../AtModal'
 import AtTextField from '../../AtTextField/AtTextField'
-import { Tree, TreeInterface } from '../../../utils/redux/types/tree.type'
-import { useAppDispatch } from '../../../utils/hooks/reduxHook'
-import { handleAddFolder } from '../../../utils/redux/actions/tree.action'
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
+import { handleAddGroup } from '../../../utils/redux/actions/group.action'
+import { Group, GroupInterface } from '../../../utils/redux/types/groups.type'
+import { getActiveGroup } from '../../../utils/redux/selectors/group.selector'
 
 const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
   props: ModalAddFolderProps,
 ) => {
   const dispatch = useAppDispatch()
   const [folderName, setFolderName] = useState('')
+  const activeFolder = useAppSelector((state) => getActiveGroup(state))
 
-  const [folder, setFolder] = useState(new Tree({}))
-
-  useEffect(() => {
-    if (props.folder) {
-      setFolder(new Tree(props.folder))
-    }
-  }, [props.folder])
+  const folder = new Group({ ...props.folder })
 
   const handleClose = () => {
     props.onClose?.()
@@ -34,10 +30,10 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
   }
 
   const addNewFolder = () => {
-    if (folder.id) {
-      dispatch(handleAddFolder({ folderName, targetId: folder.id }))
-      handleClose()
-    }
+    dispatch(
+      handleAddGroup({ folderName, targetId: folder.id ?? activeFolder.id }),
+    )
+    handleClose()
   }
 
   return (
@@ -97,7 +93,7 @@ const ModalAddFolder: React.FunctionComponent<ModalAddFolderProps> = (
 }
 
 interface ModalAddFolderProps {
-  folder?: TreeInterface | undefined
+  folder?: GroupInterface | undefined
   isOpen: boolean
   onClose?: () => void
 }

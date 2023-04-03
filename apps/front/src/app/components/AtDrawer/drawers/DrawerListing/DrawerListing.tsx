@@ -54,7 +54,7 @@ const DrawerListing: React.FunctionComponent<DrawerListingProps> = (
   const [collapseWhole, setCollapseWhole] = useState(false)
   const [openDrawer, setOpenDrawer] = useState(false)
 
-  const handleClickTalent = (id: string) => {
+  const handleClickTalent = (id: number) => {
     dispatch(handleSelectTalent(id))
     setOpenDrawer(true)
   }

@@ -45,7 +45,10 @@ const ClientMenu: React.FunctionComponent = () => {
       )}
 
       {isCurrentTabAllowed(RightClick.MoveToDeclined) && (
-        <AtContextMenuItem variant="danger" onSelect={() => console.log(undefined)}>
+        <AtContextMenuItem
+          variant="danger"
+          onSelect={() => console.log(undefined)}
+        >
           <AtTypography>
             <TrushSquare size={20} />
             {RightClick.MoveToDeclined}

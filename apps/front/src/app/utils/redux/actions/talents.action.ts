@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { talentService } from '../../services/talentService'
 import { Talent } from '../types/talents.type'
 import { TalentSearch } from '@yjcapp/app'
+import { talentService } from '../../services'
 
 export const handleTalents = createAsyncThunk(
   'talents/initTalents',
@@ -50,7 +50,7 @@ export const handlePatchTalent = createAsyncThunk(
 
 export const handleSelectTalent = createAsyncThunk(
   'talents/selectTalent',
-  async (idTalent: string | null) => {
+  async (idTalent: number | null) => {
     return idTalent
   },
 )

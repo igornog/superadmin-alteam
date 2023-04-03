@@ -3,13 +3,13 @@ import { ArrowLeft2, ArrowDown2 } from 'iconsax-react'
 import React, { useState } from 'react'
 import { white } from '../../utils/colors'
 import { useAppDispatch } from '../../utils/hooks/reduxHook'
-import { handleSelectFolder } from '../../utils/redux/actions/tree.action'
+import { handleSelectGroup } from '../../utils/redux/actions/group.action'
+import { Group } from '../../utils/redux/types/groups.type'
 import { Page } from '../../utils/redux/types/settings.type'
-import { Tree } from '../../utils/redux/types/tree.type'
 import { boxShadow } from '../../utils/theme'
 import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton'
 import AtLine from '../AtLine/AtLine'
-import AtDropdownTree from '../AtTree/AtDropdownTree'
+import AtDropdownGroup from '../AtGroup/AtDropdownGroup'
 import AtTypography from '../AtTypography/AtTypography'
 
 export const StyledContentPopover = styled(Collapse)<{
@@ -38,7 +38,9 @@ const AtTopTitle: React.FunctionComponent<AtTopTitle> = (props: AtTopTitle) => {
   const [openDropdown, setOpenDropdown] = useState(false)
 
   const handlePreviousFolder = () => {
-    dispatch(handleSelectFolder(props.activeFolder?.idParent))
+    dispatch(
+      handleSelectGroup({ idFolder: props.activeGroup?.id, goBack: true }),
+    )
   }
 
   const handleClose = () => {
@@ -53,7 +55,7 @@ const AtTopTitle: React.FunctionComponent<AtTopTitle> = (props: AtTopTitle) => {
         position={'relative'}
         gap={'5px'}
       >
-        {props.activeFolder.id && !props.activeFolder.isParent() && (
+        {props.activeGroup.id && !props.activeGroup.isParent() && (
           <Box
             display={'flex'}
             gap={'15px'}
@@ -76,11 +78,11 @@ const AtTopTitle: React.FunctionComponent<AtTopTitle> = (props: AtTopTitle) => {
           gap={'5px'}
         >
           <AtTypography variant={'h3'}>
-            {props.activeFolder.isParent() || !props.activeFolder.id
+            {props.activeGroup.isParent() || !props.activeGroup.id
               ? props.activeTab.title
-              : props.activeFolder.name}
+              : props.activeGroup.name}
           </AtTypography>
-          {props.activeFolder.id && !props.activeFolder.isParent() && (
+          {props.activeGroup.id && !props.activeGroup.isParent() && (
             <>
               <AtButton
                 startIcon={<StyledArrow size={10} opened={openDropdown} />}
@@ -98,7 +100,7 @@ const AtTopTitle: React.FunctionComponent<AtTopTitle> = (props: AtTopTitle) => {
                   in={openDropdown}
                   orientation={'vertical'}
                 >
-                  <AtDropdownTree />
+                  <AtDropdownGroup />
                 </StyledContentPopover>
               </Box>
             </>
@@ -111,7 +113,7 @@ const AtTopTitle: React.FunctionComponent<AtTopTitle> = (props: AtTopTitle) => {
 
 interface AtTopTitle {
   activeTab: Page
-  activeFolder: Tree
+  activeGroup: Group
 }
 
 export default AtTopTitle

@@ -8,19 +8,25 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '../../../../utils/hooks/reduxHook'
-import { handleLoadTree } from '../../../../utils/redux/actions/tree.action'
+import { handleLoadGroups } from '../../../../utils/redux/actions/group.action'
+import { getActiveTab } from '../../../../utils/redux/selectors/settings.selector'
 import { Column } from '../../../../utils/redux/types/settings.type'
+import { Talent } from '../../../../utils/redux/types/talents.type'
 import ShortlistFolderListing from './ShortlistFolderListing'
 import ShortlistTalentsHeader from './ShortlistTalentsHeader'
 
 const ShortlistTalentsView: React.FunctionComponent = () => {
   const talents = useAppSelector((state) => state.talents)
-  const listTalent = talents.listTalents
+  const activeTab = useAppSelector((state) => getActiveTab(state))
+
+  const listTalents = talents.listTalents.filter(
+    (talent: Talent) => talent.status === activeTab.status,
+  )
 
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(handleLoadTree())
+    dispatch(handleLoadGroups({}))
   }, [dispatch])
 
   return (
@@ -34,10 +40,11 @@ const ShortlistTalentsView: React.FunctionComponent = () => {
 
         <AtSpace direction={'vertical'} spacing={'20'} />
 
-        {listTalent.length === 0 ? (
+        {listTalents.length === 0 ? (
           <AtNoResult sentence={`No Shortlisted Talents`} />
         ) : (
           <TalentsSwitchMode
+            talents={listTalents}
             tableColumns={[
               Column.Talent,
               Column.Applied,

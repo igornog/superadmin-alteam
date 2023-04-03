@@ -77,7 +77,7 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
           about: about,
           skills: skills,
           portfolio,
-          assets: [],
+          assets: undefined,
           status: ListingStatus.Inbound,
         }),
       )
@@ -153,7 +153,7 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
         {props.step === 2 ? (
           <>
             <AtButton
-              onClick={handleClose}
+              onClick={createTalent}
               kind={AtButtonKind.Default}
               variant={AtButtonVariant.Outlined}
               name={'Skip & Done'}

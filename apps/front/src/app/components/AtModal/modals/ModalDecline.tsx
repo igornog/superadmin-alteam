@@ -20,9 +20,14 @@ const ModalDecline: React.FunctionComponent<ModalDeclineProps> = (
 ) => {
   const dispatch = useAppDispatch()
   const selectedTalent = useAppSelector((state) => getActiveTalent(state))
-  
+
   const moveTalent = () => {
-    dispatch(handlePatchTalent({ id: selectedTalent.id, status: ListingStatus.Declined }))
+    dispatch(
+      handlePatchTalent({
+        id: selectedTalent.id,
+        status: ListingStatus.Declined,
+      }),
+    )
     props.onClose?.()
   }
 
