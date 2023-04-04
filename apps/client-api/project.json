@@ -76,7 +76,7 @@
       "dependsOn": ["package"],
       "options": {
         "cwd": "apps/client-api/infrastructure",
-        "command": "../../../infrastructure/scripts/terraformStageWrapper.sh apply talent-api"
+        "command": "../../../infrastructure/scripts/terraformStageWrapper.sh apply client-api"
       }
     }
   },

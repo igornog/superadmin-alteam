@@ -16,13 +16,13 @@ const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
 ) => {
   const dispatch = useAppDispatch()
   const settings = useAppSelector((state) => state.settings)
-
+  
   const [openDrawer, setOpenDrawer] = useState(false)
   const [openShortlistModal, setOpenShortlistModal] = useState(false)
   const [openAcceptedModal, setOpenAcceptedModal] = useState(false)
   const [openEmailToTalent, setOpenEmailToTalent] = useState(false)
 
-  const handleClickTalent = (id: string) => {
+  const handleClickTalent = (id: number) => {
     dispatch(handleSelectTalent(id))
     setOpenDrawer(true)
   }
@@ -31,7 +31,7 @@ const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
     <Grid container={true} spacing={2.5} alignItems={'stretch'}>
       {settings.displayMode === DisplayMode.Grid ? (
         <TalentCard
-          talents={props.listTalents}
+          talents={props.talents}
           displayStatusTag={props.displayStatusTag}
           openTalent={handleClickTalent}
           openShortlist={() => setOpenShortlistModal(true)}
@@ -41,7 +41,7 @@ const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
       ) : (
         <Grid item={true} xs={12}>
           <TalentsTable
-            talents={props.listTalents}
+            talents={props.talents}
             openTalent={handleClickTalent}
             tableColumns={props.tableColumns}
             openShortlist={() => setOpenShortlistModal(true)}
@@ -76,7 +76,7 @@ const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
 
 interface TalentsSwitchModeProps {
   tableColumns: Column[]
-  listTalents: Talent[]
+  talents: Talent[]
   displayStatusTag?: boolean
 }
 

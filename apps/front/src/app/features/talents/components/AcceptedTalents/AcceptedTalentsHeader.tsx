@@ -5,12 +5,12 @@ import AtSwitchDisplayMode from '../../../../components/AtLayout/AtSwitchDisplay
 import AtTextField from '../../../../components/AtTextField/AtTextField'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
 import { useAppSelector } from '../../../../utils/hooks/reduxHook'
-import { getActiveFolder } from '../../../../utils/redux/selectors/tree.selector'
+import { getActiveGroup } from '../../../../utils/redux/selectors/group.selector'
 import { SortTypes } from '../../../../utils/redux/types/settings.type'
 import AtSortByDropdown from '../../../../components/AtDropdown/AtSortByDropdown'
 
 const AcceptedTalentsHeader: React.FunctionComponent = () => {
-  const activeFolder = useAppSelector((state) => getActiveFolder(state))
+  const activeFolder = useAppSelector((state) => getActiveGroup(state))
 
   const sortOptions = [
     { id: 0, value: null, label: 'None' },

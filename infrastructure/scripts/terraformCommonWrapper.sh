@@ -4,7 +4,7 @@ PROJECT=$2
 BASEDIR=$(dirname "$0")
 STAGE=$("$BASEDIR"/../../scripts/currentStage.sh)
 
-if [ "$KEY" = "prod" ]; then
+if [ "$STAGE" = "prod" ]; then
   ENVIRONMENT="prod"
 else
   ENVIRONMENT="int"

@@ -88,7 +88,7 @@ function soloTalentFormToSoloTalent(
     about,
     role,
     email,
-    assets: [file],
+    assets: [],
     skills: retrieveSkills(data),
   }
 }

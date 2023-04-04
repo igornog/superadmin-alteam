@@ -10,21 +10,21 @@ import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtLine from '../../AtLine/AtLine'
 import AtModal from '../AtModal'
 import AtTextField from '../../AtTextField/AtTextField'
-import { Tree, TreeInterface } from '../../../utils/redux/types/tree.type'
 import { useAppDispatch } from '../../../utils/hooks/reduxHook'
-import { handleAddFolder } from '../../../utils/redux/actions/tree.action'
+import { handleAddGroup } from '../../../utils/redux/actions/group.action'
+import { Group, GroupInterface } from '../../../utils/redux/types/groups.type'
 
 const ModalRenameFolder: React.FunctionComponent<ModalRenameFolderProps> = (
   props: ModalRenameFolderProps,
 ) => {
   const dispatch = useAppDispatch()
 
-  const [folder, setFolder] = useState(new Tree({}))
+  const [folder, setFolder] = useState(new Group({}))
   const [folderName, setFolderName] = useState('')
 
   useEffect(() => {
     if (props.folder) {
-      setFolder(new Tree(props.folder))
+      setFolder(new Group(props.folder))
       setFolderName(props.folder.name)
     }
   }, [props.folder])
@@ -36,7 +36,7 @@ const ModalRenameFolder: React.FunctionComponent<ModalRenameFolderProps> = (
 
   const addNewFolder = () => {
     if (folder.id) {
-      dispatch(handleAddFolder({ folderName, targetId: folder.id }))
+      dispatch(handleAddGroup({ folderName, targetId: folder.id }))
       handleClose()
     }
   }
@@ -94,7 +94,7 @@ const ModalRenameFolder: React.FunctionComponent<ModalRenameFolderProps> = (
 }
 
 interface ModalRenameFolderProps {
-  folder?: TreeInterface | undefined
+  folder?: GroupInterface | undefined
   isOpen: boolean
   onClose?: () => void
 }

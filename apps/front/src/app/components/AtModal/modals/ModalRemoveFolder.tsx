@@ -9,8 +9,8 @@ import AtTypography from '../../AtTypography/AtTypography'
 import { ModalSize } from '../../../utils/redux/types/settings.type'
 import AtLine from '../../AtLine/AtLine'
 import AtModal from '../AtModal'
-import { TreeInterface } from '../../../utils/redux/types/tree.type'
 import { grey2 } from '../../../utils/colors'
+import { GroupInterface } from '../../../utils/redux/types/groups.type'
 
 const ModalRemoveFolder: React.FunctionComponent<ModalRemoveFolderProps> = (
   props: ModalRemoveFolderProps,
@@ -82,7 +82,7 @@ const ModalRemoveFolder: React.FunctionComponent<ModalRemoveFolderProps> = (
 }
 
 interface ModalRemoveFolderProps {
-  folder?: TreeInterface | undefined
+  folder?: GroupInterface | undefined
   isOpen: boolean
   onClose?: () => void
 }

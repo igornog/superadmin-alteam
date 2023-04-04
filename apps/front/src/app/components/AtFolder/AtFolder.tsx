@@ -1,9 +1,8 @@
 import { Box, CircularProgress, Skeleton } from '@mui/material'
 import { Folder } from 'iconsax-react'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { black, grey3, grey5, white } from '../../utils/colors'
-import { Tree, TreeInterface } from '../../utils/redux/types/tree.type'
 import AtRightClick from '../AtRightClick/AtRightClick'
 import FolderMenu from '../AtRightClick/ContextMenus/FolderMenu'
 import AtTypography from '../AtTypography/AtTypography'
@@ -12,6 +11,7 @@ import ModalAssignFolderToClient from '../AtModal/modals/ModalAssignFolderToClie
 import ModalRemoveFolder from '../AtModal/modals/ModalRemoveFolder'
 import ModalRenameFolder from '../AtModal/modals/ModalRenameFolder'
 import ModalShareFolder from '../AtModal/modals/ModalShareFolder'
+import { Group, GroupInterface } from '../../utils/redux/types/groups.type'
 
 const StyledFolder = styled.div<{ minimize?: boolean }>`
   width: 100%;
@@ -44,13 +44,7 @@ const AtFolder: React.FunctionComponent<AtFolderProps> = (
   const [openAssignFolderToClient, setOpenAssignFolderToClient] =
     useState(false)
 
-  const [folder, setFolder] = useState(new Tree({}))
-
-  useEffect(() => {
-    if (props.folder) {
-      setFolder(new Tree(props.folder))
-    }
-  }, [props.folder])
+  const folder = new Group({ ...props.folder })
 
   return (
     <>
@@ -127,7 +121,7 @@ const AtFolder: React.FunctionComponent<AtFolderProps> = (
 }
 
 interface AtFolderProps {
-  folder?: TreeInterface
+  folder?: GroupInterface
   loading?: boolean
   minimize?: boolean
   onClick?: (e: React.MouseEvent) => void

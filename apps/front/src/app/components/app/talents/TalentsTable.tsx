@@ -228,7 +228,7 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
 
 interface TalentsTableProps {
   talents: Talent[]
-  openTalent: (id: string) => void
+  openTalent: (id: number) => void
   openShortlist: () => void
   openAccepted: () => void
   openEmailToTalent: () => void

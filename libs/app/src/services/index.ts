@@ -1,4 +1,6 @@
 export * from './authService'
+export * from './assetService'
 export * from './talentService'
 export * from './clientService'
 export * from './listingService'
+export * from './groupService'

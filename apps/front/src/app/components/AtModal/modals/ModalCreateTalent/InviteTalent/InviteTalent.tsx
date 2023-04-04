@@ -59,7 +59,6 @@ const InviteTalent: React.FunctionComponent<InviteTalentProps> = (
         />
 
         <AtButton
-          onClick={() => console.log('test')}
           kind={AtButtonKind.Success}
           variant={AtButtonVariant.Contained}
           name={'Invite'}

@@ -4,11 +4,15 @@
   "projects": {
     "api-utils": "libs/api-utils",
     "app": "libs/app",
+    "asset-api": "apps/asset-api",
     "auth-api": "apps/auth-api",
     "client-api": "apps/client-api",
     "front": "apps/front",
+    "group-api": "apps/group-api",
     "infrastructure": "infrastructure",
     "listing-api": "apps/listing-api",
+    "listing-app": "apps/listing-app",
+    "listing-app-e2e": "apps/listing-app-e2e",
     "postgres-db": "libs/postgres-db",
     "talent": "libs/talent",
     "talent-api": "apps/talent-api"

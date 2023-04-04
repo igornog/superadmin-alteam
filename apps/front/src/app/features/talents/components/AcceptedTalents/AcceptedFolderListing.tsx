@@ -6,32 +6,51 @@ import {
   useAppSelector,
   useAppDispatch,
 } from '../../../../utils/hooks/reduxHook'
-import { handleSelectFolder } from '../../../../utils/redux/actions/tree.action'
-import { getActiveFolder } from '../../../../utils/redux/selectors/tree.selector'
+import { handleSelectGroup } from '../../../../utils/redux/actions/group.action'
+import { getActiveGroup } from '../../../../utils/redux/selectors/group.selector'
+import { GroupInterface } from '../../../../utils/redux/types/groups.type'
 import { StatusType } from '../../../../utils/redux/types/status.type'
-import { Tree, TreeInterface } from '../../../../utils/redux/types/tree.type'
 
 const AcceptedFolderListing: React.FunctionComponent = () => {
-  const tree = useAppSelector((state) => state.tree)
+  const groups = useAppSelector((state) => state.groups)
   const dispatch = useAppDispatch()
-  const folder = useAppSelector((state) => getActiveFolder(state))
-  const selectedFolder = folder ?? new Tree(tree.data)
-  const nbChildren = selectedFolder?.children?.length ?? false
+  const selectedFolder = useAppSelector((state) => getActiveGroup(state))
+  const nbChildren = selectedFolder?.subGroups?.length ?? false
 
-  const selectFolder = (idFolder: string) => {
-    dispatch(handleSelectFolder(idFolder))
+  const selectFolder = (idFolder: number) => {
+    dispatch(handleSelectGroup({ idFolder }))
   }
 
   return (
     <Grid container={true} spacing={2.5}>
-      {tree.status === StatusType.Succeeded ? (
-        selectedFolder.hasChildren() ? (
-          selectedFolder.children?.map((item: TreeInterface) => {
+      {groups.status === StatusType.Succeeded ? (
+        selectedFolder.id ? (
+          selectedFolder.hasChildren() ? (
+            selectedFolder.subGroups?.map((item: GroupInterface) => {
+              return (
+                <Grid item={true} xs={nbChildren > 4 ? 2.4 : 3} key={item.id}>
+                  <AtFolder
+                    folder={item}
+                    onClick={() => selectFolder(item.id)}
+                    minimize={nbChildren > 4}
+                  />
+                </Grid>
+              )
+            })
+          ) : (
+            <Grid item={true} xs={3}>
+              <AtCreateFolder />
+            </Grid>
+          )
+        ) : groups.data.length > 0 ? (
+          groups.data.map((group: GroupInterface) => {
+            const nbChildren = groups?.data?.length ?? false
+
             return (
-              <Grid item={true} xs={nbChildren > 4 ? 2.4 : 3}>
+              <Grid item={true} xs={nbChildren > 4 ? 2.4 : 3} key={group.id}>
                 <AtFolder
-                  folder={item}
-                  onClick={() => selectFolder(item.id)}
+                  folder={group}
+                  onClick={() => selectFolder(group.id)}
                   minimize={nbChildren > 4}
                 />
               </Grid>

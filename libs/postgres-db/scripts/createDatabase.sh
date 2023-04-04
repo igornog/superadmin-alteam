@@ -1,6 +1,6 @@
 #!/bin/sh
 BASEDIR=$(dirname "$0")
-STAGE=$("$BASEDIR"/../../../scripts/extractIssueId.sh)
+STAGE=$("$BASEDIR"/../../../scripts/currentStage.sh)
 if [ "$STAGE" = "prod" ]
 then
   echo "Not creating database because running in prod"

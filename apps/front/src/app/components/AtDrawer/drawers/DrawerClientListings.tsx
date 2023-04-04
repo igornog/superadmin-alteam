@@ -23,9 +23,6 @@ import AtButton, {
 import ModalEditClient from '../../AtModal/modals/ModalEditClient'
 import AtTextField from '../../AtTextField/AtTextField'
 import AtTypography from '../../AtTypography/AtTypography'
-import AtDrawer from '../AtDrawer'
-import DrawerListing from './DrawerListing/DrawerListing'
-import DrawerCreateListing from './DrawerCreateListing/DrawerCreateListing'
 import { StyledNavPage } from '../../AtNavPage/AtNavPage'
 import AtTab from '../../AtTab/AtTab'
 import { ListingType } from '@yjcapp/app'
@@ -95,160 +92,142 @@ const DrawerClientListings: React.FunctionComponent<
   }, [dispatch, listingFilter, props.open, selectedClient.id])
 
   return (
-    <AtDrawer
-      size={'calc(100% - 145px)'}
-      backgroundColor={'#F7F8FE'}
-      withBackdrop={false}
-      open={props.open}
-      handleClose={props.handleClose}
-    >
-      <Grid container={true}>
-        <Grid xs={8}>
-          <Box display={'flex'} padding={'25px 20px 0 20px'}>
-            <Box display={'flex'} gap={'5px'} alignItems={'center'}>
-              <AtButton
-                variant={AtButtonVariant.Contained}
-                startIcon={<ArrowLeft2 />}
-                kind={AtButtonKind.Default}
-                onClick={props.handleClose}
-              />
-              <AtTypography color={grey2}>
-                Back to {activeTab.title}
-              </AtTypography>
-            </Box>
-          </Box>
 
+    <Grid container={true}>
+      <Grid xs={8}>
+        <Box display={'flex'} padding={'25px 20px 0 20px'}>
+          <Box display={'flex'} gap={'5px'} alignItems={'center'}>
+            <AtButton
+              variant={AtButtonVariant.Contained}
+              startIcon={<ArrowLeft2 />}
+              kind={AtButtonKind.Default}
+              onClick={props.handleClose}
+            />
+            <AtTypography color={grey2}>
+              Back to {activeTab.title}
+            </AtTypography>
+          </Box>
+        </Box>
+
+        <Box
+          display={'flex'}
+          flexDirection={'column'}
+          padding={'30px 20px 25px 20px'}
+          gap={'25px'}
+        >
           <Box
             display={'flex'}
-            flexDirection={'column'}
-            padding={'30px 20px 25px 20px'}
-            gap={'25px'}
+            justifyContent={'space-between'}
+            alignItems={'center'}
           >
-            <Box
-              display={'flex'}
-              justifyContent={'space-between'}
-              alignItems={'center'}
-            >
-              <Box display={'flex'} gap={'20px'} alignItems={'center'}>
-                <Box display={'flex'} gap={'10px'}>
-                  <ClientLogo logo={selectedClient.logo} width={'40px'} />
-                  <AtTypography variant={'h3'}>
-                    {selectedClient.companyName}
-                  </AtTypography>
-                </Box>
-                <AtButton
-                  padding={'0'}
-                  kind={AtButtonKind.Default}
-                  variant={AtButtonVariant.Text}
-                  onClick={() => setOpenEditModal(true)}
-                  name={'Edit'}
-                  startIcon={<Edit size={16} />}
-                  fontSize={'14px'}
-                />
-              </Box>
-
-              <AtButton
-                kind={AtButtonKind.Default}
-                variant={AtButtonVariant.Text}
-                startIcon={<Import />}
-                fontSize={'14px'}
-                name={'Download CSV'}
-              />
-            </Box>
-
-            <Company client={selectedClient} />
-
-            <Client client={selectedClient} />
-
-            <Notes />
-          </Box>
-
-          <ModalEditClient
-            open={openEditModal}
-            onClose={() => setOpenEditModal(false)}
-          />
-        </Grid>
-        <Grid xs={4}>
-          <StyledListings paddingTop={'30px'} paddingX={'20px'}>
-            <Box display={'flex'} justifyContent={'space-between'}>
-              <AtTypography variant={'h4'}>All Listings</AtTypography>
-              <AtButton
-                kind={AtButtonKind.Success}
-                variant={AtButtonVariant.Contained}
-                startIcon={<AddCircle />}
-                name={'Create Listing'}
-                onClick={createListing}
-              />
-            </Box>
-
-            <StyledNavPage>
-              <AtTab
-                label={'Project'}
-                badge={listProjects.length}
-                $active={listingFilter === ListingType.Project}
-                width={'50%'}
-                onClick={() => setListingFilter(ListingType.Project)}
-              />
-              <AtTab
-                label={'Teams'}
-                badge={listTeams.length}
-                width={'50%'}
-                $active={listingFilter === ListingType.Team}
-                onClick={() => setListingFilter(ListingType.Team)}
-              />
-            </StyledNavPage>
-
-            <AtTextField
-              disabled={!listListings?.length}
-              startIcon={<SearchNormal1 />}
-              placeholder={
-                'Search in ' + selectedClient.companyName + ' Listings...'
-              }
-            />
-
-            {listListings.length === 0 ? (
-              <Box
-                display={'flex'}
-                alignItems={'center'}
-                justifyContent={'center'}
-                height={'70%'}
-              >
-                <AtTypography variant={'h3'} color={grey3}>
-                  No Active Listings
+            <Box display={'flex'} gap={'20px'} alignItems={'center'}>
+              <Box display={'flex'} gap={'10px'}>
+                <ClientLogo logo={selectedClient.logo} width={'40px'} />
+                <AtTypography variant={'h3'}>
+                  {selectedClient.companyName}
                 </AtTypography>
               </Box>
-            ) : (
-              <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
-                {listListings.map((listing: Listing) => (
-                  <AtListingCard
-                    listing={listing}
-                    key={listing.id}
-                    onClick={() => selectListing(listing)}
-                  />
-                ))}
-              </Box>
-            )}
-          </StyledListings>
-        </Grid>
+              <AtButton
+                padding={'0'}
+                kind={AtButtonKind.Default}
+                variant={AtButtonVariant.Text}
+                onClick={() => setOpenEditModal(true)}
+                name={'Edit'}
+                startIcon={<Edit size={16} />}
+                fontSize={'14px'}
+              />
+            </Box>
+
+            <AtButton
+              kind={AtButtonKind.Default}
+              variant={AtButtonVariant.Text}
+              startIcon={<Import />}
+              fontSize={'14px'}
+              name={'Download CSV'}
+            />
+          </Box>
+
+          <Company client={selectedClient} />
+
+          <Client client={selectedClient} />
+
+          <Notes />
+        </Box>
+
+        <ModalEditClient
+          open={openEditModal}
+          onClose={() => setOpenEditModal(false)}
+        />
       </Grid>
+      <Grid xs={4}>
+        <StyledListings paddingTop={'30px'} paddingX={'20px'}>
+          <Box display={'flex'} justifyContent={'space-between'}>
+            <AtTypography variant={'h4'}>All Listings</AtTypography>
+            <AtButton
+              kind={AtButtonKind.Success}
+              variant={AtButtonVariant.Contained}
+              startIcon={<AddCircle />}
+              name={'Create Listing'}
+              onClick={createListing}
+            />
+          </Box>
 
-      <DrawerListing
-        open={openListingDetails}
-        selectedListing={selectedListing}
-        handleClose={() => setOpenListingDetails(false)}
-      />
+          <StyledNavPage>
+            <AtTab
+              label={'Project'}
+              badge={listProjects.length}
+              $active={listingFilter === ListingType.Project}
+              width={'50%'}
+              onClick={() => setListingFilter(ListingType.Project)}
+            />
+            <AtTab
+              label={'Teams'}
+              badge={listTeams.length}
+              width={'50%'}
+              $active={listingFilter === ListingType.Team}
+              onClick={() => setListingFilter(ListingType.Team)}
+            />
+          </StyledNavPage>
 
-      <DrawerCreateListing
-        open={openCreateListing}
-        handleClose={() => setOpenCreateListing(false)}
-      />
-    </AtDrawer>
+          <AtTextField
+            disabled={!listListings?.length}
+            startIcon={<SearchNormal1 />}
+            placeholder={
+              'Search in ' + selectedClient.companyName + ' Listings...'
+            }
+          />
+
+          {listListings.length === 0 ? (
+            <Box
+              display={'flex'}
+              alignItems={'center'}
+              justifyContent={'center'}
+              height={'70%'}
+            >
+              <AtTypography variant={'h3'} color={grey3}>
+                No Active Listings
+              </AtTypography>
+            </Box>
+          ) : (
+            <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
+              {listListings.map((listing: Listing) => (
+                <AtListingCard
+                  listing={listing}
+                  key={listing.id}
+                  onClick={() => selectListing(listing)}
+                />
+              ))}
+            </Box>
+          )}
+        </StyledListings>
+      </Grid>
+    </Grid>
   )
 }
 
 interface DrawerClientListingsProps {
-  open: boolean
-  handleClose: () => void
+  open?: boolean
+  handleClose?: () => void
 }
 
 export default DrawerClientListings

@@ -11,12 +11,12 @@ import AtTextField from '../../../../components/AtTextField/AtTextField'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
 import { grey2 } from '../../../../utils/colors'
 import { useAppDispatch, useAppSelector } from '../../../../utils/hooks/reduxHook'
-import { getActiveFolder } from '../../../../utils/redux/selectors/tree.selector'
+import { getActiveGroup } from '../../../../utils/redux/selectors/group.selector'
 import { handleActiveSort } from '../../../../utils/redux/actions/settings.action'
 import { SortTypes } from '../../../../utils/redux/types/settings.type'
 
 const ShortlistTalentsHeader: React.FunctionComponent = () => {
-  const activeFolder = useAppSelector((state) => getActiveFolder(state))
+  const activeFolder = useAppSelector((state) => getActiveGroup(state))
   const dispatch = useAppDispatch()
 
   const handleSort = (item: DropdownItem) => {

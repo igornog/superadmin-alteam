@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { grey5, grey3, black } from '../../utils/colors'
 import { useAppSelector } from '../../utils/hooks/reduxHook'
-import { getActiveFolder } from '../../utils/redux/selectors/tree.selector'
+import { getActiveGroup } from '../../utils/redux/selectors/group.selector'
 import ModalAddFolder from '../AtModal/modals/ModalAddFolder'
 import AtTypography from '../AtTypography/AtTypography'
 
@@ -29,7 +29,7 @@ const StyledFolder = styled.div`
 
 const AtCreateFolder: React.FunctionComponent = () => {
   const [openCreateFolder, setOpenCreateFolder] = useState(false)
-  const activeFolder = useAppSelector((state) => getActiveFolder(state))
+  const activeFolder = useAppSelector((state) => getActiveGroup(state))
 
   return (
     <>

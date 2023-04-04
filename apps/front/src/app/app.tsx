@@ -9,7 +9,7 @@ import {
   Briefcase,
   Setting2,
   Category,
-  MonitorMobbile
+  MonitorMobbile,
 } from 'iconsax-react'
 import Clients from './features/clients'
 export const Navigation: NavigationProps[] = [

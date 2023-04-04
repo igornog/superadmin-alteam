@@ -1,5 +1,5 @@
 export interface GroupTalent {
-  id: string
+  id: number
   email: string
   phone: string
   speciality: string
@@ -10,7 +10,7 @@ export interface GroupTalent {
 }
 
 export interface SoloTalent {
-  id: string
+  id: number
   firstName: string
   lastName: string
   experience: Experience
@@ -20,7 +20,7 @@ export interface SoloTalent {
   role: string
   email: string
   about: string
-  assets?: string[]
+  assets?: Asset[]
   skills: string[]
   appliedDate?: Date
   phoneNumber?: string
@@ -30,6 +30,10 @@ export interface SoloTalent {
   status?: ListingStatus
 }
 
+export interface Asset {
+  name: string
+  link: string
+}
 export interface Link {
   id?: string
   name?: string

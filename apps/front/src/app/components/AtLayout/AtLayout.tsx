@@ -11,7 +11,6 @@ import styled from 'styled-components'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook'
 import { handleCollapsePanel } from '../../utils/redux/actions/app.action'
 import { getActiveTab } from '../../utils/redux/selectors/settings.selector'
-import { getActiveFolder } from '../../utils/redux/selectors/tree.selector'
 import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton'
 import DrawerCreateClient from '../AtDrawer/drawers/DrawerCreateClient/DrawerCreateClient'
 import ModalAddFolder from '../AtModal/modals/ModalAddFolder'
@@ -29,6 +28,7 @@ import debounce from 'lodash.debounce'
 import { handleUpdateFilter } from '../../utils/redux/actions/settings.action'
 import AtSortByDropdown from '../AtDropdown/AtSortByDropdown'
 import { SortTypes } from '../../utils/redux/types/settings.type'
+import { getActiveGroup } from '../../utils/redux/selectors/group.selector'
 
 const StyledContent = styled(Grid) <{ $sidePanelSize?: string }>`
   overflow: hidden;
@@ -54,7 +54,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
   const app = useAppSelector((state) => state.app)
 
   const dispatch = useAppDispatch()
-  const activeFolder = useAppSelector((state) => getActiveFolder(state))
+  const activeGroup = useAppSelector((state) => getActiveGroup(state))
 
   const debouncedSearch = debounce((searchValue: string) => {
     dispatch(handleUpdateFilter({ searchName: searchValue }))
@@ -94,10 +94,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                   justifyContent={'space-between'}
                   marginTop={'30px'}
                 >
-                  <AtTopTitle
-                    activeTab={activeTab}
-                    activeFolder={activeFolder}
-                  />
+                  <AtTopTitle activeTab={activeTab} activeGroup={activeGroup} />
 
                   <Box display={'flex'} gap={'30px'}>
                     {activeTab.settings.downloadCSV && (
@@ -111,7 +108,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                     )}
 
                     {activeTab.settings.shareFolder &&
-                      !activeFolder.isParent() && (
+                      !activeGroup.isParent() && (
                         <>
                           <AtButton
                             kind={AtButtonKind.Default}
@@ -122,7 +119,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                           />
 
                           <ModalShareFolder
-                            folder={activeFolder}
+                            folder={activeGroup}
                             isOpen={openShareFolder}
                             onClose={() => setOpenShareFolder(false)}
                           />
@@ -174,7 +171,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                         />
 
                         <ModalAddFolder
-                          folder={activeFolder}
+                          folder={activeGroup}
                           isOpen={openCreateFolder}
                           onClose={() => setOpenCreateFolder(false)}
                         />

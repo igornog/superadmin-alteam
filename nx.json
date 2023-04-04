@@ -45,6 +45,7 @@
     "@nrwl/react": {
       "application": {
         "style": "styled-components",
+        "unitTestRunner": "jest",
         "linter": "eslint",
         "babel": true
       },
@@ -53,6 +54,7 @@
       },
       "library": {
         "style": "styled-components",
+        "unitTestRunner": "jest",
         "linter": "eslint"
       }
     }
