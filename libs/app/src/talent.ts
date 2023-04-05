@@ -66,6 +66,7 @@ export enum Availability {
 }
 
 export enum ListingStatus {
+  All = '',
   Shortlisted = 'shortlisted',
   Declined = 'declined',
   Accepted = 'accepted',
@@ -76,6 +77,7 @@ export enum ListingStatus {
 
 export interface TalentSearch {
   skills?: string[]
+  sort?: string | null
   experience?: string
   availability?: Availability[]
   role?: string

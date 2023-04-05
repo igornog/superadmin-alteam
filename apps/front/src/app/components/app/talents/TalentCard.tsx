@@ -6,9 +6,11 @@ import AtTalentCard from '../../AtCard/AtTalentCard'
 const TalentCard: React.FunctionComponent<TalentCardProps> = (
   props: TalentCardProps,
 ) => {
+  const listTalents = props.talents.filter(item => item)
+  
   return (
     <>
-      {props.talents.map((talent: Talent) => (
+      {listTalents.map((talent: Talent) => (
         <Grid
           item={true}
           xs={6}

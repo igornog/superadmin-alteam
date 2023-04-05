@@ -3,13 +3,13 @@ import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
 import { handleSelectTalent } from '../../../utils/redux/actions/talents.action'
 import { DisplayMode, Column } from '../../../utils/redux/types/settings.type'
-import { Talent } from '../../../utils/redux/types/talents.type'
 import DrawerTalent from '../../AtDrawer/drawers/DrawerTalent'
 import ModalAccepted from '../../AtModal/modals/ModalAccepted/ModalAccepted'
 import ModalEmailToTalent from '../../AtModal/modals/ModalEmailToTalent'
 import ModalShortlist from '../../AtModal/modals/ModalShortlist/ModalShortlist'
 import TalentCard from './TalentCard'
 import TalentsTable from './TalentsTable'
+import { Talent } from '../../../utils/redux/types/talents.type'
 
 const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
   props: TalentsSwitchModeProps,
@@ -75,8 +75,8 @@ const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
 }
 
 interface TalentsSwitchModeProps {
-  talents: Talent[]
   tableColumns: Column[]
+  talents: Talent[]
   displayStatusTag?: boolean
 }
 

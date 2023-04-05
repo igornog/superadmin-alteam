@@ -14,20 +14,22 @@ import { Column } from '../../../../utils/redux/types/settings.type'
 import { Talent } from '../../../../utils/redux/types/talents.type'
 import ShortlistFolderListing from './ShortlistFolderListing'
 import ShortlistTalentsHeader from './ShortlistTalentsHeader'
+import { sortBy } from '../../../../utils/helpers'
 
 const ShortlistTalentsView: React.FunctionComponent = () => {
+  const settings = useAppSelector((state) => state.settings)
   const talents = useAppSelector((state) => state.talents)
   const activeTab = useAppSelector((state) => getActiveTab(state))
-
-  const listTalents = talents.listTalents.filter(
-    (talent: Talent) => talent.status === activeTab.status,
-  )
-
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     dispatch(handleLoadGroups({}))
   }, [dispatch])
+
+  const listTalents = talents.listTalents.filter(
+    (talent: Talent) => talent.status === activeTab.status,
+  )
+  const talentsSorted = settings.sort ? sortBy(settings.sort, talents.listTalents) : talents.listTalents
 
   return (
     <Grid container={true}>
@@ -44,7 +46,7 @@ const ShortlistTalentsView: React.FunctionComponent = () => {
           <AtNoResult sentence={`No Shortlisted Talents`} />
         ) : (
           <TalentsSwitchMode
-            talents={listTalents}
+            talents={talentsSorted}
             tableColumns={[
               Column.Talent,
               Column.Applied,

@@ -39,7 +39,7 @@ const TalentsView: React.FunctionComponent = () => {
   }, [activeTab, dispatch, settings.tabs])
 
   useEffect(() => {
-    if (settingsLoaded) {
+    if (activeTab) {
       dispatch(
         handleTalents({
           talentName: settings.filters.searchName || '',
@@ -47,22 +47,26 @@ const TalentsView: React.FunctionComponent = () => {
             ?.filter((skill) => skill.active)
             .map((item: Filter) => item.label),
 
+          sort: settings.sort,
+
           availability: settings.filters.jobTypes
             ?.filter((jobType) => jobType.active)
             .map((item: Filter) => item.label as Availability),
 
-          status: activeTab?.status?.toLowerCase(),
+          status: activeTab?.status,
         }),
       )
     }
-  }, [
-    activeTab?.status,
-    dispatch,
-    settings.filters.jobTypes,
-    settings.filters.searchName,
-    settings.filters.skills,
-    settingsLoaded,
-  ])
+  },
+    [
+      activeTab,
+      dispatch,
+      settings.filters.jobTypes,
+      settings.filters.skills,
+      settings.sort,
+      settings.filters.searchName,
+    ]
+  )
 
   return (
     <AtLayout
@@ -70,7 +74,7 @@ const TalentsView: React.FunctionComponent = () => {
       sidePanelIcon={<FilterSquare size={20} />}
       sidePanelSize={'small'}
     >
-      {talentsTabs.filter((item) => item.title === activeTab?.title)[0]?.node}
+      {talentsTabs.filter((item) => item.status === activeTab?.status)[0]?.node}
     </AtLayout>
   )
 }

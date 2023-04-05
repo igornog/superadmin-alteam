@@ -4,6 +4,7 @@ import Linkedin from '../assets/images/icons/Linkedin.svg'
 import Stackoverflow from '../assets/images/icons/Stackoverflow.svg'
 import Twitter from '../assets/images/icons/Twitter.svg'
 import { green } from './colors'
+import { SortTypes } from './redux/types/settings.type'
 import { Currency } from '@yjcapp/app'
 
 export const convertHexToRGBA = (hexCode: string, opacity = 1) => {
@@ -106,6 +107,40 @@ export const stringMatch = (fullString: string, toMatch: string) => {
   )
 }
 
+const groupBy = (array: any[], key: string) => {
+  return array.reduce((result, currentValue) => {
+    (result[currentValue[key]] = result[currentValue[key]] || []).push(
+      currentValue
+    );
+    return result;
+  }, {});
+};
+
+export const sortByStatus = (array: any[]) => {
+  const listTalentsByGroup: string | any[] = []
+  const statusGroup = groupBy(array, 'status')
+
+  return listTalentsByGroup.concat(statusGroup.inbound, statusGroup.shortlisted, statusGroup.accepted)
+}
+
+export const sortBy = (sort: string, talents: any[]) => {
+  let arrayForSort = []
+  let listSorted = []
+
+  switch (sort) {
+    case SortTypes.Alphabetical:
+      arrayForSort = [...talents]
+      listSorted = arrayForSort.sort((a, b) => (a.firstName > b.firstName) ? 1 : -1)
+      break;
+    case SortTypes.MostRecent:
+      arrayForSort = [...talents]
+      listSorted = arrayForSort.sort((a: any, b: any) => (a.appliedDate < b.appliedDate) ? 1 : -1)
+      break;
+  }
+
+  listSorted.filter(item => item)
+  return listSorted
+}
 export const getCurrencySymbol = (label?: Currency) => {
   switch (label) {
     case Currency.Dollars:
