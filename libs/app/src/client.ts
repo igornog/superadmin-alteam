@@ -2,8 +2,8 @@ export interface SoloClient {
   id?: number
   logo?: string
   companyName: string
-  phoneNumber: string
-  companyUrl: string
+  phoneNumber?: string
+  companyUrl?: string
   linkedinUrl?: string
   industry?: string
   projectType?: ProjectType

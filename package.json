@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "start": "npx nx serve front",
-    "all": "npx nx run-many --target=serve --projects=$(ls -d apps/*/ | tr -d / | paste -sd ',') --parallel=$(ls -d apps/*/ | wc -l | tr -d ' ')",
+    "start-listing-app": "npx nx serve listing-app",
+    "all": "npx nx run-many --target=serve --exclude=listing-app --projects=$(ls -d apps/*/ | tr -d / | paste -sd ',') --parallel=$(ls -d apps/*/ | wc -l | tr -d ' ')",
     "storybook": "npx nx run front:storybook",
     "build-storybook": "npx nx run front:build-storybook",
     "chromatic": "npx chromatic --force-rebuild",
