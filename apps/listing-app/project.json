@@ -17,8 +17,7 @@
         "polyfills": "apps/listing-app/src/polyfills.ts",
         "tsConfig": "apps/listing-app/tsconfig.app.json",
         "assets": [
-          "apps/listing-app/src/favicon.ico",
-          "apps/listing-app/src/assets"
+          "apps/listing-app/src/favicon.ico"
         ],
         "styles": [],
         "scripts": [],
