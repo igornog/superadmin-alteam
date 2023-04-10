@@ -5,16 +5,29 @@ import {
   AtButtonKind,
   AtButtonVariant,
 } from '../../../../components/AtButton/AtButton'
-import AtDropdown from '../../../../components/AtDropdown/AtDropdown'
+import AtDropdown, { DropdownItem } from '../../../../components/AtDropdown/AtDropdown'
 import AtSwitchDisplayMode from '../../../../components/AtLayout/AtSwitchDisplayMode'
 import AtTextField from '../../../../components/AtTextField/AtTextField'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
 import { grey2 } from '../../../../utils/colors'
-import { useAppSelector } from '../../../../utils/hooks/reduxHook'
+import { useAppDispatch, useAppSelector } from '../../../../utils/hooks/reduxHook'
 import { getActiveGroup } from '../../../../utils/redux/selectors/group.selector'
+import { handleActiveSort } from '../../../../utils/redux/actions/settings.action'
+import { SortTypes } from '../../../../utils/redux/types/settings.type'
 
 const ShortlistTalentsHeader: React.FunctionComponent = () => {
   const activeFolder = useAppSelector((state) => getActiveGroup(state))
+  const dispatch = useAppDispatch()
+
+  const handleSort = (item: DropdownItem) => {
+    dispatch(handleActiveSort({ sort: item.value as string }))
+  }
+
+  const sortOptions = [
+    { id: 0, value: null, label: 'None' },
+    { id: 1, value: SortTypes.Alphabetical, label: 'A to Z' },
+    { id: 2, value: SortTypes.MostRecent, label: 'Most Recent' },
+  ]
 
   return (
     <Box
@@ -29,9 +42,8 @@ const ShortlistTalentsHeader: React.FunctionComponent = () => {
       <Box display={'flex'} gap={'30px'} alignItems={'center'} flex={2}>
         <AtTextField
           startIcon={<SearchNormal1 />}
-          placeholder={`Search in ${
-            activeFolder.isParent() ? 'Shortlisted talents' : activeFolder.name
-          }...`}
+          placeholder={`Search in ${activeFolder.isParent() ? 'Shortlisted talents' : activeFolder.name
+            }...`}
           value={''}
         />
 
@@ -50,12 +62,10 @@ const ShortlistTalentsHeader: React.FunctionComponent = () => {
             </AtTypography>
             <AtDropdown
               placeholder={'None'}
-              $listItems={[
-                { id: 0, value: 'None', label: 'None' },
-                { id: 1, value: 'None', label: 'None' },
-              ]}
+              $listItems={sortOptions}
               kind={AtButtonKind.Default}
               variant={AtButtonVariant.Contained}
+              handleSelect={handleSort}
             />
           </Box>
         </Box>

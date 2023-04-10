@@ -10,15 +10,14 @@
       "defaultConfiguration": "production",
       "options": {
         "compiler": "babel",
-        "outputPath": "dist/apps/listing-app",
+        "outputPath": "apps/listing-app/dist",
         "index": "apps/listing-app/src/index.html",
         "baseHref": "/",
         "main": "apps/listing-app/src/main.tsx",
         "polyfills": "apps/listing-app/src/polyfills.ts",
         "tsConfig": "apps/listing-app/tsconfig.app.json",
         "assets": [
-          "apps/listing-app/src/favicon.ico",
-          "apps/listing-app/src/assets"
+          "apps/listing-app/src/favicon.ico"
         ],
         "styles": [],
         "scripts": [],
@@ -78,7 +77,22 @@
         "jestConfig": "apps/listing-app/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        {
+          "params": "forward",
+          "target": "build",
+          "projects": "self"
+        }
+      ],
+      "options": {
+        "cwd": "apps/listing-app/infrastructure",
+        "command": "../../../infrastructure/scripts/terraformStageWrapper.sh apply listing-app"
+      }
     }
   },
+
   "tags": []
 }

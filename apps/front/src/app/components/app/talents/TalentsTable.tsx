@@ -44,7 +44,8 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
   const skillsRef = useRef<any>(null)
   const windowSize = useWindowSize()
   const settings = useAppSelector((state) => state.settings)
-
+  const listTalents = props.talents.filter(item => item)
+  
   useEffect(() => {
     setMaxItemPerLine(Math.floor(skillsRef.current?.clientWidth / 100))
   }, [windowSize])
@@ -74,152 +75,151 @@ const TalentsTable: React.FunctionComponent<TalentsTableProps> = (
         </AtTableRow>
       </AtTableHead>
       <AtTableBody position={position}>
-        {props.talents.map((talent: Talent) => {
-          const fullName = talent.firstName + ' ' + talent.lastName
+        {listTalents.map((talent: Talent) => {
+            const fullName = talent.firstName + ' ' + talent.lastName
 
-          return (
-            <AtRightClick
-              key={talent.id}
-              contextMenu={
-                <TalentMenu
-                  talent={talent}
-                  openShortlist={props.openShortlist}
-                  openAccepted={props.openAccepted}
-                  openEmailToTalent={props.openEmailToTalent}
-                />
-              }
-            >
-              <AtTableRow
+            return (
+              <AtRightClick
                 key={talent.id}
-                $hover={true}
-                onClick={() => props.openTalent(talent.id)}
-                $setPosition={setPosition}
+                contextMenu={
+                  <TalentMenu
+                    talent={talent}
+                    openShortlist={props.openShortlist}
+                    openAccepted={props.openAccepted}
+                    openEmailToTalent={props.openEmailToTalent}
+                  />
+                }
               >
-                {haveToDisplay(Column.Talent) && (
-                  <AtTableCell>
-                    <Box
-                      display={'flex'}
-                      flexDirection={'column'}
-                      textOverflow={'ellipsis'}
-                      whiteSpace={'nowrap'}
-                    >
-                      <Box display={'flex'} gap={'5px'} alignItems={'center'}>
-                        <AtTypography variant={'body1'}>
-                          {stringMatch(
-                            fullName,
-                            settings.filters.searchName ?? '',
-                          )}
-                        </AtTypography>
-                        {/* {talent.group && <AtGroupTag label={talent.group} />} */}
-                      </Box>
-                      <AtTypography variant={'caption'} color={grey}>
-                        {talent.role}
-                      </AtTypography>
-                    </Box>
-                  </AtTableCell>
-                )}
-                {haveToDisplay(Column.Applied) && (
-                  <AtTableCell>
-                    <AtTypography>
-                      {moment(talent.appliedDate).format('DD.MM.YYYY')}
-                    </AtTypography>
-                  </AtTableCell>
-                )}
-                {haveToDisplay(Column.Availability) && (
-                  <AtTableCell>
-                    <AtTypography>{talent.availability}</AtTypography>
-                  </AtTableCell>
-                )}
-                {haveToDisplay(Column.Status) && talent.status ? (
-                  <AtTableCell>
-                    <StyledTagClients
-                      variant={'outlined'}
-                      label={talent.status}
-                    />
-                  </AtTableCell>
-                ) : null}
-                {haveToDisplay(Column.AssignedTo) && (
-                  <AtTableCell>
-                    <Tooltip
-                      title={
-                        <Box
-                          display={'flex'}
-                          flexDirection={'column'}
-                          gap={'5px'}
-                        >
-                          5 more
-                        </Box>
-                      }
-                      arrow={true}
-                    >
-                      <span>
-                        <StyledTagClients
-                          variant={'outlined'}
-                          label={`5 clients`}
-                        />
-                      </span>
-                    </Tooltip>
-                  </AtTableCell>
-                )}
-                {haveToDisplay(Column.Skills) && (
-                  <AtTableCell align={'right'}>
-                    {talent.skills && talent.skills.length > 0 ? (
+                <AtTableRow
+                  key={talent.id}
+                  $hover={true}
+                  onClick={() => props.openTalent(talent.id)}
+                  $setPosition={setPosition}
+                >
+                  {haveToDisplay(Column.Talent) && (
+                    <AtTableCell>
                       <Box
                         display={'flex'}
-                        flexWrap={'nowrap'}
-                        gap={'10px'}
-                        justifyContent={'flex-end'}
-                        ref={skillsRef}
+                        flexDirection={'column'}
+                        textOverflow={'ellipsis'}
+                        whiteSpace={'nowrap'}
                       >
-                        {talent.skills
-                          ?.slice(0, maxItemPerLine)
-                          .map((skill: string, index: number) => (
-                            <StyledTag label={skill} key={index} />
-                          ))}
-                        {talent.skills.slice(maxItemPerLine).length > 0 && (
-                          <Tooltip
-                            title={
-                              <Box
-                                display={'flex'}
-                                flexDirection={'column'}
-                                gap={'5px'}
-                              >
-                                {talent.skills
-                                  .slice(maxItemPerLine)
-                                  .map((skill: string, index: number) => (
-                                    <AtTypography key={index}>
-                                      {skill}
-                                    </AtTypography>
-                                  ))}
-                              </Box>
-                            }
-                            arrow={true}
-                          >
-                            <span>
-                              <StyledTag
-                                $hover={true}
-                                variant={'outlined'}
-                                label={`${
-                                  talent.skills.slice(maxItemPerLine).length
-                                } more`}
-                              />
-                            </span>
-                          </Tooltip>
-                        )}
-                      </Box>
-                    ) : (
-                      <Box display={'flex'} justifyContent={'flex-end'}>
-                        <AtTypography color={grey3}>
-                          No skills been added by {talent.firstName}{' '}
-                          {talent.lastName}
+                        <Box display={'flex'} gap={'5px'} alignItems={'center'}>
+                          <AtTypography variant={'body1'} $bold={true}>
+                            {stringMatch(
+                              fullName,
+                              settings.filters.searchName ?? '',
+                            )}
+                          </AtTypography>
+                          {/* {talent.group && <AtGroupTag label={talent.group} />} */}
+                        </Box>
+                        <AtTypography variant={'caption'} color={grey}>
+                          {talent.role}
                         </AtTypography>
                       </Box>
-                    )}
-                  </AtTableCell>
-                )}
-              </AtTableRow>
-            </AtRightClick>
-          )
+                    </AtTableCell>
+                  )}
+                  {haveToDisplay(Column.Applied) && (
+                    <AtTableCell>
+                      <AtTypography>
+                        {moment(talent.appliedDate).format('DD.MM.YYYY')}
+                      </AtTypography>
+                    </AtTableCell>
+                  )}
+                  {haveToDisplay(Column.Availability) && (
+                    <AtTableCell>
+                      <AtTypography>{talent.availability}</AtTypography>
+                    </AtTableCell>
+                  )}
+                  {haveToDisplay(Column.Status) && talent.status ? (
+                    <AtTableCell>
+                      <StyledTagClients
+                        variant={'outlined'}
+                        label={talent.status}
+                      />
+                    </AtTableCell>
+                  ) : null}
+                  {haveToDisplay(Column.AssignedTo) && (
+                    <AtTableCell>
+                      <Tooltip
+                        title={
+                          <Box
+                            display={'flex'}
+                            flexDirection={'column'}
+                            gap={'5px'}
+                          >
+                            5 more
+                          </Box>
+                        }
+                        arrow={true}
+                      >
+                        <span>
+                          <StyledTagClients
+                            variant={'outlined'}
+                            label={`5 clients`}
+                          />
+                        </span>
+                      </Tooltip>
+                    </AtTableCell>
+                  )}
+                  {haveToDisplay(Column.Skills) && (
+                    <AtTableCell align={'right'}>
+                      {talent.skills && talent.skills.length > 0 ? (
+                        <Box
+                          display={'flex'}
+                          flexWrap={'nowrap'}
+                          gap={'10px'}
+                          justifyContent={'flex-end'}
+                          ref={skillsRef}
+                        >
+                          {talent.skills
+                            ?.slice(0, maxItemPerLine)
+                            .map((skill: string, index: number) => (
+                              <StyledTag label={skill} key={index} />
+                            ))}
+                          {talent.skills.slice(maxItemPerLine).length > 0 && (
+                            <Tooltip
+                              title={
+                                <Box
+                                  display={'flex'}
+                                  flexDirection={'column'}
+                                  gap={'5px'}
+                                >
+                                  {talent.skills
+                                    .slice(maxItemPerLine)
+                                    .map((skill: string, index: number) => (
+                                      <AtTypography key={index}>
+                                        {skill}
+                                      </AtTypography>
+                                    ))}
+                                </Box>
+                              }
+                              arrow={true}
+                            >
+                              <span>
+                                <StyledTag
+                                  $hover={true}
+                                  variant={'outlined'}
+                                  label={`${talent.skills.slice(maxItemPerLine).length
+                                    } more`}
+                                />
+                              </span>
+                            </Tooltip>
+                          )}
+                        </Box>
+                      ) : (
+                        <Box display={'flex'} justifyContent={'flex-end'}>
+                          <AtTypography color={grey3}>
+                            No skills been added by {talent.firstName}{' '}
+                            {talent.lastName}
+                          </AtTypography>
+                        </Box>
+                      )}
+                    </AtTableCell>
+                  )}
+                </AtTableRow>
+              </AtRightClick>
+            )
         })}
       </AtTableBody>
     </StyledTable>

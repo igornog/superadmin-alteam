@@ -122,7 +122,8 @@ const DrawerTalent: React.FunctionComponent<DrawerTalentProps> = (
             />
           ) : null}
 
-          {selectedTalent.status !== ListingStatus.Declined ? (
+          {selectedTalent.status === ListingStatus.Shortlisted ||
+            selectedTalent.status === ListingStatus.Inbound ? (
             <AtButton
               onClick={() => setOpenModalAccepted(true)}
               kind={AtButtonKind.Success}

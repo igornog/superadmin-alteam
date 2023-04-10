@@ -43,6 +43,13 @@ export const handleUpdateFilter = createAsyncThunk(
   },
 )
 
+export const handleActiveSort = createAsyncThunk(
+  'settings/activeSort',
+  async (props: { sort: string }) => {
+    return props
+  },
+)
+
 export const handleActiveFilter = createAsyncThunk(
   'settings/activeFilter',
   async (props: { filter: Filter; section: 'skills' | 'jobTypes' }) => {

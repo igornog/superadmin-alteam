@@ -137,6 +137,8 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
           $iconSize={10}
           padding={props.padding}
           $flexibleHeight={props.$flexibleHeight}
+          dropdown={true}
+          open={open}
         />
 
         <StyledContentPopover
@@ -163,9 +165,9 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
   )
 }
 
-interface DropdownItem {
+export interface DropdownItem {
   id: number | string
-  value: string
+  value: string | null
   label: React.ReactNode
 }
 

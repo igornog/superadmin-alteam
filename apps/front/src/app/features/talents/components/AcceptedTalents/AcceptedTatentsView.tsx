@@ -14,9 +14,11 @@ import { Column } from '../../../../utils/redux/types/settings.type'
 import { Talent } from '../../../../utils/redux/types/talents.type'
 import AcceptedFolderListing from './AcceptedFolderListing'
 import AcceptedTalentsHeader from './AcceptedTalentsHeader'
+import { sortBy } from '../../../../utils/helpers'
 
 const AcceptedTatentsView: React.FunctionComponent = () => {
   const talents = useAppSelector((state) => state.talents)
+  const settings = useAppSelector((state) => state.settings)
   const activeTab = useAppSelector((state) => getActiveTab(state))
 
   const listTalents = talents.listTalents.filter(
@@ -28,6 +30,8 @@ const AcceptedTatentsView: React.FunctionComponent = () => {
   useEffect(() => {
     dispatch(handleLoadGroups({}))
   }, [dispatch])
+
+  const talentsSorted = settings.sort ? sortBy(settings.sort, talents.listTalents) : talents.listTalents
 
   return (
     <Grid container={true}>
@@ -44,7 +48,7 @@ const AcceptedTatentsView: React.FunctionComponent = () => {
           <AtNoResult sentence={`No Accepted Talents`} />
         ) : (
           <TalentsSwitchMode
-            talents={listTalents}
+            talents={talentsSorted}
             tableColumns={[
               Column.Talent,
               Column.Applied,

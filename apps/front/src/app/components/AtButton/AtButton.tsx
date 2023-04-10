@@ -11,6 +11,7 @@ import {
   green,
   red,
 } from '../../utils/colors'
+import { ArrowDown2 } from 'iconsax-react'
 
 export enum AtButtonKind {
   Default = 'default',
@@ -80,7 +81,13 @@ interface StyledButtonProps {
   startIcon?: React.ReactNode
   $iconSize?: number
   $flexibleHeight?: boolean
+  clicked?: React.MouseEventHandler<HTMLButtonElement>
 }
+
+const StyledArrow = styled(ArrowDown2)<{ open?: boolean }>`
+  transition: 0.3s;
+  transform: rotate(${({ open }) => (open ? '180' : '0')}deg);
+`
 
 const StyledButton = styled(Button)<StyledButtonProps>`
   & {
@@ -98,6 +105,16 @@ const StyledButton = styled(Button)<StyledButtonProps>`
     font-size: 13px;
     text-transform: initial;
     box-shadow: none;
+
+    ${({ clicked }) =>
+    clicked
+      ? css`
+      transition: 0.3s;
+      transform: rotate(180deg);
+        `
+      : `      transition: 0.3s;
+      transform: rotate(0deg);` }
+
 
     & .${buttonClasses.endIcon} {
       margin-right: 0;
@@ -221,7 +238,10 @@ const AtButton: React.FunctionComponent<AtButtonProps> = (
       $btnName={props.name}
       $padding={props.padding}
       startIcon={props.startIcon}
-      endIcon={props.endIcon}
+      endIcon={
+        props.dropdown ? (
+          <StyledArrow open={props.open} size={15} />
+        ) : props.endIcon}
       $iconSize={props.$iconSize}
       disabled={props.disabled}
       disableRipple={true}
@@ -245,6 +265,8 @@ export interface AtButtonProps {
   variant: AtButtonVariant
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   name?: string
+  dropdown?: boolean
+  open?: boolean
   disabled?: boolean
   padding?: string
   startIcon?: React.ReactNode

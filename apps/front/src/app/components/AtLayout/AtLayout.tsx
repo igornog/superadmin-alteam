@@ -1,7 +1,6 @@
 import { Backdrop, Box, Collapse, Grid, useMediaQuery } from '@mui/material'
 import {
   AddCircle,
-  Candle,
   Import,
   SearchNormal1,
   Share,
@@ -9,13 +8,11 @@ import {
 } from 'iconsax-react'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { grey2 } from '../../utils/colors'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHook'
 import { handleCollapsePanel } from '../../utils/redux/actions/app.action'
 import { getActiveTab } from '../../utils/redux/selectors/settings.selector'
 import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton'
 import DrawerCreateClient from '../AtDrawer/drawers/DrawerCreateClient/DrawerCreateClient'
-import AtDropdown from '../AtDropdown/AtDropdown'
 import ModalAddFolder from '../AtModal/modals/ModalAddFolder'
 import ModalAddTalent from '../AtModal/modals/ModalCreateTalent/ModalAddTalent'
 import ModalShareFolder from '../AtModal/modals/ModalShareFolder'
@@ -29,16 +26,11 @@ import AtSwitchDisplayMode from './AtSwitchDisplayMode'
 import AtTopTitle from './AtTopTitle'
 import debounce from 'lodash.debounce'
 import { handleUpdateFilter } from '../../utils/redux/actions/settings.action'
+import AtSortByDropdown from '../AtDropdown/AtSortByDropdown'
+import { SortTypes } from '../../utils/redux/types/settings.type'
 import { getActiveGroup } from '../../utils/redux/selectors/group.selector'
 
-const SortOptions = [
-  { id: 0, value: '', label: 'None' },
-  { id: 1, value: 'alphabetical', label: 'A to Z' },
-  { id: 1, value: 'mostRecent', label: 'Most Recent' },
-  { id: 1, value: 'status', label: 'Status' },
-]
-
-const StyledContent = styled(Grid)<{ $sidePanelSize?: string }>`
+const StyledContent = styled(Grid) <{ $sidePanelSize?: string }>`
   overflow: hidden;
   background-color: #f7f8fe;
   margin: 20px 20px 30px 165px;
@@ -70,6 +62,17 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
 
   const handleSearchChange = (searchValue: string) => {
     debouncedSearch(searchValue)
+  }
+
+  const sortOptions = [
+    { id: 0, value: null, label: 'None' },
+    { id: 1, value: SortTypes.Alphabetical, label: 'A to Z' },
+    { id: 2, value: SortTypes.MostRecent, label: 'Most Recent' },
+  ]
+  if (!activeTab?.status) {
+    sortOptions.push(
+      { id: 3, value: SortTypes.Status, label: 'Status' }
+    )
   }
 
   return !isSmallScreen ? (
@@ -130,7 +133,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                           variant={AtButtonVariant.Outlined}
                           startIcon={<TickCircle />}
                           name={'Verifiy Client (1)'}
-                          // onClick={() => setOpenCreateTalent(true)}
+                        // onClick={() => setOpenCreateTalent(true)}
                         />
 
                         {/* <ModalAddTalent
@@ -213,22 +216,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                   <Box display={'flex'} gap={'30px'}>
                     {activeTab.settings.displayMode && <AtSwitchDisplayMode />}
                     {activeTab.settings.sortBy && (
-                      <Box
-                        display={'flex'}
-                        gap={'5px'}
-                        justifyContent={'flex-end'}
-                        alignItems={'center'}
-                      >
-                        <AtTypography color={grey2}>
-                          <Candle /> Sort by:
-                        </AtTypography>
-                        <AtDropdown
-                          placeholder={'None'}
-                          $listItems={SortOptions}
-                          kind={AtButtonKind.Default}
-                          variant={AtButtonVariant.Contained}
-                        />
-                      </Box>
+                      <AtSortByDropdown sortOptions={sortOptions} />
                     )}
                   </Box>
                 </Grid>
