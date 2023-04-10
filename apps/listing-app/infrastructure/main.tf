@@ -3,33 +3,39 @@ terraform {
     bucket         = "s3-terraform-remote-state-eu-west-1-858816193321"
     dynamodb_table = "dynamodb-terraform-remote-state-eu-west-1-858816193321"
     region         = "eu-west-1"
-    key            = "dev/front"
   }
   required_version = ">= 1.1.9, < 2.0.0"
 }
+locals {
+  is_prod = var.stage == "prod"
+}
 
-module "website" {
-  source                    = "./modules/s3-static-website"
-  stage                     = var.stage
-  origin_access_identity_id = module.cloudfront.origin_access_identity_id
+module "ui_label" {
+  source = "../../../infrastructure/modules/naming"
+  stage  = var.stage
+  name   = "ui"
 }
-module "cloudfront" {
-  source             = "./modules/cloudfront"
-  bucket_domain_name = module.website.regional_domain_name
-  stage              = var.stage
-  certificate_arn    = module.data.admin_alteam_cert_arn
-  zone_id            = module.data.hosted_zone_id
+resource "aws_amplify_app" "app" {
+  name                     = module.ui_label.id
+  repository               = "https://github.com/YJCollective/yjcapp"
+  access_token = "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"
 }
-resource "null_resource" "deploy" {
-  triggers = {
-    always = timestamp()
+resource "aws_amplify_branch" "branch" {
+  app_id            = aws_amplify_app.app.id
+  branch_name       = local.is_prod ? "main" : "develop"
+  enable_auto_build = true
+  stage = "PRODUCTION"
+}
+
+resource "aws_amplify_domain_association" "domain_association" {
+  app_id      = aws_amplify_app.app.id
+  domain_name = "listing.alteam.io"
+
+  dynamic "sub_domain" {
+    for_each = local.is_prod ? [""] : ["dev"]
+    content {
+      branch_name = aws_amplify_branch.branch.branch_name
+      prefix      = sub_domain.value
+    }
   }
-  provisioner "local-exec" {
-    command = "aws s3 sync ${path.module}/../dist s3://alt-${var.stage}-s3-listing-website-tf/ --delete"
-  }
 }
-
-module "data" {
-  source = "../../../infrastructure/modules/base_data"
-}
-
