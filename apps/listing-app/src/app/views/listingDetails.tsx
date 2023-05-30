@@ -103,16 +103,16 @@ const ListingDetails: React.FunctionComponent = () => {
   const [openModal, setOpenModal] = useState(false)
   const isSmallScreen = useMediaQuery('(max-width:1079px)')
 
-  useEffect(() => {
-    const getListing = async () => {
-      if (id) {
-        const listing = await listingService.searchListing({ listingId: parseInt(id) })
-        setCurrentListing(listing[0])
-      }
-    }
+  // useEffect(() => {
+  //   const getListing = async () => {
+  //     if (id) {
+  //       const listing = await listingService.searchListing({ listingId: parseInt(id) })
+  //       setCurrentListing(listing[0])
+  //     }
+  //   }
 
-    getListing()
-  }, [id])
+  //   getListing()
+  // }, [id])
 
   // const handleStatusChange = (statusValue: string) => {
   //   listingService.updateListing({ id: currentListing?.id, status: statusValue as ListingState })
@@ -164,7 +164,8 @@ const ListingDetails: React.FunctionComponent = () => {
                           fontSize={'14px'}
                         />
                         <AtTypography variant={'h4'} $bold>
-                          {currentListing?.listingName}
+                          {/* {currentListing?.listingName} */}
+                          {dummyListing[0]?.listingName}
                         </AtTypography>
                         <Edit
                           cursor={'pointer'}
