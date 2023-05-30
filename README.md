@@ -1,4 +1,5 @@
 # Alteam - Intelligent freelance team matching
+Live site: https://alteam-portal-git-main-igornog.vercel.app/
 
 <img width="1434" alt="Captura de Tela 2023-05-17 às 17 02 45" src="https://github.com/igornog/alteam/assets/29484089/20a7d9ec-0c90-4c8d-bed7-df78d90f9153">
 
