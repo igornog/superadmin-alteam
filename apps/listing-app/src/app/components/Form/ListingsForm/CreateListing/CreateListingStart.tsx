@@ -55,14 +55,14 @@ const CreateListingStart: React.FC = () => {
   
   const activeClient = useAppSelector((state) => getActiveClient(state))
 
-  useEffect(() => {
-    const getLastClient = async () => {
-        const client = await clientService.searchClient({ clientName: '' })
-        setLastClient(client[0])
-    }
+  // useEffect(() => {
+  //   const getLastClient = async () => {
+  //       const client = await clientService.searchClient({ clientName: '' })
+  //       setLastClient(client[0])
+  //   }
 
-    getLastClient()
-  }, [])
+  //   getLastClient()
+  // }, [])
 
   const createListing = (type: ListingType) => {
     setOpenCreateListing(true)
