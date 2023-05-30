@@ -71,7 +71,7 @@ const ClientInfo: React.FC = () => {
   // });
 
   const createClient = () => {
-    dispatch(handleCreateClient(client))
+    // dispatch(handleCreateClient(client))
     navigate('/create-my-listing')
   }
 
