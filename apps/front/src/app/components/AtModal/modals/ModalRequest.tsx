@@ -65,7 +65,7 @@ const ModalRequest: React.FunctionComponent<ModalRequestProps> = (
           fullWidth={true}
           value={selectedClient.projectType}
           placeholder={'Select option...'}
-          handleSelect={(e) => setProjectType(e.label as ProjectType)}
+          handleselect={(e) => setProjectType(e.label as ProjectType)}
           $listItems={Object.values(ProjectType).map(
             (label: ProjectType, index: number) => ({
               id: index,
@@ -79,7 +79,7 @@ const ModalRequest: React.FunctionComponent<ModalRequestProps> = (
           fullWidth={true}
           value={selectedClient.deliveryType}
           placeholder={'Select option...'}
-          handleSelect={(e) => setDeliveryType(e.label as DeliveryType)}
+          handleselect={(e) => setDeliveryType(e.label as DeliveryType)}
           $listItems={Object.values(DeliveryType).map(
             (label: DeliveryType, index: number) => ({
               id: index,
@@ -93,7 +93,7 @@ const ModalRequest: React.FunctionComponent<ModalRequestProps> = (
           fullWidth={true}
           value={selectedClient.teamRequest}
           placeholder={'Select option...'}
-          handleSelect={(e) => setTeamRequest(e.label as TeamRequest)}
+          handleselect={(e) => setTeamRequest(e.label as TeamRequest)}
           $listItems={Object.values(TeamRequest).map(
             (label: TeamRequest, index: number) => ({
               id: index,

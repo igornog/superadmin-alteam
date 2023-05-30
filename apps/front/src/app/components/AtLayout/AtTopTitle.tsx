@@ -12,7 +12,7 @@ import AtLine from '../AtLine/AtLine'
 import AtDropdownGroup from '../AtGroup/AtDropdownGroup'
 import AtTypography from '../AtTypography/AtTypography'
 
-export const StyledContentPopover = styled(Collapse)<{
+export const StyledContentPopover = styled(Collapse) <{
   $minWidth?: number
   left?: number
   top?: number
@@ -28,7 +28,7 @@ export const StyledContentPopover = styled(Collapse)<{
   overflow: auto;
 `
 
-const StyledArrow = styled(ArrowDown2)<{ opened?: boolean }>`
+const StyledArrow = styled(ArrowDown2) <{ opened?: boolean }>`
   transition: transform 0.3s;
   transform: rotate(${({ opened }) => (opened ? '180' : '0')}deg);
 `

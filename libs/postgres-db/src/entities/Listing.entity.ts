@@ -1,6 +1,7 @@
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -80,4 +81,7 @@ export class ListingEntity extends BaseEntity {
 
   @Column({ type: 'text' })
   status: ListingState
+
+  @CreateDateColumn({ type: 'timestamptz', name: 'created_at' })
+  createdAt: Date
 }

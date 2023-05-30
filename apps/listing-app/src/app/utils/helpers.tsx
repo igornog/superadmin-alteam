@@ -24,7 +24,7 @@ export const convertHexToRGBA = (hexCode: string, opacity = 1) => {
   return `rgba(${r},${g},${b},${opacity})`
 }
 
-export const capitalizeFirstLetter = (value: string) => {
+export const capitalize = (value: string) => {
   const capitalized = value.charAt(0).toUpperCase() + value.slice(1)
 
   return capitalized

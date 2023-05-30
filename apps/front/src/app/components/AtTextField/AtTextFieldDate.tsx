@@ -21,7 +21,7 @@ const AtTextFieldDate: React.FunctionComponent<AtTextFieldProps> = (
   return (
     <Box ref={dropdownRef}>
       <DesktopDatePicker
-        value={value}
+        value={value ?? props.value}
         open={isOpen}
         onClose={() => setIsOpen(false)}
         PopperProps={{
@@ -60,8 +60,7 @@ const AtTextFieldDate: React.FunctionComponent<AtTextFieldProps> = (
           )
         }}
         onChange={(newValue) => {
-          const formatedDate = moment(newValue).utc()
-
+          const formatedDate = moment(newValue)
           props?.onValueChange?.(formatedDate)
           setValue(newValue)
         }}

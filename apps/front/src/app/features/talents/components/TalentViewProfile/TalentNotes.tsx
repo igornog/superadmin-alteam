@@ -1,12 +1,13 @@
 import { Box } from '@mui/material'
-import { AddCircle, Edit } from 'iconsax-react'
+import { AddCircle } from 'iconsax-react'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import ModalAddNote from '../../../../components/AtModal/modals/ModalAddNote'
 import ModalEditNote from '../../../../components/AtModal/modals/ModalEditNote'
 import AtFrame from '../../../../components/AtFrame/AtFrame'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
-import { black, grey, grey2, grey3 } from '../../../../utils/colors'
+import { black, grey2 } from '../../../../utils/colors'
+import AtLine from '../../../../components/AtLine/AtLine'
 
 const StyledBox = styled(Box)`
   color: ${grey2};
@@ -18,22 +19,27 @@ const StyledBox = styled(Box)`
   }
 `
 
-const TalentNotes: React.FunctionComponent = () => {
+const TalentNotes: React.FunctionComponent<TalentNotesProps> = (
+  props: TalentNotesProps,
+) => {
   const [openModalAddNote, setOpenModalAddNote] = useState(false)
   const [openModalEditNote, setOpenModalEditNote] = useState(false)
 
   return (
     <AtFrame
       title={'Notes'}
+      gap={0}
       icon={
-        <AtTypography>
-          <AddCircle size={16} />
-          Add note
-        </AtTypography>
+        !props.notEditable && (
+          <AtTypography>
+            <AddCircle size={16} />
+            Add note
+          </AtTypography>
+        )
       }
       onClick={() => setOpenModalAddNote(true)}
     >
-      <Box display={'flex'} justifyContent={'space-between'}>
+      {/* <Box display={'flex'} justifyContent={'space-between'}>
         <Box display={'flex'} gap={'20px'}>
           <AtTypography variant={'body1'}>Yoann Demont’s Note:</AtTypography>
 
@@ -54,7 +60,11 @@ const TalentNotes: React.FunctionComponent = () => {
         ultrices sed ut odio vestibulum nisl, id vulputate. Gravida mattis
         bibendum lacus lacus pulvinar egestas proin convallis. Magna sed auctor
         diam fringilla vestibulum eu.
-      </AtTypography>
+      </AtTypography> */}
+
+      <AtLine spacing={15} />
+
+      <AtTypography variant="body2">No notes added.</AtTypography>
 
       <ModalAddNote
         isOpen={openModalAddNote}
@@ -67,6 +77,10 @@ const TalentNotes: React.FunctionComponent = () => {
       />
     </AtFrame>
   )
+}
+
+interface TalentNotesProps {
+  notEditable?: boolean
 }
 
 export default TalentNotes

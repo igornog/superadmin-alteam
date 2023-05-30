@@ -1,6 +1,6 @@
 //eslint-disable @typescript-eslint/no-unused-vars
 import { postgresClient } from './postgresClient'
-import { ClientSearch, SoloClient } from '@yjcapp/app'
+import { ClientSearch, EmailStatus, SoloClient } from '@yjcapp/app'
 import { clientFromEntity, clientToEntity } from './clientConverter'
 import { SoloClientEntity } from './entities/SoloClient.entity'
 
@@ -11,35 +11,54 @@ function calculateOffset(page: number, limit: number): number {
 }
 
 async function createSoloClient(
-  soloTalent: Omit<SoloClient, 'id'>,
-): Promise<SoloClient> {
+  soloClient: Omit<SoloClient, 'id'>,
+): Promise<SoloClient | string> {
   const soloClientRepository = (await postgresClient()).getRepository(
     SoloClientEntity,
   )
-  const entity = clientToEntity(soloTalent)
+
+  const clientExists = await soloClientRepository.find({
+    where: [
+      { companyName: soloClient.companyName },
+      { email: soloClient.email },
+    ],
+  })
+
+  if (clientExists.length > 0) {
+    return 'Client already exists'
+  }
+
+  const entity = clientToEntity({
+    ...soloClient,
+    emailStatus: EmailStatus.Unconfirmed,
+  })
   const result = await soloClientRepository.save(entity)
   return clientFromEntity(result)
 }
 
-async function findClient(talentSearch: ClientSearch): Promise<SoloClient[]> {
-  const soloTalentRepository = (await postgresClient()).getRepository(
+async function findClient(clientSearch: ClientSearch): Promise<SoloClient[]> {
+  const soloClientRepository = (await postgresClient()).getRepository(
     SoloClientEntity,
   )
 
-  const queryBuilder = await soloTalentRepository.createQueryBuilder(
+  const queryBuilder = await soloClientRepository.createQueryBuilder(
     'solo_client',
   )
 
-  if (talentSearch.status) {
-    queryBuilder.andWhere('status = :status', { status: talentSearch.status })
+  if (clientSearch.id) {
+    queryBuilder.andWhere('solo_client.id = :id', {
+      id: clientSearch.id,
+    })
   }
 
-  queryBuilder.andWhere('company_name LIKE :clientName', {
-    clientName: '%' + talentSearch.clientName + '%',
-  })
+  if (clientSearch.status) {
+    queryBuilder.andWhere('solo_client.status = :status', {
+      status: clientSearch.status,
+    })
+  }
 
   queryBuilder.limit(PAGE_SIZE)
-  queryBuilder.offset(calculateOffset(talentSearch.page ?? 1, PAGE_SIZE))
+  queryBuilder.offset(calculateOffset(clientSearch.page ?? 1, PAGE_SIZE))
 
   const result = await queryBuilder.getMany()
 
@@ -47,11 +66,11 @@ async function findClient(talentSearch: ClientSearch): Promise<SoloClient[]> {
 }
 
 async function updateSoloClient(client: SoloClient): Promise<SoloClient> {
-  const soloTalentRepository = (await postgresClient()).getRepository(
+  const soloClientRepository = (await postgresClient()).getRepository(
     SoloClientEntity,
   )
   const entity = clientToEntity(client)
-  const result = await soloTalentRepository.save(entity)
+  const result = await soloClientRepository.save(entity)
   return clientFromEntity(result)
 }
 

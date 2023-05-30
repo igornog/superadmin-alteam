@@ -18,6 +18,7 @@ export function clientFromEntity(entity: SoloClientEntity): SoloClient {
     email: entity.email,
     fullName: entity.fullName,
     position: entity.position,
+    emailStatus: entity.emailStatus,
     status: entity.status,
   }
 }
@@ -40,6 +41,7 @@ export function clientToEntity(
     email: client.email,
     fullName: client.fullName,
     position: client.position,
+    emailStatus: client.emailStatus,
     status: client.status,
   }
 }

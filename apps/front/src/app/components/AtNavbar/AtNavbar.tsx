@@ -9,6 +9,7 @@ import { Navigation, NavigationProps } from '../../app'
 import { handleInitPage } from '../../utils/redux/actions/app.action'
 import { useAppDispatch } from '../../utils/hooks/reduxHook'
 import AtTypography from '../AtTypography/AtTypography'
+import { useAuth0 } from '@auth0/auth0-react'
 
 const StyledNav = styled.div`
   position: fixed;
@@ -83,6 +84,8 @@ const StyledButton = styled.div`
 
 const AtNavbar: React.FunctionComponent = () => {
   const location = useLocation()
+  const { logout } = useAuth0();
+  
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
@@ -90,6 +93,13 @@ const AtNavbar: React.FunctionComponent = () => {
     dispatch(handleInitPage())
     navigate(link)
   }
+
+  const logoutWithRedirect = () =>
+  logout({
+      logoutParams: {
+        returnTo: window.location.origin,
+      }
+  });
 
   return (
     <StyledNav>
@@ -113,7 +123,7 @@ const AtNavbar: React.FunctionComponent = () => {
         </StyledUl>
       </Box>
       <Box paddingBottom={'15px'}>
-        <StyledButton>
+        <StyledButton onClick={logoutWithRedirect}>
           <LogoutCurve />
         </StyledButton>
       </Box>

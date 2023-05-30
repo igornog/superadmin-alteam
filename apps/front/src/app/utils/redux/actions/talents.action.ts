@@ -61,3 +61,14 @@ export const handleShortlistTalent = createAsyncThunk(
     return true
   },
 )
+
+export const findTalent = createAsyncThunk(
+  'talents/findTalent',
+  async (idTalent: string, { rejectWithValue }) => {
+    try {
+      return await talentService.retrieveSoloTalent(idTalent.toString())
+    } catch (err) {
+      return rejectWithValue(err)
+    }
+  },
+)

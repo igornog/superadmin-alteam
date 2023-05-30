@@ -25,6 +25,7 @@ export function clientListingFromEntity(entity: ListingEntity): ClientListing {
     jobDescription: entity.jobDescription,
     listingType: entity.listingType,
     status: entity.status,
+    createdAt: entity.createdAt,
   }
 }
 
@@ -53,5 +54,6 @@ export function clientListingToEntity(
     jobDescription: clientListing.jobDescription,
     listingType: clientListing.listingType,
     status: clientListing.status,
+    createdAt: clientListing.createdAt,
   }
 }

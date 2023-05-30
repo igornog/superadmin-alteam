@@ -1,18 +1,13 @@
 import { Box } from '@mui/material'
-import { ArrowRight2 } from 'iconsax-react'
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import AtButton, {
   AtButtonKind,
   AtButtonVariant,
 } from '../../../components/AtButton/AtButton'
-import AtTextField, {
-  AtTextFieldType,
-} from '../../../components/AtTextField/AtTextField'
-import AtTypography from '../../../components/AtTypography/AtTypography'
 import { grey5 } from '../../../utils/colors'
-import { isValidEmail } from '../../../utils/emails'
-import { authService } from '../../../utils/services'
+import { useAuth0 } from "@auth0/auth0-react";
+import { ArrowRight2 } from 'iconsax-react'
 
 const StyledBackground = styled.div`
   padding: 0 50px;
@@ -22,15 +17,17 @@ const StyledBackground = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
+
+  button {
+    padding: 2rem 6rem;
+    span {
+      font-size: 1.125rem;
+    }
+  }
 `
 
 const AuthForm: React.FunctionComponent = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-  const handleSubmit = () => {
-    authService.login(email, password)
-  }
+  const { loginWithRedirect } = useAuth0();
 
   return (
     <StyledBackground>
@@ -41,37 +38,15 @@ const AuthForm: React.FunctionComponent = () => {
         gap={'30px'}
         width={'100%'}
       >
-        <AtTypography variant={'h2'}>Login</AtTypography>
-
-        <AtTextField
-          label={'Email'}
-          value={email}
-          required={true}
-          placeholder={'Enter email'}
-          type={AtTextFieldType.Email}
-          helperText={'Something went wrong'}
-          onValueChange={setEmail}
+      <Box display={'flex'} justifyContent={'center'}>
+        <AtButton
+          name={'Continue to login'}
+          kind={AtButtonKind.Success}
+          variant={AtButtonVariant.Contained}
+          endIcon={<ArrowRight2 />}
+          onClick={() => loginWithRedirect()}
         />
-
-        <AtTextField
-          label={'Password'}
-          value={password}
-          placeholder={'Enter password'}
-          required={true}
-          type={AtTextFieldType.Password}
-          onValueChange={setPassword}
-        />
-
-        <Box display={'flex'} justifyContent={'flex-end'}>
-          <AtButton
-            name={'Login'}
-            kind={AtButtonKind.Success}
-            variant={AtButtonVariant.Contained}
-            onClick={handleSubmit}
-            endIcon={<ArrowRight2 />}
-            disabled={!(isValidEmail(email) && password.length > 0)}
-          />
-        </Box>
+      </Box>
       </Box>
     </StyledBackground>
   )

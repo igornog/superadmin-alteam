@@ -7,6 +7,7 @@ export interface GroupTalent {
   website: string
   about: string
   assets: string[]
+  notes?: TalentNote[]
 }
 
 export interface SoloTalent {
@@ -26,8 +27,9 @@ export interface SoloTalent {
   phoneNumber?: string
   salaryExpectation?: string
   workExperience?: string
-  listing?: any
-  status?: ListingStatus
+  listing?: Listing[]
+  status?: TalentStatus
+  notes?: TalentNote[]
 }
 
 export interface Asset {
@@ -65,14 +67,27 @@ export enum Availability {
   FullTime = 'Full Time',
 }
 
-export enum ListingStatus {
-  All = '',
+export enum Skills {
+  Figma = 'Figma',
+  UIUXDesign = 'UI/UX Design',
+  WebDevelopment = 'Web Development',
+  ReactNative = 'React Native',
+  Wireframing = 'Wireframing',
+}
+
+export enum TalentStatus {
   Shortlisted = 'shortlisted',
   Declined = 'declined',
   Accepted = 'accepted',
   Inbound = 'inbound',
-  Applicable = 'applicable',
   Marketplace = 'marketplace',
+}
+
+export interface Listing {
+  companyName: string
+  duration: string
+  jobType: string
+  status: TalentStatus
 }
 
 export interface TalentSearch {
@@ -81,9 +96,17 @@ export interface TalentSearch {
   experience?: string
   availability?: Availability[]
   role?: string
-  status?: ListingStatus
+  status?: TalentStatus
   page?: number
   talentName?: string
+}
+
+export interface TalentNote {
+  id: number
+  author: string
+  text: string
+  createdAt: Date
+  upatedAt?: Date
 }
 
 export type Talent = GroupTalent | SoloTalent

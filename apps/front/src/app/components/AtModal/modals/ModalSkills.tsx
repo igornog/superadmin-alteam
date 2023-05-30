@@ -76,7 +76,7 @@ const ModalSkills: React.FunctionComponent<ModalSkillsProps> = (
         />
 
         <Box display={'flex'} flexWrap={'wrap'} gap={'10px'}>
-          {skills.length > 0 ? (
+          {skills?.length > 0 ? (
             skills?.map((skill, index) => {
               return (
                 <AtTag

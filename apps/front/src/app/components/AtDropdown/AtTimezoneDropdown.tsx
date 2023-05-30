@@ -120,7 +120,7 @@ const AtTimezoneDropdown: React.FunctionComponent<AtTimeZoneDropdownProps> = (
 
   const handleSelect = (item: string) => {
     setSelectedItem(item)
-    props.handleSelect?.(item)
+    props.handleselect?.(item)
   }
 
   const open = Boolean(anchorEl)
@@ -182,7 +182,7 @@ const AtTimezoneDropdown: React.FunctionComponent<AtTimeZoneDropdownProps> = (
 }
 
 interface AtTimeZoneDropdownProps extends AtTextFieldProps {
-  handleSelect?: (item: string) => void
+  handleselect?: (item: string) => void
 }
 
 export default AtTimezoneDropdown

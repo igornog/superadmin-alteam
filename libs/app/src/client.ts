@@ -14,6 +14,7 @@ export interface SoloClient {
   fullName?: string
   position?: string
   received?: Date
+  emailStatus?: EmailStatus
   status: ClientStatus
 }
 
@@ -27,6 +28,11 @@ export enum DeliveryType {
 
 export enum TeamRequest {
   SoloFreelancer = 'Solo freelancer',
+}
+
+export enum EmailStatus {
+  Confirmed = 'Confirmed',
+  Unconfirmed = 'Unconfirmed',
 }
 
 export enum ClientStatus {
@@ -55,6 +61,7 @@ export const CreateClientStatus = [
 ]
 
 export interface ClientSearch {
+  id?: number
   status?: ClientStatus
   clientName?: string
   page?: number

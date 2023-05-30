@@ -16,10 +16,12 @@ const TalentGeneral: React.FunctionComponent<TalentGeneralProps> = (
     <AtFrame
       title={'General information'}
       icon={
-        <AtTypography>
-          <Edit size={16} />
-          Edit
-        </AtTypography>
+        !props.notEditable && (
+          <AtTypography>
+            <Edit size={16} />
+            Edit
+          </AtTypography>
+        )
       }
       onClick={() => setOpenModal(true)}
     >
@@ -82,7 +84,7 @@ const TalentGeneral: React.FunctionComponent<TalentGeneralProps> = (
             <AtTypography color={grey2}>Email:</AtTypography>
           </Grid>
           <Grid item={true} xs={9}>
-            <AtTypography color={grey}>
+            <AtTypography color={grey} blurred={props.notEditable}>
               {props.talent.email ?? 'N/A'}
             </AtTypography>
           </Grid>
@@ -93,7 +95,7 @@ const TalentGeneral: React.FunctionComponent<TalentGeneralProps> = (
             <AtTypography color={grey2}>Phone Number:</AtTypography>
           </Grid>
           <Grid item={true} xs={9}>
-            <AtTypography color={grey}>
+            <AtTypography color={grey} blurred={props.notEditable}>
               {props.talent.phoneNumber ?? 'N/A'}
             </AtTypography>
           </Grid>
@@ -110,6 +112,7 @@ const TalentGeneral: React.FunctionComponent<TalentGeneralProps> = (
 
 interface TalentGeneralProps {
   talent: Talent
+  notEditable?: boolean
 }
 
 export default TalentGeneral

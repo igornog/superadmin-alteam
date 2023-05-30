@@ -13,7 +13,7 @@ import AtModal from '../AtModal'
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/reduxHook'
 import { handlePatchTalent } from '../../../utils/redux/actions/talents.action'
 import { getActiveTalent } from '../../../utils/redux/selectors/talents.selector'
-import { ListingStatus } from '@yjcapp/app'
+import { TalentStatus } from '@yjcapp/app'
 
 const ModalDecline: React.FunctionComponent<ModalDeclineProps> = (
   props: ModalDeclineProps,
@@ -25,7 +25,7 @@ const ModalDecline: React.FunctionComponent<ModalDeclineProps> = (
     dispatch(
       handlePatchTalent({
         id: selectedTalent.id,
-        status: ListingStatus.Declined,
+        status: TalentStatus.Declined,
       }),
     )
     props.onClose?.()

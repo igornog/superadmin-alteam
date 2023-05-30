@@ -7,10 +7,11 @@ import styled, { css } from 'styled-components'
 import { black, grey2, grey5, white } from '../../utils/colors'
 import { getText } from '../../utils/helpers'
 import { boxShadow } from '../../utils/theme'
-import AtButton, { AtButtonProps } from '../AtButton/AtButton'
+import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton'
 import AtTypography from '../AtTypography/AtTypography'
+import { ListingState } from '@yjcapp/app'
 
-export const StyledContentPopover = styled(Collapse)<{
+export const StyledContentPopover = styled(Collapse) <{
   $minWidth?: number
   $currentHeight?: number
   left?: number
@@ -111,7 +112,7 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
 
   const handleSelect = (item: DropdownItem) => {
     setSelectedItem(item)
-    props.handleSelect?.(item)
+    props.handleselect?.(item)
   }
 
   const open = Boolean(anchorEl)
@@ -127,8 +128,9 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
       <Box ref={dropdownRef} position={'relative'}>
         {props.label && <StyledLabel>{props.label}</StyledLabel>}
         <AtButton
-          {...props}
           kind={props.kind}
+          status={props.status}
+          $listingStatus={props.$listingStatus}
           variant={props.variant}
           onClick={open ? handleClose : handleClick}
           name={selectedItem ? getText(selectedItem.label) : props.placeholder}
@@ -137,7 +139,7 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
           $iconSize={10}
           padding={props.padding}
           $flexibleHeight={props.$flexibleHeight}
-          dropdown={true}
+          $isDropdown={true}
           open={open}
         />
 
@@ -146,6 +148,7 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
           $minWidth={dropdownRef?.current?.offsetWidth}
           align={props.align ?? 'unset'}
         >
+
           <Box display={'flex'} flexDirection={'column'}>
             {props?.$listItems?.map((item: DropdownItem) => (
               <StyledDropdownElement
@@ -167,16 +170,24 @@ const AtDropdown: React.FunctionComponent<AtDropdownProps> = (
 
 export interface DropdownItem {
   id: number | string
-  value: string | null
+  value: string
   label: React.ReactNode
 }
 
-interface AtDropdownProps extends AtButtonProps {
+interface AtDropdownProps {
+  disabled?: any
+  variant: AtButtonVariant
+  fontSize?: string
+  padding?: string
+  $flexibleHeight?: boolean | undefined
+  kind: AtButtonKind
   $listItems: DropdownItem[]
   placeholder?: string
+  status?: ListingState
+  $listingStatus?: boolean
   label?: string
-  handleSelect?: (item: DropdownItem) => void
   align?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'none'
+  handleselect?: (e: DropdownItem) => void | Promise<any>
 }
 
 export default AtDropdown

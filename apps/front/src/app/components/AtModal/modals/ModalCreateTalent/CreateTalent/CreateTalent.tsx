@@ -13,7 +13,7 @@ import AtButton, {
   AtButtonKind,
   AtButtonVariant,
 } from '../../../../AtButton/AtButton'
-import { Availability, Experience, ListingStatus } from '@yjcapp/app'
+import { Availability, Experience, TalentStatus } from '@yjcapp/app'
 import AtTabs from '../../../../AtTabs/AtTabs'
 import ModalCreateTalentStep1 from './steps/ModalCreateTalentStep1'
 import ModalCreateTalentStep2 from './steps/ModalCreateTalentStep2'
@@ -77,8 +77,7 @@ const CreateTalent: React.FunctionComponent<CreateTalentProps> = (
           about: about,
           skills: skills,
           portfolio,
-          assets: undefined,
-          status: ListingStatus.Inbound,
+          status: TalentStatus.Inbound,
         }),
       )
     }

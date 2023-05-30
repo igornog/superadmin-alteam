@@ -108,6 +108,7 @@ const DrawerCreateListing: React.FunctionComponent<DrawerCreateListingProps> = (
             <Grid container={true} justifyContent={'center'}>
               <Grid
                 xs={10}
+                item
                 display={'flex'}
                 flexDirection={'column'}
                 gap={'20px'}

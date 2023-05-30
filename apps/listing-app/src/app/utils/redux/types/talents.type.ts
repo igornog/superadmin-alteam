@@ -1,7 +1,7 @@
 import {
   Availability,
   Experience,
-  ListingStatus,
+  TalentStatus,
   SoloTalent,
   Link,
   Asset,
@@ -13,13 +13,6 @@ export interface TalentsState {
   selectedTalent: number | null
   status?: StatusType
   error?: string | null
-}
-
-export enum TalentStatus {
-  Inbound = 'Inbound',
-  Shortlisted = 'Shortlisted',
-  Accepted = 'Accepted',
-  Declined = 'Declined',
 }
 
 export class Talent implements SoloTalent {
@@ -40,7 +33,7 @@ export class Talent implements SoloTalent {
   salaryExpectation?: string
   workExperience?: string
   // listing?: Listing[]
-  status?: ListingStatus
+  status?: TalentStatus
 
   constructor(data: any) {
     this.id = data.id

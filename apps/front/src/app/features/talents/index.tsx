@@ -5,7 +5,7 @@ import AllTalentsView from './components/AllTalents/AllTalentsView'
 import DeclinedTalentsView from './components/DeclinedTalents/DeclinedTalentsView'
 import InboundTalentsView from './components/InboundTalents/InboundTalentsView'
 import ShortlistLatentsView from './components/ShortlistTalents/ShortlistTatentsView'
-import { Availability, ListingStatus } from '@yjcapp/app'
+import { Availability, Skills, TalentStatus } from '@yjcapp/app'
 
 export { default } from './components/TalentsView'
 
@@ -27,7 +27,7 @@ export const talentsTabs: Page[] = [
   },
   {
     title: Tabs.InboundTalent,
-    status: ListingStatus.Inbound,
+    status: TalentStatus.Inbound,
     node: <InboundTalentsView />,
     badge: 5,
     active: true,
@@ -48,7 +48,7 @@ export const talentsTabs: Page[] = [
   },
   {
     title: Tabs.ShortlistTalent,
-    status: ListingStatus.Shortlisted,
+    status: TalentStatus.Shortlisted,
     node: <ShortlistLatentsView />,
     badge: 40,
     active: false,
@@ -69,7 +69,7 @@ export const talentsTabs: Page[] = [
   },
   {
     title: Tabs.AcceptedTalent,
-    status: ListingStatus.Accepted,
+    status: TalentStatus.Accepted,
     node: <AcceptedTatentsView />,
     badge: 20,
     active: false,
@@ -89,7 +89,7 @@ export const talentsTabs: Page[] = [
   },
   {
     title: Tabs.DeclinedTalent,
-    status: ListingStatus.Declined,
+    status: TalentStatus.Declined,
     node: <DeclinedTalentsView />,
     active: false,
     settings: {
@@ -105,33 +105,15 @@ export const talentsTabs: Page[] = [
       RightClick.ShareTalent,
     ],
     clientRightClick: [],
-  }
-]
-
-export const skillsFilters = [
-  {
-    label: 'Figma',
-    active: false,
-  },
-  {
-    label: 'UI/UX Design',
-    active: false,
-  },
-  {
-    label: 'Web Development',
-    active: false,
-  },
-  {
-    label: 'React Native',
-    active: false,
-  },
-  {
-    label: 'Wireframing',
-    active: false,
   },
 ]
 
 export const availabilityFilters = Object.keys(Availability).map((key) => ({
   label: Availability[key as keyof typeof Availability],
+  active: false,
+}))
+
+export const skillsFilters = Object.keys(Skills).map((key) => ({
+  label: Skills[key as keyof typeof Skills],
   active: false,
 }))

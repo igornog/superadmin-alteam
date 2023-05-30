@@ -7,9 +7,9 @@ import {
   ListingState,
   ListingType,
   Role,
+  SoloClient,
   WorkType,
 } from '@yjcapp/app'
-import { Client } from './clients.type'
 
 export interface ListingsState {
   listListings: ClientListing[]
@@ -20,7 +20,7 @@ export interface ListingsState {
 
 export class Listing implements ClientListing {
   id: number
-  soloClient: Client
+  soloClient: SoloClient
   listingName: string
   individuals: number
   workType?: WorkType
@@ -40,6 +40,7 @@ export class Listing implements ClientListing {
   jobDescription?: string
   listingType: ListingType
   status: ListingState
+  createdAt: Date
 
   constructor(data: any) {
     this.id = data.id
@@ -62,5 +63,6 @@ export class Listing implements ClientListing {
     this.jobDescription = data.jobDescription
     this.listingType = data.listingType
     this.status = data.status
+    this.createdAt = data.createdAt
   }
 }

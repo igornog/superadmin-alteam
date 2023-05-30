@@ -1,3 +1,4 @@
+import { TalentNote } from '@yjcapp/app'
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity({ name: 'group_talent' })
@@ -25,4 +26,7 @@ export class GroupTalentEntity extends BaseEntity {
 
   @Column({ type: 'varchar', array: true, name: 'assets' })
   assets: string[]
+
+  @Column({ type: 'text', array: true, nullable: true, name: 'notes' })
+  notes: TalentNote[]
 }

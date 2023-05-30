@@ -31,7 +31,9 @@ const AcceptedTatentsView: React.FunctionComponent = () => {
     dispatch(handleLoadGroups({}))
   }, [dispatch])
 
-  const talentsSorted = settings.sort ? sortBy(settings.sort, talents.listTalents) : talents.listTalents
+  const talentsSorted = settings.sort
+    ? sortBy(settings.sort, talents.listTalents)
+    : talents.listTalents
 
   return (
     <Grid container={true}>

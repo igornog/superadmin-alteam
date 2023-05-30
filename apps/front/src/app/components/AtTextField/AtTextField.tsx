@@ -315,6 +315,7 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
           $dropdown={props.dropdown}
           $maxWidth={props.maxWidth}
           $bgColor={props.bgColor}
+          name={props.name}
           readOnly={props.readonly}
           $isError={props.isError}
           $isSuccess={props.isSuccess}
@@ -322,7 +323,8 @@ const AtTextField: React.FunctionComponent<AtTextFieldProps> = (
           multiline={props.multiline}
           rows={props.rows}
           inputProps={{
-            maxlength: props.maxLength,
+            maxLength: props.maxLength,
+            min: props.minValue,
             ...props.inputProps,
           }}
           disabled={props.disabled}
@@ -409,6 +411,7 @@ export interface AtTextFieldProps {
   open?: boolean
 
   maxWidth?: number
+  minValue?: number
   bgColor?: 'black' | 'white'
   size?: 'small' | 'medium'
   onValueChange?: (value: any) => void
@@ -417,6 +420,7 @@ export interface AtTextFieldProps {
   type?: AtTextFieldType
 
   label?: string
+  name?: string
   labelDropdown?: LabelDropdown[]
   onClickDropdownLabel?: (value: LabelDropdown) => void
 }

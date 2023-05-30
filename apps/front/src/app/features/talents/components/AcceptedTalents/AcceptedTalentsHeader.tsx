@@ -13,7 +13,7 @@ const AcceptedTalentsHeader: React.FunctionComponent = () => {
   const activeFolder = useAppSelector((state) => getActiveGroup(state))
 
   const sortOptions = [
-    { id: 0, value: null, label: 'None' },
+    { id: 0, value: '', label: 'None' },
     { id: 1, value: SortTypes.Alphabetical, label: 'A to Z' },
     { id: 2, value: SortTypes.MostRecent, label: 'Most Recent' },
   ]
@@ -31,8 +31,9 @@ const AcceptedTalentsHeader: React.FunctionComponent = () => {
       <Box display={'flex'} gap={'30px'} alignItems={'center'} flex={2}>
         <AtTextField
           startIcon={<SearchNormal1 />}
-          placeholder={`Search in ${activeFolder.isParent() ? 'Accepted talents' : activeFolder.name
-            }...`}
+          placeholder={`Search in ${
+            activeFolder.isParent() ? 'Accepted talents' : activeFolder.name
+          }...`}
           value={''}
         />
 

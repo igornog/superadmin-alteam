@@ -92,7 +92,7 @@ const ModalGeneralInformations: React.FunctionComponent<
           fullWidth={true}
           value={selectedTalent.availability}
           placeholder={'Select Availability'}
-          handleSelect={(e) => setAvailability(e.label as Availability)}
+          handleselect={(e) => setAvailability(e.label as Availability)}
           $listItems={Object.values(Availability).map(
             (label: Availability, index: number) => ({
               id: index,
@@ -105,7 +105,7 @@ const ModalGeneralInformations: React.FunctionComponent<
         <AtTextFieldDropdown
           fullWidth={true}
           value={selectedTalent.experience}
-          handleSelect={(e) => setExperience(e.label as Experience)}
+          handleselect={(e) => setExperience(e.label as Experience)}
           placeholder={'Select Work Experience'}
           $listItems={Object.values(Experience).map(
             (label: Experience, index: number) => ({

@@ -12,11 +12,11 @@ const AtSortByDropdown: React.FunctionComponent<AtSortByDropdownProps> = (
 ) => {
   const dispatch = useAppDispatch()
 
-  const handleSort = (item: DropdownItem) => {
-    dispatch(handleActiveSort({ sort: item.value as string }))
+  const handleSort = async (item: DropdownItem) => {
+    await dispatch(handleActiveSort({ sort: item.value as string }))
   }
 
-  props.sortOptions.map((option: DropdownItem, i: number) => option.id = i)
+  props.sortOptions.map((option: DropdownItem, i: number) => (option.id = i))
 
   return (
     <Box
@@ -33,12 +33,11 @@ const AtSortByDropdown: React.FunctionComponent<AtSortByDropdownProps> = (
         $listItems={props.sortOptions}
         kind={AtButtonKind.Default}
         variant={AtButtonVariant.Contained}
-        handleSelect={handleSort}
+        handleselect={handleSort}
       />
     </Box>
   )
 }
-
 
 interface AtSortByDropdownProps {
   sortOptions: DropdownItem[]

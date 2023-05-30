@@ -5,12 +5,17 @@ import {
   AtButtonKind,
   AtButtonVariant,
 } from '../../../../components/AtButton/AtButton'
-import AtDropdown, { DropdownItem } from '../../../../components/AtDropdown/AtDropdown'
+import AtDropdown, {
+  DropdownItem,
+} from '../../../../components/AtDropdown/AtDropdown'
 import AtSwitchDisplayMode from '../../../../components/AtLayout/AtSwitchDisplayMode'
 import AtTextField from '../../../../components/AtTextField/AtTextField'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
 import { grey2 } from '../../../../utils/colors'
-import { useAppDispatch, useAppSelector } from '../../../../utils/hooks/reduxHook'
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../../utils/hooks/reduxHook'
 import { getActiveGroup } from '../../../../utils/redux/selectors/group.selector'
 import { handleActiveSort } from '../../../../utils/redux/actions/settings.action'
 import { SortTypes } from '../../../../utils/redux/types/settings.type'
@@ -19,12 +24,12 @@ const ShortlistTalentsHeader: React.FunctionComponent = () => {
   const activeFolder = useAppSelector((state) => getActiveGroup(state))
   const dispatch = useAppDispatch()
 
-  const handleSort = (item: DropdownItem) => {
-    dispatch(handleActiveSort({ sort: item.value as string }))
+  const handleSort = async (item: DropdownItem) => {
+    await dispatch(handleActiveSort({ sort: item.value as string }))
   }
 
   const sortOptions = [
-    { id: 0, value: null, label: 'None' },
+    { id: 0, value: '', label: 'None' },
     { id: 1, value: SortTypes.Alphabetical, label: 'A to Z' },
     { id: 2, value: SortTypes.MostRecent, label: 'Most Recent' },
   ]
@@ -42,8 +47,9 @@ const ShortlistTalentsHeader: React.FunctionComponent = () => {
       <Box display={'flex'} gap={'30px'} alignItems={'center'} flex={2}>
         <AtTextField
           startIcon={<SearchNormal1 />}
-          placeholder={`Search in ${activeFolder.isParent() ? 'Shortlisted talents' : activeFolder.name
-            }...`}
+          placeholder={`Search in ${
+            activeFolder.isParent() ? 'Shortlisted talents' : activeFolder.name
+          }...`}
           value={''}
         />
 
@@ -65,7 +71,7 @@ const ShortlistTalentsHeader: React.FunctionComponent = () => {
               $listItems={sortOptions}
               kind={AtButtonKind.Default}
               variant={AtButtonVariant.Contained}
-              handleSelect={handleSort}
+              handleselect={handleSort}
             />
           </Box>
         </Box>

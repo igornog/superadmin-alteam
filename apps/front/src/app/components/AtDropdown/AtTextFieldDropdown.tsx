@@ -67,7 +67,7 @@ const AtTextFieldDropdown: React.FunctionComponent<AtTextFieldDropdownProps> = (
 
   const handleSelect = (item: DropdownItem) => {
     setSelectedItem(item)
-    props.handleSelect?.(item)
+    props.handleselect?.(item)
   }
 
   const open = Boolean(anchorEl)
@@ -151,7 +151,7 @@ export interface DropdownItem {
 interface AtTextFieldDropdownProps extends AtTextFieldProps {
   searchable?: boolean
   $listItems: DropdownItem[]
-  handleSelect?: (item: DropdownItem) => void
+  handleselect?: (item: DropdownItem) => void
 }
 
 export default AtTextFieldDropdown

@@ -16,7 +16,7 @@ const TalentsSwitchMode: React.FunctionComponent<TalentsSwitchModeProps> = (
 ) => {
   const dispatch = useAppDispatch()
   const settings = useAppSelector((state) => state.settings)
-  
+
   const [openDrawer, setOpenDrawer] = useState(false)
   const [openShortlistModal, setOpenShortlistModal] = useState(false)
   const [openAcceptedModal, setOpenAcceptedModal] = useState(false)

@@ -71,7 +71,7 @@ const AtNavPage: React.FunctionComponent<AtNavPageProps> = (
         {settings.tabs.map((page: Page, index: number) => (
           <AtTab
             label={page.title}
-            // badge={page.badge}
+            badge={page.badge}
             key={index}
             $active={page.active}
             onClick={() => handleClick(page)}

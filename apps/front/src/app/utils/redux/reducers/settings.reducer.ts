@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { skillsFilters, availabilityFilters } from '../../../features/talents'
 import {
+  clientsFilters,
+  priceRangeFilters,
+  statusFilters,
+} from '../../../features/listings'
+import {
   handleActiveFilter,
   handleActiveSort,
   handleActiveTab,
@@ -18,6 +23,8 @@ const initialState: SettingsState = {
   filters: {
     skills: [],
     jobTypes: [],
+    clients: [],
+    listingStatus: [],
     searchName: '',
   },
   sort: null,
@@ -46,8 +53,19 @@ const { reducer } = createSlice({
         }
 
         if (payload.jobTypes) {
-          state.filters
-          .jobTypes = payload.jobTypes
+          state.filters.jobTypes = payload.jobTypes
+        }
+
+        if (payload.clients) {
+          state.filters.clients = payload.clients
+        }
+
+        if (payload.listingStatus) {
+          state.filters.listingStatus = payload.listingStatus
+        }
+
+        if (payload.priceRange) {
+          state.filters.priceRange = payload.priceRange
         }
       })
 
@@ -88,6 +106,9 @@ const { reducer } = createSlice({
       .addCase(handleRefreshFilters.fulfilled, (state: SettingsState) => {
         state.filters.skills = skillsFilters
         state.filters.jobTypes = availabilityFilters
+        state.filters.listingStatus = statusFilters
+        state.filters.clients = clientsFilters
+        state.filters.priceRange = priceRangeFilters
         state.filters.searchName = ''
       })
 

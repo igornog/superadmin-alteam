@@ -16,6 +16,7 @@ import {
 import { grey2 } from '../../../../../utils/colors'
 
 const Step2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
+
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
       <StyledForm>
@@ -41,7 +42,7 @@ const Step2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
                 label: label,
               }),
             )}
-            handleSelect={(e) =>
+            handleselect={(e) =>
               props.setClient({
                 ...props.client,
                 projectType: e.label as ProjectType,
@@ -60,7 +61,7 @@ const Step2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
                 label: label,
               }),
             )}
-            handleSelect={(e) =>
+            handleselect={(e) =>
               props.setClient({
                 ...props.client,
                 deliveryType: e.label as DeliveryType,
@@ -73,7 +74,7 @@ const Step2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
             fullWidth={true}
             value={undefined}
             placeholder={'Select option...'}
-            handleSelect={(e) =>
+            handleselect={(e) =>
               props.setClient({
                 ...props.client,
                 teamRequest: e.label as TeamRequest,
@@ -157,22 +158,17 @@ const Step2: React.FunctionComponent<Step2Props> = (props: Step2Props) => {
           gap={'30px'}
         >
           <AtTextFieldDropdown
-            fullWidth={true}
-            required={true}
-            placeholder={'Client Request'}
-            value={undefined}
             $listItems={CreateClientStatus.map((status, index) => ({
               id: index,
               label: status.label,
               value: status.value,
             }))}
-            handleSelect={(e) => {
-              props.setClient({
-                ...props.client,
-                status: e.value as ClientStatus,
-              })
-            }}
+            fullWidth={true}
+            required={true}
+            placeholder={'Client Request'}
+            value={undefined}
             label={'Is the client qualified?'}
+            handleselect={(e) => props.setClient({ ...props.client, status: e.value as ClientStatus })}
           />
         </Box>
       </StyledForm>

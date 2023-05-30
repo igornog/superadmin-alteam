@@ -14,4 +14,14 @@ export default class RemoteListingService implements ListingService {
     })
     return data
   }
+
+  async endingListing(id: string): Promise<string> {
+    const { data } = await atAxios.delete(`/listing/${id}`)
+    return data
+  }
+
+  async updateListing(listing: Partial<ClientListing>): Promise<ClientListing> {
+    const { data } = await atAxios.patch(`/listing`, listing)
+    return data
+  }
 }

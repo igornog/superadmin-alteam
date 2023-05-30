@@ -107,40 +107,6 @@ export const stringMatch = (fullString: string, toMatch: string) => {
   )
 }
 
-const groupBy = (array: any[], key: string) => {
-  return array.reduce((result, currentValue) => {
-    (result[currentValue[key]] = result[currentValue[key]] || []).push(
-      currentValue
-    );
-    return result;
-  }, {});
-};
-
-export const sortByStatus = (array: any[]) => {
-  const listTalentsByGroup: string | any[] = []
-  const statusGroup = groupBy(array, 'status')
-
-  return listTalentsByGroup.concat(statusGroup.inbound, statusGroup.shortlisted, statusGroup.accepted)
-}
-
-export const sortBy = (sort: string, talents: any[]) => {
-  let arrayForSort = []
-  let listSorted = []
-
-  switch (sort) {
-    case SortTypes.Alphabetical:
-      arrayForSort = [...talents]
-      listSorted = arrayForSort.sort((a, b) => (a.firstName > b.firstName) ? 1 : -1)
-      break;
-    case SortTypes.MostRecent:
-      arrayForSort = [...talents]
-      listSorted = arrayForSort.sort((a: any, b: any) => (a.appliedDate < b.appliedDate) ? 1 : -1)
-      break;
-  }
-
-  listSorted.filter(item => item)
-  return listSorted
-}
 export const getCurrencySymbol = (label?: Currency) => {
   switch (label) {
     case Currency.Dollars:
@@ -155,4 +121,46 @@ export const getCurrencySymbol = (label?: Currency) => {
     default:
       return '£'
   }
+}
+const groupBy = (array: any[], key: string) => {
+  return array.reduce((result, currentValue) => {
+    ;(result[currentValue[key]] = result[currentValue[key]] || []).push(
+      currentValue,
+    )
+    return result
+  }, {})
+}
+
+export const sortByStatus = (array: any[]) => {
+  const listTalentsByGroup: string | any[] = []
+  const statusGroup = groupBy(array, 'status')
+
+  return listTalentsByGroup.concat(
+    statusGroup.inbound,
+    statusGroup.shortlisted,
+    statusGroup.accepted,
+  )
+}
+
+export const sortBy = (sort: string, talents: any[]) => {
+  let arrayForSort = []
+  let listSorted = []
+
+  switch (sort) {
+    case SortTypes.Alphabetical:
+      arrayForSort = [...talents]
+      listSorted = arrayForSort.sort((a, b) =>
+        a.firstName > b.firstName ? 1 : -1,
+      )
+      break
+    case SortTypes.MostRecent:
+      arrayForSort = [...talents]
+      listSorted = arrayForSort.sort((a: any, b: any) =>
+        a.appliedDate < b.appliedDate ? 1 : -1,
+      )
+      break
+  }
+
+  listSorted.filter((item) => item)
+  return listSorted
 }

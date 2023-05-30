@@ -29,7 +29,9 @@ const ShortlistTalentsView: React.FunctionComponent = () => {
   const listTalents = talents.listTalents.filter(
     (talent: Talent) => talent.status === activeTab.status,
   )
-  const talentsSorted = settings.sort ? sortBy(settings.sort, talents.listTalents) : talents.listTalents
+  const talentsSorted = settings.sort
+    ? sortBy(settings.sort, talents.listTalents)
+    : talents.listTalents
 
   return (
     <Grid container={true}>

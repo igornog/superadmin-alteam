@@ -10,7 +10,8 @@ import {
   Availability,
   Experience,
   Link,
-  ListingStatus,
+  TalentNote,
+  TalentStatus,
 } from '@yjcapp/app'
 
 @Entity({ name: 'solo_talent' })
@@ -60,6 +61,9 @@ export class SoloTalentEntity extends BaseEntity {
   @Column({ type: 'varchar', nullable: true, name: 'work_experience' })
   workExperience?: string
 
+  @Column({ type: 'text', array: true, nullable: true, name: 'notes' })
+  notes: TalentNote[]
+
   @UpdateDateColumn({
     type: 'timestamptz',
     nullable: true,
@@ -68,5 +72,5 @@ export class SoloTalentEntity extends BaseEntity {
   appliedDate?: Date
 
   @Column({ type: 'varchar', name: 'status' })
-  status: ListingStatus
+  status: TalentStatus
 }

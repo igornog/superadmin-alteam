@@ -9,6 +9,7 @@ import {
 import {
   ClientStatus,
   DeliveryType,
+  EmailStatus,
   ProjectType,
   Talent,
   TeamRequest,
@@ -23,7 +24,7 @@ export class SoloClientEntity extends BaseEntity {
   @Column({ type: 'varchar', nullable: true })
   logo?: string
 
-  @Column({ type: 'varchar', name: 'company_name', nullable: true })
+  @Column({ type: 'varchar', name: 'company_name' })
   companyName: string
 
   @Column({ type: 'varchar', nullable: true })
@@ -50,14 +51,14 @@ export class SoloClientEntity extends BaseEntity {
   @Column({ type: 'varchar', nullable: true })
   request?: string
 
-  @Column({ type: 'varchar', nullable: true })
-  email?: string
+  @Column({ type: 'varchar' })
+  email: string
 
-  @Column({ type: 'varchar', nullable: true })
-  fullName?: string
+  @Column({ type: 'varchar' })
+  fullName: string
 
-  @Column({ type: 'varchar', nullable: true })
-  position?: string
+  @Column({ type: 'varchar' })
+  position: string
 
   @UpdateDateColumn({
     type: 'timestamptz',
@@ -73,6 +74,9 @@ export class SoloClientEntity extends BaseEntity {
 
   @Column({ type: 'json', nullable: true })
   assignee?: Talent[]
+
+  @Column({ type: 'varchar', name: 'email_status', nullable: true })
+  emailStatus: EmailStatus
 
   @Column({ type: 'varchar' })
   status: ClientStatus

@@ -1,71 +1,131 @@
 import { Box } from '@mui/material'
 import { ArrowRight2 } from 'iconsax-react'
-import React from 'react'
-import { grey, grey2, grey3 } from '../../utils/colors'
+import styled, { css } from 'styled-components'
+import { green, grey3, grey5, white } from '../../utils/colors'
+import AtLine from '../AtLine/AtLine'
+import AtStatusTag from '../AtStatusTag/AtStatusTag'
 import AtGroupTag from '../AtGroupTag/AtGroupTag'
 import AtTypography from '../AtTypography/AtTypography'
-import { StyledCard } from './AtTalentCard'
-import AtLine from '../AtLine/AtLine'
-import AtButton, { AtButtonKind, AtButtonVariant } from '../AtButton/AtButton'
-import { Listing } from '../../utils/redux/types/listings.type'
+import { boxShadow } from '../../utils/theme'
+import moment from 'moment'
+import { ClientListing, ListingState, ListingStatus } from '@yjcapp/app'
+import AtTag from '../AtTag/AtTag'
+
+export const StyledCard = styled.div<{ fullHeight?: boolean }>`
+  background-color: ${white};
+  border: 1px solid ${grey5};
+  border-radius: 10px;
+  padding: 20px;
+  transition: 0.3s;
+  min-height: 120px;
+  ${({ fullHeight }) =>
+    fullHeight &&
+    css`
+      height: 100%;
+    `}
+
+  &:hover {
+    box-shadow: ${boxShadow};
+    transition: 0.3s;
+    cursor: pointer;
+    border-color: ${green};
+  }
+`
 
 const AtListingCard: React.FunctionComponent<AtListingCardProps> = (
   props: AtListingCardProps,
 ) => {
-  const listing = new Listing(props.listing)
+  const getListingStatus = (status?: ListingState | ListingStatus) => {
+    switch (status) {
+      case ListingState.Active:
+        return (
+          <AtStatusTag status={ListingStatus.Active} label={ListingStatus.Active} />
+        )
+      case ListingStatus.Disabled:
+        return (
+          <AtStatusTag status={ListingStatus.Disabled} label={ListingStatus.Disabled} />
+        )
+      case ListingStatus.Ended:
+        return (
+          <AtStatusTag status={ListingStatus.Ended} label={ListingStatus.Ended} />
+        )
+      case ListingStatus.Draft:
+        return (
+          <AtStatusTag status={ListingStatus.Draft} label={ListingStatus.Draft} />
+        )
+      case ListingStatus.Running:
+        return (
+          <AtStatusTag status={ListingStatus.Running} label={ListingStatus.Running} />
+        )
+      default: return true
+    }
+  }
 
   return (
     <StyledCard onClick={props.onClick} fullHeight={props.fullHeight}>
-      <Box display={'flex'} flexDirection={'column'} gap={'5px'}>
+      <Box>
         <Box
           display={'flex'}
           justifyContent={'space-between'}
-          alignItems={'center'}
         >
-          <AtTypography variant={'h5'} $bold={true}>
-            {listing.listingName}
-          </AtTypography>
-          <AtGroupTag icon={<ArrowRight2 size={10} />} />
+          <Box display={'flex'} gap={'5px'} flexDirection={'column'}>
+            <Box display={'flex'} alignItems={'center'}>
+              <AtTypography variant={'h5'} $bold={true}>
+                {props.listing.listingName}
+              </AtTypography>
+              <Box display={'flex'} gap={'10px'} marginLeft={'15px'} alignItems={'center'}>
+                {getListingStatus(props.listing.status)}
+              </Box>
+            </Box>
+            <AtTypography variant={'body1'} $bold={true}>
+
+              {props.listing.soloClient.companyName}
+            </AtTypography>
+          </Box>
+
+          <Box
+            display={'flex'}
+            gap={'5px'}
+            flexDirection={'column'}
+            alignItems={'flex-end'}
+          >
+            <Box display={'flex'} gap={'10px'} alignItems={'center'}>
+              <AtTypography color={grey3}>
+                <>Created on: {moment(props.listing.createdAt).format('DD.MM.YYYY')}</>
+              </AtTypography>
+              <AtGroupTag icon={<ArrowRight2 size={10} />} />
+            </Box>
+          </Box>
         </Box>
 
-        <Box
-          display={'flex'}
-          justifyContent={'space-between'}
-          alignItems={'center'}
-        >
-          <AtTypography color={grey} variant={'body1'}>
-            {listing.status}
-          </AtTypography>
-          {/* <AtTypography color={grey3}>
-            Received: {listing.received}
-          </AtTypography> */}
+        <AtLine spacing={16} />
+
+        <Box display={'flex'} flexWrap={'wrap'} gap={'10px'}>
+          {props.listing.skills?.map(
+            (skill: string, index: number) => {
+              return (
+                <AtTag
+                  label={skill}
+                  key={index}
+                />
+              )
+            },
+          )}
         </Box>
 
-        <AtLine spacingTop={16} spacingBottom={6} />
+        <AtLine spacing={16} />
 
-        <Box display={'flex'} gap={'10px'}>
-          <AtTypography color={grey3}>Nobody assigned</AtTypography>
-
-          <AtButton
-            kind={AtButtonKind.Default}
-            variant={AtButtonVariant.Text}
-            name={'Assign now'}
-            fontSize={'14px'}
-          />
-        </Box>
-
-        <AtLine spacingTop={6} spacingBottom={16} />
-
-        <AtTypography color={grey2} ellipsis={3}>
-          {listing.jobDescription}
+        <AtTypography color={grey3}>
+          {props.listing.jobDescription}
         </AtTypography>
       </Box>
     </StyledCard>
+
   )
 }
 
 interface AtListingCardProps {
-  listing: Listing
+  listing: ClientListing
   fullHeight?: boolean
   onClick?: (e: React.MouseEvent) => void
 }

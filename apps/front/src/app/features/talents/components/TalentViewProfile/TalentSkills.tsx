@@ -17,10 +17,12 @@ const TalentSkills: React.FunctionComponent<TalentSkillsProps> = (
     <AtFrame
       title={'Skills'}
       icon={
-        <AtTypography>
-          <Edit size={16} />
-          Edit
-        </AtTypography>
+        !props.notEditable && (
+          <AtTypography>
+            <Edit size={16} />
+            Edit
+          </AtTypography>
+        )
       }
       onClick={() => setOpenModal(true)}
     >
@@ -43,6 +45,7 @@ const TalentSkills: React.FunctionComponent<TalentSkillsProps> = (
 
 interface TalentSkillsProps {
   talent: Talent
+  notEditable?: boolean
 }
 
 export default TalentSkills

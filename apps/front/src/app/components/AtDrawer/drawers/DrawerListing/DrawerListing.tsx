@@ -1,28 +1,31 @@
 import { Box, Collapse, Grid } from '@mui/material'
-import { ArrowDown, ArrowLeft2, ArrowUp } from 'iconsax-react'
-import React, { useState } from 'react'
+import { ArrowDown, ArrowLeft2, ArrowUp, Edit, Status } from 'iconsax-react'
+import React, { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { grey2 } from '../../../../utils/colors'
-import {
-  useAppDispatch,
-  useAppSelector,
-} from '../../../../utils/hooks/reduxHook'
-import { handleSelectTalent } from '../../../../utils/redux/actions/talents.action'
-import { getActiveClient } from '../../../../utils/redux/selectors/clients.selector'
 import AtButton, {
   AtButtonVariant,
   AtButtonKind,
 } from '../../../AtButton/AtButton'
 import AtGroupTag from '../../../AtGroupTag/AtGroupTag'
-import AtSwitch from '../../../AtSwitch/AtSwitch'
 import AtTypography from '../../../AtTypography/AtTypography'
 import AtDrawer from '../../AtDrawer'
 import DrawerTalent from '../DrawerTalent'
 import GeneralInformations from './GeneralInformations'
 import JobDescription from './JobDescription'
 import ScreeningQuestions from './ScreeningQuestions'
+import AtStatusTag from '../../../AtStatusTag/AtStatusTag'
+import { ClientListing, ListingState, ListingStatus } from '@yjcapp/app'
+import AtDropdown from '../../../AtDropdown/AtDropdown'
+import Skills from './Skills'
+import { useAppSelector, useAppDispatch } from '../../../../utils/hooks/reduxHook'
+import { handleUpdateListing } from '../../../../utils/redux/actions/listing.action'
+import ModalListingName from '../../../AtModal/modals/listings/ModalListingName'
+import Roles from './Roles'
+import { getActiveClient } from '../../../../utils/redux/selectors/clients.selector'
+import { listingService } from '../../../../utils/services'
 
-const StyledCollapse = styled(Collapse)<{ isOpen: boolean }>`
+const StyledCollapse = styled(Collapse) <{ isOpen: boolean }>`
   position: relative;
 
   &:before {
@@ -32,8 +35,8 @@ const StyledCollapse = styled(Collapse)<{ isOpen: boolean }>`
     height: 100%;
 
     ${({ isOpen }) =>
-      !isOpen &&
-      css`
+    !isOpen &&
+    css`
         content: '';
         background: linear-gradient(
           0deg,
@@ -48,15 +51,29 @@ const DrawerListing: React.FunctionComponent<DrawerListingProps> = (
   props: DrawerListingProps,
 ) => {
   const selectedClient = useAppSelector((state) => getActiveClient(state))
-  const dispatch = useAppDispatch()
-
-  const [isActivated, setIsActivated] = useState(true)
+  const [listingSelected, setListingSelected] = useState<ClientListing>()
   const [collapseWhole, setCollapseWhole] = useState(false)
   const [openDrawer, setOpenDrawer] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
 
-  const handleClickTalent = (id: number) => {
-    dispatch(handleSelectTalent(id))
-    setOpenDrawer(true)
+  const dispatch = useAppDispatch()
+
+  const getListings = async () => {
+    const listings = await listingService.searchListing({ clientId: selectedClient.id })
+    listings.map((listing) => {
+      if (listing.id === props.selectedListing.id) {
+        setListingSelected(listing)
+      }
+      return listing
+    })
+  }
+
+  useEffect(() => {
+    getListings()
+  }, [])
+
+  const handleStatusChange = (statusValue: ListingState) => {
+    dispatch(handleUpdateListing({ id: props.selectedListing.id, status: statusValue }))
   }
 
   return (
@@ -68,7 +85,7 @@ const DrawerListing: React.FunctionComponent<DrawerListingProps> = (
       handleClose={props.handleClose}
     >
       <Grid container={true}>
-        <Grid xs={12}>
+        <Grid xs={12} item>
           <Box
             display={'flex'}
             flexDirection={'column'}
@@ -83,30 +100,51 @@ const DrawerListing: React.FunctionComponent<DrawerListingProps> = (
                 onClick={props.handleClose}
               />
               <AtTypography color={grey2}>
-                Back to {selectedClient.companyName}
+                Back to all listings
               </AtTypography>
             </Box>
 
             <Box display={'flex'} justifyContent={'space-between'}>
               <Box display={'flex'} alignItems={'center'} gap={'10px'}>
                 <AtGroupTag
-                  label={selectedClient.companyName}
+                  label={listingSelected?.soloClient?.companyName}
                   fontSize={'14px'}
                 />
                 <AtTypography variant={'h3'}>
-                  {props.selectedListing.listingName}
+                  {listingSelected?.listingName}
                 </AtTypography>
+                <Edit
+                  cursor={'pointer'}
+                  size={16}
+                  onClick={() => setOpenModal(true)}
+                />
+                <Box marginLeft={'10px'}>
+                  <AtStatusTag status={ListingStatus.Active} label={listingSelected?.listingType} />
+                </Box>
               </Box>
 
-              <AtSwitch
-                label={
-                  <AtTypography variant="caption" color={grey2}>
-                    {isActivated ? 'Activate Listing:' : 'Deactivate Listing:'}
-                  </AtTypography>
-                }
-                onChange={() => setIsActivated(!isActivated)}
-                forceColors={true}
-              />
+              <Box display={'flex'} gap={'10px'}>
+                <AtTypography color={grey2}>
+                  <Status size={20} />
+                  Status:
+                </AtTypography>
+                <AtDropdown
+                  placeholder={listingSelected?.status}
+                  kind={AtButtonKind.Default}
+                  $listingStatus
+                  $listItems={
+                    [
+                      { id: 1, value: ListingStatus.Active, label: ListingStatus.Active },
+                      { id: 2, value: ListingStatus.Disabled, label: ListingStatus.Disabled },
+                      { id: 3, value: ListingStatus.Ended, label: ListingStatus.Ended },
+                    ]
+                  }
+                  status={listingSelected?.status}
+                  variant={AtButtonVariant.Contained}
+                  handleselect={(e) => handleStatusChange(e.value as ListingState)}
+                  fontSize='14px'
+                />
+              </Box>
             </Box>
 
             <StyledCollapse
@@ -114,13 +152,14 @@ const DrawerListing: React.FunctionComponent<DrawerListingProps> = (
               isOpen={collapseWhole}
               collapsedSize={315}
             >
-              <Box display={'flex'} flexDirection={'column'} gap={'25px'}>
-                <GeneralInformations selectedListing={props.selectedListing} />
-
-                <JobDescription selectedListing={props.selectedListing} />
-
-                <ScreeningQuestions selectedListing={props.selectedListing} />
-              </Box>
+              {listingSelected &&
+                <Box display={'flex'} flexDirection={'column'} gap={'25px'}>
+                  <GeneralInformations selectedListing={listingSelected} />
+                  <JobDescription selectedListing={listingSelected} />
+                  <Roles selectedListing={listingSelected} />
+                  <Skills selectedListing={listingSelected} />
+                  <ScreeningQuestions selectedListing={listingSelected} />
+                </Box>}
             </StyledCollapse>
 
             <Box display={'flex'} justifyContent={'center'}>
@@ -128,34 +167,14 @@ const DrawerListing: React.FunctionComponent<DrawerListingProps> = (
                 kind={AtButtonKind.Default}
                 variant={AtButtonVariant.Text}
                 startIcon={collapseWhole ? <ArrowUp /> : <ArrowDown />}
-                name={`${collapseWhole ? 'Collapse' : 'Open'} Project Details`}
+                name={`${collapseWhole ? 'Collapse' : 'Open'} ${listingSelected?.listingType} Details`}
                 fontSize={'14px'}
                 onClick={() => setCollapseWhole(!collapseWhole)}
               />
             </Box>
 
             <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
-              <AtTypography variant={'h4'}>
-                All Talent In This Project
-              </AtTypography>
-
               <Grid container={true} spacing={2.5} alignItems={'stretch'}>
-                {/* {props.selectedListing.talent?.map((talentId: string) => {
-                  return (
-                    <Grid
-                      item={true}
-                      xs={6}
-                      xl={4}
-                      display={'flex'}
-                      flexDirection={'column'}
-                    >
-                      <AtTalentCard
-                        idTalent={talentId}
-                        onClick={() => handleClickTalent(talentId)}
-                      />
-                    </Grid>
-                  )
-                })} */}
               </Grid>
             </Box>
           </Box>
@@ -166,6 +185,13 @@ const DrawerListing: React.FunctionComponent<DrawerListingProps> = (
         open={openDrawer}
         handleClose={() => setOpenDrawer(false)}
       />
+
+
+      <ModalListingName
+        open={openModal}
+        listing={listingSelected}
+        onClose={() => setOpenModal(false)}
+      />
     </AtDrawer>
   )
 }
@@ -173,7 +199,7 @@ const DrawerListing: React.FunctionComponent<DrawerListingProps> = (
 interface DrawerListingProps {
   open: boolean
   handleClose: () => void
-  selectedListing: any
+  selectedListing: ClientListing
 }
 
 export default DrawerListing

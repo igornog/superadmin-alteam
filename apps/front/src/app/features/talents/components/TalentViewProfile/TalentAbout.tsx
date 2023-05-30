@@ -15,14 +15,20 @@ const TalentAbout: React.FunctionComponent<TalentAboutProps> = (
     <AtFrame
       title={'About Talent'}
       icon={
-        <AtTypography>
-          <Edit size={16} />
-          Edit
-        </AtTypography>
+        !props.notEditable && (
+          <AtTypography>
+            <Edit size={16} />
+            Edit
+          </AtTypography>
+        )
       }
       onClick={() => setOpenModal(true)}
     >
-      <AtTypography color={grey}>{props.talent.about}</AtTypography>
+      <AtTypography color={grey}>
+        {props.talent.about?.length
+          ? props.talent.about
+          : 'No description added.'}
+      </AtTypography>
 
       <ModalAbout isOpen={openModal} onClose={() => setOpenModal(false)} />
     </AtFrame>
@@ -31,6 +37,7 @@ const TalentAbout: React.FunctionComponent<TalentAboutProps> = (
 
 interface TalentAboutProps {
   talent: Talent
+  notEditable?: boolean
 }
 
 export default TalentAbout

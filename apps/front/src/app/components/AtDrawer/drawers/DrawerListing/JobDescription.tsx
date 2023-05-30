@@ -8,11 +8,13 @@ import AtButton, {
 } from '../../../AtButton/AtButton'
 import AtFrame from '../../../AtFrame/AtFrame'
 import AtTypography from '../../../AtTypography/AtTypography'
+import ModalJobDescription from '../../../AtModal/modals/listings/ModalJobDescription'
 
 const JobDescription: React.FunctionComponent<JobDescriptionProps> = (
   props: JobDescriptionProps,
 ) => {
   const [collapseDescription, setCollapseDescription] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
 
   return (
     <AtFrame
@@ -23,7 +25,7 @@ const JobDescription: React.FunctionComponent<JobDescriptionProps> = (
           Edit
         </AtTypography>
       }
-      onClick={() => undefined}
+      onClick={() => setOpenModal(true)}
       backgroundColor={'#FBFCFF'}
     >
       <Collapse in={collapseDescription} collapsedSize={40}>
@@ -42,6 +44,12 @@ const JobDescription: React.FunctionComponent<JobDescriptionProps> = (
           onClick={() => setCollapseDescription(!collapseDescription)}
         />
       </Box>
+
+      <ModalJobDescription
+        open={openModal}
+        listing={props.selectedListing}
+        onClose={() => setOpenModal(false)}
+      />
     </AtFrame>
   )
 }

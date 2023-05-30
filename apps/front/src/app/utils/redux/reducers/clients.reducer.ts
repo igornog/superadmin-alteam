@@ -71,9 +71,7 @@ const { reducer } = createSlice({
 
         if (client) {
           const updatedTalent = { ...client, ...newObj } as any
-
           const talentIndex = state.listClients.indexOf(client)
-
           state.listClients.splice(talentIndex, 1, updatedTalent)
         }
       })

@@ -1,17 +1,18 @@
-import React from 'react'
-import { Route, Routes, useLocation } from 'react-router-dom'
-import Auth from './features/auth'
+import React, { useEffect } from 'react'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+import Auth from './features/auth/index'
 import Talents from './features/talents'
-// import Marketplace from './features/marketplace'
+import Account from './features/account'
+import Listings from './features/listings'
 import {
   Personalcard,
   Profile,
   Briefcase,
-  Setting2,
   Category,
-  MonitorMobbile,
 } from 'iconsax-react'
 import Clients from './features/clients'
+import AtTalentCardDetails from './components/AtCard/AtTalentCardDetails'
+import { useAuth0 } from '@auth0/auth0-react'
 export const Navigation: NavigationProps[] = [
   {
     link: '/talents',
@@ -27,28 +28,28 @@ export const Navigation: NavigationProps[] = [
   },
   {
     link: '/listings',
-    element: <Talents />,
+    element: <Listings />,
     icon: <Briefcase />,
     name: 'Listings',
   },
   {
-    link: '/marketplace',
-    element: <Talents />,
-    icon: <MonitorMobbile />,
-    name: 'Marketplace',
-  },
-  {
-    link: '/settings',
-    element: <Talents />,
-    icon: <Setting2 />,
-    name: 'Settings',
-  },
-  {
     link: '/account',
-    element: <Talents />,
+    element: <Account />,
     icon: <Category />,
     name: 'Account',
   },
+  // {
+  //   link: '/marketplace',
+  //   element: <Talents />,
+  //   icon: <MonitorMobbile />,
+  //   name: 'Marketplace',
+  // },
+  // {
+  //   link: '/settings',
+  //   element: <Talents />,
+  //   icon: <Setting2 />,
+  //   name: 'Settings',
+  // },
 ]
 
 export interface NavigationProps {
@@ -60,14 +61,29 @@ export interface NavigationProps {
 
 export const App: React.FunctionComponent = () => {
   const location = useLocation()
+  const navigate = useNavigate()
+  const {
+    isAuthenticated,
+    error
+  } = useAuth0();
+
+  useEffect(() => {
+    if (error) {
+      navigate('/')
+    }
+  }, [error, navigate])
 
   return (
     <Routes location={location} key={location.pathname}>
-      <Route path="/" element={<Auth />} />
 
-      {Navigation.map((item: NavigationProps, index: number) => {
-        return <Route path={item.link} element={item.element} key={index} />
-      })}
+      <Route path="/" element={<Auth />} />
+      <Route path="/talent/:id" element={<AtTalentCardDetails />} />
+
+      {isAuthenticated &&
+        Navigation.map((item: NavigationProps, index: number) => {
+          return <Route path={item.link} element={item.element} key={index} />
+        })
+      }
     </Routes>
   )
 }

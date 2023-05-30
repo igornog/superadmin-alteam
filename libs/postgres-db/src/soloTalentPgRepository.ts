@@ -1,6 +1,6 @@
 //eslint-disable @typescript-eslint/no-unused-vars
 import { postgresClient } from './postgresClient'
-import { SoloTalent, TalentSearch } from '@yjcapp/app'
+import { SoloTalent, TalentNote, TalentSearch } from '@yjcapp/app'
 import { SoloTalentEntity } from './entities'
 import { soloTalentFromEntity, soloTalentToEntity } from './soloTalentConverter'
 
@@ -84,9 +84,129 @@ async function updateSoloTalent(talent: SoloTalent): Promise<SoloTalent> {
   return soloTalentFromEntity(result)
 }
 
+async function addNoteToSoloTalent(
+  id: string,
+  note: Partial<TalentNote>,
+): Promise<SoloTalent> {
+  const soloTalentRepository = (await postgresClient()).getRepository(
+    SoloTalentEntity,
+  )
+
+  const entity = await soloTalentRepository.findOneBy({ id: parseInt(id) })
+  const { notes: existingNotes } = entity
+
+  const existingNotesParsed: TalentNote[] = existingNotes.map((note) => {
+    const roleString = (note as unknown as string)
+      .split(String.fromCharCode(92))
+      .join('')
+      .split("'")
+      .join('"')
+
+    return JSON.parse(roleString as unknown as string)
+  })
+
+  const lastNoteObj = JSON.parse(
+    existingNotes[existingNotes.length - 1] as unknown as string,
+  )
+
+  const newNote: TalentNote = {
+    id: existingNotes.length === 0 ? 1 : lastNoteObj.id + 1,
+    author: note.author,
+    text: note.text,
+    createdAt: new Date(),
+  }
+  const newNotes = [...existingNotesParsed, newNote]
+
+  await soloTalentRepository.update(id, {
+    notes: newNotes,
+  })
+
+  return { ...soloTalentFromEntity(entity), notes: newNotes }
+}
+
+async function updateNoteOnSoloTalent(
+  soloTalentId: string,
+  noteId: string,
+  note: TalentNote,
+): Promise<SoloTalent> {
+  const soloTalentRepository = (await postgresClient()).getRepository(
+    SoloTalentEntity,
+  )
+
+  const entity = await soloTalentRepository.findOneBy({
+    id: parseInt(soloTalentId),
+  })
+  const { notes: existingNotes } = entity
+
+  const existingNotesParsed: TalentNote[] = existingNotes.map((note) => {
+    const roleString = (note as unknown as string)
+      .split(String.fromCharCode(92))
+      .join('')
+      .split("'")
+      .join('"')
+
+    return JSON.parse(roleString as unknown as string)
+  })
+
+  const editedNotes: TalentNote[] = existingNotesParsed.map((noteObj) => {
+    if (noteObj.id === parseInt(noteId)) {
+      return {
+        ...noteObj,
+        text: note.text,
+        updatedAt: new Date(),
+      }
+    } else {
+      return noteObj
+    }
+  })
+
+  await soloTalentRepository.update(soloTalentId, {
+    notes: editedNotes,
+  })
+
+  return { ...soloTalentFromEntity(entity), notes: editedNotes }
+}
+
+async function deleteNoteOnSoloTalent(
+  soloTalentId: string,
+  noteId: string,
+): Promise<SoloTalent> {
+  const soloTalentRepository = (await postgresClient()).getRepository(
+    SoloTalentEntity,
+  )
+
+  const entity = await soloTalentRepository.findOneBy({
+    id: parseInt(soloTalentId),
+  })
+  const { notes: existingNotes } = entity
+
+  const existingNotesParsed: TalentNote[] = existingNotes.map((note) => {
+    const roleString = (note as unknown as string)
+      .split(String.fromCharCode(92))
+      .join('')
+      .split("'")
+      .join('"')
+
+    return JSON.parse(roleString as unknown as string)
+  })
+
+  const editedNotes: TalentNote[] = existingNotesParsed.filter((noteObj) => {
+    return noteObj.id !== parseInt(noteId)
+  })
+
+  await soloTalentRepository.update(soloTalentId, {
+    notes: editedNotes,
+  })
+
+  return { ...soloTalentFromEntity(entity), notes: editedNotes }
+}
+
 export const soloTalentPgRepository = {
   createSoloTalent,
   retrieveSoloTalent,
   updateSoloTalent,
   findSoloTalentBySearch,
+  addNoteToSoloTalent,
+  updateNoteOnSoloTalent,
+  deleteNoteOnSoloTalent,
 }

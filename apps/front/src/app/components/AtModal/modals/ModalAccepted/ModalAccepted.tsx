@@ -20,7 +20,7 @@ import ModalAcceptedStep1 from './steps/ModalAcceptedStep1'
 import ModalAcceptedStep2 from './steps/ModalAcceptedStep2'
 import { handlePatchTalent } from '../../../../utils/redux/actions/talents.action'
 import { getActiveTalent } from '../../../../utils/redux/selectors/talents.selector'
-import { ListingStatus } from '@yjcapp/app'
+import { TalentStatus } from '@yjcapp/app'
 
 const ModalAccepted: React.FunctionComponent<ModalAcceptedProps> = (
   props: ModalAcceptedProps,
@@ -39,7 +39,7 @@ const ModalAccepted: React.FunctionComponent<ModalAcceptedProps> = (
     dispatch(
       handlePatchTalent({
         id: selectedTalent.id,
-        status: ListingStatus.Accepted,
+        status: TalentStatus.Accepted,
       }),
     )
     props.onClose?.()

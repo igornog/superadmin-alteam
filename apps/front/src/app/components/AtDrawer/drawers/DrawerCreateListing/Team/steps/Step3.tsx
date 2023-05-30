@@ -166,7 +166,7 @@ const TeamStep3: React.FunctionComponent<Step3Props> = (props: Step3Props) => {
                           })),
                       ]}
                       label={`Role Name ${i + 1}`}
-                      handleSelect={(e) =>
+                      handleselect={(e) =>
                         handleRoleChange(e, jobDescription.id)
                       }
                     />

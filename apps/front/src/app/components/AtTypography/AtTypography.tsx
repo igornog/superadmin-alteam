@@ -12,9 +12,10 @@ interface StyledTypographyProps {
   flex?: number
   justifyContent?: string
   ellipsis?: number
+  blurred?: boolean
 }
 
-const StyledTypography = styled(Typography)<StyledTypographyProps>`
+const StyledTypography = styled(Typography) <StyledTypographyProps>`
   font-size: ${({ fontSize }) => fontSize && fontSize};
   ${({ $bold }) =>
     $bold &&
@@ -44,6 +45,7 @@ const StyledTypography = styled(Typography)<StyledTypographyProps>`
 const AtTypography: React.FunctionComponent<AtTypographyProps> = (
   props: AtTypographyProps,
 ) => {
+
   return (
     <StyledTypography
       {...props}
@@ -57,8 +59,18 @@ const AtTypography: React.FunctionComponent<AtTypographyProps> = (
       whiteSpace={props.whiteSpace ?? 'none'}
       ellipsis={props.ellipsis}
     >
-      {props.children}
-    </StyledTypography>
+
+      {!props.blurred ?
+        props.children :
+        <span
+          style={
+            {
+              filter: 'blur(5px)',
+              userSelect: 'none',
+              pointerEvents: 'none'
+            }
+          }>Nice try, hacker!</span>}
+    </StyledTypography >
   )
 }
 
@@ -74,6 +86,7 @@ interface AtTypographyProps {
   flex?: number
   justifyContent?: string
   ellipsis?: number
+  blurred?: boolean
 }
 
 export default AtTypography

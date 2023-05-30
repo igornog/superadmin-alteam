@@ -52,7 +52,10 @@ export const handleActiveSort = createAsyncThunk(
 
 export const handleActiveFilter = createAsyncThunk(
   'settings/activeFilter',
-  async (props: { filter: Filter; section: 'skills' | 'jobTypes' }) => {
+  async (props: {
+    filter: Filter
+    section: 'skills' | 'jobTypes' | 'clients' | 'listingStatus' | 'priceRange'
+  }) => {
     return props
   },
 )

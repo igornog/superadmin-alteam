@@ -22,7 +22,7 @@ import AtDrawer from '../../AtDrawer'
 import FinalStep from './steps/FinalStep'
 import Step1 from './steps/Step1'
 import Step2 from './steps/Step2'
-import { ClientStatus } from '@yjcapp/app'
+import { ClientStatus, EmailStatus } from '@yjcapp/app'
 
 export const StyledForm = styled.div`
   background-color: ${white};
@@ -75,6 +75,7 @@ const DrawerCreateClient: React.FunctionComponent<DrawerCreateClientProps> = (
     email: '',
     fullName: '',
     position: '',
+    emailStatus: EmailStatus.Unconfirmed,
     status: ClientStatus.Request,
   }
 

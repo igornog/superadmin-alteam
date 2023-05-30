@@ -1,17 +1,36 @@
 import {
   GroupTalent,
   SoloTalent,
+  TalentNote,
   TalentSearch,
   TalentService,
 } from '@yjcapp/app'
 import atAxios from './axios'
 
 export default class RemoteTalentService implements TalentService {
-  retrieveGroupTalent(id: string): Promise<GroupTalent | undefined> {
+  addNoteToGroupTalent(id: string, note: Partial<TalentNote>): Promise<GroupTalent> {
+    throw new Error('Method not implemented.')
+  }
+  updateNoteOnGroupTalent(soloTalentId: string, noteId: string, note: TalentNote): Promise<GroupTalent> {
+    throw new Error('Method not implemented.')
+  }
+  deleteNoteOnGroupTalent(soloTalentId: string, noteId: string): Promise<GroupTalent> {
+    throw new Error('Method not implemented.')
+  }
+  addNoteToSoloTalent(id: string, note: Partial<TalentNote>): Promise<SoloTalent> {
+    throw new Error('Method not implemented.')
+  }
+  updateNoteOnSoloTalent(soloTalentId: string, noteId: string, note: TalentNote): Promise<SoloTalent> {
+    throw new Error('Method not implemented.')
+  }
+  deleteNoteOnSoloTalent(soloTalentId: string, noteId: string): Promise<SoloTalent> {
+    throw new Error('Method not implemented.')
+  }
+  retrieveGroupTalent(): Promise<GroupTalent | undefined> {
     throw new Error('Method not implemented.')
   }
 
-  createGroupTalent(talent: Omit<GroupTalent, 'id'>): Promise<GroupTalent> {
+  createGroupTalent(): Promise<GroupTalent> {
     throw new Error('Method not implemented.')
   }
 

@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { CloseSquare, TickSquare } from 'iconsax-react'
 import moment from 'moment'
 import React, { useState } from 'react'
-import { ListingStatus } from '@yjcapp/app'
+import { TalentStatus } from '@yjcapp/app'
 import TalentAbout from '../../../features/talents/components/TalentViewProfile/TalentAbout'
 import TalentAttachments from '../../../features/talents/components/TalentViewProfile/TalentAttachments'
 import TalentGeneral from '../../../features/talents/components/TalentViewProfile/TalentGeneral'
@@ -40,13 +40,8 @@ const DrawerTalent: React.FunctionComponent<DrawerTalentProps> = (
   const [openModalDecline, setOpenModalDecline] = useState(false)
 
   const moveToInbound = () => {
-    dispatch(
-      handlePatchTalent({
-        id: selectedTalent.id,
-        status: ListingStatus.Inbound,
-      }),
-    )
-    props.handleClose()
+      dispatch(handlePatchTalent({ id: selectedTalent.id, status: TalentStatus.Inbound }))
+      props.handleClose()
   }
 
   return (
@@ -93,7 +88,8 @@ const DrawerTalent: React.FunctionComponent<DrawerTalentProps> = (
         <TalentNotes />
 
         <Box display={'flex'} justifyContent={'flex-end'} gap={2.5}>
-          {selectedTalent.status !== ListingStatus.Declined ? (
+
+          {selectedTalent.status !== TalentStatus.Declined ? (
             <AtButton
               onClick={() => setOpenModalDecline(true)}
               kind={AtButtonKind.Danger}
@@ -103,8 +99,8 @@ const DrawerTalent: React.FunctionComponent<DrawerTalentProps> = (
             />
           ) : null}
 
-          {selectedTalent.status === ListingStatus.Inbound ||
-          selectedTalent.status === ListingStatus.Accepted ? (
+          {selectedTalent.status === TalentStatus.Inbound ||
+            selectedTalent.status === TalentStatus.Accepted ? (
             <AtButton
               onClick={() => setOpenModalShortlist(true)}
               kind={AtButtonKind.Default}
@@ -113,7 +109,7 @@ const DrawerTalent: React.FunctionComponent<DrawerTalentProps> = (
             />
           ) : null}
 
-          {selectedTalent.status === ListingStatus.Shortlisted ? (
+          {selectedTalent.status === TalentStatus.Shortlisted? (
             <AtButton
               onClick={moveToInbound}
               kind={AtButtonKind.Default}
@@ -122,8 +118,7 @@ const DrawerTalent: React.FunctionComponent<DrawerTalentProps> = (
             />
           ) : null}
 
-          {selectedTalent.status === ListingStatus.Shortlisted ||
-            selectedTalent.status === ListingStatus.Inbound ? (
+          {selectedTalent.status !== TalentStatus.Declined ? (
             <AtButton
               onClick={() => setOpenModalAccepted(true)}
               kind={AtButtonKind.Success}

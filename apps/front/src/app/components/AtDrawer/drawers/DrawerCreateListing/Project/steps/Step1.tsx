@@ -92,7 +92,7 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
                 id: index,
                 label: client.companyName,
               }))}
-              handleSelect={(e) => {
+              handleselect={(e) => {
                 const getClientFromName = listClients.find(
                   (item: Client) => item.companyName === e.label,
                 )
@@ -116,7 +116,7 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
               id: key + 1,
               label: (key + 1).toString(),
             }))}
-            handleSelect={(e) =>
+            handleselect={(e) =>
               props.setProject({
                 ...props.project,
                 individuals: parseInt(e.label) as number,
@@ -138,7 +138,7 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
                       label: label,
                     }),
                   )}
-                  handleSelect={(e) =>
+                  handleselect={(e) =>
                     props.setProject({
                       ...props.project,
                       workType: e.label as WorkType,
@@ -153,7 +153,7 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
                   <AtTimezoneDropdown
                     fullWidth={true}
                     placeholder={'Enter Timezone'}
-                    handleSelect={(e) =>
+                    handleselect={(e) =>
                       props.setProject({ ...props.project, timeZone: e })
                     }
                   />
@@ -171,7 +171,7 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
                 label: label,
               }),
             )}
-            handleSelect={(e) =>
+            handleselect={(e) =>
               props.setProject({
                 ...props.project,
                 availability: e.label as Availability,
@@ -216,7 +216,7 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
                 label: label + ` (${getCurrencySymbol(label)})`,
               }),
             )}
-            handleSelect={(e) =>
+            handleselect={(e) =>
               props.setProject({
                 ...props.project,
                 currency: e.key as Currency,
@@ -236,7 +236,7 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
                   label: label,
                 }),
               )}
-              handleSelect={(e) => props.setRateType(e.label as RateType)}
+              handleselect={(e) => props.setRateType(e.label as RateType)}
               label={'Rate'}
             />
 
@@ -295,7 +295,7 @@ const ProjectStep1: React.FunctionComponent<Step1Props> = (
                 label: label,
               }),
             )}
-            handleSelect={(e) =>
+            handleselect={(e) =>
               props.setProject({
                 ...props.project,
                 difficulty: e.label as Difficulty,

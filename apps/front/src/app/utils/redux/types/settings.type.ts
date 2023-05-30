@@ -1,7 +1,7 @@
 import React from 'react'
 import { RightClick } from '../../types'
 import { StatusType } from './status.type'
-import { ClientStatus, ListingStatus } from '@yjcapp/app'
+import { ClientStatus, ListingType, TalentStatus } from '@yjcapp/app'
 
 export interface SettingsState {
   tabs: Page[]
@@ -17,12 +17,15 @@ export interface FilterInterface {
   skills?: Filter[]
   jobTypes?: Filter[]
   searchName?: string
+  listingStatus?: Filter[]
+  clients?: Filter[]
+  priceRange?: Filter[]
 }
 
 export interface Page {
   title: string
-  status: ListingStatus | ClientStatus | null
-  node?: React.ReactNode
+  status: TalentStatus | ClientStatus | ListingType | null
+  node: React.ReactNode
   badge?: number
   action?: string
   active?: boolean
@@ -58,6 +61,11 @@ export enum SortTypes {
   Alphabetical = 'alphabetical',
   MostRecent = 'mostRecent',
   Status = 'status',
+  Draft = 'draft',
+  Activated = 'activated',
+  Running = 'running',
+  Desactivated = 'desactivated',
+  Ended = 'ended',
 }
 
 export enum DisplayMode {
@@ -99,6 +107,9 @@ export interface HandlesettingsProps {
   filters?: Filter[]
   sort?: Sort
   jobTypes?: Filter[]
+  listingStatus?: Filter[]
+  clients?: Filter[]
+  priceRange?: Filter[]
 }
 
 export enum Column {

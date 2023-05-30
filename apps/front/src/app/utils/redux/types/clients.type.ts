@@ -1,6 +1,7 @@
 import {
   ClientStatus,
   DeliveryType,
+  EmailStatus,
   ProjectType,
   SoloClient,
   Talent,
@@ -26,6 +27,7 @@ export class Client implements SoloClient {
   projectType?: ProjectType
   deliveryType?: DeliveryType
   teamRequest?: TeamRequest
+  emailStatus: EmailStatus
   request?: string
   email?: string
   fullName?: string
@@ -40,6 +42,7 @@ export class Client implements SoloClient {
     this.phoneNumber = data.phoneNumber
     this.companyUrl = data.companyUrl
     this.linkedinUrl = data.linkedinUrl
+    this.emailStatus = data.emailStatus
     this.industry = data.industry
     this.projectType = data.projectType
     this.deliveryType = data.deliveryType

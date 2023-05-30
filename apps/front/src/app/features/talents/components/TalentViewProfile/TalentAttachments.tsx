@@ -1,26 +1,30 @@
-import { Box } from '@mui/material'
-import { Import, DocumentText1 } from 'iconsax-react'
+import { Import } from 'iconsax-react'
 import React from 'react'
 import AtLine from '../../../../components/AtLine/AtLine'
 import AtFrame from '../../../../components/AtFrame/AtFrame'
 import AtTypography from '../../../../components/AtTypography/AtTypography'
-import { grey } from '../../../../utils/colors'
 
-const TalentAttachments: React.FunctionComponent = () => {
+const TalentAttachments: React.FunctionComponent<TalentAttachmentsProps> = (
+  props: TalentAttachmentsProps,
+) => {
   return (
     <AtFrame
       title={'Attachments'}
       icon={
-        <AtTypography>
-          <Import size={16} />
-          Download all
-        </AtTypography>
+        !props.notEditable && (
+          <AtTypography>
+            <Import size={16} />
+            Download all
+          </AtTypography>
+        )
       }
       gap={0}
     >
       <AtLine spacing={15} />
 
-      <Box display={'flex'} justifyContent={'space-between'}>
+      <AtTypography variant="body2">No Attachments added.</AtTypography>
+
+      {/* <Box display={'flex'} justifyContent={'space-between'}>
         <Box display={'flex'} gap={'10px'}>
           <DocumentText1 />
           <AtTypography color={grey}>Filenamecanbethislong.pdf</AtTypography>
@@ -49,9 +53,13 @@ const TalentAttachments: React.FunctionComponent = () => {
         </Box>
 
         <Import />
-      </Box>
+      </Box> */}
     </AtFrame>
   )
+}
+
+interface TalentAttachmentsProps {
+  notEditable?: boolean
 }
 
 export default TalentAttachments

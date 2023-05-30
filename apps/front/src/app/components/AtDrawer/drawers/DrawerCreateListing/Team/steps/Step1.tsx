@@ -108,7 +108,7 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
                 id: index,
                 label: client.companyName,
               }))}
-              handleSelect={(e) => {
+              handleselect={(e) => {
                 const getClientFromName = listClients.find(
                   (item: Client) => item.companyName === e.label,
                 )
@@ -132,7 +132,7 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
               id: key + 1,
               label: (key + 1).toString(),
             }))}
-            handleSelect={(e) =>
+            handleselect={(e) =>
               props.setTeam({
                 ...props.team,
                 individuals: parseInt(e.label) as number,
@@ -153,7 +153,7 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
                     label: label,
                   }),
                 )}
-                handleSelect={(e) =>
+                handleselect={(e) =>
                   props.setTeam({
                     ...props.team,
                     workType: e.label as WorkType,
@@ -186,7 +186,7 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
                 label: label,
               }),
             )}
-            handleSelect={(e) =>
+            handleselect={(e) =>
               props.setTeam({
                 ...props.team,
                 availability: e.label as Availability,
@@ -230,7 +230,7 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
                 label: label + ` (${getCurrencySymbol(label)})`,
               }),
             )}
-            handleSelect={(e) =>
+            handleselect={(e) =>
               props.setTeam({
                 ...props.team,
                 currency: e.key as Currency,
@@ -289,7 +289,7 @@ const TeamStep1: React.FunctionComponent<Step1Props> = (props: Step1Props) => {
                 label: label,
               }),
             )}
-            handleSelect={(e) =>
+            handleselect={(e) =>
               props.setTeam({
                 ...props.team,
                 difficulty: e.label as Difficulty,

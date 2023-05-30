@@ -27,7 +27,7 @@ import ModalShortlistStep3 from './steps/ModalShortlistStep3'
 import AtTabs from '../../../AtTabs/AtTabs'
 import { handlePatchTalent } from '../../../../utils/redux/actions/talents.action'
 import { getActiveTalent } from '../../../../utils/redux/selectors/talents.selector'
-import { ListingStatus } from '@yjcapp/app'
+import { TalentStatus } from '@yjcapp/app'
 
 const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
   props: ModalShortlistProps,
@@ -43,12 +43,7 @@ const ModalShortlist: React.FunctionComponent<ModalShortlistProps> = (
   }, [dispatch, props.isOpen])
 
   const moveTalent = () => {
-    dispatch(
-      handlePatchTalent({
-        id: selectedTalent.id,
-        status: ListingStatus.Shortlisted,
-      }),
-    )
+    dispatch(handlePatchTalent({ id: selectedTalent.id, status: TalentStatus.Shortlisted }))
     props.onClose?.()
   }
 

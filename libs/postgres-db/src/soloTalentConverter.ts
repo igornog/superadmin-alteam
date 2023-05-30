@@ -21,6 +21,7 @@ export function soloTalentFromEntity(entity: SoloTalentEntity): SoloTalent {
     workExperience: entity.workExperience,
     assets: entity.assets,
     skills: entity.skills,
+    notes: entity.notes,
   }
 }
 
@@ -45,5 +46,6 @@ export function soloTalentToEntity(
     status: soloTalent.status,
     assets: soloTalent.assets,
     skills: soloTalent.skills,
+    notes: soloTalent.notes,
   }
 }

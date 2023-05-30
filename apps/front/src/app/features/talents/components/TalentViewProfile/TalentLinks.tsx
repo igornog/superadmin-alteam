@@ -51,10 +51,12 @@ const TalentLinks: React.FunctionComponent<TalentLinksProps> = (
         <AtFrame
           title={'Additional Links'}
           icon={
-            <AtTypography>
-              <Edit size={16} />
-              Edit
-            </AtTypography>
+            !props.notEditable && (
+              <AtTypography>
+                <Edit size={16} />
+                Edit
+              </AtTypography>
+            )
           }
           onClick={() => {
             setOpenModal(true)
@@ -79,7 +81,7 @@ const TalentLinks: React.FunctionComponent<TalentLinksProps> = (
             </>
           ))}
         </AtFrame>
-      ) : (
+      ) : !props.notEditable ? (
         <StyledLink
           onClick={() => {
             setOpenModal(true)
@@ -90,7 +92,7 @@ const TalentLinks: React.FunctionComponent<TalentLinksProps> = (
             <AddCircle size={20} /> Add links
           </AtTypography>
         </StyledLink>
-      )}
+      ) : null}
 
       <ModalLink
         isOpen={openModal}
@@ -103,6 +105,7 @@ const TalentLinks: React.FunctionComponent<TalentLinksProps> = (
 
 interface TalentLinksProps {
   talent: Talent
+  notEditable?: boolean
 }
 
 export default TalentLinks

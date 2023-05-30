@@ -17,7 +17,9 @@ const DeclinedTalentsView: React.FunctionComponent = () => {
     (talent: Talent) => talent.status === activeTab.status,
   )
 
-  const talentsSorted = settings.sort ? sortBy(settings.sort, talents.listTalents) : talents.listTalents
+  const talentsSorted = settings.sort
+    ? sortBy(settings.sort, talents.listTalents)
+    : talents.listTalents
 
   return listTalents.length === 0 ? (
     <AtNoResult sentence={`No Declined Talents`} />

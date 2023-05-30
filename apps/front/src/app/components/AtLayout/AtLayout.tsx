@@ -30,7 +30,7 @@ import AtSortByDropdown from '../AtDropdown/AtSortByDropdown'
 import { SortTypes } from '../../utils/redux/types/settings.type'
 import { getActiveGroup } from '../../utils/redux/selectors/group.selector'
 
-const StyledContent = styled(Grid) <{ $sidePanelSize?: string }>`
+export const StyledContent = styled(Grid)<{ $sidePanelSize?: string }>`
   overflow: hidden;
   background-color: #f7f8fe;
   margin: 20px 20px 30px 165px;
@@ -65,14 +65,12 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
   }
 
   const sortOptions = [
-    { id: 0, value: null, label: 'None' },
+    { id: 0, value: '', label: 'None' },
     { id: 1, value: SortTypes.Alphabetical, label: 'A to Z' },
     { id: 2, value: SortTypes.MostRecent, label: 'Most Recent' },
   ]
   if (!activeTab?.status) {
-    sortOptions.push(
-      { id: 3, value: SortTypes.Status, label: 'Status' }
-    )
+    sortOptions.push({ id: 3, value: SortTypes.Status, label: 'Status' })
   }
 
   return !isSmallScreen ? (
@@ -133,7 +131,7 @@ const AtLayout: React.FunctionComponent<AtLayoutProps> = (
                           variant={AtButtonVariant.Outlined}
                           startIcon={<TickCircle />}
                           name={'Verifiy Client (1)'}
-                        // onClick={() => setOpenCreateTalent(true)}
+                          // onClick={() => setOpenCreateTalent(true)}
                         />
 
                         {/* <ModalAddTalent

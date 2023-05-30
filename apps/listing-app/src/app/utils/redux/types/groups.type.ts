@@ -1,5 +1,5 @@
 import { StatusType } from './status.type'
-import { Group as AtGroup, GroupTalent } from '@yjcapp/app'
+import { Group as AtGroup, GroupTalent, SoloTalent } from '@yjcapp/app'
 import { Client } from './clients.type'
 import { Talent } from './talents.type'
 
@@ -14,7 +14,7 @@ export class Group implements AtGroup {
   id: number
   name: string
   client?: Client
-  talents?: Talent[]
+  talents?: SoloTalent[]
   groupTalents?: GroupTalent[]
   subGroups: Group[]
   parent: Group

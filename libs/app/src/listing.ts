@@ -1,6 +1,24 @@
 import { SoloClient } from './client'
 import { Availability } from './talent'
 
+export enum Clients {
+  Glide = 'Glide',
+  Chaptr = 'Chaptr',
+  Cerculla = 'Cerculla',
+  Ticknovate = 'Ticknovate',
+  Barbr = 'Barbr',
+}
+
+export enum PriceRanges {
+  From0to1k = '0 to 1K',
+  From1to5k = '1K to 5K',
+  From5to10k = '5K to 10K',
+  From10to20k = '10K to 20K',
+  From20to50k = '20K to 50K',
+  From50to100k = '50K to 100K',
+  From100k = '100K+',
+}
+
 export interface ClientListing {
   id?: number
   soloClient: SoloClient
@@ -23,6 +41,7 @@ export interface ClientListing {
   jobDescription?: string
   listingType: ListingType
   status: ListingState
+  createdAt: Date
 }
 
 export interface Role {
@@ -63,10 +82,19 @@ export enum ListingType {
   Team = 'Team',
 }
 
+export enum ListingStatus {
+  Draft = 'Draft',
+  Active = 'Active',
+  Running = 'Running',
+  Disabled = 'Disabled',
+  Ended = 'Ended',
+}
+
 export enum ListingState {
   Draft = 'Draft',
   Active = 'Active',
   Deactivate = 'Deactivate',
+  Ended = 'Ended',
 }
 
 export enum Currency {
@@ -76,7 +104,12 @@ export enum Currency {
 }
 
 export interface ListingSearch {
+  listingId?: number
   listingName?: string
+  skills?: string[]
+  sort?: string | null
+  status?: ListingStatus
   listingType?: ListingType
   clientId?: number
+  clientEmail?: string
 }
