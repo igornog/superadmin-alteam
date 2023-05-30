@@ -19,6 +19,59 @@ import HeaderHome from '../components/Header/HeaderHome'
 import ModalListingName from '../components/Modal/modals/ModalListingName'
 import Roles from '../components/Form/ListingsForm/CreateListing/Team/steps/Preview/Roles'
 
+const dummyListing = [
+  {
+      "id": 1,
+      "soloClient": {
+          "companyName": "saasd",
+          "email": "igorcmnog@gmail.com",
+          "fullName": "Igor Carlos Mathias Nogueira",
+          "position": "asdsda"
+      },
+      "listingName": "My First Team Project ",
+      "individuals": "2",
+      "workType": "Remote",
+      "timeZone": "+03:00",
+      "availability": "Full Time",
+      "projectLength": 12,
+      "startDate": "2023-06-12T00:00:00.000Z",
+      "currency": "Dollars",
+      "exactRate": "40000",
+      "rateFrom": null,
+      "rateTo": null,
+      "difficulty": "MidSenior",
+      "learningLink": "google.com",
+      "roles": [
+          {
+              "roleName": "Front End Developer",
+              "description": "This is the FE Description.",
+              "price": 20000,
+              "percentage": 50
+          },
+          {
+              "roleName": "Back End Developer",
+              "description": "This is the BE Description.",
+              "price": 20000,
+              "percentage": 50
+          }
+      ],
+      "skills": [
+          "React",
+          "TypeScript",
+          "Jest"
+      ],
+      "questions": [
+          "This is a screening question 1",
+          "This is a screening question 2",
+          "This is a screening question 3"
+      ],
+      "jobDescription": "This is the General Description.",
+      "listingType": ListingType.Team,
+      "status": ListingState.Active,
+      "createdAt": "2023-05-30T13:38:41.104Z"
+  }
+]
+
 const StyledCollapse = styled(Collapse) <{ $isOpen: boolean }>`
   position: relative;
 
@@ -61,9 +114,9 @@ const ListingDetails: React.FunctionComponent = () => {
     getListing()
   }, [id])
 
-  const handleStatusChange = (statusValue: string) => {
-    listingService.updateListing({ id: currentListing?.id, status: statusValue as ListingState })
-  }
+  // const handleStatusChange = (statusValue: string) => {
+  //   listingService.updateListing({ id: currentListing?.id, status: statusValue as ListingState })
+  // }
 
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
@@ -106,7 +159,8 @@ const ListingDetails: React.FunctionComponent = () => {
                     >
                       <Box display={'flex'} alignItems={'center'} gap={'10px'}>
                         <AtGroupTag
-                          label={currentListing?.soloClient.companyName}
+                          // label={currentListing?.soloClient.companyName}
+                          label={dummyListing[0].soloClient.companyName}
                           fontSize={'14px'}
                         />
                         <AtTypography variant={'h4'} $bold>
@@ -125,7 +179,8 @@ const ListingDetails: React.FunctionComponent = () => {
                           Status:
                         </AtTypography>
                         <AtDropdown
-                          placeholder={currentListing?.status}
+                          // placeholder={currentListing?.status}
+                          placeholder={dummyListing[0]?.status}
                           $listingStatus
                           fontWeight={600}
                           disabled={!isAuthenticated}
@@ -140,39 +195,45 @@ const ListingDetails: React.FunctionComponent = () => {
                             ]
                           }
                           variant={AtButtonVariant.Contained}
-                          handleSelect={(e) => handleStatusChange(e.value)}
+                          // handleSelect={(e) => handleStatusChange(e.value)}
                         />
                       </Box>
                     </Box>
 
-                    {currentListing ?
+                    {dummyListing ?
                       <Box display={'flex'} flexDirection={'column'} gap={'25px'}>
                         <GeneralInformations
-                          listing={currentListing}
+                          // listing={currentListing}
+                          listing={dummyListing[0]}
                           isSmallScreen={isSmallScreen}
                           isAuthenticated={isAuthenticated}
                         />
                         <JobDescription
-                          listing={currentListing}
+                          // listing={currentListing}
+                          listing={dummyListing[0]}
                           isSmallScreen={isSmallScreen}
                           isAuthenticated={isAuthenticated}
                         />
 
 
-                        {currentListing?.listingType === ListingType.Team &&
+                        {/* {currentListing?.listingType === ListingType.Team && */}
+                        {dummyListing[0]?.listingType === ListingType.Team &&
                           <Roles
-                            listing={currentListing}
+                            // listing={currentListing}
+                            listing={dummyListing[0]}
                             isSmallScreen={isSmallScreen}
                             isAuthenticated={isAuthenticated}
                           />}
 
                         <Skills
-                          listing={currentListing}
+                            // listing={currentListing}
+                            listing={dummyListing[0]}
                           isSmallScreen={isSmallScreen}
                           isAuthenticated={isAuthenticated}
                         />
                         <ScreeningQuestions
-                          listing={currentListing}
+                            // listing={currentListing}
+                            listing={dummyListing[0]}
                           isSmallScreen={isSmallScreen}
                           isAuthenticated={isAuthenticated}
                         />
@@ -196,7 +257,8 @@ const ListingDetails: React.FunctionComponent = () => {
 
             <ModalListingName
               open={openModal}
-              listing={currentListing}
+              // listing={currentListing}
+              listing={dummyListing[0]}
               onClose={() => setOpenModal(false)}
             />
           </Container>

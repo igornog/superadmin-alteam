@@ -20,12 +20,65 @@ import HeaderHome from '../components/Header/HeaderHome'
 import Footer from '../components/Footer/Footer'
 import AtLine from '../components/Line/Line'
 import { capitalize } from '../utils/helpers'
-import { ClientListing, ListingState } from '@yjcapp/app'
+import { ClientListing, ListingState, ListingStatus, ListingType } from '@yjcapp/app'
 import { clientService, listingService } from '../utils/services'
 import AtListingCard from '../components/Card/Listings/ListingCard'
 import blueBackgroundGradient from '../assets/images/blue-background-gradient.png'
 import { Client } from '../utils/redux/types/clients.type'
 import CustomButton from '../components/Button/Button'
+
+const dummyListings = [
+  {
+      "id": 1,
+      "soloClient": {
+          "companyName": "saasd",
+          "email": "igorcmnog@gmail.com",
+          "fullName": "Igor Carlos Mathias Nogueira",
+          "position": "asdsda"
+      },
+      "listingName": "My First Team Project ",
+      "individuals": "2",
+      "workType": "Remote",
+      "timeZone": "+03:00",
+      "availability": "Full Time",
+      "projectLength": 12,
+      "startDate": "2023-06-12T00:00:00.000Z",
+      "currency": "Dollars",
+      "exactRate": "40000",
+      "rateFrom": null,
+      "rateTo": null,
+      "difficulty": "MidSenior",
+      "learningLink": "google.com",
+      "roles": [
+          {
+              "roleName": "Front End Developer",
+              "description": "This is the FE Description.",
+              "price": 20000,
+              "percentage": 50
+          },
+          {
+              "roleName": "Back End Developer",
+              "description": "This is the BE Description.",
+              "price": 20000,
+              "percentage": 50
+          }
+      ],
+      "skills": [
+          "React",
+          "TypeScript",
+          "Jest"
+      ],
+      "questions": [
+          "This is a screening question 1",
+          "This is a screening question 2",
+          "This is a screening question 3"
+      ],
+      "jobDescription": "This is the General Description.",
+      "listingType": ListingType.Team,
+      "status": ListingState.Active,
+      "createdAt": "2023-05-30T13:38:41.104Z"
+  }
+]
 
 const StyledBackground = styled.div`
   height: 100%;
@@ -279,7 +332,8 @@ const Home: React.FC = () => {
               <Box margin={'20px 0 20vh'} padding={isSmallScreen ? '0 15px' : '0'} width={'fill-available'}>
                 <AtLine />
 
-                {userListings ?
+                {/* {userListings?.length > 0 ? */}
+                {dummyListings?.length > 0 ?
                   <Box
                     margin={'35px 0 20px'}
                     display={'flex'}
@@ -292,7 +346,8 @@ const Home: React.FC = () => {
                         Your Listings
                       </AtTypography>
 
-                      {userListings.find((listing: ClientListing) => listing.status === ListingState.Active) &&
+                      {/* {userListings.find((listing: ClientListing) => listing.status === ListingState.Active) && */}
+                      {dummyListings.find((listing: any) => listing.status === ListingState.Active) &&
                         <CustomButton
                           kind={AtButtonKind.Default}
                           variant={AtButtonVariant.Text}
@@ -321,7 +376,8 @@ const Home: React.FC = () => {
                     />
                   </Box> : null}
 
-                {!userListings &&
+                {/* {userListings?.length === 0 && */}
+                {dummyListings?.length === 0 &&
                   <Box
                     margin={'35px 0 20px'}
                     display={'flex'}
@@ -352,7 +408,8 @@ const Home: React.FC = () => {
                   gridTemplateColumns={!isSmallScreen ? 'repeat(auto-fit, minmax(400px, 1fr))' : 'repeat(auto-fit, minmax(200px, 1fr))'}
                 >
 
-                  {userListings?.map((listing: ClientListing) => {
+                  {/* {userListings?.map((listing: ClientListing) => { */}
+                  {dummyListings?.map((listing: any) => {
                     return (
                       <AtListingCard key={listing.id} listing={listing} onClick={() => navigate(`/listing/${listing.id}`)} />
                     )

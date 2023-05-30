@@ -149,7 +149,7 @@ const GeneralInformation: React.FunctionComponent<GeneralProps> = (
 }
 
 interface GeneralProps {
-  listing: ClientListing
+  listing: any
   isAuthenticated?: boolean
   isSmallScreen?: boolean
 }
