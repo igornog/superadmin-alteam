@@ -86,19 +86,19 @@ const Home: React.FC = () => {
   }
 
   useEffect(() => {
-    const getCurrentClient = async () => {
-      const clients = await clientService.searchClient({ clientName: '' })
-      const clientFromThisUser = clients.filter((client: Client) => client.email === user?.email)
-      setUserClient(clientFromThisUser[0])
-    }
+    // const getCurrentClient = async () => {
+    //   const clients = await clientService.searchClient({ clientName: '' })
+    //   const clientFromThisUser = clients.filter((client: Client) => client.email === user?.email)
+    //   setUserClient(clientFromThisUser[0])
+    // }
 
-    getUserListings()
-    getCurrentClient()
+    // getUserListings()
+    // getCurrentClient()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, allListings])
 
   useEffect(() => {
-    getUserListings()
+    // getUserListings()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -279,7 +279,7 @@ const Home: React.FC = () => {
               <Box margin={'20px 0 20vh'} padding={isSmallScreen ? '0 15px' : '0'} width={'fill-available'}>
                 <AtLine />
 
-                {userListings?.length ?
+                {userListings ?
                   <Box
                     margin={'35px 0 20px'}
                     display={'flex'}
@@ -321,7 +321,7 @@ const Home: React.FC = () => {
                     />
                   </Box> : null}
 
-                {userListings?.length === 0 &&
+                {!userListings &&
                   <Box
                     margin={'35px 0 20px'}
                     display={'flex'}
