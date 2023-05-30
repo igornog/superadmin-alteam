@@ -31,10 +31,10 @@ const dummyListings = [
   {
       "id": 1,
       "soloClient": {
-          "companyName": "saasd",
+          "companyName": "The Company Name Co.",
           "email": "igorcmnog@gmail.com",
           "fullName": "Igor Carlos Mathias Nogueira",
-          "position": "asdsda"
+          "position": "CEO"
       },
       "listingName": "My First Team Project ",
       "individuals": "2",
