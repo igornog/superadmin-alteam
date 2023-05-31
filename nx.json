@@ -40,7 +40,7 @@
     "appsDir": "apps",
     "libsDir": "libs"
   },
-  "defaultProject": "listing-app",
+  "defaultProject": "front",
   "generators": {
     "@nrwl/react": {
       "application": {
