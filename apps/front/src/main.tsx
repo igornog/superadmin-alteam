@@ -12,21 +12,13 @@ import store from './app/utils/redux/store'
 import { alTeamTheme } from './app/utils/theme'
 import { Auth0Provider } from "@auth0/auth0-react";
 import { getConfig } from "./config";
-import history from "./app/utils/history";
-
-const onRedirectCallback = (appState: any) => {
-  history.push(
-    appState && appState.returnTo ? appState.returnTo : window.location.pathname
-  );
-};
 
 const config = getConfig();
 const providerConfig = {
   domain: config.domain,
   clientId: config.clientId,
-  onRedirectCallback,
   authorizationParams: {
-    redirect_uri: window.location.origin + '/talents',
+    redirect_uri: window.location.origin,
     ...(config.audience ? { audience: config.audience } : null),
   },
 };

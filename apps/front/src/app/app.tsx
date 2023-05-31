@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
-import Auth from './features/auth/index'
 import Talents from './features/talents'
 import Account from './features/account'
 import Listings from './features/listings'
@@ -11,11 +10,11 @@ import {
   Category,
 } from 'iconsax-react'
 import Clients from './features/clients'
-import AtTalentCardDetails from './components/AtCard/AtTalentCardDetails'
+// import AtTalentCardDetails from './components/AtCard/AtTalentCardDetails'
 import { useAuth0 } from '@auth0/auth0-react'
 export const Navigation: NavigationProps[] = [
   {
-    link: '/talents',
+    link: '/',
     element: <Talents />,
     icon: <Profile />,
     name: 'Talents',
@@ -67,19 +66,19 @@ export const App: React.FunctionComponent = () => {
     error
   } = useAuth0();
 
-  useEffect(() => {
-    if (error) {
-      navigate('/')
-    }
-  }, [error, navigate])
+  // useEffect(() => {
+  //   if (error) {
+  //     navigate('/')
+  //   }
+  // }, [error, navigate])
 
   return (
     <Routes location={location} key={location.pathname}>
 
-      <Route path="/" element={<Auth />} />
-      <Route path="/talent/:id" element={<AtTalentCardDetails />} />
+      {/* <Route path="/" element={<Auth />} />
+      <Route path="/talent/:id" element={<AtTalentCardDetails />} /> */}
 
-      {isAuthenticated &&
+      {
         Navigation.map((item: NavigationProps, index: number) => {
           return <Route path={item.link} element={item.element} key={index} />
         })
