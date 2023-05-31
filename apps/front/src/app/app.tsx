@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
-import Auth from './features/auth/index'
+// import Auth from './features/auth/index'
 import Talents from './features/talents'
 import Account from './features/account'
 import Listings from './features/listings'
@@ -76,7 +76,7 @@ export const App: React.FunctionComponent = () => {
   return (
     <Routes location={location} key={location.pathname}>
 
-      <Route path="/" element={<Auth />} />
+      {/* <Route path="/" element={<Auth />} /> */}
       <Route path="/talent/:id" element={<AtTalentCardDetails />} />
 
       {isAuthenticated &&
