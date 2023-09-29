@@ -1,0 +1,20 @@
+@import './typography.css';
+
+*::-webkit-scrollbar {
+  width: 3px;
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(124, 124, 124);
+  border-radius: 20px;
+}
+ 
+html,
+body,
+div#root {
+  margin: 0 !important;
+  padding: 0;
+  height: 100%;
+  background-color: #f7f8fe;
+}
